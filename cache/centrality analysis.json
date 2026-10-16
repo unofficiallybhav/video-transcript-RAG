@@ -1,0 +1,587 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.34,
+    "text": " The final type of analytics we will discuss in this module is called centrality analysis."
+  },
+  {
+    "start": 6.66,
+    "end": 11.0,
+    "text": " We call something central if it's in the middle of a larger entity."
+  },
+  {
+    "start": 11.84,
+    "end": 16.28,
+    "text": " We also call something central if it's important and vital."
+  },
+  {
+    "start": 17.56,
+    "end": 24.18,
+    "text": " For graphs, we'll identify important nodes by looking at how central they are in the graph."
+  },
+  {
+    "start": 26.76,
+    "end": 28.400000000000002,
+    "text": " Look at the six-node graph."
+  },
+  {
+    "start": 28.400000000000002,
+    "end": 35.64,
+    "text": " You don't have to know a lot to figure out that the orange node is pretty important."
+  },
+  {
+    "start": 35.64,
+    "end": 36.64,
+    "text": " Why?"
+  },
+  {
+    "start": 36.64,
+    "end": 39.160000000000004,
+    "text": " Well, one reason could be that it's the most vulnerable node."
+  },
+  {
+    "start": 39.160000000000004,
+    "end": 41.28,
+    "text": " If you remove it, the graph will fall apart."
+  },
+  {
+    "start": 41.28,
+    "end": 45.68000000000001,
+    "text": " So this is clearly one way to look at the centrality of a node."
+  },
+  {
+    "start": 45.68000000000001,
+    "end": 48.52,
+    "text": " But it's not the only way."
+  },
+  {
+    "start": 48.52,
+    "end": 53.2,
+    "text": " Another way of looking at the orange node is that it can reach all other nodes quicker"
+  },
+  {
+    "start": 53.2,
+    "end": 55.400000000000006,
+    "text": " than any other node."
+  },
+  {
+    "start": 55.4,
+    "end": 61.6,
+    "text": " So this is the idea behind influencers, people in a social network who are connected enough"
+  },
+  {
+    "start": 61.6,
+    "end": 68.36,
+    "text": " to reach out and possibly influence a lot more people than others would be able to."
+  },
+  {
+    "start": 68.36,
+    "end": 73.7,
+    "text": " If the little graph represents a transportation network, and you are asked to build a restaurant"
+  },
+  {
+    "start": 73.7,
+    "end": 79.06,
+    "text": " somewhere around this network, you will possibly choose an area near the central node because"
+  },
+  {
+    "start": 79.06,
+    "end": 83.3,
+    "text": " more traffic will flow through this node than other nodes."
+  },
+  {
+    "start": 83.3,
+    "end": 88.28,
+    "text": " And some of them will get out at this station and bring business to your restaurant."
+  },
+  {
+    "start": 88.28,
+    "end": 90.34,
+    "text": " We can give many more examples."
+  },
+  {
+    "start": 90.34,
+    "end": 96.03999999999999,
+    "text": " In biological networks, housekeeping genes are genes needed for the maintenance of basic"
+  },
+  {
+    "start": 96.03999999999999,
+    "end": 102.53999999999999,
+    "text": " cellular function and are expressed in all cells of an organism under normal and abnormal"
+  },
+  {
+    "start": 102.53999999999999,
+    "end": 103.53999999999999,
+    "text": " conditions."
+  },
+  {
+    "start": 103.53999999999999,
+    "end": 107.92,
+    "text": " Now, these genes are central because they are vital and they are connected to many other"
+  },
+  {
+    "start": 107.92,
+    "end": 110.47999999999999,
+    "text": " nodes in a biological network."
+  },
+  {
+    "start": 110.48,
+    "end": 115.36,
+    "text": " So much so that they need to be taken out of the network so that the rest of the network"
+  },
+  {
+    "start": 115.36,
+    "end": 116.36,
+    "text": " can be studied."
+  },
+  {
+    "start": 116.36,
+    "end": 122.78,
+    "text": " Out of all these examples, we will focus on a kind of problem researchers have called"
+  },
+  {
+    "start": 122.78,
+    "end": 125.80000000000001,
+    "text": " the key player problem."
+  },
+  {
+    "start": 125.80000000000001,
+    "end": 127.72,
+    "text": " The problem comes in two flavors."
+  },
+  {
+    "start": 127.72,
+    "end": 134.5,
+    "text": " I'll take a little time to read the two examples."
+  },
+  {
+    "start": 140.48,
+    "end": 147.23999999999998,
+    "text": " The first is sort of a negative case."
+  },
+  {
+    "start": 147.23999999999998,
+    "end": 153.39999999999998,
+    "text": " We have a network and we are trying to find a small subset of people whose removal will"
+  },
+  {
+    "start": 153.39999999999998,
+    "end": 157.28,
+    "text": " maximally disrupt the network."
+  },
+  {
+    "start": 157.28,
+    "end": 160.66,
+    "text": " The key operative word here is maximally."
+  },
+  {
+    "start": 160.66,
+    "end": 166.95999999999998,
+    "text": " So if there is a node whose removal breaks the network into two parts, it is not what"
+  },
+  {
+    "start": 166.96,
+    "end": 170.84,
+    "text": " we want if there is another two nodes whose removal"
+  },
+  {
+    "start": 170.84,
+    "end": 173.38,
+    "text": " will break the network into 10 parts."
+  },
+  {
+    "start": 173.38,
+    "end": 178.20000000000002,
+    "text": " The second case, however, is a lot more conventional."
+  },
+  {
+    "start": 178.20000000000002,
+    "end": 180.10000000000002,
+    "text": " The goal is to find a small set of nodes"
+  },
+  {
+    "start": 180.10000000000002,
+    "end": 184.20000000000002,
+    "text": " with maximal combined reachability to other nodes."
+  },
+  {
+    "start": 184.20000000000002,
+    "end": 187.26000000000002,
+    "text": " That means, taken together, these nodes"
+  },
+  {
+    "start": 187.26000000000002,
+    "end": 190.96,
+    "text": " should reach almost all other nodes."
+  },
+  {
+    "start": 190.96,
+    "end": 193.88,
+    "text": " You should know that people use two terms"
+  },
+  {
+    "start": 193.88,
+    "end": 198.29999999999998,
+    "text": " to characterize the general concept of network centrality."
+  },
+  {
+    "start": 198.29999999999998,
+    "end": 202.2,
+    "text": " The first term, centrality, is about a node."
+  },
+  {
+    "start": 202.2,
+    "end": 205.2,
+    "text": " It measures how central the node is"
+  },
+  {
+    "start": 205.2,
+    "end": 207.34,
+    "text": " with respect to the network."
+  },
+  {
+    "start": 207.34,
+    "end": 210.85999999999999,
+    "text": " So the orange node in the left graph has high centrality,"
+  },
+  {
+    "start": 210.85999999999999,
+    "end": 214.1,
+    "text": " and the blue nodes have low centrality."
+  },
+  {
+    "start": 214.1,
+    "end": 219.6,
+    "text": " The second term, centralization, is about the network."
+  },
+  {
+    "start": 219.6,
+    "end": 221.54,
+    "text": " And look at the graph on the right,"
+  },
+  {
+    "start": 221.54,
+    "end": 224.88,
+    "text": " where the dark orange node is still very central,"
+  },
+  {
+    "start": 224.88,
+    "end": 228.7,
+    "text": " but the light orange node in between the other nodes,"
+  },
+  {
+    "start": 228.7,
+    "end": 231.92,
+    "text": " and therefore, it has reasonable centrality."
+  },
+  {
+    "start": 231.92,
+    "end": 235.12,
+    "text": " As more nodes start having higher centrality,"
+  },
+  {
+    "start": 235.12,
+    "end": 238.04,
+    "text": " the centralization of the network drops"
+  },
+  {
+    "start": 238.04,
+    "end": 241.72,
+    "text": " because there is less variation in the centrality values"
+  },
+  {
+    "start": 241.72,
+    "end": 243.82,
+    "text": " of the network."
+  },
+  {
+    "start": 243.82,
+    "end": 247.78,
+    "text": " So for each type of centrality that we discussed next,"
+  },
+  {
+    "start": 247.78,
+    "end": 250.76,
+    "text": " we can compute the network centralization"
+  },
+  {
+    "start": 250.76000000000002,
+    "end": 253.76000000000002,
+    "text": " by considering the sum of the difference"
+  },
+  {
+    "start": 253.76000000000002,
+    "end": 257.56,
+    "text": " between the maximum centrality and the centrality of a node"
+  },
+  {
+    "start": 257.56,
+    "end": 260.6,
+    "text": " divided by the maximum centrality."
+  },
+  {
+    "start": 260.6,
+    "end": 264.56,
+    "text": " There are over 30 different measures of centrality."
+  },
+  {
+    "start": 264.56,
+    "end": 266.96000000000004,
+    "text": " We will consider only a few of them"
+  },
+  {
+    "start": 266.96000000000004,
+    "end": 270.56,
+    "text": " and explore the conceptual principles of what they do."
+  },
+  {
+    "start": 270.56,
+    "end": 272.56,
+    "text": " The first and the most intuitive measure"
+  },
+  {
+    "start": 272.56,
+    "end": 276.8,
+    "text": " is degree centrality, which measures the degree of a node"
+  },
+  {
+    "start": 276.8,
+    "end": 279.8,
+    "text": " divided by the possible edges it could have"
+  },
+  {
+    "start": 279.8,
+    "end": 285.04,
+    "text": " if it connected to each of the other n minus 1 nodes in the graph."
+  },
+  {
+    "start": 285.04,
+    "end": 286.94,
+    "text": " We have seen this before."
+  },
+  {
+    "start": 286.94,
+    "end": 290.8,
+    "text": " This measure gives us a sense of the hub-ness of the node."
+  },
+  {
+    "start": 290.8,
+    "end": 295.58000000000004,
+    "text": " The higher the number is, the more hub-like the node is."
+  },
+  {
+    "start": 295.58000000000004,
+    "end": 298.46000000000004,
+    "text": " Thinking of our second key player problem,"
+  },
+  {
+    "start": 298.46000000000004,
+    "end": 302.12,
+    "text": " one way to approach this is to find a hub-like measure"
+  },
+  {
+    "start": 302.12,
+    "end": 305.98,
+    "text": " for a group with multiple nodes instead"
+  },
+  {
+    "start": 305.98,
+    "end": 309.32,
+    "text": " of measuring the degree centrality of individual nodes."
+  },
+  {
+    "start": 309.8,
+    "end": 315.84000000000003,
+    "text": " The measure simply counts the number of edges coming into the group as a whole compared"
+  },
+  {
+    "start": 315.84000000000003,
+    "end": 318.62,
+    "text": " to the number of outsiders."
+  },
+  {
+    "start": 318.62,
+    "end": 327.56,
+    "text": " In our example, two red nodes here together connect to all blue nodes, although there"
+  },
+  {
+    "start": 327.56,
+    "end": 331.64,
+    "text": " is just one node neighboring both of them."
+  },
+  {
+    "start": 331.64,
+    "end": 336.7,
+    "text": " Closeness centrality takes a different approach to the centrality problem."
+  },
+  {
+    "start": 336.7,
+    "end": 341.7,
+    "text": " It adds the shortest distance of a node to all other nodes and divides it by n minus"
+  },
+  {
+    "start": 341.7,
+    "end": 343.52,
+    "text": " 1."
+  },
+  {
+    "start": 343.52,
+    "end": 349.0,
+    "text": " So in our graph, a node like i, which is on the periphery of the graph, will be quite"
+  },
+  {
+    "start": 349.0,
+    "end": 356.82,
+    "text": " far from all nodes in general, and therefore will have a very high closest centrality value."
+  },
+  {
+    "start": 356.82,
+    "end": 364.4,
+    "text": " On the other hand, nodes like f, c, and h are much closer to all other nodes."
+  },
+  {
+    "start": 364.40000000000003,
+    "end": 369.88000000000005,
+    "text": " After that, we define this measure in terms of shortest paths."
+  },
+  {
+    "start": 369.88000000000005,
+    "end": 377.32000000000005,
+    "text": " So if a moving object like information flows to the shortest path in the network, F is"
+  },
+  {
+    "start": 377.32000000000005,
+    "end": 382.44000000000005,
+    "text": " more likely to receive them earlier than other nodes and therefore can broadcast them to"
+  },
+  {
+    "start": 382.44000000000005,
+    "end": 384.70000000000005,
+    "text": " other nodes more quickly."
+  },
+  {
+    "start": 384.70000000000005,
+    "end": 391.26000000000005,
+    "text": " Therefore, if we look to inject a new piece of information in the network with the idea"
+  },
+  {
+    "start": 391.26,
+    "end": 394.08,
+    "text": " that it should reach every other node quickly,"
+  },
+  {
+    "start": 394.08,
+    "end": 398.02,
+    "text": " I should possibly inject it at f."
+  },
+  {
+    "start": 398.02,
+    "end": 401.7,
+    "text": " Recall, however, that not information flow"
+  },
+  {
+    "start": 401.7,
+    "end": 403.86,
+    "text": " is through shortest routes."
+  },
+  {
+    "start": 403.86,
+    "end": 406.74,
+    "text": " An example is gossip that tends to travel"
+  },
+  {
+    "start": 406.74,
+    "end": 409.3,
+    "text": " through more intermediary nodes."
+  },
+  {
+    "start": 409.3,
+    "end": 411.78,
+    "text": " Closeness centrality does not work well"
+  },
+  {
+    "start": 411.78,
+    "end": 414.42,
+    "text": " for these types of information flows."
+  },
+  {
+    "start": 414.42,
+    "end": 416.59999999999997,
+    "text": " Another very popular centrality measure"
+  },
+  {
+    "start": 416.59999999999997,
+    "end": 419.62,
+    "text": " is called betweenness centrality."
+  },
+  {
+    "start": 419.62,
+    "end": 423.3,
+    "text": " For any node, it measures the fraction"
+  },
+  {
+    "start": 423.3,
+    "end": 426.38,
+    "text": " of shortest paths flowing through that node"
+  },
+  {
+    "start": 426.38,
+    "end": 430.5,
+    "text": " compared to the number of shortest paths in the graph."
+  },
+  {
+    "start": 430.5,
+    "end": 436.24,
+    "text": " Since B is at one end, its betweenness centrality is 0."
+  },
+  {
+    "start": 436.24,
+    "end": 441.22,
+    "text": " Well, let's look at A. A is in the path from B to E."
+  },
+  {
+    "start": 441.22,
+    "end": 447.64,
+    "text": " So is D. Therefore, A's score for the B to E path is 0.5."
+  },
+  {
+    "start": 447.64,
+    "end": 456.24,
+    "text": " Similarly, its score for the C to E path is also 0.5, making the total score 1. E is"
+  },
+  {
+    "start": 456.24,
+    "end": 464.68,
+    "text": " in the path from A to D, but there is one more path from A to D through C. So E's score"
+  },
+  {
+    "start": 464.68,
+    "end": 473.14,
+    "text": " is 0.5. Can you verify why C's score is 3.5? Betweenness centrality is typically used for"
+  },
+  {
+    "start": 473.14,
+    "end": 477.28,
+    "text": " of problems where a commodity is flowing through the network."
+  },
+  {
+    "start": 477.28,
+    "end": 481.0,
+    "text": " As in the case of closeness centrality,"
+  },
+  {
+    "start": 481.0,
+    "end": 484.0,
+    "text": " any quantity that does not flow in shortest path channels"
+  },
+  {
+    "start": 484.0,
+    "end": 486.96,
+    "text": " like infection or rumor on the internet"
+  },
+  {
+    "start": 486.96,
+    "end": 490.2,
+    "text": " does not work well with betweenness centrality."
+  }
+]

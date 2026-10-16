@@ -1,0 +1,317 @@
+[
+  {
+    "start": 0.64,
+    "end": 4.04,
+    "text": " The most primitive path analytics question one can ask"
+  },
+  {
+    "start": 4.04,
+    "end": 8.92,
+    "text": " is to find the best path from node 1 to node 2."
+  },
+  {
+    "start": 8.92,
+    "end": 11.200000000000001,
+    "text": " What does best mean?"
+  },
+  {
+    "start": 11.200000000000001,
+    "end": 14.4,
+    "text": " Well, that depends on the actual needs of the application."
+  },
+  {
+    "start": 14.4,
+    "end": 17.8,
+    "text": " But in general, to specify the best path,"
+  },
+  {
+    "start": 17.8,
+    "end": 22.72,
+    "text": " we need to define when one path is better than another."
+  },
+  {
+    "start": 22.72,
+    "end": 27.96,
+    "text": " This is usually expressed in terms of an optimization problem,"
+  },
+  {
+    "start": 27.96,
+    "end": 30.880000000000003,
+    "text": " where we need to minimize or maximize a function"
+  },
+  {
+    "start": 30.880000000000003,
+    "end": 32.74,
+    "text": " subject to constraints."
+  },
+  {
+    "start": 32.74,
+    "end": 34.38,
+    "text": " What kind of constraints?"
+  },
+  {
+    "start": 34.38,
+    "end": 38.78,
+    "text": " Two common criteria for graphs are inclusion and exclusion"
+  },
+  {
+    "start": 38.78,
+    "end": 40.24,
+    "text": " conditions."
+  },
+  {
+    "start": 40.24,
+    "end": 44.58,
+    "text": " Inclusion criteria may specify which nodes we have"
+  },
+  {
+    "start": 44.58,
+    "end": 46.760000000000005,
+    "text": " to include in the path."
+  },
+  {
+    "start": 46.760000000000005,
+    "end": 50.28,
+    "text": " And exclusion criteria specify which nodes and edges"
+  },
+  {
+    "start": 50.28,
+    "end": 52.24,
+    "text": " should be excluded from the path."
+  },
+  {
+    "start": 52.24,
+    "end": 57.36,
+    "text": " In addition, one may specify a preference criteria"
+  },
+  {
+    "start": 57.36,
+    "end": 60.96,
+    "text": " that act as a softer or less strict constraint."
+  },
+  {
+    "start": 60.96,
+    "end": 64.8,
+    "text": " For example, we would like to minimize highways on my trip"
+  },
+  {
+    "start": 64.8,
+    "end": 66.9,
+    "text": " or avoid congestion."
+  },
+  {
+    "start": 66.9,
+    "end": 70.03999999999999,
+    "text": " These are soft because although the users would like"
+  },
+  {
+    "start": 70.03999999999999,
+    "end": 73.24,
+    "text": " to have them enforced completely,"
+  },
+  {
+    "start": 73.24,
+    "end": 76.08,
+    "text": " it is all right if they are not fully enforced."
+  },
+  {
+    "start": 76.08,
+    "end": 79.16,
+    "text": " A good practical use case occurs when I'm trying to drive"
+  },
+  {
+    "start": 79.16,
+    "end": 80.76,
+    "text": " to work in the morning."
+  },
+  {
+    "start": 80.76,
+    "end": 84.03999999999999,
+    "text": " Ideally, I would like to take a path having the shortest"
+  },
+  {
+    "start": 84.04,
+    "end": 88.86000000000001,
+    "text": " distance from my home, for example, node i, to my workplace,"
+  },
+  {
+    "start": 88.86000000000001,
+    "end": 91.72,
+    "text": " which is node b in the graph."
+  },
+  {
+    "start": 91.72,
+    "end": 95.60000000000001,
+    "text": " But I have to drop off my son at school."
+  },
+  {
+    "start": 95.60000000000001,
+    "end": 100.98,
+    "text": " So my path must include his school, the j here."
+  },
+  {
+    "start": 100.98,
+    "end": 103.66000000000001,
+    "text": " However, I would like to avoid roads"
+  },
+  {
+    "start": 103.66000000000001,
+    "end": 106.16000000000001,
+    "text": " around a new construction that's happening about five miles"
+  },
+  {
+    "start": 106.16000000000001,
+    "end": 111.06,
+    "text": " from my workplace, like the node e in the graph."
+  },
+  {
+    "start": 111.06,
+    "end": 114.04,
+    "text": " because there is usually a huge traffic delay"
+  },
+  {
+    "start": 114.04,
+    "end": 116.52,
+    "text": " around that construction site."
+  },
+  {
+    "start": 116.52,
+    "end": 118.68,
+    "text": " I could also add a preference criteria,"
+  },
+  {
+    "start": 118.68,
+    "end": 121.24000000000001,
+    "text": " like I don't prefer to drive on the highway."
+  },
+  {
+    "start": 121.24000000000001,
+    "end": 124.94,
+    "text": " But for this discussion, we'll skip the preference idea."
+  },
+  {
+    "start": 124.94,
+    "end": 126.84,
+    "text": " Too complicated?"
+  },
+  {
+    "start": 126.84,
+    "end": 128.62,
+    "text": " OK."
+  },
+  {
+    "start": 128.62,
+    "end": 131.46,
+    "text": " Let's start with a simpler problem."
+  },
+  {
+    "start": 131.46,
+    "end": 134.06,
+    "text": " To start with, let's drop the constraints"
+  },
+  {
+    "start": 134.06,
+    "end": 136.98000000000002,
+    "text": " and look at the problem with just the optimization part"
+  },
+  {
+    "start": 136.98000000000002,
+    "end": 141.04,
+    "text": " of the problem, having a single variable."
+  },
+  {
+    "start": 141.06,
+    "end": 151.0,
+    "text": " In our case, that variable is the sum of edge weights from the source, that is the starting node i, to the target, which is b."
+  },
+  {
+    "start": 152.82,
+    "end": 157.04,
+    "text": " This problem is handled by all mapping and road direction software."
+  },
+  {
+    "start": 157.82,
+    "end": 165.4,
+    "text": " Here is a Google Maps screenshot in which I am trying to go from my home in North San Diego to a collision center in a nearby city."
+  },
+  {
+    "start": 165.4,
+    "end": 172.4,
+    "text": " Google Maps shows three different routes and highlights one as a preferred solution."
+  },
+  {
+    "start": 172.4,
+    "end": 179.4,
+    "text": " You should really see that the real shortest path of 26.6 miles"
+  },
+  {
+    "start": 179.4,
+    "end": 183.4,
+    "text": " will take the longest time at the time of the day when I was looking up the map."
+  },
+  {
+    "start": 183.4,
+    "end": 189.4,
+    "text": " So this means the weights here are not raw distances but estimated travel time."
+  },
+  {
+    "start": 189.4,
+    "end": 197.4,
+    "text": " You should also notice the blue, red, and orange segments in the preferred path are presented by Google."
+  },
+  {
+    "start": 197.4,
+    "end": 206.4,
+    "text": " The orange and red street segments clearly represent congestion areas and therefore have higher weight than the blue segments."
+  },
+  {
+    "start": 206.4,
+    "end": 215.4,
+    "text": " Therefore, the weights of the street segments are not really static but change with many other factors like weather or the time of the day."
+  },
+  {
+    "start": 216.36,
+    "end": 221.88,
+    "text": " This is why the least weight path problem is an important problem to solve for the benefit"
+  },
+  {
+    "start": 221.88,
+    "end": 228.36,
+    "text": " of the commuter. A widely applied algorithm that is applied for shortest path problems"
+  },
+  {
+    "start": 228.36,
+    "end": 235.4,
+    "text": " is called Dijkstra's algorithm. Originally, Dijkstra considered a variant of the problem"
+  },
+  {
+    "start": 235.4,
+    "end": 240.68,
+    "text": " where the task is to find the shortest path from a single source node to all other nodes."
+  },
+  {
+    "start": 240.68,
+    "end": 243.68,
+    "text": " We will go through the algorithm here."
+  },
+  {
+    "start": 243.68,
+    "end": 249.64000000000001,
+    "text": " However, there are many good online resources including tutorials and YouTube videos describing"
+  },
+  {
+    "start": 249.64000000000001,
+    "end": 251.6,
+    "text": " the algorithm."
+  },
+  {
+    "start": 251.6,
+    "end": 256.26,
+    "text": " For our discussion, we will confine ourselves to the case where both the source and the"
+  },
+  {
+    "start": 256.26,
+    "end": 258.2,
+    "text": " target nodes are known in advance."
+  }
+]

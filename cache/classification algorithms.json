@@ -1,0 +1,152 @@
+[
+  {
+    "start": 1.0,
+    "end": 6.0,
+    "text": " In this video, we will outline some commonly used algorithms for building a classification"
+  },
+  {
+    "start": 6.0,
+    "end": 13.0,
+    "text": " model. After this video, you will be able to describe the goal of a classification algorithm"
+  },
+  {
+    "start": 13.0,
+    "end": 20.0,
+    "text": " and name some common algorithms for classification. Recall that a classification task is to predict"
+  },
+  {
+    "start": 20.0,
+    "end": 27.0,
+    "text": " the category from the input variables. A classification model processes the input data it receives"
+  },
+  {
+    "start": 27.0,
+    "end": 32.44,
+    "text": " and provides an output. Since classification is a supervised task, a"
+  },
+  {
+    "start": 32.44,
+    "end": 38.82,
+    "text": " target, or desired output, is provided for each sample. The goal is to get the"
+  },
+  {
+    "start": 38.82,
+    "end": 45.260000000000005,
+    "text": " model outputs to match the targets as much as possible. A classification model"
+  },
+  {
+    "start": 45.260000000000005,
+    "end": 51.3,
+    "text": " adjusts its parameters to get its outputs to match the targets. To adjust a"
+  },
+  {
+    "start": 51.3,
+    "end": 56.86,
+    "text": " model's parameters, a learning algorithm is applied. This occurs in the training"
+  },
+  {
+    "start": 56.86,
+    "end": 62.86,
+    "text": " phase when the model is constructed. There are many algorithms to build a classification"
+  },
+  {
+    "start": 62.86,
+    "end": 70.86,
+    "text": " model. In this course, we will cover the algorithms listed here. K and N, or K nearest neighbors,"
+  },
+  {
+    "start": 70.86,
+    "end": 78.86,
+    "text": " decision tree, and naive Bayes. K and N stands for K nearest neighbors. This technique relies"
+  },
+  {
+    "start": 78.86,
+    "end": 85.86,
+    "text": " on the notion that samples with similar characteristics, that is samples with similar values for input,"
+  },
+  {
+    "start": 85.86,
+    "end": 92.2,
+    "text": " belong to the same class, so classification of a sample is dependent on the target values"
+  },
+  {
+    "start": 92.2,
+    "end": 95.62,
+    "text": " of the neighboring points."
+  },
+  {
+    "start": 95.62,
+    "end": 101.38,
+    "text": " Another classification technique is referred to as decision tree. A decision tree is a classification"
+  },
+  {
+    "start": 101.38,
+    "end": 108.58,
+    "text": " model that uses a tree-like structure to represent multiple decision paths. Traversing each path"
+  },
+  {
+    "start": 108.58,
+    "end": 113.3,
+    "text": " leads to a different way to classify an input sample."
+  },
+  {
+    "start": 113.3,
+    "end": 119.02,
+    "text": " A naive Bayes model uses a probabilistic approach to classification."
+  },
+  {
+    "start": 119.02,
+    "end": 124.82,
+    "text": " Bayes' theorem is used to capture the relationship between the input data and the output class."
+  },
+  {
+    "start": 124.82,
+    "end": 129.82,
+    "text": " Simply put, the Bayes' theorem compares the probability of an event in the presence of"
+  },
+  {
+    "start": 129.82,
+    "end": 131.62,
+    "text": " another event."
+  },
+  {
+    "start": 131.62,
+    "end": 136.12,
+    "text": " We see here the probability of A if B is present."
+  },
+  {
+    "start": 136.12,
+    "end": 140.72,
+    "text": " For example, probability of having a fire if the weather is hot."
+  },
+  {
+    "start": 140.72,
+    "end": 144.94,
+    "text": " You can imagine event B depending on more than one variable, for example, weather is"
+  },
+  {
+    "start": 144.94,
+    "end": 147.46,
+    "text": " hot and windy."
+  },
+  {
+    "start": 147.46,
+    "end": 154.1,
+    "text": " We will cover K&N, Decision Tree, and Naive Bayes in detail in the next few lectures."
+  },
+  {
+    "start": 154.1,
+    "end": 158.8,
+    "text": " There are many other classification techniques, but we will focus on these since they are"
+  },
+  {
+    "start": 158.8,
+    "end": 164.02,
+    "text": " fundamental algorithms that are commonly used and form the basis of other algorithms for"
+  },
+  {
+    "start": 164.02,
+    "end": 165.02,
+    "text": " for classification."
+  }
+]

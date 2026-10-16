@@ -1,0 +1,262 @@
+[
+  {
+    "start": 1.0,
+    "end": 6.0,
+    "text": " If you recall, we had previously discussed that the main categories of machine learning tasks are"
+  },
+  {
+    "start": 6.0,
+    "end": 12.0,
+    "text": " classification, regression, cluster analysis, and association analysis."
+  },
+  {
+    "start": 12.0,
+    "end": 15.0,
+    "text": " We have discussed classification in detail."
+  },
+  {
+    "start": 15.0,
+    "end": 19.0,
+    "text": " Now let's look at the other categories, starting with regression."
+  },
+  {
+    "start": 19.0,
+    "end": 24.0,
+    "text": " After this video, you will be able to define what regression is,"
+  },
+  {
+    "start": 24.0,
+    "end": 28.0,
+    "text": " explain the difference between regression and classification,"
+  },
+  {
+    "start": 28.0,
+    "end": 32.0,
+    "text": " and name some applications of regression."
+  },
+  {
+    "start": 32.0,
+    "end": 36.0,
+    "text": " Before we talk about regression, let's review classification."
+  },
+  {
+    "start": 36.0,
+    "end": 41.0,
+    "text": " In a classification problem, the input data is presented to the machine learning model,"
+  },
+  {
+    "start": 41.0,
+    "end": 46.0,
+    "text": " and the task is to predict the target corresponding to the input data."
+  },
+  {
+    "start": 46.0,
+    "end": 49.0,
+    "text": " The target is a categorical variable,"
+  },
+  {
+    "start": 49.0,
+    "end": 57.0,
+    "text": " so the classification task is to predict the category or label of the target given the input data."
+  },
+  {
+    "start": 57.0,
+    "end": 61.0,
+    "text": " The classification example shown here is one we have seen before."
+  },
+  {
+    "start": 61.0,
+    "end": 70.0,
+    "text": " The input variables are measurements such as temperature, relative humidity, atmospheric pressure, wind speed, wind direction, etc."
+  },
+  {
+    "start": 70.0,
+    "end": 76.0,
+    "text": " The task for the model is to predict the weather category associated with the input data."
+  },
+  {
+    "start": 76.0,
+    "end": 82.0,
+    "text": " The possible values for the weather category is sunny, windy, rainy, or cloudy."
+  },
+  {
+    "start": 82.0,
+    "end": 86.0,
+    "text": " Since we're predicting the category, this is a classification task."
+  },
+  {
+    "start": 86.0,
+    "end": 91.1,
+    "text": " With that context in mind, let's now discuss regression."
+  },
+  {
+    "start": 91.1,
+    "end": 96.24,
+    "text": " When the model has to predict a numeric value instead of a category, then the task becomes"
+  },
+  {
+    "start": 96.24,
+    "end": 98.36,
+    "text": " a regression problem."
+  },
+  {
+    "start": 98.36,
+    "end": 102.12,
+    "text": " An example of regression is to predict the price of a stock."
+  },
+  {
+    "start": 102.12,
+    "end": 105.48,
+    "text": " The stock price is a numeric value, not a category."
+  },
+  {
+    "start": 105.48,
+    "end": 109.6,
+    "text": " So this is a regression task instead of a classification task."
+  },
+  {
+    "start": 109.6,
+    "end": 113.98,
+    "text": " Note that if you were to predict not the actual price of the stock, but whether the stock"
+  },
+  {
+    "start": 113.98,
+    "end": 118.98,
+    "text": " price will go up or go down, then that would be a classification task. That is the main"
+  },
+  {
+    "start": 118.98,
+    "end": 124.98,
+    "text": " difference between classification and regression. In classification, you're predicting a category,"
+  },
+  {
+    "start": 124.98,
+    "end": 127.98,
+    "text": " and in regression, you're predicting a numeric value."
+  },
+  {
+    "start": 127.98,
+    "end": 133.18,
+    "text": " Here are some examples where regression can be used. Forecast the high temperature for"
+  },
+  {
+    "start": 133.18,
+    "end": 139.32,
+    "text": " the next day. Estimate the average housing price for a particular region. Determine the"
+  },
+  {
+    "start": 139.32,
+    "end": 145.64,
+    "text": " the demand for a new product, a new book for example, based on similar existing products."
+  },
+  {
+    "start": 145.64,
+    "end": 151.18,
+    "text": " Predict the power usage for a particular power grid. This is what the dataset might look"
+  },
+  {
+    "start": 151.18,
+    "end": 155.98,
+    "text": " like for the regression task of predicting tomorrow's high temperature. The input variables"
+  },
+  {
+    "start": 155.98,
+    "end": 160.92,
+    "text": " could be the high temperature for today, the low temperature for today, and the month."
+  },
+  {
+    "start": 160.92,
+    "end": 166.01999999999998,
+    "text": " And the target is the high temperature for tomorrow. The model has to predict this target"
+  },
+  {
+    "start": 166.02,
+    "end": 172.76000000000002,
+    "text": " value for each sample. Recall that in a supervised task, the target is provided, while for an"
+  },
+  {
+    "start": 172.76000000000002,
+    "end": 178.8,
+    "text": " unsupervised task, the target is not available or not known. Since the target label is provided"
+  },
+  {
+    "start": 178.8,
+    "end": 185.88,
+    "text": " for each sample here, the regression task is a supervised one, similar to classification."
+  },
+  {
+    "start": 185.88,
+    "end": 190.94,
+    "text": " As with classification, building a regression model also involves two phases, a training"
+  },
+  {
+    "start": 190.94,
+    "end": 195.0,
+    "text": " phase in which the model is built and a testing phase in which the model is"
+  },
+  {
+    "start": 195.0,
+    "end": 200.82,
+    "text": " applied to new data. The model is built using training data and evaluated on"
+  },
+  {
+    "start": 200.82,
+    "end": 205.78,
+    "text": " test data. Similar to classification, the goal in building a regression model is"
+  },
+  {
+    "start": 205.78,
+    "end": 210.94,
+    "text": " also to have the model perform well on training data as well as generalize to"
+  },
+  {
+    "start": 210.94,
+    "end": 215.82,
+    "text": " new data. The use of three different data sets that we have previously discussed"
+  },
+  {
+    "start": 215.82,
+    "end": 220.82,
+    "text": " also apply to regression. Recall that the three datasets are used as follows."
+  },
+  {
+    "start": 220.82,
+    "end": 225.82,
+    "text": " The training dataset is used to train the model, that is to adjust the parameters"
+  },
+  {
+    "start": 225.82,
+    "end": 230.82,
+    "text": " of the model to learn the input-to-output mapping. The validation dataset is"
+  },
+  {
+    "start": 230.82,
+    "end": 235.82,
+    "text": " used to determine when training should stop in order to avoid overfitting. And"
+  },
+  {
+    "start": 235.82,
+    "end": 240.82,
+    "text": " the test dataset is used to evaluate the performance of the model on new data."
+  },
+  {
+    "start": 240.82,
+    "end": 247.82,
+    "text": " In summary, in regression, the model has to predict a numeric value corresponding to the input data."
+  },
+  {
+    "start": 247.82,
+    "end": 252.82,
+    "text": " Since the target is provided for each sample, regression is a supervised task."
+  },
+  {
+    "start": 252.82,
+    "end": 256.82,
+    "text": " The target is always a numerical variable in regression."
+  },
+  {
+    "start": 256.82,
+    "end": 261.82,
+    "text": " In the next lecture, we will discuss a specific algorithm to build a regression model."
+  }
+]

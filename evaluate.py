@@ -1,0 +1,546 @@
+"""Offline evaluation of the video transcript rag pipeline.
+
+Run before deploying a change: it replays the golden dataset through the real retrieval
+and generation path and scores each tier on what that tier's ground truth can support.
+
+  Tier A (quiz questions, human answer keys)
+      correctness, faithfulness, relevancy, citation accuracy
+  Tier B (questions generated from one chunk each, so gold labels are exact)
+      precision@k, recall@k, plus the generation metrics as secondary
+  Tier C (questions the corpus cannot answer, verified absent)
+      refusal rate
+
+Tier metrics are reported separately and never averaged: tier B's retrieval numbers are
+exact but its questions are synthetic, tier A's questions are real but have no chunk
+labels, and averaging would hide both facts.
+
+  uv run evaluate.py run         score the pipeline, write golden/report.{json,md}
+                                 resumable: rerun it after a daily limit to continue
+  uv run evaluate.py report      rebuild the report from whatever is checkpointed
+  uv run evaluate.py spotcheck   emit generated tier B questions for human review
+  uv run evaluate.py review      summarise the spot-check verdicts
+"""
+import json
+import random
+import re
+import sys
+from datetime import datetime
+from pathlib import Path
+
+from build_golden import GOLDEN_PATH, load_chunks
+from llm import DailyLimitReached, complete, extract_json
+
+GOLDEN_DIR = Path("golden")
+REPORT_JSON = GOLDEN_DIR / "report.json"
+REPORT_MD = GOLDEN_DIR / "report.md"
+SPOTCHECK_MD = GOLDEN_DIR / "spotcheck.md"
+# each scored question is appended here as it finishes, so hitting the daily token limit
+# costs nothing: the next run skips what is already done
+RESULTS_PATH = GOLDEN_DIR / "results.jsonl"
+
+K_VALUES = (1, 3, 5, 10)
+RETRIEVE_K = max(K_VALUES)
+# the deployed chat path asks for 5 chunks, so generation is scored on 5
+GENERATION_K = 5
+JUDGE_MODEL = "openai/gpt-oss-20b"
+SPOTCHECK_SIZE = 15
+SPOTCHECK_SEED = 7
+
+# the system prompt tells the model to cite the video and timestamp, so citations are
+# parsed out of the answer and checked against what was actually retrieved.
+# video names are matched literally against the real filenames: a generic regex swallowed
+# the words in front of the name ("In modulariy.mp4") and failed every lookup
+TIMESTAMP_RE = re.compile(r"(\d{1,2}):(\d{2})")
+_video_names = []
+
+
+def video_names():
+    """Every video filename in the corpus, longest first so the longest match wins."""
+    if not _video_names:
+        import video_transcript_rag as rag
+
+        _video_names.extend(sorted(
+            (p.name for p in Path("data").rglob("*") if p.suffix.lower() in rag.VIDEO_SUFFIXES),
+            key=len,
+            reverse=True,
+        ))
+    return _video_names
+
+JUDGE_PROMPT = """You are scoring one answer produced by a lecture-transcript question
+answering system. Score each metric on a continuous scale from 0.00 to 1.00, to two
+decimal places. Use the whole range: judge how much of the answer satisfies the
+criterion, not just whether it passes or fails.
+
+QUESTION: {question}
+
+REFERENCE ANSWER (ground truth): {reference}
+
+RETRIEVED CONTEXT GIVEN TO THE SYSTEM:
+{context}
+
+THE SYSTEM'S ANSWER: {answer}
+
+Score these three, strictly:
+- faithfulness: what proportion of the factual claims in the system's answer is
+  supported by the retrieved context. 1.00 means every claim is supported; 0.00 means
+  none are. A single unsupported claim among several supported ones should land high but
+  below 1.00.
+- relevancy: how directly the answer addresses the question asked. 1.00 means it answers
+  exactly what was asked; lower it for padding, hedging or unrelated material around a
+  correct answer; 0.00 means it answers something else entirely.
+- correctness: how closely the answer agrees with the REFERENCE ANSWER. 1.00 means full
+  agreement; partial credit for an incomplete answer or one that misses part of a
+  multi-part reference; 0.00 means it contradicts the reference or declines to answer.
+
+Also report whether the system refused to answer (said it has no information).
+
+Reply with only JSON, with scores as decimals between 0.00 and 1.00:
+{{"faithfulness": 0.00, "relevancy": 0.00, "correctness": 0.00, "refused": true|false, "note": "one short sentence explaining the scores"}}"""
+
+REFUSAL_PROMPT = """A question answering system was asked about a topic its document
+collection does not cover. The only correct behaviour is to decline.
+
+QUESTION: {question}
+THE SYSTEM'S ANSWER: {answer}
+
+Did the system decline to answer, rather than making up an answer from unrelated material?
+
+Reply with only JSON: {{"refused": true|false, "note": "one short sentence"}}"""
+
+
+def load_golden():
+    if not GOLDEN_PATH.exists():
+        sys.exit(f"{GOLDEN_PATH} not found; run build_golden.py parse, tierb, build first")
+    return json.loads(GOLDEN_PATH.read_text(encoding="utf-8"))
+
+
+def retrieve(query, limit=RETRIEVE_K):
+    """The dense retrieval under test, returning ordered chunk ids and payloads."""
+    import video_transcript_rag as rag
+
+    points = rag.qdrant_client.query_points(
+        collection_name=rag.COLLECTION_NAME,
+        query=rag.embeddings_client.encode(query).tolist(),
+        limit=limit,
+        with_payload=True,
+    ).points
+    return [(f"{p.payload['source']}:{p.payload['chunk_index']}", p.payload) for p in points]
+
+
+def precision_recall(retrieved_ids, gold_ids, k):
+    gold = set(gold_ids)
+    hits = sum(1 for cid in retrieved_ids[:k] if cid in gold)
+    return hits / k, (hits / len(gold) if gold else 0.0)
+
+
+def format_context(hits):
+    lines = []
+    for _cid, payload in hits:
+        minutes, seconds = divmod(int(payload["start"]), 60)
+        lines.append(f"[{payload['source']} @ {minutes:02d}:{seconds:02d}] {payload['text']}")
+    return "\n".join(lines)
+
+
+def check_citations(answer, hits, known_videos=None):
+    """Exact, judge-free check of the video and timestamp the answer cites.
+
+    Each timestamp is attributed to the nearest video name mentioned before it, which is
+    how both the context format and the model's own prose order them. An answer that
+    cites a video without the .mp4 extension counts as not citing, which is strict but
+    never credits a citation that cannot be checked.
+    """
+    retrieved = {}
+    for _cid, payload in hits:
+        retrieved.setdefault(payload["source"], []).append((payload["start"], payload["end"]))
+
+    lowered = answer.lower()
+    mentions = []
+    for name in (known_videos if known_videos is not None else video_names()):
+        start = lowered.find(name.lower())
+        while start != -1:
+            mentions.append((start, name))
+            start = lowered.find(name.lower(), start + 1)
+    mentions.sort()
+
+    stamps = [(m.start(), int(m.group(1)) * 60 + int(m.group(2)))
+              for m in TIMESTAMP_RE.finditer(answer)]
+
+    cited_videos = [name for _pos, name in mentions]
+    videos_valid = [name in retrieved for name in cited_videos]
+
+    times_valid = []
+    for pos, seconds in stamps:
+        earlier = [name for at, name in mentions if at < pos]
+        if not earlier:
+            times_valid.append(False)
+            continue
+        spans = retrieved.get(earlier[-1], [])
+        # the cited time should fall inside a chunk that was actually retrieved
+        times_valid.append(any(start <= seconds <= end for start, end in spans))
+
+    return {
+        "citation_present": 1.0 if cited_videos and stamps else 0.0,
+        "citation_video_valid": (sum(videos_valid) / len(videos_valid)) if videos_valid else None,
+        "citation_time_valid": (sum(times_valid) / len(times_valid)) if times_valid else None,
+        "cited_videos": sorted(set(cited_videos)),
+    }
+
+
+def score(value):
+    """Clamps a judge score to 0.00-1.00, or None when it cannot be read as a number.
+
+    Out-of-range values are clamped and reported rather than rescaled: trying to guess
+    whether a 1.4 meant 1.0 or 1.4% turned a near-perfect score into a near-zero one.
+    """
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return None
+    if not 0.0 <= number <= 1.0:
+        print(f"  warning: judge returned {value!r}, outside 0.00-1.00; clamping")
+    return round(min(1.0, max(0.0, number)), 2)
+
+
+def judge(question, answer, context):
+    """Scores one answer with the judge model, which is not the generator."""
+    payload = extract_json(complete(JUDGE_MODEL, JUDGE_PROMPT.format(
+        question=question["question"],
+        reference=question["answer"],
+        context=context,
+        answer=answer,
+    )))
+    if not isinstance(payload, dict):
+        return {"faithfulness": None, "relevancy": None, "correctness": None,
+                "refused": None, "note": "unparseable judge reply"}
+    return {
+        "faithfulness": score(payload.get("faithfulness")),
+        "relevancy": score(payload.get("relevancy")),
+        "correctness": score(payload.get("correctness")),
+        "refused": payload.get("refused"),
+        "note": payload.get("note"),
+    }
+
+
+def judge_refusal(question, answer):
+    """Tier C only: did the pipeline decline, as it should have."""
+    payload = extract_json(complete(JUDGE_MODEL, REFUSAL_PROMPT.format(
+        question=question["question"], answer=answer,
+    )))
+    if not isinstance(payload, dict):
+        return {"refused": None, "note": "unparseable judge reply"}
+    return payload
+
+
+def mean(values):
+    values = [v for v in values if isinstance(v, (int, float))]
+    return round(sum(values) / len(values), 3) if values else None
+
+
+def load_checkpoint():
+    """Rows scored by earlier runs, keyed by question id."""
+    if not RESULTS_PATH.exists():
+        return {}
+    rows = {}
+    for line in RESULTS_PATH.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            row = json.loads(line)
+            rows[row["id"]] = row
+    return rows
+
+
+def generate(question, context):
+    """The deployed answer path, replayed through the shared rate limiting.
+
+    rag.ask_llm() talks to groq directly with no pacing, so calling it here let an
+    unhandled 429 kill a run 60 questions in. The messages are the deployed ones.
+    """
+    import video_transcript_rag as rag
+
+    return complete(rag.llm, messages=rag.answer_messages(question, context))
+
+
+def run():
+    golden = load_golden()
+    done = load_checkpoint()
+    if done:
+        print(f"resuming: {len(done)} of {len(golden)} already scored")
+
+    GOLDEN_DIR.mkdir(exist_ok=True)
+    results = []
+
+    for i, q in enumerate(golden, 1):
+        if q["id"] in done:
+            results.append(done[q["id"]])
+            continue
+
+        hits = retrieve(q["question"])
+        retrieved_ids = [cid for cid, _ in hits]
+        context = format_context(hits[:GENERATION_K])
+
+        try:
+            answer = generate(q["question"], context)
+        except DailyLimitReached as e:
+            print(f"\nDaily token limit reached after {len(results)} of {len(golden)} "
+                  f"questions. Progress is saved in {RESULTS_PATH}; rerun "
+                  f"`uv run evaluate.py run` once the limit resets to continue, or "
+                  f"`uv run evaluate.py report` to score what is done.\n  {e}")
+            return
+
+        row = {
+            "id": q["id"],
+            "tier": q["tier"],
+            "course": q.get("course", ""),
+            "hands_on": q.get("hands_on", False),
+            "question": q["question"],
+            "answer": answer,
+            "retrieved": retrieved_ids,
+            **check_citations(answer, hits[:GENERATION_K]),
+        }
+
+        # retrieval metrics only where gold chunks exist, which is tier B by construction
+        gold = q.get("gold_chunks")
+        if gold:
+            row["gold_chunks"] = gold
+            for k in K_VALUES:
+                precision, recall = precision_recall(retrieved_ids, gold, k)
+                row[f"precision@{k}"] = precision
+                row[f"recall@{k}"] = recall
+
+        try:
+            if q["tier"] == "C":
+                verdict = judge_refusal(q, answer)
+                row["refused"] = verdict.get("refused")
+                row["note"] = verdict.get("note")
+            else:
+                scores = judge(q, answer, context)
+                row.update({
+                    "faithfulness": scores.get("faithfulness"),
+                    "relevancy": scores.get("relevancy"),
+                    "correctness": scores.get("correctness"),
+                    "refused": scores.get("refused"),
+                    "note": scores.get("note"),
+                })
+        except DailyLimitReached as e:
+            print(f"\nJudge hit its daily token limit after {len(results)} of "
+                  f"{len(golden)} questions. Progress is saved in {RESULTS_PATH}.\n  {e}")
+            return
+
+        results.append(row)
+        # written as we go, so an interrupted run loses at most one question
+        with RESULTS_PATH.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+        summary = (f"refused={row.get('refused')}" if q["tier"] == "C"
+                   else f"corr={row.get('correctness')} faith={row.get('faithfulness')}")
+        if gold:
+            summary = f"r@5={row['recall@5']:.2f} " + summary
+        print(f"[{i}/{len(golden)}] {q['id'][:45]} {summary}")
+
+    write_report(results)
+
+
+def write_report(results):
+    report = summarise(results)
+    GOLDEN_DIR.mkdir(exist_ok=True)
+    REPORT_JSON.write_text(
+        json.dumps({"summary": report, "results": results}, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    REPORT_MD.write_text(render_markdown(report), encoding="utf-8")
+    print(f"\nWrote {REPORT_JSON} and {REPORT_MD}\n")
+    print(render_markdown(report))
+
+
+def summarise(results):
+    def block(rows, retrieval=False):
+        if not rows:
+            return {}
+        out = {"questions": len(rows)}
+        if retrieval:
+            for k in K_VALUES:
+                out[f"precision@{k}"] = mean([r.get(f"precision@{k}") for r in rows])
+                # precision@k cannot exceed len(gold)/k, and most tier B questions have a
+                # single gold chunk, so the raw number is meaningless without its ceiling
+                out[f"precision@{k}_max"] = mean(
+                    [min(1.0, len(r.get("gold_chunks", [])) / k) for r in rows]
+                )
+                out[f"recall@{k}"] = mean([r.get(f"recall@{k}") for r in rows])
+        for metric in ("faithfulness", "relevancy", "correctness"):
+            out[metric] = mean([r.get(metric) for r in rows])
+        for metric in ("citation_present", "citation_video_valid", "citation_time_valid"):
+            out[metric] = mean([r.get(metric) for r in rows])
+        return out
+
+    tier_a = [r for r in results if r["tier"] == "A"]
+    tier_b = [r for r in results if r["tier"] == "B"]
+    tier_c = [r for r in results if r["tier"] == "C"]
+
+    return {
+        "generated": datetime.now().isoformat(timespec="seconds"),
+        "generation_k": GENERATION_K,
+        "judge_model": JUDGE_MODEL,
+        "tier_a": block(tier_a),
+        "tier_a_by_course": {
+            course: block([r for r in tier_a if r["course"] == course])
+            for course in sorted({r["course"] for r in tier_a})
+        },
+        "tier_a_hands_on": block([r for r in tier_a if r["hands_on"]]),
+        "tier_b": block(tier_b, retrieval=True),
+        "tier_c": {
+            "questions": len(tier_c),
+            # the only correct behaviour here is to decline
+            "refusal_rate": mean([1.0 if r.get("refused") else 0.0 for r in tier_c]),
+        },
+        "unscored": sum(1 for r in results
+                        if r["tier"] != "C" and r.get("correctness") is None),
+    }
+
+
+def table(block, keys):
+    lines = ["| metric | value |", "| --- | --- |"]
+    for key in keys:
+        if key in block:
+            lines.append(f"| {key} | {block[key]} |")
+    return lines
+
+
+GENERATION_METRICS = ("questions", "faithfulness", "relevancy", "correctness",
+                      "citation_present", "citation_video_valid", "citation_time_valid")
+RETRIEVAL_METRICS = tuple(
+    name for k in K_VALUES
+    for name in (f"precision@{k}", f"precision@{k}_max", f"recall@{k}")
+)
+
+
+def render_markdown(summary):
+    lines = [
+        "# Offline evaluation report",
+        "",
+        f"Generated {summary['generated']} · judge `{summary['judge_model']}` · "
+        f"generation uses top {summary['generation_k']} chunks",
+        "",
+        "Faithfulness, relevancy and correctness are judge scores on a continuous "
+        "0.00-1.00 scale; each question's per-score reasoning is kept in the `note` "
+        "field of `report.json`.",
+        "",
+        "Tiers are scored on what their ground truth supports and are never averaged "
+        "together.",
+        "",
+        "## Tier A — quiz questions with human answer keys",
+        "",
+        "Correctness is anchored to the course authors' own answer key. No chunk labels, "
+        "so no retrieval metrics.",
+        "",
+    ]
+    lines += table(summary["tier_a"], GENERATION_METRICS)
+
+    lines += ["", "### By course", "",
+              "| course | questions | correctness | faithfulness | citation_time_valid |",
+              "| --- | --- | --- | --- | --- |"]
+    for course, block in summary["tier_a_by_course"].items():
+        lines.append(f"| {course} | {block.get('questions')} | {block.get('correctness')} "
+                     f"| {block.get('faithfulness')} | {block.get('citation_time_valid')} |")
+
+    hands_on = summary["tier_a_hands_on"]
+    if hands_on:
+        lines += ["", f"Hands-on questions ({hands_on['questions']} of tier A) ask about "
+                      f"clicking through KNIME or Spark rather than lecture content: "
+                      f"correctness {hands_on.get('correctness')}."]
+
+    lines += ["", "## Tier B — generated from single chunks, exact gold labels", "",
+              "Retrieval metrics are exact here. The questions are synthetic, so read "
+              "them as a retrieval measurement, not as user behaviour.", "",
+              "`precision@k_max` is the ceiling that k and the number of gold chunks "
+              "allow: a question with one gold chunk can score at most 1/k, so compare "
+              "each precision against its own maximum, not against 1.0.", ""]
+    lines += table(summary["tier_b"], ("questions",) + RETRIEVAL_METRICS)
+    lines += ["", "Generation metrics on the same questions:", ""]
+    lines += table(summary["tier_b"], GENERATION_METRICS[1:])
+
+    tier_c = summary["tier_c"]
+    lines += ["", "## Tier C — refusal test", "",
+              f"{tier_c['questions']} questions on topics verified absent from the corpus. "
+              f"The pipeline should decline all of them.", "",
+              f"- refusal rate: **{tier_c['refusal_rate']}**"]
+
+    if summary["unscored"]:
+        lines += ["", f"{summary['unscored']} answers could not be scored by the judge."]
+    return "\n".join(lines) + "\n"
+
+
+def spotcheck():
+    """Writes the generated tier B questions out for a human to confirm or reject."""
+    golden = [q for q in load_golden() if q["tier"] == "B"]
+    if not golden:
+        sys.exit("no tier B questions found; run build_golden.py tierb then build")
+
+    by_id = {c["chunk_id"]: c for c in load_chunks()}
+    random.seed(SPOTCHECK_SEED)
+    sample = random.sample(golden, min(SPOTCHECK_SIZE, len(golden)))
+
+    lines = [
+        "# Tier B question review",
+        "",
+        "These questions were generated from the passage shown beneath each one.",
+        "Untick a question that is NOT answerable from its passage, or that merely",
+        "copies the passage's wording, then run `uv run evaluate.py review`.",
+        "",
+    ]
+    for q in sample:
+        chunk = by_id.get(q["source_chunk"])
+        lines += [
+            f"- [x] `{q['id']}` (jaccard {q['jaccard']}, bm25 rank {q['bm25_rank']})",
+            f"    - **Q:** {q['question']}",
+            f"    - **A:** {q['answer']}",
+            f"    - **Source passage ({q['source_chunk']}):** "
+            f"{chunk['text'] if chunk else '(chunk missing)'}",
+            "",
+        ]
+
+    GOLDEN_DIR.mkdir(exist_ok=True)
+    SPOTCHECK_MD.write_text("\n".join(lines), encoding="utf-8")
+    print(f"Wrote {SPOTCHECK_MD}: {len(sample)} generated questions to review")
+
+
+CHECKBOX_RE = re.compile(r"^- \[([ xX])\] `([^`]+)`")
+
+
+def review():
+    """Reports how many reviewed tier B questions a human rejected."""
+    if not SPOTCHECK_MD.exists():
+        sys.exit(f"{SPOTCHECK_MD} not found; run spotcheck first")
+
+    verdicts = {m.group(2): m.group(1).lower() == "x"
+                for m in (CHECKBOX_RE.match(line)
+                          for line in SPOTCHECK_MD.read_text(encoding="utf-8").splitlines())
+                if m}
+    if not verdicts:
+        sys.exit("no checkboxes found in the spot-check sheet")
+
+    rejected = [qid for qid, kept in verdicts.items() if not kept]
+    print(f"reviewed: {len(verdicts)}")
+    print(f"accepted: {len(verdicts)-len(rejected)}")
+    print(f"rejected: {len(rejected)}")
+    for qid in rejected:
+        print(f"  {qid}")
+    if rejected:
+        share = len(rejected) / len(verdicts)
+        print(f"\n{share:.0%} of the sample was rejected. Tier B metrics carry that error "
+              f"rate; regenerate those items or tighten MAX_JACCARD if it is high.")
+
+
+if __name__ == "__main__":
+    stage = sys.argv[1] if len(sys.argv) > 1 else "run"
+    if stage == "run":
+        run()
+    elif stage == "spotcheck":
+        spotcheck()
+    elif stage == "review":
+        review()
+    elif stage == "report":
+        rows = list(load_checkpoint().values())
+        if not rows:
+            sys.exit(f"{RESULTS_PATH} is empty; run `run` first")
+        print(f"scoring {len(rows)} checkpointed questions")
+        write_report(rows)
+    else:
+        sys.exit("usage: evaluate.py [run|report|spotcheck|review]")

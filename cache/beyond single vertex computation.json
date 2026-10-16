@@ -1,0 +1,337 @@
+[
+  {
+    "start": 0.0,
+    "end": 7.08,
+    "text": " As we said earlier, while the giraffe paradigm implements BSP, it must also be pragmatic."
+  },
+  {
+    "start": 8.2,
+    "end": 12.58,
+    "text": " One such point of pragmatism is the computation of aggregate values."
+  },
+  {
+    "start": 13.66,
+    "end": 19.46,
+    "text": " In the think like a vertex paradigm, operations local to a vertex can be performed in parallel"
+  },
+  {
+    "start": 19.46,
+    "end": 23.12,
+    "text": " and each vertex only has to work with its immediate neighborhood."
+  },
+  {
+    "start": 23.7,
+    "end": 27.44,
+    "text": " This is very useful, but it isn't sufficient at times."
+  },
+  {
+    "start": 28.16,
+    "end": 32.5,
+    "text": " For example, we need to know and use the total number of edges in the graph."
+  },
+  {
+    "start": 33.32,
+    "end": 37.02,
+    "text": " This will be computed by adding edges connected to each vertex,"
+  },
+  {
+    "start": 37.38,
+    "end": 41.14,
+    "text": " but once aggregated, it does not belong to any specific vertex."
+  },
+  {
+    "start": 42.24,
+    "end": 45.02,
+    "text": " So, whom does this vertex send the aggregate to?"
+  },
+  {
+    "start": 46.260000000000005,
+    "end": 50.540000000000006,
+    "text": " Also, suppose a vertex creates some edges as part of its compute step."
+  },
+  {
+    "start": 51.46,
+    "end": 54.040000000000006,
+    "text": " When does this information get sent out?"
+  },
+  {
+    "start": 54.86,
+    "end": 56.900000000000006,
+    "text": " Let's answer the first question first."
+  },
+  {
+    "start": 57.44,
+    "end": 63.3,
+    "text": " The class in charge of these aggregates is called the default MasterCompute class."
+  },
+  {
+    "start": 64.08,
+    "end": 67.34,
+    "text": " This class specializes MasterCompute."
+  },
+  {
+    "start": 68.36,
+    "end": 72.22,
+    "text": " How does the default MasterCompute relate to the basic vertex computation?"
+  },
+  {
+    "start": 73.68,
+    "end": 79.22,
+    "text": " We have seen that all vertex programs are created by first defining a vertex class."
+  },
+  {
+    "start": 79.92,
+    "end": 85.9,
+    "text": " This class has a compute function that performs like the think-like-a-vertex logic."
+  },
+  {
+    "start": 85.9,
+    "end": 92.02000000000001,
+    "text": " Now, let's add to it the basic vertex function and an aggregate function."
+  },
+  {
+    "start": 92.02000000000001,
+    "end": 97.86000000000001,
+    "text": " Now, this function for our example of all the total number of aggregate edges looks"
+  },
+  {
+    "start": 97.86000000000001,
+    "end": 100.42,
+    "text": " like this."
+  },
+  {
+    "start": 100.42,
+    "end": 103.28,
+    "text": " The name of the function is aggregate."
+  },
+  {
+    "start": 103.28,
+    "end": 109.52000000000001,
+    "text": " As you can see in yellow, it just gets the number of edges of this vertex."
+  },
+  {
+    "start": 109.52,
+    "end": 116.8,
+    "text": " What's a little strange is that the first argument of this aggregation has an ID of"
+  },
+  {
+    "start": 116.8,
+    "end": 121.17999999999999,
+    "text": " something whose name is total number of edges."
+  },
+  {
+    "start": 121.17999999999999,
+    "end": 123.69999999999999,
+    "text": " What really happens is as follows."
+  },
+  {
+    "start": 123.69999999999999,
+    "end": 128.4,
+    "text": " The default master compute class which is in charge of these global aggregate operations"
+  },
+  {
+    "start": 128.4,
+    "end": 132.78,
+    "text": " is specialized by your aggregate class."
+  },
+  {
+    "start": 132.78,
+    "end": 139.72,
+    "text": " This class has an ID, and the aggregator gets registered with Giraffe's default master"
+  },
+  {
+    "start": 139.72,
+    "end": 141.62,
+    "text": " compute class."
+  },
+  {
+    "start": 141.62,
+    "end": 148.18,
+    "text": " The ID we saw before refers to your registered aggregator class's ID."
+  },
+  {
+    "start": 148.18,
+    "end": 153.88,
+    "text": " The master compute class performs the centralized computation between super steps."
+  },
+  {
+    "start": 153.88,
+    "end": 160.36,
+    "text": " This class is instantiated on the master node and will run every super step before the workers"
+  },
+  {
+    "start": 160.36,
+    "end": 161.36,
+    "text": " do."
+  },
+  {
+    "start": 161.36,
+    "end": 165.58,
+    "text": " Communication with the workers should be performed via aggregators."
+  },
+  {
+    "start": 166.64000000000001,
+    "end": 171.3,
+    "text": " The values of the aggregators are broadcast to the workers before the vertex compute is called"
+  },
+  {
+    "start": 171.3,
+    "end": 176.0,
+    "text": " and collected by the master before the master compute is called."
+  },
+  {
+    "start": 176.60000000000002,
+    "end": 185.26000000000002,
+    "text": " This means the aggregator values used by the workers are consistent with the aggregator values from the master from the same super step."
+  },
+  {
+    "start": 185.26,
+    "end": 187.44,
+    "text": " and the aggregator used by the master"
+  },
+  {
+    "start": 187.44,
+    "end": 190.29999999999998,
+    "text": " are consistent with the aggregator values from the workers"
+  },
+  {
+    "start": 190.29999999999998,
+    "end": 192.34,
+    "text": " from the previous super step."
+  },
+  {
+    "start": 193.07999999999998,
+    "end": 195.6,
+    "text": " Now let's go back to the big picture for a second."
+  },
+  {
+    "start": 196.38,
+    "end": 197.88,
+    "text": " Giraffe is a big data software."
+  },
+  {
+    "start": 198.98,
+    "end": 201.72,
+    "text": " Why not implement the Giraffe system"
+  },
+  {
+    "start": 201.72,
+    "end": 203.5,
+    "text": " with a set of MapReduce jobs?"
+  },
+  {
+    "start": 204.04,
+    "end": 205.44,
+    "text": " Too much disk requirement."
+  },
+  {
+    "start": 205.98,
+    "end": 207.01999999999998,
+    "text": " No in-memory caching."
+  },
+  {
+    "start": 208.04,
+    "end": 209.95999999999998,
+    "text": " Every super step becomes a job."
+  },
+  {
+    "start": 210.73999999999998,
+    "end": 213.94,
+    "text": " So all intermediate steps are written to files"
+  },
+  {
+    "start": 213.94,
+    "end": 217.74,
+    "text": " and that is not a very scalable solution for iterative operations."
+  },
+  {
+    "start": 218.66,
+    "end": 224.02,
+    "text": " However, it will be incorrect to think that Girafe works only in an in-memory process."
+  },
+  {
+    "start": 224.68,
+    "end": 227.32,
+    "text": " It can always have less memory than it needs."
+  },
+  {
+    "start": 228.18,
+    "end": 232.56,
+    "text": " There are two broad categories of what's called out-of-core computation."
+  },
+  {
+    "start": 233.5,
+    "end": 236.52,
+    "text": " The first situation occurs when the graph is really large"
+  },
+  {
+    "start": 236.52,
+    "end": 238.72,
+    "text": " compared to the capacity of the cluster it's running on."
+  },
+  {
+    "start": 239.54,
+    "end": 243.92,
+    "text": " Each worker stores the vertices assigned to it inside a set of partitions."
+  },
+  {
+    "start": 243.94,
+    "end": 251.32,
+    "text": " inside a partition are a subset of vertices together with their data during a super step"
+  },
+  {
+    "start": 251.32,
+    "end": 259.42,
+    "text": " the worker node processes multiple partitions concurrently one per thread if a graph is large"
+  },
+  {
+    "start": 259.42,
+    "end": 266.5,
+    "text": " then not all partitions are stored in memory typically only n partitions are kept in memory"
+  },
+  {
+    "start": 266.5,
+    "end": 272.5,
+    "text": " at all times, and the rest of the partitions are swapped into disk."
+  },
+  {
+    "start": 272.5,
+    "end": 277.5,
+    "text": " The second situation occurs when the number of messages becomes high."
+  },
+  {
+    "start": 277.5,
+    "end": 282.5,
+    "text": " Normally, vertices are processed in the order of their IDs."
+  },
+  {
+    "start": 282.5,
+    "end": 287.5,
+    "text": " A large number of messages is handled by creating temporary message stores"
+  },
+  {
+    "start": 287.5,
+    "end": 290.5,
+    "text": " which are sorted by their destination IDs."
+  },
+  {
+    "start": 290.5,
+    "end": 294.5,
+    "text": " All messages going to the same vertex are placed together."
+  },
+  {
+    "start": 294.5,
+    "end": 298.5,
+    "text": " To do this, messages are sorted in memory periodically."
+  },
+  {
+    "start": 298.5,
+    "end": 304.5,
+    "text": " The message store files are accessed based on which vertices are being processed at this moment."
+  },
+  {
+    "start": 304.5,
+    "end": 309.5,
+    "text": " This whole system is managed by Giraffe's out-of-core message processor."
+  }
+]

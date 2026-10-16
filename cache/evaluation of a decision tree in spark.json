@@ -1,0 +1,147 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.16,
+    "text": " In this activity, we are going to evaluate the decision tree that we previously created in Spark."
+  },
+  {
+    "start": 7.28,
+    "end": 12.56,
+    "text": " For this evaluation, we are going to calculate the accuracy of our classifier"
+  },
+  {
+    "start": 12.56,
+    "end": 15.040000000000001,
+    "text": " and we are going to display the confusion matrix."
+  },
+  {
+    "start": 18.56,
+    "end": 25.2,
+    "text": " For those who closed the container after the previous activity, we have to start the container"
+  },
+  {
+    "start": 25.2,
+    "end": 32.32,
+    "text": " as we have done previously, click on this link and this will transfer us to JupyterLab."
+  },
+  {
+    "start": 33.76,
+    "end": 39.92,
+    "text": " We open our Big Data 4 folder and this time we are going to use the Model Evaluation Notebook."
+  },
+  {
+    "start": 44.72,
+    "end": 48.56,
+    "text": " This is the first step we need to load the predictions that we previously saved"
+  },
+  {
+    "start": 48.56,
+    "end": 56.080000000000005,
+    "text": " in this CSV file from the previous activity. So we start by running this first cell in which we"
+  },
+  {
+    "start": 56.080000000000005,
+    "end": 61.6,
+    "text": " are going to load the classes that we will use for classification, specifically multi-class"
+  },
+  {
+    "start": 61.6,
+    "end": 67.92,
+    "text": " classification evaluator and multi-class metrics. And once we do this, we're going to start our"
+  },
+  {
+    "start": 67.92,
+    "end": 74.88,
+    "text": " Spark session as usual and load our predictions using the right path, the path that I have right"
+  },
+  {
+    "start": 74.88,
+    "end": 78.39999999999999,
+    "text": " here, keeping the header true and inferring the schema."
+  },
+  {
+    "start": 82.96,
+    "end": 89.28,
+    "text": " After loading our predictions, we will proceed to build an evaluator object to calculate the"
+  },
+  {
+    "start": 89.28,
+    "end": 96.08,
+    "text": " accuracy of our predictions. So we will use this class, Multi-Class Classification Evaluator."
+  },
+  {
+    "start": 96.08,
+    "end": 101.67999999999999,
+    "text": " We will specify label as our label column, prediction as our prediction column,"
+  },
+  {
+    "start": 101.68,
+    "end": 109.12,
+    "text": " and the metric that we will use is accuracy. We build it and now we use it to calculate the"
+  },
+  {
+    "start": 109.12,
+    "end": 118.16000000000001,
+    "text": " accuracy in our predictions data frame and as we see we have a 78% accuracy in our predictions."
+  },
+  {
+    "start": 123.36000000000001,
+    "end": 129.44,
+    "text": " We can make a more comprehensive evaluation by calculating the confusion matrix so first we're"
+  },
+  {
+    "start": 129.44,
+    "end": 136.07999999999998,
+    "text": " going to take an example of how predictions looks as an IRDD. This is how the pairs of rows look like."
+  },
+  {
+    "start": 136.8,
+    "end": 144.16,
+    "text": " We can map them and make tuples out of our predictions so we will have the prediction"
+  },
+  {
+    "start": 144.16,
+    "end": 151.04,
+    "text": " next to their true label in a tuple and we're going to create a metrics object using these"
+  },
+  {
+    "start": 151.04,
+    "end": 159.28,
+    "text": " predictions and getting the tuples from the whole data frame to make the pairs of the label and the"
+  },
+  {
+    "start": 159.28,
+    "end": 165.44,
+    "text": " prediction. So we do this, we get this warning that we can ignore because the reason why we're"
+  },
+  {
+    "start": 165.44,
+    "end": 170.56,
+    "text": " getting this warning is because in this library, the library from multi-class metrics, there are"
+  },
+  {
+    "start": 170.56,
+    "end": 176.88,
+    "text": " some deprecated objects that are being used but that is something that we cannot really change."
+  },
+  {
+    "start": 177.68,
+    "end": 183.44,
+    "text": " So now with our metrics object we build the confusion matrix and the way to read this"
+  },
+  {
+    "start": 183.44,
+    "end": 192.96,
+    "text": " is the following. We have 87 true zeros, 84 true ones, we have 28 observations that were really"
+  },
+  {
+    "start": 192.96,
+    "end": 198.96,
+    "text": " zero but were classified as one, and we have 19 observations that were truly ones but were"
+  },
+  {
+    "start": 198.96,
+    "end": 204.96,
+    "text": " classified as zero. And this is how we conclude this activity."
+  }
+]

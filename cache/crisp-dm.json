@@ -1,0 +1,332 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.0,
+    "text": " In the previous lecture, we provided an overview of the general process for data science."
+  },
+  {
+    "start": 6.0,
+    "end": 12.0,
+    "text": " We will now focus on CRISP-DM as a well-adopted methodology for data mining."
+  },
+  {
+    "start": 12.0,
+    "end": 18.0,
+    "text": " After this video, you will be able to summarize what CRISP-DM is,"
+  },
+  {
+    "start": 18.0,
+    "end": 23.0,
+    "text": " list the phases of CRISP-DM, and describe the goals of each phase."
+  },
+  {
+    "start": 23.0,
+    "end": 29.0,
+    "text": " CRISP-DM is a process model that describes the steps in a data mining process."
+  },
+  {
+    "start": 29.0,
+    "end": 36.9,
+    "text": " You may come across CRISP-DM, or some variation of it, as a way to capture the data science or machine learning process as well."
+  },
+  {
+    "start": 38.5,
+    "end": 43.8,
+    "text": " CRISP-DM stands for Cross Industry Standard Process for Data Mining."
+  },
+  {
+    "start": 44.8,
+    "end": 47.980000000000004,
+    "text": " This diagram shows the phases of CRISP-DM."
+  },
+  {
+    "start": 47.980000000000004,
+    "end": 59.980000000000004,
+    "text": " The phases are Business Understanding, Data Understanding, Data Preparation, Modeling,"
+  },
+  {
+    "start": 59.980000000000004,
+    "end": 63.42,
+    "text": " Evaluation, and Deployment."
+  },
+  {
+    "start": 63.42,
+    "end": 67.02000000000001,
+    "text": " We will cover each phase in more detail in this lecture."
+  },
+  {
+    "start": 67.02000000000001,
+    "end": 70.78,
+    "text": " The first phase of CRISP-DM is Business Understanding."
+  },
+  {
+    "start": 70.78,
+    "end": 75.74000000000001,
+    "text": " As with any project, the first step is to understand why we're doing this."
+  },
+  {
+    "start": 75.74,
+    "end": 77.94,
+    "text": " We need to define the business problem."
+  },
+  {
+    "start": 77.94,
+    "end": 80.83999999999999,
+    "text": " What is the problem or opportunity being addressed?"
+  },
+  {
+    "start": 80.83999999999999,
+    "end": 84.66,
+    "text": " What do we hope to gain by undertaking this project?"
+  },
+  {
+    "start": 84.66,
+    "end": 86.97999999999999,
+    "text": " We then need to assess the situation."
+  },
+  {
+    "start": 86.97999999999999,
+    "end": 88.91999999999999,
+    "text": " What are the available resources?"
+  },
+  {
+    "start": 88.91999999999999,
+    "end": 94.25999999999999,
+    "text": " What are the requirements, the risks, the costs, the benefits?"
+  },
+  {
+    "start": 94.25999999999999,
+    "end": 99.06,
+    "text": " We also need to formulate goals and objectives and define the success criteria."
+  },
+  {
+    "start": 99.06,
+    "end": 102.14,
+    "text": " What do we hope to achieve by the end of the project?"
+  },
+  {
+    "start": 102.14,
+    "end": 106.42,
+    "text": " At the end of this phase, we should understand the problem we want to address."
+  },
+  {
+    "start": 106.42,
+    "end": 110.02,
+    "text": " Once we know the question we want to address, then we can formulate the plan to come up"
+  },
+  {
+    "start": 110.02,
+    "end": 115.22,
+    "text": " with the answer, in other words, the solution to our problem."
+  },
+  {
+    "start": 115.22,
+    "end": 118.88,
+    "text": " The second phase of CRISP-DM is data understanding."
+  },
+  {
+    "start": 118.88,
+    "end": 124.76,
+    "text": " This phase has two parts, data acquisition and data exploration."
+  },
+  {
+    "start": 124.76,
+    "end": 130.32,
+    "text": " As you can probably guess, data acquisition involves identifying, collecting, and integrating"
+  },
+  {
+    "start": 130.32,
+    "end": 136.45999999999998,
+    "text": " all data related to the problem being addressed, and data exploration means preliminary exploration"
+  },
+  {
+    "start": 136.45999999999998,
+    "end": 140.51999999999998,
+    "text": " of the data to understand what you have to work with."
+  },
+  {
+    "start": 140.51999999999998,
+    "end": 143.76,
+    "text": " The third phase is data preparation."
+  },
+  {
+    "start": 143.76,
+    "end": 147.6,
+    "text": " The goal here is to prepare data for modeling."
+  },
+  {
+    "start": 147.6,
+    "end": 153.12,
+    "text": " The activities in this phase are to address data quality issues, select the features to"
+  },
+  {
+    "start": 153.12,
+    "end": 159.7,
+    "text": " use, and process the data to make it suitable for modeling in the next phase."
+  },
+  {
+    "start": 159.70000000000002,
+    "end": 165.78000000000003,
+    "text": " After we have prepared the data, then we use this data to build a model in the fourth phase."
+  },
+  {
+    "start": 165.78000000000003,
+    "end": 169.36,
+    "text": " We first need to determine the type of problem we have."
+  },
+  {
+    "start": 169.36,
+    "end": 172.82000000000002,
+    "text": " Is it a classification problem, for example?"
+  },
+  {
+    "start": 172.82000000000002,
+    "end": 177.38000000000002,
+    "text": " Then the modeling techniques or algorithms need to be selected."
+  },
+  {
+    "start": 177.38000000000002,
+    "end": 183.54000000000002,
+    "text": " Then the model is built using the prepared data to perform the necessary task."
+  },
+  {
+    "start": 183.54000000000002,
+    "end": 186.94000000000003,
+    "text": " In phase 5, we evaluate our results."
+  },
+  {
+    "start": 186.94,
+    "end": 192.26,
+    "text": " The model's performance needs to be assessed and these results need to be evaluated with"
+  },
+  {
+    "start": 192.26,
+    "end": 196.38,
+    "text": " respect to the success criteria defined in the first phase."
+  },
+  {
+    "start": 196.38,
+    "end": 201.76,
+    "text": " At the end of this phase, a go or no-go decision will need to be made regarding the model that"
+  },
+  {
+    "start": 201.76,
+    "end": 203.48,
+    "text": " has been built."
+  },
+  {
+    "start": 203.48,
+    "end": 207.02,
+    "text": " If it's a go, then we proceed to the next phase."
+  },
+  {
+    "start": 207.02,
+    "end": 211.98,
+    "text": " If a no-go decision is decided, then we need to determine what the next steps are."
+  },
+  {
+    "start": 211.98,
+    "end": 214.07999999999998,
+    "text": " Do we need to clean up the data more?"
+  },
+  {
+    "start": 214.08,
+    "end": 220.3,
+    "text": " Do we need to go back to Phase 2, which is data understanding, to collect more data?"
+  },
+  {
+    "start": 220.3,
+    "end": 223.66000000000003,
+    "text": " The final phase in CRISP-DM is deployment."
+  },
+  {
+    "start": 223.66000000000003,
+    "end": 228.72000000000003,
+    "text": " Depending on the project requirements, deployment phase can be as simple as creating a final"
+  },
+  {
+    "start": 228.72000000000003,
+    "end": 235.4,
+    "text": " report or as complex as implementing the model and integrating it into an existing process."
+  },
+  {
+    "start": 235.4,
+    "end": 242.08,
+    "text": " In this phase, we want to produce a final report or presentation to document and communicate"
+  },
+  {
+    "start": 242.08,
+    "end": 247.3,
+    "text": " the findings of the project to others. This should include model performance and address"
+  },
+  {
+    "start": 247.3,
+    "end": 253.76000000000002,
+    "text": " business objectives that were set for the project. Deploy the model. This means integrating"
+  },
+  {
+    "start": 253.76000000000002,
+    "end": 260.56,
+    "text": " the model into the intended application or process. Create a plan to monitor the model."
+  },
+  {
+    "start": 260.56,
+    "end": 267.08000000000004,
+    "text": " This is necessary to evaluate the impact of the model on our process or application."
+  },
+  {
+    "start": 267.08000000000004,
+    "end": 271.6,
+    "text": " You might have noticed that there are many similarities between CRISP-DM and our model"
+  },
+  {
+    "start": 271.6,
+    "end": 274.86,
+    "text": " for the machine learning process that we discussed in the last two lectures."
+  },
+  {
+    "start": 275.40000000000003,
+    "end": 277.0,
+    "text": " You would be correct in your assessment."
+  },
+  {
+    "start": 277.90000000000003,
+    "end": 281.14000000000004,
+    "text": " This diagram shows how the steps in our machine learning process"
+  },
+  {
+    "start": 281.14000000000004,
+    "end": 283.58000000000004,
+    "text": " map to the phases of CRISP-DM."
+  },
+  {
+    "start": 284.44,
+    "end": 288.38,
+    "text": " The goals and activities are similar, just organized a little differently."
+  },
+  {
+    "start": 289.3,
+    "end": 292.28000000000003,
+    "text": " Our process puts more emphasis on actionable results"
+  },
+  {
+    "start": 292.28000000000003,
+    "end": 295.82000000000005,
+    "text": " by explicitly calling out report and act activities"
+  },
+  {
+    "start": 295.82000000000005,
+    "end": 299.94,
+    "text": " to emphasize the importance of turning insights into action"
+  },
+  {
+    "start": 299.94,
+    "end": 301.52000000000004,
+    "text": " in a machine learning project."
+  },
+  {
+    "start": 301.6,
+    "end": 331.58000000000004,
+    "text": " Thank you."
+  }
+]

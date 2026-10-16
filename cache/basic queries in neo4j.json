@@ -1,0 +1,447 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.0,
+    "text": " In this activity, we are going to execute basic queries with Neo4j."
+  },
+  {
+    "start": 8.0,
+    "end": 13.0,
+    "text": " As a setup for this activity, make sure to clean the slate in Neo4j running this command,"
+  },
+  {
+    "start": 13.0,
+    "end": 18.0,
+    "text": " and to load the test graph that we explored in the previous activity."
+  },
+  {
+    "start": 21.0,
+    "end": 24.0,
+    "text": " Our first query is going to be a simple one."
+  },
+  {
+    "start": 24.0,
+    "end": 27.0,
+    "text": " We are simply going to return the count of nodes."
+  },
+  {
+    "start": 27.0,
+    "end": 31.560000000000002,
+    "text": " So I run this to match all of the nodes of the type by node, and I return the count of"
+  },
+  {
+    "start": 31.560000000000002,
+    "end": 34.36,
+    "text": " those nodes."
+  },
+  {
+    "start": 34.36,
+    "end": 39.82,
+    "text": " The result is that we have 11 nodes, and I can confirm that result visually if I take"
+  },
+  {
+    "start": 39.82,
+    "end": 48.1,
+    "text": " the same command and I remove the function count to return the graph instead of the count."
+  },
+  {
+    "start": 48.1,
+    "end": 53.879999999999995,
+    "text": " So I remove the function, I run this, and this is the graph, so let me count."
+  },
+  {
+    "start": 53.88,
+    "end": 67.4,
+    "text": " We have 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 nodes as our previous results indicated."
+  },
+  {
+    "start": 67.4,
+    "end": 69.64,
+    "text": " Now I'm going to count the edges."
+  },
+  {
+    "start": 69.64,
+    "end": 74.24000000000001,
+    "text": " So what I'm going to do is that I'm going to take a command that is almost the same"
+  },
+  {
+    "start": 74.24000000000001,
+    "end": 80.30000000000001,
+    "text": " as the previous one, but this time I'm representing the edges in a variable called r and I'm"
+  },
+  {
+    "start": 80.30000000000001,
+    "end": 83.32000000000001,
+    "text": " returning the count of this variable."
+  },
+  {
+    "start": 83.32000000000001,
+    "end": 92.34,
+    "text": " I run it, and my count is equal to 14."
+  },
+  {
+    "start": 92.34,
+    "end": 98.02000000000001,
+    "text": " Now I'm going to identify leaf nodes, which are nodes that have no outgoing edges."
+  },
+  {
+    "start": 98.02000000000001,
+    "end": 102.76,
+    "text": " So what I'm going to do is that first I'm going to locate all of the nodes that have"
+  },
+  {
+    "start": 102.76,
+    "end": 108.22000000000001,
+    "text": " the label 2 associated to them, and I'm going to set this constraint which indicates that"
+  },
+  {
+    "start": 108.22000000000001,
+    "end": 111.96000000000001,
+    "text": " these nodes must not have any outgoing edge."
+  },
+  {
+    "start": 111.96000000000001,
+    "end": 120.96000000000001,
+    "text": " I run it, and I find that the only leaf node in my graph is P."
+  },
+  {
+    "start": 120.96000000000001,
+    "end": 124.92000000000002,
+    "text": " For this new query, I'm going to look for the root nodes, which are nodes that have"
+  },
+  {
+    "start": 124.92000000000002,
+    "end": 126.94000000000001,
+    "text": " no incoming edges."
+  },
+  {
+    "start": 126.94000000000001,
+    "end": 132.3,
+    "text": " So I'm going to use a command that follows the same logic as the previous one, but the"
+  },
+  {
+    "start": 132.3,
+    "end": 134.84,
+    "text": " statements are basically inverse."
+  },
+  {
+    "start": 134.84,
+    "end": 141.32,
+    "text": " This time the constraint is that my nodes must not have any incoming edge."
+  },
+  {
+    "start": 141.32,
+    "end": 152.28,
+    "text": " So I run this and the only root node in my graph is H."
+  },
+  {
+    "start": 152.28,
+    "end": 156.5,
+    "text": " A triangle occurs when I have three nodes connected and the beginning node is the same"
+  },
+  {
+    "start": 156.5,
+    "end": 158.24,
+    "text": " as the ending node."
+  },
+  {
+    "start": 158.24,
+    "end": 164.82,
+    "text": " So to find them, I'm going to run a command to locate the nodes A that go to B, then to"
+  },
+  {
+    "start": 164.82,
+    "end": 170.82,
+    "text": " C and then back to A. Return the three types of nodes and distinct to not repeat triangles."
+  },
+  {
+    "start": 170.82,
+    "end": 179.82,
+    "text": " I run it, and I find that my graph has two triangles, one right here, and the other one right here."
+  },
+  {
+    "start": 183.82,
+    "end": 188.82,
+    "text": " Now we are going to identify the second neighbors of D."
+  },
+  {
+    "start": 188.82,
+    "end": 194.82,
+    "text": " So in this query, we are going to match all of the pairs of nodes that are at least two nodes away from each other,"
+  },
+  {
+    "start": 194.82,
+    "end": 198.82,
+    "text": " then we are going to specify that one of these nodes has to be D,"
+  },
+  {
+    "start": 198.82,
+    "end": 203.28,
+    "text": " And finally, we use the command distinct so we don't get back repeated nodes."
+  },
+  {
+    "start": 205.57999999999998,
+    "end": 208.44,
+    "text": " So we run this query and this is our graph."
+  },
+  {
+    "start": 209.01999999999998,
+    "end": 214.66,
+    "text": " Notice that some nodes are one node away from D, but we can get to those nodes indirectly through another node,"
+  },
+  {
+    "start": 214.78,
+    "end": 218.16,
+    "text": " which means that they are both a first neighbor and a second neighbor."
+  },
+  {
+    "start": 222.28,
+    "end": 225.78,
+    "text": " For this query, we're going to bring back our terrorist data."
+  },
+  {
+    "start": 225.78,
+    "end": 231.48,
+    "text": " So the first step is gonna be to clean the slate of Neo4j so we can load our"
+  },
+  {
+    "start": 231.48,
+    "end": 236.88,
+    "text": " new graph. So we run this and then we can bring back our command to load the"
+  },
+  {
+    "start": 236.88,
+    "end": 243.36,
+    "text": " terrorist data. So let me go up once again and paste the command in this new"
+  },
+  {
+    "start": 243.36,
+    "end": 251.4,
+    "text": " cell. I run it and my data is ready to work with. The first thing that I want to"
+  },
+  {
+    "start": 251.4,
+    "end": 256.22,
+    "text": " know from my data is that I want to know the labels associated with a specific"
+  },
+  {
+    "start": 256.22,
+    "end": 262.26,
+    "text": " node. So in this case what I'm going to do is that I'm going to run a command in"
+  },
+  {
+    "start": 262.26,
+    "end": 267.36,
+    "text": " which I am going to identify the nodes with the property name equal to"
+  },
+  {
+    "start": 267.36,
+    "end": 272.14,
+    "text": " Afghanistan and I'm going to return the label associated with these nodes which"
+  },
+  {
+    "start": 272.14,
+    "end": 275.84000000000003,
+    "text": " in this case is country."
+  },
+  {
+    "start": 275.84000000000003,
+    "end": 284.52000000000004,
+    "text": " For this new query, I want to return a label again, but this time the label associated"
+  },
+  {
+    "start": 284.52000000000004,
+    "end": 286.44000000000005,
+    "text": " with a type of edge."
+  },
+  {
+    "start": 286.44000000000005,
+    "end": 293.96000000000004,
+    "text": " So what I'm going to do is that I'm going to match the edges that connect to the nodes"
+  },
+  {
+    "start": 293.96000000000004,
+    "end": 299.32000000000005,
+    "text": " with the property name Afghanistan, and I'm going to return the type of these nodes."
+  },
+  {
+    "start": 299.32000000000005,
+    "end": 301.22,
+    "text": " Sorry, of these edges."
+  },
+  {
+    "start": 301.22,
+    "end": 306.58000000000004,
+    "text": " And I see that the label associated with these edges is the label is from, and this is because"
+  },
+  {
+    "start": 306.58000000000004,
+    "end": 317.24,
+    "text": " the connection between the terrorist node and the country nodes is the label is from."
+  },
+  {
+    "start": 317.24,
+    "end": 323.32000000000005,
+    "text": " For my next query, I want to return nodes with all of the properties associated to them."
+  },
+  {
+    "start": 323.32000000000005,
+    "end": 328.98,
+    "text": " So to do this, I'm going to run this new command in which I'm going to match all of the nodes"
+  },
+  {
+    "start": 328.98,
+    "end": 333.52000000000004,
+    "text": " of the class actor, who are terrorists, and I'm going to return all of the properties"
+  },
+  {
+    "start": 333.52000000000004,
+    "end": 337.56,
+    "text": " represented in an asterisk."
+  },
+  {
+    "start": 337.56,
+    "end": 342.22,
+    "text": " This view doesn't allow me to see the properties, so I'm going to change to a table view, clicking"
+  },
+  {
+    "start": 342.22,
+    "end": 347.94,
+    "text": " on text, and here I'm able to see the first 20 observations of my data with all of the"
+  },
+  {
+    "start": 347.94,
+    "end": 351.22,
+    "text": " properties associated to these nodes."
+  },
+  {
+    "start": 351.22,
+    "end": 358.18,
+    "text": " For this new command, we need to load a new graph."
+  },
+  {
+    "start": 358.18,
+    "end": 364.40000000000003,
+    "text": " So we're going to scroll down to run again this command that cleans the slate in Neo4j"
+  },
+  {
+    "start": 364.40000000000003,
+    "end": 369.56,
+    "text": " and we're going to take a command that is available in the written instructions that"
+  },
+  {
+    "start": 369.56,
+    "end": 375.24,
+    "text": " is going to load a graph from a CSV file called test2."
+  },
+  {
+    "start": 375.24,
+    "end": 383.14,
+    "text": " I run it and this adds 7 new nodes and 16 relationships to Neo4j."
+  },
+  {
+    "start": 383.14,
+    "end": 389.09999999999997,
+    "text": " So we click here, then we click on graph and let me first move the graph a little bit so"
+  },
+  {
+    "start": 389.09999999999997,
+    "end": 394.84,
+    "text": " I can give you a better overview of it and explain what is particular about this graph."
+  },
+  {
+    "start": 394.84,
+    "end": 399.4,
+    "text": " And what is particular about this graph is the fact that we have cases of multigraphs,"
+  },
+  {
+    "start": 399.4,
+    "end": 405.5,
+    "text": " this means nodes that are connected by more than one edge and we also have loops like"
+  },
+  {
+    "start": 405.5,
+    "end": 410.91999999999996,
+    "text": " the one that we have right here and another one right here."
+  },
+  {
+    "start": 410.92,
+    "end": 416.82,
+    "text": " So with this set, the intention of this first query with this new graph is to return the"
+  },
+  {
+    "start": 416.82,
+    "end": 419.02000000000004,
+    "text": " loops of the graph."
+  },
+  {
+    "start": 419.02000000000004,
+    "end": 425.1,
+    "text": " So I'm going to run this new command that I'm going to paste right here in which I'm"
+  },
+  {
+    "start": 425.1,
+    "end": 430.3,
+    "text": " going to match the nodes end that are connected to themselves."
+  },
+  {
+    "start": 430.3,
+    "end": 439.56,
+    "text": " I run it and I can return the loops that I previously identified."
+  },
+  {
+    "start": 439.56,
+    "end": 444.78000000000003,
+    "text": " Now in this new query I want to return the multigraphs that I previously identified."
+  },
+  {
+    "start": 444.78000000000003,
+    "end": 452.84000000000003,
+    "text": " So what I'm going to do is that I'm going to find the matches of the nodes n and m that"
+  },
+  {
+    "start": 452.84000000000003,
+    "end": 458.8,
+    "text": " are connected through an edge r1 through an edge r2 and I'm going to write this constraint"
+  },
+  {
+    "start": 458.8,
+    "end": 462.9,
+    "text": " indicating that these edges cannot be the same."
+  },
+  {
+    "start": 462.90000000000003,
+    "end": 474.76000000000005,
+    "text": " So I run this and I can obtain the multigraphs that I previously identified."
+  },
+  {
+    "start": 474.76000000000005,
+    "end": 479.74,
+    "text": " For my last query, I want to give a set of nodes and return a subgraph."
+  },
+  {
+    "start": 479.74,
+    "end": 484.92,
+    "text": " So I run this command in which I'm going to match all of the nodes with their respective"
+  },
+  {
+    "start": 484.92,
+    "end": 489.66,
+    "text": " edges, but I'm going to set a constraint that I can only return the nodes that are part"
+  },
+  {
+    "start": 489.66,
+    "end": 491.24,
+    "text": " of the set."
+  },
+  {
+    "start": 491.24,
+    "end": 497.52,
+    "text": " I run this and this is my resulting sub graph."
+  },
+  {
+    "start": 497.52,
+    "end": 499.18,
+    "text": " This is how we conclude this activity."
+  }
+]

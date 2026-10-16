@@ -1,0 +1,397 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.0,
+    "text": " In this activity, we will be performing classification in KNIME."
+  },
+  {
+    "start": 5.0,
+    "end": 9.0,
+    "text": " First, we will create a new workflow and import our weather data."
+  },
+  {
+    "start": 9.0,
+    "end": 16.0,
+    "text": " Next, we will remove the missing data and then create a categorical value for the humidity measurements."
+  },
+  {
+    "start": 16.0,
+    "end": 23.0,
+    "text": " We will then examine summary statistics of the data before and after the missing data was removed."
+  },
+  {
+    "start": 23.0,
+    "end": 27.0,
+    "text": " And finally, build a decision tree workflow."
+  },
+  {
+    "start": 30.0,
+    "end": 41.5,
+    "text": " Let's begin. First, let's create a new workflow. We'll call it classification."
+  },
+  {
+    "start": 41.5,
+    "end": 49.5,
+    "text": " Next, we'll import the daily weather data using the file reader node."
+  },
+  {
+    "start": 49.5,
+    "end": 58.5,
+    "text": " Configure the file reader node to use daily underscore weather dot CSV."
+  },
+  {
+    "start": 58.5,
+    "end": 69.9,
+    "text": " Next, we'll add a MissingValue node to remove the missing values in the daily weather data."
+  },
+  {
+    "start": 69.9,
+    "end": 81.2,
+    "text": " We'll configure MissingValue to remove all the missing values."
+  },
+  {
+    "start": 81.2,
+    "end": 88.96000000000001,
+    "text": " Next, we'll use the NumericBender node to create a categorical variable for the humidity at 3 p.m."
+  },
+  {
+    "start": 88.96000000000001,
+    "end": 95.44,
+    "text": " We'll add the NumericBender node, we'll connect it to missing value,"
+  },
+  {
+    "start": 95.44,
+    "end": 102.4,
+    "text": " we'll select the relative humidity 3 p.m. column, and we'll create two bins."
+  },
+  {
+    "start": 102.4,
+    "end": 109.76,
+    "text": " The first bin we'll call humidity underscore low,"
+  },
+  {
+    "start": 109.76,
+    "end": 113.60000000000001,
+    "text": " That value will go up to 25."
+  },
+  {
+    "start": 113.60000000000001,
+    "end": 123.2,
+    "text": " The second bin we'll call humidity underscore not underscore low."
+  },
+  {
+    "start": 123.2,
+    "end": 139.32,
+    "text": " We'll check the append new column and we'll call the new column low underscore humidity underscore day."
+  },
+  {
+    "start": 139.32,
+    "end": 146.32,
+    "text": " Next, we'll examine some summary statistics both before and after we've removed the missing values."
+  },
+  {
+    "start": 146.32,
+    "end": 154.32,
+    "text": " We'll add the Statistics node to the canvas."
+  },
+  {
+    "start": 154.32,
+    "end": 159.32,
+    "text": " We'll connect the first one to the output of the FileReader actor."
+  },
+  {
+    "start": 159.32,
+    "end": 167.32,
+    "text": " We'll add another one to the output of NumericBinner."
+  },
+  {
+    "start": 167.32,
+    "end": 175.32,
+    "text": " We'll change the name of the first one to be BEFORE FILTERING,"
+  },
+  {
+    "start": 175.32,
+    "end": 182.32,
+    "text": " and change the name of the second one to AFTER FILTERING."
+  },
+  {
+    "start": 182.32,
+    "end": 185.32,
+    "text": " Let's configure the first one."
+  },
+  {
+    "start": 185.32,
+    "end": 192.32,
+    "text": " We'll change the maximum number of possible values per column to 1500."
+  },
+  {
+    "start": 192.32,
+    "end": 193.98,
+    "text": " We'll also add all the columns."
+  },
+  {
+    "start": 198.04,
+    "end": 200.56,
+    "text": " Let's configure the second statistics node."
+  },
+  {
+    "start": 200.56,
+    "end": 203.18,
+    "text": " Again, we'll change the maximum number of possible values"
+  },
+  {
+    "start": 203.18,
+    "end": 206.51999999999998,
+    "text": " per column to 1,500, and we'll add all the columns."
+  },
+  {
+    "start": 209.28,
+    "end": 210.44,
+    "text": " Now let's run our workflow."
+  },
+  {
+    "start": 215.12,
+    "end": 218.56,
+    "text": " Let's view both statistic nodes to compare the outputs."
+  },
+  {
+    "start": 222.32,
+    "end": 229.32,
+    "text": " In the before filtering statistics, we can see that there are missing values."
+  },
+  {
+    "start": 229.32,
+    "end": 238.32,
+    "text": " However, there are no missing values in the after filtering statistics."
+  },
+  {
+    "start": 238.32,
+    "end": 244.32,
+    "text": " We can also compare the summary statistics for different measurements to see that they are similar values."
+  },
+  {
+    "start": 244.32,
+    "end": 258.88,
+    "text": " For example, let's take a look at air temp 9 a.m."
+  },
+  {
+    "start": 258.88,
+    "end": 266.21999999999997,
+    "text": " We can see that most of the statistics are the same, as well as the distribution of values."
+  },
+  {
+    "start": 266.21999999999997,
+    "end": 272.62,
+    "text": " In the after filtering statistics, click on the nominal tab, and we'll look at the low"
+  },
+  {
+    "start": 272.62,
+    "end": 284.06,
+    "text": " humidity day categorical variable we created."
+  },
+  {
+    "start": 284.06,
+    "end": 291.22,
+    "text": " We can see that the samples are equally distributed between the two values."
+  },
+  {
+    "start": 291.22,
+    "end": 294.58,
+    "text": " Let's close these statistics views."
+  },
+  {
+    "start": 294.58,
+    "end": 304.58,
+    "text": " Next, let's add a Column Filter node."
+  },
+  {
+    "start": 304.58,
+    "end": 310.58,
+    "text": " We'll connect this to the output of Numeric Banner, double-click to configure the node,"
+  },
+  {
+    "start": 310.58,
+    "end": 317.58,
+    "text": " and we will exclude Relative Humidity 9 AM and Relative Humidity 3 PM columns."
+  },
+  {
+    "start": 317.58,
+    "end": 320.58,
+    "text": " Click OK."
+  },
+  {
+    "start": 320.58,
+    "end": 328.58,
+    "text": " Next, we'll add a ColorManager node to the canvas."
+  },
+  {
+    "start": 328.58,
+    "end": 334.58,
+    "text": " We'll connect this to the output of ColumnFilter, double-click to configure it,"
+  },
+  {
+    "start": 334.58,
+    "end": 341.58,
+    "text": " and we'll make sure that HumidityLow is red and HumidityNotLow is blue."
+  },
+  {
+    "start": 341.58,
+    "end": 346.58,
+    "text": " Click OK to close."
+  },
+  {
+    "start": 346.58,
+    "end": 349.58,
+    "text": " Next, we'll add the partitioning node to the canvas."
+  },
+  {
+    "start": 354.28,
+    "end": 357.68,
+    "text": " We'll connect this to the output of Color Manager."
+  },
+  {
+    "start": 357.68,
+    "end": 359.97999999999996,
+    "text": " Double click to configure."
+  },
+  {
+    "start": 359.97999999999996,
+    "end": 362.97999999999996,
+    "text": " We want to split the data into two partitions."
+  },
+  {
+    "start": 362.97999999999996,
+    "end": 365.78,
+    "text": " The first partition should have 80% of the data."
+  },
+  {
+    "start": 365.78,
+    "end": 368.68,
+    "text": " The second partition should have 20%."
+  },
+  {
+    "start": 368.68,
+    "end": 374.47999999999996,
+    "text": " To do this, click on relative percent and change this to 80."
+  },
+  {
+    "start": 374.48,
+    "end": 384.52000000000004,
+    "text": " We'll make sure Draw Randomly is selected, and check Use Random Seed, and change the seed to 1, 2, 3, 4, 5."
+  },
+  {
+    "start": 385.22,
+    "end": 387.66,
+    "text": " Normally, we would not specify the random seed."
+  },
+  {
+    "start": 388.52000000000004,
+    "end": 393.02000000000004,
+    "text": " However, since we want repeatable results, we use a specific seed value here."
+  },
+  {
+    "start": 394.08000000000004,
+    "end": 395.38,
+    "text": " Click OK to continue."
+  },
+  {
+    "start": 396.64000000000004,
+    "end": 399.62,
+    "text": " Next, we'll add a Decision Tree Learner to the workflow."
+  },
+  {
+    "start": 399.62,
+    "end": 406.62,
+    "text": " We'll connect this to the top output of the partitioning node."
+  },
+  {
+    "start": 406.62,
+    "end": 414.62,
+    "text": " Double-click to configure and change the min number of records per node to 20."
+  },
+  {
+    "start": 414.62,
+    "end": 417.62,
+    "text": " Click OK."
+  },
+  {
+    "start": 417.62,
+    "end": 421.62,
+    "text": " Next, we'll add a decision tree predictor node to the canvas,"
+  },
+  {
+    "start": 421.62,
+    "end": 428.62,
+    "text": " and we'll connect the bottom output of partitioning to the bottom input of the predictor."
+  },
+  {
+    "start": 428.62,
+    "end": 436.62,
+    "text": " Next, we'll connect the output of Decision Tree Learner to the top input of Decision Tree Predictor."
+  },
+  {
+    "start": 436.62,
+    "end": 439.62,
+    "text": " Now let's execute our workflow."
+  },
+  {
+    "start": 439.62,
+    "end": 445.62,
+    "text": " We can view the resulting classification rules by right-clicking on Decision Tree Predictor"
+  },
+  {
+    "start": 445.62,
+    "end": 452.62,
+    "text": " and choosing either View Decision Tree View or View Decision Tree View Simple."
+  },
+  {
+    "start": 452.62,
+    "end": 454.62,
+    "text": " Let's do the first one."
+  },
+  {
+    "start": 454.62,
+    "end": 458.62,
+    "text": " This shows the first two splits in our decision tree."
+  },
+  {
+    "start": 458.62,
+    "end": 462.62,
+    "text": " We can expand each branch by clicking on the plus."
+  },
+  {
+    "start": 462.62,
+    "end": 465.62,
+    "text": " Let's close this."
+  },
+  {
+    "start": 465.62,
+    "end": 468.62,
+    "text": " Now let's look at the simplified view."
+  },
+  {
+    "start": 468.62,
+    "end": 473.62,
+    "text": " Again, we can expand the branches to see the splits in the decision tree."
+  },
+  {
+    "start": 473.62,
+    "end": 476.62,
+    "text": " Close this."
+  },
+  {
+    "start": 476.62,
+    "end": 479.62,
+    "text": " Finally, let's save this workflow."
+  },
+  {
+    "start": 479.62,
+    "end": 484.62,
+    "text": " We'll analyze the results of the decision tree model in the next KNIME hands-on."
+  },
+  {
+    "start": 484.62,
+    "end": 488.62,
+    "text": " Save the workflow by clicking on the disk icon."
+  }
+]

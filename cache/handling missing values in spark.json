@@ -1,0 +1,227 @@
+[
+  {
+    "start": 0.8,
+    "end": 5.88,
+    "text": " In this activity, we are going to explore different techniques to handle missing values"
+  },
+  {
+    "start": 5.88,
+    "end": 7.88,
+    "text": " using Spark."
+  },
+  {
+    "start": 7.88,
+    "end": 13.72,
+    "text": " The two approaches that we are going to follow are, number one, the removal of rows containing"
+  },
+  {
+    "start": 13.72,
+    "end": 25.16,
+    "text": " missing values, and number two, the imputation of missing values with the average value."
+  },
+  {
+    "start": 25.16,
+    "end": 29.44,
+    "text": " As we have done with previous activities involving Spark, we are going to start this"
+  },
+  {
+    "start": 29.44,
+    "end": 35.620000000000005,
+    "text": " activity by starting our Jupyter Coursera container so we click the start button"
+  },
+  {
+    "start": 35.620000000000005,
+    "end": 40.88,
+    "text": " and wait for the container to start running and once the container is"
+  },
+  {
+    "start": 40.88,
+    "end": 45.88,
+    "text": " running we click at this link to open our browser and be transferred to Jupyter"
+  },
+  {
+    "start": 45.88,
+    "end": 49.88,
+    "text": " lab this is the notebook from the previous activity we are going to close"
+  },
+  {
+    "start": 49.88,
+    "end": 56.16,
+    "text": " it and open our missing values notebook"
+  },
+  {
+    "start": 59.44,
+    "end": 65.06,
+    "text": " With the notebook open, we are going to load the Spark Session class from PySpark SQL."
+  },
+  {
+    "start": 65.46,
+    "end": 71.46,
+    "text": " We're going to create the Spark Session object and read the CSV daily weather to create a"
+  },
+  {
+    "start": 71.46,
+    "end": 75.22,
+    "text": " data frame, keeping the header true and inferring the schema."
+  },
+  {
+    "start": 79.03999999999999,
+    "end": 83.2,
+    "text": " We're going to take a look at the descriptive statistics of our data frame."
+  },
+  {
+    "start": 83.66,
+    "end": 84.82,
+    "text": " So we run this cell."
+  },
+  {
+    "start": 84.82000000000001,
+    "end": 88.88000000000001,
+    "text": " and one of the first things that we're going to notice"
+  },
+  {
+    "start": 88.88000000000001,
+    "end": 91.52000000000001,
+    "text": " is that the count for each column is different"
+  },
+  {
+    "start": 91.52000000000001,
+    "end": 96.88000000000001,
+    "text": " and this is because each column has a different number of missing values."
+  },
+  {
+    "start": 98.0,
+    "end": 100.32000000000001,
+    "text": " So the next thing that we're going to do"
+  },
+  {
+    "start": 100.32000000000001,
+    "end": 104.4,
+    "text": " is to print the descriptive statistics for this particular column"
+  },
+  {
+    "start": 104.4,
+    "end": 107.56,
+    "text": " that we're going to use as comparison in the next steps"
+  },
+  {
+    "start": 107.56,
+    "end": 112.4,
+    "text": " and we're also going to print the total number of rows in our data frame."
+  },
+  {
+    "start": 114.82000000000001,
+    "end": 121.76,
+    "text": " The first method that we're going to use to remove missing values is to simply remove"
+  },
+  {
+    "start": 121.76,
+    "end": 125.82000000000001,
+    "text": " every single row that has at least one missing value."
+  },
+  {
+    "start": 125.82000000000001,
+    "end": 129.04000000000002,
+    "text": " And to do this, we're going to use the naDrop method."
+  },
+  {
+    "start": 129.04000000000002,
+    "end": 135.32,
+    "text": " So we run this cell, and then we run once again the descriptive statistics for air temperature"
+  },
+  {
+    "start": 135.32,
+    "end": 138.32,
+    "text": " at 9am."
+  },
+  {
+    "start": 138.32,
+    "end": 144.04000000000002,
+    "text": " We take a look at them, and we see that we lost 36, sorry, 26 rows, and also that the"
+  },
+  {
+    "start": 144.04,
+    "end": 150.04,
+    "text": " mean now is slightly higher. The standard deviation is now slightly smaller and our"
+  },
+  {
+    "start": 150.04,
+    "end": 156.6,
+    "text": " mean and maximum value did not change. We take a look at the number of rows on this new data frame"
+  },
+  {
+    "start": 156.6,
+    "end": 161.56,
+    "text": " and as we can see the value that we get is consistent to what we got in the previous"
+  },
+  {
+    "start": 161.56,
+    "end": 165.88,
+    "text": " table which means that in total we lost 31 observations."
+  },
+  {
+    "start": 165.88,
+    "end": 175.48,
+    "text": " The second method that we're going to explore is the imputation of missing values with another"
+  },
+  {
+    "start": 175.48,
+    "end": 181.56,
+    "text": " value. So we start by importing the average function and by creating a copy of our original"
+  },
+  {
+    "start": 181.56,
+    "end": 187.0,
+    "text": " data frame, and what we're going to do is that for each of the columns of this new data frame,"
+  },
+  {
+    "start": 187.0,
+    "end": 192.76,
+    "text": " we are going to calculate the average value, then we're going to print the column along with the"
+  },
+  {
+    "start": 192.76,
+    "end": 198.32,
+    "text": " mean value and finally we're going to impute the mean value into the missing"
+  },
+  {
+    "start": 198.32,
+    "end": 206.48,
+    "text": " values. So we run this cell and we can see how we're getting for each column the"
+  },
+  {
+    "start": 206.48,
+    "end": 210.48,
+    "text": " mean value that we just calculated."
+  },
+  {
+    "start": 212.7,
+    "end": 218.2,
+    "text": " We take a final comparison of air temperature 9 between the original"
+  },
+  {
+    "start": 218.20000000000002,
+    "end": 224.62,
+    "text": " data frame and the imputed data frame. So we run this cell and the first thing"
+  },
+  {
+    "start": 224.62,
+    "end": 228.56,
+    "text": " that we notice is that now the count is higher because we are not losing any"
+  },
+  {
+    "start": 228.56,
+    "end": 233.96,
+    "text": " missing values, the standard deviation is slightly smaller, the minimum and the"
+  },
+  {
+    "start": 233.96,
+    "end": 238.36,
+    "text": " maximum value are the same, and also the mean is the same because of the"
+  },
+  {
+    "start": 238.36,
+    "end": 246.56,
+    "text": " imputation, which is smaller than this mean when we remove all missing values."
+  }
+]

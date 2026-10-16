@@ -1,0 +1,222 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.74,
+    "text": " In this activity, we are going to perform exploratory data analysis on weather data using Spark."
+  },
+  {
+    "start": 7.54,
+    "end": 14.38,
+    "text": " During this activity, we are going to, number one, read CSV files into Spark data frames,"
+  },
+  {
+    "start": 14.94,
+    "end": 21.900000000000002,
+    "text": " number two, generate summary statistics, and finally, compute correlation coefficients between two columns."
+  },
+  {
+    "start": 21.900000000000002,
+    "end": 32.1,
+    "text": " the first step we are going to build the docker container for this activity and for the next"
+  },
+  {
+    "start": 32.1,
+    "end": 37.28,
+    "text": " activities that also involve spark for people coming from the previous course big data integration"
+  },
+  {
+    "start": 37.28,
+    "end": 42.160000000000004,
+    "text": " of processing you can skip to step number two for those who are not coming from that course"
+  },
+  {
+    "start": 42.160000000000004,
+    "end": 48.68000000000001,
+    "text": " first make sure to have your docker engine running by opening docker desktop and after you do that"
+  },
+  {
+    "start": 48.68,
+    "end": 55.4,
+    "text": " you're going to pull the image docker-pull-p-ramanedi-vega-jupyter-coursera,"
+  },
+  {
+    "start": 56.92,
+    "end": 61.24,
+    "text": " include the tag latest, and after pressing enter,"
+  },
+  {
+    "start": 62.6,
+    "end": 67.08,
+    "text": " the image is going to start to be downloaded into your local system."
+  },
+  {
+    "start": 69.64,
+    "end": 77.0,
+    "text": " After a couple of minutes, you will have your image ready, so we are going to build a container"
+  },
+  {
+    "start": 77.0,
+    "end": 79.64,
+    "text": " using the following fields."
+  },
+  {
+    "start": 79.64,
+    "end": 89.52,
+    "text": " Manitiga, Jupyter Coursera, minus P, port 8888, and using the default image."
+  },
+  {
+    "start": 89.52,
+    "end": 96.6,
+    "text": " So we build a container, specify the name Jupyter Coursera, use the port 8888, and use"
+  },
+  {
+    "start": 96.6,
+    "end": 99.64,
+    "text": " the image that we just pulled to build it."
+  },
+  {
+    "start": 99.64,
+    "end": 106.92,
+    "text": " We run this, and wait for a few seconds for the container to start."
+  },
+  {
+    "start": 107.0,
+    "end": 114.94,
+    "text": " Okay, now this seems to be ready."
+  },
+  {
+    "start": 114.94,
+    "end": 119.6,
+    "text": " So here it is, this is our container, this is the image, the container is running and"
+  },
+  {
+    "start": 119.6,
+    "end": 125.82,
+    "text": " we can click on this link to open our browser and be transferred to Jupyter."
+  },
+  {
+    "start": 125.82,
+    "end": 128.44,
+    "text": " So here we are, this is JupyterLab."
+  },
+  {
+    "start": 128.44,
+    "end": 134.86,
+    "text": " Now we go to the Big Data 4 folder and we open the Data Exploration Notebook."
+  },
+  {
+    "start": 137.0,
+    "end": 148.7,
+    "text": " Once we are inside our notebook, we are going to start by loading the spark session class"
+  },
+  {
+    "start": 148.7,
+    "end": 154.32,
+    "text": " and creating our spark object which will allow us to read our data."
+  },
+  {
+    "start": 154.32,
+    "end": 160.36,
+    "text": " So we run this cell and after doing this, we specify the path of our file."
+  },
+  {
+    "start": 160.36,
+    "end": 166.72,
+    "text": " Our file is the daily weather.csv dataset and we are going to read the CSV using the"
+  },
+  {
+    "start": 166.72,
+    "end": 173.12,
+    "text": " path, keeping the header true, and inferring the schema of the data set."
+  },
+  {
+    "start": 176.88,
+    "end": 184.24,
+    "text": " To look at the columns of our data frame we can simply call these property columns. So we run"
+  },
+  {
+    "start": 184.24,
+    "end": 191.12,
+    "text": " this cell and we get a list of the different columns that are part of our data frame. These"
+  },
+  {
+    "start": 191.12,
+    "end": 198.4,
+    "text": " are all columns related to weather data and we can look at the schema by using the sprint"
+  },
+  {
+    "start": 198.4,
+    "end": 203.76,
+    "text": " schema method in which we see the names of the columns but also their format and whether the"
+  },
+  {
+    "start": 203.76,
+    "end": 215.84,
+    "text": " column can have no values or not. If we want to return the summary statistics for the full data"
+  },
+  {
+    "start": 215.84,
+    "end": 222.32,
+    "text": " frame, we can use the describe method and that method will return summary statistics for each"
+  },
+  {
+    "start": 222.32,
+    "end": 227.84,
+    "text": " of the columns of our data frame like the maximum, the minimum value, the mean, and the standard"
+  },
+  {
+    "start": 227.84,
+    "end": 234.72,
+    "text": " deviation. We run this cell along with the toPandas method to get a nicer view and we get summary"
+  },
+  {
+    "start": 234.72,
+    "end": 243.36,
+    "text": " statistics for each of the columns. We can also use the describe method and only specify a single"
+  },
+  {
+    "start": 243.36,
+    "end": 249.04000000000002,
+    "text": " column so we can get the summary statistics of that column. In this case we can see that these"
+  },
+  {
+    "start": 249.04000000000002,
+    "end": 259.28000000000003,
+    "text": " results are the same as above. We quickly look at the number of columns. In this case we have"
+  },
+  {
+    "start": 260.0,
+    "end": 269.36,
+    "text": " 11 columns. We are also going to count the number of rows which is 1095 and we're going to create a"
+  },
+  {
+    "start": 269.36,
+    "end": 275.28000000000003,
+    "text": " second data frame in which we are going to drop all of the observations that have a missing value"
+  },
+  {
+    "start": 275.28000000000003,
+    "end": 282.56,
+    "text": " for the air pressure 9 am column. So we run this cell and after counting the number of rows for"
+  },
+  {
+    "start": 282.56,
+    "end": 293.76,
+    "text": " this new data frame we see a difference of three rows. To finalize we compute the correlation"
+  },
+  {
+    "start": 293.76,
+    "end": 300.71999999999997,
+    "text": " between two columns, in this case the correlation between rain accumulation and duration at 9am,"
+  },
+  {
+    "start": 301.36,
+    "end": 305.44,
+    "text": " and we see that the correlation between these two columns is of 73%."
+  },
+  {
+    "start": 306.64,
+    "end": 309.44,
+    "text": " And this is how we conclude this activity."
+  }
+]

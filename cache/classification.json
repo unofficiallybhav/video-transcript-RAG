@@ -1,0 +1,262 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.0,
+    "text": " Welcome back. We will be discussing classification models and techniques for the next few lectures."
+  },
+  {
+    "start": 6.0,
+    "end": 10.0,
+    "text": " Let's first define what the classification task is."
+  },
+  {
+    "start": 10.0,
+    "end": 15.0,
+    "text": " After this video, you will be able to define what classification is,"
+  },
+  {
+    "start": 15.0,
+    "end": 19.0,
+    "text": " explain whether classification is supervised or unsupervised,"
+  },
+  {
+    "start": 19.0,
+    "end": 25.0,
+    "text": " and describe how binomial classification differs from multinomial classification."
+  },
+  {
+    "start": 25.0,
+    "end": 29.0,
+    "text": " Classification is one type of machine learning problems."
+  },
+  {
+    "start": 29.0,
+    "end": 34.14,
+    "text": " In a classification problem, the input data is presented to the machine learning model"
+  },
+  {
+    "start": 34.14,
+    "end": 39.6,
+    "text": " and the task is to predict the target corresponding to the input data."
+  },
+  {
+    "start": 39.6,
+    "end": 46.1,
+    "text": " The target is a categorical variable, so the classification task is to predict the category"
+  },
+  {
+    "start": 46.1,
+    "end": 49.82,
+    "text": " or label of the target given the input data."
+  },
+  {
+    "start": 49.82,
+    "end": 56.64,
+    "text": " For example, the classification problem illustrated in this image is to predict the type of weather."
+  },
+  {
+    "start": 56.64,
+    "end": 61.72,
+    "text": " The target that the model has to predict is the weather, and the possible values for weather"
+  },
+  {
+    "start": 61.72,
+    "end": 67.52,
+    "text": " in this case is sunny, windy, rainy, or cloudy."
+  },
+  {
+    "start": 67.52,
+    "end": 73.02,
+    "text": " The input data can consist of measurements like temperature, relative humidity, atmospheric"
+  },
+  {
+    "start": 73.02,
+    "end": 77.58,
+    "text": " pressure, wind speed, wind direction, etc."
+  },
+  {
+    "start": 77.58,
+    "end": 83.64,
+    "text": " So given specific values for temperature, relative humidity, atmospheric pressure, etc.,"
+  },
+  {
+    "start": 83.64,
+    "end": 89.84,
+    "text": " The task for the model is to predict if the weather will be sunny, windy, rainy, or cloudy"
+  },
+  {
+    "start": 89.84,
+    "end": 92.28,
+    "text": " for the day."
+  },
+  {
+    "start": 92.28,
+    "end": 96.56,
+    "text": " This is what the dataset might look like for the weather classification problem."
+  },
+  {
+    "start": 96.56,
+    "end": 103.0,
+    "text": " Each row is a sample with input variables temperature, humidity, and pressure, and target"
+  },
+  {
+    "start": 103.0,
+    "end": 105.0,
+    "text": " variable weather."
+  },
+  {
+    "start": 105.0,
+    "end": 109.9,
+    "text": " Each row has specific values for the input variables and a corresponding value for the"
+  },
+  {
+    "start": 109.9,
+    "end": 111.96000000000001,
+    "text": " target variable."
+  },
+  {
+    "start": 111.96000000000001,
+    "end": 117.12,
+    "text": " The classification task is to predict the value of the target variable from the values"
+  },
+  {
+    "start": 117.12,
+    "end": 120.18,
+    "text": " of the input variables."
+  },
+  {
+    "start": 120.18,
+    "end": 126.06,
+    "text": " Since the target is provided, we have labeled data, and so classification is a supervised"
+  },
+  {
+    "start": 126.06,
+    "end": 127.44000000000001,
+    "text": " task."
+  },
+  {
+    "start": 127.44000000000001,
+    "end": 134.28,
+    "text": " Recall that in a supervised task, the target, or desired output, for each sample is given."
+  },
+  {
+    "start": 134.28,
+    "end": 140.76000000000002,
+    "text": " Note that the target variable goes by many names, such as target, label, output, class"
+  },
+  {
+    "start": 140.76,
+    "end": 144.92,
+    "text": " class variable, category, and class."
+  },
+  {
+    "start": 144.92,
+    "end": 149.32,
+    "text": " A classification problem can be binary or multi-class."
+  },
+  {
+    "start": 149.32,
+    "end": 154.29999999999998,
+    "text": " With binary classification, the target variable has two possible values."
+  },
+  {
+    "start": 154.29999999999998,
+    "end": 156.56,
+    "text": " For example, yes and no."
+  },
+  {
+    "start": 156.56,
+    "end": 162.29999999999998,
+    "text": " With multi-class classification, the target variable has more than two possible values."
+  },
+  {
+    "start": 162.29999999999998,
+    "end": 167.92,
+    "text": " For example, the target can be short, medium, and tall."
+  },
+  {
+    "start": 167.92000000000002,
+    "end": 173.60000000000002,
+    "text": " classification is also referred to as multinomial or multi-label classification."
+  },
+  {
+    "start": 173.60000000000002,
+    "end": 177.70000000000002,
+    "text": " Remember though that the target is always a categorical variable in"
+  },
+  {
+    "start": 177.70000000000002,
+    "end": 184.58,
+    "text": " classification. Some examples of binary classification are predicting whether it"
+  },
+  {
+    "start": 184.58,
+    "end": 189.8,
+    "text": " will rain tomorrow or not. Here there are only two possible outcomes, yes it will"
+  },
+  {
+    "start": 189.8,
+    "end": 195.16000000000003,
+    "text": " rain tomorrow or no it will not rain tomorrow. Identifying whether a credit"
+  },
+  {
+    "start": 195.16,
+    "end": 199.98,
+    "text": " card transaction is legitimate or fraudulent. Again, there are only two possible values"
+  },
+  {
+    "start": 199.98,
+    "end": 205.98,
+    "text": " for the target, legitimate or fraudulent. Some examples of multi-class classification"
+  },
+  {
+    "start": 205.98,
+    "end": 212.57999999999998,
+    "text": " include predicting what type of product that a customer will buy. The possible values for"
+  },
+  {
+    "start": 212.57999999999998,
+    "end": 220.48,
+    "text": " the target variables would be product categories such as kitchen, electronics, clothes, etc."
+  },
+  {
+    "start": 220.48000000000002,
+    "end": 226.62,
+    "text": " There is more than one category of products, so this is a multi-class classification problem."
+  },
+  {
+    "start": 226.62,
+    "end": 232.72000000000003,
+    "text": " Another example is categorizing a tweet as having a positive, negative, or neutral sentiment."
+  },
+  {
+    "start": 232.72000000000003,
+    "end": 237.72000000000003,
+    "text": " Again, the number of possible values for the target is more than two here, so this is also"
+  },
+  {
+    "start": 237.72000000000003,
+    "end": 241.24,
+    "text": " a multi-class classification task."
+  },
+  {
+    "start": 241.24,
+    "end": 245.88000000000002,
+    "text": " To summarize, in classification, the model has to predict the category corresponding"
+  },
+  {
+    "start": 245.88000000000002,
+    "end": 247.88000000000002,
+    "text": " to the input data."
+  },
+  {
+    "start": 247.88,
+    "end": 253.7,
+    "text": " Once the target is provided for each sample, classification is a supervised task."
+  },
+  {
+    "start": 253.7,
+    "end": 257.08,
+    "text": " The target variable is always categorical in classification."
+  }
+]

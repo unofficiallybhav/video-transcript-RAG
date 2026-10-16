@@ -1,0 +1,282 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.6,
+    "text": " In this activity, we are going to modify a graph with Neo4j."
+  },
+  {
+    "start": 8.16,
+    "end": 11.040000000000001,
+    "text": " Let's get back to the graph that we built in the previous activity."
+  },
+  {
+    "start": 12.24,
+    "end": 15.76,
+    "text": " Let's say that we know that Julian, located right here,"
+  },
+  {
+    "start": 15.76,
+    "end": 19.6,
+    "text": " has a fiancé named Joyce and that she works as a store clerk."
+  },
+  {
+    "start": 21.36,
+    "end": 26.8,
+    "text": " I can run the following command in which I'm first going to locate the node with the property name"
+  },
+  {
+    "start": 26.8,
+    "end": 30.880000000000003,
+    "text": " Julian and I'm going to attach a new toy relation with a property of"
+  },
+  {
+    "start": 30.880000000000003,
+    "end": 36.46,
+    "text": " relationship fiancé to a new toy node with two properties, the name Joyce and"
+  },
+  {
+    "start": 36.46,
+    "end": 43.06,
+    "text": " the job of store clerk. With my information defined in my command I can"
+  },
+  {
+    "start": 43.06,
+    "end": 48.46,
+    "text": " run it and I'm going to see this message which is going to confirm that I add a"
+  },
+  {
+    "start": 48.46,
+    "end": 54.88,
+    "text": " new node, three new properties and a new relationship to my graph. If I want to"
+  },
+  {
+    "start": 54.88,
+    "end": 60.660000000000004,
+    "text": " verify that my information was added correctly to the graph, I can visualize it by running again"
+  },
+  {
+    "start": 60.660000000000004,
+    "end": 66.60000000000001,
+    "text": " the cell and the result will be displayed in the same window. However, I want to keep track of the"
+  },
+  {
+    "start": 66.60000000000001,
+    "end": 72.2,
+    "text": " different graphs that I built through this exercise. So I'm going to copy and paste the command to a"
+  },
+  {
+    "start": 72.2,
+    "end": 80.38,
+    "text": " new cell. I'm going to run it. And now I can see the new node that I attached to it, the node of"
+  },
+  {
+    "start": 80.38,
+    "end": 91.24,
+    "text": " Joyce with her job of store clerk as well as her relationship with Julian."
+  },
+  {
+    "start": 91.24,
+    "end": 97.36,
+    "text": " Before showing how to add a node incorrectly, I'm going to run a command that is going to"
+  },
+  {
+    "start": 97.36,
+    "end": 103.53999999999999,
+    "text": " delete all nodes and relationships because I want to start from scratch with the graph"
+  },
+  {
+    "start": 103.53999999999999,
+    "end": 105.82,
+    "text": " as it is originally."
+  },
+  {
+    "start": 105.82000000000001,
+    "end": 112.26,
+    "text": " And something good about Neo4j is that I can scroll down to previous cells and I can execute"
+  },
+  {
+    "start": 112.26,
+    "end": 116.12,
+    "text": " again the commands that I previously executed."
+  },
+  {
+    "start": 116.12,
+    "end": 122.2,
+    "text": " So I run this and this is going to rebuild my original graph of people and relationships."
+  },
+  {
+    "start": 122.2,
+    "end": 128.84,
+    "text": " I'm going to go back to the top and let's say that I assume that the function to use"
+  },
+  {
+    "start": 128.84,
+    "end": 135.38,
+    "text": " to create a new relationship is the function create because it sounds intuitive."
+  },
+  {
+    "start": 135.38,
+    "end": 139.94,
+    "text": " So I'm going to run this new version of the previous command, but this time I start with"
+  },
+  {
+    "start": 139.94,
+    "end": 141.44,
+    "text": " the function create."
+  },
+  {
+    "start": 141.44,
+    "end": 147.22,
+    "text": " The rest is the same, I locate the node with the name Julian, and I establish a new relationship"
+  },
+  {
+    "start": 147.22,
+    "end": 151.0,
+    "text": " and a new node with the properties that I mentioned earlier."
+  },
+  {
+    "start": 151.0,
+    "end": 155.54,
+    "text": " I run it again."
+  },
+  {
+    "start": 155.54,
+    "end": 162.32,
+    "text": " And I'm going to notice in this message that now I created two nodes, four properties,"
+  },
+  {
+    "start": 162.32,
+    "end": 164.34,
+    "text": " and one relationship."
+  },
+  {
+    "start": 164.34,
+    "end": 167.8,
+    "text": " So let me visualize the graph again to see how this looks."
+  },
+  {
+    "start": 167.8,
+    "end": 176.38,
+    "text": " I'm going to copy this command again and paste it in a new cell."
+  },
+  {
+    "start": 176.38,
+    "end": 179.44,
+    "text": " I run it and now the problem is clear."
+  },
+  {
+    "start": 179.44,
+    "end": 184.8,
+    "text": " The problem is that instead of attaching Joyce to Julian right here, it created a new instance"
+  },
+  {
+    "start": 184.8,
+    "end": 190.12,
+    "text": " of Julian and it left the relationship outside of our original graph."
+  },
+  {
+    "start": 194.34,
+    "end": 214.68,
+    "text": " To correct the mistake from the previous step, what I can do is that I can run the following command that I'm going to paste in this cell and I'm going to match the toy node with the property name Joyce and I'm going to delete all of the relationships and the nodes to which this node is connected."
+  },
+  {
+    "start": 214.68,
+    "end": 221.5,
+    "text": " So, I'm going to run this, and according to this message, two nodes and one relationship"
+  },
+  {
+    "start": 221.5,
+    "end": 223.38,
+    "text": " have been deleted."
+  },
+  {
+    "start": 223.38,
+    "end": 229.32,
+    "text": " I can confirm this by visualizing my graph again, so I'm going to take this command"
+  },
+  {
+    "start": 229.32,
+    "end": 234.62,
+    "text": " and paste it in a new cell."
+  },
+  {
+    "start": 234.62,
+    "end": 244.34,
+    "text": " And as I can see, the node Joyce and the extra node Julian have been deleted."
+  },
+  {
+    "start": 244.34,
+    "end": 248.84,
+    "text": " say that we know that Harry is a drummer and we want to include that information"
+  },
+  {
+    "start": 248.84,
+    "end": 255.74,
+    "text": " into the node. We can run the following command in which we are going to match"
+  },
+  {
+    "start": 255.74,
+    "end": 261.38,
+    "text": " the toy node where the property name is equal to Harry and we're going to set a"
+  },
+  {
+    "start": 261.38,
+    "end": 269.58,
+    "text": " new property, the property job, with the value of drummer. We run it and according"
+  },
+  {
+    "start": 269.58,
+    "end": 275.74,
+    "text": " this message we have set one new property. If we hover over Harry here we don't see that,"
+  },
+  {
+    "start": 275.74,
+    "end": 280.21999999999997,
+    "text": " but if we run this command again, actually I'm going to run it in the same cell,"
+  },
+  {
+    "start": 281.34,
+    "end": 288.38,
+    "text": " I can hover over Harry again and I can see the new property job drummer as I specify."
+  },
+  {
+    "start": 290.21999999999997,
+    "end": 296.14,
+    "text": " Now let's say that Harry is not only a drummer but is also a lead guitarist and we want to"
+  },
+  {
+    "start": 296.14,
+    "end": 301.18,
+    "text": " include this additional information to the property. So I'm going to match the"
+  },
+  {
+    "start": 301.18,
+    "end": 305.96,
+    "text": " toy node where the name is Harry once again and I'm going to reset the job"
+  },
+  {
+    "start": 305.96,
+    "end": 313.9,
+    "text": " property to the current value plus a new value of lead guitarist. I run it and I"
+  },
+  {
+    "start": 313.9,
+    "end": 319.24,
+    "text": " can see the message that one new property has been set again. So I'm going"
+  },
+  {
+    "start": 319.24,
+    "end": 327.8,
+    "text": " to rerun the visualization for one last time and when I go to Harry I'm going to be able to see"
+  },
+  {
+    "start": 327.8,
+    "end": 334.36,
+    "text": " both jobs as part of the property job. In the next activities we're going to start to perform"
+  },
+  {
+    "start": 334.36,
+    "end": 338.36,
+    "text": " some basic Neo4j queries. This is how we conclude this activity."
+  }
+]

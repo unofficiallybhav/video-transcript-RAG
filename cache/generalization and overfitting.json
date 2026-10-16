@@ -1,0 +1,317 @@
+[
+  {
+    "start": 0.88,
+    "end": 5.16,
+    "text": " Generalization and overfitting are very important concepts in machine learning."
+  },
+  {
+    "start": 5.16,
+    "end": 8.56,
+    "text": " We will cover them in the next three lectures."
+  },
+  {
+    "start": 8.56,
+    "end": 14.96,
+    "text": " After this video, you will be able to define what overfitting is, describe how overfitting"
+  },
+  {
+    "start": 14.96,
+    "end": 21.12,
+    "text": " is related to generalization, and explain why overfitting should be avoided."
+  },
+  {
+    "start": 21.12,
+    "end": 26.16,
+    "text": " Before we look at generalization and overfitting, let's first define some terms we will need"
+  },
+  {
+    "start": 26.16,
+    "end": 32.26,
+    "text": " to know to discuss errors in classification. Recall that a machine learning model maps"
+  },
+  {
+    "start": 32.26,
+    "end": 37.88,
+    "text": " the input it receives to an output. For a classification model, the model's output"
+  },
+  {
+    "start": 37.88,
+    "end": 43.019999999999996,
+    "text": " is the predicted class label for the input variables, and the true class label is the"
+  },
+  {
+    "start": 43.019999999999996,
+    "end": 51.620000000000005,
+    "text": " target. Then, if the classifier predicts the correct class label for SAMBL, that is a success."
+  },
+  {
+    "start": 51.620000000000005,
+    "end": 56.120000000000005,
+    "text": " If the predicted class label is different from the true class label, then that is an"
+  },
+  {
+    "start": 56.120000000000005,
+    "end": 63.00000000000001,
+    "text": " error. The error rate, then, is the percentage of errors made over the entire dataset. That"
+  },
+  {
+    "start": 63.00000000000001,
+    "end": 69.08000000000001,
+    "text": " is, it is the number of errors divided by the total number of samples in the dataset."
+  },
+  {
+    "start": 69.08000000000001,
+    "end": 74.68,
+    "text": " Error rate is also known as misclassification rate, or simply error."
+  },
+  {
+    "start": 74.68,
+    "end": 79.12,
+    "text": " In our lesson on classification, we discussed that there is a training phase in which the"
+  },
+  {
+    "start": 79.12,
+    "end": 85.22,
+    "text": " model is built and a testing phase in which the model is applied to new data. The model"
+  },
+  {
+    "start": 85.22,
+    "end": 90.03999999999999,
+    "text": " Model is built using training data and evaluated on test data."
+  },
+  {
+    "start": 90.03999999999999,
+    "end": 93.74,
+    "text": " The training and test data are two different datasets."
+  },
+  {
+    "start": 93.74,
+    "end": 98.52,
+    "text": " The goal in building a machine learning model is to have the model perform well on training"
+  },
+  {
+    "start": 98.52,
+    "end": 101.46000000000001,
+    "text": " as well as test data."
+  },
+  {
+    "start": 101.46000000000001,
+    "end": 107.48,
+    "text": " Error rate or simply error on the training data is referred to as training error, and"
+  },
+  {
+    "start": 107.48,
+    "end": 112.02,
+    "text": " the error on test data is referred to as test error."
+  },
+  {
+    "start": 112.02,
+    "end": 116.88,
+    "text": " The error on the test data is an indication of how well the classifier will perform on"
+  },
+  {
+    "start": 116.88,
+    "end": 118.78,
+    "text": " new data."
+  },
+  {
+    "start": 118.78,
+    "end": 121.86,
+    "text": " This is known as generalization."
+  },
+  {
+    "start": 121.86,
+    "end": 126.22,
+    "text": " Generalization refers to how well your model performs on new data, that is, data not used"
+  },
+  {
+    "start": 126.22,
+    "end": 128.24,
+    "text": " to train the model."
+  },
+  {
+    "start": 128.24,
+    "end": 131.48,
+    "text": " You want your model to generalize well to new data."
+  },
+  {
+    "start": 131.48,
+    "end": 135.68,
+    "text": " If your model generalizes well, then it will perform well on data sets that are similar"
+  },
+  {
+    "start": 135.68,
+    "end": 140.7,
+    "text": " in structure to the training data, but doesn't contain exactly the same samples as in the"
+  },
+  {
+    "start": 140.70000000000002,
+    "end": 147.32000000000002,
+    "text": " training set. Since the test error indicates how well your model generalizes to new data,"
+  },
+  {
+    "start": 147.32000000000002,
+    "end": 151.64000000000001,
+    "text": " note that the test error is also called generalization error."
+  },
+  {
+    "start": 151.64000000000001,
+    "end": 157.52,
+    "text": " A related concept to generalization is overfitting. If your model has very low training error"
+  },
+  {
+    "start": 157.52,
+    "end": 162.32000000000002,
+    "text": " but high generalization error, then it is overfitting. This means that the model has"
+  },
+  {
+    "start": 162.32000000000002,
+    "end": 167.60000000000002,
+    "text": " learned to model the noise in the training data, instead of learning the underlying structure"
+  },
+  {
+    "start": 167.6,
+    "end": 173.88,
+    "text": " of the data. These plots illustrate what happens when a model overfits. Training samples are"
+  },
+  {
+    "start": 173.88,
+    "end": 178.78,
+    "text": " shown as points, and the input-to-output mapping that the model has learned is indicated as"
+  },
+  {
+    "start": 178.78,
+    "end": 184.06,
+    "text": " a curve. The plot on the left shows that the model has learned the underlying structure"
+  },
+  {
+    "start": 184.06,
+    "end": 190.06,
+    "text": " of the data, as the curve follows the trend of the sample points well. The plot on the"
+  },
+  {
+    "start": 190.06,
+    "end": 195.98,
+    "text": " right, however, shows that the model has learned to model the noise in a dataset. The model"
+  },
+  {
+    "start": 195.98000000000002,
+    "end": 202.18,
+    "text": " tries to capture every sample point instead of the general trend of the samples together."
+  },
+  {
+    "start": 202.18,
+    "end": 208.44000000000003,
+    "text": " The training error and the generalization error are plotted together during model training."
+  },
+  {
+    "start": 208.44000000000003,
+    "end": 211.86,
+    "text": " What is the connection between overfitting and generalization?"
+  },
+  {
+    "start": 211.86,
+    "end": 216.96,
+    "text": " A model that overfits will not generalize well to new data, so the model will do well"
+  },
+  {
+    "start": 216.96,
+    "end": 223.26000000000002,
+    "text": " on just the data it was trained on, but giving a new dataset, it will perform poorly."
+  },
+  {
+    "start": 223.26,
+    "end": 228.26,
+    "text": " A classifier that performs well on just the training dataset will not be very useful,"
+  },
+  {
+    "start": 228.26,
+    "end": 232.67999999999998,
+    "text": " so it is essential that the goal of good generalization performance is kept in mind when building"
+  },
+  {
+    "start": 232.67999999999998,
+    "end": 234.67999999999998,
+    "text": " a model."
+  },
+  {
+    "start": 234.67999999999998,
+    "end": 239.34,
+    "text": " A problem related to overfitting is underfitting."
+  },
+  {
+    "start": 239.34,
+    "end": 243.57999999999998,
+    "text": " Overfitting occurs when the model is fitting to the noise in the training data."
+  },
+  {
+    "start": 243.57999999999998,
+    "end": 248.78,
+    "text": " This results in low training error and high test error."
+  },
+  {
+    "start": 248.78,
+    "end": 252.96,
+    "text": " Overfitting, on the other hand, occurs when the model has not learned the structure of"
+  },
+  {
+    "start": 252.96,
+    "end": 254.0,
+    "text": " the data."
+  },
+  {
+    "start": 254.0,
+    "end": 258.72,
+    "text": " This results in high training error and high test error."
+  },
+  {
+    "start": 258.72,
+    "end": 262.66,
+    "text": " Both are undesirable, since both mean that the model will not generalize well to new"
+  },
+  {
+    "start": 262.66,
+    "end": 265.22,
+    "text": " data."
+  },
+  {
+    "start": 265.22,
+    "end": 270.46,
+    "text": " Overfitting generally occurs when a model is too complex, that is, it has too many parameters"
+  },
+  {
+    "start": 270.46,
+    "end": 273.4,
+    "text": " relative to the number of training samples."
+  },
+  {
+    "start": 273.4,
+    "end": 278.52,
+    "text": " So to avoid overfitting, the model needs to be kept as simple as possible, and yet still"
+  },
+  {
+    "start": 278.52,
+    "end": 284.28,
+    "text": " solve the input-output mapping for the given dataset. We will discuss methods for avoiding"
+  },
+  {
+    "start": 284.28,
+    "end": 287.91999999999996,
+    "text": " overfitting in the next couple of lectures."
+  },
+  {
+    "start": 287.91999999999996,
+    "end": 292.97999999999996,
+    "text": " In summary, overfitting is when your model has learned the noise in the training data"
+  },
+  {
+    "start": 292.97999999999996,
+    "end": 297.5,
+    "text": " instead of the underlying structure of the data. You want to avoid overfitting so that"
+  },
+  {
+    "start": 297.5,
+    "end": 300.08,
+    "text": " your model will generalize well to new data."
+  }
+]

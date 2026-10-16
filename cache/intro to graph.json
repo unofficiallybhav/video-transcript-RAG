@@ -1,0 +1,232 @@
+[
+  {
+    "start": 0.32,
+    "end": 6.84,
+    "text": " Now, we are going to introduce you to GraphX, which we'll primarily cover as a hands-on presentation."
+  },
+  {
+    "start": 8.28,
+    "end": 14.120000000000001,
+    "text": " GraphX was developed by the Amplab at UC Berkeley and has now become an Apache product."
+  },
+  {
+    "start": 14.780000000000001,
+    "end": 19.54,
+    "text": " In this brief introduction, we are using a few slides from Amplab presentations."
+  },
+  {
+    "start": 21.38,
+    "end": 26.48,
+    "text": " Like Neo4j, GraphX uses a property graph model."
+  },
+  {
+    "start": 27.46,
+    "end": 31.66,
+    "text": " That means both nodes and edges can have attributes and values."
+  },
+  {
+    "start": 33.02,
+    "end": 36.7,
+    "text": " In GraphX, the node properties are stored in a vertex table,"
+  },
+  {
+    "start": 37.52,
+    "end": 39.94,
+    "text": " and edge properties are stored in an edge table."
+  },
+  {
+    "start": 41.0,
+    "end": 45.120000000000005,
+    "text": " The connectivity information, that is, which edge connects to which nodes,"
+  },
+  {
+    "start": 45.519999999999996,
+    "end": 48.260000000000005,
+    "text": " is stored separately from the node and edge properties."
+  },
+  {
+    "start": 49.019999999999996,
+    "end": 53.34,
+    "text": " Since GraphX is based on Spark, whose central information representation"
+  },
+  {
+    "start": 53.34,
+    "end": 57.06,
+    "text": " is based on Resilient Distributed Datasets, or RDDs,"
+  },
+  {
+    "start": 57.6,
+    "end": 62.660000000000004,
+    "text": " you may recall that RDDs are typically in-memory information objects."
+  },
+  {
+    "start": 63.540000000000006,
+    "end": 67.30000000000001,
+    "text": " These objects can be used to perform an action, which returns a value,"
+  },
+  {
+    "start": 67.78,
+    "end": 72.52000000000001,
+    "text": " or they can perform a transformation, which can produce another RDD."
+  },
+  {
+    "start": 73.66,
+    "end": 77.4,
+    "text": " GraphX is built on special RDDs for vertices and edges."
+  },
+  {
+    "start": 78.66,
+    "end": 82.06,
+    "text": " Note that vertex IDs are defined to be unique by design."
+  },
+  {
+    "start": 82.06,
+    "end": 88.94,
+    "text": " Vertex RDD A represents a set of vertices, all of which have an attribute called A."
+  },
+  {
+    "start": 89.96000000000001,
+    "end": 95.8,
+    "text": " The Edge class is an object with a source vertex, a destination vertex, and an edge attribute."
+  },
+  {
+    "start": 96.98,
+    "end": 106.68,
+    "text": " The Edge RDD extends this basic edge by storing edges in a columnar format on each partition for performance."
+  },
+  {
+    "start": 107.68,
+    "end": 110.96000000000001,
+    "text": " Very often, it's easier to operate on a data structure"
+  },
+  {
+    "start": 110.96000000000001,
+    "end": 114.06,
+    "text": " that has both node properties and edge properties."
+  },
+  {
+    "start": 114.84,
+    "end": 117.64000000000001,
+    "text": " If you're familiar with SQL, you'll readily see"
+  },
+  {
+    "start": 117.64000000000001,
+    "end": 120.22000000000001,
+    "text": " that this is a three-way join operation"
+  },
+  {
+    "start": 120.22000000000001,
+    "end": 124.06,
+    "text": " between the node set, the edge set, and the second node set."
+  },
+  {
+    "start": 124.86000000000001,
+    "end": 128.62,
+    "text": " Finally, GraphX implements its own version of BSP."
+  },
+  {
+    "start": 129.44,
+    "end": 132.8,
+    "text": " This implementation, not surprisingly, is called Pregel."
+  },
+  {
+    "start": 133.48000000000002,
+    "end": 136.60000000000002,
+    "text": " It allows a user to write a vertex program"
+  },
+  {
+    "start": 136.6,
+    "end": 142.0,
+    "text": " a send message routine, and a message combiner routine, just like BSP."
+  },
+  {
+    "start": 142.88,
+    "end": 149.0,
+    "text": " However, this implementation also performs vertex partitioning like we saw in GraphLab."
+  },
+  {
+    "start": 149.88,
+    "end": 154.22,
+    "text": " Also, similarly to GraphLab, it enables the message sending computation"
+  },
+  {
+    "start": 154.22,
+    "end": 156.64,
+    "text": " to reach the attributes of both vertices."
+  },
+  {
+    "start": 157.7,
+    "end": 160.51999999999998,
+    "text": " The code snippet shown here is written in Scala."
+  },
+  {
+    "start": 161.66,
+    "end": 166.44,
+    "text": " The hands-on code after this, you'll see, are also written in Scala."
+  },
+  {
+    "start": 166.6,
+    "end": 170.32,
+    "text": " We'll, however, not assume that you know Scala."
+  },
+  {
+    "start": 170.32,
+    "end": 176.98,
+    "text": " We would like to show you here an example which uses the Pregel runtime object in GraphX"
+  },
+  {
+    "start": 176.98,
+    "end": 179.84,
+    "text": " to implement a simple BSP task."
+  },
+  {
+    "start": 179.84,
+    "end": 185.88,
+    "text": " We would like to show here how Pregel runtime object in GraphX works."
+  },
+  {
+    "start": 185.88,
+    "end": 190.6,
+    "text": " We point out all the functions that are defined by users in running the Pregel operation."
+  },
+  {
+    "start": 190.6,
+    "end": 197.54,
+    "text": " The vprogf function, which takes a vertex and a message and returns a new attribute"
+  },
+  {
+    "start": 197.54,
+    "end": 199.28,
+    "text": " value for that vertex."
+  },
+  {
+    "start": 200.06,
+    "end": 205.7,
+    "text": " The sendMessageF function, which computes the new message along each edge."
+  },
+  {
+    "start": 206.72,
+    "end": 211.24,
+    "text": " The option m construct says that it is optional for a vertex to send a message."
+  },
+  {
+    "start": 211.72,
+    "end": 216.01999999999998,
+    "text": " That is, the system should not show an error if a message is not sent for a vertex."
+  },
+  {
+    "start": 216.02,
+    "end": 221.12,
+    "text": " The combineF function is a message combiner that we mentioned in passing for"
+  },
+  {
+    "start": 221.12,
+    "end": 227.34,
+    "text": " Giraffe. Finally, the user can also specify the number of iterations that the"
+  },
+  {
+    "start": 227.34,
+    "end": 231.08,
+    "text": " Graphics BSP process will run for."
+  }
+]

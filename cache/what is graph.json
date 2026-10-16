@@ -1,0 +1,577 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.88,
+    "text": " So, before we go into graph analytics, the first question we want to ask is, what is"
+  },
+  {
+    "start": 6.88,
+    "end": 8.76,
+    "text": " a graph?"
+  },
+  {
+    "start": 8.76,
+    "end": 10.96,
+    "text": " Let's see."
+  },
+  {
+    "start": 10.96,
+    "end": 16.54,
+    "text": " This is a plot of the sales of some items against time, and it gives you a nice visual"
+  },
+  {
+    "start": 16.54,
+    "end": 18.580000000000002,
+    "text": " representation of the data."
+  },
+  {
+    "start": 18.580000000000002,
+    "end": 21.56,
+    "text": " But is it a graph?"
+  },
+  {
+    "start": 21.56,
+    "end": 25.900000000000002,
+    "text": " While you think about it, let's try another one."
+  },
+  {
+    "start": 25.900000000000002,
+    "end": 29.18,
+    "text": " This is another common visual representation of data."
+  },
+  {
+    "start": 29.18,
+    "end": 34.8,
+    "text": " If you go to Google and type pie graph, you will see many results that look like this."
+  },
+  {
+    "start": 34.8,
+    "end": 36.78,
+    "text": " But is this a graph?"
+  },
+  {
+    "start": 36.78,
+    "end": 40.28,
+    "text": " In our usage, this is not a graph."
+  },
+  {
+    "start": 40.28,
+    "end": 42.36,
+    "text": " We call it a chart."
+  },
+  {
+    "start": 42.36,
+    "end": 46.28,
+    "text": " Yes, you guessed it right this time."
+  },
+  {
+    "start": 46.28,
+    "end": 49.92,
+    "text": " This too is a chart and not a graph."
+  },
+  {
+    "start": 49.92,
+    "end": 53.64,
+    "text": " So why do people call them graphs then?"
+  },
+  {
+    "start": 53.64,
+    "end": 56.36,
+    "text": " In a sense, they are abbreviated."
+  },
+  {
+    "start": 56.36,
+    "end": 60.5,
+    "text": " A chart depicts what's called the graph of a function."
+  },
+  {
+    "start": 60.5,
+    "end": 62.2,
+    "text": " Let me explain."
+  },
+  {
+    "start": 62.2,
+    "end": 64.94,
+    "text": " Look at the two column table on the right."
+  },
+  {
+    "start": 64.94,
+    "end": 68.08,
+    "text": " The first column has information about product category"
+  },
+  {
+    "start": 68.08,
+    "end": 72.06,
+    "text": " with values like furniture, office supplies, and technology."
+  },
+  {
+    "start": 72.06,
+    "end": 75.53999999999999,
+    "text": " The second column represents another set of values"
+  },
+  {
+    "start": 75.53999999999999,
+    "end": 81.48,
+    "text": " called total containing 1724, 4610, and 2065."
+  },
+  {
+    "start": 81.48,
+    "end": 85.24,
+    "text": " Now we can define a mapping function,"
+  },
+  {
+    "start": 85.24,
+    "end": 90.08,
+    "text": " which means a correspondence from product category to total."
+  },
+  {
+    "start": 90.08,
+    "end": 93.97999999999999,
+    "text": " So we map furniture to the value 70 and 24,"
+  },
+  {
+    "start": 93.97999999999999,
+    "end": 97.36,
+    "text": " office supplies to the value 4610, and so forth."
+  },
+  {
+    "start": 97.36,
+    "end": 100.38,
+    "text": " If we visually portray this, we can represent it"
+  },
+  {
+    "start": 100.38,
+    "end": 102.74,
+    "text": " like a bar chart or a pie chart."
+  },
+  {
+    "start": 102.74,
+    "end": 105.78,
+    "text": " This is why both the previous diagram and this diagram"
+  },
+  {
+    "start": 105.78,
+    "end": 107.5,
+    "text": " are charts and not graphs."
+  },
+  {
+    "start": 110.08,
+    "end": 113.36,
+    "text": " Graph analytics has its basis in a branch of mathematics"
+  },
+  {
+    "start": 113.36,
+    "end": 114.94,
+    "text": " called graph theory."
+  },
+  {
+    "start": 114.94,
+    "end": 116.92,
+    "text": " What's more interesting, however,"
+  },
+  {
+    "start": 116.92,
+    "end": 121.96,
+    "text": " is that graph theory was born out of a very practical problem."
+  },
+  {
+    "start": 121.96,
+    "end": 125.75999999999999,
+    "text": " The problem started in a very old city in Prussia,"
+  },
+  {
+    "start": 125.75999999999999,
+    "end": 130.78,
+    "text": " which is now in Russia, called Konigsberg."
+  },
+  {
+    "start": 130.78,
+    "end": 133.12,
+    "text": " If you look at it in Google Maps,"
+  },
+  {
+    "start": 133.12,
+    "end": 135.76,
+    "text": " it would sort of look like this."
+  },
+  {
+    "start": 135.76,
+    "end": 138.16,
+    "text": " One of the interesting features of Konigsberg"
+  },
+  {
+    "start": 138.16,
+    "end": 139.56,
+    "text": " is that it has two islands."
+  },
+  {
+    "start": 139.56,
+    "end": 143.32,
+    "text": " And these islands are connected by seven bridges."
+  },
+  {
+    "start": 143.32,
+    "end": 150.72,
+    "text": " Back in 1736, the city wanted to create a walkway and the criteria was this walkway"
+  },
+  {
+    "start": 150.72,
+    "end": 155.32,
+    "text": " would traverse all seven bridges such that somebody wanting to go from one part of the"
+  },
+  {
+    "start": 155.32,
+    "end": 162.32,
+    "text": " city to another can cross a bridge only once."
+  },
+  {
+    "start": 162.32,
+    "end": 166.06,
+    "text": " Now this is sort of an urban planning problem, right?"
+  },
+  {
+    "start": 166.06,
+    "end": 170.79999999999998,
+    "text": " Well in fact, it required a mathematician to solve the problem."
+  },
+  {
+    "start": 170.8,
+    "end": 175.36,
+    "text": " The mathematician named Euler, shown on the left, looked at this and figured out that"
+  },
+  {
+    "start": 175.36,
+    "end": 178.3,
+    "text": " you really cannot create such a walk."
+  },
+  {
+    "start": 178.3,
+    "end": 179.46,
+    "text": " Why?"
+  },
+  {
+    "start": 179.46,
+    "end": 184.92000000000002,
+    "text": " He said it cannot be done because there are an odd number of bridges and proved it mathematically."
+  },
+  {
+    "start": 184.92000000000002,
+    "end": 189.66000000000003,
+    "text": " From this problem, the whole field called graph theory emerged."
+  },
+  {
+    "start": 189.66000000000003,
+    "end": 194.86,
+    "text": " On the right, you can see Edgar Dijkstra, a well-known computer scientist who has developed"
+  },
+  {
+    "start": 194.86,
+    "end": 199.38000000000002,
+    "text": " graph algorithms, one of which we will study later in the course."
+  },
+  {
+    "start": 199.38,
+    "end": 204.44,
+    "text": " This work has had far-fetched impact on both the theoretical computer science and practical"
+  },
+  {
+    "start": 204.44,
+    "end": 205.44,
+    "text": " applications."
+  },
+  {
+    "start": 205.44,
+    "end": 211.22,
+    "text": " What's the difference between the mathematics view and the computer science view?"
+  },
+  {
+    "start": 211.22,
+    "end": 214.46,
+    "text": " Let's try to define the mathematical view of graphs."
+  },
+  {
+    "start": 214.46,
+    "end": 217.0,
+    "text": " We start with a set of vertices."
+  },
+  {
+    "start": 217.0,
+    "end": 221.34,
+    "text": " Here we have a set of six nodes or vertices."
+  },
+  {
+    "start": 221.34,
+    "end": 223.82,
+    "text": " Now I'll add another set."
+  },
+  {
+    "start": 223.82,
+    "end": 227.0,
+    "text": " I'll call this the set of edges."
+  },
+  {
+    "start": 227.0,
+    "end": 231.02,
+    "text": " In our diagram, there are only four edges, but there is something special about these"
+  },
+  {
+    "start": 231.02,
+    "end": 233.02,
+    "text": " edges."
+  },
+  {
+    "start": 233.02,
+    "end": 237.74,
+    "text": " Each edge is just not an ordinary atomic object."
+  },
+  {
+    "start": 237.74,
+    "end": 244.48,
+    "text": " An edge like E1 actually is one term from V and then a second term from V."
+  },
+  {
+    "start": 244.48,
+    "end": 249.62,
+    "text": " So this edge E1 goes from V1 to V5."
+  },
+  {
+    "start": 249.62,
+    "end": 253.1,
+    "text": " Pictorially, we can draw an arrow from V1 to V5."
+  },
+  {
+    "start": 253.1,
+    "end": 258.4,
+    "text": " Now, if I had said v5 to v1, the arrow would be reversed."
+  },
+  {
+    "start": 258.4,
+    "end": 259.86,
+    "text": " So what we have so far?"
+  },
+  {
+    "start": 259.86,
+    "end": 263.28,
+    "text": " We have a set of vertices and a set of edges."
+  },
+  {
+    "start": 263.28,
+    "end": 267.98,
+    "text": " That is a mathematical definition of a graph."
+  },
+  {
+    "start": 267.98,
+    "end": 271.42,
+    "text": " What about the computer scientist's definition?"
+  },
+  {
+    "start": 271.42,
+    "end": 275.98,
+    "text": " Of course, a computer scientist needs to adhere to the mathematical definition, but they want"
+  },
+  {
+    "start": 275.98,
+    "end": 279.14,
+    "text": " to represent and manipulate the same information."
+  },
+  {
+    "start": 279.14,
+    "end": 281.36,
+    "text": " So they need a data structure."
+  },
+  {
+    "start": 281.36,
+    "end": 284.12,
+    "text": " In other words, something that they can operate on."
+  },
+  {
+    "start": 284.12,
+    "end": 286.74,
+    "text": " So what kind of operations would they do?"
+  },
+  {
+    "start": 286.74,
+    "end": 291.02000000000004,
+    "text": " Well, with a graph, they can say add edge or add a new vertex."
+  },
+  {
+    "start": 291.02000000000004,
+    "end": 292.92,
+    "text": " Find the nearest neighbors of a vertex,"
+  },
+  {
+    "start": 292.92,
+    "end": 295.58000000000004,
+    "text": " where the term neighbor refers to the nodes connected"
+  },
+  {
+    "start": 295.58000000000004,
+    "end": 298.26,
+    "text": " to the vertex."
+  },
+  {
+    "start": 298.26,
+    "end": 299.98,
+    "text": " We said a computer scientist needs"
+  },
+  {
+    "start": 299.98,
+    "end": 302.48,
+    "text": " to represent graphs using data structures."
+  },
+  {
+    "start": 302.48,
+    "end": 304.32,
+    "text": " Here is one you should recognize."
+  },
+  {
+    "start": 304.32,
+    "end": 308.34000000000003,
+    "text": " It's a matrix called the adjacency matrix of a graph."
+  },
+  {
+    "start": 308.34000000000003,
+    "end": 310.76,
+    "text": " Both the rows and the columns of this matrix"
+  },
+  {
+    "start": 310.76,
+    "end": 319.94,
+    "text": " represent nodes. If I go from v1 along the row, I see there is one at v3, which means"
+  },
+  {
+    "start": 319.94,
+    "end": 327.98,
+    "text": " there is an edge from v1 to v3. Similarly, there is another from v1 to v5."
+  },
+  {
+    "start": 327.98,
+    "end": 333.94,
+    "text": " Let's look at some operation. Let's say I first want to add an edge from v3 to v2."
+  },
+  {
+    "start": 333.94,
+    "end": 341.84,
+    "text": " What should I do? I will start from the row V3, go up to the column V2 and add a 1 in"
+  },
+  {
+    "start": 341.84,
+    "end": 351.76,
+    "text": " that cell. So I have added an edge which is an operation on the matrix. Another operation."
+  },
+  {
+    "start": 351.76,
+    "end": 358.18,
+    "text": " I want to get the neighbors of V3. This will be a little more complicated. I will look"
+  },
+  {
+    "start": 358.18,
+    "end": 363.54,
+    "text": " at the row v3 and paint that row, and I will also look at the column v3 and paint that"
+  },
+  {
+    "start": 363.54,
+    "end": 372.40000000000003,
+    "text": " column. If we go down the row of v3, we will get v2. So v2 is a neighbor. And if we go"
+  },
+  {
+    "start": 372.40000000000003,
+    "end": 381.02,
+    "text": " down the column of v3, we will get v1 and v6. So v1 and v6 are also neighbors. What's"
+  },
+  {
+    "start": 381.02,
+    "end": 390.26,
+    "text": " the difference? Since the matrix has the from along the rows and the twos along the columns,"
+  },
+  {
+    "start": 390.26,
+    "end": 397.2,
+    "text": " following the row V3 gives us the edges outgoing from V3 and following the column V3 gives"
+  },
+  {
+    "start": 397.2,
+    "end": 405.82,
+    "text": " us the edges coming into V3. Is this the only representation of the graph? No, it's not."
+  },
+  {
+    "start": 405.82,
+    "end": 407.52,
+    "text": " Here is another one."
+  },
+  {
+    "start": 407.52,
+    "end": 411.42,
+    "text": " In this representation, there are two kinds of data objects."
+  },
+  {
+    "start": 411.42,
+    "end": 417.08,
+    "text": " Node data, which are the blue rectangles, and edge data, which are the triangles."
+  },
+  {
+    "start": 417.08,
+    "end": 422.58,
+    "text": " To get a sense of this representation, look at the node V1 and follow the top yellow line."
+  },
+  {
+    "start": 422.58,
+    "end": 425.21999999999997,
+    "text": " You'll reach V3."
+  },
+  {
+    "start": 425.21999999999997,
+    "end": 430.34,
+    "text": " So this link structure directly captures the graph diagram we created before."
+  },
+  {
+    "start": 430.34000000000003,
+    "end": 438.46000000000004,
+    "text": " Now start from V1 again and follow the blue link and you will reach E1 and then V3."
+  },
+  {
+    "start": 438.46000000000004,
+    "end": 443.94000000000005,
+    "text": " So that tells you that E1 is an edge object between V1 and V3."
+  },
+  {
+    "start": 443.94000000000005,
+    "end": 452.44000000000005,
+    "text": " Next, let us stand on the edge triangle E1 and follow the red dashed line to get to E2,"
+  },
+  {
+    "start": 452.44000000000005,
+    "end": 456.64000000000004,
+    "text": " which is the next edge from the same starting node."
+  },
+  {
+    "start": 456.64000000000004,
+    "end": 458.46000000000004,
+    "text": " Is this possibly too complex?"
+  },
+  {
+    "start": 458.46000000000004,
+    "end": 460.20000000000005,
+    "text": " Yes, it is."
+  },
+  {
+    "start": 460.2,
+    "end": 462.62,
+    "text": " However, as we'll see down the road,"
+  },
+  {
+    "start": 462.62,
+    "end": 465.7,
+    "text": " many graph database systems are using this kind of data"
+  },
+  {
+    "start": 465.7,
+    "end": 469.08,
+    "text": " structure internally so that the database operations"
+  },
+  {
+    "start": 469.08,
+    "end": 471.2,
+    "text": " become more efficient."
+  }
+]

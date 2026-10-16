@@ -1,0 +1,402 @@
+[
+  {
+    "start": 0.96,
+    "end": 5.76,
+    "text": " In this activity, we are going to perform cluster analysis using Spark."
+  },
+  {
+    "start": 7.2,
+    "end": 12.56,
+    "text": " We will start this activity by scaling all features so that each feature is zero normalized,"
+  },
+  {
+    "start": 13.200000000000001,
+    "end": 18.56,
+    "text": " then we will create an elbow plot to determine the right value for k, which is the number of"
+  },
+  {
+    "start": 18.56,
+    "end": 24.96,
+    "text": " clusters to use in the k-means algorithm, then we will perform cluster analysis on a dataset using"
+  },
+  {
+    "start": 24.96,
+    "end": 31.76,
+    "text": " k-means and finally we will create parallel coordinates plots to analyze the cluster centers."
+  },
+  {
+    "start": 35.36,
+    "end": 40.88,
+    "text": " As you already know the first thing that we have to do is to start our Jupyter Coursera container"
+  },
+  {
+    "start": 41.44,
+    "end": 48.64,
+    "text": " and to do this we open Docker Desktop and click on the start button. Once the container is running"
+  },
+  {
+    "start": 48.64,
+    "end": 53.6,
+    "text": " we click on this link that will open our browser and transfer us to JupyterLab"
+  },
+  {
+    "start": 53.6,
+    "end": 60.22,
+    "text": " and here we open the big data for folder and the clustering notebook that is the"
+  },
+  {
+    "start": 60.22,
+    "end": 63.52,
+    "text": " notebook for this activity."
+  },
+  {
+    "start": 65.52,
+    "end": 71.18,
+    "text": " With the notebook open we are going to proceed to load our data. So first we"
+  },
+  {
+    "start": 71.18,
+    "end": 75.32,
+    "text": " are going to import all the necessary libraries and classes that we need for"
+  },
+  {
+    "start": 75.32,
+    "end": 81.86,
+    "text": " this activity and once we do this we proceed to load the minor weather CSV"
+  },
+  {
+    "start": 81.86,
+    "end": 86.9,
+    "text": " file as we have done before keeping the header true and inferring the schema."
+  },
+  {
+    "start": 91.3,
+    "end": 97.94,
+    "text": " Let's do some data pre-processing. We will start by counting the number of observations in our"
+  },
+  {
+    "start": 97.94,
+    "end": 105.46000000000001,
+    "text": " data frame and we notice that we have almost 1.6 million observations which is just a lot for the"
+  },
+  {
+    "start": 105.46000000000001,
+    "end": 111.46000000000001,
+    "text": " purposes of this activity. So instead of working with the full data frame we're going to filter"
+  },
+  {
+    "start": 111.46000000000001,
+    "end": 118.34,
+    "text": " and create a filtered data frame only keeping one tenth of the original data frame. So we run this"
+  },
+  {
+    "start": 118.34,
+    "end": 126.24000000000001,
+    "text": " cell and now we only have almost 160,000 observations. We take a quick look at the"
+  },
+  {
+    "start": 126.24000000000001,
+    "end": 132.46,
+    "text": " descriptive statistics of this data frame and something that you need to know is that this"
+  },
+  {
+    "start": 132.46,
+    "end": 138.86,
+    "text": " data was collected during a period of drought in the city of San Diego so it's very likely that"
+  },
+  {
+    "start": 138.86,
+    "end": 145.26000000000002,
+    "text": " the variables related to rain do not offer much information. We can verify this by counting the"
+  },
+  {
+    "start": 145.26000000000002,
+    "end": 151.9,
+    "text": " number of rows that have a value of zero for both rain accumulation and rain duration, and we see"
+  },
+  {
+    "start": 151.9,
+    "end": 158.54000000000002,
+    "text": " that it's almost all of the observations in our filtered data frame. So what we're going to do is"
+  },
+  {
+    "start": 158.54000000000002,
+    "end": 164.62,
+    "text": " that we're going to create a new data frame, our working data frame, and we're going to drop the"
+  },
+  {
+    "start": 164.62,
+    "end": 172.78,
+    "text": " rain variables along with the timestamp. Finally we are going to drop every single row that might"
+  },
+  {
+    "start": 172.78,
+    "end": 178.06,
+    "text": " contain a missing value and we're going to see how many rows we lose in this process"
+  },
+  {
+    "start": 178.06,
+    "end": 181.74,
+    "text": " and we only lost 46 rows after dropping the missing values."
+  },
+  {
+    "start": 187.1,
+    "end": 193.02,
+    "text": " With our subset ready we will proceed to scale our features so first we take again a quick look"
+  },
+  {
+    "start": 193.02,
+    "end": 198.46,
+    "text": " to the columns of our working data frame and instead of using all of the columns what we"
+  },
+  {
+    "start": 198.46,
+    "end": 202.78,
+    "text": " will do is that we will create a list with the features that we actually plan to use"
+  },
+  {
+    "start": 203.34,
+    "end": 209.98000000000002,
+    "text": " and then we will use again the vector assembler class to create a column vector and add this"
+  },
+  {
+    "start": 209.98000000000002,
+    "end": 216.46,
+    "text": " column vector to our working data frame in a new data frame called assembler. Then we will create"
+  },
+  {
+    "start": 216.46,
+    "end": 225.26000000000002,
+    "text": " a scalar object to scale these features keeping the mean as 0 and the standard deviation as 1."
+  },
+  {
+    "start": 225.98000000000002,
+    "end": 229.10000000000002,
+    "text": " And finally we add this to our assembled data frame."
+  },
+  {
+    "start": 233.9,
+    "end": 239.58,
+    "text": " After scaling our data we will proceed to create an elbow plot so first we select the features"
+  },
+  {
+    "start": 239.58,
+    "end": 246.38000000000002,
+    "text": " and the row id we only keep one third of the scale data and we create a new elbow set."
+  },
+  {
+    "start": 247.42000000000002,
+    "end": 254.3,
+    "text": " Then we will define a range of clusters from 2 to 30 or values for k and we will start this"
+  },
+  {
+    "start": 255.26000000000002,
+    "end": 260.86,
+    "text": " function that will perform a training on the elbow set and calculate the within"
+  },
+  {
+    "start": 260.86,
+    "end": 266.22,
+    "text": " cluster sum of square error so we can make our plot and decide which is the best value for k."
+  },
+  {
+    "start": 266.22,
+    "end": 277.02000000000004,
+    "text": " So we wait for this training to be completed and after completing our training for a cluster size"
+  },
+  {
+    "start": 277.02000000000004,
+    "end": 283.26000000000005,
+    "text": " of 30 we can use the list of values that we just stored and make the plot to make a decision on"
+  },
+  {
+    "start": 283.26000000000005,
+    "end": 290.40000000000003,
+    "text": " the right value of k. So we run this cell and now we have our plot ready to be analyzed. If we take"
+  },
+  {
+    "start": 290.40000000000003,
+    "end": 295.62,
+    "text": " a look at this plot we will see that on the y axis we will have the sum of square errors"
+  },
+  {
+    "start": 295.62,
+    "end": 301.44,
+    "text": " and on the x-axis we have the different values for k or clusters and the idea of"
+  },
+  {
+    "start": 301.44,
+    "end": 307.44,
+    "text": " this plot is to choose a value of k that allows us to create a model that is not"
+  },
+  {
+    "start": 307.44,
+    "end": 312.12,
+    "text": " overfitting and we can notice that yellow is pretty much somewhere in"
+  },
+  {
+    "start": 312.12,
+    "end": 319.06,
+    "text": " between a cluster value of 10 or 15 so we are going to choose 12 in this case"
+  },
+  {
+    "start": 319.06,
+    "end": 323.38,
+    "text": " as the value for k to train our model."
+  },
+  {
+    "start": 325.62,
+    "end": 330.9,
+    "text": " With our value for k selected we are going to select the features that we"
+  },
+  {
+    "start": 330.9,
+    "end": 335.4,
+    "text": " will use to cluster and we're going to persist this data in memory so we can"
+  },
+  {
+    "start": 335.4,
+    "end": 340.86,
+    "text": " get faster access to it. So we run this and now we're going to define the k-means"
+  },
+  {
+    "start": 340.86,
+    "end": 345.96,
+    "text": " algorithm with a value of k of 12, the following seed, and we're going to fit"
+  },
+  {
+    "start": 345.96,
+    "end": 352.38,
+    "text": " the model using the data that we persisted. And finally we will apply"
+  },
+  {
+    "start": 352.38,
+    "end": 359.5,
+    "text": " this model to this to the same data. So we run this cell, we wait for a few seconds,"
+  },
+  {
+    "start": 360.94,
+    "end": 365.9,
+    "text": " and our clusters should be defined. We run this to take a look at the cluster centers,"
+  },
+  {
+    "start": 366.46,
+    "end": 369.58,
+    "text": " and these are the centers of the 12 clusters that we defined."
+  },
+  {
+    "start": 370.21999999999997,
+    "end": 375.34,
+    "text": " This is not very readable, so we will proceed to plot them to get a better view of them."
+  },
+  {
+    "start": 375.34000000000003,
+    "end": 383.02000000000004,
+    "text": " We will proceed to create parallel plots of our clusters."
+  },
+  {
+    "start": 383.02000000000004,
+    "end": 388.06000000000006,
+    "text": " So the first cell that we run creates a data frame with the cluster center coordinates"
+  },
+  {
+    "start": 388.06000000000006,
+    "end": 390.66,
+    "text": " and the cluster label."
+  },
+  {
+    "start": 390.66,
+    "end": 396.06000000000006,
+    "text": " As a first example, let's show clusters for dry days, this means days with a relative"
+  },
+  {
+    "start": 396.06000000000006,
+    "end": 401.14000000000004,
+    "text": " humidity below 0.5."
+  },
+  {
+    "start": 401.14,
+    "end": 405.91999999999996,
+    "text": " We can see that all of the clusters in this plot have a relative humidity below 0 and"
+  },
+  {
+    "start": 405.91999999999996,
+    "end": 412.58,
+    "text": " more specifically below 0.5, but their values for other features are very different."
+  },
+  {
+    "start": 412.58,
+    "end": 415.34,
+    "text": " Now take a look at cluster number 5."
+  },
+  {
+    "start": 415.34,
+    "end": 418.9,
+    "text": " This cluster has lower than average wind direction."
+  },
+  {
+    "start": 418.9,
+    "end": 423.02,
+    "text": " If we recall that these are values capturing degrees, this will mean that these are samples"
+  },
+  {
+    "start": 423.02,
+    "end": 426.59999999999997,
+    "text": " with wind coming from the north and the northeast."
+  },
+  {
+    "start": 426.6,
+    "end": 431.64000000000004,
+    "text": " This is also a cluster in which samples have higher than average wind speed."
+  },
+  {
+    "start": 431.64000000000004,
+    "end": 436.0,
+    "text": " These are all patterns of something that we know as Santana winds, which are very common"
+  },
+  {
+    "start": 436.0,
+    "end": 442.6,
+    "text": " in California and increase the risk of wildfires."
+  },
+  {
+    "start": 442.6,
+    "end": 450.36,
+    "text": " Now we will show clusters with high air temperature."
+  },
+  {
+    "start": 450.36,
+    "end": 455.20000000000005,
+    "text": " As we see, all of these clusters have a high value for air temperature, but they have very"
+  },
+  {
+    "start": 455.2,
+    "end": 460.42,
+    "text": " different values in other features. Now we will represent clusters for cool days."
+  },
+  {
+    "start": 460.42,
+    "end": 466.59999999999997,
+    "text": " This means clusters with high relative humidity and low air temperature."
+  },
+  {
+    "start": 466.59999999999997,
+    "end": 471.82,
+    "text": " Notice that in cluster number 2 we also have high values for wind speed, which"
+  },
+  {
+    "start": 471.82,
+    "end": 477.38,
+    "text": " suggests that this might be a cluster of samples for rainy and stormy days. To"
+  },
+  {
+    "start": 477.38,
+    "end": 484.59999999999997,
+    "text": " conclude, we will return a plot using the index, in this case cluster number 2."
+  },
+  {
+    "start": 485.2,
+    "end": 490.2,
+    "text": " This is the cluster number 2 that we have previously seen, and this is how we conclude this activity."
+  }
+]

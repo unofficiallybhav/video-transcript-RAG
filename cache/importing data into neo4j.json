@@ -1,0 +1,302 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.44,
+    "text": " In this activity, we are going to import data to Neo4j."
+  },
+  {
+    "start": 7.2,
+    "end": 11.68,
+    "text": " To start this activity, we are going to take a look at the data that we're going to work with."
+  },
+  {
+    "start": 12.32,
+    "end": 17.52,
+    "text": " This data has been previously loaded into the Docker container that you're using to run Neo4j,"
+  },
+  {
+    "start": 17.52,
+    "end": 21.04,
+    "text": " and we're going to be using it through different activities in this course."
+  },
+  {
+    "start": 22.0,
+    "end": 26.96,
+    "text": " In this data, we can observe that we have one column with the source node,"
+  },
+  {
+    "start": 26.96,
+    "end": 32.72,
+    "text": " a second column with the target node, and a third column which indicates the distance between the"
+  },
+  {
+    "start": 32.72,
+    "end": 38.480000000000004,
+    "text": " source and the target. Therefore, we can easily represent this data in a graph."
+  },
+  {
+    "start": 43.120000000000005,
+    "end": 46.88,
+    "text": " Now, let's take a look at the script that we are going to use to load the data."
+  },
+  {
+    "start": 47.760000000000005,
+    "end": 52.64,
+    "text": " In this script, we first load the data using the function loadcsv with headers,"
+  },
+  {
+    "start": 52.64,
+    "end": 58.4,
+    "text": " and we specify the path where the data is located. We also include a keyword line to"
+  },
+  {
+    "start": 58.4,
+    "end": 64.24,
+    "text": " specify the individual line we're currently working on. In the second line, we are specifying"
+  },
+  {
+    "start": 64.24,
+    "end": 70.24000000000001,
+    "text": " a variable n to be of the type myNode, which is a type that we are just making up for this exercise."
+  },
+  {
+    "start": 70.8,
+    "end": 76.32,
+    "text": " We are adding a property to this node, which is a name, and we're using the column source"
+  },
+  {
+    "start": 76.32,
+    "end": 82.24000000000001,
+    "text": " as the source of the value for this node. In the third line, we are doing the same,"
+  },
+  {
+    "start": 82.24,
+    "end": 87.11999999999999,
+    "text": " but this time we specify a variable m and we use the column target as the source for the"
+  },
+  {
+    "start": 87.11999999999999,
+    "end": 94.56,
+    "text": " values of the names. Finally, we have to include the edges, so we specify the edges that go from"
+  },
+  {
+    "start": 94.56,
+    "end": 100.56,
+    "text": " n to m using the column distance as the source for these values, making sure that they are"
+  },
+  {
+    "start": 100.56,
+    "end": 110.47999999999999,
+    "text": " captured as integral values, and adding the label 2. Prior to loading the data, we're going to run"
+  },
+  {
+    "start": 110.48,
+    "end": 116.08,
+    "text": " the this command to make sure that we clean every any graph that might be loaded into neo4j"
+  },
+  {
+    "start": 116.08,
+    "end": 122.56,
+    "text": " and then we're going to run the script that we just made so we run it and according to this"
+  },
+  {
+    "start": 122.56,
+    "end": 129.12,
+    "text": " message we just added 11 nodes 25 properties and 14 relationships we can click on database"
+  },
+  {
+    "start": 129.12,
+    "end": 134.64000000000001,
+    "text": " information and then on my notes to quickly visualize the graph and this is a graph that we"
+  },
+  {
+    "start": 134.64000000000001,
+    "end": 141.68,
+    "text": " we just loaded, this is a graph that we will be using in many activities in this course."
+  },
+  {
+    "start": 141.68,
+    "end": 146.74,
+    "text": " Notice that we were able to include the label 2 to indicate the direction of these edges"
+  },
+  {
+    "start": 146.74,
+    "end": 151.70000000000002,
+    "text": " from one node to the other, and that when we hover over them, we can see the distance"
+  },
+  {
+    "start": 151.70000000000002,
+    "end": 157.4,
+    "text": " between these nodes."
+  },
+  {
+    "start": 157.4,
+    "end": 162.12,
+    "text": " The second dataset that we're going to work with is this data which contains information"
+  },
+  {
+    "start": 162.12,
+    "end": 168.68,
+    "text": " about terrorists. As you can observe each row of this data has more information than the previous"
+  },
+  {
+    "start": 168.68,
+    "end": 178.92000000000002,
+    "text": " one which makes it more challenging to graph in Neo4j. As you can observe because our data is more"
+  },
+  {
+    "start": 178.92000000000002,
+    "end": 185.08,
+    "text": " complex our cipher script is also more complex. The first line does the same that we did in the"
+  },
+  {
+    "start": 185.08,
+    "end": 191.0,
+    "text": " previous data but this time we used the keyword row instead of line. From the second to the third"
+  },
+  {
+    "start": 191.0,
+    "end": 196.92,
+    "text": " line we start to specify our nodes. Notice that each node has a different class. For example,"
+  },
+  {
+    "start": 196.92,
+    "end": 202.84,
+    "text": " the first type is a type country and we only add one property which is the property name and we"
+  },
+  {
+    "start": 202.84,
+    "end": 208.36,
+    "text": " use the column country as the source for this property. On the third line we specify the type"
+  },
+  {
+    "start": 209.16,
+    "end": 215.88,
+    "text": " actor and sorry the class actor and we specify multiple properties including a type property"
+  },
+  {
+    "start": 215.88,
+    "end": 222.68,
+    "text": " which is the column actor type and in the fourth column we specify the class organization and we"
+  },
+  {
+    "start": 222.68,
+    "end": 229.72,
+    "text": " only add one property to it. In the fifth and the sixth line we are including the edges to our graph."
+  },
+  {
+    "start": 229.72,
+    "end": 236.04,
+    "text": " The first type of edges are the edges that indicate the affiliation of these actors to the"
+  },
+  {
+    "start": 236.04,
+    "end": 243.64,
+    "text": " organizations and the final line specifies the edges that connect the countries with the actors."
+  },
+  {
+    "start": 245.88,
+    "end": 253.54,
+    "text": " Before running our new script, we need to delete the graph from the previous step."
+  },
+  {
+    "start": 253.54,
+    "end": 259.76,
+    "text": " So we're going to go down to rerun this command that is going to delete this graph and now"
+  },
+  {
+    "start": 259.76,
+    "end": 263.44,
+    "text": " we can proceed to run our new script."
+  },
+  {
+    "start": 263.44,
+    "end": 270.54,
+    "text": " We run it and as we see in this message, we just loaded more than 600 nodes, 3400 properties"
+  },
+  {
+    "start": 270.54,
+    "end": 273.28,
+    "text": " and 14 relationships."
+  },
+  {
+    "start": 273.28000000000003,
+    "end": 277.8,
+    "text": " If we want to take a quick view of this graph, we can go to the left menu and click on this"
+  },
+  {
+    "start": 277.8,
+    "end": 283.16,
+    "text": " gray box, and this is going to display the 25 first rows."
+  },
+  {
+    "start": 283.16,
+    "end": 288.04,
+    "text": " Notice that in this case, we are only loading one country, which is Afghanistan in red."
+  },
+  {
+    "start": 288.04,
+    "end": 293.28000000000003,
+    "text": " We are loading eight actors in brown and 16 organizations."
+  },
+  {
+    "start": 293.28000000000003,
+    "end": 300.04,
+    "text": " And we can see the labels in the edges indicating the nature of these relationships."
+  },
+  {
+    "start": 300.04,
+    "end": 305.28000000000003,
+    "text": " If we want to display more information, we can modify this number, so in this case now"
+  },
+  {
+    "start": 305.28000000000003,
+    "end": 312.66,
+    "text": " I'm going to return 250 observations, I run it, and now I can see more nodes, but still"
+  },
+  {
+    "start": 312.66,
+    "end": 314.5,
+    "text": " one country."
+  },
+  {
+    "start": 314.5,
+    "end": 321.04,
+    "text": " Now I have more than 100 terrorists and more than 100 organizations."
+  },
+  {
+    "start": 321.04,
+    "end": 326.16,
+    "text": " If I want to display the full graph, I can go to the left menu, click on this tool, and"
+  },
+  {
+    "start": 326.16,
+    "end": 333.52000000000004,
+    "text": " make sure that this number is set to 1000. So it allows me to return 1000 observations. So that's"
+  },
+  {
+    "start": 333.52000000000004,
+    "end": 340.56,
+    "text": " the number that I'm going to write here to make sure that I return all of the graph. So I run it."
+  },
+  {
+    "start": 342.72,
+    "end": 350.40000000000003,
+    "text": " And let me zoom out, so we can take a better view of it. And now in this case, I was able to return"
+  },
+  {
+    "start": 350.40000000000003,
+    "end": 356.96000000000004,
+    "text": " three countries and notice that in some way the nodes are clusterized and the center of these"
+  },
+  {
+    "start": 356.96000000000004,
+    "end": 362.08000000000004,
+    "text": " clusters are the countries followed by the actors and then the organizations."
+  },
+  {
+    "start": 363.52000000000004,
+    "end": 365.20000000000005,
+    "text": " This is how we conclude this activity."
+  }
+]

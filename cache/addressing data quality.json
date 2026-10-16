@@ -1,0 +1,332 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.0,
+    "text": " In the last lecture, we discussed data quality issues."
+  },
+  {
+    "start": 4.0,
+    "end": 8.0,
+    "text": " We will now discuss some common techniques for addressing those quality issues."
+  },
+  {
+    "start": 8.0,
+    "end": 13.0,
+    "text": " After this video, you will be able to define what imputation means,"
+  },
+  {
+    "start": 13.0,
+    "end": 16.0,
+    "text": " illustrate three ways to handle missing values,"
+  },
+  {
+    "start": 16.0,
+    "end": 21.0,
+    "text": " and describe the role of domain knowledge in addressing data quality issues."
+  },
+  {
+    "start": 21.0,
+    "end": 25.0,
+    "text": " As we discussed in the last lecture, real-world data is messy."
+  },
+  {
+    "start": 25.0,
+    "end": 29.0,
+    "text": " Some data quality issues that you can find in your data are missing values,"
+  },
+  {
+    "start": 29.0,
+    "end": 34.0,
+    "text": " duplicate data, invalid data, noise, and outliers."
+  },
+  {
+    "start": 34.0,
+    "end": 39.0,
+    "text": " You will need to clean your data if you want to perform any meaningful analysis on that data."
+  },
+  {
+    "start": 39.0,
+    "end": 45.0,
+    "text": " Recall that missing data occurs when you don't have a value for certain variables in some samples."
+  },
+  {
+    "start": 45.0,
+    "end": 51.0,
+    "text": " A simple way to handle missing data is to simply drop any samples with missing values or NAs."
+  },
+  {
+    "start": 51.0,
+    "end": 57.0,
+    "text": " All machine learning tools provide a mechanism or command for filtering out rows with any missing values."
+  },
+  {
+    "start": 57.0,
+    "end": 60.32,
+    "text": " The advantage of this approach is that it is very simple."
+  },
+  {
+    "start": 60.32,
+    "end": 64.76,
+    "text": " The caveat is that you are removing data when you filter out examples."
+  },
+  {
+    "start": 64.76,
+    "end": 69.8,
+    "text": " If the number of samples dropped is large, then you end up losing a lot of your data."
+  },
+  {
+    "start": 69.8,
+    "end": 75.2,
+    "text": " An alternative to dropping samples with missing data is to impute the missing values."
+  },
+  {
+    "start": 75.2,
+    "end": 79.88,
+    "text": " Imputing means to replace the missing values with some reasonable values."
+  },
+  {
+    "start": 79.88,
+    "end": 83.96000000000001,
+    "text": " The advantage of this approach is that you are making use of all of your data."
+  },
+  {
+    "start": 83.96000000000001,
+    "end": 88.68,
+    "text": " Of course, imputing is more complicated than simply dropping samples."
+  },
+  {
+    "start": 88.68,
+    "end": 91.06,
+    "text": " There are several ways to impute missing values."
+  },
+  {
+    "start": 91.06,
+    "end": 97.08000000000001,
+    "text": " One strategy is to replace the missing values with the mean or median value of the variable."
+  },
+  {
+    "start": 97.08000000000001,
+    "end": 102.32000000000001,
+    "text": " For example, a missing value for years of employment can be replaced by the mean or"
+  },
+  {
+    "start": 102.32000000000001,
+    "end": 107.32000000000001,
+    "text": " median value for years of employment for all current employees."
+  },
+  {
+    "start": 107.32000000000001,
+    "end": 112.06,
+    "text": " Another approach is to use the most frequent value in place of the missing value."
+  },
+  {
+    "start": 112.06,
+    "end": 117.62,
+    "text": " For example, the most frequently recorded age of customers associated with a specific"
+  },
+  {
+    "start": 117.62,
+    "end": 121.06,
+    "text": " item can be used if that value is missing."
+  },
+  {
+    "start": 121.06,
+    "end": 126.52000000000001,
+    "text": " Alternatively, a sensible value can be derived as a replacement for a missing value."
+  },
+  {
+    "start": 126.52000000000001,
+    "end": 131.1,
+    "text": " For example, a missing value for income can be set to zero for customers less than 18"
+  },
+  {
+    "start": 131.1,
+    "end": 137.14000000000001,
+    "text": " years old, or it can be replaced with an average value based on occupation and location."
+  },
+  {
+    "start": 137.14000000000001,
+    "end": 141.12,
+    "text": " Note that this approach requires knowledge about the application and the variable with"
+  },
+  {
+    "start": 141.12,
+    "end": 145.92000000000002,
+    "text": " missing values in order to make reasonable choices about what values would be sensible"
+  },
+  {
+    "start": 145.92000000000002,
+    "end": 148.62,
+    "text": " to replace the missing values."
+  },
+  {
+    "start": 148.62,
+    "end": 153.58,
+    "text": " In the case of duplicate data, one approach is to delete the older record."
+  },
+  {
+    "start": 153.58,
+    "end": 156.54,
+    "text": " Another approach is to merge duplicate records."
+  },
+  {
+    "start": 156.54,
+    "end": 161.38,
+    "text": " This often requires a way to determine how to resolve conflicting values."
+  },
+  {
+    "start": 161.38,
+    "end": 167.0,
+    "text": " For example, in the case of multiple addresses for the same customer, some logic for determining"
+  },
+  {
+    "start": 167.0,
+    "end": 174.74,
+    "text": " similarities between addresses might be necessary. For example, ST period is the same as street."
+  },
+  {
+    "start": 174.74,
+    "end": 180.78,
+    "text": " To address invalid data, consulting another data source may be necessary. For example,"
+  },
+  {
+    "start": 180.78,
+    "end": 185.56,
+    "text": " an invalid zip code can be corrected by looking up the correct zip code based on city and"
+  },
+  {
+    "start": 185.56,
+    "end": 192.14,
+    "text": " state. A best estimate for a reasonable value can also be used as a replacement. For example,"
+  },
+  {
+    "start": 192.14000000000001,
+    "end": 197.14000000000001,
+    "text": " For a missing age value for an employee, a reasonable value can be estimated based on"
+  },
+  {
+    "start": 197.14000000000001,
+    "end": 201.14000000000001,
+    "text": " the employee's length of employment."
+  },
+  {
+    "start": 201.14000000000001,
+    "end": 205.26000000000002,
+    "text": " Noise that distorts the data values can be addressed by filtering out the source of the"
+  },
+  {
+    "start": 205.26000000000002,
+    "end": 206.26000000000002,
+    "text": " noise."
+  },
+  {
+    "start": 206.26000000000002,
+    "end": 211.06,
+    "text": " For example, filtering out the frequency of a constant background noise will remove that"
+  },
+  {
+    "start": 211.06,
+    "end": 213.70000000000002,
+    "text": " noise component from a recording."
+  },
+  {
+    "start": 213.70000000000002,
+    "end": 218.82000000000002,
+    "text": " This filtering must be done with care, however, as it can also remove some components of the"
+  },
+  {
+    "start": 218.82000000000002,
+    "end": 221.82000000000002,
+    "text": " true data in the process."
+  },
+  {
+    "start": 221.82,
+    "end": 227.04,
+    "text": " Outliers can be detected through the use of summary statistics and plots of the data."
+  },
+  {
+    "start": 227.04,
+    "end": 231.0,
+    "text": " Outliers can significantly skew the distribution of your data and thus the results of your"
+  },
+  {
+    "start": 231.0,
+    "end": 232.4,
+    "text": " analysis."
+  },
+  {
+    "start": 232.4,
+    "end": 236.64,
+    "text": " In cases where outliers are not the focus of your analysis, you'll want to remove these"
+  },
+  {
+    "start": 236.64,
+    "end": 239.06,
+    "text": " outlier samples from your dataset."
+  },
+  {
+    "start": 239.06,
+    "end": 243.95999999999998,
+    "text": " For example, when a thermostat malfunctions and causes values to fluctuate wildly or to"
+  },
+  {
+    "start": 243.95999999999998,
+    "end": 248.72,
+    "text": " be much higher or lower than normal, these samples should be filtered out."
+  },
+  {
+    "start": 248.72,
+    "end": 253.16,
+    "text": " In some applications, however, outliers are exactly what you're looking for."
+  },
+  {
+    "start": 253.16,
+    "end": 256.04,
+    "text": " So when you detect outliers, you don't want to throw them out."
+  },
+  {
+    "start": 256.04,
+    "end": 258.96,
+    "text": " Instead, you want to examine them more closely."
+  },
+  {
+    "start": 258.96,
+    "end": 264.64,
+    "text": " A classic example of this is in fraud detection, where outliers represent potential fraudulent"
+  },
+  {
+    "start": 264.64,
+    "end": 268.66,
+    "text": " use and those samples should be analyzed closely."
+  },
+  {
+    "start": 268.66,
+    "end": 274.66,
+    "text": " In order to address data quality issues effectively, knowledge about the application is crucial."
+  },
+  {
+    "start": 274.66,
+    "end": 280.04,
+    "text": " Things such as how the data was collected, the user population, the intended use of the"
+  },
+  {
+    "start": 280.04,
+    "end": 283.0,
+    "text": " application, etc., are important."
+  },
+  {
+    "start": 283.0,
+    "end": 288.34000000000003,
+    "text": " This domain knowledge is essential to making informed decisions on how to best impute missing"
+  },
+  {
+    "start": 288.34000000000003,
+    "end": 293.22,
+    "text": " values, how to handle duplicate records and invalid data, and what to do about noise and"
+  },
+  {
+    "start": 293.22,
+    "end": 294.34000000000003,
+    "text": " outliers in your data."
+  }
+]

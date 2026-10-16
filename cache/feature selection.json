@@ -1,0 +1,352 @@
+[
+  {
+    "start": 0.0,
+    "end": 9.0,
+    "text": " In addition to cleaning your data to address data quality issues, data preparation also includes selecting features to use for analysis."
+  },
+  {
+    "start": 9.0,
+    "end": 20.0,
+    "text": " After this video, you will be able to explain what feature selection involves, discuss the goal of feature selection, and list three approaches for selecting features."
+  },
+  {
+    "start": 20.0,
+    "end": 26.0,
+    "text": " Feature selection refers to choosing the set of features to use that is appropriate for the subsequent analysis."
+  },
+  {
+    "start": 26.0,
+    "end": 31.38,
+    "text": " The goal of feature selection is to come up with the smallest set of features that best"
+  },
+  {
+    "start": 31.38,
+    "end": 35.0,
+    "text": " captures the characteristics of the problem being addressed."
+  },
+  {
+    "start": 35.0,
+    "end": 39.019999999999996,
+    "text": " The smaller the number of features used, the simpler the analysis will be."
+  },
+  {
+    "start": 39.019999999999996,
+    "end": 44.42,
+    "text": " But of course, the set of features used must include all features relevant to the problem,"
+  },
+  {
+    "start": 44.42,
+    "end": 50.120000000000005,
+    "text": " so there must be a balance between expressiveness and compactness of the feature set."
+  },
+  {
+    "start": 50.120000000000005,
+    "end": 53.480000000000004,
+    "text": " There are several methods to consider in selecting features."
+  },
+  {
+    "start": 53.480000000000004,
+    "end": 58.760000000000005,
+    "text": " New features can be added, some features can be removed, features can be recoded, or features"
+  },
+  {
+    "start": 58.760000000000005,
+    "end": 60.440000000000005,
+    "text": " can be combined."
+  },
+  {
+    "start": 60.440000000000005,
+    "end": 65.24000000000001,
+    "text": " All of these operations affect the final set of features that will be used for analysis."
+  },
+  {
+    "start": 65.24000000000001,
+    "end": 69.2,
+    "text": " Of course, some features can be kept as is as well."
+  },
+  {
+    "start": 69.2,
+    "end": 72.06,
+    "text": " New features can be derived from existing features."
+  },
+  {
+    "start": 72.06,
+    "end": 78.2,
+    "text": " For example, a new feature to specify whether a student is in-state or out-of-state can"
+  },
+  {
+    "start": 78.2,
+    "end": 81.76,
+    "text": " be added based on the student's state of residence."
+  },
+  {
+    "start": 81.76,
+    "end": 87.0,
+    "text": " For an application such as college admissions, this new feature represents an important aspect"
+  },
+  {
+    "start": 87.0,
+    "end": 91.66000000000001,
+    "text": " of an application and so would be very helpful as a separate feature."
+  },
+  {
+    "start": 91.66000000000001,
+    "end": 96.06,
+    "text": " Another example is adding a feature to indicate the color of a vehicle, which can play an"
+  },
+  {
+    "start": 96.06,
+    "end": 100.18,
+    "text": " important role in an auto insurance application."
+  },
+  {
+    "start": 100.18,
+    "end": 102.72,
+    "text": " Features can also be removed."
+  },
+  {
+    "start": 102.72,
+    "end": 106.12,
+    "text": " Candidates for removal are features that are very correlated."
+  },
+  {
+    "start": 106.12,
+    "end": 110.64,
+    "text": " During data exploration, you may have discovered that two features are very correlated, that"
+  },
+  {
+    "start": 110.64,
+    "end": 113.8,
+    "text": " That is, they change in very similar ways."
+  },
+  {
+    "start": 113.8,
+    "end": 118.5,
+    "text": " For example, the purchase price of a product and the amount of sales tax paid are likely"
+  },
+  {
+    "start": 118.5,
+    "end": 120.46000000000001,
+    "text": " to be very correlated."
+  },
+  {
+    "start": 120.46000000000001,
+    "end": 124.24,
+    "text": " The higher the purchase price, the higher the sales tax."
+  },
+  {
+    "start": 124.24,
+    "end": 128.04,
+    "text": " In this case, you might want to drop one of these features, since these features have"
+  },
+  {
+    "start": 128.04,
+    "end": 133.04,
+    "text": " essentially duplicate information, and keeping both features makes the feature set larger"
+  },
+  {
+    "start": 133.04,
+    "end": 137.0,
+    "text": " and the analysis unnecessarily more complex."
+  },
+  {
+    "start": 137.0,
+    "end": 141.6,
+    "text": " Features with a high percentage of missing values may also be good candidates for removal."
+  },
+  {
+    "start": 141.6,
+    "end": 146.38,
+    "text": " The validity and usefulness of features with a lot of missing values are in question, so"
+  },
+  {
+    "start": 146.38,
+    "end": 149.38,
+    "text": " removing them may not result in any loss of information."
+  },
+  {
+    "start": 149.38,
+    "end": 154.68,
+    "text": " Again, these features would have been discovered during the data exploration step."
+  },
+  {
+    "start": 154.68,
+    "end": 158.32,
+    "text": " Irrelevant features should also be removed from the dataset."
+  },
+  {
+    "start": 158.32,
+    "end": 162.02,
+    "text": " Irrelevant features are those that contain no information that is useful for the analysis"
+  },
+  {
+    "start": 162.02,
+    "end": 163.26,
+    "text": " task."
+  },
+  {
+    "start": 163.26,
+    "end": 167.56,
+    "text": " An example of this is employee ID in predicting income."
+  },
+  {
+    "start": 167.56,
+    "end": 173.35999999999999,
+    "text": " Other fields used simply for identification, such as row number, person's ID, etc., are"
+  },
+  {
+    "start": 173.35999999999999,
+    "end": 176.12,
+    "text": " good candidates for removal."
+  },
+  {
+    "start": 176.12,
+    "end": 180.42,
+    "text": " Features can also be combined if the new feature presents important information that is not"
+  },
+  {
+    "start": 180.42,
+    "end": 185.14,
+    "text": " represented by looking at the original features individually."
+  },
+  {
+    "start": 185.14,
+    "end": 191.88,
+    "text": " For example, BMI, which is Body Mass Index, is an indicator of whether a person is underweight,"
+  },
+  {
+    "start": 191.88,
+    "end": 197.85999999999999,
+    "text": " average weight or overweight. This is an important feature to have for a weight loss application."
+  },
+  {
+    "start": 197.85999999999999,
+    "end": 202.29999999999998,
+    "text": " It represents information about how much a person weighs relative to their height that"
+  },
+  {
+    "start": 202.29999999999998,
+    "end": 207.72,
+    "text": " is not available by looking at just the person's height or weight alone."
+  },
+  {
+    "start": 207.72,
+    "end": 212.64,
+    "text": " A feature can be recoded as appropriate for the application. A common example of this"
+  },
+  {
+    "start": 212.64,
+    "end": 218.24,
+    "text": " is when you want to turn a continuous feature into a categorical one. For example, for a"
+  },
+  {
+    "start": 218.24,
+    "end": 223.06,
+    "text": " marketing application, you might want to recode customer's age into customer"
+  },
+  {
+    "start": 223.06,
+    "end": 229.3,
+    "text": " categories such as teenager, young adult, adult, and senior citizen. So you would"
+  },
+  {
+    "start": 229.3,
+    "end": 238.3,
+    "text": " map ages 13 to 19 to teenager, ages 20 to 25 to young adult, 26 to 55 as adult, and"
+  },
+  {
+    "start": 238.3,
+    "end": 244.24,
+    "text": " over 55 as senior. For some applications, you may want to make use of binary"
+  },
+  {
+    "start": 244.24,
+    "end": 249.04000000000002,
+    "text": " features. As an example, you might want a feature to capture whether a customer tends"
+  },
+  {
+    "start": 249.04000000000002,
+    "end": 254.22,
+    "text": " to buy expensive items or not. In this case, you would want to have a feature that maps"
+  },
+  {
+    "start": 254.22,
+    "end": 259.78000000000003,
+    "text": " to one for a customer with an average purchase price over a certain amount and maps to zero"
+  },
+  {
+    "start": 259.78000000000003,
+    "end": 266.72,
+    "text": " otherwise. Recoding features can also result in breaking one feature into multiple features."
+  },
+  {
+    "start": 266.72,
+    "end": 272.34000000000003,
+    "text": " A common example of this is to separate an address feature into its constituent parts"
+  },
+  {
+    "start": 272.34000000000003,
+    "end": 276.46000000000004,
+    "text": " street address, city, state, and zip code."
+  },
+  {
+    "start": 276.46000000000004,
+    "end": 279.04,
+    "text": " This way, you can more easily group records by state,"
+  },
+  {
+    "start": 279.04,
+    "end": 282.24,
+    "text": " for example, to provide a state-by-state analysis."
+  },
+  {
+    "start": 283.40000000000003,
+    "end": 287.72,
+    "text": " Feature selection aims to select the smallest set of features"
+  },
+  {
+    "start": 287.72,
+    "end": 289.52000000000004,
+    "text": " to best capture the characteristics"
+  },
+  {
+    "start": 289.52000000000004,
+    "end": 291.32000000000005,
+    "text": " of the data for your application."
+  },
+  {
+    "start": 292.22,
+    "end": 294.14000000000004,
+    "text": " Note from the examples we presented"
+  },
+  {
+    "start": 294.14000000000004,
+    "end": 297.48,
+    "text": " that domain knowledge once again plays a key role"
+  },
+  {
+    "start": 297.48,
+    "end": 300.28000000000003,
+    "text": " in choosing the appropriate features to use."
+  },
+  {
+    "start": 300.28000000000003,
+    "end": 305.68,
+    "text": " Good understanding of the application is essential in deciding which features to add, drop, or"
+  },
+  {
+    "start": 305.68,
+    "end": 306.68,
+    "text": " modify."
+  },
+  {
+    "start": 306.68,
+    "end": 312.1,
+    "text": " It should also be noted that feature selection can be referred to as feature engineering,"
+  },
+  {
+    "start": 312.1,
+    "end": 316.28000000000003,
+    "text": " since what you're doing here is to engineer the best feature set for your application."
+  }
+]

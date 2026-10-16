@@ -1,0 +1,327 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.0,
+    "text": " Let's now discuss what feature transformation is."
+  },
+  {
+    "start": 5.0,
+    "end": 11.0,
+    "text": " After this video, you will be able to articulate the purpose of feature transformation,"
+  },
+  {
+    "start": 11.0,
+    "end": 17.0,
+    "text": " list three feature transformation operations, and discuss when scaling is important."
+  },
+  {
+    "start": 17.0,
+    "end": 23.0,
+    "text": " In addition to feature selection, data preprocessing can also include feature transformation."
+  },
+  {
+    "start": 23.0,
+    "end": 27.0,
+    "text": " Feature transformation involves mapping a set of values for the feature"
+  },
+  {
+    "start": 27.0,
+    "end": 30.0,
+    "text": " to a new set of values to make the representation of the data"
+  },
+  {
+    "start": 30.0,
+    "end": 34.0,
+    "text": " more suitable or easier to process for the downstream analysis."
+  },
+  {
+    "start": 36.0,
+    "end": 39.0,
+    "text": " A common feature transformation operation is scaling."
+  },
+  {
+    "start": 39.0,
+    "end": 43.0,
+    "text": " This involves changing the range of values for a feature or features"
+  },
+  {
+    "start": 43.0,
+    "end": 46.0,
+    "text": " to another specified range."
+  },
+  {
+    "start": 46.0,
+    "end": 49.0,
+    "text": " This is done to avoid allowing features with large values"
+  },
+  {
+    "start": 49.0,
+    "end": 51.0,
+    "text": " to dominate the analysis results."
+  },
+  {
+    "start": 51.0,
+    "end": 55.0,
+    "text": " For example, if your data set has both weight and height as features,"
+  },
+  {
+    "start": 55.0,
+    "end": 60.28,
+    "text": " features, the magnitude of the weight values, which are in pounds, will be much larger than"
+  },
+  {
+    "start": 60.28,
+    "end": 65.12,
+    "text": " the magnitude of the height values, which are in feet and inches. So scaling both features"
+  },
+  {
+    "start": 65.12,
+    "end": 71.38,
+    "text": " to a common value range will make the contributions from both weight and height equal."
+  },
+  {
+    "start": 71.38,
+    "end": 76.5,
+    "text": " One way to perform scaling is to map all values of a feature to a specific range, such as"
+  },
+  {
+    "start": 76.5,
+    "end": 81.8,
+    "text": " between 0 and 1. For example, let's say you have a feature for income that ranges from"
+  },
+  {
+    "start": 81.8,
+    "end": 87.32,
+    "text": " 30,000 to 100,000. And you have another feature for years of employment that"
+  },
+  {
+    "start": 87.32,
+    "end": 92.96,
+    "text": " ranges from 0 to 50. These features have very different scales. If you want both"
+  },
+  {
+    "start": 92.96,
+    "end": 97.16,
+    "text": " features to have equal weighting when you compare the data samples, then you can"
+  },
+  {
+    "start": 97.16,
+    "end": 102.08,
+    "text": " scale the range of both features to be between 0 and 1. That way, the income"
+  },
+  {
+    "start": 102.08,
+    "end": 105.5,
+    "text": " feature, which is on a much larger scale than the years of employment feature,"
+  },
+  {
+    "start": 105.5,
+    "end": 111.32,
+    "text": " will not dominate the comparison results. Alternatively, scaling can be performed by"
+  },
+  {
+    "start": 111.32000000000001,
+    "end": 117.4,
+    "text": " transforming the feature such that the results have zero mean and unit standard deviation."
+  },
+  {
+    "start": 117.4,
+    "end": 121.48,
+    "text": " The steps to perform this scaling is to first calculate the mean and standard deviation"
+  },
+  {
+    "start": 121.48,
+    "end": 127.10000000000001,
+    "text": " values for the feature to be scaled. Then, for each value for this feature, subtract"
+  },
+  {
+    "start": 127.10000000000001,
+    "end": 132.52,
+    "text": " the mean value from that value and divide by the standard deviation. The transform feature"
+  },
+  {
+    "start": 132.52,
+    "end": 138.38,
+    "text": " will end up with a mean value of zero and standard deviation of one. This effectively"
+  },
+  {
+    "start": 138.38,
+    "end": 144.62,
+    "text": " removes the units of the features and converts each feature value to number of standard deviations"
+  },
+  {
+    "start": 144.62,
+    "end": 150.74,
+    "text": " from the mean. This scaling method is used when the min and max values are known. This"
+  },
+  {
+    "start": 150.74,
+    "end": 155.46,
+    "text": " is also useful when there are outliers which will skew the calculation for the range as"
+  },
+  {
+    "start": 155.46,
+    "end": 161.32,
+    "text": " the max value is determined by the furthest outlier. This scaling operation is often referred"
+  },
+  {
+    "start": 161.32,
+    "end": 168.4,
+    "text": " to as zero-normalization or standardization. Filtering is another feature transformation"
+  },
+  {
+    "start": 168.4,
+    "end": 175.95999999999998,
+    "text": " operation. This is commonly applied to time-series data such as speech or audio signals. A low-pass"
+  },
+  {
+    "start": 175.95999999999998,
+    "end": 181.56,
+    "text": " filter can be used to filter out noise, which usually manifests as a high-frequency component"
+  },
+  {
+    "start": 181.56,
+    "end": 187.78,
+    "text": " in the signal. A low-pass filter removes components above a certain frequency, allowing the rest"
+  },
+  {
+    "start": 187.78,
+    "end": 194.6,
+    "text": " to pass through unaltered. Filtering can also be used to remove noise in images. Noise in"
+  },
+  {
+    "start": 194.6,
+    "end": 200.58,
+    "text": " an image is random variation in intensity or color in the pixels. For example, a noise"
+  },
+  {
+    "start": 200.58,
+    "end": 206.16,
+    "text": " can cause an image to appear grainy. A mean or median filter can be used to replace a"
+  },
+  {
+    "start": 206.16,
+    "end": 212.02,
+    "text": " pixel value with the mean or median value of its neighboring pixels. This has the effect"
+  },
+  {
+    "start": 212.02,
+    "end": 217.68,
+    "text": " of smoothing out the image, removing the noise that causes the graininess in the image."
+  },
+  {
+    "start": 217.68,
+    "end": 222.68,
+    "text": " Aggregation combines values for a feature in order to summarize data or reduce variability."
+  },
+  {
+    "start": 222.68,
+    "end": 230.68,
+    "text": " Aggregation combines values for a feature in order to summarize the data or to reduce variability."
+  },
+  {
+    "start": 230.68,
+    "end": 235.68,
+    "text": " Aggregation is done by summing or averaging data values at a higher level."
+  },
+  {
+    "start": 235.68,
+    "end": 243.68,
+    "text": " For example, hourly values can be aggregated to the daily level, or values within a city region can be aggregated to a state level."
+  },
+  {
+    "start": 243.68,
+    "end": 246.68,
+    "text": " These plots show the results of aggregation."
+  },
+  {
+    "start": 246.68,
+    "end": 250.68,
+    "text": " The left plot shows wind speed values in miles per hour,"
+  },
+  {
+    "start": 250.68,
+    "end": 254.68,
+    "text": " averaged every 10 minutes over a period of 7 days."
+  },
+  {
+    "start": 254.68,
+    "end": 256.68,
+    "text": " Notice that there is a lot of variability."
+  },
+  {
+    "start": 256.68,
+    "end": 259.68,
+    "text": " That is, the values fluctuate a lot."
+  },
+  {
+    "start": 259.68,
+    "end": 262.68,
+    "text": " The right plot shows wind speed values averaged every hour,"
+  },
+  {
+    "start": 262.68,
+    "end": 265.68,
+    "text": " so every 60 minutes instead of every 10 minutes."
+  },
+  {
+    "start": 265.68,
+    "end": 268.68,
+    "text": " Notice that the line is much smoother here"
+  },
+  {
+    "start": 268.68,
+    "end": 272.68,
+    "text": " because the values are aggregated at a higher timescale level."
+  },
+  {
+    "start": 272.68,
+    "end": 275.68,
+    "text": " So aggregation can have the effect of removing noise,"
+  },
+  {
+    "start": 275.68,
+    "end": 280.68,
+    "text": " noise to provide a clearer representation of the structure of your data."
+  },
+  {
+    "start": 280.68,
+    "end": 286.68,
+    "text": " Another example is tracking stock prices. Hourly deviations of a stock may be difficult to track,"
+  },
+  {
+    "start": 286.68,
+    "end": 293.68,
+    "text": " but aggregated daily changes may better reveal any upward or downward trend of the stock."
+  },
+  {
+    "start": 293.68,
+    "end": 299.68,
+    "text": " In summary, feature transformation involves mapping the set of values for a feature to a new set of values"
+  },
+  {
+    "start": 299.68,
+    "end": 304.68,
+    "text": " to make the representation of the data more suitable for the downstream analysis."
+  },
+  {
+    "start": 304.68,
+    "end": 309.90000000000003,
+    "text": " analysis. Feature transformations should be used with caution since they change the nature"
+  },
+  {
+    "start": 309.90000000000003,
+    "end": 316.04,
+    "text": " of the data and unintentionally remove some important characteristics of the data. So"
+  },
+  {
+    "start": 316.04,
+    "end": 319.40000000000003,
+    "text": " it's important to look at the effects of the transformation you're applying to your"
+  },
+  {
+    "start": 319.40000000000003,
+    "end": 322.96000000000004,
+    "text": " data to make certain that it has the intended consequences."
+  }
+]

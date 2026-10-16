@@ -1,0 +1,462 @@
+[
+  {
+    "start": 1.0,
+    "end": 5.0,
+    "text": " Now that we know what machine learning is and have seen some examples of it,"
+  },
+  {
+    "start": 5.0,
+    "end": 8.0,
+    "text": " let's talk about how we do machine learning."
+  },
+  {
+    "start": 8.0,
+    "end": 14.0,
+    "text": " In this lecture, we will get an overview of the main categories of machine learning techniques."
+  },
+  {
+    "start": 14.0,
+    "end": 17.0,
+    "text": " After this video, you will be able to"
+  },
+  {
+    "start": 17.0,
+    "end": 21.0,
+    "text": " Describe the main categories of machine learning techniques"
+  },
+  {
+    "start": 21.0,
+    "end": 27.0,
+    "text": " and summarize how supervised learning differs from unsupervised learning."
+  },
+  {
+    "start": 27.0,
+    "end": 32.0,
+    "text": " There are different categories of machine learning techniques for different types of problems."
+  },
+  {
+    "start": 32.0,
+    "end": 34.0,
+    "text": " The main categories are listed here."
+  },
+  {
+    "start": 34.0,
+    "end": 40.0,
+    "text": " They are classification, regression, cluster analysis, and association analysis."
+  },
+  {
+    "start": 40.0,
+    "end": 44.0,
+    "text": " We will cover each one in detail in the following slides."
+  },
+  {
+    "start": 44.0,
+    "end": 49.0,
+    "text": " In classification, the goal is to predict the category of the input data."
+  },
+  {
+    "start": 49.0,
+    "end": 56.0,
+    "text": " An example of this is predicting the weather as being sunny, rainy, windy, or cloudy."
+  },
+  {
+    "start": 56.0,
+    "end": 64.96000000000001,
+    "text": " The input data in this case would be sensor data specifying the temperature, relative humidity, atmospheric pressure, wind speed, wind direction, etc."
+  },
+  {
+    "start": 65.2,
+    "end": 73.64,
+    "text": " The target, or what you're trying to predict, would be the different weather categories, sunny, windy, rainy, and cloudy."
+  },
+  {
+    "start": 74.48,
+    "end": 78.72,
+    "text": " Another example is to classify a tumor as either benign or malignant."
+  },
+  {
+    "start": 79.42,
+    "end": 85.28,
+    "text": " In this case, the classification is referred to as binary classification since there are only two categories."
+  },
+  {
+    "start": 85.28,
+    "end": 91.56,
+    "text": " But you can have many categories as well, as the weather prediction problem shown here."
+  },
+  {
+    "start": 91.56,
+    "end": 96.6,
+    "text": " Another example is to identify handwritten digits as being in 1 of 10 categories, 0"
+  },
+  {
+    "start": 96.6,
+    "end": 99.02,
+    "text": " to 9."
+  },
+  {
+    "start": 99.02,
+    "end": 104.46000000000001,
+    "text": " Some more examples of classification are classifying a tumor from a medical image as being benign"
+  },
+  {
+    "start": 104.46000000000001,
+    "end": 110.08,
+    "text": " or malignant, predicting whether it will rain the next day, determining if a loan application"
+  },
+  {
+    "start": 110.08,
+    "end": 116.74,
+    "text": " is high risk, medium risk, or low risk, identifying the sentiment of a tweet or review as being"
+  },
+  {
+    "start": 116.74,
+    "end": 120.98,
+    "text": " positive, negative, or neutral."
+  },
+  {
+    "start": 120.98,
+    "end": 126.08,
+    "text": " When your model has to predict a numeric value instead of a category, then the task becomes"
+  },
+  {
+    "start": 126.08,
+    "end": 129.02,
+    "text": " a regression problem."
+  },
+  {
+    "start": 129.02,
+    "end": 132.92,
+    "text": " An example of regression is to predict the price of a stock."
+  },
+  {
+    "start": 132.92,
+    "end": 138.44,
+    "text": " The stock price is a numeric value, not a category, so this is a regression task instead"
+  },
+  {
+    "start": 138.44,
+    "end": 144.24,
+    "text": " of a classification task. If you were to predict whether the stock price will rise or fall,"
+  },
+  {
+    "start": 144.24,
+    "end": 148.38,
+    "text": " then that would be a classification problem. But if you're predicting the actual price"
+  },
+  {
+    "start": 148.38,
+    "end": 154.0,
+    "text": " of the stock, then that is a regression problem. That is the main difference between classification"
+  },
+  {
+    "start": 154.0,
+    "end": 159.0,
+    "text": " and regression. In classification, you're predicting a category, and in regression,"
+  },
+  {
+    "start": 159.0,
+    "end": 165.62,
+    "text": " you're predicting a numeric value. Some other examples of regression are estimating"
+  },
+  {
+    "start": 165.62,
+    "end": 171.22,
+    "text": " the demand of a product based on time or season of the year, predicting the score on a test,"
+  },
+  {
+    "start": 172.06,
+    "end": 176.1,
+    "text": " determining the likelihood of how effective a drug will be for a particular patient,"
+  },
+  {
+    "start": 177.02,
+    "end": 182.48000000000002,
+    "text": " predicting the amount of rain for a region. In cluster analysis, the goal is to organize"
+  },
+  {
+    "start": 182.48000000000002,
+    "end": 188.48000000000002,
+    "text": " similar items in your data set into groups. A very common application of cluster analysis"
+  },
+  {
+    "start": 188.48000000000002,
+    "end": 194.16,
+    "text": " is referred to as customer segmentation. This means that you're separating your customer base"
+  },
+  {
+    "start": 194.16,
+    "end": 197.35999999999999,
+    "text": " into different groups or segments based on customer types."
+  },
+  {
+    "start": 198.07999999999998,
+    "end": 201.22,
+    "text": " For example, it would be very beneficial to segment your customers"
+  },
+  {
+    "start": 201.22,
+    "end": 204.2,
+    "text": " into seniors, adults, and teenagers."
+  },
+  {
+    "start": 205.1,
+    "end": 206.96,
+    "text": " These groups have different likes and dislikes"
+  },
+  {
+    "start": 206.96,
+    "end": 208.62,
+    "text": " and have different purchasing behaviors."
+  },
+  {
+    "start": 209.4,
+    "end": 211.54,
+    "text": " By segmenting your customers into different groups,"
+  },
+  {
+    "start": 211.82,
+    "end": 214.42,
+    "text": " you can more effectively provide marketing ads"
+  },
+  {
+    "start": 214.42,
+    "end": 216.85999999999999,
+    "text": " targeted for each group's particular interests."
+  },
+  {
+    "start": 217.57999999999998,
+    "end": 220.6,
+    "text": " Note that cluster analysis is also referred to as clustering."
+  },
+  {
+    "start": 220.6,
+    "end": 227.6,
+    "text": " Some other examples of cluster analysis are identifying areas of similar topography,"
+  },
+  {
+    "start": 227.6,
+    "end": 231.6,
+    "text": " such as desert region, grassy areas, mountains, etc.,"
+  },
+  {
+    "start": 231.6,
+    "end": 234.6,
+    "text": " categorizing different types of tissues from medical images,"
+  },
+  {
+    "start": 234.6,
+    "end": 240.6,
+    "text": " determining different groups of weather patterns, such as snowy, dry, monsoon,"
+  },
+  {
+    "start": 240.6,
+    "end": 245.6,
+    "text": " and discovering hot spots for different types of crime from police reports."
+  },
+  {
+    "start": 246.29999999999998,
+    "end": 253.38,
+    "text": " The goal in association analysis is to come up with a set of rules to capture associations between items or events."
+  },
+  {
+    "start": 254.01999999999998,
+    "end": 257.65999999999997,
+    "text": " The rules are used to determine when items or events occur together."
+  },
+  {
+    "start": 258.42,
+    "end": 263.52,
+    "text": " A common application of association analysis is known as market basket analysis,"
+  },
+  {
+    "start": 263.84,
+    "end": 267.15999999999997,
+    "text": " which is used to understand customer purchasing behavior."
+  },
+  {
+    "start": 267.94,
+    "end": 274.14,
+    "text": " For example, association analysis can reveal that banking customers who have CDs, or certificates of deposits,"
+  },
+  {
+    "start": 274.14,
+    "end": 279.03999999999996,
+    "text": " also tend to be interested in other investment vehicles such as money market accounts."
+  },
+  {
+    "start": 279.71999999999997,
+    "end": 282.06,
+    "text": " This information can be used for cross-selling."
+  },
+  {
+    "start": 282.76,
+    "end": 285.94,
+    "text": " If you advertise money market accounts to your customers with CDs,"
+  },
+  {
+    "start": 286.14,
+    "end": 288.36,
+    "text": " they are likely to open such an account."
+  },
+  {
+    "start": 290.34,
+    "end": 292.12,
+    "text": " According to data mining folklore,"
+  },
+  {
+    "start": 292.12,
+    "end": 296.26,
+    "text": " a supermarket chain used association analysis to discover a connection"
+  },
+  {
+    "start": 296.26,
+    "end": 298.68,
+    "text": " between two seemingly unrelated products."
+  },
+  {
+    "start": 299.34,
+    "end": 302.91999999999996,
+    "text": " They discovered that many customers who go to the store late on Sunday night"
+  },
+  {
+    "start": 302.92,
+    "end": 308.42,
+    "text": " to buy diapers also tend to buy beer. This information was then used to place beer and"
+  },
+  {
+    "start": 308.42,
+    "end": 314.02000000000004,
+    "text": " diapers close together, and they saw a jump in sales of both items. This is the famous diaper-beer"
+  },
+  {
+    "start": 314.02000000000004,
+    "end": 322.6,
+    "text": " connection. Some other applications of association analysis are recommending similar items based on"
+  },
+  {
+    "start": 322.6,
+    "end": 328.90000000000003,
+    "text": " the purchasing behavior or browsing histories of customers, finding items that are often purchased"
+  },
+  {
+    "start": 328.90000000000003,
+    "end": 333.82000000000005,
+    "text": " together, such as garden hoes and potting soil, and offer sales on these related items at the"
+  },
+  {
+    "start": 333.82000000000005,
+    "end": 339.64000000000004,
+    "text": " same time to drive sales of both items, identifying web pages that are often accessed together so"
+  },
+  {
+    "start": 339.64000000000004,
+    "end": 343.86,
+    "text": " that you can more efficiently offer up these related web pages at the same time."
+  },
+  {
+    "start": 345.58000000000004,
+    "end": 349.20000000000005,
+    "text": " We have now looked at the different categories of machine learning techniques."
+  },
+  {
+    "start": 349.84000000000003,
+    "end": 356.24,
+    "text": " They are classification, regression, cluster analysis, and association analysis. We have"
+  },
+  {
+    "start": 356.24,
+    "end": 363.52,
+    "text": " also seen some examples of each category. There is also another categorization of machine learning"
+  },
+  {
+    "start": 363.52,
+    "end": 369.92,
+    "text": " techniques, and that is supervised versus unsupervised approaches. In supervised approaches,"
+  },
+  {
+    "start": 370.16,
+    "end": 375.22,
+    "text": " the target, which is what the model is predicting, is provided. This is referred to as having"
+  },
+  {
+    "start": 375.22,
+    "end": 380.5,
+    "text": " labeled data because the target is labeled for every sample that you have in your data set."
+  },
+  {
+    "start": 381.46,
+    "end": 387.08,
+    "text": " Referring back to our example of predicting the weather category of sunny, windy, rainy, or cloudy,"
+  },
+  {
+    "start": 387.68,
+    "end": 391.66,
+    "text": " every sample in the data set is labeled as being one of these four categories."
+  },
+  {
+    "start": 392.38,
+    "end": 397.1,
+    "text": " So the data is labeled, and predicting the weather categories is a supervised task."
+  },
+  {
+    "start": 397.74,
+    "end": 401.5,
+    "text": " In general, classification and regression are supervised approaches."
+  },
+  {
+    "start": 403.26,
+    "end": 409.66,
+    "text": " In unsupervised approaches, on the other hand, the target that the model is predicting is unknown or unavailable."
+  },
+  {
+    "start": 410.28000000000003,
+    "end": 412.46000000000004,
+    "text": " This means that you have unlabeled data."
+  },
+  {
+    "start": 413.16,
+    "end": 417.70000000000005,
+    "text": " Going back to your cluster analysis example of segmenting customers into different groups,"
+  },
+  {
+    "start": 418.26000000000005,
+    "end": 421.34000000000003,
+    "text": " the samples in your data are not labeled with the correct group."
+  },
+  {
+    "start": 422.1,
+    "end": 425.62,
+    "text": " Instead, the segmentation is performed using a clustering technique"
+  },
+  {
+    "start": 425.62,
+    "end": 428.78000000000003,
+    "text": " to group items based on characteristics that they have in common."
+  },
+  {
+    "start": 429.14000000000004,
+    "end": 435.58000000000004,
+    "text": " Thus, the data is unlabeled, and the task of grouping customers into different segments is an unsupervised one."
+  },
+  {
+    "start": 436.46,
+    "end": 441.34,
+    "text": " In general, cluster analysis and association analysis are unsupervised approaches."
+  },
+  {
+    "start": 443.9,
+    "end": 447.74,
+    "text": " In summary, in this lecture, we looked at the different categories of machine learning"
+  },
+  {
+    "start": 447.74,
+    "end": 453.74,
+    "text": " techniques. We discussed classification, regression, cluster analysis, and association"
+  },
+  {
+    "start": 453.74,
+    "end": 463.58,
+    "text": " analysis. We also defined what supervised and unsupervised approaches are in machine learning."
+  }
+]

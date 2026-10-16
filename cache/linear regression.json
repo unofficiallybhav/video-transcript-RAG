@@ -1,0 +1,222 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.0,
+    "text": " Linear regression is a very common algorithm to build regression models."
+  },
+  {
+    "start": 5.0,
+    "end": 10.0,
+    "text": " After this video, you will be able to describe how linear regression works,"
+  },
+  {
+    "start": 10.0,
+    "end": 14.0,
+    "text": " discuss how least squares is used in linear regression,"
+  },
+  {
+    "start": 14.0,
+    "end": 18.0,
+    "text": " define simple and multiple linear regression."
+  },
+  {
+    "start": 18.0,
+    "end": 26.0,
+    "text": " A linear regression model captures the relationship between a numerical output and the input variables."
+  },
+  {
+    "start": 26.0,
+    "end": 32.0,
+    "text": " The relationship is modeled as a linear relationship, hence the linear in linear regression."
+  },
+  {
+    "start": 32.0,
+    "end": 38.0,
+    "text": " To see how linear regression works, let's take a look at an example from the iris flower"
+  },
+  {
+    "start": 38.0,
+    "end": 41.0,
+    "text": " dataset, which is a commonly used dataset for machine learning."
+  },
+  {
+    "start": 41.0,
+    "end": 47.0,
+    "text": " This dataset has samples of different species of iris flowers, along with measurements such"
+  },
+  {
+    "start": 47.0,
+    "end": 49.0,
+    "text": " as petal width and petal length."
+  },
+  {
+    "start": 49.0,
+    "end": 55.0,
+    "text": " Here we have a plot with petal width measurements in centimeters on the x-axis and petal length"
+  },
+  {
+    "start": 55.0,
+    "end": 60.46,
+    "text": " length measurements on the y-axis. Let's say that we want to predict pedal length based"
+  },
+  {
+    "start": 60.46,
+    "end": 67.46000000000001,
+    "text": " on pedal width. Then the regression task is this. Given a measurement for pedal width,"
+  },
+  {
+    "start": 67.46000000000001,
+    "end": 73.24000000000001,
+    "text": " predict the pedal length. We can build a linear regression model to capture this linear relationship"
+  },
+  {
+    "start": 73.24000000000001,
+    "end": 78.44,
+    "text": " between the input pedal width and the output pedal length. The linear relationship for"
+  },
+  {
+    "start": 78.44,
+    "end": 83.0,
+    "text": " these samples is shown as the red line on the plot."
+  },
+  {
+    "start": 83.0,
+    "end": 87.94,
+    "text": " From this example, we see that linear regression works by finding the best fitting straight"
+  },
+  {
+    "start": 87.94,
+    "end": 92.46000000000001,
+    "text": " line through the samples. This is called the regression line."
+  },
+  {
+    "start": 92.46000000000001,
+    "end": 98.0,
+    "text": " In the simple case with just one input variable, the regression line is simply a line. The"
+  },
+  {
+    "start": 98.0,
+    "end": 106.0,
+    "text": " equation for a line is y equals m times x plus b, where m determines the slope of the"
+  },
+  {
+    "start": 106.0,
+    "end": 112.74000000000001,
+    "text": " line, and b is the y-intercept, or where the line crosses the y-axis."
+  },
+  {
+    "start": 112.74000000000001,
+    "end": 118.64000000000001,
+    "text": " M and B are the parameters of the model. Training a linear regression model means adjusting"
+  },
+  {
+    "start": 118.64000000000001,
+    "end": 123.74000000000001,
+    "text": " these parameters to fit the regression line to the samples. The regression line can be"
+  },
+  {
+    "start": 123.74000000000001,
+    "end": 129.64000000000001,
+    "text": " determined using what's referred to as the least squares method. This plot illustrates"
+  },
+  {
+    "start": 129.64000000000001,
+    "end": 136.14000000000001,
+    "text": " how the least squares method works. The yellow dots are the data samples. The red line is"
+  },
+  {
+    "start": 136.14000000000001,
+    "end": 141.04000000000002,
+    "text": " the regression line, the straight line that goes through the samples. This line represents"
+  },
+  {
+    "start": 141.04,
+    "end": 145.42,
+    "text": " the model's prediction of the output, given the input."
+  },
+  {
+    "start": 145.42,
+    "end": 150.07999999999998,
+    "text": " Each green line indicates the distance of each sample from the regression line, so the"
+  },
+  {
+    "start": 150.07999999999998,
+    "end": 154.54,
+    "text": " green line represents the error between the prediction, which is the value of the red"
+  },
+  {
+    "start": 154.54,
+    "end": 158.94,
+    "text": " regression line, and the actual value of the sample."
+  },
+  {
+    "start": 158.94,
+    "end": 165.35999999999999,
+    "text": " The square of this distance is referred to as the residual associated with that sample."
+  },
+  {
+    "start": 165.35999999999999,
+    "end": 170.1,
+    "text": " The least squares method finds the regression line that makes the sum of the residuals as"
+  },
+  {
+    "start": 170.1,
+    "end": 175.88,
+    "text": " small as possible. In other words, we want to find the line that minimizes the sum of"
+  },
+  {
+    "start": 175.88,
+    "end": 181.72,
+    "text": " the squared errors of prediction. The goal of linear regression, then, is to find the"
+  },
+  {
+    "start": 181.72,
+    "end": 186.85999999999999,
+    "text": " best fitting straight line through the samples using the least squares method."
+  },
+  {
+    "start": 186.85999999999999,
+    "end": 191.48,
+    "text": " Once the regression model is built, we can use it to make predictions. For example, given"
+  },
+  {
+    "start": 191.48,
+    "end": 196.9,
+    "text": " a measurement of 1.5 centimeters for pedal width, the model would predict a value of"
+  },
+  {
+    "start": 196.9,
+    "end": 203.44,
+    "text": " 4.5 centimeters for petal length based on the regression line that it has constructed."
+  },
+  {
+    "start": 203.44,
+    "end": 208.08,
+    "text": " In linear regression, if there is only one input variable, then the task is referred"
+  },
+  {
+    "start": 208.08,
+    "end": 214.46,
+    "text": " to as simple linear regression. In cases with more than one input variables, then it is"
+  },
+  {
+    "start": 214.46,
+    "end": 220.36,
+    "text": " referred to as multiple linear regression. To summarize, linear regression captures the"
+  },
+  {
+    "start": 220.36,
+    "end": 225.82,
+    "text": " linear relationship between a numerical output and the input variables. The least-quarse"
+  },
+  {
+    "start": 225.82,
+    "end": 230.06,
+    "text": " method can be used to build a linear regression model by finding the best"
+  },
+  {
+    "start": 230.06,
+    "end": 233.57999999999998,
+    "text": " fitting line through the samples."
+  }
+]

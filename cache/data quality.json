@@ -1,0 +1,247 @@
+[
+  {
+    "start": 1.0,
+    "end": 5.0,
+    "text": " A very important part of data preparation is to assess the quality of your data."
+  },
+  {
+    "start": 5.0,
+    "end": 9.0,
+    "text": " We will look at some common data quality issues in this lecture."
+  },
+  {
+    "start": 9.0,
+    "end": 14.0,
+    "text": " After this video, you will be able to describe three data quality issues,"
+  },
+  {
+    "start": 14.0,
+    "end": 17.0,
+    "text": " name three reasons for poor data quality,"
+  },
+  {
+    "start": 17.0,
+    "end": 21.0,
+    "text": " and explain why data quality issues need to be addressed."
+  },
+  {
+    "start": 21.0,
+    "end": 23.0,
+    "text": " Real-world data is often very messy,"
+  },
+  {
+    "start": 23.0,
+    "end": 26.0,
+    "text": " so it's a given fact that you will need to clean your data"
+  },
+  {
+    "start": 26.0,
+    "end": 29.86,
+    "text": " by identifying and addressing many issues that affect the quality of your data."
+  },
+  {
+    "start": 30.44,
+    "end": 33.18,
+    "text": " Let's take a closer look at what these data quality issues are."
+  },
+  {
+    "start": 33.980000000000004,
+    "end": 37.0,
+    "text": " A very common data quality issue is missing data."
+  },
+  {
+    "start": 37.68,
+    "end": 41.76,
+    "text": " Recall that a sample in your data set typically contains several variables or features,"
+  },
+  {
+    "start": 42.18,
+    "end": 44.06,
+    "text": " like name, age, and income."
+  },
+  {
+    "start": 45.0,
+    "end": 48.34,
+    "text": " For some samples, some of these variables may not have a value."
+  },
+  {
+    "start": 48.84,
+    "end": 52.54,
+    "text": " These are referred to as missing values in the data."
+  },
+  {
+    "start": 52.54,
+    "end": 60.54,
+    "text": " Missing values are also referred to as N.A. for not available, so you will see N.A. and missing values used interchangeably."
+  },
+  {
+    "start": 60.54,
+    "end": 65.53999999999999,
+    "text": " You may have missing values in your data if you have an optional field in your dataset."
+  },
+  {
+    "start": 65.53999999999999,
+    "end": 70.53999999999999,
+    "text": " For example, the field age is often an optional field on a survey."
+  },
+  {
+    "start": 70.53999999999999,
+    "end": 74.53999999999999,
+    "text": " Also, many people may choose not to provide a response for income,"
+  },
+  {
+    "start": 74.53999999999999,
+    "end": 79.53999999999999,
+    "text": " and so you will end up with missing values for the variable income in your dataset."
+  },
+  {
+    "start": 79.54,
+    "end": 83.54,
+    "text": " In some cases, a variable may not be applicable to all cases."
+  },
+  {
+    "start": 83.54,
+    "end": 90.54,
+    "text": " For example, income might not be applicable to people who are retired or unemployed or to children."
+  },
+  {
+    "start": 90.54,
+    "end": 94.54,
+    "text": " So you will not have an entry for income in all of your samples."
+  },
+  {
+    "start": 94.54,
+    "end": 98.54,
+    "text": " You can also have missing values due to a data-collecting device that malfunctions,"
+  },
+  {
+    "start": 98.54,
+    "end": 102.54,
+    "text": " a network problem that affects how the data was transmitted,"
+  },
+  {
+    "start": 102.54,
+    "end": 106.54,
+    "text": " or something else that goes wrong during the data-collection process itself,"
+  },
+  {
+    "start": 106.54,
+    "end": 110.54,
+    "text": " or the process of transmitting the data or storing the data."
+  },
+  {
+    "start": 110.54,
+    "end": 117.54,
+    "text": " Duplicate data occurs when your data set has data objects that are duplicates or near duplicates of one another."
+  },
+  {
+    "start": 117.54,
+    "end": 123.54,
+    "text": " An example of this is when there are two different records for the same customer with different addresses."
+  },
+  {
+    "start": 123.54,
+    "end": 128.54000000000002,
+    "text": " This can come about, for example, if a customer's address has changed,"
+  },
+  {
+    "start": 128.54000000000002,
+    "end": 134.54000000000002,
+    "text": " but the second address was simply added to this customer's records instead of used to update the first address."
+  },
+  {
+    "start": 134.54,
+    "end": 138.54,
+    "text": " Duplicate data can occur when merging data from multiple sources."
+  },
+  {
+    "start": 138.54,
+    "end": 144.54,
+    "text": " Invalid or inconsistent data occurs when you have an impossible value for a variable."
+  },
+  {
+    "start": 144.54,
+    "end": 152.54,
+    "text": " Some common examples are when you have a six-digit zip code, the letters AB for a state abbreviation, or negative number for age."
+  },
+  {
+    "start": 152.54,
+    "end": 158.54,
+    "text": " These invalid data values can come about when there is a data entry error during data collection."
+  },
+  {
+    "start": 158.54,
+    "end": 168.54,
+    "text": " For example, if you allow people to type in their zip code and someone accidentally includes an extra digit to their five-digit zip code, then you will end up with an invalid six-digit zip code."
+  },
+  {
+    "start": 168.54,
+    "end": 177.54,
+    "text": " Noise refers to anything that can distort your data. Noise can be introduced during the data collection process or data transmission process."
+  },
+  {
+    "start": 177.54,
+    "end": 184.54,
+    "text": " An example is buzzing in the background when an audio message is recorded due to background noise or a faulty microphone."
+  },
+  {
+    "start": 184.54,
+    "end": 189.22,
+    "text": " Another example is an overly bright image due to an incorrect light exposure setting."
+  },
+  {
+    "start": 190.22,
+    "end": 196.6,
+    "text": " An outlier is a data sample with values that are considerably different than the rest of the other data samples in the data set."
+  },
+  {
+    "start": 197.45999999999998,
+    "end": 205.73999999999998,
+    "text": " An example scenario that can create outliers is when there is a sense of failure that causes values being recorded to be much higher or lower than normal."
+  },
+  {
+    "start": 206.44,
+    "end": 209.34,
+    "text": " In this case, you want to remove the outliers from your data."
+  },
+  {
+    "start": 209.34,
+    "end": 214.78,
+    "text": " data. In other applications, however, such as fraud detection, outliers are the important"
+  },
+  {
+    "start": 214.78,
+    "end": 220.06,
+    "text": " samples that should be examined more closely. So, depending on the application, outliers"
+  },
+  {
+    "start": 220.06,
+    "end": 224.38,
+    "text": " may need to be removed or be kept for further analysis."
+  },
+  {
+    "start": 224.38,
+    "end": 229.3,
+    "text": " If you simply ignore these data quality issues, any analysis that is performed will produce"
+  },
+  {
+    "start": 229.3,
+    "end": 235.14000000000001,
+    "text": " misleading results. In addition, some implementations of analysis techniques cannot handle some"
+  },
+  {
+    "start": 235.14000000000001,
+    "end": 239.8,
+    "text": " of these problems, such as missing values. So problems that we've discussed in this"
+  },
+  {
+    "start": 239.8,
+    "end": 245.0,
+    "text": " lecture need to be addressed before any meaningful analysis can be performed. We will discuss"
+  },
+  {
+    "start": 245.0,
+    "end": 247.9,
+    "text": " some techniques for handling data quality issues in the next lecture."
+  }
+]

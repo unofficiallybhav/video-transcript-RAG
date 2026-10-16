@@ -1,0 +1,242 @@
+[
+  {
+    "start": 0.88,
+    "end": 5.12,
+    "text": " What are the steps in the machine learning process? We will discuss those in this lecture."
+  },
+  {
+    "start": 6.72,
+    "end": 12.56,
+    "text": " After this video, you will be able to identify the steps in the machine learning process"
+  },
+  {
+    "start": 12.56,
+    "end": 15.36,
+    "text": " and discuss why the machine learning process is iterative."
+  },
+  {
+    "start": 17.28,
+    "end": 20.56,
+    "text": " This diagram illustrates the steps in the machine learning process."
+  },
+  {
+    "start": 21.2,
+    "end": 24.560000000000002,
+    "text": " In this lecture, we will cover an overview of these steps."
+  },
+  {
+    "start": 24.560000000000002,
+    "end": 27.6,
+    "text": " In the next lecture, we will cover each step in more detail."
+  },
+  {
+    "start": 27.6,
+    "end": 33.36,
+    "text": " It should be kept in mind that all of these steps need to be carried out with a clear"
+  },
+  {
+    "start": 33.36,
+    "end": 35.22,
+    "text": " purpose in mind."
+  },
+  {
+    "start": 35.22,
+    "end": 39.84,
+    "text": " That is, the problem or opportunity that is being addressed must be defined with clearly"
+  },
+  {
+    "start": 39.84,
+    "end": 42.2,
+    "text": " stated goals and objectives."
+  },
+  {
+    "start": 42.2,
+    "end": 47.18000000000001,
+    "text": " For example, the purpose of a project may be to study customer purchasing behavior to"
+  },
+  {
+    "start": 47.18000000000001,
+    "end": 52.84,
+    "text": " come up with a more effective marketing strategy in order to increase sales revenue."
+  },
+  {
+    "start": 52.84,
+    "end": 58.160000000000004,
+    "text": " The purpose behind the project will drive the machine learning process."
+  },
+  {
+    "start": 58.160000000000004,
+    "end": 62.160000000000004,
+    "text": " The first step in the machine learning process is to get all available data related to the"
+  },
+  {
+    "start": 62.160000000000004,
+    "end": 63.6,
+    "text": " problem at hand."
+  },
+  {
+    "start": 63.6,
+    "end": 69.46000000000001,
+    "text": " Here, we need to identify all data sources, collect the data, and finally integrate data"
+  },
+  {
+    "start": 69.46000000000001,
+    "end": 72.56,
+    "text": " from these multiple sources."
+  },
+  {
+    "start": 72.56,
+    "end": 77.26,
+    "text": " The next step in the machine learning process is to prepare the data."
+  },
+  {
+    "start": 77.26,
+    "end": 83.72,
+    "text": " This step is further divided into two parts, explored data and pre-processed data."
+  },
+  {
+    "start": 83.72,
+    "end": 89.08000000000001,
+    "text": " The first part of data preparation involves preliminary exploration of the data to understand"
+  },
+  {
+    "start": 89.08000000000001,
+    "end": 92.42,
+    "text": " the nature of the data that we have to work with."
+  },
+  {
+    "start": 92.42,
+    "end": 98.5,
+    "text": " Things we want to understand about the data are its characteristics, format, and quality."
+  },
+  {
+    "start": 98.5,
+    "end": 103.12,
+    "text": " A good understanding of the data leads to a more informed analysis and a more successful"
+  },
+  {
+    "start": 103.12,
+    "end": 105.62,
+    "text": " outcome."
+  },
+  {
+    "start": 105.62,
+    "end": 110.94,
+    "text": " Since we know more about the data through exploratory analysis, the next part is pre-processing"
+  },
+  {
+    "start": 110.94,
+    "end": 113.26,
+    "text": " of the data for analysis."
+  },
+  {
+    "start": 113.26,
+    "end": 118.42,
+    "text": " This includes cleaning data, selecting the variables to use, and transforming data to"
+  },
+  {
+    "start": 118.42,
+    "end": 122.96000000000001,
+    "text": " make the data more suitable for analysis in the next step."
+  },
+  {
+    "start": 122.96000000000001,
+    "end": 126.72,
+    "text": " The prepared data then would be passed on to the analysis step."
+  },
+  {
+    "start": 126.72,
+    "end": 131.18,
+    "text": " This step involves selecting the analytical techniques to use, building a model using"
+  },
+  {
+    "start": 131.18,
+    "end": 135.1,
+    "text": " the data, and assessing the results."
+  },
+  {
+    "start": 135.1,
+    "end": 138.98,
+    "text": " Step 4 in the machine learning process is to communicate results."
+  },
+  {
+    "start": 138.98,
+    "end": 143.79999999999998,
+    "text": " This includes evaluating the results with respect to the goals set for the project,"
+  },
+  {
+    "start": 143.79999999999998,
+    "end": 149.74,
+    "text": " presenting the results in an easy-to-understand way, and communicating the results to others."
+  },
+  {
+    "start": 149.74,
+    "end": 152.35999999999999,
+    "text": " The last step is to apply the results."
+  },
+  {
+    "start": 152.35999999999999,
+    "end": 155.54,
+    "text": " This brings us back to the purpose of the project."
+  },
+  {
+    "start": 155.54,
+    "end": 160.48,
+    "text": " How can the insights from our analysis be used to provide effective marketing to increase"
+  },
+  {
+    "start": 160.48,
+    "end": 162.44,
+    "text": " sales revenue?"
+  },
+  {
+    "start": 162.44,
+    "end": 168.84,
+    "text": " Finding actions from insights gained from analysis is the main focus of the ACT step."
+  },
+  {
+    "start": 168.84,
+    "end": 172.68,
+    "text": " Note that the machine learning process is a very iterative one."
+  },
+  {
+    "start": 172.68,
+    "end": 177.66,
+    "text": " Findings from one step may require a previous step to be repeated with new information."
+  },
+  {
+    "start": 177.66,
+    "end": 182.52,
+    "text": " For example, during the PREPARE step, we may find some data quality issues that may require"
+  },
+  {
+    "start": 182.52,
+    "end": 187.7,
+    "text": " us to go back to the ACQUIRE step to address some issues with data collection or to get"
+  },
+  {
+    "start": 187.7,
+    "end": 191.7,
+    "text": " additional data that we didn't include in the first go-round."
+  },
+  {
+    "start": 191.70000000000002,
+    "end": 197.04000000000002,
+    "text": " Each step may also require several iterations. For example, it is common to try different"
+  },
+  {
+    "start": 197.04000000000002,
+    "end": 202.52,
+    "text": " analysis techniques in the analyze step in order to get reasonable results from the model."
+  },
+  {
+    "start": 202.52,
+    "end": 207.32000000000002,
+    "text": " So it is important to recognize that this is a highly iterative process and not a linear"
+  },
+  {
+    "start": 207.32000000000002,
+    "end": 207.46,
+    "text": " one."
+  }
+]

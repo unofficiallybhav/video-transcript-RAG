@@ -1,0 +1,632 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.0,
+    "text": " Parallel computation is at the heart of big data computing."
+  },
+  {
+    "start": 4.0,
+    "end": 7.0,
+    "text": " However, to specify what becomes parallel,"
+  },
+  {
+    "start": 7.0,
+    "end": 10.0,
+    "text": " we usually think of a conceptual model of parallel computation,"
+  },
+  {
+    "start": 10.0,
+    "end": 13.0,
+    "text": " often called a programming model."
+  },
+  {
+    "start": 13.0,
+    "end": 16.0,
+    "text": " A parallel programming model is a way to specify abstractly"
+  },
+  {
+    "start": 16.0,
+    "end": 19.0,
+    "text": " how a parallel program will run."
+  },
+  {
+    "start": 19.0,
+    "end": 21.0,
+    "text": " Naturally, for a program to be parallel,"
+  },
+  {
+    "start": 21.0,
+    "end": 26.0,
+    "text": " there must be a number of concurrently operating processes."
+  },
+  {
+    "start": 26.0,
+    "end": 29.0,
+    "text": " But how do these processes communicate and exchange data?"
+  },
+  {
+    "start": 29.0,
+    "end": 33.0,
+    "text": " How do they decide when to communicate with each other?"
+  },
+  {
+    "start": 33.0,
+    "end": 36.0,
+    "text": " Further, what exactly is done in parallel?"
+  },
+  {
+    "start": 36.0,
+    "end": 44.0,
+    "text": " To think of the first question, two processors may communicate data by sharing memory."
+  },
+  {
+    "start": 44.0,
+    "end": 52.0,
+    "text": " Indeed, there are architectures in which all memory in multiple machines can be made to virtually look like one large addressable memory space."
+  },
+  {
+    "start": 52.0,
+    "end": 58.0,
+    "text": " However, two processors may also communicate by passing messages to one another,"
+  },
+  {
+    "start": 58.0,
+    "end": 64.76,
+    "text": " either directly from one process to another, or through a common message-curring pipe, often called a message bus."
+  },
+  {
+    "start": 66.16,
+    "end": 68.94,
+    "text": " The second question can also have multiple answers."
+  },
+  {
+    "start": 70.14,
+    "end": 75.86,
+    "text": " Two of the most common ways of achieving parallelism are task parallelism and data parallelism."
+  },
+  {
+    "start": 76.48,
+    "end": 83.4,
+    "text": " In task parallelism, a large task can be decomposed into multiple subtasks, each of which can run concurrently."
+  },
+  {
+    "start": 83.4,
+    "end": 90.28,
+    "text": " In data parallelism, the data can be partitioned into many smaller fragments and operation"
+  },
+  {
+    "start": 90.28,
+    "end": 93.78,
+    "text": " can run on each partition independent of the others."
+  },
+  {
+    "start": 93.78,
+    "end": 99.02000000000001,
+    "text": " Typically, these partial operations are then synchronized and partially processed data"
+  },
+  {
+    "start": 99.02000000000001,
+    "end": 102.88000000000001,
+    "text": " combined to produce a full answer."
+  },
+  {
+    "start": 102.88000000000001,
+    "end": 108.22,
+    "text": " Many parallel data management systems operate in a partitioned data parallel manner."
+  },
+  {
+    "start": 108.22,
+    "end": 112.52000000000001,
+    "text": " We need to remember that task parallelism is somewhat independent of data parallelism"
+  },
+  {
+    "start": 112.52,
+    "end": 116.39999999999999,
+    "text": " and it is possible to have both forms of parallelism in a programming model."
+  },
+  {
+    "start": 117.36,
+    "end": 120.22,
+    "text": " It is important to emphasize the issue of a programming model"
+  },
+  {
+    "start": 120.22,
+    "end": 124.52,
+    "text": " should not be confused with the issue of a programming language."
+  },
+  {
+    "start": 125.19999999999999,
+    "end": 127.89999999999999,
+    "text": " A programming language is independent of the programming model,"
+  },
+  {
+    "start": 128.22,
+    "end": 132.18,
+    "text": " and therefore a programming model can be implemented in several different languages."
+  },
+  {
+    "start": 132.85999999999999,
+    "end": 137.18,
+    "text": " As I mentioned, the programming model we are going to consider is BSP."
+  },
+  {
+    "start": 138.34,
+    "end": 141.4,
+    "text": " BSP wasn't initially created for graph computation."
+  },
+  {
+    "start": 141.4,
+    "end": 147.86,
+    "text": " It was thought of as a parallel computing model that will bridge the gap between software models of parallel computation"
+  },
+  {
+    "start": 147.86,
+    "end": 150.4,
+    "text": " and hardware capabilities for supporting parallelism."
+  },
+  {
+    "start": 151.54000000000002,
+    "end": 153.84,
+    "text": " The basic idea of BSP is as follows."
+  },
+  {
+    "start": 155.26,
+    "end": 156.5,
+    "text": " There are a number of processors."
+  },
+  {
+    "start": 157.76,
+    "end": 161.92000000000002,
+    "text": " Each processor can perform local computation using its own local memory."
+  },
+  {
+    "start": 163.06,
+    "end": 168.92000000000002,
+    "text": " There is a router, which can serve to pass a message from any processor to any other."
+  },
+  {
+    "start": 169.78000000000003,
+    "end": 172.28000000000003,
+    "text": " When one pair of nodes are exchanging messages,"
+  },
+  {
+    "start": 172.98000000000002,
+    "end": 175.42000000000002,
+    "text": " another third node can still perform computation."
+  },
+  {
+    "start": 177.4,
+    "end": 182.8,
+    "text": " There is a facility that can synchronize the state of all or a subset of processors."
+  },
+  {
+    "start": 183.60000000000002,
+    "end": 188.34000000000003,
+    "text": " This synchronize may either happen periodically at intervals of L time units,"
+  },
+  {
+    "start": 189.10000000000002,
+    "end": 193.76000000000002,
+    "text": " or there may be another way of specifying when the synchronization is going to happen."
+  },
+  {
+    "start": 193.76,
+    "end": 199.26,
+    "text": " But when it does, all processors affected by it will come to a consistent state."
+  },
+  {
+    "start": 200.26,
+    "end": 204.79999999999998,
+    "text": " When synchronization is performed, a fresh round of computation can start."
+  },
+  {
+    "start": 205.34,
+    "end": 209.22,
+    "text": " We call this synchronization point barrier synchronization,"
+  },
+  {
+    "start": 209.66,
+    "end": 215.92,
+    "text": " because all executing processes must reach this barrier point before the next step of processing can continue."
+  },
+  {
+    "start": 216.76,
+    "end": 220.98,
+    "text": " A BSP program is broken up into a sequence of super steps."
+  },
+  {
+    "start": 220.98000000000002,
+    "end": 227.48000000000002,
+    "text": " In each superstep, each processor will get the data if needed, perform its computation"
+  },
+  {
+    "start": 227.48000000000002,
+    "end": 232.48000000000002,
+    "text": " if needed, and then exchange data with the right partner."
+  },
+  {
+    "start": 232.48000000000002,
+    "end": 236.36,
+    "text": " Once all the nodes are done, the system helps to synchronize."
+  },
+  {
+    "start": 236.36,
+    "end": 238.8,
+    "text": " Then the next round starts."
+  },
+  {
+    "start": 238.8,
+    "end": 243.12,
+    "text": " Each processor can determine if it needs to compute or exchange data."
+  },
+  {
+    "start": 243.12,
+    "end": 246.74,
+    "text": " If not, it will make itself inactive."
+  },
+  {
+    "start": 246.74,
+    "end": 252.4,
+    "text": " If required later, a processor can be woken up to be active again."
+  },
+  {
+    "start": 252.4,
+    "end": 257.28000000000003,
+    "text": " When all processors are inactive, the computation stops."
+  },
+  {
+    "start": 257.28000000000003,
+    "end": 261.82,
+    "text": " In applying BSP model to graphs, we make a few assumptions."
+  },
+  {
+    "start": 261.82,
+    "end": 266.06,
+    "text": " We assume that a processor is synonymous with a vertex."
+  },
+  {
+    "start": 266.06,
+    "end": 274.16,
+    "text": " So a processor can only send messages to or receive messages from its neighboring processors."
+  },
+  {
+    "start": 274.16,
+    "end": 281.36,
+    "text": " We also assume a vertex has an ID and possibly a complex value, and an edge may also have"
+  },
+  {
+    "start": 281.36,
+    "end": 283.6,
+    "text": " an ID and a value."
+  },
+  {
+    "start": 283.6,
+    "end": 288.64000000000004,
+    "text": " Each vertex knows which edges it is connected to."
+  },
+  {
+    "start": 288.64000000000004,
+    "end": 293.14000000000004,
+    "text": " We can now think of a computation as a vertex-centric task."
+  },
+  {
+    "start": 293.14000000000004,
+    "end": 297.62,
+    "text": " We'll shortly show what this means."
+  },
+  {
+    "start": 297.62,
+    "end": 304.14000000000004,
+    "text": " In a now-famous paper from Google, this programming model was called Think Like a Vertex, where"
+  },
+  {
+    "start": 304.14,
+    "end": 309.94,
+    "text": " to think like a vertex, we need to know what a vertex can do. Here is a list of actions"
+  },
+  {
+    "start": 309.94,
+    "end": 318.03999999999996,
+    "text": " a vertex can take. The first one is easy. A vertex can find its own identifier. The second"
+  },
+  {
+    "start": 318.03999999999996,
+    "end": 323.84,
+    "text": " operation is to get or set the value of the node. This operation may be a little involved"
+  },
+  {
+    "start": 323.84,
+    "end": 328.53999999999996,
+    "text": " if the value is a complex data object. For our purposes, we will assume the value is"
+  },
+  {
+    "start": 328.54,
+    "end": 335.48,
+    "text": " a scalar. Next, a node can ask for its own edges. The result of the operation is a set"
+  },
+  {
+    "start": 335.48,
+    "end": 342.28000000000003,
+    "text": " of edge objects. A node may also count its edges. Since we are referring to outgoing"
+  },
+  {
+    "start": 342.28000000000003,
+    "end": 348.66,
+    "text": " edges throughout, this is the out degree of the vertex. Recognize that this means a vertex"
+  },
+  {
+    "start": 348.66,
+    "end": 356.08000000000004,
+    "text": " does not natively have access to its incident nodes. However, it does have control of the"
+  },
+  {
+    "start": 356.08,
+    "end": 362.76,
+    "text": " outgoing edges. So it can get and set the edge values. There may be two different ways"
+  },
+  {
+    "start": 362.76,
+    "end": 368.8,
+    "text": " of specifying an edge. The edge may have an ID that the node can get. Possibly more commonly,"
+  },
+  {
+    "start": 368.8,
+    "end": 375.68,
+    "text": " an edge is identified the vertex it targets. So in our diagram, V1 will ask for the edge"
+  },
+  {
+    "start": 375.68,
+    "end": 383.38,
+    "text": " targeting V4. So in a situation like V3 and V5, where there are multiple edges between"
+  },
+  {
+    "start": 383.38,
+    "end": 393.5,
+    "text": " v3 and v5, the source v3 can ask for the values of all edges going to v5. The update operation"
+  },
+  {
+    "start": 393.5,
+    "end": 400.98,
+    "text": " can add or remove an edge of a vertex. Finally, since the vertices are processors, they can"
+  },
+  {
+    "start": 400.98,
+    "end": 406.7,
+    "text": " start or stop computing. Typically, a node wakes up if it receives a message from another"
+  },
+  {
+    "start": 406.7,
+    "end": 414.62,
+    "text": " node. Now in comparison to a vertex, an edge can do far less. It can get its own ID if the system"
+  },
+  {
+    "start": 414.62,
+    "end": 421.64,
+    "text": " allows edge IDs. It can set and retrieve its own value. And it can get the ID of the node it's"
+  },
+  {
+    "start": 421.64,
+    "end": 427.78,
+    "text": " pointing to. That's it. Now we still have not defined how to think like a vertex. That's what"
+  },
+  {
+    "start": 427.78,
+    "end": 434.65999999999997,
+    "text": " we'll do next using an example that we have seen several times before. It's Dijkstra's single"
+  },
+  {
+    "start": 434.66,
+    "end": 442.04,
+    "text": " source shortest path, SSSP, algorithm. We have seen this algorithm before, but now we'll show"
+  },
+  {
+    "start": 442.04,
+    "end": 449.72,
+    "text": " how to compute it in a parallel setting using BSP. Here is the edge value, that's the weight"
+  },
+  {
+    "start": 449.72,
+    "end": 458.20000000000005,
+    "text": " of the edge. This is known before the algorithm starts. Each vertex runs the exact same routine"
+  },
+  {
+    "start": 458.2,
+    "end": 469.76,
+    "text": " concurrently. So each vertex asks, one, is it super step 0? Two, if yes, then if this"
+  },
+  {
+    "start": 469.76,
+    "end": 476.14,
+    "text": " is the source vertex, it sets the value to 0. Else, it sets the value to infinity, which"
+  },
+  {
+    "start": 476.14,
+    "end": 482.03999999999996,
+    "text": " is a large number. The source vertex propagates its edge value to the nodes at the other end"
+  },
+  {
+    "start": 482.04,
+    "end": 485.26000000000005,
+    "text": " of the edges, just the source vertex."
+  },
+  {
+    "start": 485.26000000000005,
+    "end": 488.22,
+    "text": " All other vertices are quiet."
+  },
+  {
+    "start": 488.22,
+    "end": 491.06,
+    "text": " The propagation process works like this."
+  },
+  {
+    "start": 491.06,
+    "end": 495.6,
+    "text": " A vertex gets its own value, which for the source vertex is 0."
+  },
+  {
+    "start": 495.6,
+    "end": 498.02000000000004,
+    "text": " It gets its edges."
+  },
+  {
+    "start": 498.02000000000004,
+    "end": 501.84000000000003,
+    "text": " For each edge, it gets the value of the edge,"
+  },
+  {
+    "start": 501.84000000000003,
+    "end": 505.84000000000003,
+    "text": " adds it to its own value, and sends the result"
+  },
+  {
+    "start": 505.84000000000003,
+    "end": 508.0,
+    "text": " to the end points of the edge."
+  },
+  {
+    "start": 508.0,
+    "end": 511.72,
+    "text": " The blue numbers indicate that the message is sent."
+  },
+  {
+    "start": 511.72,
+    "end": 513.0600000000001,
+    "text": " All vertices vote to halt."
+  },
+  {
+    "start": 513.36,
+    "end": 517.14,
+    "text": " That is, they now have hit a synchronization barrier."
+  },
+  {
+    "start": 518.2,
+    "end": 521.6800000000001,
+    "text": " Notice that the receiving nodes do not look at the messages yet."
+  },
+  {
+    "start": 522.44,
+    "end": 527.86,
+    "text": " It's the system's job to ensure that the messages are available to these nodes at the next super step."
+  },
+  {
+    "start": 529.22,
+    "end": 533.34,
+    "text": " All nodes who have received messages wake up and read the messages."
+  },
+  {
+    "start": 533.9,
+    "end": 537.76,
+    "text": " If a node receives multiple messages, it picks the minimum."
+  },
+  {
+    "start": 537.76,
+    "end": 543.0,
+    "text": " In our case, the two active nodes have received only one value each."
+  },
+  {
+    "start": 543.86,
+    "end": 547.9399999999999,
+    "text": " We have, for the sake of convenience, colored the processed edges in yellow."
+  },
+  {
+    "start": 548.58,
+    "end": 551.28,
+    "text": " This is just for visualization purposes in this example."
+  },
+  {
+    "start": 552.3199999999999,
+    "end": 556.74,
+    "text": " Now, it compares this minimum value to its own value."
+  },
+  {
+    "start": 557.3,
+    "end": 563.34,
+    "text": " And if its own value is greater, it sets its own value with the minimum value."
+  },
+  {
+    "start": 563.96,
+    "end": 569.46,
+    "text": " In our case, both nodes set their value to that of the incoming message."
+  },
+  {
+    "start": 570.4,
+    "end": 572.84,
+    "text": " The same propagation routine works again."
+  },
+  {
+    "start": 573.32,
+    "end": 580.48,
+    "text": " So, each node computes the new distance and sends the message along an edge to the other endpoint."
+  },
+  {
+    "start": 581.24,
+    "end": 581.88,
+    "text": " Then halts."
+  },
+  {
+    "start": 582.72,
+    "end": 586.0,
+    "text": " The same step is repeated in the next super step."
+  },
+  {
+    "start": 587.1600000000001,
+    "end": 590.8000000000001,
+    "text": " At this point, the nodes have updated their values."
+  },
+  {
+    "start": 591.6400000000001,
+    "end": 594.94,
+    "text": " the node with the value 6 has received a message"
+  },
+  {
+    "start": 594.94,
+    "end": 598.0000000000001,
+    "text": " just along one of the three edges incident on it."
+  },
+  {
+    "start": 599.0200000000001,
+    "end": 602.3800000000001,
+    "text": " Continuing, at the end of super step 2,"
+  },
+  {
+    "start": 602.98,
+    "end": 607.4000000000001,
+    "text": " all nodes are ready to receive messages from all their incident edges."
+  },
+  {
+    "start": 608.58,
+    "end": 613.2,
+    "text": " The node with the value 6 received a value which is lower than its current value."
+  },
+  {
+    "start": 613.7400000000001,
+    "end": 617.1400000000001,
+    "text": " Now the active nodes have no more messages to send."
+  },
+  {
+    "start": 617.84,
+    "end": 619.96,
+    "text": " So each vertex votes to halt."
+  },
+  {
+    "start": 620.8000000000001,
+    "end": 626.5000000000001,
+    "text": " The vertex ID and the value are read out from each vertex, and then the process stops."
+  },
+  {
+    "start": 627.0000000000001,
+    "end": 641.6800000000001,
+    "text": " If these nodes are on different machines of a cluster, the system will rely on the underlying platform like YARN or Spark's underlying infrastructure to ensure that the edges going across machines can send and receive messages effectively."
+  },
+  {
+    "start": 642.72,
+    "end": 647.08,
+    "text": " This should give you a sense of the speed of this process for a large-scale network."
+  },
+  {
+    "start": 650.8000000000001,
+    "end": 652.8000000000001,
+    "text": " You"
+  }
+]

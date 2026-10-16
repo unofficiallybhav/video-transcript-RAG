@@ -1,0 +1,322 @@
+[
+  {
+    "start": 0.64,
+    "end": 5.4,
+    "text": " Let's talk about what it means to build a classification model and how building a model"
+  },
+  {
+    "start": 5.4,
+    "end": 11.72,
+    "text": " differs from applying a model. After this video, you will be able to discuss what building"
+  },
+  {
+    "start": 11.72,
+    "end": 16.6,
+    "text": " a classification model means, explain the difference between building and applying a"
+  },
+  {
+    "start": 16.6,
+    "end": 22.0,
+    "text": " model, and summarize why the parameters of a model need to be adjusted."
+  },
+  {
+    "start": 22.0,
+    "end": 27.0,
+    "text": " A machine learning model is a mathematical model. In the general sense, this means that"
+  },
+  {
+    "start": 27.0,
+    "end": 32.04,
+    "text": " the model has parameters and uses equations to determine the relationship between its"
+  },
+  {
+    "start": 32.04,
+    "end": 34.56,
+    "text": " inputs and outputs."
+  },
+  {
+    "start": 34.56,
+    "end": 39.7,
+    "text": " The parameters are used by the model to modify the inputs to generate the outputs."
+  },
+  {
+    "start": 39.7,
+    "end": 46.120000000000005,
+    "text": " The model adjusts its parameters in order to correct or refine this input-output relationship."
+  },
+  {
+    "start": 46.120000000000005,
+    "end": 49.7,
+    "text": " Here's an example of a simple model."
+  },
+  {
+    "start": 49.7,
+    "end": 52.620000000000005,
+    "text": " This mathematical model represents a line."
+  },
+  {
+    "start": 52.620000000000005,
+    "end": 60.36000000000001,
+    "text": " y is the output, x is the input, m determines the slope of the line, and b determines the"
+  },
+  {
+    "start": 60.36000000000001,
+    "end": 68.86000000000001,
+    "text": " y-intercept, or where the line crosses the y-axis. m and b are the model's parameters."
+  },
+  {
+    "start": 68.86000000000001,
+    "end": 76.46000000000001,
+    "text": " Given a specific value for x, the model uses its parameters along with x to determine y."
+  },
+  {
+    "start": 76.46000000000001,
+    "end": 82.64000000000001,
+    "text": " By adjusting the values for the parameters m and b, the model can adjust how the input"
+  },
+  {
+    "start": 82.64000000000001,
+    "end": 89.98,
+    "text": " x maps to the output y. Here we see how the output y changes for the same value of input"
+  },
+  {
+    "start": 89.98,
+    "end": 98.58000000000001,
+    "text": " x when parameter b changes. Recall that b is the y-intercept, or where the line crosses"
+  },
+  {
+    "start": 98.58000000000001,
+    "end": 106.14000000000001,
+    "text": " the y-axis. The value of b is positive 1 for the red line and negative 1 for the blue"
+  },
+  {
+    "start": 106.14,
+    "end": 114.42,
+    "text": " line. For the input x equals 1, the value of y is 3 for the red line, as indicated by"
+  },
+  {
+    "start": 114.42,
+    "end": 121.42,
+    "text": " the red arrow. For the blue line, when the parameter b changes from positive 1 to negative"
+  },
+  {
+    "start": 121.42,
+    "end": 129.3,
+    "text": " 1, for x equals 1, the value of y is 1, as indicated by the blue arrow. So we see that"
+  },
+  {
+    "start": 129.3,
+    "end": 136.46,
+    "text": " But with just a simple change in one model parameter, the input-to-output mapping changes."
+  },
+  {
+    "start": 136.46,
+    "end": 139.52,
+    "text": " A machine learning model works in a similar way."
+  },
+  {
+    "start": 139.52,
+    "end": 145.48000000000002,
+    "text": " It maps input values to output values, and adjusts the parameters in order to correct"
+  },
+  {
+    "start": 145.48000000000002,
+    "end": 149.20000000000002,
+    "text": " or refine this input-output mapping."
+  },
+  {
+    "start": 149.20000000000002,
+    "end": 154.60000000000002,
+    "text": " The parameters of a machine learning model are adjusted, or estimated, from the data"
+  },
+  {
+    "start": 154.60000000000002,
+    "end": 157.42000000000002,
+    "text": " using a learning algorithm."
+  },
+  {
+    "start": 157.42000000000002,
+    "end": 161.28000000000003,
+    "text": " This in essence is what is involved in building a model."
+  },
+  {
+    "start": 161.28000000000003,
+    "end": 168.12,
+    "text": " This process is referred to by many terms, such as model building, model creation, model"
+  },
+  {
+    "start": 168.12,
+    "end": 171.8,
+    "text": " training and model fitting."
+  },
+  {
+    "start": 171.8,
+    "end": 176.3,
+    "text": " In building a model, we want to adjust the parameters in order to reduce the model's"
+  },
+  {
+    "start": 176.3,
+    "end": 177.60000000000002,
+    "text": " error."
+  },
+  {
+    "start": 177.60000000000002,
+    "end": 183.58,
+    "text": " In the case of supervised tasks such as classification, this means getting the model's outputs to"
+  },
+  {
+    "start": 183.58,
+    "end": 188.68,
+    "text": " match the targets or desired outputs as much as possible."
+  },
+  {
+    "start": 188.68,
+    "end": 194.26000000000002,
+    "text": " Since the classification task is to predict the correct category or class given the input"
+  },
+  {
+    "start": 194.26000000000002,
+    "end": 200.34,
+    "text": " variables, you can think of the classification problem visually as carving up the input space"
+  },
+  {
+    "start": 200.34,
+    "end": 204.88000000000002,
+    "text": " into regions corresponding to the different class labels."
+  },
+  {
+    "start": 204.88000000000002,
+    "end": 211.04000000000002,
+    "text": " In this diagram, for example, the classification model needs to form the boundaries to define"
+  },
+  {
+    "start": 211.04,
+    "end": 217.94,
+    "text": " the regions separating red triangles from blue diamonds, from green circles, from yellow"
+  },
+  {
+    "start": 217.94,
+    "end": 225.16,
+    "text": " squares. In this example, if a sample falls within the region in the upper right corner,"
+  },
+  {
+    "start": 225.16,
+    "end": 231.35999999999999,
+    "text": " it will be classified as a blue diamond. Classification decisions are based on these regions, and"
+  },
+  {
+    "start": 231.35999999999999,
+    "end": 237.22,
+    "text": " the regions are defined by the boundaries, as indicated by the dashed lines in the diagram."
+  },
+  {
+    "start": 237.22,
+    "end": 241.68,
+    "text": " So these boundaries are referred to as decision boundaries."
+  },
+  {
+    "start": 241.68,
+    "end": 246.54,
+    "text": " Building a classification, then, means using the data to adjust the model's parameters"
+  },
+  {
+    "start": 246.54,
+    "end": 251.96,
+    "text": " in order to form decision boundaries to separate the target classes."
+  },
+  {
+    "start": 251.96,
+    "end": 257.48,
+    "text": " Note that the term classifier is often used to mean classification model."
+  },
+  {
+    "start": 257.48,
+    "end": 263.18,
+    "text": " In general, building a classification model, as well as other machine learning models,"
+  },
+  {
+    "start": 263.18,
+    "end": 265.86,
+    "text": " involves two phases."
+  },
+  {
+    "start": 265.86,
+    "end": 271.08000000000004,
+    "text": " The first is the training phase, in which the model is constructed and its parameters"
+  },
+  {
+    "start": 271.08000000000004,
+    "end": 277.08000000000004,
+    "text": " adjusted using what is referred to as training data. Training data is the dataset used to"
+  },
+  {
+    "start": 277.08000000000004,
+    "end": 284.04,
+    "text": " train or create the model. The second is the testing phase. This is where the learned model"
+  },
+  {
+    "start": 284.04,
+    "end": 289.8,
+    "text": " is applied to new data, that is data not used in training the model."
+  },
+  {
+    "start": 289.8,
+    "end": 295.14,
+    "text": " Here's another way to look at the two phases. In the training phase, the learning algorithm"
+  },
+  {
+    "start": 295.14,
+    "end": 301.08,
+    "text": " uses the training data to adjust the model's parameters to minimize errors."
+  },
+  {
+    "start": 301.08,
+    "end": 305.38,
+    "text": " At the end of the training phase, you get the trained model."
+  },
+  {
+    "start": 305.38,
+    "end": 310.47999999999996,
+    "text": " In the testing phase, the trained model is applied to test data."
+  },
+  {
+    "start": 310.47999999999996,
+    "end": 316.2,
+    "text": " Test data is separate from training data and is previously unseen by the model."
+  },
+  {
+    "start": 316.2,
+    "end": 320.91999999999996,
+    "text": " The model is then evaluated on how it performs on the test data."
+  },
+  {
+    "start": 320.92,
+    "end": 326.08000000000004,
+    "text": " The goal in building a classifier model is to have the model perform well on training"
+  },
+  {
+    "start": 326.08000000000004,
+    "end": 328.48,
+    "text": " as well as test data."
+  },
+  {
+    "start": 328.48,
+    "end": 332.68,
+    "text": " We will discuss in more detail the use of training and test data sets in the next module"
+  },
+  {
+    "start": 332.68,
+    "end": 335.44,
+    "text": " when we discuss model evaluation."
+  },
+  {
+    "start": 335.44,
+    "end": 340.34000000000003,
+    "text": " To adjust a model's parameters, we need to apply a learning algorithm."
+  },
+  {
+    "start": 340.34000000000003,
+    "end": 345.44,
+    "text": " We will discuss specific algorithms to build a classification model in the next few lectures."
+  }
+]

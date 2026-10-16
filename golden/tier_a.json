@@ -1,0 +1,832 @@
+[
+  {
+    "id": "A-Quiz 1 - Machine Learning Overview-3",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 1 - Machine Learning Overview",
+    "question": "Which categories of machine learning techniques are supervised?",
+    "answer": "classification and regression",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 1 - Machine Learning Overview-4",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 1 - Machine Learning Overview",
+    "question": "In unsupervised approaches,",
+    "answer": "the target is unknown or unavailable.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 1 - Machine Learning Overview-5",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 1 - Machine Learning Overview",
+    "question": "What is the sequence of the steps in the machine learning process?",
+    "answer": "Acquire -> Prepare -> Analyze -> Report -> Act",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 1 - Machine Learning Overview-6",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 1 - Machine Learning Overview",
+    "question": "Are the steps in the machine learning process apply-once or iterative?",
+    "answer": "Iterative",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 1 - Machine Learning Overview-8",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 1 - Machine Learning Overview",
+    "question": "What is the main difference between KNIME and Spark MLlib?",
+    "answer": "KNIME is a graphical user interface-based machine learning tool, while Spark MLlib provides a programming-based distributed platform for scalable machine learning algorithms.",
+    "multi_answer": false,
+    "hands_on": true
+  },
+  {
+    "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-1",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 10 - Regression, Cluster Analysis and Association Analysis",
+    "question": "What is the main difference between classification and regression?",
+    "answer": "In classification, you're predicting a category, and in regression, you're predicting a number.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-3",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 10 - Regression, Cluster Analysis and Association Analysis",
+    "question": "In linear regression, the least squares method is used to",
+    "answer": "Determine the regression line that best fits the samples.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-4",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 10 - Regression, Cluster Analysis and Association Analysis",
+    "question": "How does simple linear regression differ from multiple linear regression?",
+    "answer": "In simple linear regression, the input has only one variable. In multiple linear regression, the input has more than one variables.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-5",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 10 - Regression, Cluster Analysis and Association Analysis",
+    "question": "The goal of cluster analysis is",
+    "answer": "To segment data so that differences between samples in the same cluster are minimized and differences between samples of different clusters are maximized.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-6",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 10 - Regression, Cluster Analysis and Association Analysis",
+    "question": "Cluster results can be used to",
+    "answer": "All of these choices are valid uses of the resulting clusters.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-7",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 10 - Regression, Cluster Analysis and Association Analysis",
+    "question": "A cluster centroid is",
+    "answer": "The mean of all the samples in the cluster",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-8",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 10 - Regression, Cluster Analysis and Association Analysis",
+    "question": "The main steps in the k-means clustering algorithm are",
+    "answer": "Assign each sample to the closest centroid, then calculate the new centroid.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-9",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 10 - Regression, Cluster Analysis and Association Analysis",
+    "question": "The goal of association analysis is",
+    "answer": "To find rules to capture associations between items or events",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-11",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 10 - Regression, Cluster Analysis and Association Analysis",
+    "question": "The support of an item set",
+    "answer": "Captures the frequency of that item set",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-12",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 10 - Regression, Cluster Analysis and Association Analysis",
+    "question": "Rule confidence is used to",
+    "answer": "Prune rules by eliminating rules with low confidence",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 11 - Cluster Analysis in Spark-1",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 11 - Cluster Analysis in Spark",
+    "question": "What percentage of samples have 0 for rain_accumulation?",
+    "answer": "157812 / 158726 = 99.4%",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 11 - Cluster Analysis in Spark-2",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 11 - Cluster Analysis in Spark",
+    "question": "Why is it necessary to scale the data (Step 4)?",
+    "answer": "Since the values of the features are on different scales, all features need to be scaled so that no one feature dominates the clustering results.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 11 - Cluster Analysis in Spark-4",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 11 - Cluster Analysis in Spark",
+    "question": "This line of code creates a k-means model with 12 clusters: ``` kmeans = KMeans (k=12, seed=1) ``` What is the significance of “seed=1”?",
+    "answer": "This sets the seed to a specific value, which is necessary to reproduce the k-means results",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 11 - Cluster Analysis in Spark-5",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 11 - Cluster Analysis in Spark",
+    "question": "Just by looking at the values for the cluster centers, which cluster contains samples with the lowest relative humidity?",
+    "answer": "Cluster 4",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 11 - Cluster Analysis in Spark-6",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 11 - Cluster Analysis in Spark",
+    "question": "What do clusters 7, 8, and 11 have in common?",
+    "answer": "They capture weather patterns associated with warm and dry days",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 11 - Cluster Analysis in Spark-7",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 11 - Cluster Analysis in Spark",
+    "question": "If we perform clustering with 20 clusters (and seed = 1), which cluster appears to identify Santa Ana conditions (lowest humidity and highest wind speeds)?",
+    "answer": "Cluster 12",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Data Exploration-1",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 2 - Data Exploration",
+    "question": "Which of these statements is true about samples and variables?",
+    "answer": "All of these statements are true.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Data Exploration-2",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 2 - Data Exploration",
+    "question": "Other names for 'variable' are",
+    "answer": "feature, column, attribute",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Data Exploration-3",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 2 - Data Exploration",
+    "question": "What is the purpose of exploring data?",
+    "answer": "To gain a better understanding of your data.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Data Exploration-4",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 2 - Data Exploration",
+    "question": "What are the two main categories of techniques for exploring data? Choose two.",
+    "answer": "Visualization ; Summary statistics",
+    "multi_answer": true,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Data Exploration-6",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 2 - Data Exploration",
+    "question": "What are the two measures for measuring shape as mentioned in the lecture? Choose two.",
+    "answer": "Kurtosis ; Skewness",
+    "multi_answer": true,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 4 - Data Preparation-2",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 4 - Data Preparation",
+    "question": "Imputing missing data means to",
+    "answer": "replace missing values with something reasonable.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 4 - Data Preparation-3",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 4 - Data Preparation",
+    "question": "A data sample with values that are considerably different than the rest of the other data samples in the dataset is called an/a _____________.",
+    "answer": "Outlier",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 4 - Data Preparation-7",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 4 - Data Preparation",
+    "question": "The mean value and the standard deviation of a zero-normalized feature are",
+    "answer": "mean = 0 and standard deviation = 1",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 5 - Handling Missing Values in KNIME and Spark-4",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 5 - Handling Missing Values in KNIME and Spark",
+    "question": "Which column in the weather dataset has the most number of missing values?",
+    "answer": "rain_accumulation_9am",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 5 - Handling Missing Values in KNIME and Spark-5",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 5 - Handling Missing Values in KNIME and Spark",
+    "question": "When we remove all the missing values from the dataset, the number of rows is 1064, yet the variable with most missing values has 1089 rows. Why did the number of rows decrease so much?",
+    "answer": "Because the missing values in each column are not necessarily in the same row",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 6 - Classification-2",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 6 - Classification",
+    "question": "In which phase are model parameters adjusted?",
+    "answer": "Training phase",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 6 - Classification-3",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 6 - Classification",
+    "question": "Which classification algorithm uses a probabilistic approach?",
+    "answer": "naive bayes",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 6 - Classification-4",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 6 - Classification",
+    "question": "What does the 'k' stand for in k-nearest-neighbors?",
+    "answer": "the number of nearest neighbors to consider in classifying a sample",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 6 - Classification-6",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 6 - Classification",
+    "question": "Which statement is true of tree induction?",
+    "answer": "All of these statements are true of tree induction.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 6 - Classification-7",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 6 - Classification",
+    "question": "What does 'naive' mean in Naive Bayes?",
+    "answer": "The model assumes that the input features are statistically independent of one another. The 'naïve' in the name of classifier comes from this naïve assumption.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 6 - Classification-8",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 6 - Classification",
+    "question": "The feature independence assumption in Naive Bayes simplifies the classification problem by",
+    "answer": "allowing the probability of each feature given the class to be estimated individually.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 7 - Classification in KNIME and Spark-1",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 7 - Classification in KNIME and Spark",
+    "question": "KNIME: In configuring the Numeric Binner node, what would happen if the definition for the humidity_low bin is changed from ``` ] -infinity ... 25.0 [ to ] -infinity ... 25.0 ] ``` (i.e., the last bracket is changed from [ to ] ?",
+    "answer": "The definition for the humidity_low bin would change from excluding 25.0 to including 25.0",
+    "multi_answer": false,
+    "hands_on": true
+  },
+  {
+    "id": "A-Quiz 7 - Classification in KNIME and Spark-2",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 7 - Classification in KNIME and Spark",
+    "question": "KNIME: Considering the Numeric Binner node again, what would happen if the “Append new column” box is not checked?",
+    "answer": "The relative_humidity_3pm variable will become a categorical variable",
+    "multi_answer": false,
+    "hands_on": true
+  },
+  {
+    "id": "A-Quiz 7 - Classification in KNIME and Spark-5",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 7 - Classification in KNIME and Spark",
+    "question": "KNIME: What are the target and predicted class labels for the first sample in the test set?",
+    "answer": "Both are humidity_not_low",
+    "multi_answer": false,
+    "hands_on": true
+  },
+  {
+    "id": "A-Quiz 7 - Classification in KNIME and Spark-6",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 7 - Classification in KNIME and Spark",
+    "question": "Spark: What values are in the number column?",
+    "answer": "Integer values starting at 0",
+    "multi_answer": false,
+    "hands_on": true
+  },
+  {
+    "id": "A-Quiz 8 - Model Evaluation-1",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 8 - Model Evaluation",
+    "question": "A model that generalizes well means that",
+    "answer": "The model performs well on data not used in training.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 8 - Model Evaluation-2",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 8 - Model Evaluation",
+    "question": "What indicates that the model is overfitting?",
+    "answer": "Low training error and high generalization error",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 8 - Model Evaluation-3",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 8 - Model Evaluation",
+    "question": "Which method is used to avoid overfitting in decision trees?",
+    "answer": "Pre-pruning and post-pruning",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 8 - Model Evaluation-6",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 8 - Model Evaluation",
+    "question": "How is the accuracy rate calculated?",
+    "answer": "Divide the number of correct predictions by the total number of predictions",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 8 - Model Evaluation-7",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 8 - Model Evaluation",
+    "question": "Which evaluation metrics are commonly used for evaluating the performance of a classification model when there is a class imbalance problem?",
+    "answer": "precision and recall",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 8 - Model Evaluation-8",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 8 - Model Evaluation",
+    "question": "How do you determine the classifier accuracy from the confusion matrix?",
+    "answer": "Divide the sum of the diagonal values in the confusion matrix by the total number of samples.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-1",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 9 - Model Evaluation in KNIME and Spark",
+    "question": "KNIME: In the confusion matrix as viewed in the Scorer node, low_humidity_day is:",
+    "answer": "the target class label",
+    "multi_answer": false,
+    "hands_on": true
+  },
+  {
+    "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-2",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 9 - Model Evaluation in KNIME and Spark",
+    "question": "KNIME: In the confusion matrix, what is the difference between low_humidity_day and Prediction(low_humidity_day)?",
+    "answer": "low_humidity_day is the target class label, and Prediction(low_humidity_day) is the predicted class label",
+    "multi_answer": false,
+    "hands_on": true
+  },
+  {
+    "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-3",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 9 - Model Evaluation in KNIME and Spark",
+    "question": "KNIME: In the Table View of the Interactive Table, each row is color-coded. Blue specifies:",
+    "answer": "that the target class label for the sample is humidity_not_low",
+    "multi_answer": false,
+    "hands_on": true
+  },
+  {
+    "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-4",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 9 - Model Evaluation in KNIME and Spark",
+    "question": "KNIME: To change the colors used to color-code each sample in the Table View of the Interactive Table node:",
+    "answer": "change the color settings in the Color Manager node",
+    "multi_answer": false,
+    "hands_on": true
+  },
+  {
+    "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-5",
+    "tier": "A",
+    "course": "machine learning",
+    "quiz": "Quiz 9 - Model Evaluation in KNIME and Spark",
+    "question": "KNIME: In the Table View of the Interactive Table, the values in RowID are not consecutive because:",
+    "answer": "the RowID values are from the original dataset, and only the test samples are displayed here",
+    "multi_answer": false,
+    "hands_on": true
+  },
+  {
+    "id": "A-Quiz 1 - Introduction to Graphs-4",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 1 - Introduction to Graphs",
+    "question": "Based on the videos, which kinds of analysis might one be able to perform on a tweet graph?",
+    "answer": "find interacting groups of users ; extract conversation threads ; find influencers in a twitter community",
+    "multi_answer": true,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 1 - Introduction to Graphs-5",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 1 - Introduction to Graphs",
+    "question": "The key reason mentioned in the video that biology applications need Big Data analytics is...",
+    "answer": "The integration of multiple data sources from different researchers and of different sources of information.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 1 - Introduction to Graphs-6",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 1 - Introduction to Graphs",
+    "question": "Which of the Vs BEST describes the result in constant increasing in the number of edges in a graph, sometimes causing challenges in knowing when one has found \"an answer\" to one's analysis question?",
+    "answer": "Velocity",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 1 - Introduction to Graphs-7",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 1 - Introduction to Graphs",
+    "question": "Which of the Vs results in increased algorithmic complexity (which can cause analyses to not be able to finish running in reasonable amounts of time)?",
+    "answer": "Volume",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 1 - Introduction to Graphs-8",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 1 - Introduction to Graphs",
+    "question": "Which of the Vs results in challenges due to graphs created from varying kinds, formats, sources, and meanings of data?",
+    "answer": "Variety",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 1 - Introduction to Graphs-9",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 1 - Introduction to Graphs",
+    "question": "Which of the Vs causes increased interconnectivity of a graph -- which can cause problems in analysis due to density?",
+    "answer": "Valence",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 1 - Introduction to Graphs-10",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 1 - Introduction to Graphs",
+    "question": "Updating a graph with a stream of posting information on facebook is an example of which of the Vs?",
+    "answer": "Velocity",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 1 - Introduction to Graphs-11",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 1 - Introduction to Graphs",
+    "question": "Studying Amarnath's gmail interactions over time (as gmail started to be used by more and more people) is BEST defined as an impact of which of the Vs?",
+    "answer": "Valence",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Graph Analytics Applications-2",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 2 - Graph Analytics Applications",
+    "question": "In a network representing the world wide web nodes would likely represent:",
+    "answer": "Webpages",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Graph Analytics Applications-3",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 2 - Graph Analytics Applications",
+    "question": "In a network representing the world wide web edges (or links) would likely represent",
+    "answer": "Hyperlinks",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Graph Analytics Applications-4",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 2 - Graph Analytics Applications",
+    "question": "In an email network, which might reasonably be represented by weight on edges?",
+    "answer": "average number of emails sent from one user to another in a week",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Graph Analytics Applications-5",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 2 - Graph Analytics Applications",
+    "question": "A loop in a graph is where:",
+    "answer": "where there is an edge from a node to itself.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Graph Analytics Applications-6",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 2 - Graph Analytics Applications",
+    "question": "An example of a loop in a graph could occur when:",
+    "answer": "Someone emails themself",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Graph Analytics Applications-10",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 2 - Graph Analytics Applications",
+    "question": "Suppose we have an email network where the edges of a graph represent the number of emails from one user to another. If I was going to ask if Maria had sent any emails that (either directly or through forwarding from others) reached Julio, I would ask if:",
+    "answer": "Julio’s node was reachable from Maria node",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Graph Analytics Applications-13",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 2 - Graph Analytics Applications",
+    "question": "This question is about \"best paths\". To find the most discussed email in an email network, would we be looking to minimize a function or maximize a function?",
+    "answer": "Maximize",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Graph Analytics Applications-14",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 2 - Graph Analytics Applications",
+    "question": "Which are the two kinds of constraints on paths discussed in the video on basic path analytics? (check 2) Hint: remember the example of Amarnath needing to get to work by taking his son to school.",
+    "answer": "Inclusion of nodes and/or edges ; Exclusion of nodes and/or edges",
+    "multi_answer": true,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Graph Analytics Applications-15",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 2 - Graph Analytics Applications",
+    "question": "What are examples of preference constraints in the Google Maps application?",
+    "answer": "Avoid roads under construction ; Avoid highways",
+    "multi_answer": true,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 2 - Graph Analytics Applications-16",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 2 - Graph Analytics Applications",
+    "question": "Which of the statements below is true?",
+    "answer": "Dijsktra's algorithm is computationally inefficient (has high computational complexity).",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-1",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 3 - Connectivity, Community, and Centrality Analytics",
+    "question": "The example given in the lectures of when a power network loses power in large portions of its service area was an example of what?",
+    "answer": "an attack which causes disconnection of the graph",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-4",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 3 - Connectivity, Community, and Centrality Analytics",
+    "question": "If you were going to look for a node which would be most likely to be the target of an attack to disconnect a network, what would be the best characteristic to look for?",
+    "answer": "high degree nodes",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-8",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 3 - Connectivity, Community, and Centrality Analytics",
+    "question": "What would we be looking for if we followed the steps below? Note: we have 2 graphs. Create a table for each graph where, for each node, you list the degree of the node. For each graph, create a histogram indicating how many nodes in that graph have a specific degree (e.g., how many nodes have degree 1? 2? etc.). Use advanced approaches (e.g. Euclidean distances) to compare these two histograms.",
+    "answer": "Similarity",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-10",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 3 - Connectivity, Community, and Centrality Analytics",
+    "question": "What type of community analytics question is the following? Did a community form on twitter around the 2014 World Cup in Brazil?",
+    "answer": "Evolution",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-11",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 3 - Connectivity, Community, and Centrality Analytics",
+    "question": "Which type of community analytics question is the following? How tightly knit was the 2014 World Cup twitter community on July 13, 2014 (the day of the finals)?",
+    "answer": "Static",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-15",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 3 - Connectivity, Community, and Centrality Analytics",
+    "question": "An influencer in a network is defined as:",
+    "answer": "a node which can reach all other nodes quickly",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-17",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 3 - Connectivity, Community, and Centrality Analytics",
+    "question": "What kind of centrality would you want to analyze in a graph if you wanted to inject information that flows through the shortest path in a network and have it spread quickly?",
+    "answer": "Closeness",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-18",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 3 - Connectivity, Community, and Centrality Analytics",
+    "question": "What kind of centrality would you want to analyze in a graph if you wanted maximize commodity flow in a network?",
+    "answer": "Between-ness",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-19",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 3 - Connectivity, Community, and Centrality Analytics",
+    "question": "What kind of centrality identifies \"hubness\"?",
+    "answer": "Degree",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 4 - Graph Analytics with Neo4j-2",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 4 - Graph Analytics with Neo4j",
+    "question": "For a graph network whose nodes are all of type \"MyNode\", which has both incoming and outgoing edges, and which has both root and leaf nodes, what will the following Cypher code return in a Neo4j report? ``` match (n:MyNode)<-[r]-() return n ```",
+    "answer": "All nodes except root nodes.",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 4 - Graph Analytics with Neo4j-5",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 4 - Graph Analytics with Neo4j",
+    "question": "Which Cypher pattern is used to represent a node?",
+    "answer": "()",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 4 - Graph Analytics with Neo4j-6",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 4 - Graph Analytics with Neo4j",
+    "question": "QNeo4j is a ...",
+    "answer": "Graph database",
+    "multi_answer": false,
+    "hands_on": false
+  },
+  {
+    "id": "A-Quiz 4 - Graph Analytics with Neo4j-7",
+    "tier": "A",
+    "course": "graph analytics",
+    "quiz": "Quiz 4 - Graph Analytics with Neo4j",
+    "question": "Which Cypher command launches a Neo4j database search?",
+    "answer": "MATCH ; False",
+    "multi_answer": true,
+    "hands_on": false
+  }
+]

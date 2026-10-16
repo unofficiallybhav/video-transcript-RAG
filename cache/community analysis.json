@@ -1,0 +1,637 @@
+[
+  {
+    "start": 0.88,
+    "end": 7.0,
+    "text": " This lesson on graph analytics is about identifying and tracking groups of interacting entities"
+  },
+  {
+    "start": 7.0,
+    "end": 8.88,
+    "text": " in a network."
+  },
+  {
+    "start": 8.88,
+    "end": 12.44,
+    "text": " We call these groups communities."
+  },
+  {
+    "start": 12.44,
+    "end": 17.38,
+    "text": " Let's try to provide a more concrete definition of communities in a network."
+  },
+  {
+    "start": 17.38,
+    "end": 21.56,
+    "text": " We motivate the definition by this diagram showing a research study on the Santa Fe"
+  },
+  {
+    "start": 21.56,
+    "end": 27.68,
+    "text": " Institute, a theoretical research institute located in Santa Fe, New Mexico, U.S."
+  },
+  {
+    "start": 27.68,
+    "end": 30.18,
+    "text": " They perform multidisciplinary studies"
+  },
+  {
+    "start": 30.18,
+    "end": 34.2,
+    "text": " on fundamental principles of complex adaptive systems."
+  },
+  {
+    "start": 34.2,
+    "end": 37.04,
+    "text": " The nodes in the graph are researchers,"
+  },
+  {
+    "start": 37.04,
+    "end": 39.58,
+    "text": " and an edge exists between two researchers"
+  },
+  {
+    "start": 39.58,
+    "end": 42.0,
+    "text": " if they collaborate with each other."
+  },
+  {
+    "start": 42.0,
+    "end": 46.96,
+    "text": " As you can see, there are distinct groups among researchers."
+  },
+  {
+    "start": 46.96,
+    "end": 49.28,
+    "text": " A mathematical ecology researcher"
+  },
+  {
+    "start": 49.28,
+    "end": 51.260000000000005,
+    "text": " does not collaborate with researchers"
+  },
+  {
+    "start": 51.260000000000005,
+    "end": 54.32,
+    "text": " who work on structure of the RNA."
+  },
+  {
+    "start": 54.32,
+    "end": 58.78,
+    "text": " So the graph is essentially a set of separate groups thinly"
+  },
+  {
+    "start": 58.78,
+    "end": 62.480000000000004,
+    "text": " connected through a handful of cross-disciplinary researchers"
+  },
+  {
+    "start": 62.480000000000004,
+    "end": 65.16,
+    "text": " who collaborate across groups."
+  },
+  {
+    "start": 65.16,
+    "end": 67.18,
+    "text": " These groups are then the communities"
+  },
+  {
+    "start": 67.18,
+    "end": 69.54,
+    "text": " in this collaboration graph."
+  },
+  {
+    "start": 69.54,
+    "end": 71.58,
+    "text": " What does this tell us?"
+  },
+  {
+    "start": 71.58,
+    "end": 73.62,
+    "text": " It tells us that communities are highly"
+  },
+  {
+    "start": 73.62,
+    "end": 76.22,
+    "text": " interacting clusters in a graph."
+  },
+  {
+    "start": 76.22,
+    "end": 80.06,
+    "text": " That is, they form pockets of denser subgraphs"
+  },
+  {
+    "start": 80.06,
+    "end": 83.22,
+    "text": " that are more connected to each other than to members"
+  },
+  {
+    "start": 83.22,
+    "end": 85.46,
+    "text": " of the other clusters."
+  },
+  {
+    "start": 85.46,
+    "end": 88.32,
+    "text": " Communities, of humans or otherwise,"
+  },
+  {
+    "start": 88.32,
+    "end": 90.82,
+    "text": " are interesting things to study because it gives us"
+  },
+  {
+    "start": 90.82,
+    "end": 93.66,
+    "text": " an insight into the interaction patterns"
+  },
+  {
+    "start": 93.66,
+    "end": 96.24,
+    "text": " and how they change with time."
+  },
+  {
+    "start": 96.24,
+    "end": 100.25999999999999,
+    "text": " Here are some analytics questions about communities."
+  },
+  {
+    "start": 100.25999999999999,
+    "end": 103.98,
+    "text": " We have divided them into three categories."
+  },
+  {
+    "start": 103.98,
+    "end": 106.32,
+    "text": " Analytics questions that do not depend on time"
+  },
+  {
+    "start": 106.32,
+    "end": 107.94,
+    "text": " are called static."
+  },
+  {
+    "start": 107.94,
+    "end": 110.88,
+    "text": " Here we ask a question about the composition"
+  },
+  {
+    "start": 110.88,
+    "end": 116.0,
+    "text": " the community, how tightly the members are connected, and so forth."
+  },
+  {
+    "start": 116.0,
+    "end": 124.14,
+    "text": " In the second category, we involve the formation and evolution of the community."
+  },
+  {
+    "start": 124.14,
+    "end": 130.12,
+    "text": " Communities can form temporally, for example, around an event like a school shooting, or"
+  },
+  {
+    "start": 130.12,
+    "end": 136.6,
+    "text": " some communities, despite the comings and goings of members, sustain themselves well."
+  },
+  {
+    "start": 136.6,
+    "end": 143.14,
+    "text": " A Facebook group, a political party, or fans of a music band are likely to continue over"
+  },
+  {
+    "start": 143.14,
+    "end": 147.1,
+    "text": " time and hence are non-transient."
+  },
+  {
+    "start": 147.1,
+    "end": 150.98,
+    "text": " One can also be interested in the history of formation of a community like a criminal"
+  },
+  {
+    "start": 150.98,
+    "end": 152.22,
+    "text": " network."
+  },
+  {
+    "start": 152.22,
+    "end": 156.06,
+    "text": " The third category is about predictions."
+  },
+  {
+    "start": 156.06,
+    "end": 161.12,
+    "text": " Analysts would like to predict how a community would grow, whether its composition of members"
+  },
+  {
+    "start": 161.12,
+    "end": 165.5,
+    "text": " might change, or whether there are emerging power shifts"
+  },
+  {
+    "start": 165.5,
+    "end": 167.8,
+    "text": " with the community."
+  },
+  {
+    "start": 167.8,
+    "end": 170.86,
+    "text": " Now, before we ask these questions,"
+  },
+  {
+    "start": 170.86,
+    "end": 173.82,
+    "text": " however, we need to first identify communities"
+  },
+  {
+    "start": 173.82,
+    "end": 175.8,
+    "text": " in a large network."
+  },
+  {
+    "start": 175.8,
+    "end": 179.52,
+    "text": " To find communities, we need to formalize the idea"
+  },
+  {
+    "start": 179.52,
+    "end": 183.06,
+    "text": " that there are more connections within the community"
+  },
+  {
+    "start": 183.06,
+    "end": 186.6,
+    "text": " and fewer connections between two communities."
+  },
+  {
+    "start": 186.6,
+    "end": 188.78,
+    "text": " One way to achieve this is to think"
+  },
+  {
+    "start": 188.78,
+    "end": 195.46,
+    "text": " Think of dividing the degree of a node into an internal and an external component."
+  },
+  {
+    "start": 195.46,
+    "end": 201.34,
+    "text": " The internal component is the count of edges within community, and the external degree"
+  },
+  {
+    "start": 201.34,
+    "end": 205.44,
+    "text": " is the count of edges outside the community."
+  },
+  {
+    "start": 205.44,
+    "end": 210.62,
+    "text": " An example will be to consider that my community is where I live, that is San Diego, and then"
+  },
+  {
+    "start": 210.62,
+    "end": 216.7,
+    "text": " count the number of my friends within San Diego versus outside San Diego."
+  },
+  {
+    "start": 216.70000000000002,
+    "end": 224.74,
+    "text": " In the figure, the highlighted node has four internal connections and one external connection."
+  },
+  {
+    "start": 224.74,
+    "end": 230.26000000000002,
+    "text": " The next step would be to think of the internal degree and the external degree of an entire"
+  },
+  {
+    "start": 230.26000000000002,
+    "end": 231.9,
+    "text": " cluster."
+  },
+  {
+    "start": 231.9,
+    "end": 237.24,
+    "text": " We can sum up the internal degrees of all nodes in a cluster and call it the internal"
+  },
+  {
+    "start": 237.24,
+    "end": 239.50000000000003,
+    "text": " degree of the whole cluster."
+  },
+  {
+    "start": 239.50000000000003,
+    "end": 244.00000000000003,
+    "text": " And similarly, sum the external degrees of the nodes to compute the external degree of"
+  },
+  {
+    "start": 244.00000000000003,
+    "end": 245.50000000000003,
+    "text": " a cluster."
+  },
+  {
+    "start": 245.5,
+    "end": 251.38,
+    "text": " Now we can define intracluster density to be the ratio of the number of internal edges"
+  },
+  {
+    "start": 251.38,
+    "end": 257.7,
+    "text": " of the cluster divided by the number of possible connections inside the cluster."
+  },
+  {
+    "start": 257.7,
+    "end": 262.88,
+    "text": " The denominator is n choose 2, which is the number of pairwise combination of nodes within"
+  },
+  {
+    "start": 262.88,
+    "end": 264.18,
+    "text": " the cluster."
+  },
+  {
+    "start": 264.18,
+    "end": 266.74,
+    "text": " We call this delta int."
+  },
+  {
+    "start": 266.74,
+    "end": 273.18,
+    "text": " Similarly, intercluster density delta x is the number of intercluster edges divided by"
+  },
+  {
+    "start": 273.18,
+    "end": 277.74,
+    "text": " by the possible pairings between nc, a node in the cluster,"
+  },
+  {
+    "start": 277.74,
+    "end": 281.94,
+    "text": " to n minus nc, the number of nodes outside the cluster."
+  },
+  {
+    "start": 281.94,
+    "end": 285.04,
+    "text": " There are two kinds of methods used"
+  },
+  {
+    "start": 285.04,
+    "end": 287.46000000000004,
+    "text": " for finding communities in a network."
+  },
+  {
+    "start": 287.46000000000004,
+    "end": 292.0,
+    "text": " One of them focuses on local properties,"
+  },
+  {
+    "start": 292.0,
+    "end": 295.18,
+    "text": " that is properties for which one only looks"
+  },
+  {
+    "start": 295.18,
+    "end": 297.72,
+    "text": " at a node and its neighborhood."
+  },
+  {
+    "start": 297.72,
+    "end": 299.9,
+    "text": " Well, the most ideal community in a network"
+  },
+  {
+    "start": 299.9,
+    "end": 302.66,
+    "text": " is a subgraph where every node is connected"
+  },
+  {
+    "start": 302.66,
+    "end": 305.16,
+    "text": " to every other node in the subgraph."
+  },
+  {
+    "start": 305.16,
+    "end": 308.54,
+    "text": " Such a structure is called a clique."
+  },
+  {
+    "start": 308.54,
+    "end": 311.68,
+    "text": " To find a perfect community structure as a clique,"
+  },
+  {
+    "start": 311.68,
+    "end": 315.92,
+    "text": " one can try to find the largest clique within a graph."
+  },
+  {
+    "start": 315.92,
+    "end": 319.36,
+    "text": " It turns out that it's a computationally challenging"
+  },
+  {
+    "start": 319.36,
+    "end": 321.20000000000005,
+    "text": " problem."
+  },
+  {
+    "start": 321.20000000000005,
+    "end": 326.76000000000005,
+    "text": " It's much simpler to find cliques if we know the value of k,"
+  },
+  {
+    "start": 326.76000000000005,
+    "end": 330.28000000000003,
+    "text": " that means the number of members in the clique."
+  },
+  {
+    "start": 330.28000000000003,
+    "end": 334.68,
+    "text": " We will show a simple version of this in module 3."
+  },
+  {
+    "start": 334.68,
+    "end": 336.52000000000004,
+    "text": " The more general problem has been solved"
+  },
+  {
+    "start": 336.52000000000004,
+    "end": 342.04,
+    "text": " by complex algorithms that are beyond the scope of this course."
+  },
+  {
+    "start": 342.04,
+    "end": 345.92,
+    "text": " In the real world, perfect clicks larger than 3 or 4"
+  },
+  {
+    "start": 345.92,
+    "end": 347.56000000000006,
+    "text": " are harder to find."
+  },
+  {
+    "start": 347.56000000000006,
+    "end": 350.70000000000005,
+    "text": " So we need to relax the definition a little."
+  },
+  {
+    "start": 350.70000000000005,
+    "end": 355.8,
+    "text": " Now there are two types of relaxations, those based on distance"
+  },
+  {
+    "start": 355.8,
+    "end": 358.92,
+    "text": " and those based on density."
+  },
+  {
+    "start": 358.92,
+    "end": 364.94,
+    "text": " Two distance-based definitions are n clique and n plan."
+  },
+  {
+    "start": 364.94,
+    "end": 369.96000000000004,
+    "text": " We will illustrate this over a friendship graph shown here."
+  },
+  {
+    "start": 369.96000000000004,
+    "end": 373.92,
+    "text": " n clique is a subgraph such that the distance between each node"
+  },
+  {
+    "start": 373.92,
+    "end": 376.94,
+    "text": " pair in that subgraph is n or less."
+  },
+  {
+    "start": 376.94,
+    "end": 384.0,
+    "text": " By this definition, Holly, Paul, and Gary form a two clique."
+  },
+  {
+    "start": 384.0,
+    "end": 386.92,
+    "text": " That's a little awkward, isn't it?"
+  },
+  {
+    "start": 386.92,
+    "end": 390.48,
+    "text": " Yeah, they are within two distance of each other,"
+  },
+  {
+    "start": 390.48,
+    "end": 393.3,
+    "text": " but the two-click does not include intermediate nodes"
+  },
+  {
+    "start": 393.3,
+    "end": 395.58000000000004,
+    "text": " that connect the member nodes."
+  },
+  {
+    "start": 395.58000000000004,
+    "end": 400.78000000000003,
+    "text": " So Mike is not in the two-click."
+  },
+  {
+    "start": 400.78000000000003,
+    "end": 405.18,
+    "text": " This situation is corrected in N clan, where"
+  },
+  {
+    "start": 405.18,
+    "end": 407.72,
+    "text": " to belong to the N clan, the shortest path"
+  },
+  {
+    "start": 407.72,
+    "end": 412.8,
+    "text": " between any members without involving outsiders is N or less."
+  },
+  {
+    "start": 412.8,
+    "end": 420.96000000000004,
+    "text": " Now, Holly, Mike, Bill, Don, Harry, and Gary form a two-clan."
+  },
+  {
+    "start": 420.96000000000004,
+    "end": 423.76,
+    "text": " Clearly, this group is more cohesive"
+  },
+  {
+    "start": 423.76,
+    "end": 427.66,
+    "text": " than the two-clique we saw before."
+  },
+  {
+    "start": 427.66,
+    "end": 431.3,
+    "text": " N-clique and N-clan are distance-based measures"
+  },
+  {
+    "start": 431.3,
+    "end": 434.68,
+    "text": " for finding cohesive groups of communities."
+  },
+  {
+    "start": 434.68,
+    "end": 438.92,
+    "text": " K-core is a density-based method for finding communities."
+  },
+  {
+    "start": 438.92,
+    "end": 442.36,
+    "text": " Let's look at the dark orange subgraph."
+  },
+  {
+    "start": 442.36,
+    "end": 445.8,
+    "text": " Every node is connected to at least three other nodes"
+  },
+  {
+    "start": 445.8,
+    "end": 447.28000000000003,
+    "text": " within the subgraph."
+  },
+  {
+    "start": 447.28000000000003,
+    "end": 450.02000000000004,
+    "text": " They form a three core."
+  },
+  {
+    "start": 450.02000000000004,
+    "end": 452.36,
+    "text": " Let's include the medium light orange nodes"
+  },
+  {
+    "start": 452.36,
+    "end": 454.6,
+    "text": " in the subgraph now."
+  },
+  {
+    "start": 454.6,
+    "end": 457.64,
+    "text": " Each node is connected to at least two other members"
+  },
+  {
+    "start": 457.64,
+    "end": 459.26,
+    "text": " within the subgraph."
+  },
+  {
+    "start": 459.26,
+    "end": 462.32,
+    "text": " They form a two core."
+  },
+  {
+    "start": 462.32,
+    "end": 465.88,
+    "text": " Relaxing further, we can add the light orange nodes"
+  },
+  {
+    "start": 465.88,
+    "end": 468.6,
+    "text": " and the graph as a one core."
+  }
+]

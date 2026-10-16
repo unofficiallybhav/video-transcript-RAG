@@ -1,0 +1,157 @@
+[
+  {
+    "start": 0.0,
+    "end": 7.0,
+    "text": " So we have seen how to compute degree histograms of a graph."
+  },
+  {
+    "start": 7.0,
+    "end": 11.0,
+    "text": " While degree histograms are useful to characterize a graph,"
+  },
+  {
+    "start": 11.0,
+    "end": 14.0,
+    "text": " it is usually a means to add end."
+  },
+  {
+    "start": 14.0,
+    "end": 18.0,
+    "text": " It's a known practice in statistics to compute a mathematical expression"
+  },
+  {
+    "start": 18.0,
+    "end": 23.0,
+    "text": " for a statistical distribution using histograms."
+  },
+  {
+    "start": 23.0,
+    "end": 29.0,
+    "text": " For graphs, we often look for a function to describe the degree distribution."
+  },
+  {
+    "start": 29.0,
+    "end": 36.8,
+    "text": " Now, this is expressed as a distribution of the probability that a random vortex will have exactly k neighbors."
+  },
+  {
+    "start": 37.92,
+    "end": 40.56,
+    "text": " Now, this problem has been investigated by many."
+  },
+  {
+    "start": 41.519999999999996,
+    "end": 45.4,
+    "text": " One popular, well-known model is the power law."
+  },
+  {
+    "start": 46.6,
+    "end": 55.32,
+    "text": " A graph follows a power law if the above probability is given by k raised to a negative exponent called alpha."
+  },
+  {
+    "start": 56.26,
+    "end": 61.54,
+    "text": " The value of alpha for many practical networks is between 2 and 3."
+  },
+  {
+    "start": 62.88,
+    "end": 67.92,
+    "text": " More recently, people have suggested other distributions that look like the power-low graph."
+  },
+  {
+    "start": 68.68,
+    "end": 71.1,
+    "text": " One of them is a log-normal graph."
+  },
+  {
+    "start": 72.16,
+    "end": 75.96000000000001,
+    "text": " Here, the logarithm of k has a Gaussian distribution."
+  },
+  {
+    "start": 75.96000000000001,
+    "end": 82.6,
+    "text": " So this log-normal distribution seems to be a better fit to natural graphs that are observed."
+  },
+  {
+    "start": 85.32000000000001,
+    "end": 88.76,
+    "text": " So why are power law graphs so important?"
+  },
+  {
+    "start": 88.76,
+    "end": 95.80000000000001,
+    "text": " Interestingly, many very very different real-life graphs in the world seem to follow the power law."
+  },
+  {
+    "start": 95.80000000000001,
+    "end": 101.64000000000001,
+    "text": " If a graph does follow the power law, it would have one large connected component"
+  },
+  {
+    "start": 101.64000000000001,
+    "end": 107.48,
+    "text": " with a very high proportion of nodes connected to it."
+  },
+  {
+    "start": 107.48,
+    "end": 115.0,
+    "text": " So in a power law graph, most nodes have a low degree and some nodes may be disconnected."
+  },
+  {
+    "start": 115.0,
+    "end": 118.84,
+    "text": " The low-degree nodes belong to very dense subgraphs,"
+  },
+  {
+    "start": 118.84,
+    "end": 122.84,
+    "text": " and those subgraphs are connected to each other through hubs."
+  },
+  {
+    "start": 122.84,
+    "end": 126.52,
+    "text": " Since the center of the graph has a high density,"
+  },
+  {
+    "start": 126.52,
+    "end": 129.48,
+    "text": " power-lar graphs can be difficult to compute with."
+  },
+  {
+    "start": 129.48,
+    "end": 134.04,
+    "text": " For example, the shortest path algorithm operating in the dense part"
+  },
+  {
+    "start": 134.04,
+    "end": 138.76,
+    "text": " will possibly be very inefficient, not because of the size of the network,"
+  },
+  {
+    "start": 138.76,
+    "end": 144.6,
+    "text": " but because there are too many paths to explore inside the denser pieces."
+  },
+  {
+    "start": 145.0,
+    "end": 154.1,
+    "text": " The more interesting reason why people study power law graphs is because power law graphs"
+  },
+  {
+    "start": 154.1,
+    "end": 156.84,
+    "text": " are supposed to be robust."
+  },
+  {
+    "start": 156.84,
+    "end": 164.04,
+    "text": " So in nature, all biological networks show power law graphs because it gives you a high"
+  },
+  {
+    "start": 164.04,
+    "end": 167.0,
+    "text": " rate of redundancy against failure and attacks."
+  }
+]

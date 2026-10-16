@@ -1,0 +1,282 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.0,
+    "text": " In this activity we are going to build a degree histogram using the graph that we"
+  },
+  {
+    "start": 5.0,
+    "end": 10.46,
+    "text": " created in the previous activity, hands-on building a graph. Therefore, make"
+  },
+  {
+    "start": 10.46,
+    "end": 15.16,
+    "text": " sure to complete that activity before starting this one."
+  },
+  {
+    "start": 16.16,
+    "end": 21.28,
+    "text": " In the previous activity we created a graph connecting metropolitan areas with"
+  },
+  {
+    "start": 21.28,
+    "end": 25.32,
+    "text": " their respective countries. Let's start this activity by printing the number of"
+  },
+  {
+    "start": 25.32,
+    "end": 29.2,
+    "text": " edges and vertices of our graph. The first thing that we're going to do is"
+  },
+  {
+    "start": 29.2,
+    "end": 34.64,
+    "text": " we're going to take this command metrosgraph.numberofedges and this will return the number"
+  },
+  {
+    "start": 34.64,
+    "end": 41.28,
+    "text": " of edges in our graph which in this case is 65. We can do the same with the number of vertices"
+  },
+  {
+    "start": 41.28,
+    "end": 49.6,
+    "text": " so we're going to take the same command and we're going to type a number of vertices"
+  },
+  {
+    "start": 50.64,
+    "end": 54.32,
+    "text": " and this will return the total number of vertices which is 93 in this case."
+  },
+  {
+    "start": 54.32,
+    "end": 63.08,
+    "text": " In this next step, we are going to define a couple of functions for Spark's Reduce method."
+  },
+  {
+    "start": 63.08,
+    "end": 67.2,
+    "text": " One that returns the maximum value and one that returns the minimum value, depending"
+  },
+  {
+    "start": 67.2,
+    "end": 69.56,
+    "text": " on the type of value that we want to return."
+  },
+  {
+    "start": 69.56,
+    "end": 73.34,
+    "text": " The first one is going to be the maxValue function."
+  },
+  {
+    "start": 73.34,
+    "end": 78.18,
+    "text": " What this function does is that it takes a pair of tuples and it returns the maximum"
+  },
+  {
+    "start": 78.18,
+    "end": 80.6,
+    "text": " value from those two."
+  },
+  {
+    "start": 80.60000000000001,
+    "end": 85.42000000000002,
+    "text": " This can be the number of edges, the number of nodes, or other values that we will explore"
+  },
+  {
+    "start": 85.42000000000002,
+    "end": 86.50000000000001,
+    "text": " later."
+  },
+  {
+    "start": 86.50000000000001,
+    "end": 91.32000000000001,
+    "text": " We type enter and now our function is defined."
+  },
+  {
+    "start": 91.32000000000001,
+    "end": 95.54,
+    "text": " We are going to do the same with the function for the minimum value."
+  },
+  {
+    "start": 95.54,
+    "end": 100.38000000000001,
+    "text": " So we paste this new line of code and this is doing pretty much the same, but instead"
+  },
+  {
+    "start": 100.38000000000001,
+    "end": 105.32000000000001,
+    "text": " of returning the maximum value, it's going to return the minimum value."
+  },
+  {
+    "start": 105.32000000000001,
+    "end": 114.64000000000001,
+    "text": " We also press enter and our function for the minimum value is ready."
+  },
+  {
+    "start": 114.64000000000001,
+    "end": 119.16000000000001,
+    "text": " Now we're going to return some information using the functions that we just defined."
+  },
+  {
+    "start": 119.16000000000001,
+    "end": 122.94000000000001,
+    "text": " The first thing that we're going to return is going to be the vertex ID and the edge"
+  },
+  {
+    "start": 122.94000000000001,
+    "end": 126.42000000000002,
+    "text": " count for the node with the most out edges."
+  },
+  {
+    "start": 126.42000000000002,
+    "end": 132.64000000000001,
+    "text": " So we're going to run this line of code, we press enter, and we get the vertex ID number"
+  },
+  {
+    "start": 132.64000000000001,
+    "end": 142.20000000000002,
+    "text": " 5, but we could have gotten any other vertex ID because all nodes have only one out edge."
+  },
+  {
+    "start": 142.20000000000002,
+    "end": 149.24,
+    "text": " We're going to run the next line of code to see an example of one node with one out edge."
+  },
+  {
+    "start": 149.24,
+    "end": 153.70000000000002,
+    "text": " In this case, it's going to be the vertex ID 44, and this is going to return the city"
+  },
+  {
+    "start": 153.70000000000002,
+    "end": 155.70000000000002,
+    "text": " of Toronto."
+  },
+  {
+    "start": 155.70000000000002,
+    "end": 164.08,
+    "text": " As a next step, we're going to do the same this time to return the vertex ID and the"
+  },
+  {
+    "start": 164.08,
+    "end": 169.78000000000003,
+    "text": " edge count of the node with the most in edges."
+  },
+  {
+    "start": 169.78000000000003,
+    "end": 174.64000000000001,
+    "text": " So this time we change this to in degrees instead of out degrees."
+  },
+  {
+    "start": 174.64000000000001,
+    "end": 180.96,
+    "text": " And we see that it is the vertex ID number 108, the one that meets this criteria and"
+  },
+  {
+    "start": 180.96,
+    "end": 183.8,
+    "text": " it has 14 in edges."
+  },
+  {
+    "start": 183.8,
+    "end": 194.28,
+    "text": " We're going to return this one and that is going to be the United States."
+  },
+  {
+    "start": 194.28,
+    "end": 203.20000000000002,
+    "text": " Next we're going to return the number of nodes which only have one out edge."
+  },
+  {
+    "start": 203.20000000000002,
+    "end": 210.64000000000001,
+    "text": " So we're going to run this in which we're returning the count of nodes with only one"
+  },
+  {
+    "start": 210.64000000000001,
+    "end": 215.52,
+    "text": " out edge and we see that the number of nodes in this case is 65."
+  },
+  {
+    "start": 219.20000000000002,
+    "end": 229.92000000000002,
+    "text": " Next we're going to return the maximum number of edges that any node has. We'll press enter"
+  },
+  {
+    "start": 231.84,
+    "end": 236.32000000000002,
+    "text": " and we get again the vertex ID 108 because it is the one that has the"
+  },
+  {
+    "start": 236.32,
+    "end": 242.64,
+    "text": " most number of edges. We know that is the United States. And now we're going to do the same,"
+  },
+  {
+    "start": 242.64,
+    "end": 249.6,
+    "text": " but this time to see which is the one with the minimum number of edges. And we get the ID 122,"
+  },
+  {
+    "start": 249.6,
+    "end": 254.64,
+    "text": " but it could have been any because there are multiple nodes that only have one edge."
+  },
+  {
+    "start": 259.12,
+    "end": 264.8,
+    "text": " As a final step, we're going to compute the histogram of the degree connectedness. And to"
+  },
+  {
+    "start": 264.8,
+    "end": 269.74,
+    "text": " And to do this, we're going to take the following code from the written instructions."
+  },
+  {
+    "start": 269.74,
+    "end": 271.8,
+    "text": " We paste it."
+  },
+  {
+    "start": 271.8,
+    "end": 276.82,
+    "text": " And what this is doing is that it's taking our metros graph, it's filtering to only keep"
+  },
+  {
+    "start": 276.82,
+    "end": 283.78000000000003,
+    "text": " those nodes in which the vertex ID is above 100, since we only want to keep the countries."
+  },
+  {
+    "start": 283.78000000000003,
+    "end": 290.02,
+    "text": " Then we map them, we group them and count them depending on their number of degrees,"
+  },
+  {
+    "start": 290.02,
+    "end": 293.1,
+    "text": " and then we sort them by the number of degrees."
+  },
+  {
+    "start": 294.8,
+    "end": 303.78000000000003,
+    "text": " We press enter and what we get is the following, we have 18 countries with 1 edge, 4 countries"
+  },
+  {
+    "start": 303.78000000000003,
+    "end": 311.96000000000004,
+    "text": " with 2 edges, 2 with 3, 2 with 5, 1 with 9 and 1 with 14, which we know is the United"
+  },
+  {
+    "start": 311.96000000000004,
+    "end": 313.28000000000003,
+    "text": " States."
+  },
+  {
+    "start": 313.28000000000003,
+    "end": 314.82,
+    "text": " And this is how we conclude this activity."
+  }
+]

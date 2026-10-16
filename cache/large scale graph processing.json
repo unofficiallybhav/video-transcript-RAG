@@ -1,0 +1,97 @@
+[
+  {
+    "start": 0.48,
+    "end": 3.2,
+    "text": " Welcome back to the fourth and final module of the course."
+  },
+  {
+    "start": 4.12,
+    "end": 8.92,
+    "text": " In this module, we'll cover the underlying principles of large-scale graph processing"
+  },
+  {
+    "start": 8.92,
+    "end": 11.88,
+    "text": " and the software infrastructure that supports it."
+  },
+  {
+    "start": 12.84,
+    "end": 17.240000000000002,
+    "text": " So in this module, you'll learn a programming model for graph computation"
+  },
+  {
+    "start": 17.240000000000002,
+    "end": 19.86,
+    "text": " and systems that implement this model."
+  },
+  {
+    "start": 20.92,
+    "end": 25.18,
+    "text": " After this module, you'll be able to formulate graph analytics computations"
+  },
+  {
+    "start": 25.18,
+    "end": 26.900000000000002,
+    "text": " in terms of the programming model."
+  },
+  {
+    "start": 26.900000000000002,
+    "end": 30.900000000000002,
+    "text": " This module will consist of three lessons."
+  },
+  {
+    "start": 30.900000000000002,
+    "end": 34.900000000000006,
+    "text": " The first lesson will revisit the concept of a programming model"
+  },
+  {
+    "start": 34.900000000000006,
+    "end": 39.900000000000006,
+    "text": " and introduce a programming model called Bulk Synchronous Parallel, or BSP,"
+  },
+  {
+    "start": 39.900000000000006,
+    "end": 43.900000000000006,
+    "text": " that is designed specifically for graph-oriented computation."
+  },
+  {
+    "start": 43.900000000000006,
+    "end": 47.900000000000006,
+    "text": " I will discuss two well-known versions of the central idea,"
+  },
+  {
+    "start": 47.900000000000006,
+    "end": 52.900000000000006,
+    "text": " Bregel from Google and GraphLab from Carnegie Mellon University."
+  },
+  {
+    "start": 52.9,
+    "end": 56.9,
+    "text": " The second lesson will discuss two software systems,"
+  },
+  {
+    "start": 56.9,
+    "end": 61.9,
+    "text": " Giraffe that operates on Hadoop and GraphX that operates on Spark."
+  },
+  {
+    "start": 61.9,
+    "end": 67.9,
+    "text": " We'll compare the basic architecture of these two systems and point out their differences."
+  },
+  {
+    "start": 67.9,
+    "end": 72.9,
+    "text": " The final lesson will show example computations using the GraphX platform."
+  },
+  {
+    "start": 72.9,
+    "end": 78.9,
+    "text": " Since GraphX comes with Spark, we have created these examples on the virtual machine which you have access to."
+  },
+  {
+    "start": 78.9,
+    "end": 83.16000000000001,
+    "text": " The code and some datasets are available for those who wish to play with the system."
+  }
+]

@@ -1,0 +1,287 @@
+[
+  {
+    "start": 0.56,
+    "end": 6.32,
+    "text": " In this video, we will explore another fundamental property of graphs called connectivity."
+  },
+  {
+    "start": 8.24,
+    "end": 13.6,
+    "text": " We list two important kinds of graph analytics questions that are based on connectivity."
+  },
+  {
+    "start": 14.56,
+    "end": 18.32,
+    "text": " In the first case, we are asking about the robustness of the network."
+  },
+  {
+    "start": 19.2,
+    "end": 23.76,
+    "text": " Suppose we have a computer network with many servers and a hacker is trying to bring the"
+  },
+  {
+    "start": 23.76,
+    "end": 29.04,
+    "text": " system down. Is there a small set of servers that the hacker can target"
+  },
+  {
+    "start": 29.04,
+    "end": 31.599999999999998,
+    "text": " to disrupt the network."
+  },
+  {
+    "start": 31.599999999999998,
+    "end": 34.78,
+    "text": " What we mean by disrupt is to disconnect a part"
+  },
+  {
+    "start": 34.78,
+    "end": 37.2,
+    "text": " of the network from the rest."
+  },
+  {
+    "start": 37.2,
+    "end": 41.019999999999996,
+    "text": " A similar problem may occur in a power distribution network."
+  },
+  {
+    "start": 41.019999999999996,
+    "end": 44.9,
+    "text": " In that case, an attacker may be able to attack one or two"
+  },
+  {
+    "start": 44.9,
+    "end": 48.06,
+    "text": " central components so that large portions of the network"
+  },
+  {
+    "start": 48.06,
+    "end": 50.16,
+    "text": " loses power."
+  },
+  {
+    "start": 50.16,
+    "end": 54.28,
+    "text": " I have a geneticist colleague at Keck Graduate Institute"
+  },
+  {
+    "start": 54.28,
+    "end": 57.76,
+    "text": " who studied the robustness of biological networks."
+  },
+  {
+    "start": 57.76,
+    "end": 62.66,
+    "text": " He told me that many biological networks have built-in redundancy"
+  },
+  {
+    "start": 62.66,
+    "end": 66.42,
+    "text": " so that even if you disrupt one important gene,"
+  },
+  {
+    "start": 66.42,
+    "end": 68.94,
+    "text": " there are other genes in the network"
+  },
+  {
+    "start": 68.94,
+    "end": 71.12,
+    "text": " which will support the biological function,"
+  },
+  {
+    "start": 71.12,
+    "end": 73.7,
+    "text": " possibly through other routes."
+  },
+  {
+    "start": 73.7,
+    "end": 79.2,
+    "text": " Therefore, a network is robust if removing one or more edges"
+  },
+  {
+    "start": 79.2,
+    "end": 83.32,
+    "text": " or nodes still keeps it connected."
+  },
+  {
+    "start": 83.32,
+    "end": 86.38,
+    "text": " The second category is about network comparison"
+  },
+  {
+    "start": 86.38,
+    "end": 90.03999999999999,
+    "text": " in terms of their overall connectivity."
+  },
+  {
+    "start": 90.03999999999999,
+    "end": 94.66,
+    "text": " The two graphs shown here are very different in their structure."
+  },
+  {
+    "start": 94.66,
+    "end": 97.88,
+    "text": " What are some parameters by which we can compare them?"
+  },
+  {
+    "start": 97.88,
+    "end": 100.14,
+    "text": " Now, to talk about connectivity, we"
+  },
+  {
+    "start": 100.14,
+    "end": 103.41999999999999,
+    "text": " must first define the concept of connectivity."
+  },
+  {
+    "start": 103.41999999999999,
+    "end": 106.53999999999999,
+    "text": " Very simply, a graph is connected"
+  },
+  {
+    "start": 106.53999999999999,
+    "end": 112.06,
+    "text": " if we can reach any node from any other node."
+  },
+  {
+    "start": 112.06,
+    "end": 114.88,
+    "text": " Let's look at the Twitter graph in the picture."
+  },
+  {
+    "start": 114.88,
+    "end": 119.97999999999999,
+    "text": " Clearly, we cannot reach from all nodes to all nodes here."
+  },
+  {
+    "start": 119.97999999999999,
+    "end": 123.34,
+    "text": " Thus, this graph is not connected."
+  },
+  {
+    "start": 123.34,
+    "end": 127.52,
+    "text": " However, we can identify four parts of the graph"
+  },
+  {
+    "start": 127.52,
+    "end": 129.82,
+    "text": " that are themselves connected."
+  },
+  {
+    "start": 129.82,
+    "end": 133.98,
+    "text": " These islands of connected parts are called components"
+  },
+  {
+    "start": 133.98,
+    "end": 137.12,
+    "text": " or connected components of a graph."
+  },
+  {
+    "start": 137.12,
+    "end": 140.12,
+    "text": " For directed graphs, we need to be a little more"
+  },
+  {
+    "start": 140.12,
+    "end": 142.4,
+    "text": " specific about connectivity."
+  },
+  {
+    "start": 142.4,
+    "end": 145.72,
+    "text": " We say that a directed graph is strongly connected"
+  },
+  {
+    "start": 145.72,
+    "end": 148.46,
+    "text": " if we follow the direction of the edges"
+  },
+  {
+    "start": 148.46,
+    "end": 153.08,
+    "text": " and still reach every node from every other node."
+  },
+  {
+    "start": 153.08,
+    "end": 156.48000000000002,
+    "text": " A weaker form of connectivity is if we do not"
+  },
+  {
+    "start": 156.48000000000002,
+    "end": 158.52,
+    "text": " care about the direction of the arrows"
+  },
+  {
+    "start": 158.52,
+    "end": 162.92000000000002,
+    "text": " and can reach every node from every other node."
+  },
+  {
+    "start": 162.92000000000002,
+    "end": 166.54000000000002,
+    "text": " Another way of saying it is that the undirected version"
+  },
+  {
+    "start": 166.54000000000002,
+    "end": 168.8,
+    "text": " of the graph is connected."
+  },
+  {
+    "start": 168.8,
+    "end": 171.64000000000001,
+    "text": " This is called weak connectivity."
+  },
+  {
+    "start": 171.64000000000001,
+    "end": 173.72000000000003,
+    "text": " Look at the graph that we have seen so many times"
+  },
+  {
+    "start": 173.72000000000003,
+    "end": 175.22000000000003,
+    "text": " in this course."
+  },
+  {
+    "start": 175.22000000000003,
+    "end": 177.96,
+    "text": " Is it strongly connected or weakly connected?"
+  },
+  {
+    "start": 185.92000000000002,
+    "end": 189.96,
+    "text": " This leads to some big graph challenges."
+  },
+  {
+    "start": 189.96,
+    "end": 192.8,
+    "text": " Given an arbitrarily large graph,"
+  },
+  {
+    "start": 192.8,
+    "end": 195.4,
+    "text": " can I find the connected components of the graph"
+  },
+  {
+    "start": 195.4,
+    "end": 197.08,
+    "text": " efficiently?"
+  },
+  {
+    "start": 197.08,
+    "end": 200.20000000000002,
+    "text": " Second, given an arbitrarily large graph,"
+  },
+  {
+    "start": 200.20000000000002,
+    "end": 203.96,
+    "text": " Can we find its subgraphs that are strongly connected?"
+  },
+  {
+    "start": 203.96,
+    "end": 206.52,
+    "text": " We'll touch upon these questions in module four."
+  }
+]

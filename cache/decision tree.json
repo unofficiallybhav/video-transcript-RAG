@@ -1,0 +1,777 @@
+[
+  {
+    "start": 0.96,
+    "end": 7.32,
+    "text": " In this lecture, we will look at the decision tree model, a popular method used for classification."
+  },
+  {
+    "start": 7.32,
+    "end": 14.040000000000001,
+    "text": " After this video, you will be able to explain how a decision tree is used for classification,"
+  },
+  {
+    "start": 14.040000000000001,
+    "end": 19.5,
+    "text": " describe the process of constructing a decision tree for classification, and interpret how"
+  },
+  {
+    "start": 19.5,
+    "end": 23.48,
+    "text": " a decision tree comes up with a classification decision."
+  },
+  {
+    "start": 23.48,
+    "end": 29.44,
+    "text": " The idea behind decision trees for classification is to split the data into subsets, where each"
+  },
+  {
+    "start": 29.44,
+    "end": 33.1,
+    "text": " Each subset belongs to only one class."
+  },
+  {
+    "start": 33.1,
+    "end": 38.84,
+    "text": " This is accomplished by dividing the input space into pure regions, that is, regions"
+  },
+  {
+    "start": 38.84,
+    "end": 42.480000000000004,
+    "text": " with samples from only one class."
+  },
+  {
+    "start": 42.480000000000004,
+    "end": 48.16,
+    "text": " With real data, completely pure subsets may not be possible, so the goal is to divide"
+  },
+  {
+    "start": 48.16,
+    "end": 52.68000000000001,
+    "text": " the data into subsets that are as pure as possible."
+  },
+  {
+    "start": 52.68000000000001,
+    "end": 58.24,
+    "text": " That is, each subset contains as many samples as possible from a single class."
+  },
+  {
+    "start": 58.24,
+    "end": 63.28,
+    "text": " Graphically, this is equivalent to dividing the input space into regions that are as pure"
+  },
+  {
+    "start": 63.28,
+    "end": 70.4,
+    "text": " as possible. Boundaries separating these regions are called decision boundaries, and the decision"
+  },
+  {
+    "start": 70.4,
+    "end": 77.24000000000001,
+    "text": " tree model makes classification decisions based on these decision boundaries. A decision"
+  },
+  {
+    "start": 77.24000000000001,
+    "end": 84.64,
+    "text": " tree is a hierarchical structure with nodes and directed edges. The node at the top is"
+  },
+  {
+    "start": 84.64,
+    "end": 90.26,
+    "text": " called the root node. The nodes at the bottom are called the leaf nodes."
+  },
+  {
+    "start": 90.26,
+    "end": 95.82,
+    "text": " Notes that are neither the root node or the leaf nodes are called internal nodes. The"
+  },
+  {
+    "start": 95.82,
+    "end": 102.32,
+    "text": " root and internal nodes have test conditions. Each leaf node has a class label associated"
+  },
+  {
+    "start": 102.32,
+    "end": 108.76,
+    "text": " with it. A classification decision is made by traversing the decision tree starting with"
+  },
+  {
+    "start": 108.76,
+    "end": 114.86,
+    "text": " the root node. At each node, the answer to the test condition determines which branch"
+  },
+  {
+    "start": 114.86,
+    "end": 121.06,
+    "text": " to traverse to. When a leaf node is reached, the category at the leaf node determines the"
+  },
+  {
+    "start": 121.06,
+    "end": 128.06,
+    "text": " classification decision. The depth of a node is the number of edges from the root node"
+  },
+  {
+    "start": 128.06,
+    "end": 133.96,
+    "text": " to that node. The depth of the root node is zero. The depth of a decision tree is the"
+  },
+  {
+    "start": 133.96,
+    "end": 139.68,
+    "text": " number of edges in the longest path from the root node to the leaf node."
+  },
+  {
+    "start": 139.68,
+    "end": 144.5,
+    "text": " The size of a decision tree is the number of nodes in the tree."
+  },
+  {
+    "start": 144.5,
+    "end": 147.12,
+    "text": " This is an example of a decision tree."
+  },
+  {
+    "start": 147.12,
+    "end": 152.56,
+    "text": " It can be used to classify an animal as a mammal or not a mammal."
+  },
+  {
+    "start": 152.56,
+    "end": 158.3,
+    "text": " According to this decision tree, if an animal is warm-blooded, gives life birth, and is"
+  },
+  {
+    "start": 158.3,
+    "end": 161.54000000000002,
+    "text": " a vertebrate, then it is a mammal."
+  },
+  {
+    "start": 161.54,
+    "end": 167.35999999999999,
+    "text": " If an animal does not have all of these three characteristics, then it is not a mammal."
+  },
+  {
+    "start": 167.35999999999999,
+    "end": 173.73999999999998,
+    "text": " A decision tree is built by starting with all samples at a single node, the root node."
+  },
+  {
+    "start": 173.73999999999998,
+    "end": 178.14,
+    "text": " Additional nodes are added when the data is split into subsets."
+  },
+  {
+    "start": 178.14,
+    "end": 184.0,
+    "text": " At a high level, constructing a decision tree consists of the following steps."
+  },
+  {
+    "start": 184.0,
+    "end": 187.66,
+    "text": " Start with all samples at a node."
+  },
+  {
+    "start": 187.66,
+    "end": 193.6,
+    "text": " the samples into subsets based on the input variables. The goal is to create subsets of"
+  },
+  {
+    "start": 193.6,
+    "end": 199.76,
+    "text": " records that are purest, that is, each subset contains as many samples as possible belonging"
+  },
+  {
+    "start": 199.76,
+    "end": 206.51999999999998,
+    "text": " to just one class. Another way to say this is that the subsets should be as homogeneous,"
+  },
+  {
+    "start": 206.51999999999998,
+    "end": 213.35999999999999,
+    "text": " or as pure, as possible. Repeatedly partition data into successively purest subsets until"
+  },
+  {
+    "start": 213.36,
+    "end": 219.76000000000002,
+    "text": " some stopping criterion is satisfied. An algorithm for constructing a decision tree model is"
+  },
+  {
+    "start": 219.76000000000002,
+    "end": 225.0,
+    "text": " referred to as an induction algorithm, so you may hear the term tree induction used"
+  },
+  {
+    "start": 225.0,
+    "end": 229.46,
+    "text": " to describe the process of building a decision tree."
+  },
+  {
+    "start": 229.46,
+    "end": 234.38000000000002,
+    "text": " Note that at each split, the induction algorithm only considers the best way to split that"
+  },
+  {
+    "start": 234.38000000000002,
+    "end": 240.48000000000002,
+    "text": " particular portion of the data. This is referred to as a greedy approach. Greedy algorithms"
+  },
+  {
+    "start": 240.48000000000002,
+    "end": 246.20000000000002,
+    "text": " solve a subset of the problem at a time, and is a necessary approach when solving the entire"
+  },
+  {
+    "start": 246.20000000000002,
+    "end": 252.08,
+    "text": " problem is not feasible. This is the case with decision trees. It is not feasible to"
+  },
+  {
+    "start": 252.08,
+    "end": 258.36,
+    "text": " determine the best tree given a dataset, so the tree has to be built in piecemeal fashion"
+  },
+  {
+    "start": 258.36,
+    "end": 264.02000000000004,
+    "text": " by determining the best way to split the current node at each step, and combining these decisions"
+  },
+  {
+    "start": 264.02000000000004,
+    "end": 267.64000000000004,
+    "text": " together to form the final decision tree."
+  },
+  {
+    "start": 267.64,
+    "end": 272.76,
+    "text": " In constructing a decision tree, how is the data partitioned? How does a decision tree"
+  },
+  {
+    "start": 272.76,
+    "end": 278.78,
+    "text": " determine the best way to split the set of samples at a node? Again, the goal is to partition"
+  },
+  {
+    "start": 278.78,
+    "end": 283.76,
+    "text": " data at a node into subsets that are as pure as possible."
+  },
+  {
+    "start": 283.76,
+    "end": 289.41999999999996,
+    "text": " In this example, the partition shown on the right results in more homogeneous subsets"
+  },
+  {
+    "start": 289.41999999999996,
+    "end": 295.88,
+    "text": " since these subsets contain more samples belonging to a single class than the resulting subsets"
+  },
+  {
+    "start": 295.88,
+    "end": 301.9,
+    "text": " shown on the left. So the partition on the right results in purer subsets and is the"
+  },
+  {
+    "start": 301.9,
+    "end": 308.86,
+    "text": " preferred partition. Therefore, we need a way to measure the purity of a split in order"
+  },
+  {
+    "start": 308.86,
+    "end": 314.42,
+    "text": " to compare different ways to partition a set of data. It turns out that it works out better"
+  },
+  {
+    "start": 314.42,
+    "end": 321.76,
+    "text": " mathematically if we measure the impurity rather than the purity of a split. So the impurity"
+  },
+  {
+    "start": 321.76,
+    "end": 327.82,
+    "text": " measure of a node specifies how mixed the resulting subsets are. Since we want the resulting"
+  },
+  {
+    "start": 327.82,
+    "end": 333.64,
+    "text": " subsets to have homogeneous class labels, not mixed class labels, we want the split"
+  },
+  {
+    "start": 333.64,
+    "end": 337.56,
+    "text": " that minimizes the impurity measure."
+  },
+  {
+    "start": 337.56,
+    "end": 343.3,
+    "text": " A common impurity measure used for determining the best split is the Gini index. The lower"
+  },
+  {
+    "start": 343.3,
+    "end": 349.09999999999997,
+    "text": " the Gini index, the higher the purity of the split. So the decision tree will select the"
+  },
+  {
+    "start": 349.1,
+    "end": 355.5,
+    "text": " a split that minimizes the Gini index. Besides the Gini index, other impurity measures include"
+  },
+  {
+    "start": 355.5,
+    "end": 361.14000000000004,
+    "text": " entropy, or information gain, and misclassification rate."
+  },
+  {
+    "start": 361.14000000000004,
+    "end": 366.3,
+    "text": " The other factor in determining the best way to partition a node is which variable to split"
+  },
+  {
+    "start": 366.3,
+    "end": 372.98,
+    "text": " on. The decision tree will test all variables to determine the best way to split a node,"
+  },
+  {
+    "start": 372.98,
+    "end": 378.86,
+    "text": " using a purity measure such as the Gini index to compare the various possibilities."
+  },
+  {
+    "start": 378.86,
+    "end": 384.92,
+    "text": " Recall that the tree induction algorithm repeatedly splits nodes to get more and more homogenous"
+  },
+  {
+    "start": 384.92,
+    "end": 385.92,
+    "text": " subsets."
+  },
+  {
+    "start": 385.92,
+    "end": 388.04,
+    "text": " So when does this process stop?"
+  },
+  {
+    "start": 388.04,
+    "end": 391.18,
+    "text": " When does the algorithm stop growing the tree?"
+  },
+  {
+    "start": 391.18,
+    "end": 395.52000000000004,
+    "text": " There are several criteria that can be used to determine when a node should no longer"
+  },
+  {
+    "start": 395.52000000000004,
+    "end": 398.8,
+    "text": " be split into subsets."
+  },
+  {
+    "start": 398.8,
+    "end": 403.40000000000003,
+    "text": " The induction algorithm can stop expanding a node when all samples in the node have the"
+  },
+  {
+    "start": 403.40000000000003,
+    "end": 405.54,
+    "text": " same class label."
+  },
+  {
+    "start": 405.54,
+    "end": 410.54,
+    "text": " This means that this set of data is as pure as possible, and further splitting will not"
+  },
+  {
+    "start": 410.54,
+    "end": 414.3,
+    "text": " result in any better partition of the data."
+  },
+  {
+    "start": 414.3,
+    "end": 419.92,
+    "text": " Since getting completely pure subsets is difficult to achieve with real data, this stopping criterion"
+  },
+  {
+    "start": 419.92,
+    "end": 426.92,
+    "text": " can be modified to when a certain percentage of the samples in the node, say 90%, for example,"
+  },
+  {
+    "start": 426.92,
+    "end": 429.72,
+    "text": " have the same class labels."
+  },
+  {
+    "start": 429.72,
+    "end": 434.14000000000004,
+    "text": " The algorithm can stop expanding a node when the number of samples in the node falls below"
+  },
+  {
+    "start": 434.14,
+    "end": 439.94,
+    "text": " a certain minimum value. At this point, the number of samples is too small to make much"
+  },
+  {
+    "start": 439.94,
+    "end": 444.53999999999996,
+    "text": " difference in the classification results with further splitting."
+  },
+  {
+    "start": 444.53999999999996,
+    "end": 449.2,
+    "text": " The induction algorithm can stop expanding a node when the improvement in impurity measure"
+  },
+  {
+    "start": 449.2,
+    "end": 455.03999999999996,
+    "text": " is too small to make much of a difference in classification results."
+  },
+  {
+    "start": 455.03999999999996,
+    "end": 460.15999999999997,
+    "text": " The algorithm can stop expanding a node when the maximum tree depth is reached. This is"
+  },
+  {
+    "start": 460.16,
+    "end": 465.06,
+    "text": " to control the complexity of the resulting tree."
+  },
+  {
+    "start": 465.06,
+    "end": 470.76000000000005,
+    "text": " There can be other criteria that can be used to determine when tree induction should stop."
+  },
+  {
+    "start": 470.76000000000005,
+    "end": 475.22,
+    "text": " Let's take a look at an example to illustrate the tree induction process."
+  },
+  {
+    "start": 475.22,
+    "end": 480.42,
+    "text": " Let's say that we want to classify loan applicants as being likely to repay a loan or not likely"
+  },
+  {
+    "start": 480.42,
+    "end": 486.3,
+    "text": " to repay a loan based on their income and amount of debt they already have."
+  },
+  {
+    "start": 486.3,
+    "end": 490.84000000000003,
+    "text": " Using a decision tree for this classification problem could proceed as follows."
+  },
+  {
+    "start": 490.84000000000003,
+    "end": 496.34000000000003,
+    "text": " Consider the input space of this problem as shown in the left figure."
+  },
+  {
+    "start": 496.34000000000003,
+    "end": 501.5,
+    "text": " One way to split this dataset into homogeneous subsets is to consider the decision boundary"
+  },
+  {
+    "start": 501.5,
+    "end": 504.78000000000003,
+    "text": " where income equals T1."
+  },
+  {
+    "start": 504.78000000000003,
+    "end": 509.42,
+    "text": " To the right of this decision boundary are mostly red samples, and to the left are mostly"
+  },
+  {
+    "start": 509.42,
+    "end": 511.32,
+    "text": " blue samples."
+  },
+  {
+    "start": 511.32,
+    "end": 515.58,
+    "text": " The subsets are not completely homogeneous, but that is the best way to split the original"
+  },
+  {
+    "start": 515.58,
+    "end": 522.76,
+    "text": " data set based on the variable income. This decision boundary is represented in the decision"
+  },
+  {
+    "start": 522.76,
+    "end": 529.64,
+    "text": " tree by the condition income is greater than T1 at the root node. This is the condition"
+  },
+  {
+    "start": 529.64,
+    "end": 535.1600000000001,
+    "text": " used to split the original data set. Samples with income greater than the threshold value"
+  },
+  {
+    "start": 535.1600000000001,
+    "end": 540.08,
+    "text": " of T1 are placed in the right subset, and samples with income less than or equal to"
+  },
+  {
+    "start": 540.08,
+    "end": 546.46,
+    "text": " T1 are placed in the left subset, just as shown in the right diagram."
+  },
+  {
+    "start": 546.46,
+    "end": 551.14,
+    "text": " The right subset is now labeled as red, meaning that the loan applicant is likely to repay"
+  },
+  {
+    "start": 551.14,
+    "end": 553.84,
+    "text": " the loan."
+  },
+  {
+    "start": 553.84,
+    "end": 558.94,
+    "text": " The second step, then, is to determine how to split the region outlined in red."
+  },
+  {
+    "start": 558.94,
+    "end": 564.6,
+    "text": " As shown in the left diagram, in input space, the best way to split this data is specified"
+  },
+  {
+    "start": 564.6,
+    "end": 569.5600000000001,
+    "text": " by the second decision boundary with debt equals T2."
+  },
+  {
+    "start": 569.5600000000001,
+    "end": 574.0200000000001,
+    "text": " This is represented in the decision tree on the right with the addition of the node with"
+  },
+  {
+    "start": 574.0200000000001,
+    "end": 578.32,
+    "text": " condition debt greater than T2."
+  },
+  {
+    "start": 578.32,
+    "end": 582.5600000000001,
+    "text": " Samples with the value of debt greater than T2 are shown in the region above the decision"
+  },
+  {
+    "start": 582.5600000000001,
+    "end": 584.0600000000001,
+    "text": " boundary."
+  },
+  {
+    "start": 584.0600000000001,
+    "end": 589.44,
+    "text": " This region contains all blue samples and so the corresponding node is labeled blue,"
+  },
+  {
+    "start": 589.44,
+    "end": 594.1600000000001,
+    "text": " meaning that the loan applicant is not likely to repay the loan."
+  },
+  {
+    "start": 594.1600000000001,
+    "end": 598.5000000000001,
+    "text": " The third and final split looks at how to split the region outlined in red in the left"
+  },
+  {
+    "start": 598.5,
+    "end": 605.3,
+    "text": " diagram. The best split is specified by the boundary with income equals T3. This splits"
+  },
+  {
+    "start": 605.3,
+    "end": 611.38,
+    "text": " the red region into two pure subsets. This split is represented in the decision tree"
+  },
+  {
+    "start": 611.38,
+    "end": 617.46,
+    "text": " by adding a node with condition income is greater than T3. The left resulting node is"
+  },
+  {
+    "start": 617.46,
+    "end": 623.3,
+    "text": " labeled blue and the right resulting node is labeled red, corresponding to the resulting"
+  },
+  {
+    "start": 623.3000000000001,
+    "end": 627.7800000000001,
+    "text": " subsets within the red border in the left diagram."
+  },
+  {
+    "start": 627.7800000000001,
+    "end": 632.44,
+    "text": " We end with the final decision tree on the right, which implements the decision boundaries"
+  },
+  {
+    "start": 632.44,
+    "end": 636.72,
+    "text": " shown as dashed lines in the left diagram."
+  },
+  {
+    "start": 636.72,
+    "end": 640.2600000000001,
+    "text": " These decision boundaries partition the dataset as shown."
+  },
+  {
+    "start": 640.2600000000001,
+    "end": 645.2800000000001,
+    "text": " The label for each region is determined by the label of the majority of the samples."
+  },
+  {
+    "start": 645.2800000000001,
+    "end": 651.46,
+    "text": " These labels are reflected in the leaf nodes of the decision tree shown on the right."
+  },
+  {
+    "start": 651.46,
+    "end": 656.5400000000001,
+    "text": " You may have noticed that the decision boundaries of a decision tree are parallel to the axes"
+  },
+  {
+    "start": 656.5400000000001,
+    "end": 658.9200000000001,
+    "text": " formed by the variables."
+  },
+  {
+    "start": 658.9200000000001,
+    "end": 662.08,
+    "text": " This is referred to as being rectilinear."
+  },
+  {
+    "start": 662.08,
+    "end": 668.4200000000001,
+    "text": " The boundaries are rectilinear because each split considers only a single variable."
+  },
+  {
+    "start": 668.4200000000001,
+    "end": 672.98,
+    "text": " There are variants of the tree induction algorithm that consider more than one attribute when"
+  },
+  {
+    "start": 672.98,
+    "end": 674.34,
+    "text": " splitting a node."
+  },
+  {
+    "start": 674.34,
+    "end": 680.86,
+    "text": " However, each split has to consider all combinations of combined variables, and so such induction"
+  },
+  {
+    "start": 680.86,
+    "end": 685.34,
+    "text": " algorithms are much more computationally expensive."
+  },
+  {
+    "start": 685.34,
+    "end": 690.12,
+    "text": " There are a few important things to note about the decision tree classifier."
+  },
+  {
+    "start": 690.12,
+    "end": 694.0,
+    "text": " The resulting tree is often simple to understand and interpret."
+  },
+  {
+    "start": 694.0,
+    "end": 697.5600000000001,
+    "text": " This is one of the biggest advantages of decision trees for classification."
+  },
+  {
+    "start": 697.5600000000001,
+    "end": 703.4,
+    "text": " It is often possible to look at the resulting tree to see which variables are important"
+  },
+  {
+    "start": 703.4,
+    "end": 708.84,
+    "text": " to the classification problem, and understand how the classification is performed."
+  },
+  {
+    "start": 708.84,
+    "end": 713.3000000000001,
+    "text": " For this reason, many people would start out with a decision tree classifier to get a feel"
+  },
+  {
+    "start": 713.3000000000001,
+    "end": 718.44,
+    "text": " for the classification problem, even if they end up using more sophisticated models later"
+  },
+  {
+    "start": 718.44,
+    "end": 720.72,
+    "text": " on."
+  },
+  {
+    "start": 720.72,
+    "end": 725.2800000000001,
+    "text": " The tree induction algorithm as described in this lesson is relatively computationally"
+  },
+  {
+    "start": 725.2800000000001,
+    "end": 732.96,
+    "text": " inexpensive, so training a decision tree for classification can be relatively fast."
+  },
+  {
+    "start": 732.96,
+    "end": 737.32,
+    "text": " The greedy approach used by the tree induction algorithm determines the best way to split"
+  },
+  {
+    "start": 737.32,
+    "end": 742.6800000000001,
+    "text": " the portion of the data at a node, but does not guarantee the best solution overall for"
+  },
+  {
+    "start": 742.6800000000001,
+    "end": 746.38,
+    "text": " the entire dataset."
+  },
+  {
+    "start": 746.38,
+    "end": 748.5400000000001,
+    "text": " Decision boundaries are rectilinear."
+  },
+  {
+    "start": 748.5400000000001,
+    "end": 753.62,
+    "text": " This can limit the expressiveness of the resulting model, which means that it may not be able"
+  },
+  {
+    "start": 753.62,
+    "end": 758.5600000000001,
+    "text": " to solve complicated classification problems that require more complex decision boundaries"
+  },
+  {
+    "start": 758.5600000000001,
+    "end": 761.0400000000001,
+    "text": " to be formed."
+  },
+  {
+    "start": 761.0400000000001,
+    "end": 766.7600000000001,
+    "text": " In summary, the decision tree classifier uses a tree-like structure to specify a series"
+  },
+  {
+    "start": 766.76,
+    "end": 772.72,
+    "text": " of conditions that are tested to determine the class label for a sample."
+  },
+  {
+    "start": 772.72,
+    "end": 778.26,
+    "text": " The decision tree is constructed by repeatedly splitting a data partition into successively"
+  },
+  {
+    "start": 778.26,
+    "end": 780.8199999999999,
+    "text": " more homogeneous subsets."
+  },
+  {
+    "start": 780.8199999999999,
+    "end": 783.72,
+    "text": " The resulting tree can often be easy to interpret."
+  }
+]

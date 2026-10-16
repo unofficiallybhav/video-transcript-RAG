@@ -1,0 +1,142 @@
+[
+  {
+    "start": 0.0,
+    "end": 7.08,
+    "text": " In the previous video, we learned what a graph is. We gained insight into both the"
+  },
+  {
+    "start": 7.08,
+    "end": 13.42,
+    "text": " mathematician's view and the computer scientist's view. Now, we want to look at the big picture"
+  },
+  {
+    "start": 13.42,
+    "end": 20.22,
+    "text": " of graph analytics. Why are we doing what we are doing? And why do I need a graph representation"
+  },
+  {
+    "start": 20.22,
+    "end": 26.6,
+    "text": " and graph analytics? Let's start with a graph network, which you may already be familiar"
+  },
+  {
+    "start": 26.6,
+    "end": 32.56,
+    "text": " with? No, Facebook. Here is my Facebook page. Let's look at it and consider some of the"
+  },
+  {
+    "start": 32.56,
+    "end": 43.0,
+    "text": " elements it contains. There is a primary user and that's me. They are my friends. And typically"
+  },
+  {
+    "start": 43.0,
+    "end": 49.36,
+    "text": " there are some posts, some of which may have media in them such as video. What else does"
+  },
+  {
+    "start": 49.36,
+    "end": 58.519999999999996,
+    "text": " it have? Well, let's consider what's inside a post. The post contains text. It has tags."
+  },
+  {
+    "start": 58.519999999999996,
+    "end": 65.56,
+    "text": " I tag some people. Some people comment on my post. If somebody is commenting, then that"
+  },
+  {
+    "start": 65.56,
+    "end": 72.96000000000001,
+    "text": " means there must be a commenter who is also a user in the Facebook. Other people like"
+  },
+  {
+    "start": 72.96000000000001,
+    "end": 81.96000000000001,
+    "text": " my post, or they like a comment, and they also respond to some of the comments."
+  },
+  {
+    "start": 81.96000000000001,
+    "end": 86.84,
+    "text": " Many posts have locations associated with them as well."
+  },
+  {
+    "start": 86.84,
+    "end": 89.34,
+    "text": " When we consider all of these together, do you see the graph?"
+  },
+  {
+    "start": 89.34,
+    "end": 92.42000000000002,
+    "text": " Well, if not, we'll show you."
+  },
+  {
+    "start": 92.42000000000002,
+    "end": 97.08000000000001,
+    "text": " Here we see very much the same types of information, but now they're in a graph."
+  },
+  {
+    "start": 97.08000000000001,
+    "end": 100.30000000000001,
+    "text": " First, notice me on the far left."
+  },
+  {
+    "start": 100.3,
+    "end": 105.25999999999999,
+    "text": " If you look carefully at this graph, you'll also notice there are relations labeled friend"
+  },
+  {
+    "start": 105.25999999999999,
+    "end": 110.96,
+    "text": " of and created post and parts of the post and everything that you saw before that are"
+  },
+  {
+    "start": 110.96,
+    "end": 116.62,
+    "text": " now organized in terms of objects and relationships between objects."
+  },
+  {
+    "start": 116.62,
+    "end": 122.1,
+    "text": " The objects here are the post, comments on the post, replies to the comments and so forth,"
+  },
+  {
+    "start": 122.1,
+    "end": 125.88,
+    "text": " and the relationships also include tagged in or refers to."
+  },
+  {
+    "start": 125.88,
+    "end": 129.62,
+    "text": " So this is sort of the big picture, right?"
+  },
+  {
+    "start": 130.3,
+    "end": 135.28,
+    "text": " Next, we will look at four specific use cases in four different disciplines."
+  },
+  {
+    "start": 136.16000000000003,
+    "end": 138.18,
+    "text": " The first one will be on social media."
+  },
+  {
+    "start": 139.44,
+    "end": 143.94,
+    "text": " The second one will be on biology, where we will look at genes and diseases."
+  },
+  {
+    "start": 145.14000000000001,
+    "end": 150.48000000000002,
+    "text": " The third one will be human information network, which means personal information."
+  },
+  {
+    "start": 151.26000000000002,
+    "end": 153.70000000000002,
+    "text": " And the fourth one will be on smart cities."
+  },
+  {
+    "start": 154.70000000000002,
+    "end": 156.9,
+    "text": " Let's go through these examples one by one."
+  }
+]

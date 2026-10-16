@@ -1,0 +1,547 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.0,
+    "text": " Hello everyone! You have probably heard of machine learning before, enough to grab"
+  },
+  {
+    "start": 5.0,
+    "end": 8.4,
+    "text": " your attention and bring you to this class. However, you might be wondering"
+  },
+  {
+    "start": 8.4,
+    "end": 12.200000000000001,
+    "text": " what machine learning is. We will talk about that in this lecture and discuss"
+  },
+  {
+    "start": 12.200000000000001,
+    "end": 17.5,
+    "text": " how we can see machine learning in action in our day-to-day life. After this"
+  },
+  {
+    "start": 17.5,
+    "end": 22.400000000000002,
+    "text": " video, you will be able to explain what machine learning is and list three"
+  },
+  {
+    "start": 22.400000000000002,
+    "end": 27.900000000000002,
+    "text": " applications of machine learning encountered in everyday life. Since this"
+  },
+  {
+    "start": 27.900000000000002,
+    "end": 33.1,
+    "text": " course is about machine learning, let's start by defining what that means. We hear this term a lot"
+  },
+  {
+    "start": 33.1,
+    "end": 38.22,
+    "text": " these days, used in many contexts, so it's good to start out with a solid definition of what machine"
+  },
+  {
+    "start": 38.22,
+    "end": 45.02,
+    "text": " learning means. Machine learning is the field of study that focuses on computer systems that can"
+  },
+  {
+    "start": 45.02,
+    "end": 51.260000000000005,
+    "text": " learn from data. That is, these systems, often called models, can learn to perform a specific"
+  },
+  {
+    "start": 51.260000000000005,
+    "end": 57.58,
+    "text": " task by analyzing lots of examples for a particular problem. For example, a machine learning model can"
+  },
+  {
+    "start": 57.58,
+    "end": 63.4,
+    "text": " learn to recognize an image of a cat by being shown lots and lots of images of cats."
+  },
+  {
+    "start": 64.56,
+    "end": 69.56,
+    "text": " This notion of learning from data means that a machine learning model can learn a specific task"
+  },
+  {
+    "start": 69.56,
+    "end": 75.68,
+    "text": " without being explicitly programmed. In other words, the machine learning model is not given"
+  },
+  {
+    "start": 75.68,
+    "end": 82.36,
+    "text": " the step-by-step instructions on how to recognize the image of a cat. Instead, the model learns what"
+  },
+  {
+    "start": 82.36,
+    "end": 87.36,
+    "text": " features are important in determining whether a picture contains a cat from the data that it"
+  },
+  {
+    "start": 87.36,
+    "end": 92.6,
+    "text": " has analyzed. Because the model learns to perform this task from data, it's good to"
+  },
+  {
+    "start": 92.6,
+    "end": 97.12,
+    "text": " note that the amount and quality of data available for building the model are"
+  },
+  {
+    "start": 97.12,
+    "end": 102.42,
+    "text": " important factors in how well the model learns the task. Because machine learning"
+  },
+  {
+    "start": 102.42,
+    "end": 106.32,
+    "text": " models can learn from data, they can be used to discover hidden patterns and"
+  },
+  {
+    "start": 106.32,
+    "end": 112.06,
+    "text": " trends in the data. These patterns and trends lead to valuable insights into"
+  },
+  {
+    "start": 112.06,
+    "end": 116.36,
+    "text": " the data. Thus, the use of machine learning allows for data-driven decisions"
+  },
+  {
+    "start": 116.36,
+    "end": 118.96,
+    "text": " to be made for a particular problem."
+  },
+  {
+    "start": 118.96,
+    "end": 121.24,
+    "text": " So to summarize, the field of machine learning"
+  },
+  {
+    "start": 121.24,
+    "end": 123.48,
+    "text": " focuses on the study and construction"
+  },
+  {
+    "start": 123.48,
+    "end": 126.03999999999999,
+    "text": " of computer systems that can learn from data"
+  },
+  {
+    "start": 126.03999999999999,
+    "end": 128.64,
+    "text": " without being explicitly programmed."
+  },
+  {
+    "start": 128.64,
+    "end": 130.4,
+    "text": " Machine learning algorithms and techniques"
+  },
+  {
+    "start": 130.4,
+    "end": 133.16,
+    "text": " are used to build models to discover hidden patterns"
+  },
+  {
+    "start": 133.16,
+    "end": 134.68,
+    "text": " and trends in the data,"
+  },
+  {
+    "start": 134.68,
+    "end": 137.28,
+    "text": " allowing for data-driven decisions to be made."
+  },
+  {
+    "start": 139.06,
+    "end": 140.56,
+    "text": " You may have heard that machine learning"
+  },
+  {
+    "start": 140.56,
+    "end": 142.74,
+    "text": " is an interdisciplinary field."
+  },
+  {
+    "start": 142.74,
+    "end": 144.28,
+    "text": " This is very true."
+  },
+  {
+    "start": 144.28,
+    "end": 146.68,
+    "text": " machine learning combines concepts and methods"
+  },
+  {
+    "start": 146.68,
+    "end": 150.56,
+    "text": " from many disciplines, including math, statistics,"
+  },
+  {
+    "start": 150.56,
+    "end": 152.96,
+    "text": " computer science, artificial intelligence,"
+  },
+  {
+    "start": 152.96,
+    "end": 154.8,
+    "text": " and optimization."
+  },
+  {
+    "start": 154.8,
+    "end": 156.82,
+    "text": " In applying machine learning to a problem,"
+  },
+  {
+    "start": 156.82,
+    "end": 160.96,
+    "text": " domain knowledge is essential to the success of end results."
+  },
+  {
+    "start": 160.96,
+    "end": 163.3,
+    "text": " By domain knowledge, we mean an understanding"
+  },
+  {
+    "start": 163.3,
+    "end": 166.0,
+    "text": " of the application or business domain."
+  },
+  {
+    "start": 166.0,
+    "end": 167.66,
+    "text": " Knowledge about the application,"
+  },
+  {
+    "start": 167.66,
+    "end": 169.8,
+    "text": " the data related to the application,"
+  },
+  {
+    "start": 169.8,
+    "end": 172.24,
+    "text": " and how the outcomes will be used are crucial"
+  },
+  {
+    "start": 172.24,
+    "end": 174.78,
+    "text": " to driving the process of building the machine learning model."
+  },
+  {
+    "start": 175.48000000000002,
+    "end": 179.06,
+    "text": " So domain knowledge is also an integral part of a machine learning solution."
+  },
+  {
+    "start": 181.06,
+    "end": 183.98000000000002,
+    "text": " Machine learning has been used in many different applications,"
+  },
+  {
+    "start": 184.46,
+    "end": 188.44,
+    "text": " many of which you probably encounter in your daily life, perhaps without realizing it."
+  },
+  {
+    "start": 189.92000000000002,
+    "end": 194.68,
+    "text": " One application of machine learning that you likely use this past weekend or even just today"
+  },
+  {
+    "start": 194.68,
+    "end": 196.68,
+    "text": " is credit card fraud detection."
+  },
+  {
+    "start": 197.16000000000003,
+    "end": 200.96,
+    "text": " Every time you use your credit card, the current purchase is analyzed"
+  },
+  {
+    "start": 200.96,
+    "end": 203.3,
+    "text": " against your history of credit card transactions"
+  },
+  {
+    "start": 203.3,
+    "end": 207.10000000000002,
+    "text": " to determine if the current purchase is a legitimate transaction"
+  },
+  {
+    "start": 207.10000000000002,
+    "end": 209.3,
+    "text": " or a potentially fraudulent one."
+  },
+  {
+    "start": 209.86,
+    "end": 212.60000000000002,
+    "text": " If the purchase is very different from your past purchases,"
+  },
+  {
+    "start": 213.22,
+    "end": 216.88,
+    "text": " such as for a big-ticket item in a category that you had never shown an interest in,"
+  },
+  {
+    "start": 217.24,
+    "end": 220.12,
+    "text": " or when the point-of-sales location is from another country,"
+  },
+  {
+    "start": 220.48000000000002,
+    "end": 222.78,
+    "text": " then it will be flagged as a suspicious activity."
+  },
+  {
+    "start": 223.74,
+    "end": 225.88,
+    "text": " In that case, the transaction may be denied,"
+  },
+  {
+    "start": 226.04000000000002,
+    "end": 227.98000000000002,
+    "text": " or you may get a call from your credit card company"
+  },
+  {
+    "start": 227.98000000000002,
+    "end": 230.82,
+    "text": " to confirm that the purchase was indeed made by you."
+  },
+  {
+    "start": 231.52,
+    "end": 235.12,
+    "text": " This is a very common use of machine learning that is encountered in everyday life."
+  },
+  {
+    "start": 236.8,
+    "end": 240.48000000000002,
+    "text": " Another example application of machine learning encountered in daily life is"
+  },
+  {
+    "start": 240.48000000000002,
+    "end": 245.92000000000002,
+    "text": " handwritten digit recognition. When you deposit a handwritten check into an ATM,"
+  },
+  {
+    "start": 245.92000000000002,
+    "end": 250.48000000000002,
+    "text": " a machine learning process is used to read the numbers written on the check to determine the"
+  },
+  {
+    "start": 250.48000000000002,
+    "end": 256.16,
+    "text": " amount of the deposit. Handwritten digits are trickier to decipher than typed digits"
+  },
+  {
+    "start": 256.16,
+    "end": 259.12,
+    "text": " due to the many variations in people's handwriting."
+  },
+  {
+    "start": 260.16,
+    "end": 264.48,
+    "text": " A machine learning system can sift through the different variations to find similar patterns"
+  },
+  {
+    "start": 264.48,
+    "end": 272.08000000000004,
+    "text": " to distinguish a 1 from a 9, for example. Recommendations on websites is another example"
+  },
+  {
+    "start": 272.08000000000004,
+    "end": 277.28000000000003,
+    "text": " application of machine learning that most people have experienced firsthand. After you buy an item"
+  },
+  {
+    "start": 277.28000000000003,
+    "end": 282.72,
+    "text": " on a website, you will often get a list of related items. Often this will be displayed as,"
+  },
+  {
+    "start": 282.72,
+    "end": 289.44000000000005,
+    "text": " customers who bought this item also bought these items, or you may also like. These related items"
+  },
+  {
+    "start": 289.44000000000005,
+    "end": 294.08000000000004,
+    "text": " have been associated with the item you purchased by a machine learning model and are now being"
+  },
+  {
+    "start": 294.08000000000004,
+    "end": 298.96000000000004,
+    "text": " shown to you since you may also be interested in them. This is a common application of machine"
+  },
+  {
+    "start": 298.96000000000004,
+    "end": 304.88000000000005,
+    "text": " learning used often in sales and marketing. Here are some other examples of where machine"
+  },
+  {
+    "start": 304.88000000000005,
+    "end": 310.8,
+    "text": " learning has been used, like targeted ads on mobile devices, sentiment analysis of social"
+  },
+  {
+    "start": 310.8,
+    "end": 316.3,
+    "text": " media data, climate monitoring to detect seasonal patterns, crime pattern"
+  },
+  {
+    "start": 316.3,
+    "end": 321.12,
+    "text": " detection, and effectiveness analysis of drugs, among many other applications. As"
+  },
+  {
+    "start": 321.12,
+    "end": 325.32,
+    "text": " you can see from this short list, machine learning has been used in various"
+  },
+  {
+    "start": 325.32,
+    "end": 331.14,
+    "text": " applications including science, medicine, retail, law enforcement, education, and"
+  },
+  {
+    "start": 331.14,
+    "end": 336.84000000000003,
+    "text": " many others. Let's take a few minutes to discuss the different terms which refer"
+  },
+  {
+    "start": 336.84000000000003,
+    "end": 341.82000000000005,
+    "text": " to this field. The term we are using for this course is machine learning, but you may have"
+  },
+  {
+    "start": 341.82000000000005,
+    "end": 347.8,
+    "text": " heard other terms such as data mining, predictive analytics, and data science. So what is the"
+  },
+  {
+    "start": 347.8,
+    "end": 353.36,
+    "text": " difference between these different terms? As we have discussed, machine learning has its roots"
+  },
+  {
+    "start": 353.36,
+    "end": 358.86,
+    "text": " in statistics, artificial intelligence, and computer science, among other fields. Machine"
+  },
+  {
+    "start": 358.86,
+    "end": 365.82000000000005,
+    "text": " learning encompasses the algorithms and techniques used to learn from data. The term data mining"
+  },
+  {
+    "start": 365.82,
+    "end": 370.18,
+    "text": " became popular around the time that the use of databases become commonplace,"
+  },
+  {
+    "start": 370.76,
+    "end": 375.78,
+    "text": " so data mining was used to refer to activities related to finding patterns in databases and"
+  },
+  {
+    "start": 375.78,
+    "end": 381.14,
+    "text": " data warehouses. There are some practical data management aspects to data mining related to"
+  },
+  {
+    "start": 381.14,
+    "end": 386.56,
+    "text": " accessing data from databases, but the process of finding patterns in data is similar and can"
+  },
+  {
+    "start": 386.56,
+    "end": 393.7,
+    "text": " use the same algorithms and techniques as machine learning. Predictive analytics refers to analyzing"
+  },
+  {
+    "start": 393.7,
+    "end": 399.44,
+    "text": " data in order to predict future outcomes. This term is usually used in the business context"
+  },
+  {
+    "start": 399.44,
+    "end": 404.21999999999997,
+    "text": " to describe activities such as sales forecasting or predicting the purchasing behavior of a"
+  },
+  {
+    "start": 404.21999999999997,
+    "end": 409.09999999999997,
+    "text": " customer. But again, the techniques used to make these predictions are the same techniques for"
+  },
+  {
+    "start": 409.09999999999997,
+    "end": 415.91999999999996,
+    "text": " machine learning. Data science is a new term that is used to describe processing and analyzing data"
+  },
+  {
+    "start": 415.91999999999996,
+    "end": 421.28,
+    "text": " to extract meaning. Again, machine learning techniques can also be used here. Because the"
+  },
+  {
+    "start": 421.28000000000003,
+    "end": 426.46000000000004,
+    "text": " term data science became popular at the same time that big data began appearing, data science"
+  },
+  {
+    "start": 426.46000000000004,
+    "end": 431.6,
+    "text": " usually refers to extracting meaning from big data and so includes approaches for collecting,"
+  },
+  {
+    "start": 431.90000000000003,
+    "end": 437.18,
+    "text": " storing, and managing big data. These terms evolved at different times and may have encompassed"
+  },
+  {
+    "start": 437.18,
+    "end": 441.52000000000004,
+    "text": " different sets of activities, but there have always been more similarities than differences"
+  },
+  {
+    "start": 441.52000000000004,
+    "end": 447.26000000000005,
+    "text": " between them. Now they are often used interchangeably and have come to mean essentially the same"
+  },
+  {
+    "start": 447.26,
+    "end": 453.8,
+    "text": " thing, the process of extracting valuable insight from data. The core algorithms and techniques for"
+  },
+  {
+    "start": 453.8,
+    "end": 461.18,
+    "text": " doing this do not change with different terms. To summarize, in this lecture, we've discussed"
+  },
+  {
+    "start": 461.18,
+    "end": 465.94,
+    "text": " what machine learning is and how it is being used. Machine learning models learn from data"
+  },
+  {
+    "start": 465.94,
+    "end": 471.06,
+    "text": " to perform a task without being explicitly programmed. They are used to discover patterns"
+  },
+  {
+    "start": 471.06,
+    "end": 475.74,
+    "text": " and trends in the data and allow for data-driven decisions to be made for the problem being"
+  },
+  {
+    "start": 475.74,
+    "end": 480.82,
+    "text": " studied. We also discussed in this lecture examples of how machine learning is being used."
+  },
+  {
+    "start": 481.38,
+    "end": 486.16,
+    "text": " We see from the example applications that machine learning can be applied to many different areas."
+  }
+]

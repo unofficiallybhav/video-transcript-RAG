@@ -1,0 +1,357 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.0,
+    "text": " In this activity, we are going to build a classification algorithm using Spark."
+  },
+  {
+    "start": 6.0,
+    "end": 10.0,
+    "text": " Specifically, we are going to build a decision tree."
+  },
+  {
+    "start": 10.0,
+    "end": 15.0,
+    "text": " The process to create our classification algorithm will be the following."
+  },
+  {
+    "start": 15.0,
+    "end": 20.0,
+    "text": " First, we are going to generate a categorical variable from a numeric variable."
+  },
+  {
+    "start": 20.0,
+    "end": 25.0,
+    "text": " Then we are going to aggregate the features into one single column."
+  },
+  {
+    "start": 25.0,
+    "end": 29.92,
+    "text": " Then we're going to split the data into our training and testing sets."
+  },
+  {
+    "start": 30.54,
+    "end": 36.120000000000005,
+    "text": " And finally, we are going to create a decision trick classifier to predict days with low humidity."
+  },
+  {
+    "start": 41.82,
+    "end": 46.64,
+    "text": " To get started with this activity, we are going to do a process that we have done before."
+  },
+  {
+    "start": 46.760000000000005,
+    "end": 49.519999999999996,
+    "text": " We are going to start our Jupyter Coursera container."
+  },
+  {
+    "start": 49.519999999999996,
+    "end": 52.480000000000004,
+    "text": " So we press the start button."
+  },
+  {
+    "start": 52.480000000000004,
+    "end": 59.14,
+    "text": " and now that the container is running we're going to click on this link to open the browser"
+  },
+  {
+    "start": 59.14,
+    "end": 66.72,
+    "text": " and once we are inside a JupyterLab we open the Big Data 4 folder"
+  },
+  {
+    "start": 66.72,
+    "end": 74.02000000000001,
+    "text": " these are all the notebooks and we're going to work with a classification notebook"
+  },
+  {
+    "start": 74.02,
+    "end": 83.86,
+    "text": " with the notebook open we are going to load the different classes that we will be using"
+  },
+  {
+    "start": 83.86,
+    "end": 89.46,
+    "text": " in this activity most of them coming from pi spark sql and pi spark machine learning"
+  },
+  {
+    "start": 89.46,
+    "end": 96.89999999999999,
+    "text": " and we're going to start our spark session calling our app classification and we're going to read"
+  },
+  {
+    "start": 96.89999999999999,
+    "end": 103.62,
+    "text": " the daily weather csv keeping the header true and inferring the schema and we're also going"
+  },
+  {
+    "start": 103.62,
+    "end": 111.08,
+    "text": " to call for the columns just to take a quick look at them. So we'll wait for the cell to"
+  },
+  {
+    "start": 111.08,
+    "end": 118.12,
+    "text": " be executed. And there they are."
+  },
+  {
+    "start": 118.12,
+    "end": 127.12,
+    "text": " We will proceed to drop some information that is not going to be used to build our decision"
+  },
+  {
+    "start": 127.12,
+    "end": 133.36,
+    "text": " tree, for example number, it's a column that we don't need. So we will put the columns"
+  },
+  {
+    "start": 133.36,
+    "end": 139.68,
+    "text": " that we will use as features in a list named feature columns and this is going to facilitate"
+  },
+  {
+    "start": 139.68,
+    "end": 147.28,
+    "text": " some eventual processes. Then we will drop the number column as I said this is not going to be"
+  },
+  {
+    "start": 147.28,
+    "end": 155.28000000000003,
+    "text": " used at all. So we run this cell and then we drop all rows with at least one missing value."
+  },
+  {
+    "start": 156.4,
+    "end": 163.12,
+    "text": " We take a final look at the shape of this data frame and our data frame now has 1064"
+  },
+  {
+    "start": 163.12,
+    "end": 166.8,
+    "text": " rows and 10 columns."
+  },
+  {
+    "start": 169.12,
+    "end": 175.3,
+    "text": " We're going to make a binary variable of the relative humidity 3pm column which"
+  },
+  {
+    "start": 175.3,
+    "end": 179.74,
+    "text": " is the column that we want to classify and for this we're going to use the"
+  },
+  {
+    "start": 179.74,
+    "end": 184.78,
+    "text": " Vinarizer class to create a Vinarizer object or the column. The threshold is"
+  },
+  {
+    "start": 184.78,
+    "end": 190.6,
+    "text": " going to be 24.99 and the output column it's going to be labeled and we're going"
+  },
+  {
+    "start": 190.6,
+    "end": 196.38,
+    "text": " to use the binarizer to create a new data frame that includes this new column."
+  },
+  {
+    "start": 196.38,
+    "end": 201.82,
+    "text": " So we run this cell and now we're going to select the first four rows of our new data"
+  },
+  {
+    "start": 201.82,
+    "end": 208.16,
+    "text": " frame and as we can see the first row has a label of 1 because the relative humidity"
+  },
+  {
+    "start": 208.16,
+    "end": 213.26,
+    "text": " is above the threshold while the other three are below the threshold and have a value of"
+  },
+  {
+    "start": 213.26,
+    "end": 216.26,
+    "text": " zero."
+  },
+  {
+    "start": 216.26,
+    "end": 225.26,
+    "text": " As the next step, we need to put all of our feature in a single column vector."
+  },
+  {
+    "start": 225.26,
+    "end": 231.26,
+    "text": " And to do this, we're going to use the VectorAssembler class that we previously imported."
+  },
+  {
+    "start": 231.26,
+    "end": 235.85999999999999,
+    "text": " We're going to use the feature columns as our input columns, the list that we previously"
+  },
+  {
+    "start": 235.85999999999999,
+    "end": 240.1,
+    "text": " defined, and the output column is going to be called Features."
+  },
+  {
+    "start": 240.1,
+    "end": 245.01999999999998,
+    "text": " After we create this assembler, we're going to use it to transform our data into a new"
+  },
+  {
+    "start": 245.02,
+    "end": 249.58,
+    "text": " DataFrame that includes our assembled features."
+  },
+  {
+    "start": 252.70000000000002,
+    "end": 258.7,
+    "text": " Next we're going to split our data into a training and testing data set using"
+  },
+  {
+    "start": 258.7,
+    "end": 262.72,
+    "text": " the assembled DataFrame that we previously built. We're gonna make a"
+  },
+  {
+    "start": 262.72,
+    "end": 269.02,
+    "text": " random split of 80-20 and we're gonna use the following C. So we run this cell"
+  },
+  {
+    "start": 269.02,
+    "end": 276.97999999999996,
+    "text": " and now we compare the size of both data frames, and we can see that we got 846"
+  },
+  {
+    "start": 276.97999999999996,
+    "end": 284.02,
+    "text": " observations for the training data and 218 observations for the testing data."
+  },
+  {
+    "start": 286.46,
+    "end": 291.35999999999996,
+    "text": " With the data ready, we will proceed to build and train our decision tree"
+  },
+  {
+    "start": 291.35999999999996,
+    "end": 296.82,
+    "text": " classifier. We will use this class, use label as our label column, features as"
+  },
+  {
+    "start": 296.82,
+    "end": 300.24,
+    "text": " as our features column, a maximum depth of five,"
+  },
+  {
+    "start": 300.24,
+    "end": 303.8,
+    "text": " we're gonna specify 20 as the minimum instances per node,"
+  },
+  {
+    "start": 303.8,
+    "end": 306.52,
+    "text": " and Gini as our impurity measure."
+  },
+  {
+    "start": 308.3,
+    "end": 310.24,
+    "text": " Once we have our decision tree object,"
+  },
+  {
+    "start": 310.24,
+    "end": 314.12,
+    "text": " we're gonna use this object to build a pipeline"
+  },
+  {
+    "start": 314.12,
+    "end": 317.44,
+    "text": " and use this pipeline to fit a model"
+  },
+  {
+    "start": 317.44,
+    "end": 319.02,
+    "text": " using the training data."
+  },
+  {
+    "start": 321.42,
+    "end": 322.6,
+    "text": " With the model ready,"
+  },
+  {
+    "start": 322.6,
+    "end": 325.32,
+    "text": " we will now make a predictions data frame,"
+  },
+  {
+    "start": 325.32,
+    "end": 329.2,
+    "text": " which is gonna be an extension of the testing data."
+  },
+  {
+    "start": 329.2,
+    "end": 330.8,
+    "text": " So we run this cell."
+  },
+  {
+    "start": 333.8,
+    "end": 335.18,
+    "text": " And with our predictions ready,"
+  },
+  {
+    "start": 335.18,
+    "end": 337.6,
+    "text": " we're going to select the prediction"
+  },
+  {
+    "start": 337.6,
+    "end": 339.86,
+    "text": " and the label column of this data frame"
+  },
+  {
+    "start": 339.86,
+    "end": 342.21999999999997,
+    "text": " and show the first 10 rows."
+  },
+  {
+    "start": 342.21999999999997,
+    "end": 343.88,
+    "text": " So making a quick comparison,"
+  },
+  {
+    "start": 343.88,
+    "end": 347.26,
+    "text": " we can see that our model is working pretty well"
+  },
+  {
+    "start": 347.26,
+    "end": 350.52,
+    "text": " because nine out of the 10 predictions are correct."
+  },
+  {
+    "start": 355.32,
+    "end": 372.4,
+    "text": " With our predictions ready, we can now set them to a CSV file, so we're going to take, again, our prediction and our label columns from our predictions data frame, and we're going to write a predictions folder inside of Big Data 4, keeping the header true."
+  },
+  {
+    "start": 378.03999999999996,
+    "end": 380.58,
+    "text": " Let's rename the file and take a quick look at it."
+  },
+  {
+    "start": 380.58,
+    "end": 392.59999999999997,
+    "text": " So we open this new predictions folder, there are two files, the first one indicates that our operation was successful, and the second file is the CSV that we are going to rename as predictions."
+  },
+  {
+    "start": 393.34,
+    "end": 401.26,
+    "text": " We open it, and this is the full list of all of the predictions that we got through our model along with the original label."
+  },
+  {
+    "start": 401.91999999999996,
+    "end": 404.59999999999997,
+    "text": " This is how we conclude this classification activity."
+  }
+]

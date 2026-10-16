@@ -1,0 +1,602 @@
+[
+  {
+    "start": 0.8,
+    "end": 5.44,
+    "text": " How do you evaluate your model performance? In this lecture, we will look at different"
+  },
+  {
+    "start": 5.44,
+    "end": 10.32,
+    "text": " metrics that can be used to evaluate the performance of your classification model."
+  },
+  {
+    "start": 10.32,
+    "end": 16.0,
+    "text": " After this video, you will be able to discuss how performance metrics can be used to evaluate"
+  },
+  {
+    "start": 16.0,
+    "end": 22.080000000000002,
+    "text": " models, name three model evaluation metrics, and explain why accuracy may be misleading."
+  },
+  {
+    "start": 23.84,
+    "end": 28.96,
+    "text": " For the classification task, an error occurs when the model's prediction of the class label"
+  },
+  {
+    "start": 28.96,
+    "end": 34.64,
+    "text": " is different from the true class label. We can also define the different types of errors"
+  },
+  {
+    "start": 34.64,
+    "end": 39.9,
+    "text": " in classification depending on the predicted and true labels. Let's take the case where"
+  },
+  {
+    "start": 39.9,
+    "end": 46.38,
+    "text": " the task is to predict whether a given animal is a mammal or not. This is a binary classification"
+  },
+  {
+    "start": 46.38,
+    "end": 54.84,
+    "text": " task with the class label being either yes indicating mammal or no indicating non-mammal."
+  },
+  {
+    "start": 54.84,
+    "end": 58.580000000000005,
+    "text": " Then the different types of errors are as follows."
+  },
+  {
+    "start": 58.580000000000005,
+    "end": 65.68,
+    "text": " If the true label is yes and the predicted label is yes, then this is a true positive,"
+  },
+  {
+    "start": 65.68,
+    "end": 68.5,
+    "text": " abbreviated as TP."
+  },
+  {
+    "start": 68.5,
+    "end": 74.24000000000001,
+    "text": " This is the case where the label is correctly predicted as positive."
+  },
+  {
+    "start": 74.24000000000001,
+    "end": 81.88,
+    "text": " If the true label is no and the predicted label is no, then this is a true negative,"
+  },
+  {
+    "start": 81.88,
+    "end": 84.12,
+    "text": " abbreviated as TN."
+  },
+  {
+    "start": 84.12,
+    "end": 89.88000000000001,
+    "text": " This is the case where the label is correctly predicted as negative."
+  },
+  {
+    "start": 89.88000000000001,
+    "end": 96.62,
+    "text": " If the true label is no and the predicted label is yes, then this is a false positive,"
+  },
+  {
+    "start": 96.62,
+    "end": 99.4,
+    "text": " abbreviated as FP."
+  },
+  {
+    "start": 99.4,
+    "end": 106.74000000000001,
+    "text": " This is the case where the label is incorrectly predicted as positive, when it should be negative."
+  },
+  {
+    "start": 106.74000000000001,
+    "end": 112.34,
+    "text": " If the true label is yes and the predicted label is no, then this is a false negative,"
+  },
+  {
+    "start": 112.34,
+    "end": 119.26,
+    "text": " abbreviated as FN. This is the case where the label is incorrectly predicted as negative"
+  },
+  {
+    "start": 119.26,
+    "end": 124.86,
+    "text": " when it should be positive. These definitions can take a while to sink in, so feel free"
+  },
+  {
+    "start": 124.86,
+    "end": 131.18,
+    "text": " to hit the pause button and replay button several times here to review this part."
+  },
+  {
+    "start": 131.18,
+    "end": 135.36,
+    "text": " These four different types of errors are used in calculating many evaluation metrics for"
+  },
+  {
+    "start": 135.36,
+    "end": 142.0,
+    "text": " classifiers. The most commonly used evaluation metric is the accuracy rate, or accuracy,"
+  },
+  {
+    "start": 142.0,
+    "end": 148.32,
+    "text": " short. For classification, accuracy is calculated as the number of correct predictions divided"
+  },
+  {
+    "start": 148.32,
+    "end": 153.92,
+    "text": " by the total number of predictions. Note that the number of correct predictions is the sum"
+  },
+  {
+    "start": 153.92,
+    "end": 159.4,
+    "text": " of the true positives and the true negatives, since the true and predicted labels match"
+  },
+  {
+    "start": 159.4,
+    "end": 165.46,
+    "text": " for those cases. The accuracy rate is an intuitive way to measure the performance of a classification"
+  },
+  {
+    "start": 165.46,
+    "end": 171.98,
+    "text": " model. Model performance can also be expressed in terms of error rate. Error rate is the"
+  },
+  {
+    "start": 171.98,
+    "end": 175.54,
+    "text": " is the opposite of accuracy rate."
+  },
+  {
+    "start": 175.54,
+    "end": 180.29999999999998,
+    "text": " Let's look at an example to see how accuracy and error rates are calculated."
+  },
+  {
+    "start": 180.29999999999998,
+    "end": 184.82,
+    "text": " The table on the left lists the true label along with the model's prediction for a"
+  },
+  {
+    "start": 184.82,
+    "end": 187.22,
+    "text": " dataset of 10 samples."
+  },
+  {
+    "start": 187.22,
+    "end": 191.32,
+    "text": " First, let's figure out the number of true positives."
+  },
+  {
+    "start": 191.32,
+    "end": 197.26,
+    "text": " Recall that a true positive occurs when the output is correctly predicted as positive."
+  },
+  {
+    "start": 197.26,
+    "end": 201.85999999999999,
+    "text": " In other words, the true label is yes and the model's prediction is yes."
+  },
+  {
+    "start": 201.86,
+    "end": 206.42000000000002,
+    "text": " In this example, there are three true positives, as indicated by the red arrows."
+  },
+  {
+    "start": 206.42000000000002,
+    "end": 208.86,
+    "text": " So TP equals 3."
+  },
+  {
+    "start": 208.86,
+    "end": 212.9,
+    "text": " Remember that value, as we'll need it later."
+  },
+  {
+    "start": 212.9,
+    "end": 215.88000000000002,
+    "text": " Now let's figure out the number of true negatives."
+  },
+  {
+    "start": 215.88000000000002,
+    "end": 220.84,
+    "text": " A true negative occurs when the output is correctly predicted as negative."
+  },
+  {
+    "start": 220.84,
+    "end": 224.94000000000003,
+    "text": " In other words, the true label is no and the model's prediction is no."
+  },
+  {
+    "start": 224.94000000000003,
+    "end": 229.36,
+    "text": " In this example, there are four true negatives, as indicated by the green arrows."
+  },
+  {
+    "start": 229.36,
+    "end": 231.48000000000002,
+    "text": " So TN equals 4."
+  },
+  {
+    "start": 231.48000000000002,
+    "end": 235.32000000000002,
+    "text": " We'll need to remember this value as well."
+  },
+  {
+    "start": 235.32000000000002,
+    "end": 240.64000000000001,
+    "text": " Now we use the values for tp and tn to calculate the accuracy rate."
+  },
+  {
+    "start": 240.64000000000001,
+    "end": 247.66000000000003,
+    "text": " Using the equation for accuracy rate, if we plug in 3 for tp and 4 for tn, we get 7 correct"
+  },
+  {
+    "start": 247.66000000000003,
+    "end": 250.24,
+    "text": " predictions for the numerator."
+  },
+  {
+    "start": 250.24,
+    "end": 255.52,
+    "text": " The denominator is simply the total number of samples in our dataset, which is 10."
+  },
+  {
+    "start": 255.52,
+    "end": 264.12,
+    "text": " So the accuracy rate for our example is 7 out of 10, which is 0.7 or 70%."
+  },
+  {
+    "start": 264.12,
+    "end": 267.88,
+    "text": " The error rate is the exact opposite of the accuracy rate."
+  },
+  {
+    "start": 267.88,
+    "end": 273.14,
+    "text": " To calculate the error rate, we simply subtract the accuracy rate from 1."
+  },
+  {
+    "start": 273.14,
+    "end": 279.0,
+    "text": " For our example, that is 1 minus 0.7, which is 0.3."
+  },
+  {
+    "start": 279.0,
+    "end": 285.36,
+    "text": " So the error rate for this example is 0.3 or 30%."
+  },
+  {
+    "start": 285.36,
+    "end": 291.8,
+    "text": " There is a limitation with accuracy and error rates when you have a class imbalance problem."
+  },
+  {
+    "start": 291.8,
+    "end": 295.66,
+    "text": " This is when there are very few samples of the class of interest and the majority are"
+  },
+  {
+    "start": 295.66,
+    "end": 297.84000000000003,
+    "text": " negative examples."
+  },
+  {
+    "start": 297.84000000000003,
+    "end": 302.58000000000004,
+    "text": " An example of this is identifying if a tumor is cancerous or not."
+  },
+  {
+    "start": 302.58000000000004,
+    "end": 306.7,
+    "text": " What is of interest is identifying samples with cancerous tumors."
+  },
+  {
+    "start": 306.7,
+    "end": 311.18,
+    "text": " But these positive cases where the tumor is cancerous are very rare."
+  },
+  {
+    "start": 311.18,
+    "end": 315.74,
+    "text": " So you end up with a very small fraction of positive samples, and most of the samples"
+  },
+  {
+    "start": 315.74,
+    "end": 320.98,
+    "text": " are negative, thus the name class imbalance problem."
+  },
+  {
+    "start": 320.98,
+    "end": 325.88,
+    "text": " What could be the problem with using accuracy for a class imbalance problem?"
+  },
+  {
+    "start": 325.88,
+    "end": 331.38,
+    "text": " Consider the situation where only 3% of the cases are cancerous tumors."
+  },
+  {
+    "start": 331.38,
+    "end": 337.04,
+    "text": " If the classification model always predicts non-cancer, it will have an accuracy rate"
+  },
+  {
+    "start": 337.04,
+    "end": 343.92,
+    "text": " of 97%, since 97% of the samples will have non-cancerous tumors."
+  },
+  {
+    "start": 343.92,
+    "end": 349.34000000000003,
+    "text": " But note that in this case, the model fails to detect any cancer cases at all."
+  },
+  {
+    "start": 349.34000000000003,
+    "end": 352.56,
+    "text": " So the accuracy rate is very misleading here."
+  },
+  {
+    "start": 352.56,
+    "end": 356.74,
+    "text": " You may think that your model is performing very well with such a high accuracy rate,"
+  },
+  {
+    "start": 356.74,
+    "end": 362.16,
+    "text": " but in fact, it cannot identify any of the cases in the class of interest."
+  },
+  {
+    "start": 362.16,
+    "end": 367.02000000000004,
+    "text": " In these cases, we need evaluation metrics that can capture how well the model classifies"
+  },
+  {
+    "start": 367.02,
+    "end": 371.18,
+    "text": " positive versus negative classes."
+  },
+  {
+    "start": 371.18,
+    "end": 376.46,
+    "text": " A pair of evaluation metrics that are commonly used when there is a class imbalance are precision"
+  },
+  {
+    "start": 376.46,
+    "end": 378.64,
+    "text": " and recall."
+  },
+  {
+    "start": 378.64,
+    "end": 383.5,
+    "text": " Precision is defined as the number of true positives divided by the sum of true positives"
+  },
+  {
+    "start": 383.5,
+    "end": 385.59999999999997,
+    "text": " and false positives."
+  },
+  {
+    "start": 385.59999999999997,
+    "end": 391.44,
+    "text": " In other words, it is the number of true positives divided by the total number of samples predicted"
+  },
+  {
+    "start": 391.44,
+    "end": 394.46,
+    "text": " as being positive."
+  },
+  {
+    "start": 394.46000000000004,
+    "end": 399.54,
+    "text": " Recall is defined as the number of true positives divided by the sum of true positives and false"
+  },
+  {
+    "start": 399.54,
+    "end": 405.62000000000006,
+    "text": " negatives. It is the number of true positives divided by the total number of samples actually"
+  },
+  {
+    "start": 405.62000000000006,
+    "end": 408.88000000000005,
+    "text": " belonging to the true class."
+  },
+  {
+    "start": 408.88000000000005,
+    "end": 413.6,
+    "text": " Here is an illustration that shows precision and recall. The selected elements indicated"
+  },
+  {
+    "start": 413.6,
+    "end": 419.96000000000004,
+    "text": " by the green half circle are the true positives, that is, samples predicted as positive and"
+  },
+  {
+    "start": 419.96000000000004,
+    "end": 422.64000000000004,
+    "text": " are actually positive."
+  },
+  {
+    "start": 422.64,
+    "end": 427.82,
+    "text": " The relevant elements indicated by the green half circle and the green half rectangle are"
+  },
+  {
+    "start": 427.82,
+    "end": 431.2,
+    "text": " the true positives plus the false negatives."
+  },
+  {
+    "start": 431.2,
+    "end": 436.4,
+    "text": " That is, samples that are actually positive, but some are correctly predicted as positive"
+  },
+  {
+    "start": 436.4,
+    "end": 440.24,
+    "text": " and some are incorrectly predicted as negative."
+  },
+  {
+    "start": 440.24,
+    "end": 445.76,
+    "text": " Recall then is the number of samples correctly predicted as positive divided by all samples"
+  },
+  {
+    "start": 445.76,
+    "end": 449.12,
+    "text": " that are actually positive."
+  },
+  {
+    "start": 449.12,
+    "end": 454.02,
+    "text": " The entire circle indicated by the green half circle and the pink half circle are the true"
+  },
+  {
+    "start": 454.02,
+    "end": 457.02,
+    "text": " positives plus the false positives."
+  },
+  {
+    "start": 457.02,
+    "end": 461.84000000000003,
+    "text": " That is, samples that were predicted as positive, although some are actually positive and some"
+  },
+  {
+    "start": 461.84000000000003,
+    "end": 464.18,
+    "text": " are actually negative."
+  },
+  {
+    "start": 464.18,
+    "end": 470.0,
+    "text": " Then precision is the number of samples correctly predicted as positive divided by the number"
+  },
+  {
+    "start": 470.0,
+    "end": 474.66,
+    "text": " of all samples predicted as positive."
+  },
+  {
+    "start": 474.66,
+    "end": 478.92,
+    "text": " Precision is considered a measure of exactness because it calculates the percentage of samples"
+  },
+  {
+    "start": 478.92,
+    "end": 483.76000000000005,
+    "text": " predicted as positive which are actually in the positive class."
+  },
+  {
+    "start": 483.76000000000005,
+    "end": 488.42,
+    "text": " Recall is considered a measure of completeness because it calculates the percentage of positive"
+  },
+  {
+    "start": 488.42,
+    "end": 492.74,
+    "text": " samples that the model correctly identified."
+  },
+  {
+    "start": 492.74,
+    "end": 495.78000000000003,
+    "text": " There is a trade-off between precision and recall."
+  },
+  {
+    "start": 495.78000000000003,
+    "end": 502.04,
+    "text": " A perfect precision score of 1 for a class C means that every sample predicted as belonging"
+  },
+  {
+    "start": 502.04,
+    "end": 507.22,
+    "text": " to Class C does indeed belong to Class C. But this says nothing about the number of"
+  },
+  {
+    "start": 507.22,
+    "end": 514.9200000000001,
+    "text": " samples from Class C that were predicted incorrectly. A perfect recall score of 1 for a Class C"
+  },
+  {
+    "start": 514.9200000000001,
+    "end": 519.9200000000001,
+    "text": " means that every sample from Class C was correctly labeled, but this doesn't say anything"
+  },
+  {
+    "start": 519.9200000000001,
+    "end": 525.12,
+    "text": " about how many other samples were incorrectly labeled as belonging to Class C, so they are"
+  },
+  {
+    "start": 525.12,
+    "end": 530.8000000000001,
+    "text": " used together. For example, precision values can be compared for a fixed value of recall"
+  },
+  {
+    "start": 530.8,
+    "end": 537.8,
+    "text": " or vice versa. The goal for classification is to maximize both precision and recall."
+  },
+  {
+    "start": 538.24,
+    "end": 543.04,
+    "text": " Precision and recall can be combined into a single metric, called the F-measure. The"
+  },
+  {
+    "start": 543.04,
+    "end": 549.64,
+    "text": " equation for that is two times the product of precision and recall divided by their sum."
+  },
+  {
+    "start": 549.64,
+    "end": 554.8,
+    "text": " There are different versions of the F-measure. The equation on this slide is for the F-1"
+  },
+  {
+    "start": 554.8,
+    "end": 560.38,
+    "text": " measure, which is the most commonly used variant of the F-measure. With the F-1 measure, precision"
+  },
+  {
+    "start": 560.38,
+    "end": 567.38,
+    "text": " and recall are equally weighted. The F2 measure weighs recall higher than precision, and the"
+  },
+  {
+    "start": 567.38,
+    "end": 574.22,
+    "text": " F0.5 measure weighs precision higher than recall. The value for the F1 measure ranges"
+  },
+  {
+    "start": 574.22,
+    "end": 580.14,
+    "text": " from 0 to 1, with higher values giving better classification performance."
+  },
+  {
+    "start": 580.14,
+    "end": 584.9,
+    "text": " In summary, there are several metrics for evaluating the performance of a classification"
+  },
+  {
+    "start": 584.9,
+    "end": 590.22,
+    "text": " model. They are defined in terms of the types of errors you can get in a classification"
+  },
+  {
+    "start": 590.22,
+    "end": 596.52,
+    "text": " problem. We covered some of the most commonly used evaluation metrics in this lecture, namely"
+  },
+  {
+    "start": 596.52,
+    "end": 600.72,
+    "text": " accuracy in error rates, precision in recall, and F1 measure."
+  }
+]

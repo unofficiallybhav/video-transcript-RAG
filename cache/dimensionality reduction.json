@@ -1,0 +1,412 @@
+[
+  {
+    "start": 0.64,
+    "end": 4.32,
+    "text": " The data used in machine learning processes often have many variables."
+  },
+  {
+    "start": 4.88,
+    "end": 10.72,
+    "text": " This is what we call highly dimensional data. Most of these dimensions may or may not matter"
+  },
+  {
+    "start": 10.72,
+    "end": 15.92,
+    "text": " in the context of our application or the questions we are asking. Reducing such high"
+  },
+  {
+    "start": 15.92,
+    "end": 21.44,
+    "text": " dimensions to a more manageable set of related and useful variables improves the performance"
+  },
+  {
+    "start": 21.44,
+    "end": 26.32,
+    "text": " and accuracy of our analysis. After this video, you will be able to"
+  },
+  {
+    "start": 26.32,
+    "end": 33.32,
+    "text": " explain what dimensionality reduction is, discuss the benefits of dimensionality reduction,"
+  },
+  {
+    "start": 33.32,
+    "end": 37.32,
+    "text": " and describe how PCA transforms your data."
+  },
+  {
+    "start": 37.32,
+    "end": 43.32,
+    "text": " The number of features or variables you have in your dataset determines the number of dimensions,"
+  },
+  {
+    "start": 43.32,
+    "end": 46.32,
+    "text": " or the dimensionality, of your data."
+  },
+  {
+    "start": 46.32,
+    "end": 50.32,
+    "text": " If your dataset has two features, then it is two-dimensional data."
+  },
+  {
+    "start": 50.32,
+    "end": 55.32,
+    "text": " If it has three features, then it is three-dimensional data, and so on."
+  },
+  {
+    "start": 55.32,
+    "end": 60.32,
+    "text": " You want to use as many features as possible to capture the characteristics of your data,"
+  },
+  {
+    "start": 60.32,
+    "end": 64.32,
+    "text": " but you also don't want the dimensionality of your data to be too high."
+  },
+  {
+    "start": 64.32,
+    "end": 70.32,
+    "text": " As the dimensionality increases, the problem space that you're looking at increases,"
+  },
+  {
+    "start": 70.32,
+    "end": 75.32,
+    "text": " requiring substantially more instances to adequately sample that space."
+  },
+  {
+    "start": 75.32,
+    "end": 82.32,
+    "text": " So as the dimensionality increases, the space that you're looking at grows exponentially."
+  },
+  {
+    "start": 82.32000000000001,
+    "end": 88.80000000000001,
+    "text": " As the space grows, data becomes increasingly sparse. In this diagram, we see how the problem"
+  },
+  {
+    "start": 88.80000000000001,
+    "end": 96.68,
+    "text": " space grows as the dimensionality increases from 1 to 2 to 3. In the left plot, we have"
+  },
+  {
+    "start": 96.68,
+    "end": 103.16000000000001,
+    "text": " a one-dimensional space, partitioned into four regions, each with size of 5 units. The"
+  },
+  {
+    "start": 103.16000000000001,
+    "end": 109.24000000000001,
+    "text": " middle plot shows a two-dimensional space with 5 by 5 regions. The number of regions"
+  },
+  {
+    "start": 109.24000000000001,
+    "end": 116.16000000000001,
+    "text": " has now grown from 4 to 16. In the third plot, the problem space is three-dimensional, with"
+  },
+  {
+    "start": 116.16000000000001,
+    "end": 124.58000000000001,
+    "text": " 5x5x5 regions. The number of regions increased even more to 64. We see that as the number"
+  },
+  {
+    "start": 124.58000000000001,
+    "end": 130.9,
+    "text": " of dimensions increases, the number of regions increases exponentially, and the data becomes"
+  },
+  {
+    "start": 130.9,
+    "end": 133.60000000000002,
+    "text": " increasingly sparse."
+  },
+  {
+    "start": 133.6,
+    "end": 139.48,
+    "text": " With a small data set relative to the problem space, analysis results degrade."
+  },
+  {
+    "start": 139.48,
+    "end": 144.06,
+    "text": " In addition, certain calculations used in analysis become much more difficult to define"
+  },
+  {
+    "start": 144.06,
+    "end": 146.22,
+    "text": " and calculate effectively."
+  },
+  {
+    "start": 146.22,
+    "end": 150.6,
+    "text": " For example, distances between samples are harder to compare since all samples are far"
+  },
+  {
+    "start": 150.6,
+    "end": 152.35999999999999,
+    "text": " away from each other."
+  },
+  {
+    "start": 152.35999999999999,
+    "end": 156.76,
+    "text": " All of these challenges represent the difficulty of dealing with high-dimensional data and"
+  },
+  {
+    "start": 156.76,
+    "end": 161.42,
+    "text": " is referred to as the curse of dimensionality."
+  },
+  {
+    "start": 161.42000000000002,
+    "end": 166.22000000000003,
+    "text": " To avoid the curse of dimensionality, you want to reduce the dimensionality of your"
+  },
+  {
+    "start": 166.22000000000003,
+    "end": 171.74,
+    "text": " data. This means finding a smaller subset of features that can effectively capture the"
+  },
+  {
+    "start": 171.74,
+    "end": 176.52,
+    "text": " characteristics of your data. Recall from the lecture on feature selection,"
+  },
+  {
+    "start": 176.52,
+    "end": 181.58,
+    "text": " part of data preparation is to select the features to use. For example, you can remove"
+  },
+  {
+    "start": 181.58,
+    "end": 186.86,
+    "text": " a feature that is very correlated with another feature. Using feature selection techniques"
+  },
+  {
+    "start": 186.86,
+    "end": 192.42000000000002,
+    "text": " to select a subset of features is one approach to dimensionality reduction."
+  },
+  {
+    "start": 192.42000000000002,
+    "end": 197.14000000000001,
+    "text": " Another approach to dimensionality reduction is to mathematically determine the most important"
+  },
+  {
+    "start": 197.14000000000001,
+    "end": 202.82000000000002,
+    "text": " dimensions to keep and ignore the rest. The idea is to find a smaller subset of dimensions"
+  },
+  {
+    "start": 202.82000000000002,
+    "end": 208.92000000000002,
+    "text": " that captures most of the variation in your data. This reduces the dimensions of the data"
+  },
+  {
+    "start": 208.92000000000002,
+    "end": 214.4,
+    "text": " while eliminating irrelevant features, making the subsequent analysis simpler."
+  },
+  {
+    "start": 214.4,
+    "end": 219.72,
+    "text": " A technique commonly used to find the subset of most important dimensions is called Principle"
+  },
+  {
+    "start": 219.72,
+    "end": 223.34,
+    "text": " Component Analysis, or PCA for short."
+  },
+  {
+    "start": 223.34,
+    "end": 228.86,
+    "text": " The goal of PCA is to map the data from the original high-dimensional space to a lower"
+  },
+  {
+    "start": 228.86,
+    "end": 234.5,
+    "text": " dimensional space that captures as much of the variation in the data as possible."
+  },
+  {
+    "start": 234.5,
+    "end": 240.36,
+    "text": " In other words, PCA aims to find the most useful subset of dimensions to summarize the"
+  },
+  {
+    "start": 240.36,
+    "end": 242.42000000000002,
+    "text": " data."
+  },
+  {
+    "start": 242.42000000000002,
+    "end": 247.88000000000002,
+    "text": " This plot illustrates the idea behind PCA. Here, we have data samples in a two-dimensional"
+  },
+  {
+    "start": 247.88000000000002,
+    "end": 253.92000000000002,
+    "text": " space that is defined by the x-axis and the y-axis. You can see that most of the variation"
+  },
+  {
+    "start": 253.92000000000002,
+    "end": 259.64,
+    "text": " in the data lies along the red diagonal line. This means that the data samples are best"
+  },
+  {
+    "start": 259.64,
+    "end": 264.82,
+    "text": " differentiated along this dimension because they are spread out, not clumped together"
+  },
+  {
+    "start": 264.82,
+    "end": 270.90000000000003,
+    "text": " along this dimension. This dimension, indicated by the red line, is the first principal component"
+  },
+  {
+    "start": 270.9,
+    "end": 276.59999999999997,
+    "text": " labeled as PC1 in the plot. It captures the largest amount of variance along a single"
+  },
+  {
+    "start": 276.59999999999997,
+    "end": 284.47999999999996,
+    "text": " dimension in the data. PC1, indicated by the red line, does not correspond to either axis."
+  },
+  {
+    "start": 284.47999999999996,
+    "end": 289.29999999999995,
+    "text": " The next principal component is determined by looking in the direction that is orthogonal,"
+  },
+  {
+    "start": 289.29999999999995,
+    "end": 294.26,
+    "text": " in other words perpendicular, to the first principal component, which captures the next"
+  },
+  {
+    "start": 294.26,
+    "end": 300.14,
+    "text": " largest amount of variance in the data. This is the second principal component, PC2, and"
+  },
+  {
+    "start": 300.14,
+    "end": 305.58,
+    "text": " is indicated by the green line in the plot. This process can be repeated to find as many"
+  },
+  {
+    "start": 305.58,
+    "end": 310.88,
+    "text": " principal components as desired. Note that the principal components do not align with"
+  },
+  {
+    "start": 310.88,
+    "end": 316.82,
+    "text": " either the x-axis or the y-axis in that they are orthogonal, in other words, perpendicular"
+  },
+  {
+    "start": 316.82,
+    "end": 323.36,
+    "text": " to each other. This is what KCA does. It finds the underlying dimensions, the principal components,"
+  },
+  {
+    "start": 323.36,
+    "end": 328.64,
+    "text": " that capture as much of the variation in the data as possible. These principal components"
+  },
+  {
+    "start": 328.64,
+    "end": 333.76,
+    "text": " form a new coordinate system to transform the data to instead of the conventional dimensions"
+  },
+  {
+    "start": 333.76,
+    "end": 336.88,
+    "text": " like X, Y, and Z."
+  },
+  {
+    "start": 336.88,
+    "end": 342.24,
+    "text": " So how does PCA help with dimensionality reduction? Let's look again at this plot with the first"
+  },
+  {
+    "start": 342.24,
+    "end": 347.36,
+    "text": " principal component. Since the first principal component captures most of the variation in"
+  },
+  {
+    "start": 347.36,
+    "end": 351.96,
+    "text": " the data, the original data samples can be mapped to this dimension indicated by the"
+  },
+  {
+    "start": 351.96,
+    "end": 357.64,
+    "text": " red line with minimum loss of information. In this case, then, we map a two-dimensional"
+  },
+  {
+    "start": 357.64,
+    "end": 362.64,
+    "text": " data set to a one-dimensional space, while keeping as much information as possible."
+  },
+  {
+    "start": 362.64,
+    "end": 368.64,
+    "text": " Here are some main points about principal components analysis. PCA finds a new coordinate"
+  },
+  {
+    "start": 368.64,
+    "end": 373.64,
+    "text": " system for your data, such that the first coordinate, defined by the first principal"
+  },
+  {
+    "start": 373.64,
+    "end": 379.64,
+    "text": " component, captures the greatest variance in your data. The second coordinate, defined"
+  },
+  {
+    "start": 379.64,
+    "end": 384.64,
+    "text": " by the second principal component, captures the second greatest variance in the data,"
+  },
+  {
+    "start": 384.64,
+    "end": 390.32,
+    "text": " The first few principal components that capture most of the variance in the data can be used"
+  },
+  {
+    "start": 390.32,
+    "end": 396.68,
+    "text": " to define a lower dimensional space for your data. PCA can be a very useful technique for"
+  },
+  {
+    "start": 396.68,
+    "end": 402.56,
+    "text": " dimensionality reduction, especially when working with high dimensional data."
+  },
+  {
+    "start": 402.56,
+    "end": 407.12,
+    "text": " While PCA is a useful technique for reducing the dimensionality of your data, which can"
+  },
+  {
+    "start": 407.12,
+    "end": 411.59999999999997,
+    "text": " help with the downstream analysis, it can also make the resulting analysis models more"
+  },
+  {
+    "start": 411.6,
+    "end": 417.44,
+    "text": " difficult to interpret. The original features in your dataset have specific meanings such"
+  },
+  {
+    "start": 417.44,
+    "end": 423.90000000000003,
+    "text": " as income, age, and occupation. By mapping the data to a new coordinate system defined"
+  },
+  {
+    "start": 423.90000000000003,
+    "end": 429.28000000000003,
+    "text": " by principal components, the dimensions in your transformed data no longer have natural"
+  },
+  {
+    "start": 429.28000000000003,
+    "end": 433.88,
+    "text": " meanings. This should be kept in mind when using PCA for dimensionality reduction."
+  }
+]

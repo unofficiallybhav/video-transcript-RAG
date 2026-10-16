@@ -1,0 +1,192 @@
+[
+  {
+    "start": 0.56,
+    "end": 6.5600000000000005,
+    "text": " In this activity, we are going to plot the degree histogram that we created in the previous activity,"
+  },
+  {
+    "start": 6.5600000000000005,
+    "end": 12.72,
+    "text": " hence on building a degree histogram. This is the final part of a three-part activity."
+  },
+  {
+    "start": 16.16,
+    "end": 21.12,
+    "text": " This is how we finished the previous activity. We took the metros graph and calculated the"
+  },
+  {
+    "start": 21.12,
+    "end": 27.44,
+    "text": " degree histogram and these are the values that we got. To begin this activity, we are going to"
+  },
+  {
+    "start": 27.44,
+    "end": 33.32,
+    "text": " import the libraries that we need to build our histogram chart."
+  },
+  {
+    "start": 33.32,
+    "end": 42.34,
+    "text": " We press enter and now we are ready to start."
+  },
+  {
+    "start": 42.34,
+    "end": 48.2,
+    "text": " As a second step, we are going to define a function to calculate the degree histogram."
+  },
+  {
+    "start": 48.2,
+    "end": 52.86,
+    "text": " This is pretty much the same code that we used the last time, but this time we are defining"
+  },
+  {
+    "start": 52.86,
+    "end": 62.14,
+    "text": " it as a function. So again we filter the vertex ID to only keep countries, we map them, we group them,"
+  },
+  {
+    "start": 62.14,
+    "end": 71.26,
+    "text": " and make the count of degrees and then we sort them. We press enter and our function is ready."
+  },
+  {
+    "start": 75.42,
+    "end": 80.14,
+    "text": " Now we're going to calculate the probability distribution for the degree histogram."
+  },
+  {
+    "start": 80.14,
+    "end": 87.74,
+    "text": " So the first step is going to be the calculation of the total number of nodes, the country nodes,"
+  },
+  {
+    "start": 87.74,
+    "end": 93.18,
+    "text": " and we're going to store them in a value called nn, which stands for number of nodes."
+  },
+  {
+    "start": 93.18,
+    "end": 98.3,
+    "text": " So we run this and we see that we have a total of 28 nodes."
+  },
+  {
+    "start": 99.02,
+    "end": 103.18,
+    "text": " Next, we're going to calculate the degree histogram once again,"
+  },
+  {
+    "start": 103.18,
+    "end": 107.5,
+    "text": " this time using the function that we just defined previously."
+  },
+  {
+    "start": 107.5,
+    "end": 114.14,
+    "text": " And what we're going to do is that each number of nodes, sorry, each count of nodes for each"
+  },
+  {
+    "start": 115.02,
+    "end": 120.3,
+    "text": " number of degrees, we're going to divide it by the total number of nodes. So we get our"
+  },
+  {
+    "start": 120.3,
+    "end": 125.18,
+    "text": " degree histogram once again, but this time instead of having the total count of nodes,"
+  },
+  {
+    "start": 125.18,
+    "end": 129.02,
+    "text": " we are getting the probability distribution."
+  },
+  {
+    "start": 129.02,
+    "end": 138.54000000000002,
+    "text": " With our probability distribution ready, we're going to plot our results and to do this we're"
+  },
+  {
+    "start": 138.54000000000002,
+    "end": 144.78,
+    "text": " going to create two different charts, one degree distribution and one degree histogram. So we paste"
+  },
+  {
+    "start": 144.78,
+    "end": 150.70000000000002,
+    "text": " all of this code which is pretty much doing all the work for us. It's defining the axis of the"
+  },
+  {
+    "start": 150.70000000000002,
+    "end": 157.98000000000002,
+    "text": " charts, it's taking the values from the probability distribution to define the series to be used,"
+  },
+  {
+    "start": 157.98,
+    "end": 161.66,
+    "text": " and it's storing the shards in a couple of image files."
+  },
+  {
+    "start": 167.42,
+    "end": 175.66,
+    "text": " Type ctrl c and then exit to exit the container and once you're back to your local system move"
+  },
+  {
+    "start": 175.66,
+    "end": 181.73999999999998,
+    "text": " to your graphics folder inside of your big data file folder that you downloaded from github"
+  },
+  {
+    "start": 181.74,
+    "end": 192.8,
+    "text": " so to GraphX and once you're here we are going to copy the graphs that we just created the image"
+  },
+  {
+    "start": 192.8,
+    "end": 201.82000000000002,
+    "text": " files that we just created from the GraphX Coursera container to the to the folder GraphX so we run"
+  },
+  {
+    "start": 201.82000000000002,
+    "end": 209.4,
+    "text": " this and we make it the first the first image file now we're going to do the same for the degree"
+  },
+  {
+    "start": 209.4,
+    "end": 216.28,
+    "text": " histogram. This is pretty much the same but using a different file name and making a copy locally."
+  },
+  {
+    "start": 216.28,
+    "end": 224.6,
+    "text": " And now both files have been copied successfully. We open our graphics folder and this is where our"
+  },
+  {
+    "start": 224.6,
+    "end": 230.28,
+    "text": " two images are. So we open this one. This is in a different window so let me quickly grab it."
+  },
+  {
+    "start": 232.12,
+    "end": 239.08,
+    "text": " And here it is. This is how the degree histogram looks like. How as the number of edges increases,"
+  },
+  {
+    "start": 239.08,
+    "end": 247.24,
+    "text": " we see that the distribution is smaller as there are less nodes with that number of degrees."
+  },
+  {
+    "start": 247.24,
+    "end": 251.0,
+    "text": " And this is the degree histogram which pretty much follows the same logic"
+  },
+  {
+    "start": 251.0,
+    "end": 254.36,
+    "text": " but using bars instead of points connected through a line."
+  },
+  {
+    "start": 255.08,
+    "end": 257.32,
+    "text": " And this is how we conclude this activity."
+  }
+]

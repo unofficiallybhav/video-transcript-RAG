@@ -1,0 +1,292 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.0,
+    "text": " In this activity, we are going to create our first graph network using Neo4j."
+  },
+  {
+    "start": 9.0,
+    "end": 13.0,
+    "text": " Before going into Neo4j, let's take a look at the following graph."
+  },
+  {
+    "start": 13.0,
+    "end": 22.0,
+    "text": " In this graph, we have nodes which represent people, and we have the edges between those nodes that represent the relationships between these people."
+  },
+  {
+    "start": 22.0,
+    "end": 29.6,
+    "text": " For example, we have a node N1 that represents Tom, we have another node N2 that represents"
+  },
+  {
+    "start": 29.6,
+    "end": 35.519999999999996,
+    "text": " Harry, and the relationship between them is connected by the HE1, which says that the"
+  },
+  {
+    "start": 35.519999999999996,
+    "end": 38.879999999999995,
+    "text": " relationship is that they know each other."
+  },
+  {
+    "start": 38.879999999999995,
+    "end": 44.519999999999996,
+    "text": " Our goal with this graph is to be able to build a script that we can process in Neo4j"
+  },
+  {
+    "start": 44.519999999999996,
+    "end": 50.120000000000005,
+    "text": " and create an actual graph network."
+  },
+  {
+    "start": 50.120000000000005,
+    "end": 55.28,
+    "text": " In order to build our script, we are going to start by doing a simple text representation"
+  },
+  {
+    "start": 55.28,
+    "end": 62.120000000000005,
+    "text": " like the one that we have right here with the five nodes and edges."
+  },
+  {
+    "start": 62.120000000000005,
+    "end": 66.74000000000001,
+    "text": " After a simple representation in which we only listed the nodes on one side and the"
+  },
+  {
+    "start": 66.74000000000001,
+    "end": 71.84,
+    "text": " edges on the other, we can proceed with a more structured representation connecting"
+  },
+  {
+    "start": 71.84,
+    "end": 76.34,
+    "text": " the nodes through the edges that represent these relationships."
+  },
+  {
+    "start": 76.34,
+    "end": 81.06,
+    "text": " Then we can proceed to make a more technical representation of our network in the form"
+  },
+  {
+    "start": 81.06,
+    "end": 83.38000000000001,
+    "text": " of technical pseudocode."
+  },
+  {
+    "start": 83.38000000000001,
+    "end": 88.06,
+    "text": " In this case, we are introducing one class called ToyNode that is going to be the main"
+  },
+  {
+    "start": 88.06,
+    "end": 89.78,
+    "text": " class for our nodes."
+  },
+  {
+    "start": 89.78,
+    "end": 96.26,
+    "text": " Therefore, as we introduce nodes to the network, we also define them to be part of this class."
+  },
+  {
+    "start": 96.26,
+    "end": 102.74000000000001,
+    "text": " For example, in the first line, we are introducing two new nodes, n1 and n2, so we also specify"
+  },
+  {
+    "start": 102.74000000000001,
+    "end": 104.78,
+    "text": " them to be part of this class."
+  },
+  {
+    "start": 104.78,
+    "end": 110.78,
+    "text": " But in the next line, since we already introduced n2, we don't need to repeat that statement,"
+  },
+  {
+    "start": 110.78,
+    "end": 113.66,
+    "text": " and so on with the rest of the network."
+  },
+  {
+    "start": 113.66,
+    "end": 118.0,
+    "text": " We can take a step further and define our edges to be part of a class that we are calling"
+  },
+  {
+    "start": 118.0,
+    "end": 120.26,
+    "text": " toy relation."
+  },
+  {
+    "start": 120.26,
+    "end": 125.02000000000001,
+    "text": " With our classes defined, we can proceed to add properties to these classes in the form"
+  },
+  {
+    "start": 125.02000000000001,
+    "end": 126.86,
+    "text": " of key value pairs."
+  },
+  {
+    "start": 126.86,
+    "end": 129.42000000000002,
+    "text": " For example, let's look at the first line."
+  },
+  {
+    "start": 129.42000000000002,
+    "end": 135.42000000000002,
+    "text": " In the first line we are introducing the node n1 to be part of the class toy node and it"
+  },
+  {
+    "start": 135.42000000000002,
+    "end": 137.18,
+    "text": " has one property."
+  },
+  {
+    "start": 137.18,
+    "end": 143.00000000000003,
+    "text": " This property has a key of name and the value of this key is Tom."
+  },
+  {
+    "start": 143.00000000000003,
+    "end": 148.66000000000003,
+    "text": " Then it is connected through a toy relation in which the key is relationship and the value"
+  },
+  {
+    "start": 148.66000000000003,
+    "end": 155.18,
+    "text": " is nose with another node n2 which is also part of the class toy node and has one property"
+  },
+  {
+    "start": 155.18,
+    "end": 158.78,
+    "text": " the name Harry, and so on with the rest of the network."
+  },
+  {
+    "start": 162.32,
+    "end": 165.72,
+    "text": " After making a few adjustments to the previous pseudocode,"
+  },
+  {
+    "start": 165.96,
+    "end": 171.22,
+    "text": " this is the actual Cypher script that we're going to use to build our network in Neo4j."
+  },
+  {
+    "start": 174.92000000000002,
+    "end": 178.04000000000002,
+    "text": " With our code ready, we're going to open Neo4j,"
+  },
+  {
+    "start": 178.16,
+    "end": 181.36,
+    "text": " running the Docker container as we did in a previous activity,"
+  },
+  {
+    "start": 181.36,
+    "end": 188.02,
+    "text": " and we're going to take our Cypher code and paste it in this cell so we can define our network."
+  },
+  {
+    "start": 188.02,
+    "end": 197.3,
+    "text": " So we run it and we're going to see this message which indicate that we have added five labels,"
+  },
+  {
+    "start": 197.3,
+    "end": 203.62,
+    "text": " we have created five new nodes, we have set 13 properties, and we have created"
+  },
+  {
+    "start": 203.62,
+    "end": 207.88000000000002,
+    "text": " five relationships, all of these in 86 milliseconds."
+  },
+  {
+    "start": 211.36,
+    "end": 218.32000000000002,
+    "text": " Now that we have loaded our first graph into Neo4j, the first thing that we want to do"
+  },
+  {
+    "start": 218.32000000000002,
+    "end": 220.58,
+    "text": " with it is to visualize it."
+  },
+  {
+    "start": 220.58,
+    "end": 224.48000000000002,
+    "text": " To do this, we are going to run the following command in which we are going to match all"
+  },
+  {
+    "start": 224.48000000000002,
+    "end": 229.48000000000002,
+    "text": " of the nodes of the type toy node and we are going to return them along with their respective"
+  },
+  {
+    "start": 229.48000000000002,
+    "end": 230.48000000000002,
+    "text": " edges."
+  },
+  {
+    "start": 230.48000000000002,
+    "end": 236.68,
+    "text": " We run this, and this is the graph which is identical to the graph that we took as an"
+  },
+  {
+    "start": 236.68,
+    "end": 240.3,
+    "text": " inspiration for this activity."
+  },
+  {
+    "start": 240.3,
+    "end": 245.58,
+    "text": " If we hover over each particular node, we can see the properties of those nodes."
+  },
+  {
+    "start": 245.58,
+    "end": 249.86,
+    "text": " For example, in this node, we have the property Job, which is Plumber, and the name, which"
+  },
+  {
+    "start": 249.86,
+    "end": 255.32000000000002,
+    "text": " is Julian, and the same with the relationships, indicating what is the nature of the relationship"
+  },
+  {
+    "start": 255.32000000000002,
+    "end": 258.62,
+    "text": " between the nodes."
+  },
+  {
+    "start": 258.62,
+    "end": 263.92,
+    "text": " We can take a different look of this graph if we go to our left menu and we click on"
+  },
+  {
+    "start": 263.92,
+    "end": 270.96000000000004,
+    "text": " text, this is going to display this table which is going to give us a similar view to the one that"
+  },
+  {
+    "start": 270.96000000000004,
+    "end": 276.24,
+    "text": " we built when we did the text representation. We have notes on the left side, the relationship in"
+  },
+  {
+    "start": 276.24,
+    "end": 283.36,
+    "text": " the middle, and the connecting note on the right side. Or we can also take a more descriptive view"
+  },
+  {
+    "start": 283.36,
+    "end": 291.20000000000005,
+    "text": " of these notes if we click on table and get this representation. This is how we conclude this"
+  },
+  {
+    "start": 291.2,
+    "end": 293.76,
+    "text": " activity."
+  }
+]

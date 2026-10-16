@@ -1,0 +1,212 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.0,
+    "text": " So far, we have seen two versions of the Dijkstra algorithm."
+  },
+  {
+    "start": 5.0,
+    "end": 11.0,
+    "text": " Both these versions assume that the edge weights provided by the network must be used as is."
+  },
+  {
+    "start": 11.0,
+    "end": 14.0,
+    "text": " Now, that can lead to some interesting problems."
+  },
+  {
+    "start": 14.0,
+    "end": 16.0,
+    "text": " We saw one such problem before."
+  },
+  {
+    "start": 16.0,
+    "end": 21.0,
+    "text": " Remember, we were trying to decide whether we should go from G to D or from F to E,"
+  },
+  {
+    "start": 21.0,
+    "end": 23.0,
+    "text": " because both options had the same total weight?"
+  },
+  {
+    "start": 23.0,
+    "end": 26.0,
+    "text": " Now, had we chosen to go from G to D,"
+  },
+  {
+    "start": 26.0,
+    "end": 30.0,
+    "text": " it would take us a few extra steps to arrive at the correct solution."
+  },
+  {
+    "start": 30.94,
+    "end": 34.68,
+    "text": " One way of handling this problem is to use additional knowledge."
+  },
+  {
+    "start": 35.04,
+    "end": 38.96,
+    "text": " So intuitively, we want to say that we know that we want to go to B."
+  },
+  {
+    "start": 39.5,
+    "end": 42.760000000000005,
+    "text": " So traversing through D is not a good idea, right?"
+  },
+  {
+    "start": 42.78,
+    "end": 45.019999999999996,
+    "text": " Because it will take us away from B."
+  },
+  {
+    "start": 45.379999999999995,
+    "end": 50.22,
+    "text": " In other words, we use the knowledge of the destination of B's location"
+  },
+  {
+    "start": 50.22,
+    "end": 52.54,
+    "text": " to steer the direction of search."
+  },
+  {
+    "start": 52.54,
+    "end": 58.46,
+    "text": " Now, this variant is called goal-directed Dysk-Try algorithm because it is using the"
+  },
+  {
+    "start": 58.46,
+    "end": 62.42,
+    "text": " information about the target node at any point in the search."
+  },
+  {
+    "start": 62.42,
+    "end": 67.98,
+    "text": " The trick to use this information is to change the edge weights as we traverse."
+  },
+  {
+    "start": 67.98,
+    "end": 69.36,
+    "text": " How do we change the weight?"
+  },
+  {
+    "start": 69.36,
+    "end": 74.84,
+    "text": " We use a formula where the new weight is the original weight together with a function called"
+  },
+  {
+    "start": 74.84,
+    "end": 76.03999999999999,
+    "text": " the potential function."
+  },
+  {
+    "start": 76.03999999999999,
+    "end": 78.46000000000001,
+    "text": " Now, we will show this in our example."
+  },
+  {
+    "start": 78.46000000000001,
+    "end": 82.92,
+    "text": " Since our graph is a proxy for a road network, we can assume that we know the coordinates"
+  },
+  {
+    "start": 82.92,
+    "end": 83.92,
+    "text": " of every node."
+  },
+  {
+    "start": 83.92,
+    "end": 87.80000000000001,
+    "text": " Therefore, we can compute the distance between any two nodes."
+  },
+  {
+    "start": 87.80000000000001,
+    "end": 92.62,
+    "text": " In practice, we will choose a few nodes so that we can compute the distance of every"
+  },
+  {
+    "start": 92.62,
+    "end": 95.24000000000001,
+    "text": " other node from these chosen nodes."
+  },
+  {
+    "start": 95.24000000000001,
+    "end": 97.5,
+    "text": " These chosen nodes are called landmarks."
+  },
+  {
+    "start": 97.5,
+    "end": 101.14000000000001,
+    "text": " Let's assume B, which is our target, is a landmark node."
+  },
+  {
+    "start": 101.14000000000001,
+    "end": 106.0,
+    "text": " And let's rewind to the state where we are trying to choose between the GD expansion"
+  },
+  {
+    "start": 106.0,
+    "end": 107.74000000000001,
+    "text": " or the FE expansion."
+  },
+  {
+    "start": 107.74000000000001,
+    "end": 117.12,
+    "text": " So we calculate the distance of F, G and E from B. BF is 20, BG is 80 and BE is 15."
+  },
+  {
+    "start": 117.12,
+    "end": 119.82000000000001,
+    "text": " Now we will apply the formula like this."
+  },
+  {
+    "start": 119.82000000000001,
+    "end": 126.80000000000001,
+    "text": " For the FG case, we subtract the BF distance from the weight and add the BG distance to"
+  },
+  {
+    "start": 126.80000000000001,
+    "end": 128.0,
+    "text": " the weight."
+  },
+  {
+    "start": 128.0,
+    "end": 132.02,
+    "text": " This gives us 70 because G is far from B."
+  },
+  {
+    "start": 132.02,
+    "end": 135.74,
+    "text": " Similarly, for the FE case, we subtract the BF distance"
+  },
+  {
+    "start": 135.74,
+    "end": 139.9,
+    "text": " and add the BE distance to the weight, and it gives us 15."
+  },
+  {
+    "start": 139.9,
+    "end": 143.84,
+    "text": " Now with these modified weights, we choose the FE expansion."
+  },
+  {
+    "start": 143.84,
+    "end": 146.58,
+    "text": " In practice, this significantly improves"
+  },
+  {
+    "start": 146.58,
+    "end": 148.94,
+    "text": " the actual performance of the algorithm."
+  },
+  {
+    "start": 148.94,
+    "end": 152.70000000000002,
+    "text": " So this technique is used by many online mapping services"
+  },
+  {
+    "start": 152.70000000000002,
+    "end": 155.14000000000001,
+    "text": " when they give you directions."
+  }
+]

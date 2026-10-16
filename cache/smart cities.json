@@ -1,0 +1,182 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.28,
+    "text": " Our fourth and last use case has to do with smart cities."
+  },
+  {
+    "start": 6.28,
+    "end": 13.280000000000001,
+    "text": " Now a city is a geographically bounded space and contains many different networks operating"
+  },
+  {
+    "start": 13.280000000000001,
+    "end": 15.68,
+    "text": " within the same spatial domain."
+  },
+  {
+    "start": 15.68,
+    "end": 17.18,
+    "text": " What kind of networks?"
+  },
+  {
+    "start": 17.18,
+    "end": 18.82,
+    "text": " Let's see."
+  },
+  {
+    "start": 18.82,
+    "end": 27.42,
+    "text": " It has transportation networks, water and sewage networks, power transmission networks,"
+  },
+  {
+    "start": 27.42,
+    "end": 33.54,
+    "text": " IP broadband networks. Some of these networks have multiple subtypes. For"
+  },
+  {
+    "start": 33.54,
+    "end": 38.52,
+    "text": " example, transportation networks include the bus networks, the subway network, the"
+  },
+  {
+    "start": 38.52,
+    "end": 44.46,
+    "text": " surface street network, and the railway network, and so on. These networks form a"
+  },
+  {
+    "start": 44.46,
+    "end": 49.620000000000005,
+    "text": " physical infrastructure and therefore can be represented as graphs where each"
+  },
+  {
+    "start": 49.620000000000005,
+    "end": 55.32000000000001,
+    "text": " node has a geographic coordinate. But some of these networks can also be"
+  },
+  {
+    "start": 55.32,
+    "end": 60.3,
+    "text": " thought of as a commodity flow network. People flow through transportation"
+  },
+  {
+    "start": 60.3,
+    "end": 66.54,
+    "text": " networks, sewage material flows through a sewage network, and so on. For many of"
+  },
+  {
+    "start": 66.54,
+    "end": 70.62,
+    "text": " these networks, a city planner would like to make sure that they cover the"
+  },
+  {
+    "start": 70.62,
+    "end": 75.53999999999999,
+    "text": " entire city, the commute time is optimized, traffic congestions are well"
+  },
+  {
+    "start": 75.53999999999999,
+    "end": 80.03999999999999,
+    "text": " planned. To accomplish this, they would need to create what's called a network"
+  },
+  {
+    "start": 80.04,
+    "end": 87.08000000000001,
+    "text": " model. For example, urban planners develop city traffic models of a city. A traffic model will"
+  },
+  {
+    "start": 87.08000000000001,
+    "end": 92.0,
+    "text": " use both the geographic layout and connectivity of the network along with the flow parameters like"
+  },
+  {
+    "start": 92.0,
+    "end": 98.74000000000001,
+    "text": " the number of commuters getting on board at any station. Well, if we are planning to create a"
+  },
+  {
+    "start": 98.74000000000001,
+    "end": 105.46000000000001,
+    "text": " smart hub, we need to make sure that all the right things happen at the same place. People who come"
+  },
+  {
+    "start": 105.46000000000001,
+    "end": 111.54,
+    "text": " of a metro station find nearby businesses. They find nearby facilities. Those facilities"
+  },
+  {
+    "start": 111.54,
+    "end": 115.46000000000001,
+    "text": " should have broadband network for people who are going to go on their mobile phones."
+  },
+  {
+    "start": 115.46000000000001,
+    "end": 120.66000000000001,
+    "text": " The same places need to have a water supply network and you have to plan it in such a way"
+  },
+  {
+    "start": 120.66000000000001,
+    "end": 126.66000000000001,
+    "text": " that all these networks coexist within a certain distance of each other and all the facilities"
+  },
+  {
+    "start": 126.66000000000001,
+    "end": 132.34,
+    "text": " can be planned accordingly. Beyond normal operations, we also need to model what would"
+  },
+  {
+    "start": 132.34,
+    "end": 134.9,
+    "text": " happen if the network gets disrupted?"
+  },
+  {
+    "start": 134.9,
+    "end": 136.86,
+    "text": " What are the kinds of congestion or traffic"
+  },
+  {
+    "start": 136.86,
+    "end": 138.9,
+    "text": " that might disturb the network?"
+  },
+  {
+    "start": 138.9,
+    "end": 142.7,
+    "text": " Therefore, these graphs are no longer just structures,"
+  },
+  {
+    "start": 142.7,
+    "end": 145.3,
+    "text": " but they represent things like congestions, things"
+  },
+  {
+    "start": 145.3,
+    "end": 147.52,
+    "text": " like people's behavior and material's behavior"
+  },
+  {
+    "start": 147.52,
+    "end": 149.3,
+    "text": " over the network."
+  },
+  {
+    "start": 149.3,
+    "end": 151.8,
+    "text": " One should also compute energy use patterns"
+  },
+  {
+    "start": 151.8,
+    "end": 153.56,
+    "text": " for the busy parts of the network"
+  },
+  {
+    "start": 153.56,
+    "end": 156.6,
+    "text": " in order to figure out how the network structure or the network"
+  },
+  {
+    "start": 156.6,
+    "end": 160.46,
+    "text": " flow can be altered to enable energy optimal operations."
+  }
+]

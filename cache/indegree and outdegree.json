@@ -1,0 +1,167 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.08,
+    "text": " We have already defined the degree of a node as the number of edges connected to it, thus"
+  },
+  {
+    "start": 6.08,
+    "end": 10.4,
+    "text": " specifying if a node is more connected than another."
+  },
+  {
+    "start": 10.4,
+    "end": 17.240000000000002,
+    "text": " Looking closer, we can separate out the two components of a node's degrees into in-degree"
+  },
+  {
+    "start": 17.240000000000002,
+    "end": 22.88,
+    "text": " and out-degree, which are the counts of the incident and the outgoing edges of a node,"
+  },
+  {
+    "start": 22.88,
+    "end": 24.580000000000002,
+    "text": " respectively."
+  },
+  {
+    "start": 24.580000000000002,
+    "end": 32.660000000000004,
+    "text": " In the example graph, G has an in degree and out degree of 3, making the total degree equal"
+  },
+  {
+    "start": 32.660000000000004,
+    "end": 40.24,
+    "text": " to 6. We first construct this degree table for each node. It is a simple procedure where"
+  },
+  {
+    "start": 40.24,
+    "end": 47.38,
+    "text": " we count the number of nodes with degree 0, 1, 2 and so forth. The degree versus count"
+  },
+  {
+    "start": 47.38,
+    "end": 51.14,
+    "text": " table is the degree histogram of the graph."
+  },
+  {
+    "start": 51.14,
+    "end": 56.42,
+    "text": " We can compare two graphs by computing the vector distance between them."
+  },
+  {
+    "start": 56.42,
+    "end": 60.760000000000005,
+    "text": " One simplistic measure is just the Euclidean distance."
+  },
+  {
+    "start": 60.760000000000005,
+    "end": 66.0,
+    "text": " For our case, the degree histogram based on comparison of the histograms find the graphs"
+  },
+  {
+    "start": 66.0,
+    "end": 68.58,
+    "text": " to be very similar."
+  },
+  {
+    "start": 68.58,
+    "end": 76.8,
+    "text": " The more sophisticated methods are available, but are outside the scope of this course."
+  },
+  {
+    "start": 81.14,
+    "end": 93.52,
+    "text": " We can also compute histograms of just the in-degree or just the out-degree of the graph."
+  },
+  {
+    "start": 93.52,
+    "end": 99.2,
+    "text": " But perhaps more interesting is a joint two-dimensional histogram of a graph."
+  },
+  {
+    "start": 99.2,
+    "end": 103.96000000000001,
+    "text": " The colorful histogram of the graph can be interpreted here as follows."
+  },
+  {
+    "start": 103.96000000000001,
+    "end": 109.4,
+    "text": " The graph has a maximum in-degree of 3 and a maximum out-degree of 3."
+  },
+  {
+    "start": 109.4,
+    "end": 116.0,
+    "text": " This creates a two-dimensional histogram with 4 times 4 equal to 16 different joined values."
+  },
+  {
+    "start": 116.0,
+    "end": 121.88000000000001,
+    "text": " The actual value for any combination is computed from the graph and color-coded in the matrix."
+  },
+  {
+    "start": 121.88000000000001,
+    "end": 126.32000000000001,
+    "text": " For example, there is no node with in-degree 0 and out-degree 0."
+  },
+  {
+    "start": 126.32000000000001,
+    "end": 131.5,
+    "text": " So the lower left square of the graph has value 0 and color-coded glue."
+  },
+  {
+    "start": 131.5,
+    "end": 136.18,
+    "text": " On the other hand, there are two nodes with in-degree 3 and out-degree 3."
+  },
+  {
+    "start": 136.18,
+    "end": 143.38,
+    "text": " the top right corner has the value 2, which is 20% of the nodes, color coded as light green."
+  },
+  {
+    "start": 144.9,
+    "end": 152.58,
+    "text": " The 2D histogram provides an interesting insight. The nodes with more incident edges than outgoing"
+  },
+  {
+    "start": 152.58,
+    "end": 160.26000000000002,
+    "text": " edges represent entities that take in more than they put out. In a social networking setting,"
+  },
+  {
+    "start": 160.26,
+    "end": 168.12,
+    "text": " they represent members who are listeners. They receive a lot of posts, but send much"
+  },
+  {
+    "start": 168.12,
+    "end": 178.1,
+    "text": " fewer posts. On the opposite side of the spectrum, there are talkers whose out degrees exceed"
+  },
+  {
+    "start": 178.1,
+    "end": 185.54,
+    "text": " their in degrees. The entities that are in between may have both large values of in degree"
+  },
+  {
+    "start": 185.54,
+    "end": 187.38,
+    "text": " and out degree."
+  },
+  {
+    "start": 187.38,
+    "end": 189.5,
+    "text": " These are communicators."
+  },
+  {
+    "start": 189.5,
+    "end": 193.26,
+    "text": " In this graph, there seems to be more talkers than listeners."
+  },
+  {
+    "start": 193.26,
+    "end": 197.98,
+    "text": " Not surprising though, my social media friends show similar statistics."
+  }
+]

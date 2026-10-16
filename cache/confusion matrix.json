@@ -1,0 +1,472 @@
+[
+  {
+    "start": 1.0,
+    "end": 5.44,
+    "text": " In addition to the evaluation metrics covered in the last lecture, the performance of a"
+  },
+  {
+    "start": 5.44,
+    "end": 10.4,
+    "text": " classification model can also be evaluated using a confusion matrix."
+  },
+  {
+    "start": 10.4,
+    "end": 14.32,
+    "text": " We will introduce the confusion matrix in this lecture."
+  },
+  {
+    "start": 14.32,
+    "end": 19.72,
+    "text": " After this video, you will be able to describe how a confusion matrix can be used to evaluate"
+  },
+  {
+    "start": 19.72,
+    "end": 25.8,
+    "text": " a classifier, interpret the confusion matrix of a model, and relate accuracy to values"
+  },
+  {
+    "start": 25.8,
+    "end": 28.560000000000002,
+    "text": " in a confusion matrix."
+  },
+  {
+    "start": 28.560000000000002,
+    "end": 34.120000000000005,
+    "text": " Let's use our example again of predicting whether a given animal is a mammal or not."
+  },
+  {
+    "start": 34.120000000000005,
+    "end": 39.5,
+    "text": " Recall that this is a binary classification task, with the class label being either yes"
+  },
+  {
+    "start": 39.5,
+    "end": 44.36,
+    "text": " indicating mammal or no indicating non-mammal."
+  },
+  {
+    "start": 44.36,
+    "end": 48.78,
+    "text": " Now let's review the different types of errors that you can get with classification."
+  },
+  {
+    "start": 48.78,
+    "end": 54.28,
+    "text": " If the true label is yes and the predicted label is yes, then this is a true positive,"
+  },
+  {
+    "start": 54.28,
+    "end": 56.900000000000006,
+    "text": " abbreviated as TP."
+  },
+  {
+    "start": 56.9,
+    "end": 61.46,
+    "text": " This is the case where the label is correctly predicted as positive."
+  },
+  {
+    "start": 61.46,
+    "end": 67.66,
+    "text": " If the true label is no and the predicted label is no, then this is a true negative abbreviated"
+  },
+  {
+    "start": 67.66,
+    "end": 69.4,
+    "text": " as TN."
+  },
+  {
+    "start": 69.4,
+    "end": 73.88,
+    "text": " This is the case where the label is correctly predicted as negative."
+  },
+  {
+    "start": 73.88,
+    "end": 79.86,
+    "text": " If the true label is no and the predicted label is yes, then this is a false positive"
+  },
+  {
+    "start": 79.86,
+    "end": 82.28,
+    "text": " abbreviated as FP."
+  },
+  {
+    "start": 82.28,
+    "end": 89.1,
+    "text": " This is the case where the label is incorrectly predicted as positive when it should be negative."
+  },
+  {
+    "start": 89.1,
+    "end": 94.84,
+    "text": " If the true label is yes and the predicted label is no, then this is a false negative,"
+  },
+  {
+    "start": 94.84,
+    "end": 97.34,
+    "text": " abbreviated as Fn."
+  },
+  {
+    "start": 97.34,
+    "end": 104.24000000000001,
+    "text": " This is the case where the label is incorrectly predicted as negative when it should be positive."
+  },
+  {
+    "start": 104.24000000000001,
+    "end": 110.08,
+    "text": " A confusion matrix can be used to summarize the different types of classification errors."
+  },
+  {
+    "start": 110.08,
+    "end": 115.56,
+    "text": " The true positive cell corresponds to samples that are correctly predicted as positive by"
+  },
+  {
+    "start": 115.56,
+    "end": 117.2,
+    "text": " the model."
+  },
+  {
+    "start": 117.2,
+    "end": 123.03999999999999,
+    "text": " The true negative cell corresponds to samples that are correctly predicted as negative."
+  },
+  {
+    "start": 123.03999999999999,
+    "end": 128.92,
+    "text": " The false positive cell corresponds to samples that are incorrectly predicted as positive."
+  },
+  {
+    "start": 128.92,
+    "end": 135.12,
+    "text": " The false negative cell corresponds to samples that are incorrectly predicted as negative."
+  },
+  {
+    "start": 135.12,
+    "end": 141.04,
+    "text": " Each cell has the count or percentage of samples with each type of errors."
+  },
+  {
+    "start": 141.04,
+    "end": 145.5,
+    "text": " Let's look at an example to see how a confusion matrix is filled in."
+  },
+  {
+    "start": 145.5,
+    "end": 149.96,
+    "text": " The table on the left lists the true label along with the model's prediction for a data"
+  },
+  {
+    "start": 149.96,
+    "end": 151.88,
+    "text": " set of 10 samples."
+  },
+  {
+    "start": 151.88,
+    "end": 155.3,
+    "text": " We will summarize these results in a confusion matrix."
+  },
+  {
+    "start": 155.3,
+    "end": 159.12,
+    "text": " First, let's figure out the number of true positives."
+  },
+  {
+    "start": 159.12,
+    "end": 164.28,
+    "text": " Recall that a true positive occurs when the output is correctly predicted as positive."
+  },
+  {
+    "start": 164.28,
+    "end": 169.12,
+    "text": " In other words, the true label is yes and the model's prediction is also yes."
+  },
+  {
+    "start": 169.12,
+    "end": 174.54,
+    "text": " In this example, there are three true positives, as indicated by the red arrows."
+  },
+  {
+    "start": 174.54,
+    "end": 179.66,
+    "text": " So we enter three in the true positive cell in the confusion matrix."
+  },
+  {
+    "start": 179.66,
+    "end": 182.16,
+    "text": " Now let's look at the true negatives."
+  },
+  {
+    "start": 182.16,
+    "end": 186.92000000000002,
+    "text": " A true negative occurs when the output is correctly predicted as negative."
+  },
+  {
+    "start": 186.92000000000002,
+    "end": 192.16,
+    "text": " In other words, the true label is no and the model's prediction is also no."
+  },
+  {
+    "start": 192.16,
+    "end": 197.22,
+    "text": " In this example, there are four true negatives as indicated by the green arrows."
+  },
+  {
+    "start": 197.22,
+    "end": 202.84,
+    "text": " So we enter four in the true negative cell in the confusion matrix."
+  },
+  {
+    "start": 202.84,
+    "end": 204.54,
+    "text": " What about false negatives?"
+  },
+  {
+    "start": 204.54,
+    "end": 209.62,
+    "text": " A false negative occurs when the output is incorrectly predicted as negative, when it"
+  },
+  {
+    "start": 209.62,
+    "end": 211.42,
+    "text": " should be positive."
+  },
+  {
+    "start": 211.42,
+    "end": 215.88,
+    "text": " That is, the true label is yes and the model's prediction is no."
+  },
+  {
+    "start": 215.88,
+    "end": 220.84,
+    "text": " In this example, there are two false negatives as indicated by the purple arrows."
+  },
+  {
+    "start": 220.84,
+    "end": 225.24,
+    "text": " So we enter 2 in the false negative cell in the confusion matrix."
+  },
+  {
+    "start": 225.24,
+    "end": 228.88,
+    "text": " Finally, we need to look at false positives."
+  },
+  {
+    "start": 228.88,
+    "end": 234.22,
+    "text": " A false positive occurs when the output is incorrectly predicted as positive when it"
+  },
+  {
+    "start": 234.22,
+    "end": 235.8,
+    "text": " should be negative."
+  },
+  {
+    "start": 235.8,
+    "end": 240.36,
+    "text": " That is, the true label is no and the model's prediction is yes."
+  },
+  {
+    "start": 240.36,
+    "end": 245.16,
+    "text": " In this example, there is one false positive as indicated by the yellow arrow."
+  },
+  {
+    "start": 245.16,
+    "end": 250.24,
+    "text": " So we enter 1 in the false positive cell in the confusion matrix."
+  },
+  {
+    "start": 250.24,
+    "end": 253.42000000000002,
+    "text": " This is our complete confusion matrix for this example."
+  },
+  {
+    "start": 253.42000000000002,
+    "end": 257.34000000000003,
+    "text": " We see that the sum of the numbers in the cells add up to 10, which is the number of"
+  },
+  {
+    "start": 257.34000000000003,
+    "end": 260.72,
+    "text": " samples in our data set."
+  },
+  {
+    "start": 260.72,
+    "end": 265.52,
+    "text": " Note that the diagonal values, true positives and true negatives, are samples with correct"
+  },
+  {
+    "start": 265.52,
+    "end": 267.12,
+    "text": " predictions."
+  },
+  {
+    "start": 267.12,
+    "end": 273.0,
+    "text": " In our example, these values sum up to 7, meaning that 7 out of 10 samples were correctly"
+  },
+  {
+    "start": 273.0,
+    "end": 275.22,
+    "text": " predicted by the model."
+  },
+  {
+    "start": 275.22,
+    "end": 281.42,
+    "text": " So the higher the sum of the diagonal values, the better the performance of the model."
+  },
+  {
+    "start": 281.42,
+    "end": 287.34000000000003,
+    "text": " The off-diagonal values capture the misclassified samples, where the model's predictions do"
+  },
+  {
+    "start": 287.34000000000003,
+    "end": 290.06,
+    "text": " not match the true labels."
+  },
+  {
+    "start": 290.06,
+    "end": 295.20000000000005,
+    "text": " In this example, these values indicate that there were three misclassifications."
+  },
+  {
+    "start": 295.20000000000005,
+    "end": 300.44000000000005,
+    "text": " So smaller values for the off-diagonal cells in the confusion matrix indicate better model"
+  },
+  {
+    "start": 300.44000000000005,
+    "end": 303.44000000000005,
+    "text": " performance."
+  },
+  {
+    "start": 303.44,
+    "end": 308.46,
+    "text": " Note that the diagonal values, true positives and true negatives, are samples with correct"
+  },
+  {
+    "start": 308.46,
+    "end": 310.04,
+    "text": " predictions."
+  },
+  {
+    "start": 310.04,
+    "end": 315.84,
+    "text": " In our example, these values sum up to 7, meaning that 7 out of 10 samples were correctly"
+  },
+  {
+    "start": 315.84,
+    "end": 317.9,
+    "text": " predicted by the model."
+  },
+  {
+    "start": 317.9,
+    "end": 323.4,
+    "text": " So the higher the sum of the diagonal values, the better the performance of the model."
+  },
+  {
+    "start": 323.4,
+    "end": 327.86,
+    "text": " You may have noticed that the diagonal values are related to accuracy rate."
+  },
+  {
+    "start": 327.86,
+    "end": 332.84,
+    "text": " Recall that accuracy is defined as the sum of true positives and true negatives divided"
+  },
+  {
+    "start": 332.84000000000003,
+    "end": 338.62,
+    "text": " by all samples. The sum of true positives and true negatives is the sum of the diagonal"
+  },
+  {
+    "start": 338.62,
+    "end": 344.84000000000003,
+    "text": " values in a confusion matrix. So the sum of the diagonal values in a confusion matrix divided"
+  },
+  {
+    "start": 344.84000000000003,
+    "end": 349.08000000000004,
+    "text": " by the total number of samples gives you the accuracy rate."
+  },
+  {
+    "start": 349.08000000000004,
+    "end": 355.32000000000005,
+    "text": " Similarly, the off-diagonal values are related to the error rate. Recall that the error rate"
+  },
+  {
+    "start": 355.32000000000005,
+    "end": 360.74,
+    "text": " is the opposite of the accuracy rate. So the sum of the off-diagonal values in a confusion"
+  },
+  {
+    "start": 360.74,
+    "end": 367.04,
+    "text": " matrix divided by the total number of samples gives you the error rate."
+  },
+  {
+    "start": 367.04,
+    "end": 371.68,
+    "text": " Looking at the values in the confusion matrix can help you understand the kind of misclassifications"
+  },
+  {
+    "start": 371.68,
+    "end": 373.66,
+    "text": " that your model is making."
+  },
+  {
+    "start": 373.66,
+    "end": 379.14,
+    "text": " A high value for the cell indicated by the yellow arrow means that classifying the positive"
+  },
+  {
+    "start": 379.14,
+    "end": 382.1,
+    "text": " class is problematic for the model."
+  },
+  {
+    "start": 382.1,
+    "end": 386.66,
+    "text": " A high value for the cell indicated by the orange arrow, on the other hand, means that"
+  },
+  {
+    "start": 386.66,
+    "end": 391.3,
+    "text": " classifying the negative class is problematic for the model."
+  },
+  {
+    "start": 391.3,
+    "end": 396.16,
+    "text": " In summary, the confusion matrix is a table used to summarize the different types of errors"
+  },
+  {
+    "start": 396.16,
+    "end": 401.70000000000005,
+    "text": " for a classifier. The values in a confusion matrix can be used to evaluate the performance"
+  },
+  {
+    "start": 401.70000000000005,
+    "end": 407.46000000000004,
+    "text": " of a classifier and are related to evaluation metrics such as accuracy and error rates."
+  },
+  {
+    "start": 407.46000000000004,
+    "end": 413.70000000000005,
+    "text": " They also indicate what types of misclassifications the model is making. Note that in some implementations"
+  },
+  {
+    "start": 413.7,
+    "end": 419.38,
+    "text": " of the confusion matrix, the true and predicted labels are switched, so be sure to review"
+  },
+  {
+    "start": 419.38,
+    "end": 424.06,
+    "text": " the documentation for the software you're using to generate the confusion matrix to"
+  },
+  {
+    "start": 424.06,
+    "end": 426.58,
+    "text": " understand what each cell specifies."
+  }
+]

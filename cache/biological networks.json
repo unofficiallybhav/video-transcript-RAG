@@ -1,0 +1,292 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.24,
+    "text": " Our second use case is about biology."
+  },
+  {
+    "start": 5.24,
+    "end": 8.6,
+    "text": " Interactions arise naturally in biology."
+  },
+  {
+    "start": 8.6,
+    "end": 11.040000000000001,
+    "text": " Genes produce proteins."
+  },
+  {
+    "start": 11.040000000000001,
+    "end": 14.620000000000001,
+    "text": " Proteins regulate the functions of other proteins."
+  },
+  {
+    "start": 14.620000000000001,
+    "end": 18.240000000000002,
+    "text": " Cells transmit signals to other cells."
+  },
+  {
+    "start": 18.240000000000002,
+    "end": 25.1,
+    "text": " Dysfunctional genes lead to pathological conditions that present themselves as observable phenotypes."
+  },
+  {
+    "start": 25.1,
+    "end": 29.98,
+    "text": " Some of these interactions are observed and measured by experimentalists."
+  },
+  {
+    "start": 30.0,
+    "end": 33.66,
+    "text": " Another class of graph relations represent human knowledge."
+  },
+  {
+    "start": 33.66,
+    "end": 37.5,
+    "text": " For example, an edge may denote anatomical associations"
+  },
+  {
+    "start": 37.5,
+    "end": 40.6,
+    "text": " such as the nucleus is inside a cell"
+  },
+  {
+    "start": 40.6,
+    "end": 44.22,
+    "text": " or that the cerebral cortex is part of the brain."
+  },
+  {
+    "start": 44.22,
+    "end": 48.54,
+    "text": " Similarly, one can encode different classifications"
+  },
+  {
+    "start": 48.54,
+    "end": 53.32,
+    "text": " of entities like both humans and dogs and mammals."
+  },
+  {
+    "start": 53.32,
+    "end": 57.120000000000005,
+    "text": " Researchers also find these relationships"
+  },
+  {
+    "start": 57.120000000000005,
+    "end": 61.300000000000004,
+    "text": " from literature or by computational techniques"
+  },
+  {
+    "start": 61.300000000000004,
+    "end": 63.800000000000004,
+    "text": " like bioinformatics algorithms."
+  },
+  {
+    "start": 63.800000000000004,
+    "end": 65.74000000000001,
+    "text": " There are many bioinformatics algorithms"
+  },
+  {
+    "start": 65.74000000000001,
+    "end": 67.60000000000001,
+    "text": " that find statistical correlations"
+  },
+  {
+    "start": 67.60000000000001,
+    "end": 69.74000000000001,
+    "text": " between genes and proteins."
+  },
+  {
+    "start": 69.74000000000001,
+    "end": 72.22,
+    "text": " Many biological networks are created"
+  },
+  {
+    "start": 72.22,
+    "end": 74.60000000000001,
+    "text": " by creating edges between entities"
+  },
+  {
+    "start": 74.60000000000001,
+    "end": 78.0,
+    "text": " because they are strongly correlated based on measurements,"
+  },
+  {
+    "start": 78.0,
+    "end": 80.94,
+    "text": " like gene expression level."
+  },
+  {
+    "start": 80.94,
+    "end": 85.12,
+    "text": " Yet a third category of computer relationships"
+  },
+  {
+    "start": 85.12,
+    "end": 88.88000000000001,
+    "text": " associates terms by minding scientific literature."
+  },
+  {
+    "start": 88.88000000000001,
+    "end": 93.12,
+    "text": " If two entities are co-mentioned in scientific articles very often,"
+  },
+  {
+    "start": 93.12,
+    "end": 96.88000000000001,
+    "text": " then there is a likelihood that these two entities are related."
+  },
+  {
+    "start": 96.88000000000001,
+    "end": 101.60000000000001,
+    "text": " In this case, the edge between them does not depict a specific relationship"
+  },
+  {
+    "start": 101.60000000000001,
+    "end": 104.96000000000001,
+    "text": " but the fact that they are associated."
+  },
+  {
+    "start": 104.96000000000001,
+    "end": 109.92,
+    "text": " All these interactions can be assembled into networks or graphs"
+  },
+  {
+    "start": 109.92,
+    "end": 113.2,
+    "text": " where the nodes are biological entities"
+  },
+  {
+    "start": 113.2,
+    "end": 116.44,
+    "text": " And edges represent different categories"
+  },
+  {
+    "start": 116.44,
+    "end": 119.12,
+    "text": " of molecular interactions, associations"
+  },
+  {
+    "start": 119.12,
+    "end": 121.36,
+    "text": " between diseases and genes."
+  },
+  {
+    "start": 121.36,
+    "end": 125.28,
+    "text": " Now, there are two issues I would like you to understand."
+  },
+  {
+    "start": 125.28,
+    "end": 131.04,
+    "text": " First, graphs like the one we saw are assembled."
+  },
+  {
+    "start": 131.04,
+    "end": 135.42000000000002,
+    "text": " That is, integrated from many data sources produced"
+  },
+  {
+    "start": 135.42000000000002,
+    "end": 138.02,
+    "text": " by many independent science groups"
+  },
+  {
+    "start": 138.02,
+    "end": 141.14000000000001,
+    "text": " who have different research goals,"
+  },
+  {
+    "start": 141.14000000000001,
+    "end": 147.22000000000003,
+    "text": " use different scientific techniques, but the underlying biological entities are common"
+  },
+  {
+    "start": 147.22000000000003,
+    "end": 152.32000000000002,
+    "text": " across many groups. It is the commonality that helps us stitch together these larger"
+  },
+  {
+    "start": 152.32000000000002,
+    "end": 159.82000000000002,
+    "text": " graphs. Second, as more results get linked and integrated, the size of the networks grow,"
+  },
+  {
+    "start": 159.82000000000002,
+    "end": 164.70000000000002,
+    "text": " leading to big data problems and the need for big data technology."
+  },
+  {
+    "start": 164.70000000000002,
+    "end": 169.18,
+    "text": " Now let's ask the same question, why graphs?"
+  },
+  {
+    "start": 169.18,
+    "end": 173.9,
+    "text": " In biomedicine, people are always trying to discover new science."
+  },
+  {
+    "start": 173.9,
+    "end": 177.78000000000003,
+    "text": " For instance, they want to discover unknown relationships."
+  },
+  {
+    "start": 177.78000000000003,
+    "end": 184.26000000000002,
+    "text": " For example, they can take two diseases, very different diseases, colorectal cancer and"
+  },
+  {
+    "start": 184.26000000000002,
+    "end": 188.66000000000003,
+    "text": " Alzheimer's disease, and they might want to ask, are they related?"
+  },
+  {
+    "start": 188.66,
+    "end": 194.07999999999998,
+    "text": " If so, can you connect the dots and find out what the intervening network between them"
+  },
+  {
+    "start": 194.07999999999998,
+    "end": 195.24,
+    "text": " is?"
+  },
+  {
+    "start": 195.24,
+    "end": 200.24,
+    "text": " It turns out, as you can see, there are several genes that directly or indirectly connect"
+  },
+  {
+    "start": 200.24,
+    "end": 202.16,
+    "text": " these two diseases."
+  },
+  {
+    "start": 202.16,
+    "end": 208.32,
+    "text": " Thus, we can use pathfinding techniques like this to discover previously unknown connections"
+  },
+  {
+    "start": 208.32,
+    "end": 210.26,
+    "text": " in a network."
+  },
+  {
+    "start": 210.26,
+    "end": 215.34,
+    "text": " In addition, researchers sometimes need to explore the networks to help their discovery"
+  },
+  {
+    "start": 215.34,
+    "end": 216.34,
+    "text": " process."
+  },
+  {
+    "start": 216.34,
+    "end": 221.34,
+    "text": " I have collaborated with a group that is using graph exploration techniques to figure out"
+  },
+  {
+    "start": 221.34,
+    "end": 224.68,
+    "text": " how phenotypes of undiagnosed diseases all fit together."
+  }
+]

@@ -1,0 +1,302 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.28,
+    "text": " In this activity, we are going to perform connectivity analytics in Neo4j with Cypher."
+  },
+  {
+    "start": 8.96,
+    "end": 14.16,
+    "text": " As a setup for this activity, make sure to clear any previous information from Neo4j"
+  },
+  {
+    "start": 14.16,
+    "end": 19.28,
+    "text": " through this command and to load our graph from the CSV file test."
+  },
+  {
+    "start": 24.72,
+    "end": 29.68,
+    "text": " Prior to running any query, we are going to display our graph one more time"
+  },
+  {
+    "start": 29.68,
+    "end": 32.88,
+    "text": " and we're going to do this through a command that we're already familiar with."
+  },
+  {
+    "start": 33.76,
+    "end": 39.28,
+    "text": " So we paste it in this cell, we run it, and we can see our graph once again."
+  },
+  {
+    "start": 44.08,
+    "end": 50.16,
+    "text": " In this first query we want to find the out degree of all nodes. This is the count of outgoing edges."
+  },
+  {
+    "start": 53.04,
+    "end": 58.4,
+    "text": " So what we do in this command is that we first identify all of the outgoing edges,"
+  },
+  {
+    "start": 58.4,
+    "end": 64.24,
+    "text": " we return them as outdegree, we order them, and then we combine this first part with a second part"
+  },
+  {
+    "start": 64.24,
+    "end": 69.36,
+    "text": " that identifies all of the leaf nodes and assigns them a value of zero for outdegree."
+  },
+  {
+    "start": 71.6,
+    "end": 78.72,
+    "text": " So we run it, and as we see we get a table in which on the left we have the name of each node"
+  },
+  {
+    "start": 78.72,
+    "end": 85.92,
+    "text": " and on the right we have their respective outdegree. Notice that p has a value of zero because it is a leaf node."
+  },
+  {
+    "start": 88.4,
+    "end": 95.06,
+    "text": " In this new query, we are going to follow the same logic, but this time we're going"
+  },
+  {
+    "start": 95.06,
+    "end": 97.96000000000001,
+    "text": " to look for the indegree of each node."
+  },
+  {
+    "start": 97.96000000000001,
+    "end": 104.56,
+    "text": " So what we do in this new command is that we first find the incoming edges and then"
+  },
+  {
+    "start": 104.56,
+    "end": 107.98,
+    "text": " we identify the root nodes of our graph."
+  },
+  {
+    "start": 107.98,
+    "end": 112.64000000000001,
+    "text": " So we run it and we get the same table, this time with the indegree, and notice that this"
+  },
+  {
+    "start": 112.64000000000001,
+    "end": 118.36000000000001,
+    "text": " time h has a value of zero for indegree because it is a root node and therefore it has a"
+  },
+  {
+    "start": 118.36,
+    "end": 124.62,
+    "text": " no incoming edges."
+  },
+  {
+    "start": 124.62,
+    "end": 126.92,
+    "text": " Now we are going to take a more simple approach."
+  },
+  {
+    "start": 126.92,
+    "end": 129.92,
+    "text": " We are going to return the degree of each node."
+  },
+  {
+    "start": 129.92,
+    "end": 134.76,
+    "text": " So to do this, what we are going to do is that first we are going to match each of the"
+  },
+  {
+    "start": 134.76,
+    "end": 140.26,
+    "text": " edges of the nodes and we are going to return the name of the node and the distinct count"
+  },
+  {
+    "start": 140.26,
+    "end": 146.2,
+    "text": " of these edges as degree and we are going to order them by degree."
+  },
+  {
+    "start": 146.20000000000002,
+    "end": 153.20000000000002,
+    "text": " So we run this command, and as we see, we get back a table with the name of each node"
+  },
+  {
+    "start": 153.20000000000002,
+    "end": 159.22000000000003,
+    "text": " and their respective degree."
+  },
+  {
+    "start": 159.22000000000003,
+    "end": 162.08,
+    "text": " Now we're going to return the degree histogram."
+  },
+  {
+    "start": 162.08,
+    "end": 168.00000000000003,
+    "text": " So to do this, we are going to match once again the edges of the nodes, we are going"
+  },
+  {
+    "start": 168.00000000000003,
+    "end": 174.02,
+    "text": " to return the nodes as ends and the distinct edges, and we're going to return the count"
+  },
+  {
+    "start": 174.02,
+    "end": 178.3,
+    "text": " of nodes ordered by their respective degree."
+  },
+  {
+    "start": 178.3,
+    "end": 181.4,
+    "text": " So we run it and we have this histogram."
+  },
+  {
+    "start": 181.4,
+    "end": 187.14000000000001,
+    "text": " On the left we have the different degrees and on the right the count of the nodes with"
+  },
+  {
+    "start": 187.14000000000001,
+    "end": 192.26000000000002,
+    "text": " that degree."
+  },
+  {
+    "start": 192.26000000000002,
+    "end": 196.92000000000002,
+    "text": " Let's say that we want to store the degree as a new property of the nodes."
+  },
+  {
+    "start": 196.92000000000002,
+    "end": 203.26000000000002,
+    "text": " So what we do is that we run a similar command in which we first match the edges of each"
+  },
+  {
+    "start": 203.26,
+    "end": 209.62,
+    "text": " node then we find our degree but with this degree we are going to set a new"
+  },
+  {
+    "start": 209.62,
+    "end": 215.62,
+    "text": " property called div and then we will return the name and the degree of each"
+  },
+  {
+    "start": 215.62,
+    "end": 222.38,
+    "text": " node. So we run it and now we can see in this table that our nodes have a new"
+  },
+  {
+    "start": 222.38,
+    "end": 227.01999999999998,
+    "text": " property. Before going into the last two queries let's talk about the"
+  },
+  {
+    "start": 227.01999999999998,
+    "end": 231.88,
+    "text": " computational limitations of all databases. Any database allows you to do"
+  },
+  {
+    "start": 231.88,
+    "end": 236.2,
+    "text": " some analytical computations, but the rest of the computations have to be done outside"
+  },
+  {
+    "start": 236.2,
+    "end": 240.92,
+    "text": " of the database. This is why it is always a good idea to get the database to produce"
+  },
+  {
+    "start": 240.92,
+    "end": 246.28,
+    "text": " an intermediate result that is formatted in a way that you need for the next computation."
+  },
+  {
+    "start": 246.28,
+    "end": 251.48,
+    "text": " Therefore, the purpose of the next two queries is to produce intermediate results that can"
+  },
+  {
+    "start": 251.48,
+    "end": 257.71999999999997,
+    "text": " be used as input for eventual computations. The examples that we are going to look at"
+  },
+  {
+    "start": 257.72,
+    "end": 265.66,
+    "text": " are the adjacency matrix and the normalized Laplacian matrix."
+  },
+  {
+    "start": 265.66,
+    "end": 270.54,
+    "text": " Now we are going to construct the adjacency matrix of our graph, so what we are going"
+  },
+  {
+    "start": 270.54,
+    "end": 277.24,
+    "text": " to do is that we are going to match all of the nodes as n and m, then for the cases in"
+  },
+  {
+    "start": 277.24,
+    "end": 282.40000000000003,
+    "text": " which there is an edge between the nodes, we are going to return a value of 1, otherwise"
+  },
+  {
+    "start": 282.40000000000003,
+    "end": 286.92,
+    "text": " 0, and then we will return this matrix as value."
+  },
+  {
+    "start": 286.92,
+    "end": 293.90000000000003,
+    "text": " So we run this command, and this is the matrix."
+  },
+  {
+    "start": 293.90000000000003,
+    "end": 299.22,
+    "text": " Notice that in the cases in which the nodes have no edge, we see a value of 0, otherwise"
+  },
+  {
+    "start": 299.22,
+    "end": 304.96000000000004,
+    "text": " we see a value of 1."
+  },
+  {
+    "start": 304.96000000000004,
+    "end": 312.54,
+    "text": " For our final query, we are going to construct the normalized Laplacian matrix of the graph."
+  },
+  {
+    "start": 312.54,
+    "end": 316.82,
+    "text": " So what we are going to do here is something very similar to what we did in the previous"
+  },
+  {
+    "start": 316.82,
+    "end": 323.65999999999997,
+    "text": " we are going to return all nodes. If the nodes are the same, we set a value of 1. If they are"
+  },
+  {
+    "start": 323.65999999999997,
+    "end": 329.18,
+    "text": " not the same and there are edges between them, we calculate the normalized Laplacian. And if"
+  },
+  {
+    "start": 329.18,
+    "end": 334.34,
+    "text": " they are not the same and there are no edges between them, we set a value of 0. And then"
+  },
+  {
+    "start": 334.34,
+    "end": 343.1,
+    "text": " we return the matrix as value. So we run this and this is our normalized Laplacian matrix of our"
+  },
+  {
+    "start": 343.1,
+    "end": 346.22,
+    "text": " graph. And this is how we conclude this activity."
+  }
+]

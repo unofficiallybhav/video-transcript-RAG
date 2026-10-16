@@ -1,0 +1,512 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.6,
+    "text": " In this activity, we are going to analyze the network connectedness"
+  },
+  {
+    "start": 3.6,
+    "end": 6.24,
+    "text": " and the clustering components of our graph network."
+  },
+  {
+    "start": 9.6,
+    "end": 14.64,
+    "text": " To start this activity, we open a terminal shell and we make sure to have our GraphX"
+  },
+  {
+    "start": 14.64,
+    "end": 20.0,
+    "text": " Coursera container running. This is a container that we set up in the previous activity."
+  },
+  {
+    "start": 20.64,
+    "end": 25.76,
+    "text": " And once we do this, we are going to access the container shell by running this command."
+  },
+  {
+    "start": 25.76,
+    "end": 36.46,
+    "text": " And once we're inside the container's shell, we're going to access a Spark shell, and to do this, we're going to run the following line of code."
+  },
+  {
+    "start": 36.82,
+    "end": 41.56,
+    "text": " So we run this, and now we're inside of a Spark shell."
+  },
+  {
+    "start": 42.42,
+    "end": 48.3,
+    "text": " Once we are here, we're going to paste the following commands to suppress the logs and the warning messages."
+  },
+  {
+    "start": 48.3,
+    "end": 55.1,
+    "text": " And finally, we are going to import the GraphX and the RDD libraries."
+  },
+  {
+    "start": 55.76,
+    "end": 57.76,
+    "text": " And now we are ready to start."
+  },
+  {
+    "start": 61.76,
+    "end": 65.75999999999999,
+    "text": " The second step, we have to recreate the graph from the previous activity."
+  },
+  {
+    "start": 65.75999999999999,
+    "end": 68.75999999999999,
+    "text": " So first we define the master class place node"
+  },
+  {
+    "start": 68.75999999999999,
+    "end": 76.75999999999999,
+    "text": " that is gonna serve as the base for the metros and the countries nodes classes."
+  },
+  {
+    "start": 76.75999999999999,
+    "end": 80.75999999999999,
+    "text": " So now we define the class metro."
+  },
+  {
+    "start": 80.75999999999999,
+    "end": 83.75999999999999,
+    "text": " We're going to do the same with country."
+  },
+  {
+    "start": 85.76,
+    "end": 92.08000000000001,
+    "text": " We run this, and now we have our both node classes defined."
+  },
+  {
+    "start": 92.08000000000001,
+    "end": 96.42,
+    "text": " The next step is to recreate the metro nodes."
+  },
+  {
+    "start": 96.42,
+    "end": 108.14,
+    "text": " So we run this, again we're using the metro.csv file, okay, so our metro nodes are ready again."
+  },
+  {
+    "start": 108.14,
+    "end": 112.9,
+    "text": " We're going to do the same with the country nodes, so we define the countries again with"
+  },
+  {
+    "start": 112.9,
+    "end": 115.18,
+    "text": " the country.csv file."
+  },
+  {
+    "start": 115.18,
+    "end": 123.62,
+    "text": " And finally, we are going to recreate our edges in a value called MetroCountryLinks."
+  },
+  {
+    "start": 123.62,
+    "end": 133.62,
+    "text": " After recreating the MetroCountries graph, we're going to extend it by adding continent"
+  },
+  {
+    "start": 133.62,
+    "end": 134.72,
+    "text": " nodes."
+  },
+  {
+    "start": 134.72,
+    "end": 142.12,
+    "text": " So first, let's take a look at the first five lines of the CSV file, continent.csv."
+  },
+  {
+    "start": 142.12,
+    "end": 144.54000000000002,
+    "text": " So we print them."
+  },
+  {
+    "start": 144.54,
+    "end": 149.51999999999998,
+    "text": " And as you can see, we have the continent ID and the name of the continent associated"
+  },
+  {
+    "start": 149.51999999999998,
+    "end": 152.23999999999998,
+    "text": " with that ID."
+  },
+  {
+    "start": 152.23999999999998,
+    "end": 158.32,
+    "text": " The next file that we're going to look at is called country-continent.csv."
+  },
+  {
+    "start": 158.32,
+    "end": 165.14,
+    "text": " And this file is going to serve as the main file to construct the edges for the relationship"
+  },
+  {
+    "start": 165.14,
+    "end": 168.51999999999998,
+    "text": " between the country nodes and the continent nodes."
+  },
+  {
+    "start": 168.52,
+    "end": 175.16000000000003,
+    "text": " So we run this and we can see that we have here the first four country IDs and the continent"
+  },
+  {
+    "start": 175.16000000000003,
+    "end": 177.06,
+    "text": " to which they are associated."
+  },
+  {
+    "start": 177.06,
+    "end": 182.76000000000002,
+    "text": " In this case, they are all Asian countries."
+  },
+  {
+    "start": 182.76000000000002,
+    "end": 190.96,
+    "text": " So after taking a look at the CSV files, the next step is to define the class for the continent"
+  },
+  {
+    "start": 190.96,
+    "end": 191.96,
+    "text": " nodes."
+  },
+  {
+    "start": 191.96,
+    "end": 197.58,
+    "text": " In this case, as we did with the countries and the metro areas, we're going to extend"
+  },
+  {
+    "start": 197.58,
+    "end": 203.70000000000002,
+    "text": " the master class placeNode and now our continent class is defined."
+  },
+  {
+    "start": 203.70000000000002,
+    "end": 211.84,
+    "text": " And after doing this, the next step is to do the same we did with the other nodes to"
+  },
+  {
+    "start": 211.84,
+    "end": 217.48000000000002,
+    "text": " extend the class placeNode to read the file continent.csv, ignore the lines that start"
+  },
+  {
+    "start": 217.48000000000002,
+    "end": 225.34,
+    "text": " with the hashtag, and map each line to return the ID and the name of the continent associated"
+  },
+  {
+    "start": 225.34,
+    "end": 226.9,
+    "text": " with that ID."
+  },
+  {
+    "start": 226.9,
+    "end": 230.58,
+    "text": " And now our nodes are defined."
+  },
+  {
+    "start": 230.58,
+    "end": 233.98000000000002,
+    "text": " Now we have to define the edges for this graph."
+  },
+  {
+    "start": 233.98000000000002,
+    "end": 237.88,
+    "text": " And so we're going to do what we did with the country in the metro areas."
+  },
+  {
+    "start": 237.88,
+    "end": 245.8,
+    "text": " We're going to build the country continent links using the file that we explored previously."
+  },
+  {
+    "start": 245.8,
+    "end": 250.08,
+    "text": " And after running these lines of codes, our edges are ready."
+  },
+  {
+    "start": 250.08,
+    "end": 255.22,
+    "text": " Okay, so now we're going to concatenate all the nodes."
+  },
+  {
+    "start": 255.22,
+    "end": 260.72,
+    "text": " So we concatenate metros, countries, and continents to get all the nodes in a single"
+  },
+  {
+    "start": 260.72,
+    "end": 263.72,
+    "text": " value called CNotes."
+  },
+  {
+    "start": 263.72,
+    "end": 268.76,
+    "text": " And now our nodes are concatenated in a single unit RDD."
+  },
+  {
+    "start": 268.76,
+    "end": 271.52,
+    "text": " And we're going to do the same with the edges."
+  },
+  {
+    "start": 271.52,
+    "end": 278.74,
+    "text": " We run the following command in which we create the concatenated links, which is a combination"
+  },
+  {
+    "start": 278.74,
+    "end": 286.64,
+    "text": " between the metro country links and the country continent links and our links are ready."
+  },
+  {
+    "start": 286.64,
+    "end": 292.26,
+    "text": " So with our edges and our nodes ready, we now proceed to create our new graph."
+  },
+  {
+    "start": 292.26,
+    "end": 298.68,
+    "text": " So we create this new countries graph using, sorry, creating a graph object and using the"
+  },
+  {
+    "start": 298.68,
+    "end": 302.3,
+    "text": " nodes and the links that we just defined."
+  },
+  {
+    "start": 302.3,
+    "end": 306.74,
+    "text": " We run this command and now we have created our new graph."
+  },
+  {
+    "start": 306.74,
+    "end": 313.24,
+    "text": " Okay, now that our graph is ready, we have to make a new graph using GraphStream, so"
+  },
+  {
+    "start": 313.24,
+    "end": 318.04,
+    "text": " we can create a graph that can be then read in Giphy."
+  },
+  {
+    "start": 318.04,
+    "end": 325.42,
+    "text": " So first we import the GraphStream library, okay, now our library has been imported."
+  },
+  {
+    "start": 325.42,
+    "end": 331.1,
+    "text": " And then we're going to create a new instance of a single graph, which is going to be created"
+  },
+  {
+    "start": 331.1,
+    "end": 338.38,
+    "text": " using the countries graph that we just defined with GraphX. We run this and now we have a new"
+  },
+  {
+    "start": 338.38,
+    "end": 345.66,
+    "text": " instance of a single graph. The next step is to fill the attributes for the nodes of this"
+  },
+  {
+    "start": 346.62,
+    "end": 354.46000000000004,
+    "text": " new single graph. So for each vertex ID and node in countries graph, we're going to collect all"
+  },
+  {
+    "start": 354.46,
+    "end": 361.34,
+    "text": " the vertices, we're going to add the nodes to this new single graph, we're going to add"
+  },
+  {
+    "start": 361.34,
+    "end": 367.82,
+    "text": " the attribute of a name, of a label, and we're going to replace this label depending on which"
+  },
+  {
+    "start": 367.82,
+    "end": 375.09999999999997,
+    "text": " is the class of the nodes of our graph, whether it's a metro, a country, or a continent node."
+  },
+  {
+    "start": 377.09999999999997,
+    "end": 382.94,
+    "text": " Okay, after doing this for the nodes, we're going to do pretty much the same for the edges,"
+  },
+  {
+    "start": 382.94,
+    "end": 388.78,
+    "text": " This time we're going to collect the edges of the countries graph and we're going to add these"
+  },
+  {
+    "start": 388.78,
+    "end": 399.34,
+    "text": " relationships to our single graph. We run this and our single graph is pretty much ready. The next"
+  },
+  {
+    "start": 399.34,
+    "end": 407.1,
+    "text": " step is to create the file that we are going to import to our local system. So to do this,"
+  },
+  {
+    "start": 407.1,
+    "end": 415.02000000000004,
+    "text": " we're going to use the file sync GraphML library. The first thing we do at the very top is to"
+  },
+  {
+    "start": 415.02000000000004,
+    "end": 425.18,
+    "text": " import this library. Then we create a new instance of a file sync graph. We define the path for this"
+  },
+  {
+    "start": 425.18,
+    "end": 431.18,
+    "text": " file. In this case, we're calling it consciousGraph.graphML. And we're going to write the"
+  },
+  {
+    "start": 431.18,
+    "end": 438.5,
+    "text": " file, otherwise brings a potential error. So we run this and our file has been"
+  },
+  {
+    "start": 438.5,
+    "end": 442.3,
+    "text": " successfully created."
+  },
+  {
+    "start": 446.3,
+    "end": 451.34000000000003,
+    "text": " Okay, now that we have created our graph, I'm going to move to a different"
+  },
+  {
+    "start": 451.34000000000003,
+    "end": 457.74,
+    "text": " terminal and I'm going to copy the file to my local graphics folder. So I run"
+  },
+  {
+    "start": 457.74,
+    "end": 463.58,
+    "text": " this and my file has been copied. I'm going to quickly look at the files and you will find the"
+  },
+  {
+    "start": 463.58,
+    "end": 470.14,
+    "text": " file just right here along with the two charts that we did in previous activities. And once I"
+  },
+  {
+    "start": 470.14,
+    "end": 477.58,
+    "text": " have my file ready, I'm going to open Giphy and I'm going to open the Big Data 5 folder GraphX"
+  },
+  {
+    "start": 477.58,
+    "end": 491.18,
+    "text": " and open the file in Giphy. I then click OK and now my file is loaded. Now we need to get a better"
+  },
+  {
+    "start": 491.18,
+    "end": 497.18,
+    "text": " review of our graphs since this view doesn't give us much information about the relationship between"
+  },
+  {
+    "start": 497.18,
+    "end": 503.58,
+    "text": " the nodes. So we're going to click on partition and then we're going to click on class on the"
+  },
+  {
+    "start": 503.58,
+    "end": 510.62,
+    "text": " second row of this drop-down list and we are going to apply the colors to the nodes of our graph."
+  },
+  {
+    "start": 511.5,
+    "end": 517.34,
+    "text": " Then we are also going to change the layout to get a better view, so we select GFANHU proportional,"
+  },
+  {
+    "start": 518.06,
+    "end": 524.6999999999999,
+    "text": " we run this and now we get a better view of the relationships of our graph. We can see the"
+  },
+  {
+    "start": 525.42,
+    "end": 531.8199999999999,
+    "text": " continents at the center of each network connected to their countries and these countries connected"
+  },
+  {
+    "start": 531.82,
+    "end": 534.5400000000001,
+    "text": " to their respective metro areas."
+  },
+  {
+    "start": 538.46,
+    "end": 544.38,
+    "text": " To conclude this activity, we're going to generate a new graph, this time using Facebook data."
+  },
+  {
+    "start": 544.38,
+    "end": 550.38,
+    "text": " So back in the container shell, we're going to run this script to not only access"
+  },
+  {
+    "start": 551.1,
+    "end": 557.34,
+    "text": " the Spark shell, but also to run this Scala script that is going to create a Facebook"
+  },
+  {
+    "start": 557.9000000000001,
+    "end": 560.46,
+    "text": " network graph. So we run this."
+  },
+  {
+    "start": 561.82,
+    "end": 566.86,
+    "text": " And once we are inside the Spark Shell, you will notice this log which mentions that a"
+  },
+  {
+    "start": 566.86,
+    "end": 570.1600000000001,
+    "text": " Facebook graph has been exported."
+  },
+  {
+    "start": 570.1600000000001,
+    "end": 577.94,
+    "text": " So coming back to the local system folder, I'm going to copy this file from the container"
+  },
+  {
+    "start": 577.94,
+    "end": 580.38,
+    "text": " to my local folder."
+  },
+  {
+    "start": 580.38,
+    "end": 589.0,
+    "text": " So I run this, I quickly inspect my files, yes, the graph is right here, and I get back"
+  },
+  {
+    "start": 589.0,
+    "end": 591.3800000000001,
+    "text": " to Giphy to import the graph."
+  },
+  {
+    "start": 591.38,
+    "end": 605.52,
+    "text": " I select it, I click OK, and this is the full network, but this layout, this view is not helping us, so we're going to select the GFANHU layout, we run it,"
+  },
+  {
+    "start": 606.9,
+    "end": 620.52,
+    "text": " and we can get a better view of all of the multiple relationships and connections that exist within this network, this graph that has been generated using Facebook data."
+  },
+  {
+    "start": 621.38,
+    "end": 625.38,
+    "text": " And this is how we conclude this activity."
+  }
+]

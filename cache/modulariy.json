@@ -1,0 +1,662 @@
+[
+  {
+    "start": 0.52,
+    "end": 3.24,
+    "text": " So we talked about local properties."
+  },
+  {
+    "start": 3.24,
+    "end": 7.08,
+    "text": " In this lecture, we'll cover a global property-based method"
+  },
+  {
+    "start": 7.08,
+    "end": 9.6,
+    "text": " of community finding."
+  },
+  {
+    "start": 9.6,
+    "end": 14.16,
+    "text": " The specific property we focus on is called modularity."
+  },
+  {
+    "start": 14.16,
+    "end": 17.48,
+    "text": " It tries to estimate the quality of clusters or communities"
+  },
+  {
+    "start": 17.48,
+    "end": 19.240000000000002,
+    "text": " in the graph."
+  },
+  {
+    "start": 19.240000000000002,
+    "end": 21.84,
+    "text": " The intuition is as follows."
+  },
+  {
+    "start": 21.84,
+    "end": 23.68,
+    "text": " If we consider the edges in a group"
+  },
+  {
+    "start": 23.68,
+    "end": 26.560000000000002,
+    "text": " and try to see whether it's different from what"
+  },
+  {
+    "start": 26.560000000000002,
+    "end": 30.480000000000004,
+    "text": " we would see if the edges were assigned randomly"
+  },
+  {
+    "start": 30.480000000000004,
+    "end": 32.86,
+    "text": " with some probability distribution."
+  },
+  {
+    "start": 32.86,
+    "end": 35.68000000000001,
+    "text": " If there is a community, there will be more edges"
+  },
+  {
+    "start": 35.68000000000001,
+    "end": 37.800000000000004,
+    "text": " than would happen at random."
+  },
+  {
+    "start": 37.800000000000004,
+    "end": 40.800000000000004,
+    "text": " If there is no community in some part of the graph,"
+  },
+  {
+    "start": 40.800000000000004,
+    "end": 42.92,
+    "text": " the number of edges in that part will either"
+  },
+  {
+    "start": 42.92,
+    "end": 47.56,
+    "text": " be close to the random case or even lower than that."
+  },
+  {
+    "start": 47.56,
+    "end": 49.980000000000004,
+    "text": " The modularity measure thus estimates"
+  },
+  {
+    "start": 49.980000000000004,
+    "end": 52.620000000000005,
+    "text": " the quality of the clusters in the graph"
+  },
+  {
+    "start": 52.620000000000005,
+    "end": 61.18000000000001,
+    "text": " by evaluating this difference of the actual minus the random edge fraction."
+  },
+  {
+    "start": 61.18000000000001,
+    "end": 65.26,
+    "text": " So this is the mathematical formulation of what I just described."
+  },
+  {
+    "start": 65.26,
+    "end": 70.9,
+    "text": " The adjacency matrix A gives us the actual edges."
+  },
+  {
+    "start": 70.9,
+    "end": 75.78,
+    "text": " The p of ij provides the probability of a random edge."
+  },
+  {
+    "start": 75.78,
+    "end": 81.06,
+    "text": " The m in the denominator gives us the fraction of edges."
+  },
+  {
+    "start": 81.06,
+    "end": 86.66,
+    "text": " the delta functions task is to evaluate if i and j should be in the same cluster."
+  },
+  {
+    "start": 92.58,
+    "end": 98.42,
+    "text": " If they are, their contribution would be added to Q, the quality metric, which is modularity."
+  },
+  {
+    "start": 99.38,
+    "end": 104.9,
+    "text": " Well, we have not defined what the probability model looks like. There are many ways to figure"
+  },
+  {
+    "start": 104.9,
+    "end": 108.2,
+    "text": " out what pij should look like."
+  },
+  {
+    "start": 108.2,
+    "end": 110.96000000000001,
+    "text": " One simple model says that the chance"
+  },
+  {
+    "start": 110.96000000000001,
+    "end": 114.14,
+    "text": " that there is an edge between nodes i and j"
+  },
+  {
+    "start": 114.14,
+    "end": 120.2,
+    "text": " is proportional to the degree of node i times the degree of node j."
+  },
+  {
+    "start": 120.2,
+    "end": 124.5,
+    "text": " That means if nodes i and j are already well connected,"
+  },
+  {
+    "start": 124.5,
+    "end": 127.86000000000001,
+    "text": " there is a high chance that they share an edge."
+  },
+  {
+    "start": 127.86000000000001,
+    "end": 129.44,
+    "text": " So if you're a mathematical person,"
+  },
+  {
+    "start": 129.44,
+    "end": 133.96,
+    "text": " you might be thinking, OK, let's find clusters in the graph"
+  },
+  {
+    "start": 133.96,
+    "end": 137.9,
+    "text": " so that q is maximum, and then we are done."
+  },
+  {
+    "start": 137.9,
+    "end": 143.3,
+    "text": " Well, sadly, maximizing q is very hard."
+  },
+  {
+    "start": 143.3,
+    "end": 148.4,
+    "text": " So we need to find an approximate solution."
+  },
+  {
+    "start": 148.4,
+    "end": 153.24,
+    "text": " So we will illustrate a very popular method of finding"
+  },
+  {
+    "start": 153.24,
+    "end": 157.24,
+    "text": " this modularity-based community detection."
+  },
+  {
+    "start": 157.24,
+    "end": 159.14000000000001,
+    "text": " Well, the best way to describe this"
+  },
+  {
+    "start": 159.14000000000001,
+    "end": 161.52,
+    "text": " is through a YouTube video."
+  },
+  {
+    "start": 161.52,
+    "end": 163.52,
+    "text": " That's the URL."
+  },
+  {
+    "start": 163.52,
+    "end": 168.4,
+    "text": " Now, the next slide and the following slide describes it."
+  },
+  {
+    "start": 168.4,
+    "end": 173.78,
+    "text": " But I think it's better to explain the method"
+  },
+  {
+    "start": 173.78,
+    "end": 177.20000000000002,
+    "text": " through screenshots of the video as it happens."
+  },
+  {
+    "start": 179.96,
+    "end": 184.46,
+    "text": " We will show you some snapshots of the video here."
+  },
+  {
+    "start": 184.46,
+    "end": 188.58,
+    "text": " There are 309 nodes in this graph."
+  },
+  {
+    "start": 188.58,
+    "end": 191.66000000000003,
+    "text": " Initially, they all have different colors."
+  },
+  {
+    "start": 191.66,
+    "end": 195.2,
+    "text": " That is, they belong to different communities."
+  },
+  {
+    "start": 195.2,
+    "end": 202.18,
+    "text": " This screenshot shows the graph at iteration 144 of the algorithm."
+  },
+  {
+    "start": 202.18,
+    "end": 206.78,
+    "text": " The number of communities now is 286."
+  },
+  {
+    "start": 206.78,
+    "end": 210.51999999999998,
+    "text": " The chart on the right side plots time on the x-axis"
+  },
+  {
+    "start": 210.51999999999998,
+    "end": 212.94,
+    "text": " and modularity on the y-axis."
+  },
+  {
+    "start": 212.94,
+    "end": 216.66,
+    "text": " As you see, the modularity is on the rise."
+  },
+  {
+    "start": 216.66,
+    "end": 221.29999999999998,
+    "text": " Roughly at each iteration, the system"
+  },
+  {
+    "start": 221.29999999999998,
+    "end": 223.74,
+    "text": " is trying to change the color of a node"
+  },
+  {
+    "start": 223.74,
+    "end": 225.84,
+    "text": " to that of its neighbors."
+  },
+  {
+    "start": 225.84,
+    "end": 228.42,
+    "text": " But it actually changes the color"
+  },
+  {
+    "start": 228.42,
+    "end": 232.1,
+    "text": " only if the modularity value of the whole graph"
+  },
+  {
+    "start": 232.1,
+    "end": 234.94,
+    "text": " changes as a result of that color change."
+  },
+  {
+    "start": 234.94,
+    "end": 238.07999999999998,
+    "text": " After a few more iterations, the number of communities"
+  },
+  {
+    "start": 238.07999999999998,
+    "end": 240.3,
+    "text": " has become 241."
+  },
+  {
+    "start": 240.3,
+    "end": 243.42,
+    "text": " The three arrows show some parts of the graph"
+  },
+  {
+    "start": 243.42,
+    "end": 245.9,
+    "text": " where the nodes have changed colors."
+  },
+  {
+    "start": 245.9,
+    "end": 249.68,
+    "text": " Modularity is on the rise."
+  },
+  {
+    "start": 249.68,
+    "end": 253.78,
+    "text": " After 1437 iterations, the modularity of the graph"
+  },
+  {
+    "start": 253.78,
+    "end": 255.24,
+    "text": " is still going up."
+  },
+  {
+    "start": 255.24,
+    "end": 259.02,
+    "text": " Now there are 113 communities."
+  },
+  {
+    "start": 259.02,
+    "end": 262.4,
+    "text": " The error shows some new areas where the neighboring nodes"
+  },
+  {
+    "start": 262.4,
+    "end": 264.5,
+    "text": " have the same color."
+  },
+  {
+    "start": 264.5,
+    "end": 269.92,
+    "text": " At 1842 iterations, the modularity gain slows down."
+  },
+  {
+    "start": 269.92,
+    "end": 272.06,
+    "text": " Meanwhile, the number of communities"
+  },
+  {
+    "start": 272.06,
+    "end": 275.18,
+    "text": " have reduced to 75."
+  },
+  {
+    "start": 275.18,
+    "end": 279.94,
+    "text": " At 4179 iterations, the modularity growth"
+  },
+  {
+    "start": 279.94,
+    "end": 281.9,
+    "text": " has started becoming flat."
+  },
+  {
+    "start": 281.9,
+    "end": 285.26,
+    "text": " But in the meantime, the number of colors, that is communities,"
+  },
+  {
+    "start": 285.26,
+    "end": 287.88,
+    "text": " has reduced to 48."
+  },
+  {
+    "start": 287.88,
+    "end": 291.1,
+    "text": " At around 5196 iteration, the algorithm"
+  },
+  {
+    "start": 291.1,
+    "end": 294.0,
+    "text": " decides that there is not enough reduction"
+  },
+  {
+    "start": 294.0,
+    "end": 295.66,
+    "text": " in the number of communities, which"
+  },
+  {
+    "start": 295.66,
+    "end": 300.62,
+    "text": " has reduced to only 45 in the last 1,000 iterations or so."
+  },
+  {
+    "start": 300.62,
+    "end": 303.68,
+    "text": " Now it collapses each community, that is, cluster,"
+  },
+  {
+    "start": 303.68,
+    "end": 309.2,
+    "text": " to a single node and creates the cluster to cluster edges."
+  },
+  {
+    "start": 309.2,
+    "end": 314.06,
+    "text": " The orange box and arrow shows this contraction."
+  },
+  {
+    "start": 314.06,
+    "end": 317.06,
+    "text": " Now compare it with the previous slide."
+  },
+  {
+    "start": 317.06,
+    "end": 319.26,
+    "text": " This collapsing or contraction of the cluster"
+  },
+  {
+    "start": 319.26,
+    "end": 323.32,
+    "text": " creates a skeleton of the original graph."
+  },
+  {
+    "start": 323.32,
+    "end": 328.42,
+    "text": " Now the algorithm starts again with this reduced graph."
+  },
+  {
+    "start": 328.42,
+    "end": 331.88,
+    "text": " You will find many graph analysis software"
+  },
+  {
+    "start": 331.88,
+    "end": 334.54,
+    "text": " where you can run the Louvain method of community detection."
+  },
+  {
+    "start": 337.86,
+    "end": 340.06,
+    "text": " See, it reduces."
+  },
+  {
+    "start": 340.06,
+    "end": 343.94,
+    "text": " I took my LinkedIn network, which has me at the center"
+  },
+  {
+    "start": 343.94,
+    "end": 347.58000000000004,
+    "text": " and all my connections as nodes."
+  },
+  {
+    "start": 347.58000000000004,
+    "end": 350.96000000000004,
+    "text": " If two of my contacts are also connected in LinkedIn,"
+  },
+  {
+    "start": 350.96000000000004,
+    "end": 353.02000000000004,
+    "text": " there is an edge between them."
+  },
+  {
+    "start": 353.02000000000004,
+    "end": 357.76,
+    "text": " This kind of me-centric network is often called an ego network."
+  },
+  {
+    "start": 358.42,
+    "end": 362.62,
+    "text": " When I rank the community detection algorithm here,"
+  },
+  {
+    "start": 362.62,
+    "end": 366.66,
+    "text": " I found six communities with one set of parameters"
+  },
+  {
+    "start": 366.66,
+    "end": 369.40000000000003,
+    "text": " and seven communities with another."
+  },
+  {
+    "start": 369.40000000000003,
+    "end": 372.32,
+    "text": " I could clearly see my connections in San Diego,"
+  },
+  {
+    "start": 372.32,
+    "end": 374.66,
+    "text": " my connections in my professional network,"
+  },
+  {
+    "start": 374.66,
+    "end": 377.34000000000003,
+    "text": " my friends in India, and so forth."
+  },
+  {
+    "start": 377.34000000000003,
+    "end": 381.06,
+    "text": " There is always one false community, which"
+  },
+  {
+    "start": 381.06,
+    "end": 384.64,
+    "text": " stands for others, nodes that do not clearly"
+  },
+  {
+    "start": 384.64,
+    "end": 387.68,
+    "text": " belong to any specific group."
+  },
+  {
+    "start": 387.68,
+    "end": 392.0,
+    "text": " Perhaps more interesting and important"
+  },
+  {
+    "start": 392.0,
+    "end": 394.44,
+    "text": " than the static analysis of communities"
+  },
+  {
+    "start": 394.44,
+    "end": 397.44,
+    "text": " is to track communities over a length of time"
+  },
+  {
+    "start": 397.44,
+    "end": 401.12,
+    "text": " and determine how they evolve and why."
+  },
+  {
+    "start": 401.12,
+    "end": 405.38,
+    "text": " There are six large categories of evolution steps"
+  },
+  {
+    "start": 405.38,
+    "end": 407.76,
+    "text": " that can happen within a community."
+  },
+  {
+    "start": 407.76,
+    "end": 411.8,
+    "text": " A community like a new Facebook group can be born."
+  },
+  {
+    "start": 411.8,
+    "end": 415.06,
+    "text": " A community like a group of people who gathered for an event"
+  },
+  {
+    "start": 415.06,
+    "end": 418.5,
+    "text": " be dissolved because the event and the mutual interest"
+  },
+  {
+    "start": 418.5,
+    "end": 421.06,
+    "text": " around it has ended."
+  },
+  {
+    "start": 421.06,
+    "end": 423.94,
+    "text": " A community can grow because the members rally"
+  },
+  {
+    "start": 423.94,
+    "end": 426.76,
+    "text": " around a common cause."
+  },
+  {
+    "start": 426.76,
+    "end": 429.76,
+    "text": " Typically, new cross-community edges"
+  },
+  {
+    "start": 429.76,
+    "end": 435.14,
+    "text": " start getting formed before the communities actually merge."
+  },
+  {
+    "start": 435.14,
+    "end": 437.86,
+    "text": " The communities can shrink, like my book club."
+  },
+  {
+    "start": 437.86,
+    "end": 440.38,
+    "text": " Where do you see this in real life?"
+  },
+  {
+    "start": 440.38,
+    "end": 443.4,
+    "text": " Well, how about company mergers?"
+  },
+  {
+    "start": 443.40000000000003,
+    "end": 447.36,
+    "text": " Surely enough, the converse also happens when a community splits."
+  },
+  {
+    "start": 447.36,
+    "end": 449.62000000000006,
+    "text": " Going along with the previous example,"
+  },
+  {
+    "start": 449.62000000000006,
+    "end": 451.68,
+    "text": " a closely working group in a company"
+  },
+  {
+    "start": 451.68,
+    "end": 454.00000000000006,
+    "text": " may at some point create their own product"
+  },
+  {
+    "start": 454.00000000000006,
+    "end": 457.14000000000004,
+    "text": " and form a new company with very little ties"
+  },
+  {
+    "start": 457.14000000000004,
+    "end": 459.12000000000006,
+    "text": " to the old company."
+  },
+  {
+    "start": 459.12000000000006,
+    "end": 462.40000000000003,
+    "text": " One standard symptom of a group splitting"
+  },
+  {
+    "start": 462.40000000000003,
+    "end": 464.04,
+    "text": " is that the nodes in the subgroup"
+  },
+  {
+    "start": 464.04,
+    "end": 469.44000000000005,
+    "text": " show an increase in the number of edges just among themselves."
+  },
+  {
+    "start": 473.40000000000003,
+    "end": 475.40000000000003,
+    "text": " You"
+  }
+]

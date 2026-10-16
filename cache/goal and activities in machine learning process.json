@@ -1,0 +1,702 @@
+[
+  {
+    "start": 0.96,
+    "end": 6.4,
+    "text": " In this lecture, we will review each of the steps in the machine learning process in greater detail."
+  },
+  {
+    "start": 7.5200000000000005,
+    "end": 13.5,
+    "text": " After this video, you will be able to explain the goals of each step in the machine learning process"
+  },
+  {
+    "start": 13.5,
+    "end": 17.76,
+    "text": " and list key activities in each step in the process."
+  },
+  {
+    "start": 19.52,
+    "end": 22.98,
+    "text": " This is the machine learning process that we saw in the last lecture."
+  },
+  {
+    "start": 23.64,
+    "end": 26.68,
+    "text": " In this lecture, we will cover each step in more detail."
+  },
+  {
+    "start": 27.34,
+    "end": 31.62,
+    "text": " We will describe the goals of each step and the key activities performed in each step."
+  },
+  {
+    "start": 33.22,
+    "end": 37.04,
+    "text": " The first step in the data science process is to acquire the data."
+  },
+  {
+    "start": 37.7,
+    "end": 42.36,
+    "text": " The goal of this step is to identify and obtain all data related to the problem at hand."
+  },
+  {
+    "start": 43.7,
+    "end": 46.980000000000004,
+    "text": " First, we need to identify all related data and their sources."
+  },
+  {
+    "start": 47.260000000000005,
+    "end": 55.04,
+    "text": " Keep in mind that data can come from different sources, such as files, databases, the Internet, mobile devices."
+  },
+  {
+    "start": 55.04,
+    "end": 59.14,
+    "text": " so remember to include all data related to the problem you're addressing."
+  },
+  {
+    "start": 60.339999999999996,
+    "end": 62.92,
+    "text": " After you've identified your data and data sources,"
+  },
+  {
+    "start": 63.46,
+    "end": 67.34,
+    "text": " the next step is to collect the data and integrate data from the different sources."
+  },
+  {
+    "start": 68.2,
+    "end": 71.88,
+    "text": " This may require conversion, as data can come in different formats,"
+  },
+  {
+    "start": 72.28,
+    "end": 74.78,
+    "text": " and it may also require aligning the data,"
+  },
+  {
+    "start": 75.2,
+    "end": 79.4,
+    "text": " as data from different sources may have different time or spatial resolutions."
+  },
+  {
+    "start": 81.22,
+    "end": 83.68,
+    "text": " Once you've collected and integrated your data,"
+  },
+  {
+    "start": 83.68,
+    "end": 86.96000000000001,
+    "text": " you now have a coherent data set for your analysis."
+  },
+  {
+    "start": 88.34,
+    "end": 91.72000000000001,
+    "text": " The next step after acquiring data is to prepare it"
+  },
+  {
+    "start": 91.72000000000001,
+    "end": 93.74000000000001,
+    "text": " to make it suitable for analysis."
+  },
+  {
+    "start": 94.54,
+    "end": 96.0,
+    "text": " There are two parts to this step,"
+  },
+  {
+    "start": 96.52000000000001,
+    "end": 98.64000000000001,
+    "text": " explore data and pre-process data."
+  },
+  {
+    "start": 99.12,
+    "end": 101.26,
+    "text": " We will discuss data exploration first."
+  },
+  {
+    "start": 102.46000000000001,
+    "end": 103.98,
+    "text": " In data exploration,"
+  },
+  {
+    "start": 104.52000000000001,
+    "end": 106.94000000000001,
+    "text": " you want to do some preliminary investigation"
+  },
+  {
+    "start": 106.94000000000001,
+    "end": 109.44000000000001,
+    "text": " in order to gain a better understanding"
+  },
+  {
+    "start": 109.44000000000001,
+    "end": 111.88000000000001,
+    "text": " of the specific characteristics of your data."
+  },
+  {
+    "start": 112.53999999999999,
+    "end": 114.94,
+    "text": " This, in turn, will guide the rest of the process."
+  },
+  {
+    "start": 116.1,
+    "end": 123.28,
+    "text": " With data exploration, you'll want to look for things like correlations, general trends, outliers, etc."
+  },
+  {
+    "start": 124.88,
+    "end": 129.32,
+    "text": " Correlations provide information about the relationship between variables in your data."
+  },
+  {
+    "start": 130.57999999999998,
+    "end": 135.12,
+    "text": " Trends in your data will reveal if a variable is moving in a certain direction,"
+  },
+  {
+    "start": 135.62,
+    "end": 138.48,
+    "text": " such as transaction volume increasing throughout the year."
+  },
+  {
+    "start": 138.48,
+    "end": 145.23999999999998,
+    "text": " Outliers indicate potential problems with the data or may indicate an interesting data"
+  },
+  {
+    "start": 145.23999999999998,
+    "end": 147.89999999999998,
+    "text": " point that needs further examination."
+  },
+  {
+    "start": 147.89999999999998,
+    "end": 154.39999999999998,
+    "text": " Without this data exploration activity, you will not be able to use your data effectively."
+  },
+  {
+    "start": 154.39999999999998,
+    "end": 159.85999999999999,
+    "text": " One way to explore your data is to calculate summary statistics to numerically describe"
+  },
+  {
+    "start": 159.85999999999999,
+    "end": 162.35999999999999,
+    "text": " the data."
+  },
+  {
+    "start": 162.35999999999999,
+    "end": 167.32,
+    "text": " Summary statistics are quantities that capture various characteristics of a set of values"
+  },
+  {
+    "start": 167.32,
+    "end": 169.56,
+    "text": " with a single number or a small set of numbers."
+  },
+  {
+    "start": 170.32,
+    "end": 173.95999999999998,
+    "text": " Some basic summary statistics that you should compute for your data set are"
+  },
+  {
+    "start": 173.95999999999998,
+    "end": 178.62,
+    "text": " mean, median, mode, range, and standard deviation."
+  },
+  {
+    "start": 179.6,
+    "end": 182.98,
+    "text": " Mean and median are measures of the location of a set of values."
+  },
+  {
+    "start": 183.62,
+    "end": 186.54,
+    "text": " Mode is the value that occurs most frequently in your data set,"
+  },
+  {
+    "start": 187.04,
+    "end": 190.66,
+    "text": " and range and standard deviation are measures of spread in your data."
+  },
+  {
+    "start": 191.44,
+    "end": 195.06,
+    "text": " Looking at these measures will give you an idea of the nature of your data."
+  },
+  {
+    "start": 195.06,
+    "end": 199.1,
+    "text": " They can tell you if there is something wrong with your data."
+  },
+  {
+    "start": 199.1,
+    "end": 204.6,
+    "text": " For example, if the range of the values for age in your data includes negative numbers"
+  },
+  {
+    "start": 204.6,
+    "end": 208.94,
+    "text": " or a number much greater than 100, there is something suspicious in the data that needs"
+  },
+  {
+    "start": 208.94,
+    "end": 212.38,
+    "text": " to be examined."
+  },
+  {
+    "start": 212.38,
+    "end": 216.66,
+    "text": " Visualization techniques also provide quick and effective ways to explore your data."
+  },
+  {
+    "start": 216.66,
+    "end": 222.82,
+    "text": " Some examples are a histogram, such as the plot shown here, shows the distribution of"
+  },
+  {
+    "start": 222.82,
+    "end": 230.42,
+    "text": " data and can show skewness or unusual dispersion and outliers. A line plot like the one in the"
+  },
+  {
+    "start": 230.42,
+    "end": 236.01999999999998,
+    "text": " lower left can be used to look at trends in the data such as the change in the price of a stock."
+  },
+  {
+    "start": 237.45999999999998,
+    "end": 244.5,
+    "text": " A heat map can give you an idea of where the hot spots are. A scatter plot effectively shows"
+  },
+  {
+    "start": 244.5,
+    "end": 250.34,
+    "text": " correlation between two variables. Overall, there are many types of plots to visualize data."
+  },
+  {
+    "start": 250.34,
+    "end": 255.46,
+    "text": " They are very useful in helping you understand the data you have."
+  },
+  {
+    "start": 255.46,
+    "end": 258.9,
+    "text": " The second part of the prepare step is pre-process."
+  },
+  {
+    "start": 258.9,
+    "end": 265.94,
+    "text": " So after we've explored the data, we need to pre-process the data to prepare it for analysis."
+  },
+  {
+    "start": 265.94,
+    "end": 269.7,
+    "text": " The goal here is to create the data that will be used for analysis."
+  },
+  {
+    "start": 269.7,
+    "end": 275.14,
+    "text": " The main activities in this part are to clean the data, select the appropriate variables to use,"
+  },
+  {
+    "start": 275.14,
+    "end": 278.58,
+    "text": " and transform the data as needed."
+  },
+  {
+    "start": 278.58,
+    "end": 283.7,
+    "text": " A very important part of data preparation is to clean the data to address quality issues."
+  },
+  {
+    "start": 283.7,
+    "end": 289.7,
+    "text": " Real-world data is messy. There are many examples of quality issues with data from real applications,"
+  },
+  {
+    "start": 289.7,
+    "end": 296.82,
+    "text": " including missing values such as income in a survey, duplicate data such as two different"
+  },
+  {
+    "start": 296.82,
+    "end": 302.9,
+    "text": " records for the same customer with different addresses, inconsistent or invalid data such"
+  },
+  {
+    "start": 302.90000000000003,
+    "end": 311.26000000000005,
+    "text": " as a six-digit zip code, noise in the collection of data that distorts the true values, outliers"
+  },
+  {
+    "start": 311.26000000000005,
+    "end": 315.14000000000004,
+    "text": " such as a number much larger than 100 for someone's age."
+  },
+  {
+    "start": 315.14000000000004,
+    "end": 319.6,
+    "text": " It is essential to detect and address these issues that can negatively affect the quality"
+  },
+  {
+    "start": 319.6,
+    "end": 322.78000000000003,
+    "text": " of the data."
+  },
+  {
+    "start": 322.78000000000003,
+    "end": 327.8,
+    "text": " Other activities in data preprocessing can be broadly categorized as feature selection"
+  },
+  {
+    "start": 327.8,
+    "end": 330.26000000000005,
+    "text": " and feature transformation."
+  },
+  {
+    "start": 330.26,
+    "end": 334.59999999999997,
+    "text": " Feature selection refers to choosing the set of features to use that is appropriate for"
+  },
+  {
+    "start": 334.59999999999997,
+    "end": 336.62,
+    "text": " the application."
+  },
+  {
+    "start": 336.62,
+    "end": 343.12,
+    "text": " Feature selection can involve removing redundant or irrelevant features, combining features,"
+  },
+  {
+    "start": 343.12,
+    "end": 345.74,
+    "text": " or creating new features."
+  },
+  {
+    "start": 345.74,
+    "end": 350.8,
+    "text": " During the exploring data step, you may have discovered that two features are very correlated."
+  },
+  {
+    "start": 350.8,
+    "end": 355.21999999999997,
+    "text": " In that case, one of these features can be removed without negatively affecting the analysis"
+  },
+  {
+    "start": 355.21999999999997,
+    "end": 356.21999999999997,
+    "text": " results."
+  },
+  {
+    "start": 356.22,
+    "end": 362.04,
+    "text": " For example, the purchase price of a product and the amount of sales tax paid are likely to be very correlated."
+  },
+  {
+    "start": 362.78000000000003,
+    "end": 365.74,
+    "text": " Eliminating the sales tax amount, then, will be beneficial."
+  },
+  {
+    "start": 366.78000000000003,
+    "end": 371.24,
+    "text": " Removing redundant or irrelevant features will make the subsequent analysis simpler."
+  },
+  {
+    "start": 372.32000000000005,
+    "end": 375.20000000000005,
+    "text": " You may also want to combine features or create new ones."
+  },
+  {
+    "start": 375.28000000000003,
+    "end": 381.44000000000005,
+    "text": " For example, adding the applicant's education level as a feature to a loan approval application would make sense."
+  },
+  {
+    "start": 381.44,
+    "end": 386.26,
+    "text": " There are also algorithms to automatically determine the most relevant features based"
+  },
+  {
+    "start": 386.26,
+    "end": 390.44,
+    "text": " on various mathematical properties."
+  },
+  {
+    "start": 390.44,
+    "end": 394.72,
+    "text": " Feature transformation maps the data from one format to another."
+  },
+  {
+    "start": 394.72,
+    "end": 397.4,
+    "text": " Various transformation operations exist."
+  },
+  {
+    "start": 397.4,
+    "end": 403.7,
+    "text": " For example, scaling maps the data values to a specified range to prevent any one feature"
+  },
+  {
+    "start": 403.7,
+    "end": 407.24,
+    "text": " from dominating the analysis results."
+  },
+  {
+    "start": 407.24,
+    "end": 414.0,
+    "text": " Filtering or aggregation can be used to reduce noise and variability in the data."
+  },
+  {
+    "start": 414.0,
+    "end": 418.7,
+    "text": " Dimensionality reduction maps the data to a smaller subset of dimensions to simplify"
+  },
+  {
+    "start": 418.7,
+    "end": 421.0,
+    "text": " the subsequent analysis."
+  },
+  {
+    "start": 421.0,
+    "end": 427.34000000000003,
+    "text": " We will discuss techniques to prepare data in more detail later in this course."
+  },
+  {
+    "start": 427.34000000000003,
+    "end": 431.88,
+    "text": " After preparing the data to address data quality issues and pre-process it to get it in the"
+  },
+  {
+    "start": 431.88,
+    "end": 437.64,
+    "text": " appropriate format, the next step in the machine learning process is to analyze the data."
+  },
+  {
+    "start": 437.64,
+    "end": 442.52,
+    "text": " The goals of this step are to build a machine learning model, to analyze the data, and to"
+  },
+  {
+    "start": 442.52,
+    "end": 447.12,
+    "text": " evaluate the results that you get from the model."
+  },
+  {
+    "start": 447.12,
+    "end": 452.06,
+    "text": " The analyze step starts with determining the type of problem you have."
+  },
+  {
+    "start": 452.06,
+    "end": 457.76,
+    "text": " You begin by selecting appropriate machine learning techniques to analyze the data."
+  },
+  {
+    "start": 457.76,
+    "end": 461.96,
+    "text": " Then you construct the model using the data that you have prepared."
+  },
+  {
+    "start": 461.96,
+    "end": 466.92,
+    "text": " Once the model is built, you will want to apply it to new data samples to evaluate how"
+  },
+  {
+    "start": 466.92,
+    "end": 469.0,
+    "text": " well the model performs."
+  },
+  {
+    "start": 469.0,
+    "end": 474.5,
+    "text": " Thus, data analysis involves selecting the appropriate technique for your problem, building"
+  },
+  {
+    "start": 474.5,
+    "end": 477.36,
+    "text": " the model, then evaluating the results."
+  },
+  {
+    "start": 477.36,
+    "end": 481.0,
+    "text": " As there are different types of problems, there are also different types of analysis"
+  },
+  {
+    "start": 481.0,
+    "end": 482.0,
+    "text": " techniques."
+  },
+  {
+    "start": 482.0,
+    "end": 485.64,
+    "text": " We will cover algorithms for building machine learning models in much more detail in week"
+  },
+  {
+    "start": 485.64,
+    "end": 488.86,
+    "text": " three of this course."
+  },
+  {
+    "start": 488.86,
+    "end": 493.58,
+    "text": " The next step in the machine learning process is reporting the results from your analysis."
+  },
+  {
+    "start": 493.58,
+    "end": 497.47999999999996,
+    "text": " In reporting your results, it is important to communicate your insights and make a case"
+  },
+  {
+    "start": 497.47999999999996,
+    "end": 501.18,
+    "text": " for what actions should follow."
+  },
+  {
+    "start": 501.18,
+    "end": 505.36,
+    "text": " In reporting your results, you will want to think about what to present as well as how"
+  },
+  {
+    "start": 505.36,
+    "end": 506.36,
+    "text": " to present."
+  },
+  {
+    "start": 506.36,
+    "end": 511.68,
+    "text": " In deciding what to present, you should consider what the main results are, what insights were"
+  },
+  {
+    "start": 511.68,
+    "end": 516.52,
+    "text": " gained from your analysis, and what added value do these insights bring to the application."
+  },
+  {
+    "start": 517.54,
+    "end": 522.2,
+    "text": " Keep in mind that even negative results are valuable lessons learned and suggest further"
+  },
+  {
+    "start": 522.2,
+    "end": 527.78,
+    "text": " avenues for additional analysis. Remember that all findings must be presented so that informed"
+  },
+  {
+    "start": 527.78,
+    "end": 534.48,
+    "text": " decisions can be made for next steps. In deciding how to present, remember that visualization is an"
+  },
+  {
+    "start": 534.48,
+    "end": 540.48,
+    "text": " important tool in presenting your results. Plots and summary statistics discussed in the explore"
+  },
+  {
+    "start": 540.48,
+    "end": 545.66,
+    "text": " step can be used effectively here as well. You should also have tables with details from"
+  },
+  {
+    "start": 545.66,
+    "end": 551.6,
+    "text": " your analysis as backup if someone wants to take a deeper dive into the results. In summary,"
+  },
+  {
+    "start": 551.6,
+    "end": 556.36,
+    "text": " you want to report your findings by presenting your results and the value added with graphs"
+  },
+  {
+    "start": 556.36,
+    "end": 560.14,
+    "text": " using visualization tools."
+  },
+  {
+    "start": 560.14,
+    "end": 565.2,
+    "text": " The final step in the machine learning process is to determine what actions should be taken"
+  },
+  {
+    "start": 565.2,
+    "end": 568.4200000000001,
+    "text": " based on the insights gained."
+  },
+  {
+    "start": 568.42,
+    "end": 571.9799999999999,
+    "text": " What action should be taken based on the results of your analysis?"
+  },
+  {
+    "start": 571.9799999999999,
+    "end": 576.6999999999999,
+    "text": " Should you market certain products to a specific customer segment to increase sales?"
+  },
+  {
+    "start": 576.6999999999999,
+    "end": 579.76,
+    "text": " What inefficiencies can be removed from your process?"
+  },
+  {
+    "start": 579.76,
+    "end": 584.4799999999999,
+    "text": " What incentives would be effective in attracting new customers?"
+  },
+  {
+    "start": 584.4799999999999,
+    "end": 590.18,
+    "text": " Once this specific action has been determined, the next step is to implement the action."
+  },
+  {
+    "start": 590.18,
+    "end": 595.3199999999999,
+    "text": " Things to consider here include, how can the action be added to your application?"
+  },
+  {
+    "start": 595.32,
+    "end": 599.34,
+    "text": " How will end users be affected?"
+  },
+  {
+    "start": 599.34,
+    "end": 603.5600000000001,
+    "text": " Assessing the impact of the implemented action is then necessary to evaluate the benefits"
+  },
+  {
+    "start": 603.5600000000001,
+    "end": 604.7800000000001,
+    "text": " gained."
+  },
+  {
+    "start": 604.7800000000001,
+    "end": 610.08,
+    "text": " The results of this assessment determine next steps, which could suggest additional analysis"
+  },
+  {
+    "start": 610.08,
+    "end": 617.08,
+    "text": " or further opportunities, which would begin another cycle of the machine learning process."
+  },
+  {
+    "start": 617.08,
+    "end": 622.1,
+    "text": " In summary, we've looked at the steps in the machine learning process in detail."
+  },
+  {
+    "start": 622.1,
+    "end": 626.74,
+    "text": " The goals and main activities of each step were discussed in this lecture."
+  },
+  {
+    "start": 626.74,
+    "end": 631.72,
+    "text": " Remember that this is an iterative process in which each step can be repeated more than"
+  },
+  {
+    "start": 631.72,
+    "end": 637.78,
+    "text": " once and findings from each step may require a previous step to be repeated with new information."
+  }
+]

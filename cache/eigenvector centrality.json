@@ -1,0 +1,422 @@
+[
+  {
+    "start": 0.2,
+    "end": 6.92,
+    "text": " So, so far, the centrality of a node is defined using the degree and the shortest distance to other nodes."
+  },
+  {
+    "start": 7.68,
+    "end": 9.8,
+    "text": " Now, we introduce a different idea."
+  },
+  {
+    "start": 10.76,
+    "end": 17.3,
+    "text": " We would like to say that if you are important and I am connected to you, then I must be somewhat important too."
+  },
+  {
+    "start": 18.34,
+    "end": 24.66,
+    "text": " In other words, my centrality is proportional to the combined centrality values of my neighbors."
+  },
+  {
+    "start": 25.6,
+    "end": 29.84,
+    "text": " Now, if we write that down mathematically, it would look like the top formula."
+  },
+  {
+    "start": 30.0,
+    "end": 33.42,
+    "text": " the centrality of vi is the sum of its neighbors."
+  },
+  {
+    "start": 34.52,
+    "end": 36.14,
+    "text": " Now, we can write that as an equation"
+  },
+  {
+    "start": 36.14,
+    "end": 39.18,
+    "text": " where lambda is a proportionality constant."
+  },
+  {
+    "start": 40.3,
+    "end": 43.74,
+    "text": " The resulting equation looks exactly like"
+  },
+  {
+    "start": 43.74,
+    "end": 45.480000000000004,
+    "text": " the eigenvector equation we have seen before."
+  },
+  {
+    "start": 46.04,
+    "end": 49.019999999999996,
+    "text": " Now, again, you really do not have to understand how it works."
+  },
+  {
+    "start": 49.5,
+    "end": 52.019999999999996,
+    "text": " It's fine to know that if we solve that equation,"
+  },
+  {
+    "start": 52.44,
+    "end": 55.260000000000005,
+    "text": " we will get the eigenvalues lambda."
+  },
+  {
+    "start": 56.28,
+    "end": 58.24,
+    "text": " Now, let's take the largest lambda"
+  },
+  {
+    "start": 58.24,
+    "end": 60.84,
+    "text": " and find the corresponding eigenvector,"
+  },
+  {
+    "start": 61.18,
+    "end": 64.18,
+    "text": " which will give you the centrality of each node."
+  },
+  {
+    "start": 65.22,
+    "end": 67.66,
+    "text": " Notice the difference between the degree centrality"
+  },
+  {
+    "start": 67.66,
+    "end": 70.84,
+    "text": " and the eigenvector centrality in the same graph."
+  },
+  {
+    "start": 71.72,
+    "end": 75.12,
+    "text": " The yellow node in the middle has a low degree centrality"
+  },
+  {
+    "start": 75.12,
+    "end": 76.4,
+    "text": " compared to its neighbors."
+  },
+  {
+    "start": 77.38,
+    "end": 79.82000000000001,
+    "text": " However, with the eigenvector centrality,"
+  },
+  {
+    "start": 79.82000000000001,
+    "end": 82.96000000000001,
+    "text": " the node becomes comparatively more important"
+  },
+  {
+    "start": 82.96000000000001,
+    "end": 85.46000000000001,
+    "text": " because the neighbor's centrality status"
+  },
+  {
+    "start": 85.46000000000001,
+    "end": 87.84,
+    "text": " boosts up the centrality of this node."
+  },
+  {
+    "start": 88.24,
+    "end": 92.16,
+    "text": " In contrast, consider the second highlighted node."
+  },
+  {
+    "start": 93.6,
+    "end": 97.44,
+    "text": " It had the same unnormalized degree centrality as the previous node,"
+  },
+  {
+    "start": 98.16,
+    "end": 101.58,
+    "text": " but because the neighbors are low centrality nodes,"
+  },
+  {
+    "start": 102.56,
+    "end": 104.66,
+    "text": " the eigenvector centrality goes down."
+  },
+  {
+    "start": 105.34,
+    "end": 109.24,
+    "text": " So this is the intended consequence of the eigenvector centrality measure."
+  },
+  {
+    "start": 110.82,
+    "end": 113.3,
+    "text": " Well, speaking of consequences,"
+  },
+  {
+    "start": 114.46,
+    "end": 116.47999999999999,
+    "text": " eigenvector centrality essentially says,"
+  },
+  {
+    "start": 116.48,
+    "end": 119.86,
+    "text": " if you know the right people, your importance will go up."
+  },
+  {
+    "start": 120.76,
+    "end": 122.58,
+    "text": " Well, that's kind of a risky proposition."
+  },
+  {
+    "start": 123.74000000000001,
+    "end": 125.7,
+    "text": " Here is me in a social network,"
+  },
+  {
+    "start": 126.42,
+    "end": 130.54,
+    "text": " and let's say I'm connected to this somewhat dubious character."
+  },
+  {
+    "start": 131.38,
+    "end": 133.18,
+    "text": " And I think it doesn't really matter."
+  },
+  {
+    "start": 134.24,
+    "end": 138.48000000000002,
+    "text": " What I don't know is that my connection has its own set of connections,"
+  },
+  {
+    "start": 139.14000000000001,
+    "end": 140.16,
+    "text": " and look at who they are."
+  },
+  {
+    "start": 140.98000000000002,
+    "end": 146.18,
+    "text": " So on the one hand, these shady characters that I'm now connected to indirectly"
+  },
+  {
+    "start": 146.18,
+    "end": 148.92000000000002,
+    "text": " does raise my eigenvector centrality,"
+  },
+  {
+    "start": 148.92000000000002,
+    "end": 153.1,
+    "text": " but it also has quite a damaging effect on my reputation."
+  },
+  {
+    "start": 153.96,
+    "end": 157.12,
+    "text": " My EV centrality almost makes me look like a suspect."
+  },
+  {
+    "start": 158.1,
+    "end": 159.12,
+    "text": " Think about that."
+  },
+  {
+    "start": 160.16,
+    "end": 163.56,
+    "text": " Now, Brito and Page, the founders of Google,"
+  },
+  {
+    "start": 163.9,
+    "end": 167.26000000000002,
+    "text": " had an interesting way to think about the eigenvector centrality."
+  },
+  {
+    "start": 168.16,
+    "end": 169.8,
+    "text": " They thought about a surfer."
+  },
+  {
+    "start": 170.62,
+    "end": 172.38,
+    "text": " Well, no, not that kind of surfer."
+  },
+  {
+    "start": 173.20000000000002,
+    "end": 175.94,
+    "text": " This kind of surfer, the kind that serves the web."
+  },
+  {
+    "start": 176.18,
+    "end": 183.44,
+    "text": " But this is a special web surfer called a random surfer, and here is what he does."
+  },
+  {
+    "start": 183.44,
+    "end": 188.20000000000002,
+    "text": " He picks a web page and looks at the links."
+  },
+  {
+    "start": 188.20000000000002,
+    "end": 195.06,
+    "text": " Then he chooses a random link, goes to that page, and does the same thing again."
+  },
+  {
+    "start": 195.06,
+    "end": 201.20000000000002,
+    "text": " Except sometimes, when he kind of gets bored and goes to a totally new page."
+  },
+  {
+    "start": 201.20000000000002,
+    "end": 204.82,
+    "text": " How often does he do this random jump?"
+  },
+  {
+    "start": 204.82,
+    "end": 211.16,
+    "text": " say there is always sort of a 15% chance that he will, or more generally, with a probability"
+  },
+  {
+    "start": 211.16,
+    "end": 218.95999999999998,
+    "text": " of 1 minus alpha. So Page and Brint's idea was to figure out that this surfer will visit"
+  },
+  {
+    "start": 218.95999999999998,
+    "end": 225.74,
+    "text": " a page with a high chance if the page is central. They came up with a measure for this stationary"
+  },
+  {
+    "start": 225.74,
+    "end": 231.34,
+    "text": " probability of a page being visited by the random surfer. They did not call it centrality,"
+  },
+  {
+    "start": 231.34,
+    "end": 234.34,
+    "text": " they called it PageRank."
+  },
+  {
+    "start": 234.34,
+    "end": 238.34,
+    "text": " Let's see a YouTube video to understand how PageRank behaves."
+  },
+  {
+    "start": 261.34000000000003,
+    "end": 291.32000000000005,
+    "text": " Thank you."
+  },
+  {
+    "start": 291.34000000000003,
+    "end": 319.88000000000005,
+    "text": " Okay, now we are talking about the World Wide Web, which is a huge graph."
+  },
+  {
+    "start": 320.56,
+    "end": 322.56,
+    "text": " How do you compute the page rank of such a graph?"
+  },
+  {
+    "start": 323.34,
+    "end": 328.38,
+    "text": " The answer is iteratively, using a method called power iteration."
+  },
+  {
+    "start": 329.32,
+    "end": 333.0,
+    "text": " This method can be used because we are looking for the largest eigenvalue."
+  },
+  {
+    "start": 333.3,
+    "end": 334.04,
+    "text": " Let me show you."
+  },
+  {
+    "start": 335.02,
+    "end": 336.46,
+    "text": " Let's take a small graph."
+  },
+  {
+    "start": 337.56,
+    "end": 341.92,
+    "text": " Let's initialize the still unknown page rank as 0 for all nodes."
+  },
+  {
+    "start": 342.48,
+    "end": 348.36,
+    "text": " Now, page rank A is the 0.15 chance that I was at A already,"
+  },
+  {
+    "start": 348.36,
+    "end": 353.88,
+    "text": " and 0.85 chance that I come to A from B, or I come to A from C."
+  },
+  {
+    "start": 354.94,
+    "end": 358.36,
+    "text": " However, at this point, the page rank of B and C are at 0."
+  },
+  {
+    "start": 359.22,
+    "end": 362.84000000000003,
+    "text": " So in the first iteration, page rank of A is 0.15."
+  },
+  {
+    "start": 364.22,
+    "end": 367.40000000000003,
+    "text": " Now for B, I can only come to B from A,"
+  },
+  {
+    "start": 367.86,
+    "end": 371.38,
+    "text": " but we cannot claim all of page rank of A"
+  },
+  {
+    "start": 371.38,
+    "end": 375.92,
+    "text": " because there is always a half chance that the surfer will come to B from A"
+  },
+  {
+    "start": 375.92,
+    "end": 378.28000000000003,
+    "text": " because he could also get to here from C."
+  },
+  {
+    "start": 379.12,
+    "end": 382.78000000000003,
+    "text": " This plus the 0.15 chance that the server was already at B"
+  },
+  {
+    "start": 382.78000000000003,
+    "end": 385.68,
+    "text": " makes B's page rank 0.21."
+  },
+  {
+    "start": 386.6,
+    "end": 388.74,
+    "text": " Now, after doing a few rounds of this computation"
+  },
+  {
+    "start": 388.74,
+    "end": 390.74,
+    "text": " between 50 and 100 iterations, let's say,"
+  },
+  {
+    "start": 391.66,
+    "end": 392.90000000000003,
+    "text": " the values will converge."
+  },
+  {
+    "start": 393.74,
+    "end": 396.38,
+    "text": " Now, this computation has been demonstrated"
+  },
+  {
+    "start": 396.38,
+    "end": 398.62,
+    "text": " to perform well in the MapReduce framework."
+  },
+  {
+    "start": 399.58000000000004,
+    "end": 402.74,
+    "text": " In Module 4, we'll talk about another way"
+  },
+  {
+    "start": 402.74,
+    "end": 404.08000000000004,
+    "text": " of computing this metric."
+  }
+]

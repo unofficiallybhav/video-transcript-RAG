@@ -1,0 +1,702 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.9,
+    "text": " In this lesson, we'll talk about two dominant systems developed for large-scale graph processing."
+  },
+  {
+    "start": 6.58,
+    "end": 13.38,
+    "text": " The first one, called Giraffe, is from Apache and implements a BSP model on Hadoop."
+  },
+  {
+    "start": 14.08,
+    "end": 18.96,
+    "text": " The second system is called GraphX, is developed on the Spark platform,"
+  },
+  {
+    "start": 19.36,
+    "end": 23.7,
+    "text": " which, as you know, emphasizes on iterative in-memory computations."
+  },
+  {
+    "start": 23.7,
+    "end": 31.02,
+    "text": " While BSP is a popular graph processing model, the actual implementation of BSP in an infrastructure"
+  },
+  {
+    "start": 31.02,
+    "end": 35.34,
+    "text": " needs additional programmability beyond what we have discussed so far."
+  },
+  {
+    "start": 36.34,
+    "end": 41.4,
+    "text": " In Girafe, several additional capabilities are added to make it more practical."
+  },
+  {
+    "start": 42.64,
+    "end": 46.7,
+    "text": " A thorough coverage of the Girafe platform is beyond the scope of these lectures."
+  },
+  {
+    "start": 47.3,
+    "end": 50.1,
+    "text": " However, we'll touch upon a few of these capabilities."
+  },
+  {
+    "start": 50.1,
+    "end": 57.34,
+    "text": " We will first consider Graph I.O., that is how graphs can come into the system, get represented"
+  },
+  {
+    "start": 57.34,
+    "end": 60.82,
+    "text": " inside the system, and when computed, are written out to files."
+  },
+  {
+    "start": 62.5,
+    "end": 66.52000000000001,
+    "text": " Next, we will describe how Girafe interacts with external data sources."
+  },
+  {
+    "start": 67.34,
+    "end": 69.68,
+    "text": " Some of these data sources use a different data model."
+  },
+  {
+    "start": 70.48,
+    "end": 71.94,
+    "text": " Other sources include databases."
+  },
+  {
+    "start": 73.8,
+    "end": 78.76,
+    "text": " Once a graph is imported, it is important to make sure that the system runs efficiently."
+  },
+  {
+    "start": 79.76,
+    "end": 84.58000000000001,
+    "text": " We will look at a method that uses a special kind of global aggregate operation"
+  },
+  {
+    "start": 84.58000000000001,
+    "end": 87.80000000000001,
+    "text": " which saves time by reducing the amount of messaging"
+  },
+  {
+    "start": 87.80000000000001,
+    "end": 90.88000000000001,
+    "text": " to compute aggregate functions like sum and products."
+  },
+  {
+    "start": 92.74000000000001,
+    "end": 96.72,
+    "text": " Finally, we'll recognize that even if Girafe is designed"
+  },
+  {
+    "start": 96.72,
+    "end": 99.34,
+    "text": " for performing iterative in-memory computation,"
+  },
+  {
+    "start": 99.88000000000001,
+    "end": 104.10000000000001,
+    "text": " there are times when it is absolutely necessary to store data on disk."
+  },
+  {
+    "start": 104.92,
+    "end": 106.56,
+    "text": " We'll briefly touch upon"
+  },
+  {
+    "start": 106.56,
+    "end": 108.58000000000001,
+    "text": " Girafe's ability to handle out-of-core"
+  },
+  {
+    "start": 108.58000000000001,
+    "end": 110.44000000000001,
+    "text": " graphs and out-of-core messages."
+  },
+  {
+    "start": 111.42000000000002,
+    "end": 112.44000000000001,
+    "text": " A graph"
+  },
+  {
+    "start": 112.44000000000001,
+    "end": 114.04,
+    "text": " can be written in many ways."
+  },
+  {
+    "start": 114.72000000000001,
+    "end": 116.38000000000001,
+    "text": " For Neo4j, we saw how"
+  },
+  {
+    "start": 116.38000000000001,
+    "end": 118.12,
+    "text": " graphs can be important to the database"
+  },
+  {
+    "start": 118.12,
+    "end": 119.4,
+    "text": " from a CSV file."
+  },
+  {
+    "start": 120.34,
+    "end": 122.4,
+    "text": " In Girafe, two of the most"
+  },
+  {
+    "start": 122.4,
+    "end": 124.60000000000001,
+    "text": " common input formats are adjacency"
+  },
+  {
+    "start": 124.60000000000001,
+    "end": 126.36000000000001,
+    "text": " lists and edge lists."
+  },
+  {
+    "start": 127.42000000000002,
+    "end": 128.66000000000003,
+    "text": " For an adjacency"
+  },
+  {
+    "start": 128.66000000000003,
+    "end": 130.48000000000002,
+    "text": " list, each line has the"
+  },
+  {
+    "start": 130.48000000000002,
+    "end": 132.5,
+    "text": " node ID, a node value"
+  },
+  {
+    "start": 132.5,
+    "end": 133.86,
+    "text": " which is a single number here,"
+  },
+  {
+    "start": 134.1,
+    "end": 136.29999999999998,
+    "text": " and a list of destination-weight pairs."
+  },
+  {
+    "start": 137.88,
+    "end": 140.78,
+    "text": " Thus, in line 1, A has a value of 10,"
+  },
+  {
+    "start": 141.46,
+    "end": 145.84,
+    "text": " and two neighbors B and F with edge weights 2 and 5, respectively."
+  },
+  {
+    "start": 146.92,
+    "end": 150.95999999999998,
+    "text": " Since G has no outgoing edge, the adjacency list is empty."
+  },
+  {
+    "start": 152.24,
+    "end": 155.04,
+    "text": " The current way of representing graphs is in terms of triplets,"
+  },
+  {
+    "start": 155.48,
+    "end": 159.28,
+    "text": " containing the source and destination nodes, followed by an edge weight."
+  },
+  {
+    "start": 160.54,
+    "end": 162.57999999999998,
+    "text": " Notice the way that we have shown it here."
+  },
+  {
+    "start": 162.58,
+    "end": 165.08,
+    "text": " and the node value is not represented."
+  },
+  {
+    "start": 165.86,
+    "end": 169.16000000000003,
+    "text": " Let us simplify the adjacency list representation a little."
+  },
+  {
+    "start": 170.38000000000002,
+    "end": 174.8,
+    "text": " We remove the colons, commas, braces, and parentheses,"
+  },
+  {
+    "start": 175.46,
+    "end": 178.06,
+    "text": " and get a space-separated set of lines,"
+  },
+  {
+    "start": 178.44000000000003,
+    "end": 179.9,
+    "text": " one line for each vertex."
+  },
+  {
+    "start": 180.56,
+    "end": 184.66000000000003,
+    "text": " We further replace the node IDs A, B, C, etc.,"
+  },
+  {
+    "start": 184.66000000000003,
+    "end": 186.38000000000002,
+    "text": " with 1, 2, 3, etc.,"
+  },
+  {
+    "start": 186.38000000000002,
+    "end": 188.64000000000001,
+    "text": " so that these IDs are integers."
+  },
+  {
+    "start": 189.62,
+    "end": 192.48000000000002,
+    "text": " So what do we need to specify to parse this for giraffe?"
+  },
+  {
+    "start": 192.58,
+    "end": 199.36,
+    "text": " 1. The graph is a text object, and not, let's say, a database object."
+  },
+  {
+    "start": 200.22000000000003,
+    "end": 205.22000000000003,
+    "text": " 2. It is a vertex-based representation. Each line is a vertex."
+  },
+  {
+    "start": 205.94,
+    "end": 207.84,
+    "text": " The splitter here is a space."
+  },
+  {
+    "start": 208.92000000000002,
+    "end": 211.84,
+    "text": " The ID of the node is a first value for each line."
+  },
+  {
+    "start": 212.64000000000001,
+    "end": 215.16000000000003,
+    "text": " The value is a second token."
+  },
+  {
+    "start": 216.06,
+    "end": 220.52,
+    "text": " The next pair of items define an edge with the target and the weight respectively."
+  },
+  {
+    "start": 220.52,
+    "end": 225.4,
+    "text": " And lastly, there is a list of these pairs till the end of the line."
+  },
+  {
+    "start": 226.76000000000002,
+    "end": 231.58,
+    "text": " Therefore, each line would typically lead to the creation of both nodes and a set of edges."
+  },
+  {
+    "start": 233.44,
+    "end": 237.08,
+    "text": " This shows a typical reader for an adjacency matrix written in Java."
+  },
+  {
+    "start": 237.86,
+    "end": 241.74,
+    "text": " Again, you don't have to know Java to get the elements of this program."
+  },
+  {
+    "start": 243.10000000000002,
+    "end": 246.38,
+    "text": " A reader is clearly customized for your specific input."
+  },
+  {
+    "start": 247.34,
+    "end": 252.07999999999998,
+    "text": " Very often, the starting point is a basic reader provided by giraffe."
+  },
+  {
+    "start": 253.62,
+    "end": 258.15999999999997,
+    "text": " Like the reader that knows how to read vertices from each line of a text file."
+  },
+  {
+    "start": 258.96,
+    "end": 263.98,
+    "text": " To customize it, you extend it and create your own version."
+  },
+  {
+    "start": 264.82,
+    "end": 270.46,
+    "text": " Now you need to define how to get the ID and value of the vertex by writing separate methods for them."
+  },
+  {
+    "start": 270.46,
+    "end": 277.46,
+    "text": " Notice that the id comes from the zeroth item of each line after it is split by white space,"
+  },
+  {
+    "start": 277.46,
+    "end": 285.46,
+    "text": " and the value comes from the next token, the second term marked by 1 for the zero base of the line."
+  },
+  {
+    "start": 285.46,
+    "end": 289.46,
+    "text": " The next code element is this block here."
+  },
+  {
+    "start": 289.46,
+    "end": 294.46,
+    "text": " This specifies how to create edges by iterating through every line."
+  },
+  {
+    "start": 294.46,
+    "end": 299.46,
+    "text": " To keep the code short, we remove the part that gets the edge weights here."
+  },
+  {
+    "start": 299.46,
+    "end": 306.03999999999996,
+    "text": " As Girafe has matured, it has included many specialized wrappers to interoperate with compatible data sources."
+  },
+  {
+    "start": 306.78,
+    "end": 310.32,
+    "text": " This diagram is from Girafe, where they show some of these sources."
+  },
+  {
+    "start": 311.34,
+    "end": 314.7,
+    "text": " We can group them into three different categories."
+  },
+  {
+    "start": 316.12,
+    "end": 319.94,
+    "text": " Group 1 interoperates with Hive and HBase."
+  },
+  {
+    "start": 320.29999999999995,
+    "end": 323.21999999999997,
+    "text": " You possibly remember these systems from a prior course."
+  },
+  {
+    "start": 323.91999999999996,
+    "end": 328.84,
+    "text": " These systems are designed to give a high-level data access or interface on top of MapReduce."
+  },
+  {
+    "start": 329.46,
+    "end": 334.82,
+    "text": " Group 2 accesses relational systems like MySQL and Cassandra."
+  },
+  {
+    "start": 335.62,
+    "end": 340.06,
+    "text": " But these systems are accessed indirectly through a software module called Gora."
+  },
+  {
+    "start": 341.18,
+    "end": 347.85999999999996,
+    "text": " Gora uses a JSON schema to map the relational schema of the SQL database to a structure that Giraffe can read."
+  },
+  {
+    "start": 348.74,
+    "end": 354.96,
+    "text": " Group 3 accesses graph databases like Neo4j and Dex, which is now called SparkC."
+  },
+  {
+    "start": 355.9,
+    "end": 358.56,
+    "text": " These systems are also accessed indirectly"
+  },
+  {
+    "start": 358.56,
+    "end": 361.29999999999995,
+    "text": " using the Rekster service of TinkerPop,"
+  },
+  {
+    "start": 361.64,
+    "end": 363.14,
+    "text": " which is a graph API layer"
+  },
+  {
+    "start": 363.14,
+    "end": 365.53999999999996,
+    "text": " that can use many different graph stores,"
+  },
+  {
+    "start": 365.73999999999995,
+    "end": 367.84,
+    "text": " including BlazeGraph and Titan."
+  },
+  {
+    "start": 368.96,
+    "end": 371.29999999999995,
+    "text": " Consider a relational table stored in HIFE."
+  },
+  {
+    "start": 372.03999999999996,
+    "end": 373.56,
+    "text": " The table shown here is extracted"
+  },
+  {
+    "start": 373.56,
+    "end": 374.96,
+    "text": " from the BioGrid data source"
+  },
+  {
+    "start": 374.96,
+    "end": 376.26,
+    "text": " that we mentioned in Module 2."
+  },
+  {
+    "start": 377.09999999999997,
+    "end": 380.26,
+    "text": " Each row of the table represents a molecular interaction."
+  },
+  {
+    "start": 381.2,
+    "end": 383.0,
+    "text": " We can create a network from here"
+  },
+  {
+    "start": 383.0,
+    "end": 385.26,
+    "text": " just by considering the first two columns."
+  },
+  {
+    "start": 386.14,
+    "end": 388.74,
+    "text": " The first column represents the source node of an edge,"
+  },
+  {
+    "start": 389.0,
+    "end": 389.56,
+    "text": " colored red,"
+  },
+  {
+    "start": 390.02,
+    "end": 392.74,
+    "text": " and the second column represents the target node of the edge,"
+  },
+  {
+    "start": 392.82,
+    "end": 393.26,
+    "text": " colored blue."
+  },
+  {
+    "start": 394.26,
+    "end": 397.3,
+    "text": " The label of the edge comes from the fifth column of the table,"
+  },
+  {
+    "start": 397.7,
+    "end": 399.82,
+    "text": " which is a black bold font."
+  },
+  {
+    "start": 400.9,
+    "end": 402.88,
+    "text": " Let's assume that these two data items,"
+  },
+  {
+    "start": 404.22,
+    "end": 406.7,
+    "text": " these are the data items that we want to pick up"
+  },
+  {
+    "start": 406.7,
+    "end": 407.48,
+    "text": " from the hive table."
+  },
+  {
+    "start": 408.26,
+    "end": 411.86,
+    "text": " The simplest way to get a record from hive to giraffe"
+  },
+  {
+    "start": 411.86,
+    "end": 416.34000000000003,
+    "text": " is to extend the class called simpleHiveRowToEdge."
+  },
+  {
+    "start": 417.3,
+    "end": 420.78000000000003,
+    "text": " For this class, we need to specify the source node,"
+  },
+  {
+    "start": 421.32,
+    "end": 423.44,
+    "text": " the target node, and the edge value"
+  },
+  {
+    "start": 423.44,
+    "end": 425.54,
+    "text": " using three methods as shown here."
+  },
+  {
+    "start": 426.54,
+    "end": 430.46000000000004,
+    "text": " My extension is called myHiveRowToEdge."
+  },
+  {
+    "start": 430.74,
+    "end": 433.26,
+    "text": " It shows the implementation of these methods"
+  },
+  {
+    "start": 433.26,
+    "end": 439.1,
+    "text": " where we just pick up the first, second, and fifth columns"
+  },
+  {
+    "start": 439.1,
+    "end": 440.44,
+    "text": " as we described before."
+  },
+  {
+    "start": 440.44,
+    "end": 448.18,
+    "text": " Now, as mentioned before, Giraffe interacts with Neo4j through the Gremlin API provided"
+  },
+  {
+    "start": 448.18,
+    "end": 450.12,
+    "text": " by TinkerPop."
+  },
+  {
+    "start": 450.12,
+    "end": 455.94,
+    "text": " One can think of Gremlin as a traversal API, which means it allows one to start from some"
+  },
+  {
+    "start": 455.94,
+    "end": 458.56,
+    "text": " node and walk the graph step by step."
+  },
+  {
+    "start": 458.56,
+    "end": 463.32,
+    "text": " To show this, consider the disease gene graph on the right."
+  },
+  {
+    "start": 463.32,
+    "end": 469.84,
+    "text": " Let's call this graph G. So G.phi represents all the vertices of G."
+  },
+  {
+    "start": 470.44,
+    "end": 479.46,
+    "text": " Therefore, g.v has name mc4r, selects the node that has the property called name, whose"
+  },
+  {
+    "start": 479.46,
+    "end": 481.98,
+    "text": " value is mc4r."
+  },
+  {
+    "start": 481.98,
+    "end": 489.2,
+    "text": " Let's add to this path the condition dot out, which chooses the out edges of the mc4r node,"
+  },
+  {
+    "start": 489.2,
+    "end": 495.06,
+    "text": " and then traverses the associated with edge to the orange node called obesity."
+  },
+  {
+    "start": 495.06,
+    "end": 498.88,
+    "text": " So this call returns the vertex only."
+  },
+  {
+    "start": 498.88,
+    "end": 505.71999999999997,
+    "text": " Now adding the path to values name gives us obesity."
+  },
+  {
+    "start": 505.71999999999997,
+    "end": 509.5,
+    "text": " We can also expand differently from the obesity node."
+  },
+  {
+    "start": 509.5,
+    "end": 516.02,
+    "text": " When we say in V, we refer to all nodes that have incoming edges to the current node."
+  },
+  {
+    "start": 516.02,
+    "end": 520.4,
+    "text": " In this case, there is only one, the LEPR node."
+  },
+  {
+    "start": 520.4,
+    "end": 527.44,
+    "text": " To this, we add the traversal out E, and thus we get back the outgoing edge from the LEPR"
+  },
+  {
+    "start": 527.44,
+    "end": 532.44,
+    "text": " highlighted in yellow. We can also look at the Jira of Gremlin Neo4j connection"
+  },
+  {
+    "start": 532.44,
+    "end": 537.44,
+    "text": " from TinkerPop's viewpoint. TinkerPop is trying to create a standard language for"
+  },
+  {
+    "start": 537.44,
+    "end": 542.44,
+    "text": " graph traversal, just like Neo4j is trying to create OpenCypher as a standard"
+  },
+  {
+    "start": 542.44,
+    "end": 547.44,
+    "text": " query language for graph databases. In trying to create the standard,"
+  },
+  {
+    "start": 547.44,
+    "end": 551.44,
+    "text": " TinkerPop recognizes that the actual storage management for graph databases"
+  },
+  {
+    "start": 551.44,
+    "end": 556.44,
+    "text": " should be provided by another vendor. The vendor needs to implement the Gremlin"
+  },
+  {
+    "start": 556.44,
+    "end": 559.22,
+    "text": " Gremlin API for access."
+  },
+  {
+    "start": 559.22,
+    "end": 563.0200000000001,
+    "text": " Similarly, for graph processing, including expensive analytic"
+  },
+  {
+    "start": 563.0200000000001,
+    "end": 566.9200000000001,
+    "text": " operations, should be performed by what they call a graph"
+  },
+  {
+    "start": 566.9200000000001,
+    "end": 568.34,
+    "text": " computer."
+  },
+  {
+    "start": 568.34,
+    "end": 571.5,
+    "text": " This is the role played by Giraffe as well as Spark,"
+  },
+  {
+    "start": 571.5,
+    "end": 574.6800000000001,
+    "text": " both of which interface with TinkerPop."
+  }
+]

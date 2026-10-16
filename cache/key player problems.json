@@ -1,0 +1,132 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.62,
+    "text": " So, in this optional module, we'll look at the two key player problems again."
+  },
+  {
+    "start": 6.86,
+    "end": 14.98,
+    "text": " The goal of the first problem is to identify a small set of nodes whose removal will create maximum disruption."
+  },
+  {
+    "start": 16.5,
+    "end": 24.34,
+    "text": " Now, in this case, a traditional centrality algorithm may not work because the optimization goal is to break up the network."
+  },
+  {
+    "start": 25.400000000000002,
+    "end": 28.34,
+    "text": " So, we need a quantitative measure of the breakage."
+  },
+  {
+    "start": 30.0,
+    "end": 38.019999999999996,
+    "text": " If dij is the distance between nodes i and j, then 1 over dij is the closeness of these two nodes."
+  },
+  {
+    "start": 38.94,
+    "end": 43.3,
+    "text": " If we add the closeness of all nodes and normalize it by the number of node pairs,"
+  },
+  {
+    "start": 43.3,
+    "end": 47.04,
+    "text": " we'll get a measure of cohesiveness as a fraction."
+  },
+  {
+    "start": 48.36,
+    "end": 53.84,
+    "text": " So, 1 minus this value is a measure of fragmentation."
+  },
+  {
+    "start": 54.68,
+    "end": 58.879999999999995,
+    "text": " Our goal is to maximize this fragmentation metric."
+  },
+  {
+    "start": 60.0,
+    "end": 73.28,
+    "text": " In the model terrorist network shown here, removing the red nodes A, B, and C will break up the network into seven components, with F reaching a value of 0.59."
+  },
+  {
+    "start": 73.88,
+    "end": 84.24000000000001,
+    "text": " The second key player problem is trying to find a group of S influencers, which can reach a maximum number of nodes within K steps."
+  },
+  {
+    "start": 84.24,
+    "end": 90.56,
+    "text": " The number of unique nodes reachable from a starting node is called the reach of the starting node."
+  },
+  {
+    "start": 91.69999999999999,
+    "end": 97.41999999999999,
+    "text": " For this, we need to adapt the concept of reach to limit it to k-steps."
+  },
+  {
+    "start": 98.24,
+    "end": 105.82,
+    "text": " We also need to adapt it to measure the distance of an arbitrary node from a group of nodes, which means our influencers."
+  },
+  {
+    "start": 105.82000000000001,
+    "end": 113.82000000000001,
+    "text": " The distance of one node from a group of nodes can be defined as the maximum or average or"
+  },
+  {
+    "start": 113.82000000000001,
+    "end": 118.82000000000001,
+    "text": " minimum distance of the node from the members of the group."
+  },
+  {
+    "start": 118.82000000000001,
+    "end": 122.82000000000001,
+    "text": " Often, the minimum distance is a good choice."
+  },
+  {
+    "start": 122.82000000000001,
+    "end": 128.82,
+    "text": " So, the distance weighted reach can then be thought of as the proportion of all nodes"
+  },
+  {
+    "start": 128.82,
+    "end": 133.82,
+    "text": " reached by the group where the nodes are weighted by the distance from the set."
+  },
+  {
+    "start": 133.82,
+    "end": 137.66,
+    "text": " and only the nodes at distance 1 are given full weight."
+  },
+  {
+    "start": 138.79999999999998,
+    "end": 141.79999999999998,
+    "text": " Hence, a distance-weighted reach achieves a maximum value of 1"
+  },
+  {
+    "start": 141.79999999999998,
+    "end": 147.62,
+    "text": " when every outside node is adjacent to at least one member of the set of influencers."
+  },
+  {
+    "start": 148.35999999999999,
+    "end": 152.78,
+    "text": " In the network shown just three nodes, A, C, and D,"
+  },
+  {
+    "start": 153.16,
+    "end": 158.38,
+    "text": " are sufficient to reach every other member within just four steps."
+  },
+  {
+    "start": 159.35999999999999,
+    "end": 164.42,
+    "text": " Now this concludes this module where we looked at several analytic techniques and measures"
+  },
+  {
+    "start": 164.42,
+    "end": 168.12,
+    "text": " to extract different kinds of insights from a network."
+  }
+]

@@ -1,0 +1,572 @@
+[
+  {
+    "start": 0.8,
+    "end": 5.92,
+    "text": " So in this video, we will talk about graph analytics"
+  },
+  {
+    "start": 5.92,
+    "end": 11.96,
+    "text": " within the context of this big data specialization."
+  },
+  {
+    "start": 11.96,
+    "end": 14.24,
+    "text": " So in the previous courses, you know"
+  },
+  {
+    "start": 14.24,
+    "end": 17.32,
+    "text": " about the three important v's of big data, right?"
+  },
+  {
+    "start": 17.32,
+    "end": 22.92,
+    "text": " So the three well-known v's are volume, velocity, and variety."
+  },
+  {
+    "start": 22.92,
+    "end": 26.48,
+    "text": " We'll also talk about a lesser known v, which"
+  },
+  {
+    "start": 26.48,
+    "end": 30.48,
+    "text": " is called Fallon's, OK?"
+  },
+  {
+    "start": 30.48,
+    "end": 36.44,
+    "text": " What we want to talk about is what impact these things"
+  },
+  {
+    "start": 36.44,
+    "end": 39.88,
+    "text": " have on graph data."
+  },
+  {
+    "start": 39.88,
+    "end": 45.84,
+    "text": " So for volume, let's take a data set"
+  },
+  {
+    "start": 45.84,
+    "end": 49.16,
+    "text": " like the road network of the United States."
+  },
+  {
+    "start": 49.16,
+    "end": 51.66,
+    "text": " So that's a pretty large graph, right?"
+  },
+  {
+    "start": 51.66,
+    "end": 55.72,
+    "text": " So when we say volume, I mean that the size of the graph"
+  },
+  {
+    "start": 55.72,
+    "end": 64.76,
+    "text": " is much larger than what you might have in the memory of a reasonable computer or your computing"
+  },
+  {
+    "start": 64.76,
+    "end": 76.68,
+    "text": " infrastructure. Now, we will see what impact the size of the graph has on analytic operations."
+  },
+  {
+    "start": 78.36,
+    "end": 82.6,
+    "text": " What do we mean by velocity when it comes to graphs? Well, think of Facebook again."
+  },
+  {
+    "start": 82.60000000000001,
+    "end": 86.62,
+    "text": " So these little graphs are updates."
+  },
+  {
+    "start": 86.62,
+    "end": 92.52000000000001,
+    "text": " So you write a post, then like somebody else's post,"
+  },
+  {
+    "start": 92.52000000000001,
+    "end": 94.16000000000001,
+    "text": " and make a comment."
+  },
+  {
+    "start": 94.16000000000001,
+    "end": 95.86000000000001,
+    "text": " That's a bunch of updates."
+  },
+  {
+    "start": 95.86000000000001,
+    "end": 99.08000000000001,
+    "text": " That comes and adds to your graph."
+  },
+  {
+    "start": 99.08000000000001,
+    "end": 103.28,
+    "text": " Well, then 10 minutes later, you do something similar."
+  },
+  {
+    "start": 103.28,
+    "end": 104.96000000000001,
+    "text": " And that also comes and adds to the graph."
+  },
+  {
+    "start": 104.96000000000001,
+    "end": 106.58000000000001,
+    "text": " Then your friends does the same thing."
+  },
+  {
+    "start": 106.58000000000001,
+    "end": 108.10000000000001,
+    "text": " It adds to your graph."
+  },
+  {
+    "start": 108.10000000000001,
+    "end": 116.78,
+    "text": " So as time goes by, you are sending more edges to your graph. And the speed at which you"
+  },
+  {
+    "start": 116.78,
+    "end": 124.14000000000001,
+    "text": " are doing this for a place like Facebook can be really, really high. So the rate of update"
+  },
+  {
+    "start": 124.14000000000001,
+    "end": 134.34,
+    "text": " in Facebook is very high. This is what is called streaming edges into graphs. And there"
+  },
+  {
+    "start": 134.34,
+    "end": 144.42000000000002,
+    "text": " it can be multiple streams for various reasons. What we mean by variety for graphs? It means"
+  },
+  {
+    "start": 144.42000000000002,
+    "end": 150.28,
+    "text": " that the graph is collecting data from various places and all these different places are"
+  },
+  {
+    "start": 150.28,
+    "end": 153.78,
+    "text": " giving different kinds of information to the graph."
+  },
+  {
+    "start": 153.78,
+    "end": 159.96,
+    "text": " So in the end, the graph has more non-uniform and complex information potentially coming"
+  },
+  {
+    "start": 159.96,
+    "end": 166.16,
+    "text": " from multiple sources. That is what we mean by variety when we refer to graphs. That picture"
+  },
+  {
+    "start": 166.16,
+    "end": 172.62,
+    "text": " there by the way is different kinds of protein interactions."
+  },
+  {
+    "start": 172.62,
+    "end": 180.86,
+    "text": " The next one, the less known one is valence. Now, if you remember your chemistry, this"
+  },
+  {
+    "start": 180.86,
+    "end": 186.60000000000002,
+    "text": " comes from valence electrons, which are electrons in an atom which are used for bonding. The"
+  },
+  {
+    "start": 186.6,
+    "end": 193.78,
+    "text": " other electrons are called the core electrons. So, the idea is, if we increase the valence"
+  },
+  {
+    "start": 193.78,
+    "end": 200.92,
+    "text": " of a graph, you increase the connectedness of the graph. How? Well, we will see."
+  },
+  {
+    "start": 200.92,
+    "end": 212.78,
+    "text": " Now, graph size clearly impacts analytics. Why? A, it takes more space, but more importantly,"
+  },
+  {
+    "start": 212.78,
+    "end": 219.96,
+    "text": " it increases the algorithmic complexity of any operation that you want to do on the graph."
+  },
+  {
+    "start": 219.96,
+    "end": 229.78,
+    "text": " Now we will see an example of that. But what happens as a result is that the data to analysis"
+  },
+  {
+    "start": 229.78,
+    "end": 234.78,
+    "text": " time becomes high. So I put in some data and I want to do this analysis. But there is so"
+  },
+  {
+    "start": 234.78,
+    "end": 242.66,
+    "text": " much data that my analysis takes way longer than it should. Let us give a simple example."
+  },
+  {
+    "start": 242.78,
+    "end": 249.8,
+    "text": " An example we have seen before, remember we had this little graph from our biological"
+  },
+  {
+    "start": 249.8,
+    "end": 255.28,
+    "text": " example where we were asking find a simple path between Alzheimer's disease and colorectal"
+  },
+  {
+    "start": 255.28,
+    "end": 260.66,
+    "text": " cancer and in this case the result is obvious."
+  },
+  {
+    "start": 260.66,
+    "end": 269.54,
+    "text": " Now, let us pause and ask, there are two nodes that I mentioned, in this case my colorectal"
+  },
+  {
+    "start": 269.54,
+    "end": 279.72,
+    "text": " cancer and Alzheimer's disease nodes. And we are asking is there a simple path connecting"
+  },
+  {
+    "start": 279.72,
+    "end": 287.72,
+    "text": " them? This is called a decision problem. I give you a data and I am asking does such"
+  },
+  {
+    "start": 287.72,
+    "end": 294.22,
+    "text": " a simple path exist or not exist. Now, this is actually a very hard decision"
+  },
+  {
+    "start": 294.22,
+    "end": 298.38,
+    "text": " problem and the computer scientist will tell you that this is a very complicated problem"
+  },
+  {
+    "start": 298.38,
+    "end": 305.26,
+    "text": " because it has a very high complexity. Let us ask another question. Well, how many simple"
+  },
+  {
+    "start": 305.26,
+    "end": 311.52,
+    "text": " paths? Now I want to count how many simple paths exist between these two nodes. Indeed,"
+  },
+  {
+    "start": 311.52,
+    "end": 318.5,
+    "text": " it is another hard computing problem. And if you really want to know, the size of the"
+  },
+  {
+    "start": 318.5,
+    "end": 325.4,
+    "text": " result in the worst case is exponential in the number of nodes. So, if we increase the"
+  },
+  {
+    "start": 325.40000000000003,
+    "end": 331.62000000000006,
+    "text": " number of nodes and edges, if we increase the size of the graph, such a seemingly simple"
+  },
+  {
+    "start": 331.62000000000006,
+    "end": 339.40000000000003,
+    "text": " question can take a very, very, very long time so that it's almost practically impossible"
+  },
+  {
+    "start": 339.40000000000003,
+    "end": 345.00000000000006,
+    "text": " to compute it for a really large graph if we have no other information supporting it."
+  },
+  {
+    "start": 345.00000000000006,
+    "end": 353.82000000000005,
+    "text": " That's the worst case. But when we say algorithmic complexity increases, that's what we mean."
+  },
+  {
+    "start": 355.40000000000003,
+    "end": 361.76000000000005,
+    "text": " Let us talk about velocity. And I said our favorite example is Facebook, right? So, we"
+  },
+  {
+    "start": 361.76000000000005,
+    "end": 365.64000000000004,
+    "text": " are adding a bunch of updates, which means we are adding a bunch of edges. We are streaming"
+  },
+  {
+    "start": 365.64000000000004,
+    "end": 373.74,
+    "text": " the edges into the data. And we want to compute a metric. We want to see what is the shortest"
+  },
+  {
+    "start": 373.74,
+    "end": 384.18000000000006,
+    "text": " distance between person A and person B or item A in item B? Or I want to know that Facebook"
+  },
+  {
+    "start": 384.18,
+    "end": 391.02,
+    "text": " has communities, Twitter has communities like we saw and how many people are there in these"
+  },
+  {
+    "start": 391.02,
+    "end": 397.5,
+    "text": " communities and how many such communities are there, like a Facebook group, right?"
+  },
+  {
+    "start": 397.5,
+    "end": 404.58,
+    "text": " Now if you want to compute this metric and you get these edges very fast, it is very"
+  },
+  {
+    "start": 404.58,
+    "end": 413.0,
+    "text": " difficult to know when you have the answer because you are going to get an increasing"
+  },
+  {
+    "start": 413.0,
+    "end": 420.0,
+    "text": " number of edges in the system and you keep computing this metric that you want to find"
+  },
+  {
+    "start": 420.0,
+    "end": 429.0,
+    "text": " the answer for and it may turn out that your continuous stream does not fit in memory because"
+  },
+  {
+    "start": 429.0,
+    "end": 436.88,
+    "text": " your memory is limited compared to the amount of edges or edge updates you are streaming"
+  },
+  {
+    "start": 436.88,
+    "end": 442.36,
+    "text": " into the system. So, that is what happens when you have high velocity information."
+  },
+  {
+    "start": 443.0,
+    "end": 452.62,
+    "text": " Very soon, your memory runs out, and you want to compute your answer right now from the"
+  },
+  {
+    "start": 452.62,
+    "end": 454.76,
+    "text": " data that you have."
+  },
+  {
+    "start": 454.76,
+    "end": 460.32,
+    "text": " Okay, let's look at variety, also known as heterogeneity."
+  },
+  {
+    "start": 460.32,
+    "end": 465.26,
+    "text": " There are two aspects of heterogeneity."
+  },
+  {
+    "start": 465.26,
+    "end": 472.08,
+    "text": " One we have already mentioned, graph data is often created through integration."
+  },
+  {
+    "start": 472.08,
+    "end": 481.64,
+    "text": " we saw in the case of the biology. And therefore, the variety comes because the nature of data"
+  },
+  {
+    "start": 481.64,
+    "end": 488.94,
+    "text": " is very different. Also, they may not be all the same kind of data."
+  },
+  {
+    "start": 488.94,
+    "end": 496.58,
+    "text": " For example, the data may come from a relational database, it may come from an XML database,"
+  },
+  {
+    "start": 496.58,
+    "end": 504.62,
+    "text": " It may come from another graph, it may come from a document, it may even come from complex"
+  },
+  {
+    "start": 504.62,
+    "end": 510.9,
+    "text": " things like social networks, like citation networks between papers or patents, between"
+  },
+  {
+    "start": 510.9,
+    "end": 518.12,
+    "text": " interaction networks, between web entities which are connected through links and from"
+  },
+  {
+    "start": 518.12,
+    "end": 523.38,
+    "text": " human knowledge that has been represented as graphs through ontologies."
+  },
+  {
+    "start": 523.38,
+    "end": 530.26,
+    "text": " For all of these graphs, the nodes and the edges do not mean the same thing. And somehow"
+  },
+  {
+    "start": 530.26,
+    "end": 536.34,
+    "text": " in there, you need to capture what it means to have an edge, because that will determine"
+  },
+  {
+    "start": 536.34,
+    "end": 546.56,
+    "text": " what you can do with the edge. A simple example in an ontology is something that says A is"
+  },
+  {
+    "start": 546.5600000000001,
+    "end": 557.22,
+    "text": " a B and B is a C, so A is a C. The A is a C is an inference that you do given the other"
+  },
+  {
+    "start": 557.22,
+    "end": 566.5600000000001,
+    "text": " two relationships. What would be an example? My pet is a dog and the dog is a mammal, therefore"
+  },
+  {
+    "start": 566.5600000000001,
+    "end": 575.0400000000001,
+    "text": " my pet is a mammal. You want to do inferences for some edges like isa. Now, you need to"
+  },
+  {
+    "start": 575.04,
+    "end": 580.0799999999999,
+    "text": " know this. You do not do this with the biology example where you are looking at genes and"
+  },
+  {
+    "start": 580.0799999999999,
+    "end": 585.1999999999999,
+    "text": " proteins, because that operation does not make sense when you have genes and proteins."
+  },
+  {
+    "start": 586.0,
+    "end": 592.4,
+    "text": " So therefore, every graph may have a different semantics. And what happens with variety is the"
+  },
+  {
+    "start": 592.4,
+    "end": 597.68,
+    "text": " number of such semantics and the number of valid operations that you can do, that changes and that"
+  },
+  {
+    "start": 597.6800000000001,
+    "end": 606.2600000000001,
+    "text": " becomes more complex. Now, valence I said is about connectedness. It is also about interdependency"
+  },
+  {
+    "start": 606.2600000000001,
+    "end": 613.1,
+    "text": " among data. So, if I have a higher valence which means I have more data elements that"
+  },
+  {
+    "start": 613.1,
+    "end": 622.2800000000001,
+    "text": " are more strongly related and these relationships can be exploited. In most cases the part where"
+  },
+  {
+    "start": 622.28,
+    "end": 628.8399999999999,
+    "text": " becomes, where balance becomes important is that it increases over time, which means parts"
+  },
+  {
+    "start": 628.8399999999999,
+    "end": 636.4,
+    "text": " of the graph becomes denser and the average distance between node pairs decreases."
+  },
+  {
+    "start": 636.4,
+    "end": 648.56,
+    "text": " Let me show you. Here is my gmail and I have plotted my gmail graph from 2006 to about"
+  },
+  {
+    "start": 648.5600000000001,
+    "end": 657.7800000000001,
+    "text": " two months back. When I first started using it, I had these users, a very few users, and"
+  },
+  {
+    "start": 657.7800000000001,
+    "end": 665.0000000000001,
+    "text": " they were not really related. Now with time, more and more people started communicating"
+  },
+  {
+    "start": 665.0000000000001,
+    "end": 671.36,
+    "text": " with me through Gmail. And more and more of these people were also talking amongst themselves"
+  },
+  {
+    "start": 671.36,
+    "end": 678.92,
+    "text": " and copying me and responding to me, by the end you would see that you can find dense"
+  },
+  {
+    "start": 678.92,
+    "end": 687.0,
+    "text": " groups within my gmail because the information and the connectedness between people have"
+  },
+  {
+    "start": 687.0,
+    "end": 691.1800000000001,
+    "text": " evolved and become more dense over time."
+  },
+  {
+    "start": 691.1800000000001,
+    "end": 696.9,
+    "text": " This is the phenomenon of balance and this is very important to study because you want"
+  },
+  {
+    "start": 696.9,
+    "end": 703.9,
+    "text": " to study things like what parts of the graph have become more dense and why have they become"
+  },
+  {
+    "start": 703.9,
+    "end": 708.3199999999999,
+    "text": " more dense. Maybe something was going on, maybe there was an event that brought these"
+  },
+  {
+    "start": 708.3199999999999,
+    "end": 714.22,
+    "text": " people together and you want to analyze that and find that out from your graph analytics."
+  },
+  {
+    "start": 714.22,
+    "end": 720.66,
+    "text": " That is why you want to understand the effect of valence. You also want to understand what"
+  },
+  {
+    "start": 720.66,
+    "end": 728.16,
+    "text": " do I do if the graph becomes very, very dense in a place so that finding a path through"
+  },
+  {
+    "start": 728.16,
+    "end": 737.76,
+    "text": " that dense place becomes very hard? You would see in a later video that when this happens,"
+  },
+  {
+    "start": 737.76,
+    "end": 743.6,
+    "text": " the computer system that is trying to process this graph in a parallel and distributed way"
+  },
+  {
+    "start": 743.6,
+    "end": 749.36,
+    "text": " has to do something special to handle these increasing density in parts of the graph."
+  }
+]

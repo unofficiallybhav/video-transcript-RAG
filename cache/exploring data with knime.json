@@ -1,0 +1,492 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.0,
+    "text": " In this activity, we are going to explore data through plots using KNIME."
+  },
+  {
+    "start": 4.88,
+    "end": 9.76,
+    "text": " At the end of this activity, you are going to create your first KNIME workflow."
+  },
+  {
+    "start": 9.76,
+    "end": 16.240000000000002,
+    "text": " You are going to import a data set using daily weather data from the city of San Diego,"
+  },
+  {
+    "start": 16.240000000000002,
+    "end": 18.8,
+    "text": " and you are going to explore this data using plots."
+  },
+  {
+    "start": 22.16,
+    "end": 26.16,
+    "text": " As a first step, we are going to open KNIME, as I am doing here,"
+  },
+  {
+    "start": 26.16,
+    "end": 31.48,
+    "text": " here, and we are going to create a new workflow in our local space."
+  },
+  {
+    "start": 31.48,
+    "end": 36.56,
+    "text": " You can use whatever name you want, in this case I'm going to use Plot Hands On, and"
+  },
+  {
+    "start": 36.56,
+    "end": 41.06,
+    "text": " I'm going to click on Create."
+  },
+  {
+    "start": 41.06,
+    "end": 47.86,
+    "text": " So my new workflow has been initiated, and I can confirm this by clicking here and noticing"
+  },
+  {
+    "start": 47.86,
+    "end": 55.68,
+    "text": " my new workflow in my local space."
+  },
+  {
+    "start": 55.68,
+    "end": 58.08,
+    "text": " We will proceed to load our data."
+  },
+  {
+    "start": 58.08,
+    "end": 62.74,
+    "text": " So we are going to select the CSV Reader Note, this one."
+  },
+  {
+    "start": 62.74,
+    "end": 64.78,
+    "text": " We drag it into our space."
+  },
+  {
+    "start": 64.78,
+    "end": 69.08,
+    "text": " We click on the dialog window and then we are going to select our file."
+  },
+  {
+    "start": 69.08,
+    "end": 74.62,
+    "text": " In this case I have the file in my Big Data 4 folder, the folder that you downloaded from"
+  },
+  {
+    "start": 74.62,
+    "end": 79.44,
+    "text": " Chrome GitHub and we are going to select the Daily Weather CSV file."
+  },
+  {
+    "start": 79.44,
+    "end": 86.1,
+    "text": " We execute the node and on the bottom we can see our data loaded."
+  },
+  {
+    "start": 86.1,
+    "end": 92.32,
+    "text": " We can either analyze each of the rows individually or we can click on statistics and take a look"
+  },
+  {
+    "start": 92.32,
+    "end": 101.56,
+    "text": " at the descriptive statistics for each column."
+  },
+  {
+    "start": 101.56,
+    "end": 106.1,
+    "text": " The first plot that we are going to create is going to be a histogram."
+  },
+  {
+    "start": 106.10000000000001,
+    "end": 111.54,
+    "text": " So we start by scrolling down this menu to the View section and selecting the Histogram"
+  },
+  {
+    "start": 111.54,
+    "end": 112.54,
+    "text": " node."
+  },
+  {
+    "start": 112.54,
+    "end": 118.60000000000001,
+    "text": " We include it into our workspace and we connect the output of the CSV reader to this node."
+  },
+  {
+    "start": 118.60000000000001,
+    "end": 125.60000000000001,
+    "text": " We open the configuration and we are going to select the air temperature at 9am as the"
+  },
+  {
+    "start": 125.60000000000001,
+    "end": 128.0,
+    "text": " dimension to be analyzed."
+  },
+  {
+    "start": 128.0,
+    "end": 133.22,
+    "text": " We reduce the number of bins to 10 because this is a reasonable number to work with."
+  },
+  {
+    "start": 133.22,
+    "end": 139.28,
+    "text": " We select to show a separate bar for each type of special values, and we are going to"
+  },
+  {
+    "start": 139.28,
+    "end": 143.2,
+    "text": " select proportion as the frequency that the axis shows."
+  },
+  {
+    "start": 143.2,
+    "end": 149.4,
+    "text": " We click on OK, and with our configuration ready, we proceed to execute the histogram"
+  },
+  {
+    "start": 149.4,
+    "end": 151.02,
+    "text": " node."
+  },
+  {
+    "start": 151.02,
+    "end": 155.56,
+    "text": " We open the view, and this is our histogram."
+  },
+  {
+    "start": 155.56,
+    "end": 159.38,
+    "text": " We can notice that the data is normally distributed."
+  },
+  {
+    "start": 159.38,
+    "end": 165.94,
+    "text": " We can also see that most of the observations are concentrated between 61 and 74 degrees Fahrenheit,"
+  },
+  {
+    "start": 165.94,
+    "end": 172.6,
+    "text": " we can see a few observations of high air temperature, and on the right we see this"
+  },
+  {
+    "start": 172.6,
+    "end": 179.32,
+    "text": " bar with the missing values."
+  },
+  {
+    "start": 179.32,
+    "end": 185.66,
+    "text": " The second plot is going to be a scatter plot, so first let me drag this histogram a little"
+  },
+  {
+    "start": 185.66,
+    "end": 194.22,
+    "text": " it and then select the scatter plot into the workspace. I'm going to connect it with the data"
+  },
+  {
+    "start": 194.22,
+    "end": 201.98,
+    "text": " and open the configuration. For the horizontal axis, I'm going to select the air temperature"
+  },
+  {
+    "start": 201.98,
+    "end": 209.18,
+    "text": " at 9 a.m. and I'm going to analyze this data with the relative humidity at the same time."
+  },
+  {
+    "start": 209.18,
+    "end": 216.70000000000002,
+    "text": " So this is everything I'm going to select. I click on OK and then I proceed to run the node."
+  },
+  {
+    "start": 216.70000000000002,
+    "end": 224.9,
+    "text": " I open the view of this scatter plot and this is the plot. We can see a very clear negative"
+  },
+  {
+    "start": 224.9,
+    "end": 232.16,
+    "text": " correlation between the two variables or in other words we can say that in the days in which the"
+  },
+  {
+    "start": 232.16,
+    "end": 245.04,
+    "text": " the air temperature tends to be higher, the relative humidity percentage tends to be lower."
+  },
+  {
+    "start": 245.04,
+    "end": 250.12,
+    "text": " For our third plot, we want to visualize the distribution of the maximum wind direction."
+  },
+  {
+    "start": 250.12,
+    "end": 256.06,
+    "text": " However, this information is currently represented in degrees and this is not useful for us because"
+  },
+  {
+    "start": 256.06,
+    "end": 260.14,
+    "text": " we need the actual cardinal direction of this wind."
+  },
+  {
+    "start": 260.14,
+    "end": 265.82,
+    "text": " So in order to achieve this, we are going to use a special type of node and we are going"
+  },
+  {
+    "start": 265.82,
+    "end": 271.94,
+    "text": " to associate each of the values with its corresponding cardinal direction following the values of"
+  },
+  {
+    "start": 271.94,
+    "end": 273.97999999999996,
+    "text": " a compass."
+  },
+  {
+    "start": 273.97999999999996,
+    "end": 280.5,
+    "text": " So with our steps clear, we will proceed to search for this special node which is named"
+  },
+  {
+    "start": 280.5,
+    "end": 283.02,
+    "text": " a numerical binar."
+  },
+  {
+    "start": 283.02,
+    "end": 287.46,
+    "text": " This is located in the more advanced node section right here."
+  },
+  {
+    "start": 287.46,
+    "end": 292.88,
+    "text": " We drag it into our workspace and we connect it to the data."
+  },
+  {
+    "start": 292.88,
+    "end": 300.12,
+    "text": " We open the configuration window and we select the maths wind direction at 9am."
+  },
+  {
+    "start": 300.12,
+    "end": 307.71999999999997,
+    "text": " We add five binars to represent our cardinal directions because the north needs two binars."
+  },
+  {
+    "start": 307.71999999999997,
+    "end": 313.34,
+    "text": " So we start by specifying the north from 0 to 45 degrees."
+  },
+  {
+    "start": 313.34000000000003,
+    "end": 322.78000000000003,
+    "text": " we will specify it from 315 through 360, then we specify the range for the ease between"
+  },
+  {
+    "start": 322.78000000000003,
+    "end": 330.66,
+    "text": " 45 and 135 degrees and so on with all of the cardinal directions."
+  },
+  {
+    "start": 330.66,
+    "end": 337.94000000000005,
+    "text": " After completing the bins for our cardinal directions, we select to append this new column"
+  },
+  {
+    "start": 337.94,
+    "end": 345.14,
+    "text": " and we are going to name our column a categorical max win direction at 9am."
+  },
+  {
+    "start": 346.18,
+    "end": 353.46,
+    "text": " So I type categorical right here and now I can click on OK."
+  },
+  {
+    "start": 355.06,
+    "end": 360.65999999999997,
+    "text": " So with our categorical variable ready, we can proceed to search for the var chart,"
+  },
+  {
+    "start": 361.38000000000005,
+    "end": 368.98,
+    "text": " we include it into the workspace, we connect it to the numeric binar node, and I'm going to open"
+  },
+  {
+    "start": 368.98,
+    "end": 377.14000000000004,
+    "text": " the configuration to make sure that the categorical max win direction is selected as the dimension"
+  },
+  {
+    "start": 377.14000000000004,
+    "end": 386.18,
+    "text": " and to select the occurrence counts as the type of data to be displayed. We select the whole"
+  },
+  {
+    "start": 386.18,
+    "end": 394.2,
+    "text": " workflow and I execute it using this button, which is a different approach to execute the"
+  },
+  {
+    "start": 394.2,
+    "end": 401.04,
+    "text": " workflow. I open the window and this is the distribution of the max wind direction in my"
+  },
+  {
+    "start": 401.04,
+    "end": 406.94,
+    "text": " data. We can notice that very few observations have wind coming from the north and that most"
+  },
+  {
+    "start": 406.94,
+    "end": 414.52,
+    "text": " of the wind comes from the south and the east. And we can also notice a few missing values in"
+  },
+  {
+    "start": 414.52,
+    "end": 417.47999999999996,
+    "text": " this special bar on the right."
+  },
+  {
+    "start": 421.58,
+    "end": 423.47999999999996,
+    "text": " The final plot that we're going to create"
+  },
+  {
+    "start": 423.47999999999996,
+    "end": 425.38,
+    "text": " is going to be a box plot."
+  },
+  {
+    "start": 425.38,
+    "end": 428.21999999999997,
+    "text": " So first I'm going to move these two nodes a little bit"
+  },
+  {
+    "start": 428.21999999999997,
+    "end": 430.4,
+    "text": " so I can create a space"
+  },
+  {
+    "start": 430.4,
+    "end": 435.02,
+    "text": " and I'm going to search again for a numeric binar node."
+  },
+  {
+    "start": 435.02,
+    "end": 437.84,
+    "text": " I will put it right here in the workflow"
+  },
+  {
+    "start": 437.84,
+    "end": 439.91999999999996,
+    "text": " and connect it to the data."
+  },
+  {
+    "start": 439.91999999999996,
+    "end": 442.35999999999996,
+    "text": " And this time what we are going to do"
+  },
+  {
+    "start": 442.36,
+    "end": 445.78000000000003,
+    "text": " is that we are going to create a categorical variable"
+  },
+  {
+    "start": 445.78000000000003,
+    "end": 450.56,
+    "text": " to indicate whether the humidity of the day was low or not,"
+  },
+  {
+    "start": 450.56,
+    "end": 454.1,
+    "text": " using the relative humidity at 9 a.m."
+  },
+  {
+    "start": 454.1,
+    "end": 457.54,
+    "text": " So the first category is going to be humidity low"
+  },
+  {
+    "start": 457.54,
+    "end": 459.94,
+    "text": " and the upper bound will be 25,"
+  },
+  {
+    "start": 459.94,
+    "end": 463.5,
+    "text": " indicating 25% of humidity."
+  },
+  {
+    "start": 463.5,
+    "end": 468.5,
+    "text": " The second category will obviously be humidity not low"
+  },
+  {
+    "start": 469.3,
+    "end": 471.16,
+    "text": " and the lower bound will be 25."
+  },
+  {
+    "start": 471.16,
+    "end": 479.0,
+    "text": " I append this new column and I'm going to call it a low humidity day so I delete"
+  },
+  {
+    "start": 479.0,
+    "end": 490.68,
+    "text": " this and I type low humidity day. We can click on OK"
+  },
+  {
+    "start": 491.40000000000003,
+    "end": 498.40000000000003,
+    "text": " and with our categorical variable ready we proceed to look for a new node we're"
+  },
+  {
+    "start": 498.40000000000003,
+    "end": 507.82000000000005,
+    "text": " going to type conditional boxplot and we're going to select the one that says"
+  },
+  {
+    "start": 507.82000000000005,
+    "end": 513.34,
+    "text": " JavaScript. So we include it into the workflow and we connect it to the"
+  },
+  {
+    "start": 513.34,
+    "end": 519.9000000000001,
+    "text": " numeric binner. We open the configuration and we make sure to have on the"
+  },
+  {
+    "start": 519.9000000000001,
+    "end": 524.72,
+    "text": " category column to have selected low humidity day and on the bottom we're"
+  },
+  {
+    "start": 524.72,
+    "end": 532.0,
+    "text": " going to select air pressure at 9am because what we want to compare is the average air pressure"
+  },
+  {
+    "start": 532.0,
+    "end": 538.64,
+    "text": " between the days in which the humidity is low versus humidity not low. So we run this,"
+  },
+  {
+    "start": 538.64,
+    "end": 546.1600000000001,
+    "text": " which naturally executed the previous node, we open it, and this is our comparison. What we can"
+  },
+  {
+    "start": 546.1600000000001,
+    "end": 552.4,
+    "text": " notice is that in the days in which the humidity is low, the air pressure tends to be higher"
+  },
+  {
+    "start": 552.4,
+    "end": 568.3199999999999,
+    "text": " compared to the cases in which the humidity is not low. And this is how we conclude this activity."
+  }
+]

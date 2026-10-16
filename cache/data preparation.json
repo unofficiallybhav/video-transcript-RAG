@@ -1,0 +1,227 @@
+[
+  {
+    "start": 0.96,
+    "end": 5.36,
+    "text": " In this lesson, you will learn how to prepare data for analysis."
+  },
+  {
+    "start": 5.36,
+    "end": 11.68,
+    "text": " After this video, you will be able to articulate the importance of data preparation, define"
+  },
+  {
+    "start": 11.68,
+    "end": 18.16,
+    "text": " the objectives of data preparation, and list some activities in preparing data."
+  },
+  {
+    "start": 18.16,
+    "end": 22.400000000000002,
+    "text": " The raw data that you get directly from your sources is rarely in the format that you can"
+  },
+  {
+    "start": 22.400000000000002,
+    "end": 24.8,
+    "text": " use to perform analysis on."
+  },
+  {
+    "start": 24.8,
+    "end": 30.68,
+    "text": " The goal of data preparation is to create the data that will be used for analysis."
+  },
+  {
+    "start": 30.68,
+    "end": 36.260000000000005,
+    "text": " This means cleaning the data and putting the data in the right format for analysis."
+  },
+  {
+    "start": 36.260000000000005,
+    "end": 40.980000000000004,
+    "text": " The latter generally involves selecting the appropriate features to use and transforming"
+  },
+  {
+    "start": 40.980000000000004,
+    "end": 43.540000000000006,
+    "text": " the data as needed."
+  },
+  {
+    "start": 43.540000000000006,
+    "end": 46.94,
+    "text": " The data that you've acquired will likely have many problems."
+  },
+  {
+    "start": 46.94,
+    "end": 51.519999999999996,
+    "text": " An important part of data preparation is to clean the data that you have to work with"
+  },
+  {
+    "start": 51.52,
+    "end": 56.52,
+    "text": " to address what are referred to as data quality issues."
+  },
+  {
+    "start": 56.980000000000004,
+    "end": 59.120000000000005,
+    "text": " There are many types of data quality issues,"
+  },
+  {
+    "start": 59.120000000000005,
+    "end": 64.12,
+    "text": " including missing values, duplicate data,"
+  },
+  {
+    "start": 64.44,
+    "end": 69.44,
+    "text": " inconsistent or invalid data, noise, and outliers."
+  },
+  {
+    "start": 70.12,
+    "end": 72.92,
+    "text": " The problems listed here can negatively affect"
+  },
+  {
+    "start": 72.92,
+    "end": 75.02000000000001,
+    "text": " the quality of the data and compromise"
+  },
+  {
+    "start": 75.02000000000001,
+    "end": 77.32000000000001,
+    "text": " the analysis process and results."
+  },
+  {
+    "start": 77.32000000000001,
+    "end": 79.18,
+    "text": " So it is very important to detect"
+  },
+  {
+    "start": 79.18,
+    "end": 81.28,
+    "text": " and address these data quality issues."
+  },
+  {
+    "start": 82.24000000000001,
+    "end": 85.92,
+    "text": " Some techniques to address data quality issues include,"
+  },
+  {
+    "start": 85.92,
+    "end": 88.9,
+    "text": " removing data records with missing values,"
+  },
+  {
+    "start": 88.9,
+    "end": 91.12,
+    "text": " merging duplicate records,"
+  },
+  {
+    "start": 91.12,
+    "end": 94.46000000000001,
+    "text": " generating a best or at most reasonable estimate"
+  },
+  {
+    "start": 94.46000000000001,
+    "end": 96.34,
+    "text": " for invalid values."
+  },
+  {
+    "start": 96.34,
+    "end": 98.58000000000001,
+    "text": " We will discuss these techniques in more detail"
+  },
+  {
+    "start": 98.58000000000001,
+    "end": 99.66000000000001,
+    "text": " in the next lecture."
+  },
+  {
+    "start": 100.98,
+    "end": 103.10000000000001,
+    "text": " Since the goal of this step of data preparation"
+  },
+  {
+    "start": 103.10000000000001,
+    "end": 104.42000000000002,
+    "text": " is cleaning the data,"
+  },
+  {
+    "start": 104.42000000000002,
+    "end": 108.7,
+    "text": " it is referred to as data cleaning or data cleansing."
+  },
+  {
+    "start": 109.18,
+    "end": 116.18,
+    "text": " After the data has been cleaned, another goal of data preparation is to get the data into the format needed for analysis."
+  },
+  {
+    "start": 116.18,
+    "end": 124.18,
+    "text": " This step is referred to by many names, data munging, data wrangling, and data preprocessing."
+  },
+  {
+    "start": 124.18,
+    "end": 130.18,
+    "text": " The two broad categories of data wrangling are feature selection and feature transformation."
+  },
+  {
+    "start": 130.18,
+    "end": 136.18,
+    "text": " Feature selection involves deciding on which features to use from the existing ones available in your data."
+  },
+  {
+    "start": 136.18,
+    "end": 140.18,
+    "text": " Features can be removed, added, or combined."
+  },
+  {
+    "start": 140.18,
+    "end": 148.18,
+    "text": " Feature transformation involves changing the format of the data in some way to reduce noise or variability or make the data easier to analyze."
+  },
+  {
+    "start": 148.18,
+    "end": 156.18,
+    "text": " Two common feature transformations are scaling the data so that all features have the same value range and reducing the dimensionality,"
+  },
+  {
+    "start": 156.18,
+    "end": 159.18,
+    "text": " which is effectively the number of features of the data."
+  },
+  {
+    "start": 159.18,
+    "end": 163.18,
+    "text": " We will discuss these techniques later in this lesson."
+  },
+  {
+    "start": 163.18,
+    "end": 168.18,
+    "text": " Data preparation is a very important part of the machine learning process."
+  },
+  {
+    "start": 168.18,
+    "end": 171.18,
+    "text": " It can be a tedious process, but it is a crucial step."
+  },
+  {
+    "start": 171.18,
+    "end": 175.18,
+    "text": " If you do not spend the time and effort to create good data for the analysis,"
+  },
+  {
+    "start": 175.18,
+    "end": 180.18,
+    "text": " you will not get good results, no matter how sophisticated the analysis technique you're using is."
+  },
+  {
+    "start": 180.18,
+    "end": 184.18,
+    "text": " Always remember, garbage in, garbage out."
+  },
+  {
+    "start": 184.18,
+    "end": 188.18,
+    "text": " So take the time to prepare your data if you want good analysis results."
+  }
+]

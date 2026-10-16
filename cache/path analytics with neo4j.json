@@ -1,0 +1,527 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.72,
+    "text": " In this activity, we are going to perform path analytics in Neo4j with Cypher."
+  },
+  {
+    "start": 8.8,
+    "end": 13.120000000000001,
+    "text": " As a setup for this activity, make sure to delete any node or relationship"
+  },
+  {
+    "start": 13.120000000000001,
+    "end": 19.28,
+    "text": " that you might have previously loaded into Neo4j and to load the test.csv graph."
+  },
+  {
+    "start": 23.68,
+    "end": 26.240000000000002,
+    "text": " For our first query, we are going to simply view the graph."
+  },
+  {
+    "start": 26.240000000000002,
+    "end": 32.06,
+    "text": " So we run this command in which we return all of the nodes of the timeline node and"
+  },
+  {
+    "start": 32.06,
+    "end": 37.68,
+    "text": " the respective edges and connecting nodes, and this is the graph that we had previously"
+  },
+  {
+    "start": 37.68,
+    "end": 40.08,
+    "text": " seen in a prior activity."
+  },
+  {
+    "start": 40.08,
+    "end": 53.160000000000004,
+    "text": " As a first analytical query, we are going to return the path between two specific nodes."
+  },
+  {
+    "start": 53.160000000000004,
+    "end": 58.18000000000001,
+    "text": " So what we are going to do here is that we are going to match P, the path, which is equal"
+  },
+  {
+    "start": 58.18000000000001,
+    "end": 66.10000000000001,
+    "text": " to all of the edges in between A and C, where A is the node H and C is the node B, then"
+  },
+  {
+    "start": 66.10000000000001,
+    "end": 74.38,
+    "text": " we order all of these potential paths by length and return only a single one."
+  },
+  {
+    "start": 74.38,
+    "end": 81.88,
+    "text": " So we run this, and this is the path between H and P passing through six different nodes."
+  },
+  {
+    "start": 83.16,
+    "end": 90.92,
+    "text": " For this new query, we are going to run a replica of the previous one, but this time"
+  },
+  {
+    "start": 90.92,
+    "end": 99.06,
+    "text": " we are going to return the length of p instead of p."
+  },
+  {
+    "start": 99.06,
+    "end": 105.66,
+    "text": " So we run it, and as we see, the length is 7, which is something that we can visually"
+  },
+  {
+    "start": 105.66,
+    "end": 109.16,
+    "text": " confirm counting the edges from the previous graph."
+  },
+  {
+    "start": 114.11999999999999,
+    "end": 117.56,
+    "text": " We are going to run a very similar query to the two previous,"
+  },
+  {
+    "start": 117.56,
+    "end": 121.88,
+    "text": " but this time we are going to introduce a new function, the function shortest path,"
+  },
+  {
+    "start": 121.88,
+    "end": 126.36,
+    "text": " so we can return the shortest path between the nodes A and B,"
+  },
+  {
+    "start": 126.36,
+    "end": 129.72,
+    "text": " and we're also going to limit our results to only one,"
+  },
+  {
+    "start": 129.72,
+    "end": 133.48,
+    "text": " in case that we have more than one path that qualifies as the shortest path."
+  },
+  {
+    "start": 134.76,
+    "end": 137.07999999999998,
+    "text": " So we're going to run this,"
+  },
+  {
+    "start": 137.08,
+    "end": 146.36,
+    "text": " And this is the shortest path between the nodes A and P. If you want to take a different look"
+  },
+  {
+    "start": 146.36,
+    "end": 151.08,
+    "text": " at it, we can click on text and this will give us a table representation of this path."
+  },
+  {
+    "start": 154.84,
+    "end": 158.44,
+    "text": " Now we are going to return all of the shortest paths between A and P."
+  },
+  {
+    "start": 161.8,
+    "end": 165.24,
+    "text": " So what we're going to do here is that we're going to match a source,"
+  },
+  {
+    "start": 165.24,
+    "end": 172.68,
+    "text": " a destination p and we're going to set path equal to all the shortest paths from the source to the"
+  },
+  {
+    "start": 172.68,
+    "end": 179.48000000000002,
+    "text": " destination and we return our results in an array with the name of those nodes. So we run this"
+  },
+  {
+    "start": 181.56,
+    "end": 184.60000000000002,
+    "text": " and as we can see there is only one path that can be considered"
+  },
+  {
+    "start": 185.24,
+    "end": 189.08,
+    "text": " the shortest path which is the same path that we previously got."
+  },
+  {
+    "start": 189.08,
+    "end": 197.96,
+    "text": " For this new query, we are going to run a replica of the previous one, but this time"
+  },
+  {
+    "start": 197.96,
+    "end": 202.20000000000002,
+    "text": " we are going to add a condition in the third line, and the condition is that all of the"
+  },
+  {
+    "start": 202.20000000000002,
+    "end": 210.32000000000002,
+    "text": " paths that we get back must have a length greater than 5. So we run this, and there"
+  },
+  {
+    "start": 210.32000000000002,
+    "end": 216.08,
+    "text": " is only one path that qualifies as a shortest path between A and P that meets our condition."
+  },
+  {
+    "start": 219.08,
+    "end": 224.46,
+    "text": " Now, we will return the diameter of the graph, which is the longest continuous path between"
+  },
+  {
+    "start": 224.46,
+    "end": 228.96,
+    "text": " two nodes."
+  },
+  {
+    "start": 228.96,
+    "end": 233.24,
+    "text": " So what we are doing here is that we are matching all of the nodes of the type myNode to two"
+  },
+  {
+    "start": 233.24,
+    "end": 239.32000000000002,
+    "text": " variables n and m, we are setting a condition that they cannot be the same, and with all"
+  },
+  {
+    "start": 239.32000000000002,
+    "end": 243.82000000000002,
+    "text": " these pairs of nodes, we are matching the shortest path between them."
+  },
+  {
+    "start": 243.82,
+    "end": 249.48,
+    "text": " we return the name of these nodes along with the length of the path and the trick here"
+  },
+  {
+    "start": 249.48,
+    "end": 255.06,
+    "text": " is that we are ordering all of these paths by length in descending order and we are limiting"
+  },
+  {
+    "start": 255.06,
+    "end": 260.86,
+    "text": " our results to only return the top one which means that we will return the longest path"
+  },
+  {
+    "start": 260.86,
+    "end": 265.96,
+    "text": " between two nodes and therefore the diameter of the graph."
+  },
+  {
+    "start": 265.96,
+    "end": 273.34,
+    "text": " So we run this and this is the diameter of our graph with a length of 7 and it goes from"
+  },
+  {
+    "start": 273.34000000000003,
+    "end": 280.78000000000003,
+    "text": " e to l. Now, in this case we limited our results to only get one result, but maybe there is"
+  },
+  {
+    "start": 280.78000000000003,
+    "end": 287.84000000000003,
+    "text": " more than one path that qualifies as the diameter. So, to verify this, we are going to rerun"
+  },
+  {
+    "start": 287.84000000000003,
+    "end": 293.74,
+    "text": " the same query, but this time we are going to set the limit to 5 instead of 1. So we"
+  },
+  {
+    "start": 293.74,
+    "end": 299.84000000000003,
+    "text": " run this, and as we see there are three paths that qualify as the diameter of the graph."
+  },
+  {
+    "start": 303.34000000000003,
+    "end": 309.84000000000003,
+    "text": " So far, we have used the count of edges to measure the distance between two nodes."
+  },
+  {
+    "start": 309.84000000000003,
+    "end": 315.72,
+    "text": " However, maybe this is not the best approach, maybe what we want to do is that we might"
+  },
+  {
+    "start": 315.72,
+    "end": 323.98,
+    "text": " want to use the property distance to measure the actual distance between two nodes."
+  },
+  {
+    "start": 323.98,
+    "end": 325.94000000000005,
+    "text": " So what we do here is the following."
+  },
+  {
+    "start": 325.94000000000005,
+    "end": 331.24,
+    "text": " We first match the path between the node h and p, return the nodes in this path as well"
+  },
+  {
+    "start": 331.24,
+    "end": 336.52,
+    "text": " as the pathLength as pathLength and then we apply the function Redust which is going to take a set"
+  },
+  {
+    "start": 336.52,
+    "end": 343.24,
+    "text": " of values and reduce them down to a single value to define a variable s as zero and then we take"
+  },
+  {
+    "start": 343.24,
+    "end": 349.8,
+    "text": " each of the edges of the path and extract the distance as a numerical value and add them to"
+  },
+  {
+    "start": 349.8,
+    "end": 355.88,
+    "text": " the variable s so at the end we can return this result as pathDistance and then we order our"
+  },
+  {
+    "start": 355.88,
+    "end": 361.16,
+    "text": " results by pathDistance and limit our results to only return the one that has the shortest path"
+  },
+  {
+    "start": 361.16,
+    "end": 368.52000000000004,
+    "text": " distance. So we run this, and as we see this is the path that we get between H and P, it"
+  },
+  {
+    "start": 368.52000000000004,
+    "end": 371.92,
+    "text": " has 7 nodes and the distance is 39."
+  },
+  {
+    "start": 375.88000000000005,
+    "end": 380.40000000000003,
+    "text": " To apply this algorithm we are going to do the following. First, we are going to match"
+  },
+  {
+    "start": 380.40000000000003,
+    "end": 385.98,
+    "text": " the node A as the source, the node B as the destination, and we are going to find the"
+  },
+  {
+    "start": 385.98,
+    "end": 392.20000000000005,
+    "text": " shortest path between them. Then we will use again the reduce function, set a variable"
+  },
+  {
+    "start": 392.20000000000005,
+    "end": 399.26,
+    "text": " dist to zero, extract all of the relationships in this path, and aggregate the distance of"
+  },
+  {
+    "start": 399.26,
+    "end": 404.82,
+    "text": " each of these relationships to our variable dist to return it as distance. And finally"
+  },
+  {
+    "start": 404.82,
+    "end": 410.96000000000004,
+    "text": " we return both the path and the distance. So we run this, and this is the path between"
+  },
+  {
+    "start": 410.96000000000004,
+    "end": 417.92,
+    "text": " A and P. We can also visualize this as a text and see that the distance is 22."
+  },
+  {
+    "start": 421.92,
+    "end": 427.72,
+    "text": " In this new query, we want to find the shortest path from A to any other node, so we are going"
+  },
+  {
+    "start": 427.72,
+    "end": 432.62000000000006,
+    "text": " to use a query which is very similar to the previous one, but this time we are not setting"
+  },
+  {
+    "start": 432.62000000000006,
+    "end": 438.52000000000004,
+    "text": " any destination node. We are setting a condition in the second line in which we said that the"
+  },
+  {
+    "start": 438.52,
+    "end": 443.7,
+    "text": " The destination node cannot be the same as the origin node, and at the very end we are"
+  },
+  {
+    "start": 443.7,
+    "end": 448.38,
+    "text": " ordering all of the paths that we get by distance."
+  },
+  {
+    "start": 448.38,
+    "end": 455.32,
+    "text": " So we run this query, and we first get this graph, so let me move to the table representation,"
+  },
+  {
+    "start": 455.32,
+    "end": 460.56,
+    "text": " and here we can see more clearly all of the paths from A to any other node, and the distance"
+  },
+  {
+    "start": 460.56,
+    "end": 466.44,
+    "text": " between them."
+  },
+  {
+    "start": 466.44,
+    "end": 470.8,
+    "text": " This query is more simple, we are going to match all nodes and relationships, and set"
+  },
+  {
+    "start": 470.8,
+    "end": 476.3,
+    "text": " the condition that the nodes cannot have the name D, and we return all the rest of nodes"
+  },
+  {
+    "start": 476.3,
+    "end": 478.36,
+    "text": " and relationships."
+  },
+  {
+    "start": 478.36,
+    "end": 489.34,
+    "text": " So we run this, and this is our graph without the node D."
+  },
+  {
+    "start": 489.34,
+    "end": 494.2,
+    "text": " Now let's say that we want to find the shortest path between A and P, but avoid D."
+  },
+  {
+    "start": 496.44,
+    "end": 502.54,
+    "text": " So in this new query, we match the shortest path between A and P, but we set the condition on the"
+  },
+  {
+    "start": 502.54,
+    "end": 509.28,
+    "text": " second line that D cannot be part of the nodes in our result. And then we return the path and"
+  },
+  {
+    "start": 509.28,
+    "end": 518.18,
+    "text": " the length of this path. So we run this, and this is the shortest path between A and P, not including D."
+  },
+  {
+    "start": 518.1800000000001,
+    "end": 529.3800000000001,
+    "text": " Now, let's say that we want to return our graph, but without D and its neighbors."
+  },
+  {
+    "start": 529.3800000000001,
+    "end": 534.3000000000001,
+    "text": " So in this query, we'll first match the node D and all of the edges between D and any other"
+  },
+  {
+    "start": 534.3000000000001,
+    "end": 535.3000000000001,
+    "text": " node."
+  },
+  {
+    "start": 535.3000000000001,
+    "end": 539.5600000000001,
+    "text": " Then we collect the names of these nodes in a list called neighbors."
+  },
+  {
+    "start": 539.5600000000001,
+    "end": 544.0200000000001,
+    "text": " Then we match the full graph, and we set a condition that we don't want to return any"
+  },
+  {
+    "start": 544.0200000000001,
+    "end": 546.2,
+    "text": " of the neighbors nor D."
+  },
+  {
+    "start": 546.2,
+    "end": 549.6,
+    "text": " And finally, we return the rest of the graph."
+  },
+  {
+    "start": 549.6,
+    "end": 556.12,
+    "text": " So we run this query, and this is our graph without the neighborhood of D. Now, notice"
+  },
+  {
+    "start": 556.12,
+    "end": 562.6600000000001,
+    "text": " that in this graph, we are missing the node P, which is not an immediate neighbor of D,"
+  },
+  {
+    "start": 562.6600000000001,
+    "end": 565.0200000000001,
+    "text": " but it was removed during the process."
+  },
+  {
+    "start": 565.0200000000001,
+    "end": 570.6400000000001,
+    "text": " So to handle this, we are going to extend our previous query to match any leaf node"
+  },
+  {
+    "start": 570.64,
+    "end": 577.02,
+    "text": " because p is a leaf node that is not directly connected to d, and then we return that leaf"
+  },
+  {
+    "start": 577.02,
+    "end": 583.08,
+    "text": " node along with the rest of the nodes and relationships that we had previously returned."
+  },
+  {
+    "start": 583.08,
+    "end": 593.92,
+    "text": " So we run this new query, and now we can see p as part of our results."
+  },
+  {
+    "start": 593.92,
+    "end": 599.0,
+    "text": " For our final query, we want to return a graph without the second neighbors of f."
+  },
+  {
+    "start": 599.0,
+    "end": 604.14,
+    "text": " So we first match all of the nodes that are two edges away from f, we collect them in"
+  },
+  {
+    "start": 604.14,
+    "end": 610.32,
+    "text": " a list called myList, then we match the rest of the nodes and edges, and we set a condition"
+  },
+  {
+    "start": 610.32,
+    "end": 616.24,
+    "text": " that we don't want to return any node that is part of myList, and finally we return the"
+  },
+  {
+    "start": 616.24,
+    "end": 619.28,
+    "text": " rest of the nodes and relationships."
+  },
+  {
+    "start": 619.28,
+    "end": 622.16,
+    "text": " So we run this final query."
+  },
+  {
+    "start": 622.16,
+    "end": 627.44,
+    "text": " And this is our graph without the second neighbors of f and without f."
+  },
+  {
+    "start": 627.44,
+    "end": 629.44,
+    "text": " And this is how we conclude this activity."
+  }
+]

@@ -1,0 +1,227 @@
+[
+  {
+    "start": 0.0,
+    "end": 17.0,
+    "text": " Now that Mai has explained the basics of machine learning, let's remember how big data influences analytical applications and how we can take advantage of the existing big data tools and techniques in machine learning."
+  },
+  {
+    "start": 17.0,
+    "end": 26.0,
+    "text": " How can machine learning algorithms be scaled up to process large volumes of data? Let's talk about that now."
+  },
+  {
+    "start": 27.0,
+    "end": 33.92,
+    "text": " After this video, you will be able to explain how machine learning techniques can scale up"
+  },
+  {
+    "start": 33.92,
+    "end": 41.32,
+    "text": " to big data and discuss the role of distributed computing platforms like Hadoop and Spark"
+  },
+  {
+    "start": 41.32,
+    "end": 44.92,
+    "text": " in applying machine learning to big data."
+  },
+  {
+    "start": 44.92,
+    "end": 50.56,
+    "text": " With the massive amounts of data that need to be processed for applications such as drug"
+  },
+  {
+    "start": 50.56,
+    "end": 57.56,
+    "text": " effectiveness analysis, climate monitoring, and website recommendations, to name a few,"
+  },
+  {
+    "start": 57.56,
+    "end": 62.56,
+    "text": " we need to be able to add scalability to machine learning techniques."
+  },
+  {
+    "start": 62.56,
+    "end": 70.56,
+    "text": " How do we apply machine learning at scale? One way is to scale up by adding more memory,"
+  },
+  {
+    "start": 70.56,
+    "end": 76.56,
+    "text": " processors, and storage to our system so that it can store and process more data."
+  },
+  {
+    "start": 76.56,
+    "end": 79.56,
+    "text": " This is not the big data approach."
+  },
+  {
+    "start": 79.56,
+    "end": 88.56,
+    "text": " Specialized hardware, such as graphical processing units, or GPUs for short, can also be added"
+  },
+  {
+    "start": 88.56,
+    "end": 93.56,
+    "text": " to speed up numerical operations common in machine learning algorithms."
+  },
+  {
+    "start": 93.56,
+    "end": 98.56,
+    "text": " Although this is a good approach, this is also not the big data approach."
+  },
+  {
+    "start": 98.56,
+    "end": 105.56,
+    "text": " As we learned in our introductory course, one problem with this approach is that larger,"
+  },
+  {
+    "start": 105.56,
+    "end": 109.56,
+    "text": " specialized hardware can be very costly."
+  },
+  {
+    "start": 109.56,
+    "end": 114.68,
+    "text": " Another problem is that we eventually will hit a limit."
+  },
+  {
+    "start": 115.5,
+    "end": 118.76,
+    "text": " There is only so much hardware you can add to a machine."
+  },
+  {
+    "start": 119.9,
+    "end": 123.2,
+    "text": " An alternative approach is to scale out."
+  },
+  {
+    "start": 124.7,
+    "end": 130.16,
+    "text": " This means using many low-cost commodity distributed systems together."
+  },
+  {
+    "start": 131.2,
+    "end": 136.22,
+    "text": " Data is distributed over these systems to gain processing speedup."
+  },
+  {
+    "start": 136.22,
+    "end": 145.84,
+    "text": " As shown in this illustration, the idea is to divide the data into smaller subsets."
+  },
+  {
+    "start": 145.84,
+    "end": 152.74,
+    "text": " The same processing is applied to each subset or mapped, and the results are merged at the"
+  },
+  {
+    "start": 152.74,
+    "end": 157.9,
+    "text": " end to come up with the overall results for the original dataset."
+  },
+  {
+    "start": 157.9,
+    "end": 165.28,
+    "text": " Let's consider an example where we want to apply the same operation to all the samples"
+  },
+  {
+    "start": 165.28,
+    "end": 172.64000000000001,
+    "text": " in a data set of n samples. In this case, n is 4."
+  },
+  {
+    "start": 172.64000000000001,
+    "end": 179.8,
+    "text": " If it takes t time units to perform this operation on each sample, then with sequential"
+  },
+  {
+    "start": 179.8,
+    "end": 188.4,
+    "text": " processing, the time to apply that operation to all samples is n times t. If we have a"
+  },
+  {
+    "start": 188.4,
+    "end": 194.16,
+    "text": " cluster of four processors, we can distribute the data across the four"
+  },
+  {
+    "start": 194.16,
+    "end": 202.56,
+    "text": " processors. Each process performs the operation on a dataset subset of n over"
+  },
+  {
+    "start": 202.56,
+    "end": 210.64000000000001,
+    "text": " four samples. Processing of the four subsets of the data is done in parallel,"
+  },
+  {
+    "start": 210.64000000000001,
+    "end": 217.96,
+    "text": " that is, the subsets are processed at the same time. The processing time for the"
+  },
+  {
+    "start": 217.96,
+    "end": 226.52,
+    "text": " The distributed approach is approximately n over 4 times t plus any overhead required"
+  },
+  {
+    "start": 226.52,
+    "end": 232.20000000000002,
+    "text": " to merge the subset results and maybe shuffle them."
+  },
+  {
+    "start": 232.20000000000002,
+    "end": 239.06,
+    "text": " This is a speed up of nearly 4 times over the sequential approach."
+  },
+  {
+    "start": 239.06,
+    "end": 245.02,
+    "text": " On a distributed computing platform such as Spark or Hadoop, scalable machine learning"
+  },
+  {
+    "start": 245.02,
+    "end": 252.52,
+    "text": " algorithms use the same scale-out approach. Data is distributed across different processors"
+  },
+  {
+    "start": 252.52,
+    "end": 259.12,
+    "text": " which operate on the data subsets in parallel using map, reduce, and other distributed parallel"
+  },
+  {
+    "start": 259.12,
+    "end": 265.48,
+    "text": " transformations. This allows for machine learning techniques to be applied to large volumes"
+  },
+  {
+    "start": 265.48,
+    "end": 270.98,
+    "text": " of data. In this course, we will use Spark and its"
+  },
+  {
+    "start": 270.98,
+    "end": 277.98,
+    "text": " Scalable Machine Learning Library, MLlib, to show you how machine learning can be applied to big data."
+  },
+  {
+    "start": 277.98,
+    "end": 284.98,
+    "text": " And don't forget, this is the processing of the machine learning on where the data resides."
+  },
+  {
+    "start": 284.98,
+    "end": 287.98,
+    "text": " And we call this the big data approach."
+  },
+  {
+    "start": 287.98,
+    "end": 298.98,
+    "text": " However, you can also imagine a scenario where you also update the machine learning algorithms to scale up."
+  },
+  {
+    "start": 298.98,
+    "end": 307.3,
+    "text": " So you can parallelize the machine learning algorithms themselves and also use processing of big data together with this approach."
+  }
+]

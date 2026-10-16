@@ -1,0 +1,597 @@
+[
+  {
+    "start": 1.0,
+    "end": 6.0,
+    "text": " In this lecture, we will discuss what a validation set is and how it relates to overfitting"
+  },
+  {
+    "start": 6.0,
+    "end": 9.0,
+    "text": " and model performance evaluation."
+  },
+  {
+    "start": 9.0,
+    "end": 15.0,
+    "text": " After this video, you will be able to describe how validation sets can be used to avoid overfitting,"
+  },
+  {
+    "start": 15.0,
+    "end": 21.0,
+    "text": " articulate how training, validation, and test sets are used, and list three ways that validation"
+  },
+  {
+    "start": 21.0,
+    "end": 23.0,
+    "text": " can be performed."
+  },
+  {
+    "start": 23.0,
+    "end": 28.0,
+    "text": " In our lesson on classification, we discuss that there is a training phase in which the"
+  },
+  {
+    "start": 28.0,
+    "end": 33.66,
+    "text": " model is built and a testing phase in which the model is applied to new data."
+  },
+  {
+    "start": 33.66,
+    "end": 38.54,
+    "text": " The model is built using training data and evaluated on test data."
+  },
+  {
+    "start": 38.54,
+    "end": 42.26,
+    "text": " The training and test data are two different data sets."
+  },
+  {
+    "start": 42.26,
+    "end": 47.16,
+    "text": " The goal in building a machine learning model is to have the model perform well on the training"
+  },
+  {
+    "start": 47.16,
+    "end": 53.04,
+    "text": " set as well as generalize well on new data in the test set."
+  },
+  {
+    "start": 53.04,
+    "end": 57.900000000000006,
+    "text": " Recall that a model that overfits does not generalize well to new data."
+  },
+  {
+    "start": 57.9,
+    "end": 64.08,
+    "text": " Tell us all that overfitting generally occurs when a model is too complex, so to have a"
+  },
+  {
+    "start": 64.08,
+    "end": 69.52,
+    "text": " model with good generalization performance, model training has to stop before the model"
+  },
+  {
+    "start": 69.52,
+    "end": 71.52,
+    "text": " gets too complex."
+  },
+  {
+    "start": 71.52,
+    "end": 74.58,
+    "text": " How do you determine when this should occur?"
+  },
+  {
+    "start": 74.58,
+    "end": 79.46,
+    "text": " A validation set can be used to guide the training process to avoid overfitting and"
+  },
+  {
+    "start": 79.46,
+    "end": 82.42,
+    "text": " deliver good generalization performance."
+  },
+  {
+    "start": 82.42,
+    "end": 86.52,
+    "text": " We have discussed having a training set and a separate test set."
+  },
+  {
+    "start": 86.52,
+    "end": 90.67999999999999,
+    "text": " The training set is used to build a model, and the test set is used to see how the model"
+  },
+  {
+    "start": 90.67999999999999,
+    "end": 92.96,
+    "text": " performs on new data."
+  },
+  {
+    "start": 92.96,
+    "end": 97.94,
+    "text": " Now we want to further divide up the training data into a training set and a validation"
+  },
+  {
+    "start": 97.94,
+    "end": 99.16,
+    "text": " set."
+  },
+  {
+    "start": 99.16,
+    "end": 103.89999999999999,
+    "text": " The training set is used to train the model as before, and the validation set is used"
+  },
+  {
+    "start": 103.89999999999999,
+    "end": 109.38,
+    "text": " to determine when to stop training the model to avoid overfitting in order to get the best"
+  },
+  {
+    "start": 109.38,
+    "end": 112.03999999999999,
+    "text": " generalization performance."
+  },
+  {
+    "start": 112.04,
+    "end": 116.32000000000001,
+    "text": " The idea is to look at the errors on both training set and validation set during model"
+  },
+  {
+    "start": 116.32000000000001,
+    "end": 122.66000000000001,
+    "text": " training as shown here. The orange solid line on the plot is the training error and the"
+  },
+  {
+    "start": 122.66000000000001,
+    "end": 128.38,
+    "text": " green line is the validation error. We see that as model building progresses along the"
+  },
+  {
+    "start": 128.38,
+    "end": 135.28,
+    "text": " x-axis, the number of nodes increases. That is, the complexity of the model increases."
+  },
+  {
+    "start": 135.28,
+    "end": 141.20000000000002,
+    "text": " We can see that as the model complexity increases, the training error decreases."
+  },
+  {
+    "start": 141.20000000000002,
+    "end": 147.96,
+    "text": " On the other hand, the validation error initially decreases, but then starts to increase."
+  },
+  {
+    "start": 147.96,
+    "end": 153.36,
+    "text": " When the validation error increases, this indicates that the model is overfitting, resulting"
+  },
+  {
+    "start": 153.36,
+    "end": 157.70000000000002,
+    "text": " in decreased generalization performance."
+  },
+  {
+    "start": 157.70000000000002,
+    "end": 160.98000000000002,
+    "text": " This can be used to determine when to stop training."
+  },
+  {
+    "start": 160.98000000000002,
+    "end": 166.16000000000003,
+    "text": " Where validation error starts to increase is when you get the best generalization performance,"
+  },
+  {
+    "start": 166.16000000000003,
+    "end": 168.38000000000002,
+    "text": " so training should stop there."
+  },
+  {
+    "start": 168.38,
+    "end": 173.1,
+    "text": " This method of using a validation set to determine when to stop training is referred to as model"
+  },
+  {
+    "start": 173.1,
+    "end": 178.7,
+    "text": " selection, since you're selecting one from many of varying complexities."
+  },
+  {
+    "start": 178.7,
+    "end": 183.12,
+    "text": " Note that this was illustrated for a decision tree classifier, but the same method can be"
+  },
+  {
+    "start": 183.12,
+    "end": 188.04,
+    "text": " applied to any type of machine learning model."
+  },
+  {
+    "start": 188.04,
+    "end": 192.48,
+    "text": " There are several ways to create and use the validation set to avoid overfitting."
+  },
+  {
+    "start": 192.48000000000002,
+    "end": 201.12,
+    "text": " The different methods are holdout method, random subsampling, k-fold cross-validation,"
+  },
+  {
+    "start": 201.12,
+    "end": 205.26000000000002,
+    "text": " and leave-one-out cross-validation."
+  },
+  {
+    "start": 205.26000000000002,
+    "end": 209.08,
+    "text": " The first way to use a validation set is the holdout method."
+  },
+  {
+    "start": 209.08,
+    "end": 213.06000000000003,
+    "text": " This describes the scenario that we have been discussing, where part of the training data"
+  },
+  {
+    "start": 213.06000000000003,
+    "end": 216.24,
+    "text": " is reserved as the validation set."
+  },
+  {
+    "start": 216.24,
+    "end": 219.46,
+    "text": " The validation set is then the holdout set."
+  },
+  {
+    "start": 219.46,
+    "end": 224.02,
+    "text": " on the training set and the holdout set are calculated at each step during model training"
+  },
+  {
+    "start": 224.02,
+    "end": 228.92000000000002,
+    "text": " and plotted together as we've seen before. And the lowest error on the holdout set is"
+  },
+  {
+    "start": 228.92000000000002,
+    "end": 234.26000000000002,
+    "text": " when training should stop. This is just the process that we have described before. There"
+  },
+  {
+    "start": 234.26000000000002,
+    "end": 239.76000000000002,
+    "text": " are some limitations to the holdout method, however. First, since some samples are reserved"
+  },
+  {
+    "start": 239.76000000000002,
+    "end": 245.14000000000001,
+    "text": " for the holdout validation set, the training set now has less data than it originally started"
+  },
+  {
+    "start": 245.14000000000001,
+    "end": 251.8,
+    "text": " out with. Secondly, if the training and holdout sets do not have the same data distributions,"
+  },
+  {
+    "start": 251.8,
+    "end": 257.12,
+    "text": " then the results will be misleading. For example, if the training data has many more samples"
+  },
+  {
+    "start": 257.12,
+    "end": 262.52000000000004,
+    "text": " of one class, and the holdout data set has many more samples of another class."
+  },
+  {
+    "start": 262.52000000000004,
+    "end": 268.3,
+    "text": " The next method for using a validation set is repeated holdout. As the name implies,"
+  },
+  {
+    "start": 268.3,
+    "end": 273.90000000000003,
+    "text": " this is essentially repeating the holdout method several times. With each iteration,"
+  },
+  {
+    "start": 273.90000000000003,
+    "end": 280.08000000000004,
+    "text": " are randomly selected from the original training data to create the holdout validation set."
+  },
+  {
+    "start": 280.08000000000004,
+    "end": 285.26000000000005,
+    "text": " This is repeated several times with different training and validation sets. Then the error"
+  },
+  {
+    "start": 285.26000000000005,
+    "end": 289.74,
+    "text": " rates on the holdout set for the different iterations are averaged together to get the"
+  },
+  {
+    "start": 289.74,
+    "end": 295.46000000000004,
+    "text": " overall error rate for model selection. A potential problem with repeated holdout is"
+  },
+  {
+    "start": 295.46000000000004,
+    "end": 300.72,
+    "text": " that you could end up with some samples being used more than others for training. Since"
+  },
+  {
+    "start": 300.72,
+    "end": 305.96000000000004,
+    "text": " Since a sample can be used for either testing or training any number of times, some samples"
+  },
+  {
+    "start": 305.96000000000004,
+    "end": 310.0,
+    "text": " may be put in the training set more times than other samples."
+  },
+  {
+    "start": 310.0,
+    "end": 314.96000000000004,
+    "text": " So you might end up with some samples being over-represented, while other samples are"
+  },
+  {
+    "start": 314.96000000000004,
+    "end": 319.38000000000005,
+    "text": " under-represented in training or testing."
+  },
+  {
+    "start": 319.38000000000005,
+    "end": 324.92,
+    "text": " A way to improve on the repeated holdout method is to use cross-validation."
+  },
+  {
+    "start": 324.92,
+    "end": 327.46000000000004,
+    "text": " Cross-validation works as follows."
+  },
+  {
+    "start": 327.46,
+    "end": 334.46,
+    "text": " the data into k number of disjoint partitions. During each iteration, one partition is used"
+  },
+  {
+    "start": 334.46,
+    "end": 340.46,
+    "text": " as the validation set. Repeat the process k times, each time using a different partition"
+  },
+  {
+    "start": 340.46,
+    "end": 346.7,
+    "text": " for validation. So each partition is used for validation exactly once. This is illustrated"
+  },
+  {
+    "start": 346.7,
+    "end": 352.29999999999995,
+    "text": " in this figure. In the first iteration, the first partition, specified in green, is used"
+  },
+  {
+    "start": 352.3,
+    "end": 357.64,
+    "text": " for validation. In the second iteration, the second partition is used for validation, and"
+  },
+  {
+    "start": 357.64,
+    "end": 364.02000000000004,
+    "text": " so on. The overall validation error is calculated by averaging the validation errors for all"
+  },
+  {
+    "start": 364.02000000000004,
+    "end": 370.48,
+    "text": " k iterations. The model with the smallest average validation error, then, is selected."
+  },
+  {
+    "start": 370.48,
+    "end": 376.16,
+    "text": " The process we just described is referred to as k-fold cross-validation. This is a very"
+  },
+  {
+    "start": 376.16,
+    "end": 381.7,
+    "text": " commonly used approach to model selection in practice. This approach gives you a more"
+  },
+  {
+    "start": 381.7,
+    "end": 387.14,
+    "text": " structured way to divide available data up between training and validation data sets,"
+  },
+  {
+    "start": 387.14,
+    "end": 391.92,
+    "text": " and provides a way to overcome the variability and performance that you can get when using"
+  },
+  {
+    "start": 391.92,
+    "end": 396.21999999999997,
+    "text": " a single partitioning of the data."
+  },
+  {
+    "start": 396.21999999999997,
+    "end": 401.46,
+    "text": " Leave 1 out cross-validation is a special case of k-fold cross-validation where k equals"
+  },
+  {
+    "start": 401.46,
+    "end": 407.76,
+    "text": " n, where n is the size of your data set. Here, for each iteration, the validation set has"
+  },
+  {
+    "start": 407.76,
+    "end": 414.09999999999997,
+    "text": " exactly one sample, so the model is chained to using n-1 samples and is validated on the"
+  },
+  {
+    "start": 414.09999999999997,
+    "end": 421.71999999999997,
+    "text": " remaining sample. The rest of the process works the same way as regular k-fold cross-validation."
+  },
+  {
+    "start": 421.71999999999997,
+    "end": 427.21999999999997,
+    "text": " Note that cross-validation is offered abbreviated CV, and leave one out, cross-validation is"
+  },
+  {
+    "start": 427.21999999999997,
+    "end": 433.56,
+    "text": " then abbreviated LOOCV and pronounced LUCV."
+  },
+  {
+    "start": 433.56,
+    "end": 438.08,
+    "text": " We have described several ways to use a validation set to address overfitting."
+  },
+  {
+    "start": 438.08,
+    "end": 442.38,
+    "text": " Error on the validation set is used to determine when to stop training so that the model does"
+  },
+  {
+    "start": 442.38,
+    "end": 444.54,
+    "text": " not overfit."
+  },
+  {
+    "start": 444.54,
+    "end": 449.02,
+    "text": " Note that the validation error that comes out of this process can also be used to estimate"
+  },
+  {
+    "start": 449.02,
+    "end": 451.68,
+    "text": " generalization performance of the model."
+  },
+  {
+    "start": 451.68,
+    "end": 456.88,
+    "text": " In other words, the error on the validation set provides an estimate of the error on the"
+  },
+  {
+    "start": 456.88,
+    "end": 458.92,
+    "text": " test set."
+  },
+  {
+    "start": 458.92,
+    "end": 462.9,
+    "text": " With the addition of the validation set, you really need three distinct datasets when you"
+  },
+  {
+    "start": 462.90000000000003,
+    "end": 468.8,
+    "text": " build a model. Let's review these datasets. The training dataset is used to train the"
+  },
+  {
+    "start": 468.8,
+    "end": 475.62000000000006,
+    "text": " model, that is to adjust the parameters of the model to learn the input-to-output mapping."
+  },
+  {
+    "start": 475.62000000000006,
+    "end": 480.52000000000004,
+    "text": " The validation dataset is used to determine when training should stop in order to avoid"
+  },
+  {
+    "start": 480.52000000000004,
+    "end": 489.76000000000005,
+    "text": " overfitting. The test dataset is used to evaluate the performance of the model on new data."
+  },
+  {
+    "start": 489.76,
+    "end": 495.9,
+    "text": " Note that the test dataset should never, ever be used in any way to create or tune the model."
+  },
+  {
+    "start": 495.9,
+    "end": 502.0,
+    "text": " It should not be used, for example, in a cross-validation process to determine when to stop training."
+  },
+  {
+    "start": 502.0,
+    "end": 507.94,
+    "text": " The test dataset must always remain independent from model training and remain untouched until"
+  },
+  {
+    "start": 507.94,
+    "end": 512.06,
+    "text": " the very end, when all training has been completed."
+  },
+  {
+    "start": 512.06,
+    "end": 516.64,
+    "text": " Note that in sampling the original dataset to create the training, validation, and test"
+  },
+  {
+    "start": 516.64,
+    "end": 520.64,
+    "text": " all datasets must contain the same distribution of the target classes."
+  },
+  {
+    "start": 520.64,
+    "end": 523.64,
+    "text": " For example, if in the original dataset,"
+  },
+  {
+    "start": 523.64,
+    "end": 528.64,
+    "text": " 70% of the samples belong to one class and 30% to the other class,"
+  },
+  {
+    "start": 528.64,
+    "end": 532.64,
+    "text": " then this same distribution should approximately be present"
+  },
+  {
+    "start": 532.64,
+    "end": 535.64,
+    "text": " in each of the training, validation, and test sets."
+  },
+  {
+    "start": 535.64,
+    "end": 538.64,
+    "text": " Otherwise, analysis results will be misleading."
+  },
+  {
+    "start": 538.64,
+    "end": 542.64,
+    "text": " To summarize, we have discussed the need for three different datasets"
+  },
+  {
+    "start": 542.64,
+    "end": 544.64,
+    "text": " in building a model."
+  },
+  {
+    "start": 544.64,
+    "end": 546.64,
+    "text": " a training set to train the model,"
+  },
+  {
+    "start": 546.64,
+    "end": 549.64,
+    "text": " a validation set to determine when to stop training,"
+  },
+  {
+    "start": 549.64,
+    "end": 553.64,
+    "text": " and a test set to evaluate performance on new data."
+  },
+  {
+    "start": 553.64,
+    "end": 557.64,
+    "text": " We learned how a validation set can be used to avoid overfitting"
+  },
+  {
+    "start": 557.64,
+    "end": 561.64,
+    "text": " and in the process provide an estimate of generalization performance."
+  },
+  {
+    "start": 561.64,
+    "end": 565.64,
+    "text": " And we covered different ways to create and use a validation set,"
+  },
+  {
+    "start": 565.64,
+    "end": 568.64,
+    "text": " such as k-fold cross-validation."
+  }
+]

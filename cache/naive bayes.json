@@ -1,0 +1,692 @@
+[
+  {
+    "start": 0.8,
+    "end": 6.36,
+    "text": " In this lecture, we will discuss the Naive Bayes classifier. After this video, you will"
+  },
+  {
+    "start": 6.36,
+    "end": 12.82,
+    "text": " be able to discuss how a Naive Bayes model works for classification, define the components"
+  },
+  {
+    "start": 12.82,
+    "end": 18.44,
+    "text": " of Bayes rule, and explain what the Naive means in Naive Bayes."
+  },
+  {
+    "start": 18.44,
+    "end": 24.560000000000002,
+    "text": " A Naive Bayes classification model uses a probabilistic approach to classification. What"
+  },
+  {
+    "start": 24.560000000000002,
+    "end": 29.88,
+    "text": " this means is that the relationships between the input features and the class is expressed"
+  },
+  {
+    "start": 29.88,
+    "end": 37.32,
+    "text": " as probabilities. So, given the input features for a sample, the probability for each class"
+  },
+  {
+    "start": 37.32,
+    "end": 45.78,
+    "text": " is estimated. The class with the highest probability, then, determines the label for the sample."
+  },
+  {
+    "start": 45.78,
+    "end": 51.599999999999994,
+    "text": " In addition to using a probabilistic framework for classification, the naive Bayes classifier"
+  },
+  {
+    "start": 51.599999999999994,
+    "end": 56.9,
+    "text": " also uses what is known as Bayes' theorem. The application of Bayes' theorem makes"
+  },
+  {
+    "start": 56.9,
+    "end": 63.66,
+    "text": " estimating the probabilities easier. In addition, Naive Bayes assumes that the input features"
+  },
+  {
+    "start": 63.66,
+    "end": 70.53999999999999,
+    "text": " are statistically independent of one another. This means that, for a given class, the value"
+  },
+  {
+    "start": 70.53999999999999,
+    "end": 76.28,
+    "text": " of one feature does not affect the value of any other feature. This independence assumption"
+  },
+  {
+    "start": 76.28,
+    "end": 83.28,
+    "text": " is an oversimplified one that does not always hold true and so is considered a Naive assumption."
+  },
+  {
+    "start": 83.28,
+    "end": 87.96000000000001,
+    "text": " The naive independence assumption and the use of Bayes' theorem give this classification"
+  },
+  {
+    "start": 87.96000000000001,
+    "end": 89.86,
+    "text": " model its name."
+  },
+  {
+    "start": 89.86,
+    "end": 95.78,
+    "text": " We will cover Bayes' theorem and the independence assumption in more detail in this lecture."
+  },
+  {
+    "start": 95.78,
+    "end": 99.76,
+    "text": " Before we look at naive Bayes in more detail, let's first start with some background on"
+  },
+  {
+    "start": 99.76,
+    "end": 102.32,
+    "text": " probability."
+  },
+  {
+    "start": 102.32,
+    "end": 105.92,
+    "text": " Probability is the measure of how likely an event is."
+  },
+  {
+    "start": 105.92,
+    "end": 112.3,
+    "text": " The probability of an event A occurring is denoted P and in parentheses A."
+  },
+  {
+    "start": 112.3,
+    "end": 118.47999999999999,
+    "text": " It is calculated by dividing the number of ways event A can occur by the total number"
+  },
+  {
+    "start": 118.47999999999999,
+    "end": 121.36,
+    "text": " of possible outcomes."
+  },
+  {
+    "start": 121.36,
+    "end": 127.22,
+    "text": " For example, what is the probability of rolling a die and getting 6?"
+  },
+  {
+    "start": 127.22,
+    "end": 132.56,
+    "text": " When you roll a die, you can get a number from 1 to 6, so the number of possible outcomes"
+  },
+  {
+    "start": 132.56,
+    "end": 134.3,
+    "text": " is 6."
+  },
+  {
+    "start": 134.3,
+    "end": 140.14,
+    "text": " The number of ways for getting 6 is 1, since the way you can get 6 is if the die shows"
+  },
+  {
+    "start": 140.14000000000001,
+    "end": 146.54000000000002,
+    "text": " 6 when it stops rolling. That means that the probability of getting the number 6 when you"
+  },
+  {
+    "start": 146.54000000000002,
+    "end": 154.78000000000003,
+    "text": " roll a die is 1 over 6. This is denoted P of 6 and that's equal to 1 over 6 and is"
+  },
+  {
+    "start": 154.78000000000003,
+    "end": 163.42000000000002,
+    "text": " read as the probability of 6 is 1 over 6. There's also a joint probability. The joint"
+  },
+  {
+    "start": 163.42000000000002,
+    "end": 171.42000000000002,
+    "text": " probability specifies the probability of event A and event B occurring together. In this"
+  },
+  {
+    "start": 171.42000000000002,
+    "end": 178.44000000000003,
+    "text": " diagram, the probability of event A occurring is shown as the blue circle, and the probability"
+  },
+  {
+    "start": 178.44000000000003,
+    "end": 185.38000000000002,
+    "text": " of event B occurring is shown as the green circle. Then the joint probability, that is,"
+  },
+  {
+    "start": 185.38000000000002,
+    "end": 193.38000000000002,
+    "text": " the probability of A and B occurring together, is shown as the overlap of these two circles."
+  },
+  {
+    "start": 193.38,
+    "end": 201.56,
+    "text": " The joint probability of A and B is denoted P and in parentheses A comma B."
+  },
+  {
+    "start": 201.56,
+    "end": 206.92,
+    "text": " For an example of joint probability, let's consider rolling two dice together."
+  },
+  {
+    "start": 206.92,
+    "end": 212.24,
+    "text": " What is the probability of getting two sixes, or a six, from each die?"
+  },
+  {
+    "start": 212.24,
+    "end": 217.0,
+    "text": " If the two events are independent, then the joint probability is simply the result of"
+  },
+  {
+    "start": 217.0,
+    "end": 222.0,
+    "text": " multiplying the probabilities of the individual events together."
+  },
+  {
+    "start": 222.0,
+    "end": 228.26,
+    "text": " In this case then, we have the probability of rolling a 6 for each die is 1 over 6,"
+  },
+  {
+    "start": 228.26,
+    "end": 233.28,
+    "text": " so the joint probability is 1 over 36."
+  },
+  {
+    "start": 233.28,
+    "end": 236.44,
+    "text": " This leads us to conditional probability."
+  },
+  {
+    "start": 236.44,
+    "end": 243.06,
+    "text": " The conditional probability is the probability of event A occurring given that event B has"
+  },
+  {
+    "start": 243.06,
+    "end": 245.32,
+    "text": " already occurred."
+  },
+  {
+    "start": 245.32,
+    "end": 251.54,
+    "text": " Another way to say this is that event A is conditioned on event B."
+  },
+  {
+    "start": 251.54,
+    "end": 258.14,
+    "text": " The conditional probability is denoted P and in parentheses A, vertical line B, and is"
+  },
+  {
+    "start": 258.14,
+    "end": 265.64,
+    "text": " read as probability of A given B. This diagram gives a graphical definition of conditional"
+  },
+  {
+    "start": 265.64,
+    "end": 273.0,
+    "text": " probability. As before, the blue circle is the probability of event A occurring. The"
+  },
+  {
+    "start": 273.0,
+    "end": 279.71999999999997,
+    "text": " green circle is the probability of event B occurring. The overlap is the joint probability"
+  },
+  {
+    "start": 279.72,
+    "end": 288.12,
+    "text": " of A and B. The conditional probability, P of A given B, then is calculated as the joint"
+  },
+  {
+    "start": 288.12,
+    "end": 295.32000000000005,
+    "text": " probability divided by the probability of B. The conditional probability is an important"
+  },
+  {
+    "start": 295.32000000000005,
+    "end": 300.62,
+    "text": " concept in classification, as we will see later. It provides the means to specify the"
+  },
+  {
+    "start": 300.62,
+    "end": 307.62,
+    "text": " probability of a class label given the input values. The relationship between conditional"
+  },
+  {
+    "start": 307.62,
+    "end": 317.34000000000003,
+    "text": " probabilities P of B given A and P of A given B can be expressed through Bayes' theorem."
+  },
+  {
+    "start": 317.34000000000003,
+    "end": 323.18,
+    "text": " This theorem is named after a reverend named Thomas Bayes who lived in the 1700s. It is"
+  },
+  {
+    "start": 323.18,
+    "end": 328.4,
+    "text": " a way to look at how the probability of a hypothesis is affected by new evidence gathered"
+  },
+  {
+    "start": 328.4,
+    "end": 337.28000000000003,
+    "text": " from data. Bayes' theorem expresses the relationship between probability of B given A and probability"
+  },
+  {
+    "start": 337.28000000000003,
+    "end": 344.32000000000005,
+    "text": " of A given B, as shown in this equation. Bayes Theorem is also known as Bayes Rule or Bayes"
+  },
+  {
+    "start": 344.32000000000005,
+    "end": 351.06000000000006,
+    "text": " Law. Now that we have reviewed some background on probability, let's see how all this relates"
+  },
+  {
+    "start": 351.06000000000006,
+    "end": 357.52000000000004,
+    "text": " to the classification problem. With the probabilistic framework, the classification task is defined"
+  },
+  {
+    "start": 357.52000000000004,
+    "end": 365.28000000000003,
+    "text": " as follows. Capital X is the set of values for the input features in the sample. Given"
+  },
+  {
+    "start": 365.28000000000003,
+    "end": 371.68,
+    "text": " Given a sample with features x, predict the corresponding class c. Another way to state"
+  },
+  {
+    "start": 371.68,
+    "end": 379.34000000000003,
+    "text": " this is, what is the class label associated with the feature vector x? Or, how should"
+  },
+  {
+    "start": 379.34000000000003,
+    "end": 385.68,
+    "text": " the feature vector x be classified? To find the class label c, we need to calculate the"
+  },
+  {
+    "start": 385.68,
+    "end": 392.48,
+    "text": " conditional probability of class c, given x, for all classes, and select the class with"
+  },
+  {
+    "start": 392.48,
+    "end": 400.24,
+    "text": " the highest probability. So for classification, we want to find the value of c that maximizes"
+  },
+  {
+    "start": 400.24,
+    "end": 407.02000000000004,
+    "text": " the probability of c given x. The problem is that it is difficult to estimate this probability"
+  },
+  {
+    "start": 407.02000000000004,
+    "end": 412.8,
+    "text": " because we would need to enumerate every possible combination of feature values, and to know"
+  },
+  {
+    "start": 412.8,
+    "end": 419.42,
+    "text": " the conditional probability for each class given every possible feature combination."
+  },
+  {
+    "start": 419.42,
+    "end": 425.1,
+    "text": " And here's where Bayes' theorem comes into play. The classification problem can be reformulated"
+  },
+  {
+    "start": 425.1,
+    "end": 433.14000000000004,
+    "text": " using Bayes' theorem to simplify the classification problem. Specifically, using Bayes' theorem,"
+  },
+  {
+    "start": 433.14000000000004,
+    "end": 438.68,
+    "text": " probability of C given X can be expressed using other probability quantities, which"
+  },
+  {
+    "start": 438.68,
+    "end": 444.16,
+    "text": " can be estimated from the data. Here is Bayes' theorem again, with some additional"
+  },
+  {
+    "start": 444.16,
+    "end": 451.16,
+    "text": " terms defined. Probability of C given X is referred to as the posterior probability,"
+  },
+  {
+    "start": 451.16,
+    "end": 459.92,
+    "text": " since it is the probability of the class label being C after observing input features X."
+  },
+  {
+    "start": 459.92,
+    "end": 466.92,
+    "text": " Probability of X given C is the probability of observing input features X given that C"
+  },
+  {
+    "start": 466.92,
+    "end": 474.0,
+    "text": " is the class label. This is the class conditional probability since it is conditioned on the"
+  },
+  {
+    "start": 474.0,
+    "end": 482.5,
+    "text": " class. Probability of C is the probability of the class label being C. This is the probability"
+  },
+  {
+    "start": 482.5,
+    "end": 490.78,
+    "text": " of each class prior to observing any input data, and so is referred to as the prior probability."
+  },
+  {
+    "start": 490.78,
+    "end": 497.24,
+    "text": " The probability of X is the probability of observing input features X, regardless of"
+  },
+  {
+    "start": 497.24,
+    "end": 500.1,
+    "text": " what the class label is."
+  },
+  {
+    "start": 500.1,
+    "end": 506.56,
+    "text": " So for classification, we want to calculate the posterior probability P of C given X"
+  },
+  {
+    "start": 506.56,
+    "end": 515.0400000000001,
+    "text": " for each class C. From Bayes' theorem, probability of C given X is related to probability of"
+  },
+  {
+    "start": 515.0400000000001,
+    "end": 522.28,
+    "text": " X given C, probability of C, and probability of X."
+  },
+  {
+    "start": 522.28,
+    "end": 527.1800000000001,
+    "text": " Probability of X does not depend on the class C, therefore it is a constant value given"
+  },
+  {
+    "start": 527.1800000000001,
+    "end": 534.0600000000001,
+    "text": " the input X. Since it is the same value for all classes, the probability of X can be removed"
+  },
+  {
+    "start": 534.0600000000001,
+    "end": 541.22,
+    "text": " from the calculation of probability of C given X. What's left then are the probability of"
+  },
+  {
+    "start": 541.22,
+    "end": 549.1400000000001,
+    "text": " X given C and the probability of C. So estimating the probability of C given X boils down to"
+  },
+  {
+    "start": 549.1400000000001,
+    "end": 556.98,
+    "text": " estimating the probability of X given C and probability of C. The nice thing is that probability"
+  },
+  {
+    "start": 556.98,
+    "end": 564.86,
+    "text": " of X given C and probability of C can be estimated from the data. So now we have a way to calculate"
+  },
+  {
+    "start": 564.86,
+    "end": 571.4,
+    "text": " probability of C given X, which is what we need for classification. To estimate the probability"
+  },
+  {
+    "start": 571.4,
+    "end": 577.86,
+    "text": " of C, which is the probability that the class is C before observing any input data, we simply"
+  },
+  {
+    "start": 577.86,
+    "end": 584.14,
+    "text": " calculate the fraction of samples with that class label, C, in the training data. For"
+  },
+  {
+    "start": 584.14,
+    "end": 590.62,
+    "text": " For this example, there are 4 samples labeled as green circles out of 10 samples. So, probability"
+  },
+  {
+    "start": 590.62,
+    "end": 599.62,
+    "text": " of green circle is 4 out of 10, or 0.4. Similarly, the fraction of samples labeled as red triangles"
+  },
+  {
+    "start": 599.62,
+    "end": 606.8199999999999,
+    "text": " is 6 out of 10, or 0.6. So, estimating the prior probabilities is a simple count of number"
+  },
+  {
+    "start": 606.8199999999999,
+    "end": 612.34,
+    "text": " of samples with each class label, divided by the total number of samples in the training"
+  },
+  {
+    "start": 612.34,
+    "end": 619.9200000000001,
+    "text": " data set. In estimating probability of X given C, which is the probability of observing feature"
+  },
+  {
+    "start": 619.9200000000001,
+    "end": 626.1,
+    "text": " vector X given that the class is C, we can use the independence assumption to simplify"
+  },
+  {
+    "start": 626.1,
+    "end": 632.24,
+    "text": " the problem. The independence assumption of the Naive Bayes classifier assumes that each"
+  },
+  {
+    "start": 632.24,
+    "end": 640.38,
+    "text": " feature X sub i in the feature vector X is conditionally independent of every other feature"
+  },
+  {
+    "start": 640.38,
+    "end": 647.66,
+    "text": " given the class C. This means that we only need to estimate the probability of X sub"
+  },
+  {
+    "start": 647.66,
+    "end": 655.0,
+    "text": " I, given C, instead of having to estimate the probability of the entire feature X, given"
+  },
+  {
+    "start": 655.0,
+    "end": 662.06,
+    "text": " C, for every combination of values for the features in X. Then we would simply multiply"
+  },
+  {
+    "start": 662.06,
+    "end": 667.18,
+    "text": " these individual probabilities together to get the probability of the entire feature"
+  },
+  {
+    "start": 667.1800000000001,
+    "end": 676.5400000000001,
+    "text": " vector X given the class C. To estimate the probability of X sub i given C, we count up"
+  },
+  {
+    "start": 676.5400000000001,
+    "end": 682.48,
+    "text": " the number of times a particular input value is observed for the class C in the training"
+  },
+  {
+    "start": 682.48,
+    "end": 689.7800000000001,
+    "text": " data. For example, the number of times that we see the value of yes for the feature homeowner"
+  },
+  {
+    "start": 689.7800000000001,
+    "end": 696.34,
+    "text": " when the class label is no is 3, as indicated by the green arrows. This is divided by the"
+  },
+  {
+    "start": 696.34,
+    "end": 703.14,
+    "text": " number of samples with no as the class label, which is 7. This fraction, 3 out of 7, is"
+  },
+  {
+    "start": 703.14,
+    "end": 709.14,
+    "text": " the probability that homeowner is yes, given that the class is no."
+  },
+  {
+    "start": 709.14,
+    "end": 715.22,
+    "text": " Similarly, the samples with the value of single for the future marital status when the class"
+  },
+  {
+    "start": 715.22,
+    "end": 722.1,
+    "text": " is yes are indicated by the red arrows, and the probability that marital status is single,"
+  },
+  {
+    "start": 722.1,
+    "end": 729.1,
+    "text": " that the class label is yes, is 2 out of 3, or 0.67."
+  },
+  {
+    "start": 729.1,
+    "end": 734.26,
+    "text": " Some things to note about the Naive Bayes classification model are, it is a fast and"
+  },
+  {
+    "start": 734.26,
+    "end": 739.8000000000001,
+    "text": " simple algorithm. The algorithm boils down to calculating counts for probabilities and"
+  },
+  {
+    "start": 739.8000000000001,
+    "end": 745.8000000000001,
+    "text": " performing some multiplication. So it is very simple to implement, and the probabilities"
+  },
+  {
+    "start": 745.8000000000001,
+    "end": 751.7,
+    "text": " that are needed can be calculated with a single scan of the dataset and stored in a table."
+  },
+  {
+    "start": 751.7,
+    "end": 757.5400000000001,
+    "text": " to processing of the data is not necessary as with many other machine learning algorithms."
+  },
+  {
+    "start": 757.5400000000001,
+    "end": 764.0200000000001,
+    "text": " So model building and testing are both fast. It scales well. Due to the independence assumption,"
+  },
+  {
+    "start": 764.0200000000001,
+    "end": 769.5,
+    "text": " the probability for each feature can be independently estimated. This means that feature probabilities"
+  },
+  {
+    "start": 769.5,
+    "end": 775.0200000000001,
+    "text": " can be calculated in parallel. This also means that the dataset size does not have to grow"
+  },
+  {
+    "start": 775.0200000000001,
+    "end": 780.7800000000001,
+    "text": " exponentially with the number of features. This avoids the many problems associated with"
+  },
+  {
+    "start": 780.78,
+    "end": 783.52,
+    "text": " the curse of dimensionality."
+  },
+  {
+    "start": 783.52,
+    "end": 787.68,
+    "text": " This also means that you do not need a lot of data to build the model."
+  },
+  {
+    "start": 787.68,
+    "end": 792.72,
+    "text": " The number of parameters scales linearly with the number of features."
+  },
+  {
+    "start": 792.72,
+    "end": 796.6999999999999,
+    "text": " The independence assumption does not hold true in many cases."
+  },
+  {
+    "start": 796.6999999999999,
+    "end": 801.86,
+    "text": " In practice, however, the Naive Bayes classifier still tends to perform very well."
+  },
+  {
+    "start": 801.86,
+    "end": 806.1,
+    "text": " This is because even though Naive Bayes may not provide good estimates of the correct"
+  },
+  {
+    "start": 806.1,
+    "end": 812.84,
+    "text": " class probabilities, as long as the correct class is more probable than any other class,"
+  },
+  {
+    "start": 812.84,
+    "end": 816.88,
+    "text": " the correct classification results will be reached."
+  },
+  {
+    "start": 816.88,
+    "end": 821.5600000000001,
+    "text": " The independence assumption also prevents the Naive Bayes classifier to model interactions"
+  },
+  {
+    "start": 821.5600000000001,
+    "end": 825.78,
+    "text": " between features, which limits its classification power."
+  },
+  {
+    "start": 825.78,
+    "end": 832.48,
+    "text": " So the increased risk of smoking and a history of cancer would not be captured, for example."
+  },
+  {
+    "start": 832.48,
+    "end": 836.88,
+    "text": " The Naive Bayes classifier has been applied to many real-world problems, including spam"
+  },
+  {
+    "start": 836.88,
+    "end": 841.62,
+    "text": " filtering, document classification, and sentiment analysis."
+  },
+  {
+    "start": 841.62,
+    "end": 848.08,
+    "text": " To summarize, the Naive Bayes classifier uses a probabilistic framework for classification."
+  },
+  {
+    "start": 848.08,
+    "end": 854.1800000000001,
+    "text": " It applies Bayes' theorem and the feature-independence assumption to simplify the problem of estimating"
+  },
+  {
+    "start": 854.1800000000001,
+    "end": 856.6,
+    "text": " probabilities for the classification task."
+  }
+]

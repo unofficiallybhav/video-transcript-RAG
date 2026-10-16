@@ -1,0 +1,467 @@
+[
+  {
+    "start": 0.0,
+    "end": 9.0,
+    "text": " In addition to classification and regression, machine learning tasks and techniques can also fall into another category known as cluster analysis."
+  },
+  {
+    "start": 9.0,
+    "end": 15.0,
+    "text": " After this video, you will be able to articulate the goal of cluster analysis,"
+  },
+  {
+    "start": 15.0,
+    "end": 20.0,
+    "text": " discuss whether cluster analysis is supervised or unsupervised,"
+  },
+  {
+    "start": 20.0,
+    "end": 23.0,
+    "text": " and list some ways that cluster results can be applied."
+  },
+  {
+    "start": 23.0,
+    "end": 30.0,
+    "text": " In cluster analysis, the goal is to organize similar items in your data set into groups or clusters."
+  },
+  {
+    "start": 30.0,
+    "end": 36.0,
+    "text": " By segmenting your data into clusters, you can analyze each cluster more carefully."
+  },
+  {
+    "start": 36.0,
+    "end": 40.0,
+    "text": " Note that cluster analysis is also referred to as clustering."
+  },
+  {
+    "start": 40.0,
+    "end": 45.0,
+    "text": " A very common application of cluster analysis that we have discussed before"
+  },
+  {
+    "start": 45.0,
+    "end": 50.0,
+    "text": " is to divide your customer base into segments based on their purchasing histories."
+  },
+  {
+    "start": 50.0,
+    "end": 55.04,
+    "text": " For example, you can segment customers into those who have purchased science fiction books"
+  },
+  {
+    "start": 55.04,
+    "end": 61.120000000000005,
+    "text": " and videos versus those who tend to buy non-fiction books versus those who have bought many children's"
+  },
+  {
+    "start": 61.120000000000005,
+    "end": 62.32,
+    "text": " books."
+  },
+  {
+    "start": 62.32,
+    "end": 66.94,
+    "text": " This way, you can provide more targeted suggestions to each different group."
+  },
+  {
+    "start": 66.94,
+    "end": 71.98,
+    "text": " Some other examples of cluster analysis are characterizing different weather patterns"
+  },
+  {
+    "start": 71.98,
+    "end": 77.72,
+    "text": " for a region, grouping the latest news articles into topics to identify the trending topics"
+  },
+  {
+    "start": 77.72,
+    "end": 83.53999999999999,
+    "text": " of the day, and discovering hot spots for different types of crime from police reports"
+  },
+  {
+    "start": 83.53999999999999,
+    "end": 88.8,
+    "text": " in order to provide sufficient police presence for problem areas."
+  },
+  {
+    "start": 88.8,
+    "end": 93.34,
+    "text": " Cluster analysis divides all the samples in a dataset into groups."
+  },
+  {
+    "start": 93.34,
+    "end": 99.66,
+    "text": " In this diagram, we see that the red, green, and purple data points are clustered together."
+  },
+  {
+    "start": 99.66,
+    "end": 105.08,
+    "text": " Which group a sample is placed in is based on some measure of similarity."
+  },
+  {
+    "start": 105.08,
+    "end": 110.12,
+    "text": " The goal of cluster analysis is to segment data so that differences between samples in"
+  },
+  {
+    "start": 110.12,
+    "end": 115.48,
+    "text": " the same cluster are minimized, as shown by the yellow arrow, and differences between"
+  },
+  {
+    "start": 115.48,
+    "end": 120.12,
+    "text": " samples of different clusters are maximized, as shown by the orange arrow."
+  },
+  {
+    "start": 120.12,
+    "end": 125.12,
+    "text": " Visually, you can think of this as getting samples in each cluster to be as close together"
+  },
+  {
+    "start": 125.12,
+    "end": 132.07999999999998,
+    "text": " as possible, and the samples from different clusters to be as far apart as possible."
+  },
+  {
+    "start": 132.08,
+    "end": 137.48000000000002,
+    "text": " Other analysis requires some sort of metric to measure similarity between two samples."
+  },
+  {
+    "start": 137.48000000000002,
+    "end": 143.10000000000002,
+    "text": " Some common similarity measures are Euclidean distance, which is the distance along a straight"
+  },
+  {
+    "start": 143.10000000000002,
+    "end": 147.36,
+    "text": " line between two points A and B, as shown in this plot."
+  },
+  {
+    "start": 147.36,
+    "end": 153.0,
+    "text": " Manhattan distance, which is calculated on a strictly horizontal and vertical path, as"
+  },
+  {
+    "start": 153.0,
+    "end": 155.08,
+    "text": " shown in the right plot."
+  },
+  {
+    "start": 155.08,
+    "end": 161.22000000000003,
+    "text": " To go from point A to point B, you can only step along either the x-axis or the y-axis"
+  },
+  {
+    "start": 161.22,
+    "end": 166.4,
+    "text": " in the two-dimensional case. So the path to calculate the Manhattan distance consists"
+  },
+  {
+    "start": 166.4,
+    "end": 173.92,
+    "text": " of segments along the axes instead of along a diagonal path as with Euclidean distance."
+  },
+  {
+    "start": 173.92,
+    "end": 178.98,
+    "text": " Cosine similarity measures the cosine of the angle between points A and B, as shown in"
+  },
+  {
+    "start": 178.98,
+    "end": 182.5,
+    "text": " the bottom plot. Since distance measures such as Euclidean"
+  },
+  {
+    "start": 182.5,
+    "end": 188.18,
+    "text": " distance are often used to measure similarity between samples in clustering algorithms,"
+  },
+  {
+    "start": 188.18,
+    "end": 194.06,
+    "text": " Note that it may be necessary to normalize the input variables so that no one value dominates"
+  },
+  {
+    "start": 194.06,
+    "end": 196.92000000000002,
+    "text": " the similarity calculation."
+  },
+  {
+    "start": 196.92000000000002,
+    "end": 202.78,
+    "text": " We discussed scaling and normalizing variables in the lecture on feature transformation."
+  },
+  {
+    "start": 202.78,
+    "end": 205.14000000000001,
+    "text": " Normalizing is one method to scale variables."
+  },
+  {
+    "start": 205.14000000000001,
+    "end": 210.94,
+    "text": " Essentially, scaling the input variables puts the variables on the same scale so that all"
+  },
+  {
+    "start": 210.94,
+    "end": 217.14000000000001,
+    "text": " variables have equal weighting in the calculation to determine similarity between samples."
+  },
+  {
+    "start": 217.14000000000001,
+    "end": 221.82000000000002,
+    "text": " is necessary when you have variables that have very different scales, such as weight"
+  },
+  {
+    "start": 221.82000000000002,
+    "end": 227.60000000000002,
+    "text": " and height. The magnitude of the height values, which are in feet and inches, will be much"
+  },
+  {
+    "start": 227.60000000000002,
+    "end": 233.20000000000002,
+    "text": " smaller than the magnitude of the weight values, which are in pounds. So scaling both variables"
+  },
+  {
+    "start": 233.20000000000002,
+    "end": 239.54000000000002,
+    "text": " to a common value range will make the contributions from both weight and height equal. Here are"
+  },
+  {
+    "start": 239.54000000000002,
+    "end": 245.58,
+    "text": " some things to note about cluster analysis. First, unlike classification and regression,"
+  },
+  {
+    "start": 245.58,
+    "end": 249.52,
+    "text": " In general, cluster analysis is an unsupervised task."
+  },
+  {
+    "start": 249.52,
+    "end": 255.02,
+    "text": " This means that there is no target label for any sample in the dataset."
+  },
+  {
+    "start": 255.02,
+    "end": 258.62,
+    "text": " In general, there is no correct clustering results."
+  },
+  {
+    "start": 258.62,
+    "end": 264.26,
+    "text": " The best set of clusters is highly dependent on how the resulting clusters will be used."
+  },
+  {
+    "start": 264.26,
+    "end": 268.6,
+    "text": " There are numerical measures to compare two different clusters, but since there are no"
+  },
+  {
+    "start": 268.6,
+    "end": 274.02000000000004,
+    "text": " labels to determine whether a sample has been correctly clustered, there is no ground truth"
+  },
+  {
+    "start": 274.02,
+    "end": 280.41999999999996,
+    "text": " to determine if a set of clustering results are truly correct or incorrect."
+  },
+  {
+    "start": 280.41999999999996,
+    "end": 284.44,
+    "text": " Clusters don't come with labels. You may end up with five different clusters at the"
+  },
+  {
+    "start": 284.44,
+    "end": 289.78,
+    "text": " end of the cluster analysis process, but you don't know what each cluster represents."
+  },
+  {
+    "start": 289.78,
+    "end": 294.4,
+    "text": " Only by analyzing the samples in each cluster can you come up with reasonable labels for"
+  },
+  {
+    "start": 294.4,
+    "end": 300.85999999999996,
+    "text": " your clusters. Given all this, it is important to keep in mind that interpretation and analysis"
+  },
+  {
+    "start": 300.86,
+    "end": 307.66,
+    "text": " the clusters are required to make sense of and make use of the results of cluster analysis."
+  },
+  {
+    "start": 309.1,
+    "end": 312.78000000000003,
+    "text": " There are several ways that the results of cluster analysis can be used."
+  },
+  {
+    "start": 312.78000000000003,
+    "end": 316.54,
+    "text": " The most obvious is data segmentation and the benefits that come from that."
+  },
+  {
+    "start": 317.26,
+    "end": 320.94,
+    "text": " If you segment your customer base into different types of readers,"
+  },
+  {
+    "start": 320.94,
+    "end": 325.02000000000004,
+    "text": " the resulting insights can be used to provide more effective marketing"
+  },
+  {
+    "start": 325.02000000000004,
+    "end": 327.58000000000004,
+    "text": " to the different customer groups based on their preferences."
+  },
+  {
+    "start": 327.58,
+    "end": 333.58,
+    "text": " For example, analyzing each segment separately can provide valuable insights into each group's"
+  },
+  {
+    "start": 333.58,
+    "end": 338.58,
+    "text": " likes, dislikes, and purchasing behavior, just like we see science fiction, non-fiction,"
+  },
+  {
+    "start": 338.58,
+    "end": 341.58,
+    "text": " and children's books' preferences here."
+  },
+  {
+    "start": 341.58,
+    "end": 345.58,
+    "text": " Clusters can also be used to classify new data samples."
+  },
+  {
+    "start": 345.58,
+    "end": 350.58,
+    "text": " When a new sample is received, like the orange sample here, compute the similarity measure"
+  },
+  {
+    "start": 350.58,
+    "end": 356.58,
+    "text": " between it and the centers of all clusters, and assign the new sample to the closest cluster."
+  },
+  {
+    "start": 356.58,
+    "end": 363.58,
+    "text": " The label of the cluster, manually determined through analysis, is then used to classify the new sample."
+  },
+  {
+    "start": 363.58,
+    "end": 372.58,
+    "text": " In our book buyer's preferences example, a new customer can be classified as being either a science fiction, non-fiction, or children's books customer,"
+  },
+  {
+    "start": 372.58,
+    "end": 376.58,
+    "text": " depending on which cluster the new customer is most similar to."
+  },
+  {
+    "start": 376.58,
+    "end": 383.58,
+    "text": " Once cluster labels have been determined, samples in each cluster can be used as labeled data for a classification task."
+  },
+  {
+    "start": 383.58,
+    "end": 388.85999999999996,
+    "text": " task. The samples would be the input to the classification model, and the cluster label"
+  },
+  {
+    "start": 388.85999999999996,
+    "end": 393.94,
+    "text": " would be the target class for each sample. This process can be used to provide much-needed"
+  },
+  {
+    "start": 393.94,
+    "end": 397.21999999999997,
+    "text": " labeled data for classification."
+  },
+  {
+    "start": 397.21999999999997,
+    "end": 402.9,
+    "text": " Yet another use of cluster results is as a basis for anomaly detection. If a sample is"
+  },
+  {
+    "start": 402.9,
+    "end": 408.5,
+    "text": " very far away or very different from any of the cluster centers, like the yellow sample"
+  },
+  {
+    "start": 408.5,
+    "end": 414.5,
+    "text": " here, then that sample is a cluster outlier and can be flagged as an anomaly. However,"
+  },
+  {
+    "start": 414.5,
+    "end": 420.5,
+    "text": " these anomalies require further analysis. Depending on the application, these anomalies"
+  },
+  {
+    "start": 420.5,
+    "end": 425.5,
+    "text": " can be considered noise and should be removed from the dataset. An example of this would"
+  },
+  {
+    "start": 425.5,
+    "end": 432.5,
+    "text": " be a sample with a value of 150 for age. For other cases, these anomalous cases should"
+  },
+  {
+    "start": 432.5,
+    "end": 437.5,
+    "text": " be studied more carefully. Examples of this are in a credit card fraud detection or a"
+  },
+  {
+    "start": 437.5,
+    "end": 440.5,
+    "text": " or a network intrusion detection application."
+  },
+  {
+    "start": 440.5,
+    "end": 445.5,
+    "text": " In these applications, examples outside of the norm are the interesting cases"
+  },
+  {
+    "start": 445.5,
+    "end": 450.5,
+    "text": " that should be looked at to determine if they represent potential problems."
+  },
+  {
+    "start": 450.5,
+    "end": 457.5,
+    "text": " To summarize, cluster analysis is used to organize similar data items into groups or clusters."
+  },
+  {
+    "start": 457.5,
+    "end": 463.5,
+    "text": " Analyzing the resulting clusters often leads to useful insights about the characteristics of each group,"
+  },
+  {
+    "start": 463.5,
+    "end": 468.78,
+    "text": " group, as well as the underlying structure of the entire dataset."
+  },
+  {
+    "start": 468.78,
+    "end": 473.36,
+    "text": " Clusters require analysis and interpretation to make sense of the results, since there"
+  },
+  {
+    "start": 473.36,
+    "end": 478.54,
+    "text": " are no labels associated with samples or clusters in a clustering task."
+  },
+  {
+    "start": 478.54,
+    "end": 482.56,
+    "text": " In the next lecture, we will discuss a specific algorithm for cluster analysis."
+  }
+]

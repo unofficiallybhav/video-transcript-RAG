@@ -1,0 +1,482 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.0,
+    "text": " Let's look at how we can use summary statistics to explore data in more detail."
+  },
+  {
+    "start": 6.0,
+    "end": 11.0,
+    "text": " After this video, you will be able to define what a summary statistic is,"
+  },
+  {
+    "start": 11.0,
+    "end": 14.0,
+    "text": " list three common summary statistics,"
+  },
+  {
+    "start": 14.0,
+    "end": 19.0,
+    "text": " explain how summary statistics are useful in exploring data."
+  },
+  {
+    "start": 19.0,
+    "end": 24.0,
+    "text": " Summary statistics are quantities that describe a set of data values."
+  },
+  {
+    "start": 24.0,
+    "end": 29.0,
+    "text": " Summary statistics provide a simple and quick way to summarize a data set."
+  },
+  {
+    "start": 29.0,
+    "end": 32.56,
+    "text": " We will discuss three main categories of summary statistics."
+  },
+  {
+    "start": 33.24,
+    "end": 38.72,
+    "text": " Measures of location or centrality, measures of spread, and measures of shape."
+  },
+  {
+    "start": 40.2,
+    "end": 46.78,
+    "text": " Measures of location are summary statistics that describe the central or typical value in your data set."
+  },
+  {
+    "start": 47.519999999999996,
+    "end": 51.78,
+    "text": " These statistics give a sense of the middle or center of the data set."
+  },
+  {
+    "start": 52.58,
+    "end": 56.0,
+    "text": " Examples of these are mean, median, and mode."
+  },
+  {
+    "start": 56.0,
+    "end": 60.7,
+    "text": " The mean is just the average of the values in a data set."
+  },
+  {
+    "start": 60.7,
+    "end": 65.9,
+    "text": " The median is the value in the middle if you sorted the values in your data set."
+  },
+  {
+    "start": 65.9,
+    "end": 70.8,
+    "text": " In a sorted list, half of the values will be less than the median, and half will be"
+  },
+  {
+    "start": 70.8,
+    "end": 73.2,
+    "text": " greater than the median."
+  },
+  {
+    "start": 73.2,
+    "end": 79.6,
+    "text": " If the number of data values is even, then the median is the mean of the two middle values."
+  },
+  {
+    "start": 79.6,
+    "end": 85.64,
+    "text": " The mode is the value that is repeated more often than any other value."
+  },
+  {
+    "start": 85.64,
+    "end": 93.14,
+    "text": " In this example, we have a data set with 10 values. For this data set, the mean is 51.1,"
+  },
+  {
+    "start": 93.14,
+    "end": 100.1,
+    "text": " which is the number of all the values divided by 10. The median is 46. If you sort these"
+  },
+  {
+    "start": 100.1,
+    "end": 108.02,
+    "text": " numbers, the middle numbers are 42 and 50. The average of these two numbers is 46. There"
+  },
+  {
+    "start": 108.02,
+    "end": 114.48,
+    "text": " are two modes for this data set, 42 and 78, since each occurs twice, more than any other"
+  },
+  {
+    "start": 114.48,
+    "end": 117.7,
+    "text": " value in the dataset."
+  },
+  {
+    "start": 117.7,
+    "end": 122.86,
+    "text": " Measures of spread describe how dispersed or varied your dataset is."
+  },
+  {
+    "start": 122.86,
+    "end": 130.74,
+    "text": " Common measures of spread are minimum, maximum, range, standard deviation, and variance."
+  },
+  {
+    "start": 130.74,
+    "end": 136.7,
+    "text": " Minimum and maximum are, of course, the smallest and largest values in your dataset, respectively."
+  },
+  {
+    "start": 136.7,
+    "end": 141.54000000000002,
+    "text": " The range is simply the difference between the maximum and minimum, and tells you how"
+  },
+  {
+    "start": 141.54000000000002,
+    "end": 144.16,
+    "text": " spread out your data is."
+  },
+  {
+    "start": 144.16,
+    "end": 149.48,
+    "text": " Standard deviation describes the amount of variation in your dataset. A low standard"
+  },
+  {
+    "start": 149.48,
+    "end": 154.64,
+    "text": " deviation value means that the samples in your dataset tend to be close to the mean,"
+  },
+  {
+    "start": 154.64,
+    "end": 159.44,
+    "text": " and a high standard deviation value means that the data samples are spread out. Variance"
+  },
+  {
+    "start": 159.44,
+    "end": 164.96,
+    "text": " is closely related to standard deviation. In fact, the variance is the square of the"
+  },
+  {
+    "start": 164.96,
+    "end": 171.88,
+    "text": " standard deviation, so it also indicates how spread out the data samples are from the mean."
+  },
+  {
+    "start": 171.88,
+    "end": 177.26,
+    "text": " For the same dataset, the range is 66, which is the difference between the largest number,"
+  },
+  {
+    "start": 177.26,
+    "end": 181.92,
+    "text": " which is 87, and the smallest number, which is 21."
+  },
+  {
+    "start": 181.92,
+    "end": 185.92,
+    "text": " The variance is 548.767."
+  },
+  {
+    "start": 185.92,
+    "end": 189.78,
+    "text": " You can calculate this using a calculator or a spreadsheet."
+  },
+  {
+    "start": 189.78,
+    "end": 196.94,
+    "text": " And the standard deviation is 23.426, which is the square root of the variance."
+  },
+  {
+    "start": 196.94,
+    "end": 201.74,
+    "text": " Measures of shape describe the shape of the distribution of a set of values."
+  },
+  {
+    "start": 201.74,
+    "end": 207.98000000000002,
+    "text": " measures of shape are skewness and kurtosis. Skewness indicates whether the data values"
+  },
+  {
+    "start": 207.98000000000002,
+    "end": 214.18,
+    "text": " are asymmetrically distributed. A skewness value of around zero indicates that the data"
+  },
+  {
+    "start": 214.18,
+    "end": 219.88,
+    "text": " distribution is approximately normal, as shown in the middle figure in the top diagram. A"
+  },
+  {
+    "start": 219.88,
+    "end": 224.84,
+    "text": " negative skewness value indicates that the distribution is skewed to the left, as indicated"
+  },
+  {
+    "start": 224.84,
+    "end": 230.64000000000001,
+    "text": " in the left figure in the top diagram. A positive skewness value, on the other hand, indicates"
+  },
+  {
+    "start": 230.64000000000001,
+    "end": 234.3,
+    "text": " that the data distribution is skewed to the right."
+  },
+  {
+    "start": 234.3,
+    "end": 240.02,
+    "text": " Kurtosis measures the tailedness of the data distribution, or how heavy or fat the tails"
+  },
+  {
+    "start": 240.02,
+    "end": 242.04000000000002,
+    "text": " of the distribution are."
+  },
+  {
+    "start": 242.04000000000002,
+    "end": 247.70000000000002,
+    "text": " A high kurtosis value describes a distribution with longer and fatter tails and a higher"
+  },
+  {
+    "start": 247.70000000000002,
+    "end": 252.36,
+    "text": " and sharper central peak, indicating the presence of outliers."
+  },
+  {
+    "start": 252.36,
+    "end": 258.88,
+    "text": " A low kurtosis value, on the other hand, describes a distribution with shorter and lighter tails"
+  },
+  {
+    "start": 258.88,
+    "end": 265.12,
+    "text": " and lower and broader central peak, suggesting the lack of outliers."
+  },
+  {
+    "start": 265.12,
+    "end": 271.76,
+    "text": " In our age example, the skewness is about 0.3, indicating a slight positive skew, and"
+  },
+  {
+    "start": 271.76,
+    "end": 277.82,
+    "text": " the kurtosis is negative 1.2, indicating a distribution with a low and broad central"
+  },
+  {
+    "start": 277.82,
+    "end": 281.32,
+    "text": " peak and shorter and lighter tails."
+  },
+  {
+    "start": 281.32,
+    "end": 286.32,
+    "text": " Measures of dependence determine if any relationship exists between variables."
+  },
+  {
+    "start": 286.32,
+    "end": 290.88,
+    "text": " Pairwise correlation is a commonly used measure of dependence."
+  },
+  {
+    "start": 290.88,
+    "end": 295.56,
+    "text": " This is a table that shows pairwise correlation for a set of variables."
+  },
+  {
+    "start": 295.56,
+    "end": 299.88,
+    "text": " Note that correlation applies only to numerical variables."
+  },
+  {
+    "start": 299.88,
+    "end": 307.7,
+    "text": " Correlation is between 0 and 1, with 0 indicating no correlation and 1 indicating a 1 to 1 correlation."
+  },
+  {
+    "start": 307.7,
+    "end": 313.4,
+    "text": " So a correlation of 0.89 is very strong, and this is expected since a person's height"
+  },
+  {
+    "start": 313.40000000000003,
+    "end": 316.76000000000005,
+    "text": " and weight should be very correlated."
+  },
+  {
+    "start": 316.76000000000005,
+    "end": 321.44000000000005,
+    "text": " The summary statistics we just covered are useful for numerical variables."
+  },
+  {
+    "start": 321.44000000000005,
+    "end": 325.72,
+    "text": " For categorical variables, we want to look at statistics that describe the number of"
+  },
+  {
+    "start": 325.72,
+    "end": 329.32000000000005,
+    "text": " categories and the frequency of each category."
+  },
+  {
+    "start": 329.32000000000005,
+    "end": 332.88000000000005,
+    "text": " This is done using a contingency table."
+  },
+  {
+    "start": 332.88000000000005,
+    "end": 337.12,
+    "text": " Here's an example that shows a distribution of people's pets and their colors."
+  },
+  {
+    "start": 337.12,
+    "end": 341.84000000000003,
+    "text": " We can see the most common pet is a dog, and least common is a fish."
+  },
+  {
+    "start": 341.84000000000003,
+    "end": 346.74,
+    "text": " Similarly, black is the most common color and orange the least common."
+  },
+  {
+    "start": 346.74,
+    "end": 351.22,
+    "text": " The contingency table also shows the distribution between the categories."
+  },
+  {
+    "start": 351.22,
+    "end": 356.72,
+    "text": " For example, only fish are orange, while most of the brown pets are dogs."
+  },
+  {
+    "start": 356.72,
+    "end": 361.36,
+    "text": " In addition to looking at the traditional summary statistics for numerical variables"
+  },
+  {
+    "start": 361.36,
+    "end": 366.94000000000005,
+    "text": " and category count for categorical variables, for machine learning problems we also want"
+  },
+  {
+    "start": 366.94000000000005,
+    "end": 371.76000000000005,
+    "text": " to examine some additional statistics to quickly validate the data."
+  },
+  {
+    "start": 371.76,
+    "end": 376.21999999999997,
+    "text": " One of the first things to check is the number of rows and the number of columns in your"
+  },
+  {
+    "start": 376.21999999999997,
+    "end": 377.7,
+    "text": " data set."
+  },
+  {
+    "start": 377.7,
+    "end": 381.09999999999997,
+    "text": " Does the number of rows match the expected number of samples?"
+  },
+  {
+    "start": 381.09999999999997,
+    "end": 385.12,
+    "text": " Does the number of columns match the expected number of variables?"
+  },
+  {
+    "start": 385.12,
+    "end": 388.65999999999997,
+    "text": " These should be very quick and easy checks."
+  },
+  {
+    "start": 388.65999999999997,
+    "end": 393.68,
+    "text": " Another easy data validation check is to look at the values in the first and last few samples"
+  },
+  {
+    "start": 393.68,
+    "end": 397.48,
+    "text": " in your data set to see if they're reasonable."
+  },
+  {
+    "start": 397.48,
+    "end": 403.16,
+    "text": " For example, do the temperature values look to be in the right units of measure?"
+  },
+  {
+    "start": 403.16,
+    "end": 408.42,
+    "text": " Do the values for rainfall look correct, or are there some values that look out of place?"
+  },
+  {
+    "start": 408.42,
+    "end": 410.78000000000003,
+    "text": " Are the data types for your variables correct?"
+  },
+  {
+    "start": 410.78000000000003,
+    "end": 415.12,
+    "text": " For example, is the date field captured as date or timestamp?"
+  },
+  {
+    "start": 415.12,
+    "end": 418.88,
+    "text": " Or is it captured as a string or numerical value?"
+  },
+  {
+    "start": 418.88,
+    "end": 423.36,
+    "text": " These will have consequences in how this field should be processed."
+  },
+  {
+    "start": 423.36,
+    "end": 426.5,
+    "text": " Another important step is to check for missing values."
+  },
+  {
+    "start": 426.5,
+    "end": 430.22,
+    "text": " You need to determine the number of samples with missing values."
+  },
+  {
+    "start": 430.22,
+    "end": 435.02,
+    "text": " You also need to determine if there are any variables with a high percentage of missing"
+  },
+  {
+    "start": 435.02,
+    "end": 436.32,
+    "text": " values."
+  },
+  {
+    "start": 436.32,
+    "end": 440.3,
+    "text": " Handling missing values is a very important step in data preparation, which we will cover"
+  },
+  {
+    "start": 440.3,
+    "end": 442.1,
+    "text": " in the next module."
+  },
+  {
+    "start": 442.1,
+    "end": 446.12,
+    "text": " Having this information will be very helpful in determining how missing values should be"
+  },
+  {
+    "start": 446.12,
+    "end": 449.26,
+    "text": " handled in data preparation."
+  },
+  {
+    "start": 449.26,
+    "end": 454.66,
+    "text": " We covered several types of summary statistics useful for exploring data in machine learning."
+  },
+  {
+    "start": 454.66,
+    "end": 459.28000000000003,
+    "text": " These statistics provide useful information about your dataset and should be thoroughly"
+  },
+  {
+    "start": 459.28000000000003,
+    "end": 462.54,
+    "text": " examined if you want to get a better understanding of your data."
+  }
+]

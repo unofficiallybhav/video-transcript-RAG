@@ -1,0 +1,110 @@
+[
+  {
+    "id": "C-transformer",
+    "tier": "C",
+    "course": "",
+    "question": "What is the transformer architecture and what is multi-head attention?",
+    "answer": "",
+    "absent_terms": ["transformer", "multi-head"],
+    "hands_on": false
+  },
+  {
+    "id": "C-sql-window",
+    "tier": "C",
+    "course": "",
+    "question": "How do SQL window functions work, and what does PARTITION BY do?",
+    "answer": "",
+    "absent_terms": ["window function", "partition by"],
+    "hands_on": false
+  },
+  {
+    "id": "C-kubernetes",
+    "tier": "C",
+    "course": "",
+    "question": "What is Kubernetes used for when deploying applications?",
+    "answer": "",
+    "absent_terms": ["kubernetes"],
+    "hands_on": false
+  },
+  {
+    "id": "C-bert",
+    "tier": "C",
+    "course": "",
+    "question": "How are BERT embeddings produced and what are they used for?",
+    "answer": "",
+    "absent_terms": ["bert"],
+    "hands_on": false
+  },
+  {
+    "id": "C-graphql",
+    "tier": "C",
+    "course": "",
+    "question": "What is GraphQL and how does it differ from a REST API?",
+    "answer": "",
+    "absent_terms": ["graphql"],
+    "hands_on": false
+  },
+  {
+    "id": "C-flexbox",
+    "tier": "C",
+    "course": "",
+    "question": "How do you centre an element on a page using CSS flexbox?",
+    "answer": "",
+    "absent_terms": ["flexbox"],
+    "hands_on": false
+  },
+  {
+    "id": "C-quantum",
+    "tier": "C",
+    "course": "",
+    "question": "What is a qubit and how does quantum computing differ from classical computing?",
+    "answer": "",
+    "absent_terms": ["qubit", "quantum"],
+    "hands_on": false
+  },
+  {
+    "id": "C-lora",
+    "tier": "C",
+    "course": "",
+    "question": "How does LoRA fine-tuning of a language model work?",
+    "answer": "",
+    "absent_terms": ["lora", "fine-tun"],
+    "hands_on": false
+  },
+  {
+    "id": "C-cap-theorem",
+    "tier": "C",
+    "course": "",
+    "question": "What does the CAP theorem say about distributed systems?",
+    "answer": "",
+    "absent_terms": ["cap theorem"],
+    "hands_on": false
+  },
+  {
+    "id": "C-tcp-udp",
+    "tier": "C",
+    "course": "",
+    "question": "What is the difference between the TCP and UDP protocols?",
+    "answer": "",
+    "absent_terms": ["tcp", "udp"],
+    "hands_on": false
+  },
+  {
+    "id": "C-cnn",
+    "tier": "C",
+    "course": "",
+    "question": "How does a convolutional neural network process an image?",
+    "answer": "",
+    "absent_terms": ["convolution"],
+    "hands_on": false
+  },
+  {
+    "id": "C-kalman",
+    "tier": "C",
+    "course": "",
+    "question": "What is a Kalman filter and where is it used?",
+    "answer": "",
+    "absent_terms": ["kalman"],
+    "hands_on": false
+  }
+]

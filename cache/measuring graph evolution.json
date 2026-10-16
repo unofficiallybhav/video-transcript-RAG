@@ -1,0 +1,192 @@
+[
+  {
+    "start": 0.0,
+    "end": 12.120000000000001,
+    "text": " We saw how a community in a graph can evolve. To track the nature of evolution, we need"
+  },
+  {
+    "start": 12.120000000000001,
+    "end": 20.32,
+    "text": " to measure how the community changes over time. So here are three cases, one, two, and"
+  },
+  {
+    "start": 20.32,
+    "end": 26.48,
+    "text": " three, of a community changing between two observation points. The goal is to figure"
+  },
+  {
+    "start": 26.48,
+    "end": 32.2,
+    "text": " out whether these are normal fluctuations in the network or a more drastic change is"
+  },
+  {
+    "start": 32.2,
+    "end": 39.84,
+    "text": " occurring. Look at them for a second. Just visually, the first case seems to show just"
+  },
+  {
+    "start": 39.84,
+    "end": 50.78,
+    "text": " minor changes, whereas case 2 shows a merger and case 3 shows a split. Now, to come up"
+  },
+  {
+    "start": 50.78,
+    "end": 56.22,
+    "text": " with a quantitative measure of change over time, we need to take two observations from"
+  },
+  {
+    "start": 56.22,
+    "end": 60.379999999999995,
+    "text": " two consecutive time points and fuse the graph."
+  },
+  {
+    "start": 60.379999999999995,
+    "end": 66.94,
+    "text": " If you do it for case one, you will find one new node, one leaving node, and the rest"
+  },
+  {
+    "start": 66.94,
+    "end": 69.34,
+    "text": " are common over time."
+  },
+  {
+    "start": 69.34,
+    "end": 76.24,
+    "text": " For case two, you will see that two previous communities colored differently are internally"
+  },
+  {
+    "start": 76.24,
+    "end": 82.03999999999999,
+    "text": " connected the same way as before, but some members of the two communities have created"
+  },
+  {
+    "start": 82.03999999999999,
+    "end": 84.6,
+    "text": " new cross-links."
+  },
+  {
+    "start": 86.22,
+    "end": 95.44,
+    "text": " 3? Well, I see one joint node, colored purple. Apart from it, there are just two edges connecting"
+  },
+  {
+    "start": 95.44,
+    "end": 102.96000000000001,
+    "text": " the two groups. Now, with these observations, we can now compute the autocorrelation between"
+  },
+  {
+    "start": 102.96000000000001,
+    "end": 110.42,
+    "text": " the graphs across time t and t plus 1. This is just a measure of the number of common"
+  },
+  {
+    "start": 110.42,
+    "end": 115.52,
+    "text": " nodes divided by the number of nodes in the combined graph."
+  },
+  {
+    "start": 115.52,
+    "end": 119.62,
+    "text": " If a community does not change at all, this number is 1."
+  },
+  {
+    "start": 119.62,
+    "end": 124.5,
+    "text": " If a community has only a few connections, the number is lower."
+  },
+  {
+    "start": 124.5,
+    "end": 132.74,
+    "text": " After computing autocorrelation over every pair of time steps, we can then compute stationarity,"
+  },
+  {
+    "start": 132.74,
+    "end": 138.24,
+    "text": " which measures the overall change in the autocorrelation over a period of time."
+  },
+  {
+    "start": 138.24,
+    "end": 145.70000000000002,
+    "text": " So if we measure over 100 timesteps, we will add the 99 correlation values from the steps"
+  },
+  {
+    "start": 145.70000000000002,
+    "end": 148.04000000000002,
+    "text": " and then divide it by 99."
+  },
+  {
+    "start": 148.04000000000002,
+    "end": 153.3,
+    "text": " This will tell us what fraction of members remain unchanged on an average over these"
+  },
+  {
+    "start": 153.3,
+    "end": 155.8,
+    "text": " 100 timestamps."
+  },
+  {
+    "start": 155.8,
+    "end": 164.64000000000001,
+    "text": " Therefore the 1 minus zeta tells us the average ratio of members that have changed in a timestep."
+  },
+  {
+    "start": 164.64000000000001,
+    "end": 167.3,
+    "text": " Let's take three cases."
+  },
+  {
+    "start": 167.3,
+    "end": 172.74,
+    "text": " In the first plot, the size of the graph is small, and nothing much is happening here."
+  },
+  {
+    "start": 172.74,
+    "end": 179.38000000000002,
+    "text": " A node occasionally joins or leaves, keeping the stationarity pretty flat."
+  },
+  {
+    "start": 179.38000000000002,
+    "end": 185.34,
+    "text": " In the second case, the graph is small, but there are a lot of changes, especially at"
+  },
+  {
+    "start": 185.34,
+    "end": 186.78,
+    "text": " time step 7."
+  },
+  {
+    "start": 186.78,
+    "end": 191.72000000000003,
+    "text": " A whole bunch of purple nodes have joined, and then they went away."
+  },
+  {
+    "start": 191.72,
+    "end": 197.35999999999999,
+    "text": " The size of the graph clearly reflects this with a purple spike that you see on the size"
+  },
+  {
+    "start": 197.35999999999999,
+    "end": 201.26,
+    "text": " versus the time graph."
+  },
+  {
+    "start": 201.26,
+    "end": 205.64,
+    "text": " This spike on the time series, by the way, is called a burst."
+  },
+  {
+    "start": 205.64,
+    "end": 211.66,
+    "text": " The third plot shows a large graph with many nodes joining and leaving."
+  },
+  {
+    "start": 211.66,
+    "end": 217.34,
+    "text": " The stationarity of this graph will be quite low given the abrupt changes we observe over"
+  },
+  {
+    "start": 217.34,
+    "end": 218.34,
+    "text": " time."
+  }
+]

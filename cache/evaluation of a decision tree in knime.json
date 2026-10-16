@@ -1,0 +1,232 @@
+[
+  {
+    "start": 0.0,
+    "end": 7.0,
+    "text": " In this activity, we are going to evaluate the decision tree that we created in the previous activity using KNIME."
+  },
+  {
+    "start": 7.0,
+    "end": 13.0,
+    "text": " In this activity, we will first create and interpret a confusion matrix for a decision tree,"
+  },
+  {
+    "start": 13.0,
+    "end": 17.0,
+    "text": " then we will determine the accuracy rate of a decision tree model,"
+  },
+  {
+    "start": 17.0,
+    "end": 22.0,
+    "text": " and finally, we will use highlighting to analyze classification errors."
+  },
+  {
+    "start": 22.0,
+    "end": 30.439999999999998,
+    "text": " In the previous activity, we made this workflow to train a decision tree and predict whether"
+  },
+  {
+    "start": 30.439999999999998,
+    "end": 33.94,
+    "text": " they had humidity low or not low."
+  },
+  {
+    "start": 33.94,
+    "end": 35.94,
+    "text": " Now we're going to evaluate it."
+  },
+  {
+    "start": 35.94,
+    "end": 41.5,
+    "text": " The first thing that we do is that we go to the nodes repository and search for the escorter"
+  },
+  {
+    "start": 41.5,
+    "end": 44.78,
+    "text": " that we include into the workflow."
+  },
+  {
+    "start": 44.78,
+    "end": 50.66,
+    "text": " We connect it to the decision tree predictor and I'm going to open it to make sure that"
+  },
+  {
+    "start": 50.660000000000004,
+    "end": 58.580000000000005,
+    "text": " my columns the original one and the prediction are set up. I click on OK and I run it to get"
+  },
+  {
+    "start": 58.580000000000005,
+    "end": 65.78,
+    "text": " the confusion matrix. I can see it in the bottom but I will open it in a window to get more details"
+  },
+  {
+    "start": 66.5,
+    "end": 73.86,
+    "text": " and what I see is that I had 79 observations correctly predicted for humidity low, 89 correctly"
+  },
+  {
+    "start": 73.86,
+    "end": 82.5,
+    "text": " rated for humidity not low, which gives us an accuracy of 79% and 168 correctly classified"
+  },
+  {
+    "start": 82.5,
+    "end": 90.42,
+    "text": " observations. 24 were classified as humidity low incorrectly, 21 as humidity not low incorrectly,"
+  },
+  {
+    "start": 90.42,
+    "end": 95.38,
+    "text": " so this gives us 45 errors and an error rate of 21%."
+  },
+  {
+    "start": 95.38,
+    "end": 106.1,
+    "text": " percent. For this new analysis, I'm going to search for a new node. I go to the node repository"
+  },
+  {
+    "start": 106.1,
+    "end": 113.06,
+    "text": " and search for interactive table. So I'm going to drag this one that says legacy and connect"
+  },
+  {
+    "start": 113.06,
+    "end": 121.38,
+    "text": " it to the decision tree predictor. Now I'm going to run it and I'm going to open it."
+  },
+  {
+    "start": 121.38,
+    "end": 129.9,
+    "text": " And what we see here is a table that has all of the rows that were used in the testing data,"
+  },
+  {
+    "start": 129.9,
+    "end": 136.38,
+    "text": " and if we go to the right of the table, we will see the low humidity day variable that we built,"
+  },
+  {
+    "start": 136.38,
+    "end": 144.66,
+    "text": " along with the prediction that we got from our decision tree classifier. So now I'm going to"
+  },
+  {
+    "start": 144.66,
+    "end": 152.1,
+    "text": " close this window and the next thing I do is that I'm going to search for a"
+  },
+  {
+    "start": 152.1,
+    "end": 156.66,
+    "text": " scatter plot. I'm going to place it into my workflow and connect it to the"
+  },
+  {
+    "start": 156.66,
+    "end": 161.82,
+    "text": " decision tree predictor and what I'm going to do is I'm going to configure it"
+  },
+  {
+    "start": 161.82,
+    "end": 168.06,
+    "text": " to have on the horizontal dimension I will select the air pressure at 9 a.m."
+  },
+  {
+    "start": 168.06,
+    "end": 172.2,
+    "text": " and in the vertical dimension I will select the air temperature at 9 a.m."
+  },
+  {
+    "start": 172.20000000000002,
+    "end": 177.00000000000003,
+    "text": " because these were the two variables that were the most relevant for my"
+  },
+  {
+    "start": 177.00000000000003,
+    "end": 184.20000000000002,
+    "text": " decision tree. Then I will select the low humidity day as the color dimension and"
+  },
+  {
+    "start": 184.20000000000002,
+    "end": 193.54000000000002,
+    "text": " I will choose to use domain bounds as the access limits. So I'm going to run it"
+  },
+  {
+    "start": 193.54000000000002,
+    "end": 199.44000000000003,
+    "text": " and then open it along with my interactive table. And now I have both of"
+  },
+  {
+    "start": 199.44,
+    "end": 204.88,
+    "text": " my windows open. On one side I have my interactive table and on the other I have my scatter plot."
+  },
+  {
+    "start": 204.88,
+    "end": 209.04,
+    "text": " Remember that the labels at the bottom are the labels representing the original categorical"
+  },
+  {
+    "start": 209.04,
+    "end": 215.52,
+    "text": " variable and not the prediction. So let's go to the interactive table and we are going to select"
+  },
+  {
+    "start": 215.52,
+    "end": 221.28,
+    "text": " five observations like this one in which the prediction was not correct. So I know that 10"
+  },
+  {
+    "start": 221.28,
+    "end": 235.2,
+    "text": " is one case, also 17. It's the same case for 105, 120, and 124. And I'm going to go to the top menu"
+  },
+  {
+    "start": 235.2,
+    "end": 242.36,
+    "text": " and select the highlight window and click on highlight selected. And this is going to turn"
+  },
+  {
+    "start": 242.36,
+    "end": 248.56,
+    "text": " these observations into yellow. Now let's take a look for example on this one. This one as we see"
+  },
+  {
+    "start": 248.56,
+    "end": 255.78,
+    "text": " the right value is humidity not low, and the prediction was humidity low, as we can see here"
+  },
+  {
+    "start": 255.78,
+    "end": 262.94,
+    "text": " at the bottom. But if we take a look at it, this might be a big mistake by the model because this"
+  },
+  {
+    "start": 262.94,
+    "end": 268.62,
+    "text": " observation is clearly in a red cluster, along with other observations. Then we have other cases"
+  },
+  {
+    "start": 268.62,
+    "end": 275.12,
+    "text": " like this one, in which the right label is humidity not low, but it was predicted to be humidity low,"
+  },
+  {
+    "start": 275.12,
+    "end": 281.1,
+    "text": " and this kind of makes sense because it's also concentrated in what it seems to be a green cluster."
+  },
+  {
+    "start": 283.16,
+    "end": 288.1,
+    "text": " And then we have other observations like the ones that we have here in the middle of the scatter plot"
+  },
+  {
+    "start": 288.1,
+    "end": 290.76,
+    "text": " in which it's really, really hard to make a prediction."
+  },
+  {
+    "start": 291.92,
+    "end": 293.84000000000003,
+    "text": " And this is how we conclude this activity."
+  }
+]

@@ -1,0 +1,572 @@
+[
+  {
+    "start": 0.98,
+    "end": 3.3200000000000003,
+    "text": " Visualizing your data is a very effective way"
+  },
+  {
+    "start": 3.3200000000000003,
+    "end": 4.96,
+    "text": " to explore your data."
+  },
+  {
+    "start": 4.96,
+    "end": 7.16,
+    "text": " We'll look at different ways to visualize your data"
+  },
+  {
+    "start": 7.16,
+    "end": 8.68,
+    "text": " in this lecture."
+  },
+  {
+    "start": 8.68,
+    "end": 11.68,
+    "text": " After this video, you will be able to"
+  },
+  {
+    "start": 11.68,
+    "end": 15.08,
+    "text": " discuss how plots can be useful in exploring data,"
+  },
+  {
+    "start": 15.08,
+    "end": 17.76,
+    "text": " describe how you would use a scatter plot,"
+  },
+  {
+    "start": 17.76,
+    "end": 19.8,
+    "text": " and summarize what a box plot shows."
+  },
+  {
+    "start": 20.76,
+    "end": 24.28,
+    "text": " Visualizing data, that is, looking at data graphically,"
+  },
+  {
+    "start": 24.28,
+    "end": 26.72,
+    "text": " is a great way to explore your data set."
+  },
+  {
+    "start": 26.72,
+    "end": 28.88,
+    "text": " Data visualization is a nice complement"
+  },
+  {
+    "start": 28.88,
+    "end": 33.92,
+    "text": " using summary statistics for exploring data. We will cover several ways to visualize your"
+  },
+  {
+    "start": 33.92,
+    "end": 38.8,
+    "text": " data in this lecture. There are several types of plots that you can use to visualize your"
+  },
+  {
+    "start": 38.8,
+    "end": 47.4,
+    "text": " data. We will go over histogram, line plot, scatter plot, bar plot, and box plot. These"
+  },
+  {
+    "start": 47.4,
+    "end": 52.84,
+    "text": " are the most commonly used plots, but there are many others as well. A histogram is used"
+  },
+  {
+    "start": 52.84,
+    "end": 58.099999999999994,
+    "text": " to display the distribution of a variable. The range of values for the variable is divided"
+  },
+  {
+    "start": 58.1,
+    "end": 63.6,
+    "text": " into the number of bins, and the number of values that fall into each bin is counted,"
+  },
+  {
+    "start": 63.6,
+    "end": 67.28,
+    "text": " which determines the height of each bin."
+  },
+  {
+    "start": 67.28,
+    "end": 71.42,
+    "text": " A histogram can reveal many things about a variable in your data."
+  },
+  {
+    "start": 71.42,
+    "end": 76.74000000000001,
+    "text": " For example, you can usually determine the central tendency of the variable, that is,"
+  },
+  {
+    "start": 76.74000000000001,
+    "end": 79.02000000000001,
+    "text": " where the majority of the values lie."
+  },
+  {
+    "start": 79.02000000000001,
+    "end": 83.14,
+    "text": " You can also see the most frequent value of values for that variable."
+  },
+  {
+    "start": 83.14,
+    "end": 88.02,
+    "text": " A histogram also shows whether the values for that variable are skewed, and whether"
+  },
+  {
+    "start": 88.02,
+    "end": 93.84,
+    "text": " the skewness is to the left towards smaller values or to the right towards larger values."
+  },
+  {
+    "start": 93.84,
+    "end": 98.68,
+    "text": " You can also pick out outliers in a histogram, as shown on the bottom plot."
+  },
+  {
+    "start": 98.68,
+    "end": 102.44,
+    "text": " A line plot shows how data values change over time."
+  },
+  {
+    "start": 102.44,
+    "end": 107.78,
+    "text": " The values of a variable or variables are shown on the y-axis, and the x-axis shows"
+  },
+  {
+    "start": 107.78,
+    "end": 109.76,
+    "text": " some notion of time."
+  },
+  {
+    "start": 109.76,
+    "end": 113.94,
+    "text": " The resulting line displays the data values over time."
+  },
+  {
+    "start": 113.94,
+    "end": 117.78,
+    "text": " A line plot can show patterns in your variables."
+  },
+  {
+    "start": 117.78,
+    "end": 124.82000000000001,
+    "text": " For example, a cyclical pattern can be detected, as in this plot, where the values start high,"
+  },
+  {
+    "start": 124.82000000000001,
+    "end": 128.08,
+    "text": " then decrease and go back up again."
+  },
+  {
+    "start": 128.08,
+    "end": 133.94,
+    "text": " Trends can also be detected, as shown in the upper right plot, where the values fluctuate"
+  },
+  {
+    "start": 133.94,
+    "end": 136.76,
+    "text": " but show a general upward trend over time."
+  },
+  {
+    "start": 136.76,
+    "end": 143.04,
+    "text": " It is also easy to compare how multiple variables change over time on a single line plot as"
+  },
+  {
+    "start": 143.04,
+    "end": 146.39999999999998,
+    "text": " displayed in the center bottom plot."
+  },
+  {
+    "start": 146.39999999999998,
+    "end": 151.44,
+    "text": " A scatter plot is a great way to visualize the relationship between two variables."
+  },
+  {
+    "start": 151.44,
+    "end": 156.78,
+    "text": " One variable is on the x-axis, the other variable is on the y-axis."
+  },
+  {
+    "start": 156.78,
+    "end": 162.0,
+    "text": " Each sample is plotted using the values of the two variables as x and y coordinates."
+  },
+  {
+    "start": 162.0,
+    "end": 168.66,
+    "text": " resulting plot shows how one variable changes as the other is changed. A scatter plot can"
+  },
+  {
+    "start": 168.66,
+    "end": 173.7,
+    "text": " be used to display the correlation between two variables. For example, two variables"
+  },
+  {
+    "start": 173.7,
+    "end": 177.5,
+    "text": " such as the high temperature of the day and the low temperature of the day can have a"
+  },
+  {
+    "start": 177.5,
+    "end": 183.42000000000002,
+    "text": " positive correlation as shown in this plot. A positive correlation means that as the value"
+  },
+  {
+    "start": 183.42000000000002,
+    "end": 188.84,
+    "text": " of one variable increases, the value of the other variable also increases by a similar"
+  },
+  {
+    "start": 188.84,
+    "end": 195.08,
+    "text": " amount. The upper right scatterplot shows a negative correlation between two variables."
+  },
+  {
+    "start": 195.08,
+    "end": 200.12,
+    "text": " This means that as the value of one variable increases, there is a corresponding decrease"
+  },
+  {
+    "start": 200.12,
+    "end": 205.68,
+    "text": " in the other variable. Two variables can also have a nonlinear correlation as shown in the"
+  },
+  {
+    "start": 205.68,
+    "end": 211.0,
+    "text": " lower left plot. This means that a change in one variable would not always correspond"
+  },
+  {
+    "start": 211.0,
+    "end": 215.94,
+    "text": " to the same change in the other variable. This is indicated by the curve in the scatterplot"
+  },
+  {
+    "start": 215.94,
+    "end": 220.76,
+    "text": " as opposed to something closer to a straight line for linear correlation."
+  },
+  {
+    "start": 220.76,
+    "end": 223.84,
+    "text": " There can also be no correlation between two variables."
+  },
+  {
+    "start": 223.84,
+    "end": 227.74,
+    "text": " In this case, you will see something like randomly placed dots as displayed in the lower"
+  },
+  {
+    "start": 227.74,
+    "end": 232.64,
+    "text": " right plot, indicating no relationship between how the two variables change with respect"
+  },
+  {
+    "start": 232.64,
+    "end": 234.44,
+    "text": " to each other."
+  },
+  {
+    "start": 234.44,
+    "end": 238.94,
+    "text": " A bar plot is used to show the distribution of categorical variables."
+  },
+  {
+    "start": 238.94,
+    "end": 244.42,
+    "text": " Recall that a histogram is also used to look at the distribution of the values of a variable."
+  },
+  {
+    "start": 244.42000000000002,
+    "end": 249.60000000000002,
+    "text": " The difference is that, in general, a histogram is used for numeric variables, whereas a bar"
+  },
+  {
+    "start": 249.60000000000002,
+    "end": 252.98000000000002,
+    "text": " plot is used for categorical variables."
+  },
+  {
+    "start": 252.98000000000002,
+    "end": 257.92,
+    "text": " In a bar chart, the different categories of a categorical variable is shown along the"
+  },
+  {
+    "start": 257.92,
+    "end": 263.90000000000003,
+    "text": " x-axis, and the count of instances for each category is displayed on the y-axis."
+  },
+  {
+    "start": 263.90000000000003,
+    "end": 267.64,
+    "text": " This is an effective way to compare the different categories."
+  },
+  {
+    "start": 267.64,
+    "end": 272.04,
+    "text": " For example, the most frequent category can be easily determined."
+  },
+  {
+    "start": 272.04,
+    "end": 276.8,
+    "text": " A bar plot is also a great way to compare two categorical variables."
+  },
+  {
+    "start": 276.8,
+    "end": 282.72,
+    "text": " For example, this plot compares two categorical variables, one in blue and the other in orange,"
+  },
+  {
+    "start": 282.72,
+    "end": 285.28000000000003,
+    "text": " each with three different categories."
+  },
+  {
+    "start": 285.28000000000003,
+    "end": 289.94,
+    "text": " Here you can see that for the first category, the blue variable has a higher count, while"
+  },
+  {
+    "start": 289.94,
+    "end": 294.88,
+    "text": " the orange variable has a higher count for the second and third categories."
+  },
+  {
+    "start": 294.88,
+    "end": 298.98,
+    "text": " This type of bar plot is called a grouped bar chart, and the different variables are"
+  },
+  {
+    "start": 298.98,
+    "end": 301.72,
+    "text": " plotted side by side."
+  },
+  {
+    "start": 301.72,
+    "end": 306.46000000000004,
+    "text": " A different kind of comparison can be performed using a stacked bar chart as seen in the lower"
+  },
+  {
+    "start": 306.46000000000004,
+    "end": 307.46000000000004,
+    "text": " right plot."
+  },
+  {
+    "start": 307.46000000000004,
+    "end": 313.34000000000003,
+    "text": " Here, the counts for the two variables are stacked on top of each other for each category."
+  },
+  {
+    "start": 313.34000000000003,
+    "end": 318.12,
+    "text": " With this bar chart, you can determine that the combined count for the first category"
+  },
+  {
+    "start": 318.12,
+    "end": 322.66,
+    "text": " is about equal to the combined count for the second category, while the combined count"
+  },
+  {
+    "start": 322.66,
+    "end": 326.02000000000004,
+    "text": " for the third category is much larger."
+  },
+  {
+    "start": 326.02000000000004,
+    "end": 331.12,
+    "text": " A box plot is another plot that shows the distribution of a numeric variable."
+  },
+  {
+    "start": 331.12,
+    "end": 335.92,
+    "text": " It shows the distribution in a different format than a histogram, however."
+  },
+  {
+    "start": 335.92,
+    "end": 340.16,
+    "text": " This is how a box plot displays the distribution of values for a variable."
+  },
+  {
+    "start": 340.16,
+    "end": 343.5,
+    "text": " The gray portion in the figure is the box part."
+  },
+  {
+    "start": 343.5,
+    "end": 350.88,
+    "text": " The lower and upper boundaries of the box represent the 25th and 75th percentiles, respectively."
+  },
+  {
+    "start": 350.88,
+    "end": 355.72,
+    "text": " This means that the box represents the middle 50% of the data."
+  },
+  {
+    "start": 355.72,
+    "end": 361.02000000000004,
+    "text": " The median is the 50th percentile, meaning that 50% of the data is greater than this"
+  },
+  {
+    "start": 361.02000000000004,
+    "end": 365.56,
+    "text": " value and 50% of the data is less than this value."
+  },
+  {
+    "start": 365.56,
+    "end": 371.36,
+    "text": " The top and bottom lines are the whiskers and represent the 10th and 90th percentiles"
+  },
+  {
+    "start": 371.36,
+    "end": 372.86,
+    "text": " respectively."
+  },
+  {
+    "start": 372.86,
+    "end": 378.72,
+    "text": " So 80% of the data are in the region indicated by the upper extreme and lower extreme."
+  },
+  {
+    "start": 378.72,
+    "end": 383.32000000000005,
+    "text": " Any data values outside of this region are outliers and are indicated as single points"
+  },
+  {
+    "start": 383.32000000000005,
+    "end": 385.48,
+    "text": " on the box plot."
+  },
+  {
+    "start": 385.48,
+    "end": 389.76,
+    "text": " Note that there are different variations of the boxplot, with the whiskers representing"
+  },
+  {
+    "start": 389.76,
+    "end": 392.64000000000004,
+    "text": " different types of extreme values."
+  },
+  {
+    "start": 392.64000000000004,
+    "end": 397.18,
+    "text": " Boxplots provide a compact way to show how variables are distributed, so they are often"
+  },
+  {
+    "start": 397.18,
+    "end": 399.64000000000004,
+    "text": " used to compare variables."
+  },
+  {
+    "start": 399.64000000000004,
+    "end": 404.58000000000004,
+    "text": " The boxplot on the left, for example, compares the base salary for two different roles."
+  },
+  {
+    "start": 404.58000000000004,
+    "end": 409.26,
+    "text": " This plot can quickly provide information regarding the median value, the range, and"
+  },
+  {
+    "start": 409.26,
+    "end": 411.90000000000003,
+    "text": " the spread of the two different variables."
+  },
+  {
+    "start": 411.90000000000003,
+    "end": 416.48,
+    "text": " We can quickly see that the median salary for the marketing role is higher than the"
+  },
+  {
+    "start": 416.48,
+    "end": 418.12000000000006,
+    "text": " research role."
+  },
+  {
+    "start": 418.12000000000006,
+    "end": 423.02000000000004,
+    "text": " We can also see that the variation or spread of the values for marketing is greater than"
+  },
+  {
+    "start": 423.02000000000004,
+    "end": 427.72,
+    "text": " for research due to the larger area of the purple box."
+  },
+  {
+    "start": 427.72,
+    "end": 432.94000000000005,
+    "text": " A box plot can also show you if the distribution of the data values is symmetrical, positively"
+  },
+  {
+    "start": 432.94000000000005,
+    "end": 435.76000000000005,
+    "text": " skewed, or negatively skewed."
+  },
+  {
+    "start": 435.76000000000005,
+    "end": 439.40000000000003,
+    "text": " Here we see that a box plot can also be displayed on its side."
+  },
+  {
+    "start": 439.40000000000003,
+    "end": 444.62000000000006,
+    "text": " The symmetric distribution is indicated if the line in the box, which specifies the median,"
+  },
+  {
+    "start": 444.62000000000006,
+    "end": 446.96000000000004,
+    "text": " is in the center of the box."
+  },
+  {
+    "start": 446.96000000000004,
+    "end": 452.06000000000006,
+    "text": " A negative skew is indicated when the median is to the right of the center of the box."
+  },
+  {
+    "start": 452.06000000000006,
+    "end": 456.24,
+    "text": " This means that there are more values that are less than the median than there are values"
+  },
+  {
+    "start": 456.24,
+    "end": 457.84000000000003,
+    "text": " greater than the median."
+  },
+  {
+    "start": 457.84000000000003,
+    "end": 462.78000000000003,
+    "text": " Similarly, a positive skew is indicated when the median is to the left of the center of"
+  },
+  {
+    "start": 462.78000000000003,
+    "end": 464.42,
+    "text": " the box."
+  },
+  {
+    "start": 464.42,
+    "end": 470.0,
+    "text": " To summarize, data visualization provides a quick and intuitive way to examine your data."
+  },
+  {
+    "start": 470.0,
+    "end": 473.84000000000003,
+    "text": " Data visualization should be used in conjunction with summary statistics that we discussed"
+  },
+  {
+    "start": 473.84000000000003,
+    "end": 476.40000000000003,
+    "text": " in the last lecture to explore data."
+  },
+  {
+    "start": 476.40000000000003,
+    "end": 479.98,
+    "text": " The different types of plots that we have covered in this lecture will also be very"
+  },
+  {
+    "start": 479.98,
+    "end": 484.1,
+    "text": " helpful in communicating your results throughout your machine learning project."
+  }
+]

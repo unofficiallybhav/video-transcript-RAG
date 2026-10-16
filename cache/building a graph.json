@@ -1,0 +1,442 @@
+[
+  {
+    "start": 0.88,
+    "end": 7.12,
+    "text": " In this activity, we are going to build our first graph using Spark's Graphics library."
+  },
+  {
+    "start": 7.12,
+    "end": 11.36,
+    "text": " This is the first part of a three-part activity."
+  },
+  {
+    "start": 11.36,
+    "end": 16.76,
+    "text": " In this first activity, we are going to build a graph."
+  },
+  {
+    "start": 16.76,
+    "end": 22.1,
+    "text": " All the data that we are using for this activity can be found in the Graphics folder inside"
+  },
+  {
+    "start": 22.1,
+    "end": 26.94,
+    "text": " of the Big Data 5 folder that you might have downloaded from GitHub."
+  },
+  {
+    "start": 26.94,
+    "end": 32.78,
+    "text": " To start, make sure to have docker open in the back, and to open a terminal shell to"
+  },
+  {
+    "start": 32.78,
+    "end": 38.5,
+    "text": " download the docker image that we need to build our container, which is the following."
+  },
+  {
+    "start": 38.5,
+    "end": 46.760000000000005,
+    "text": " So we press enter, and now we are going to start downloading the image."
+  },
+  {
+    "start": 46.760000000000005,
+    "end": 51.1,
+    "text": " Once the image is downloaded, we are going to build the container for this activity,"
+  },
+  {
+    "start": 51.1,
+    "end": 57.22,
+    "text": " So we're going to paste the following command, in which we're going to start the container,"
+  },
+  {
+    "start": 57.22,
+    "end": 63.86,
+    "text": " name it GraphX Coursera, use the port 4040, and use the image that we just pulled."
+  },
+  {
+    "start": 63.86,
+    "end": 70.48,
+    "text": " Okay, the container is now running, and we're now inside of the container's terminal."
+  },
+  {
+    "start": 70.48,
+    "end": 73.98,
+    "text": " The next thing to do is to access Spark Shell."
+  },
+  {
+    "start": 73.98,
+    "end": 78.48,
+    "text": " So we're going to take this new command from the written instructions, and we're going"
+  },
+  {
+    "start": 78.48,
+    "end": 79.48,
+    "text": " to run it."
+  },
+  {
+    "start": 81.10000000000001,
+    "end": 90.24000000000001,
+    "text": " Let me wait for a few seconds, and now we are inside Spark Shell, which can be confirmed"
+  },
+  {
+    "start": 90.24000000000001,
+    "end": 92.4,
+    "text": " by the Scala ripple."
+  },
+  {
+    "start": 92.4,
+    "end": 97.54,
+    "text": " The next thing to do is to go to the written instructions, to copy and to paste the following"
+  },
+  {
+    "start": 97.54,
+    "end": 102.58000000000001,
+    "text": " command, which is going to suppress the warnings and the locks."
+  },
+  {
+    "start": 102.58000000000001,
+    "end": 107.24000000000001,
+    "text": " We can ignore this warning, the first three lines are going to be run in automatic, and"
+  },
+  {
+    "start": 107.24000000000001,
+    "end": 110.64000000000001,
+    "text": " for the final one we just press enter."
+  },
+  {
+    "start": 110.64,
+    "end": 115.86,
+    "text": " we go again to the written instructions and copy and paste the following command which"
+  },
+  {
+    "start": 115.86,
+    "end": 124.32,
+    "text": " is going to import the GraphX and RDD libraries to Spark."
+  },
+  {
+    "start": 124.32,
+    "end": 128.96,
+    "text": " Before importing any data, we're going to take a quick look at the first five rows of"
+  },
+  {
+    "start": 128.96,
+    "end": 133.92000000000002,
+    "text": " each of the three CSV files that we are going to use in this activity."
+  },
+  {
+    "start": 133.92000000000002,
+    "end": 141.78000000000003,
+    "text": " So we start with this CSV file, metro.csv, which is a CSV containing multiple metro areas"
+  },
+  {
+    "start": 141.78000000000003,
+    "end": 143.38000000000002,
+    "text": " around the world."
+  },
+  {
+    "start": 143.38000000000002,
+    "end": 150.20000000000002,
+    "text": " So we run this, and we see that our CSV has a metro ID, the name of the metro area, and"
+  },
+  {
+    "start": 150.20000000000002,
+    "end": 154.3,
+    "text": " the population in this metro area."
+  },
+  {
+    "start": 154.3,
+    "end": 157.04000000000002,
+    "text": " As I said, these are only the first five rows."
+  },
+  {
+    "start": 157.04,
+    "end": 164.32,
+    "text": " The next CSV file that we are going to inspect is the CSV file country."
+  },
+  {
+    "start": 164.32,
+    "end": 167.48,
+    "text": " In this case, we are expecting to see a list of countries."
+  },
+  {
+    "start": 167.48,
+    "end": 173.26,
+    "text": " So we run this and we have the country ID and the name of each country associated with"
+  },
+  {
+    "start": 173.26,
+    "end": 174.26,
+    "text": " that ID."
+  },
+  {
+    "start": 174.26,
+    "end": 181.1,
+    "text": " The final CSV that we are going to explore is going to be MetroCountry.csv, which is"
+  },
+  {
+    "start": 181.1,
+    "end": 189.1,
+    "text": " a CSV that contains the metro ID and the country ID for each observation and something that you are"
+  },
+  {
+    "start": 189.1,
+    "end": 196.62,
+    "text": " going to notice is that each metro ID will only appear once as you can see while country ID can"
+  },
+  {
+    "start": 196.62,
+    "end": 202.38,
+    "text": " appear more than once and this is because each country can have more than one metro area. Now"
+  },
+  {
+    "start": 202.38,
+    "end": 207.34,
+    "text": " we are going to define the classes for the vertices so we start by defining this class"
+  },
+  {
+    "start": 207.34,
+    "end": 213.5,
+    "text": " place node which is going to be the main class that is going to be extended for the specific"
+  },
+  {
+    "start": 213.5,
+    "end": 219.58,
+    "text": " cases of metro areas and countries. So now our class is defined and as a next step we are going"
+  },
+  {
+    "start": 219.58,
+    "end": 224.78,
+    "text": " to take this new command from the written instructions and this command is going to"
+  },
+  {
+    "start": 224.78,
+    "end": 230.14000000000001,
+    "text": " take the place node class and create an extension specific for the metro areas."
+  },
+  {
+    "start": 231.02,
+    "end": 238.94000000000003,
+    "text": " We press enter and now our class is defined. Now we're going to do the same for the case of the"
+  },
+  {
+    "start": 238.94000000000003,
+    "end": 245.26000000000002,
+    "text": " countries. So we take this new command and extend the place node class to create a country class"
+  },
+  {
+    "start": 246.62,
+    "end": 254.06,
+    "text": " and the classes for our vertices are ready. Okay, now we are ready to import our data and define"
+  },
+  {
+    "start": 254.06,
+    "end": 262.06,
+    "text": " are nodes or vertices. And so the first thing we're going to do is to define the metro vertices."
+  },
+  {
+    "start": 262.06,
+    "end": 268.78000000000003,
+    "text": " So we're going to take the metros and create an RDD with the vertex ID and the place node class,"
+  },
+  {
+    "start": 269.42,
+    "end": 279.58,
+    "text": " read the metro.csv, ignore every line that starts with a hashtag, and map each line to get the metro"
+  },
+  {
+    "start": 279.58,
+    "end": 288.8,
+    "text": " ID, the metro name, and the population. So we are going to run this, and the vertices"
+  },
+  {
+    "start": 288.8,
+    "end": 296.5,
+    "text": " for the metro areas are now defined. We are going to do the same for the countries, so"
+  },
+  {
+    "start": 296.5,
+    "end": 302.46,
+    "text": " we get back to the written instructions to copy that command, and we're going to paste"
+  },
+  {
+    "start": 302.46,
+    "end": 307.21999999999997,
+    "text": " it right here, and this is doing pretty much the same."
+  },
+  {
+    "start": 307.21999999999997,
+    "end": 314.14,
+    "text": " This is defining the country nodes, defining the vertex ID and using the place node class,"
+  },
+  {
+    "start": 314.14,
+    "end": 319.35999999999996,
+    "text": " reading country CSV, ignoring the lines that start with a hashtag, and mapping each line"
+  },
+  {
+    "start": 319.35999999999996,
+    "end": 324.5,
+    "text": " to collect the country ID and the country name."
+  },
+  {
+    "start": 324.5,
+    "end": 329.52,
+    "text": " We run this, and now the nodes for our countries are defined."
+  },
+  {
+    "start": 332.46,
+    "end": 340.2,
+    "text": " With the nodes ready, we proceed to create the vertices for our graph, and we are going"
+  },
+  {
+    "start": 340.2,
+    "end": 345.94,
+    "text": " to do this using the MetroCountry CSV that we previously explored, as this is the connection"
+  },
+  {
+    "start": 345.94,
+    "end": 349.41999999999996,
+    "text": " between the metro areas and the countries."
+  },
+  {
+    "start": 349.41999999999996,
+    "end": 356.26,
+    "text": " So we define the MetroCountry links as an RDD, in which we are reading the MetroCountry"
+  },
+  {
+    "start": 356.26,
+    "end": 362.14,
+    "text": " CSV, we are ignoring each line that starts with a hashtag, and we are mapping each line"
+  },
+  {
+    "start": 362.14,
+    "end": 371.34,
+    "text": " to capture the metro ID as it is and the country ID but adding 100 to distinguish the metro ID from"
+  },
+  {
+    "start": 371.34,
+    "end": 382.7,
+    "text": " the country ID. We are now ready to build our graph so to do this the first thing is to concatenate"
+  },
+  {
+    "start": 382.7,
+    "end": 391.09999999999997,
+    "text": " our metros and countries nodes into a single group of nodes so we do this and by running this line"
+  },
+  {
+    "start": 391.1,
+    "end": 399.02000000000004,
+    "text": " and now we have our nodes a single union RDD and with our nodes ready and with the edges that we"
+  },
+  {
+    "start": 399.02000000000004,
+    "end": 404.86,
+    "text": " previously defined the metro country links we're going to create our graph object called metros"
+  },
+  {
+    "start": 404.86,
+    "end": 411.98,
+    "text": " graph using the nodes and the metro country links as the inputs we run this"
+  },
+  {
+    "start": 411.98,
+    "end": 422.12,
+    "text": " and now our metros graph is ready. We proceed now to print the first five vertices and the first"
+  },
+  {
+    "start": 422.12,
+    "end": 428.72,
+    "text": " five edges of our metros graph. We're going to start with the vertices, so we're going to run"
+  },
+  {
+    "start": 428.72,
+    "end": 436.58000000000004,
+    "text": " this command metros graph dot vertices dot take five to take the first five vertices and this"
+  },
+  {
+    "start": 436.58,
+    "end": 437.76,
+    "text": " This is what we get."
+  },
+  {
+    "start": 437.76,
+    "end": 443.26,
+    "text": " We get the vertices metro, which is the city of Ankara."
+  },
+  {
+    "start": 443.26,
+    "end": 450.09999999999997,
+    "text": " We also get Boston, which is another metro vertices, and we get a couple of country vertices,"
+  },
+  {
+    "start": 450.09999999999997,
+    "end": 452.97999999999996,
+    "text": " United Kingdom and Colombia."
+  },
+  {
+    "start": 452.97999999999996,
+    "end": 457.62,
+    "text": " We proceed to do the same with the edges."
+  },
+  {
+    "start": 457.62,
+    "end": 464.21999999999997,
+    "text": " This time we are going to run this command, which is metrosgraph.edges.take5."
+  },
+  {
+    "start": 464.22,
+    "end": 468.1,
+    "text": " And these are the first five edges of our Metro's graph."
+  },
+  {
+    "start": 468.1,
+    "end": 478.18,
+    "text": " As a final step, we are going to apply filters to return a specific vertices from our graph."
+  },
+  {
+    "start": 478.18,
+    "end": 485.40000000000003,
+    "text": " In the first filter, we are going to use the metro area with ID number 1 as the source,"
+  },
+  {
+    "start": 485.40000000000003,
+    "end": 488.94000000000005,
+    "text": " and we are going to collect all the destination IDs."
+  },
+  {
+    "start": 488.94000000000005,
+    "end": 490.48,
+    "text": " So we press Enter."
+  },
+  {
+    "start": 490.48,
+    "end": 496.6,
+    "text": " And as we see, there is only one destination, which is the first country, the country 101."
+  },
+  {
+    "start": 496.6,
+    "end": 500.56,
+    "text": " In the second filter, we are going to do pretty much the opposite."
+  },
+  {
+    "start": 500.56,
+    "end": 508.64000000000004,
+    "text": " We are going to use the destination ID 103, and we're going to collect all the sources"
+  },
+  {
+    "start": 508.64000000000004,
+    "end": 511.82,
+    "text": " ID, which are the metro areas."
+  },
+  {
+    "start": 511.82,
+    "end": 519.5,
+    "text": " And as we see, these are the list of metro areas which are connected to the country 103,"
+  },
+  {
+    "start": 519.5,
+    "end": 522.74,
+    "text": " which is consistent to what we got in the first five edges."
+  }
+]

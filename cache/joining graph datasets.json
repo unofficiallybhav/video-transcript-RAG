@@ -1,0 +1,402 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.16,
+    "text": " This is our final activity using Spark's GraphX library."
+  },
+  {
+    "start": 4.88,
+    "end": 9.040000000000001,
+    "text": " In this activity, we're going to start by creating a new dataset,"
+  },
+  {
+    "start": 9.040000000000001,
+    "end": 12.8,
+    "text": " followed by joining two datasets using the function joinVertices,"
+  },
+  {
+    "start": 13.36,
+    "end": 18.32,
+    "text": " then we're going to join two datasets with the function outerJoinVertices,"
+  },
+  {
+    "start": 18.32,
+    "end": 22.400000000000002,
+    "text": " and finally, we'll create a new return type for the joinVertices."
+  },
+  {
+    "start": 22.400000000000002,
+    "end": 31.940000000000005,
+    "text": " To begin this activity, we start by opening a terminal shell and making sure that we have our"
+  },
+  {
+    "start": 31.940000000000005,
+    "end": 39.0,
+    "text": " GraphX Coursera container running. And once we do this, we're going to run the following command to"
+  },
+  {
+    "start": 39.0,
+    "end": 44.96,
+    "text": " access the container shell. And once we are inside the container shell, which is indicated by this"
+  },
+  {
+    "start": 44.96,
+    "end": 52.72,
+    "text": " hashtag, we're going to access the spark shell. This can take a few seconds."
+  },
+  {
+    "start": 52.72,
+    "end": 57.14,
+    "text": " And once we are inside the spark shell, the first thing that we're going to do"
+  },
+  {
+    "start": 57.14,
+    "end": 64.7,
+    "text": " is to run these lines to suppress every message or warning and we're going to"
+  },
+  {
+    "start": 64.7,
+    "end": 72.44,
+    "text": " run also the following lines so we can import our graphics and RDD libraries."
+  },
+  {
+    "start": 72.44,
+    "end": 79.44,
+    "text": " And now we're ready to start."
+  },
+  {
+    "start": 79.44,
+    "end": 83.16,
+    "text": " With our setup ready, we will proceed to create a new graph."
+  },
+  {
+    "start": 83.16,
+    "end": 88.5,
+    "text": " So as a first step, we are going to define the nodes of these graphs, or vertices."
+  },
+  {
+    "start": 88.5,
+    "end": 91.36,
+    "text": " And these nodes are going to be airports."
+  },
+  {
+    "start": 91.36,
+    "end": 96.72,
+    "text": " So for each one, we are going to define a vertex ID and the name of the airport."
+  },
+  {
+    "start": 96.72,
+    "end": 101.68,
+    "text": " We're including LA, Narita, Singapore, Charles de Gaulle, and Toronto."
+  },
+  {
+    "start": 101.68,
+    "end": 110.80000000000001,
+    "text": " we run this and our nodes or vertices are defined. Next we need to define the"
+  },
+  {
+    "start": 110.80000000000001,
+    "end": 116.32000000000001,
+    "text": " edges and our edges are going to be the different flights that are between the"
+  },
+  {
+    "start": 116.32000000000001,
+    "end": 123.58000000000001,
+    "text": " the airports. So for example for each for the first edge we are including the"
+  },
+  {
+    "start": 123.58000000000001,
+    "end": 128.98000000000002,
+    "text": " first airport which is LA, the second airport which is Charles de Gaulle and"
+  },
+  {
+    "start": 128.98,
+    "end": 131.89999999999998,
+    "text": " and the name of the flight that connects these two airports."
+  },
+  {
+    "start": 132.54,
+    "end": 137.32,
+    "text": " As a second example, we have Narita, which is connected to Chartres de Gaulle,"
+  },
+  {
+    "start": 137.82,
+    "end": 143.92,
+    "text": " and this flight, JL5427, is the flight that connects them."
+  },
+  {
+    "start": 144.38,
+    "end": 149.42,
+    "text": " We run it, and our edges are ready."
+  },
+  {
+    "start": 150.7,
+    "end": 155.88,
+    "text": " So with our vertices and our edges ready, we can proceed to create our graph."
+  },
+  {
+    "start": 155.88,
+    "end": 160.04,
+    "text": " we are going to use the airports, the nodes, and the flights, the edges,"
+  },
+  {
+    "start": 160.04,
+    "end": 162.84,
+    "text": " to create a graph object called FlightGraph."
+  },
+  {
+    "start": 164.04,
+    "end": 166.04,
+    "text": " And our graph is now defined."
+  },
+  {
+    "start": 167.72,
+    "end": 172.12,
+    "text": " We're going to print the lines of our graph to take a better look at this."
+  },
+  {
+    "start": 172.12,
+    "end": 177.88,
+    "text": " And for this, we're going to use a special kind of print in which we're going to include a message"
+  },
+  {
+    "start": 179.48,
+    "end": 182.68,
+    "text": " which includes where the flight departs from,"
+  },
+  {
+    "start": 182.68,
+    "end": 185.4,
+    "text": " where it arrives, and what is the name of that flight."
+  },
+  {
+    "start": 185.88,
+    "end": 192.88,
+    "text": " So, for example, we have one flight that departs from Narita and arrives at Chardegault, and"
+  },
+  {
+    "start": 192.88,
+    "end": 195.2,
+    "text": " the flight number is the following."
+  },
+  {
+    "start": 195.2,
+    "end": 199.24,
+    "text": " We have another flight that departs from LA that arrives at Chardegault, and the flight"
+  },
+  {
+    "start": 199.24,
+    "end": 201.5,
+    "text": " number is the following."
+  },
+  {
+    "start": 201.5,
+    "end": 206.51999999999998,
+    "text": " Now that we have defined our graph, we are going to create a new set of nodes, and to"
+  },
+  {
+    "start": 206.51999999999998,
+    "end": 212.56,
+    "text": " do this, the first thing will be to create a new class, Airport Information, in which"
+  },
+  {
+    "start": 212.56,
+    "end": 219.84,
+    "text": " we are going to include the city and the code of each airport. We run this and our class is now"
+  },
+  {
+    "start": 219.84,
+    "end": 227.76,
+    "text": " defined. So with our class defined we will create our new set of nodes or vertices and we are going"
+  },
+  {
+    "start": 227.76,
+    "end": 233.68,
+    "text": " to use the same vertex ID for each airport and we are going to create an instance of this new"
+  },
+  {
+    "start": 233.68,
+    "end": 239.52,
+    "text": " class including the name and the code of each airport. Notice that we are not including LA"
+  },
+  {
+    "start": 239.52,
+    "end": 243.44,
+    "text": " and we are also including two new airports, London and Hong Kong."
+  },
+  {
+    "start": 248.64000000000001,
+    "end": 253.20000000000002,
+    "text": " First join example that we will show will use the function joinVertices,"
+  },
+  {
+    "start": 253.20000000000002,
+    "end": 259.04,
+    "text": " but prior to do this join, we are going to define a new function, a mapping function,"
+  },
+  {
+    "start": 259.04,
+    "end": 266.40000000000003,
+    "text": " which is going to append the city name to the name of each airport. So we run this"
+  },
+  {
+    "start": 266.4,
+    "end": 275.64,
+    "text": " and our function has been defined. With our function defined, we will proceed to perform"
+  },
+  {
+    "start": 275.64,
+    "end": 283.96,
+    "text": " our join. So we will create a new graph, which is going to be called flight join graph. And"
+  },
+  {
+    "start": 283.96,
+    "end": 289.91999999999996,
+    "text": " it's going to take the original flight graph, use the function join vertices, take the airport"
+  },
+  {
+    "start": 289.92,
+    "end": 298.32,
+    "text": " information and append this new information. So we run this and now we have the vertex ID,"
+  },
+  {
+    "start": 298.32,
+    "end": 304.0,
+    "text": " the name of the airport, and for those airports to which we have the city name,"
+  },
+  {
+    "start": 304.0,
+    "end": 310.72,
+    "text": " we can also print the city name like Charterrault Paris, Narita Tokyo and Pearson Toronto."
+  },
+  {
+    "start": 310.72,
+    "end": 320.64000000000004,
+    "text": " We will perform a new join, this time using the function OuterJoinVertices and not using"
+  },
+  {
+    "start": 320.64000000000004,
+    "end": 324.24,
+    "text": " our mapping function AppendAirportInformation."
+  },
+  {
+    "start": 324.24,
+    "end": 329.22,
+    "text": " So we create a new graph in which we take the original flight graph, we use the function"
+  },
+  {
+    "start": 329.22,
+    "end": 335.16,
+    "text": " OuterJoinVertices and we join with the airport, we join the airport information nodes, keeping"
+  },
+  {
+    "start": 335.16,
+    "end": 341.58000000000004,
+    "text": " all of the information, and as we see, we get now the name of the airport, the city"
+  },
+  {
+    "start": 341.58000000000004,
+    "end": 347.48,
+    "text": " and the code for all of the airports, with the exception of LA, in which we are getting"
+  },
+  {
+    "start": 347.48,
+    "end": 354.68,
+    "text": " a non-value, because we never defined the airport information nodes for this airport."
+  },
+  {
+    "start": 354.68,
+    "end": 360.26000000000005,
+    "text": " We're going to repeat this join, but this time we're going to include a special condition,"
+  },
+  {
+    "start": 360.26,
+    "end": 368.78,
+    "text": " So we're going to take the following codes and we're going to paste this right here."
+  },
+  {
+    "start": 368.78,
+    "end": 374.15999999999997,
+    "text": " At this time we're creating a second version of this flight outer join graph, which is"
+  },
+  {
+    "start": 374.15999999999997,
+    "end": 378.4,
+    "text": " doing pretty much the same, but at the end we're including this condition in which if"
+  },
+  {
+    "start": 378.4,
+    "end": 383.82,
+    "text": " the airport information does not access, instead of returning a not, it returns a couple of"
+  },
+  {
+    "start": 383.82,
+    "end": 393.0,
+    "text": " and as we see, we get back, which is almost a copy of the previous graph, but now we see"
+  },
+  {
+    "start": 393.0,
+    "end": 401.26,
+    "text": " NAs for the airport information of LA."
+  },
+  {
+    "start": 401.26,
+    "end": 407.71999999999997,
+    "text": " For this final step, we will start by creating a new class, Airport, which is going to print"
+  },
+  {
+    "start": 407.71999999999997,
+    "end": 412.0,
+    "text": " the name, the city and the code for each airport."
+  },
+  {
+    "start": 412.0,
+    "end": 419.4,
+    "text": " So we run this, and now our class is defined, and with our class defined, we will perform"
+  },
+  {
+    "start": 419.4,
+    "end": 425.78,
+    "text": " a third outer join, and in this version of the graph, we will take the original graph"
+  },
+  {
+    "start": 425.78,
+    "end": 431.66,
+    "text": " and join with airport information, and for the case in which the airport information"
+  },
+  {
+    "start": 431.66,
+    "end": 437.76,
+    "text": " is found, it will apply this new class to generate this new print, and for the cases"
+  },
+  {
+    "start": 437.76,
+    "end": 443.03999999999996,
+    "text": " that it doesn't find the airport information, it will only print the name and it will print"
+  },
+  {
+    "start": 443.03999999999996,
+    "end": 450.0,
+    "text": " empty strings for the other two fields. So we run this and after defining our new graph,"
+  },
+  {
+    "start": 450.0,
+    "end": 457.15999999999997,
+    "text": " we will proceed with our print. So we'll print this new graph and as we see for all"
+  },
+  {
+    "start": 457.15999999999997,
+    "end": 462.94,
+    "text": " of the airports except for LA, we get this new class in which we get the name of the"
+  },
+  {
+    "start": 462.94,
+    "end": 467.64,
+    "text": " airport, the city and the code. And this is how we conclude the"
+  },
+  {
+    "start": 467.76,
+    "end": 469.36,
+    "text": " this activity."
+  }
+]

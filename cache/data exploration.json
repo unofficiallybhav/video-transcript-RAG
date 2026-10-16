@@ -1,0 +1,242 @@
+[
+  {
+    "start": 0.96,
+    "end": 5.44,
+    "text": " Now that we are familiar with some commonly used terms to describe data, let's look at"
+  },
+  {
+    "start": 5.44,
+    "end": 9.040000000000001,
+    "text": " what data exploration is and why it's important."
+  },
+  {
+    "start": 9.040000000000001,
+    "end": 16.240000000000002,
+    "text": " After this video, you will be able to explain why data exploration is necessary, articulate"
+  },
+  {
+    "start": 16.240000000000002,
+    "end": 22.64,
+    "text": " the objectives of data exploration, list the categories of techniques for exploring data."
+  },
+  {
+    "start": 22.64,
+    "end": 27.28,
+    "text": " Data exploration means doing some preliminary investigation of your data set."
+  },
+  {
+    "start": 27.28,
+    "end": 31.840000000000003,
+    "text": " The goal is to gain a better understanding of the data that you have to work with."
+  },
+  {
+    "start": 31.840000000000003,
+    "end": 36.52,
+    "text": " If you understand the characteristics of your data, you can make optimal use of it in whatever"
+  },
+  {
+    "start": 36.52,
+    "end": 40.78,
+    "text": " subsequent processing and analysis you do with the data."
+  },
+  {
+    "start": 40.78,
+    "end": 47.8,
+    "text": " Note that data exploration is also called Exploratory Data Analysis, or EDA for short."
+  },
+  {
+    "start": 47.8,
+    "end": 49.8,
+    "text": " How do you go about exploring data?"
+  },
+  {
+    "start": 49.8,
+    "end": 53.96,
+    "text": " There are two main categories of techniques to explore your data, one based on summary"
+  },
+  {
+    "start": 53.96,
+    "end": 60.56,
+    "text": " statistics, and the other based on visualization methods. Summary statistics provide important"
+  },
+  {
+    "start": 60.56,
+    "end": 66.16,
+    "text": " information that summarizes a set of data values. There are many such statistics, many"
+  },
+  {
+    "start": 66.16,
+    "end": 74.64,
+    "text": " of them you have probably heard of before, such as mean, median, and standard deviation."
+  },
+  {
+    "start": 74.64,
+    "end": 80.08,
+    "text": " These are some very commonly used summary statistics. A summary statistic provides a"
+  },
+  {
+    "start": 80.08,
+    "end": 86.2,
+    "text": " single quantity that summarizes some aspect of a dataset. For example, the mean is a single"
+  },
+  {
+    "start": 86.2,
+    "end": 90.67999999999999,
+    "text": " value that describes the average value of a dataset, no matter how large that dataset"
+  },
+  {
+    "start": 90.67999999999999,
+    "end": 95.98,
+    "text": " is. You can think of the mean as an indicator of where your dataset is centrally located"
+  },
+  {
+    "start": 95.98,
+    "end": 100.68,
+    "text": " on a number line. Thus, summary statistics provide a simple and quick way to summarize"
+  },
+  {
+    "start": 100.68,
+    "end": 107.02,
+    "text": " a dataset. Data visualization techniques allow you to look at your data graphically. There"
+  },
+  {
+    "start": 107.02,
+    "end": 110.66,
+    "text": " There are several types of plots that you can use to visualize your data."
+  },
+  {
+    "start": 110.66,
+    "end": 117.28,
+    "text": " Some examples are histogram, line plot, and scatter plot."
+  },
+  {
+    "start": 117.28,
+    "end": 119.94,
+    "text": " Each type of plot serves a different purpose."
+  },
+  {
+    "start": 119.94,
+    "end": 125.19999999999999,
+    "text": " We will cover the use of plots to visualize your data in an upcoming lecture."
+  },
+  {
+    "start": 125.19999999999999,
+    "end": 128.06,
+    "text": " What should you look for when exploring your data?"
+  },
+  {
+    "start": 128.06,
+    "end": 132.51999999999998,
+    "text": " You use statistics and visual methods to summarize and describe your data set."
+  },
+  {
+    "start": 132.52,
+    "end": 139.3,
+    "text": " some of the things you'll want to look for are correlations, general trends, and outliers."
+  },
+  {
+    "start": 139.3,
+    "end": 143.74,
+    "text": " Correlations provide information about the relationship between variables in your data."
+  },
+  {
+    "start": 143.74,
+    "end": 149.24,
+    "text": " By looking at correlations, you may be able to determine that two variables are very correlated."
+  },
+  {
+    "start": 149.24,
+    "end": 154.24,
+    "text": " This means they provide the same or similar information about your data. Since they contain"
+  },
+  {
+    "start": 154.24,
+    "end": 158.56,
+    "text": " redundant information, this suggests that you may want to remove one of the variables"
+  },
+  {
+    "start": 158.56,
+    "end": 161.96,
+    "text": " to make the analysis simpler."
+  },
+  {
+    "start": 161.96,
+    "end": 165.68,
+    "text": " Trends in your data will reveal characteristics in your data."
+  },
+  {
+    "start": 165.68,
+    "end": 170.48,
+    "text": " For example, you can see where the majority of the data values lie, whether your data"
+  },
+  {
+    "start": 170.48,
+    "end": 177.1,
+    "text": " is skewed or not, what the most frequent value or values are in your data set, etc."
+  },
+  {
+    "start": 177.1,
+    "end": 182.06,
+    "text": " Looking at trends in your data can also reveal if a variable is moving in a certain direction,"
+  },
+  {
+    "start": 182.06,
+    "end": 187.2,
+    "text": " such as sales revenue increasing or decreasing over the years."
+  },
+  {
+    "start": 187.20000000000002,
+    "end": 193.32000000000002,
+    "text": " the minimum, maximum, and range of the data values are basic steps in exploring your data."
+  },
+  {
+    "start": 193.32000000000002,
+    "end": 198.48000000000002,
+    "text": " Determining outliers is also very important. Outliers indicate potential problems with"
+  },
+  {
+    "start": 198.48000000000002,
+    "end": 204.24,
+    "text": " the data and may need to be eliminated in some applications. In other applications,"
+  },
+  {
+    "start": 204.24,
+    "end": 208.54000000000002,
+    "text": " outliers represent interesting data points that should be looked at more closely. In"
+  },
+  {
+    "start": 208.54000000000002,
+    "end": 212.82000000000002,
+    "text": " either case, outliers usually require further examination."
+  },
+  {
+    "start": 212.82000000000002,
+    "end": 217.18,
+    "text": " In summary, what you get by exploring your data is a better understanding of the complexity"
+  },
+  {
+    "start": 217.18,
+    "end": 222.46,
+    "text": " of the data so you can work with it more effectively. Better understanding, in turn,"
+  },
+  {
+    "start": 222.46,
+    "end": 228.22,
+    "text": " will guide the rest of the process and lead to more informed analyses. Summary statistics and"
+  },
+  {
+    "start": 228.22,
+    "end": 233.66,
+    "text": " visualization techniques are essential in exploring your data. They should be used together to examine"
+  },
+  {
+    "start": 233.66,
+    "end": 239.42000000000002,
+    "text": " a dataset. In the next two lectures, we will look at specific methods that you can apply to explore"
+  },
+  {
+    "start": 239.42000000000002,
+    "end": 241.42000000000002,
+    "text": " your data."
+  }
+]

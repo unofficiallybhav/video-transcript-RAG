@@ -1,0 +1,282 @@
+[
+  {
+    "start": 0.64,
+    "end": 4.96,
+    "text": " If you have been in a conversation on machine learning, you have probably heard terms like"
+  },
+  {
+    "start": 4.96,
+    "end": 9.92,
+    "text": " feature, sample, and variable. We will be defining some of those terms in this lecture."
+  },
+  {
+    "start": 11.76,
+    "end": 17.68,
+    "text": " After this video, you will be able to describe what a feature is and how it relates to a sample,"
+  },
+  {
+    "start": 18.48,
+    "end": 24.64,
+    "text": " name some alternative terms for feature, summarize how a categorical feature differs from a numerical"
+  },
+  {
+    "start": 24.64,
+    "end": 31.52,
+    "text": " feature. Before we delve into the methods for processing and analyzing data, let's"
+  },
+  {
+    "start": 31.52,
+    "end": 36.02,
+    "text": " first start with defining some terms used to describe data, starting with sample and"
+  },
+  {
+    "start": 36.02,
+    "end": 42.8,
+    "text": " variable. A sample is an instance or example of an entity in your data. This is typically"
+  },
+  {
+    "start": 42.8,
+    "end": 49.68,
+    "text": " a row in your data set. This figure shows part of a data set of values related to weather."
+  },
+  {
+    "start": 49.68,
+    "end": 54.94,
+    "text": " Each row is a sample representing weather data for a particular day."
+  },
+  {
+    "start": 54.94,
+    "end": 60.92,
+    "text": " The table in the figure shows four samples of weather data, each for a different day."
+  },
+  {
+    "start": 60.92,
+    "end": 65.52,
+    "text": " In this table, each sample has five values associated with it."
+  },
+  {
+    "start": 65.52,
+    "end": 72.18,
+    "text": " These values are different information pieces about the sample, such as the sample ID, sample"
+  },
+  {
+    "start": 72.18,
+    "end": 78.78,
+    "text": " date, minimum temperature, maximum temperature, and rainfall on that day."
+  },
+  {
+    "start": 78.78,
+    "end": 84.04,
+    "text": " We call these different values variables of the sample."
+  },
+  {
+    "start": 84.04,
+    "end": 87.02,
+    "text": " There are many names for sample and variable."
+  },
+  {
+    "start": 87.02,
+    "end": 90.68,
+    "text": " Some other terms for sample that you might hear in the machine learning context include"
+  },
+  {
+    "start": 90.68,
+    "end": 97.42,
+    "text": " record, example, row, instance, and observation."
+  },
+  {
+    "start": 97.42,
+    "end": 101.9,
+    "text": " It is helpful to realize that all of these terms mean the same thing in machine learning."
+  },
+  {
+    "start": 101.9,
+    "end": 107.98,
+    "text": " That is, they all refer to a specific example of an entity in your dataset."
+  },
+  {
+    "start": 107.98,
+    "end": 114.98,
+    "text": " There are also many names for the term variable, such as feature, column, dimension, attribute,"
+  },
+  {
+    "start": 114.98,
+    "end": 116.32000000000001,
+    "text": " and field."
+  },
+  {
+    "start": 116.32000000000001,
+    "end": 122.62,
+    "text": " All of these terms refer to specific characteristics for each sample in your dataset."
+  },
+  {
+    "start": 122.62,
+    "end": 127.26,
+    "text": " An important point to emphasize about variable is that they are digital values with a data"
+  },
+  {
+    "start": 127.26,
+    "end": 128.32,
+    "text": " type."
+  },
+  {
+    "start": 128.32,
+    "end": 131.52,
+    "text": " Each variable has a data type associated with it."
+  },
+  {
+    "start": 131.52,
+    "end": 135.78,
+    "text": " The most common data types are numeric and categorical."
+  },
+  {
+    "start": 135.78,
+    "end": 139.98,
+    "text": " There are other data types as well, such as string and date, but we will focus on two"
+  },
+  {
+    "start": 139.98,
+    "end": 145.34,
+    "text": " of the more common data types, numeric and categorical."
+  },
+  {
+    "start": 145.34,
+    "end": 150.98,
+    "text": " As the name implies, numeric variables are variables that take on number values."
+  },
+  {
+    "start": 150.98,
+    "end": 155.38,
+    "text": " Numeric variables can be measured and their values can be sorted in some way."
+  },
+  {
+    "start": 155.38,
+    "end": 160.9,
+    "text": " Note that a numeric variable can take on just integer values or be continuous valued."
+  },
+  {
+    "start": 160.9,
+    "end": 166.02,
+    "text": " It can also have just positive numbers, negative numbers, or both."
+  },
+  {
+    "start": 166.02,
+    "end": 169.66,
+    "text": " Let's go over some examples of various numeric variables."
+  },
+  {
+    "start": 169.66,
+    "end": 174.54000000000002,
+    "text": " A person's height is a positive, continuous, valued number."
+  },
+  {
+    "start": 174.54000000000002,
+    "end": 180.54000000000002,
+    "text": " The score on an exam is a positive number that ranges between 0 and 100%."
+  },
+  {
+    "start": 180.54000000000002,
+    "end": 185.98000000000002,
+    "text": " The number of transactions per hour is a positive integer, whereas the change in a stock price"
+  },
+  {
+    "start": 185.98000000000002,
+    "end": 190.02,
+    "text": " can be either positive or negative."
+  },
+  {
+    "start": 190.02,
+    "end": 195.74,
+    "text": " A variable with labels, names, or categories for values, instead of numbers, are called"
+  },
+  {
+    "start": 195.74,
+    "end": 198.10000000000002,
+    "text": " categorical variables."
+  },
+  {
+    "start": 198.10000000000002,
+    "end": 203.18,
+    "text": " For example, a variable that describes the color of an item, such as the color of a car,"
+  },
+  {
+    "start": 203.18,
+    "end": 208.96,
+    "text": " can have values such as red, silver, blue, white, and black."
+  },
+  {
+    "start": 208.96,
+    "end": 214.9,
+    "text": " These are non-numeric values that describe some quality or characteristic of an entity."
+  },
+  {
+    "start": 214.9,
+    "end": 219.70000000000002,
+    "text": " These values can be thought of as names or labels that can be sorted into categories."
+  },
+  {
+    "start": 219.70000000000002,
+    "end": 224.94000000000003,
+    "text": " Therefore, categorical variables are also referred to as qualitative variables or nominal"
+  },
+  {
+    "start": 224.94000000000003,
+    "end": 227.38000000000002,
+    "text": " variables."
+  },
+  {
+    "start": 227.38000000000002,
+    "end": 233.3,
+    "text": " Some examples of categorical variables are gender, marital status, type of customer,"
+  },
+  {
+    "start": 233.3,
+    "end": 240.34000000000003,
+    "text": " for example, teenager, adult, senior, product categories, for example, electronics, kitchen,"
+  },
+  {
+    "start": 240.34000000000003,
+    "end": 244.08,
+    "text": " bathroom, and color of an item."
+  },
+  {
+    "start": 244.08,
+    "end": 248.64000000000001,
+    "text": " To summarize, a sample is an instance or example of an entity in your data."
+  },
+  {
+    "start": 248.64000000000001,
+    "end": 254.88000000000002,
+    "text": " A variable captures a specific characteristic of each entity, so a sample has many variables"
+  },
+  {
+    "start": 254.88000000000002,
+    "end": 256.92,
+    "text": " to describe it."
+  },
+  {
+    "start": 256.92,
+    "end": 261.52000000000004,
+    "text": " Data from real applications are often multidimensional, meaning that there are many dimensions or"
+  },
+  {
+    "start": 261.52000000000004,
+    "end": 264.2,
+    "text": " variables describing each sample."
+  },
+  {
+    "start": 264.2,
+    "end": 267.38,
+    "text": " Each variable has a data type associated with it."
+  },
+  {
+    "start": 267.38,
+    "end": 271.34000000000003,
+    "text": " The most common data types are numeric and categorical."
+  },
+  {
+    "start": 271.34000000000003,
+    "end": 274.34000000000003,
+    "text": " Note that there are many terms to describe these data-related concepts."
+  }
+]

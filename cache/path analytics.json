@@ -1,0 +1,467 @@
+[
+  {
+    "start": 0.96,
+    "end": 4.8,
+    "text": " In this video, we will discuss what paths are"
+  },
+  {
+    "start": 4.8,
+    "end": 7.5200000000000005,
+    "text": " and how to find your way as you traverse along the nodes"
+  },
+  {
+    "start": 7.5200000000000005,
+    "end": 9.92,
+    "text": " and edges of a graph."
+  },
+  {
+    "start": 9.92,
+    "end": 12.4,
+    "text": " Let's start with an example."
+  },
+  {
+    "start": 12.4,
+    "end": 15.280000000000001,
+    "text": " For this example, we'll consider an edge-weighted graph"
+  },
+  {
+    "start": 15.280000000000001,
+    "end": 17.72,
+    "text": " with no loops as shown here."
+  },
+  {
+    "start": 17.72,
+    "end": 22.48,
+    "text": " Termed edge-weighted means the edges have weights."
+  },
+  {
+    "start": 22.48,
+    "end": 26.8,
+    "text": " The weight of the edge i to j is 15."
+  },
+  {
+    "start": 26.8,
+    "end": 29.32,
+    "text": " We can think of this graph as a small road network"
+  },
+  {
+    "start": 29.32,
+    "end": 31.6,
+    "text": " where the nodes are cities, and the edge weights"
+  },
+  {
+    "start": 31.6,
+    "end": 34.6,
+    "text": " are highway distances between them."
+  },
+  {
+    "start": 34.6,
+    "end": 36.44,
+    "text": " To walk or traverse through this graph,"
+  },
+  {
+    "start": 36.44,
+    "end": 39.88,
+    "text": " we will define what a walk is."
+  },
+  {
+    "start": 39.88,
+    "end": 43.44,
+    "text": " A walk is an arbitrary sequence of nodes and edges"
+  },
+  {
+    "start": 43.44,
+    "end": 46.74,
+    "text": " that starts from some node and ends on some node."
+  },
+  {
+    "start": 46.74,
+    "end": 65.7,
+    "text": " Here, we can go from H to F to G to C to F to E to B."
+  },
+  {
+    "start": 65.7,
+    "end": 71.16,
+    "text": " Notice that in this walk, we went through the node F twice."
+  },
+  {
+    "start": 71.16,
+    "end": 73.6,
+    "text": " In many applications, we do not want"
+  },
+  {
+    "start": 73.60000000000001,
+    "end": 80.24000000000001,
+    "text": " consider arbitrary walks, but consider a walk where we do not repeat nodes unless we need to"
+  },
+  {
+    "start": 80.24000000000001,
+    "end": 86.96000000000001,
+    "text": " come back to the starting point. Such a constrained walk is called a path. The green arrows indicate"
+  },
+  {
+    "start": 86.96000000000001,
+    "end": 93.68,
+    "text": " a path from J to B. We said on the last slide that a path can start from a node and end on it."
+  },
+  {
+    "start": 94.48,
+    "end": 98.84,
+    "text": " Such a path is called a cycle when the path has three or more nodes."
+  },
+  {
+    "start": 100.28,
+    "end": 108.34,
+    "text": " So J, G, C, F, J is a four-node cycle, sometimes called a four-cycle."
+  },
+  {
+    "start": 109.4,
+    "end": 112.06,
+    "text": " C, F, E is a three-cycle."
+  },
+  {
+    "start": 113.22,
+    "end": 118.32000000000001,
+    "text": " However, although there is an edge from F to J and another from J back to F,"
+  },
+  {
+    "start": 118.84,
+    "end": 123.46000000000001,
+    "text": " this two-node path is not a cycle by our definition."
+  },
+  {
+    "start": 123.68,
+    "end": 130.36,
+    "text": " A network with no cycles is called acyclic."
+  },
+  {
+    "start": 130.36,
+    "end": 138.20000000000002,
+    "text": " A graph that is both directed and acyclic is called a directed acyclic graph, in short,"
+  },
+  {
+    "start": 138.20000000000002,
+    "end": 139.70000000000002,
+    "text": " a deck."
+  },
+  {
+    "start": 139.70000000000002,
+    "end": 144.04000000000002,
+    "text": " A trail is a concept similar to a path."
+  },
+  {
+    "start": 144.04000000000002,
+    "end": 147.56,
+    "text": " It is a walk with no repeating edges."
+  },
+  {
+    "start": 147.56,
+    "end": 160.24,
+    "text": " On the graph shown in the walk H, F, G, C, F, E, C, F, J is not a trail because C, F"
+  },
+  {
+    "start": 160.24,
+    "end": 163.34,
+    "text": " is traversed twice."
+  },
+  {
+    "start": 163.34,
+    "end": 167.62,
+    "text": " Remember the seven bridges of the Konigsberg problem that we described in module 1?"
+  },
+  {
+    "start": 167.62,
+    "end": 174.32,
+    "text": " In that problem, we had the constraint that one cannot cross the same bridge twice."
+  },
+  {
+    "start": 174.32,
+    "end": 178.42,
+    "text": " we see such constraints in path planning problems?"
+  },
+  {
+    "start": 178.42,
+    "end": 183.62,
+    "text": " A common notion in directed graphs is called reachability."
+  },
+  {
+    "start": 183.62,
+    "end": 189.35999999999999,
+    "text": " If there is a path from node u to node v, v is reachable from u."
+  },
+  {
+    "start": 189.35999999999999,
+    "end": 191.76,
+    "text": " Reachability is not symmetric."
+  },
+  {
+    "start": 191.76,
+    "end": 194.9,
+    "text": " Even if v is reachable from u, u may or may not"
+  },
+  {
+    "start": 194.9,
+    "end": 199.01999999999998,
+    "text": " be reachable from v. As we can see in this graph,"
+  },
+  {
+    "start": 199.01999999999998,
+    "end": 202.94,
+    "text": " i is not reachable from a."
+  },
+  {
+    "start": 202.94,
+    "end": 205.16,
+    "text": " Look at A more carefully."
+  },
+  {
+    "start": 205.16,
+    "end": 208.48,
+    "text": " There is no outgoing edge from A at all."
+  },
+  {
+    "start": 208.48,
+    "end": 212.68,
+    "text": " So no node in this graph is reachable from A."
+  },
+  {
+    "start": 212.68,
+    "end": 217.18,
+    "text": " A is a terminal, a leaf node of the graph."
+  },
+  {
+    "start": 217.18,
+    "end": 219.42,
+    "text": " Where do we see this in real life?"
+  },
+  {
+    "start": 219.42,
+    "end": 222.12,
+    "text": " Think of a road network with one-way streets and roadblocks"
+  },
+  {
+    "start": 222.12,
+    "end": 223.98,
+    "text": " due to construction."
+  },
+  {
+    "start": 223.98,
+    "end": 228.28,
+    "text": " This can make some areas unreachable by cars."
+  },
+  {
+    "start": 228.28,
+    "end": 231.72,
+    "text": " In biology, there are gene regulation networks"
+  },
+  {
+    "start": 231.72,
+    "end": 234.74,
+    "text": " in which the nodes represent genes and edges represent"
+  },
+  {
+    "start": 234.74,
+    "end": 239.4,
+    "text": " the fact that gene A regulates gene B and not vice versa."
+  },
+  {
+    "start": 239.4,
+    "end": 242.02,
+    "text": " This makes it a directed graph."
+  },
+  {
+    "start": 242.02,
+    "end": 245.24,
+    "text": " We can easily think of a case where A regulates B"
+  },
+  {
+    "start": 245.24,
+    "end": 249.18,
+    "text": " and B regulates C, but C does not regulate B or A,"
+  },
+  {
+    "start": 249.18,
+    "end": 252.74,
+    "text": " thus making A unreachable from C."
+  },
+  {
+    "start": 252.74,
+    "end": 256.76,
+    "text": " The final concept we will explore in this lecture"
+  },
+  {
+    "start": 256.76,
+    "end": 259.16,
+    "text": " is that of a graph diameter."
+  },
+  {
+    "start": 259.16,
+    "end": 263.32000000000005,
+    "text": " The diameter of a graph measures the maximum number of steps,"
+  },
+  {
+    "start": 263.32000000000005,
+    "end": 266.18,
+    "text": " also called hops, one has to traverse"
+  },
+  {
+    "start": 266.18,
+    "end": 270.54,
+    "text": " to go to the most distant node in the graph."
+  },
+  {
+    "start": 270.54,
+    "end": 273.56,
+    "text": " That means if you go from any arbitrary node"
+  },
+  {
+    "start": 273.56,
+    "end": 276.20000000000005,
+    "text": " to any other arbitrary node in the graph,"
+  },
+  {
+    "start": 276.20000000000005,
+    "end": 279.1,
+    "text": " following only the shortest path routes,"
+  },
+  {
+    "start": 279.1,
+    "end": 282.92,
+    "text": " what is the maximum number of steps you have to take?"
+  },
+  {
+    "start": 282.92,
+    "end": 285.6,
+    "text": " Let's see how this is computed."
+  },
+  {
+    "start": 285.6,
+    "end": 288.28000000000003,
+    "text": " For this task, we'll create a matrix"
+  },
+  {
+    "start": 288.28000000000003,
+    "end": 291.72,
+    "text": " called the shortest hop distance matrix."
+  },
+  {
+    "start": 291.72,
+    "end": 295.98,
+    "text": " Just like the adjacency matrix, the rows and columns here"
+  },
+  {
+    "start": 295.98,
+    "end": 297.98,
+    "text": " represent graph nodes."
+  },
+  {
+    "start": 297.98,
+    "end": 300.56000000000006,
+    "text": " And each cell contains the distance"
+  },
+  {
+    "start": 300.56000000000006,
+    "end": 304.92,
+    "text": " from the ith node to the jth node via the shortest path."
+  },
+  {
+    "start": 304.92,
+    "end": 309.6,
+    "text": " The distance from any node to itself is 0."
+  },
+  {
+    "start": 309.6,
+    "end": 314.48,
+    "text": " So all diagonal elements of this matrix are 0."
+  },
+  {
+    "start": 314.48,
+    "end": 317.94000000000005,
+    "text": " If a node i cannot reach node j through any path,"
+  },
+  {
+    "start": 318.28000000000003,
+    "end": 321.04,
+    "text": " the distance is marked as infinity."
+  },
+  {
+    "start": 321.04,
+    "end": 325.42,
+    "text": " Thus, the distance from B to C is infinity."
+  },
+  {
+    "start": 325.42,
+    "end": 331.76000000000005,
+    "text": " You can go from E to F in two steps, E to C to F."
+  },
+  {
+    "start": 331.76000000000005,
+    "end": 336.5,
+    "text": " Therefore, the weight at the CE cell is 2."
+  },
+  {
+    "start": 336.5,
+    "end": 339.28000000000003,
+    "text": " If we fill this matrix, we'll notice"
+  },
+  {
+    "start": 339.28000000000003,
+    "end": 343.08000000000004,
+    "text": " that the largest reachable value is 4,"
+  },
+  {
+    "start": 343.08000000000004,
+    "end": 345.72,
+    "text": " ignoring the infinite distance."
+  },
+  {
+    "start": 345.72,
+    "end": 348.36,
+    "text": " Thus, the diameter of this graph is 4,"
+  },
+  {
+    "start": 348.36,
+    "end": 354.98,
+    "text": " which represents the path from i to a through j, g, and d."
+  },
+  {
+    "start": 354.98,
+    "end": 358.74,
+    "text": " There are a few noteworthy items in this distance matrix."
+  },
+  {
+    "start": 358.74,
+    "end": 362.34000000000003,
+    "text": " The row of a has a value of 0 with itself"
+  },
+  {
+    "start": 362.34000000000003,
+    "end": 365.24,
+    "text": " and infinity for every other node."
+  },
+  {
+    "start": 365.24,
+    "end": 369.66,
+    "text": " This happens because a is a leaf node."
+  },
+  {
+    "start": 369.66,
+    "end": 373.0,
+    "text": " Similarly, except for the 0 distance with itself,"
+  },
+  {
+    "start": 373.0,
+    "end": 377.68,
+    "text": " The H column has infinity for all other nodes."
+  },
+  {
+    "start": 377.68,
+    "end": 381.9,
+    "text": " This happens because H has no incoming edges,"
+  },
+  {
+    "start": 381.9,
+    "end": 384.84,
+    "text": " and therefore no other node can reach H."
+  }
+]

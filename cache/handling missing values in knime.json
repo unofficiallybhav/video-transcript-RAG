@@ -1,0 +1,292 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.7600000000000002,
+    "text": " In this activity we are going to handle missing values using 9."
+  },
+  {
+    "start": 4.96,
+    "end": 10.16,
+    "text": " In this activity we will first remove samples with missing values for a specific variable,"
+  },
+  {
+    "start": 10.16,
+    "end": 13.44,
+    "text": " then we will impute missing values with the column min,"
+  },
+  {
+    "start": 13.44,
+    "end": 17.12,
+    "text": " and finally we will remove samples with any missing values."
+  },
+  {
+    "start": 20.56,
+    "end": 26.240000000000002,
+    "text": " For this activity we are going to start a new workflow. So we click on create workflow to"
+  },
+  {
+    "start": 26.240000000000002,
+    "end": 33.86,
+    "text": " your local space, we call it missing values, and we click on create. And we"
+  },
+  {
+    "start": 33.86,
+    "end": 37.72,
+    "text": " have a clean workflow to start working."
+  },
+  {
+    "start": 42.56,
+    "end": 47.24,
+    "text": " We are going to use the same data from the previous activity, so we include a"
+  },
+  {
+    "start": 47.24,
+    "end": 52.72,
+    "text": " CSV reader node into the workflow, we open the configuration, click on browse,"
+  },
+  {
+    "start": 52.72,
+    "end": 59.48,
+    "text": " select the data from our Big Data 4.9 folder, the Daily Weather Data, we click"
+  },
+  {
+    "start": 59.48,
+    "end": 65.36,
+    "text": " on OK, and now we have to run the node to load the data. So we run it, and we can"
+  },
+  {
+    "start": 65.36,
+    "end": 68.92,
+    "text": " see our data in the bottom."
+  },
+  {
+    "start": 70.56,
+    "end": 74.56,
+    "text": " The first approach that we will follow to remove missing values is going to be"
+  },
+  {
+    "start": 74.56,
+    "end": 78.84,
+    "text": " the removal of missing values of a certain column. So we look for the node"
+  },
+  {
+    "start": 78.84,
+    "end": 85.48,
+    "text": " missing values, we added it into the workflow, we connect it with the CSV reader node, and we open"
+  },
+  {
+    "start": 85.48,
+    "end": 94.04,
+    "text": " the configuration. Then we go to column settings, we select the air temperature at 9am, which is the"
+  },
+  {
+    "start": 94.04,
+    "end": 100.84,
+    "text": " column that we want to use to remove missing values, and we tell KNIME to simply remove the"
+  },
+  {
+    "start": 100.84,
+    "end": 109.0,
+    "text": " rows in which there are missing values for this specific column. So everything seems okay. So"
+  },
+  {
+    "start": 109.0,
+    "end": 118.68,
+    "text": " we're going to click on OK. And now we're going to execute the node to see how many rows we miss."
+  },
+  {
+    "start": 118.68,
+    "end": 125.4,
+    "text": " So in the bottom, you will see that this new data has 1090 rows, while the original data"
+  },
+  {
+    "start": 125.4,
+    "end": 131.32,
+    "text": " had 1095, which means that we lost five rows in this process."
+  },
+  {
+    "start": 134.72,
+    "end": 138.38,
+    "text": " In this new approach, we are going to impute missing values with the min."
+  },
+  {
+    "start": 138.70000000000002,
+    "end": 142.5,
+    "text": " So what I'm going to do is that I'm going to open the configuration again,"
+  },
+  {
+    "start": 142.82,
+    "end": 144.96,
+    "text": " and this time, instead of removing the rows,"
+  },
+  {
+    "start": 145.1,
+    "end": 149.18,
+    "text": " I'm going to tell KNIME to use the min to impute these missing values."
+  },
+  {
+    "start": 149.82,
+    "end": 150.98000000000002,
+    "text": " I click on OK."
+  },
+  {
+    "start": 150.98,
+    "end": 156.07999999999998,
+    "text": " I also click OK here but first I'm going to tell KNIME to not show again this"
+  },
+  {
+    "start": 156.07999999999998,
+    "end": 161.35999999999999,
+    "text": " window and now I'm going to add a couple of histogram charts because I want to"
+  },
+  {
+    "start": 161.35999999999999,
+    "end": 166.57999999999998,
+    "text": " compare the original data with the imputed data so yeah I add one here I"
+  },
+  {
+    "start": 166.57999999999998,
+    "end": 171.98,
+    "text": " add another one here I connect the first histogram with the original data and the"
+  },
+  {
+    "start": 171.98,
+    "end": 176.89999999999998,
+    "text": " second one with the imputed data and now I'm going to set up the histogram I'm"
+  },
+  {
+    "start": 176.9,
+    "end": 185.12,
+    "text": " I'm going to use the air temperature at 9 a.m. as the variable to be shown because that's the variable that I'm comparing."
+  },
+  {
+    "start": 185.56,
+    "end": 186.94,
+    "text": " I set the number of beans to 10."
+  },
+  {
+    "start": 186.94,
+    "end": 195.54000000000002,
+    "text": " And this time I'm not going to choose to show the special values in a bar because I want 9 to remove the missing values by default."
+  },
+  {
+    "start": 195.96,
+    "end": 197.18,
+    "text": " I click OK."
+  },
+  {
+    "start": 198.46,
+    "end": 203.20000000000002,
+    "text": " And then I'm going to do the same for this chart."
+  },
+  {
+    "start": 203.34,
+    "end": 205.52,
+    "text": " I select the air temperature at 9 a.m."
+  },
+  {
+    "start": 205.52,
+    "end": 208.72,
+    "text": " I set the number of bins to 10 and I click on OK."
+  },
+  {
+    "start": 209.68,
+    "end": 213.60000000000002,
+    "text": " Now I'm going to take the full workflow and execute it."
+  },
+  {
+    "start": 215.42000000000002,
+    "end": 217.82000000000002,
+    "text": " And let's compare the shards now."
+  },
+  {
+    "start": 218.76000000000002,
+    "end": 220.66000000000003,
+    "text": " So I open the first one."
+  },
+  {
+    "start": 222.82000000000002,
+    "end": 228.76000000000002,
+    "text": " And I want to focus on this bar in the middle, the one right here,"
+  },
+  {
+    "start": 228.82000000000002,
+    "end": 232.20000000000002,
+    "text": " because this one shows that it has 208 observations."
+  },
+  {
+    "start": 232.20000000000002,
+    "end": 238.06000000000003,
+    "text": " And this is the bar that has the value in which the mean lands."
+  },
+  {
+    "start": 238.06000000000003,
+    "end": 245.3,
+    "text": " So now I'm going to close it and open the second one."
+  },
+  {
+    "start": 245.3,
+    "end": 250.26000000000002,
+    "text": " And what we're going to see is that this same bar has 213 values because the five values"
+  },
+  {
+    "start": 250.26000000000002,
+    "end": 257.74,
+    "text": " that were originally removed now have been imputed with the mean."
+  },
+  {
+    "start": 257.74,
+    "end": 262.38,
+    "text": " For this final approach, I'm going to simply remove any single row that contains a missing"
+  },
+  {
+    "start": 262.38,
+    "end": 263.6,
+    "text": " value."
+  },
+  {
+    "start": 263.6,
+    "end": 270.62,
+    "text": " So I'm going to go to the default window and I'm going to select in both menus to remove"
+  },
+  {
+    "start": 270.62,
+    "end": 277.88,
+    "text": " rows when any numerical value has a missing value, either integer or double."
+  },
+  {
+    "start": 277.88,
+    "end": 282.90000000000003,
+    "text": " So I click on OK and I'm going to execute the histogram node, which is going to also"
+  },
+  {
+    "start": 282.90000000000003,
+    "end": 290.62000000000006,
+    "text": " execute the mixing values node by default. And I'm going to compare my histograms again. Remember"
+  },
+  {
+    "start": 290.62000000000006,
+    "end": 296.22,
+    "text": " that this is the histogram for air temperature at 9 a.m., so this is the distribution. You will"
+  },
+  {
+    "start": 296.22,
+    "end": 303.22,
+    "text": " notice that here, for example, now we have 224 observations, while in the other one we had more,"
+  },
+  {
+    "start": 303.62,
+    "end": 309.64000000000004,
+    "text": " but if we pay attention to the distribution of this data, and now we pay attention to the"
+  },
+  {
+    "start": 309.64,
+    "end": 316.38,
+    "text": " distribution of this data that only remove five missing values, we can see that both distributions"
+  },
+  {
+    "start": 316.38,
+    "end": 321.06,
+    "text": " are pretty much the same. And this is how we conclude this activity."
+  }
+]

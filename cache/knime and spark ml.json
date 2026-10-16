@@ -1,0 +1,352 @@
+[
+  {
+    "start": 1.0,
+    "end": 5.0,
+    "text": " Let's go through an overview of the tools we will be using in this course."
+  },
+  {
+    "start": 6.0,
+    "end": 10.0,
+    "text": " After this video, you will be able to describe what KNIME is,"
+  },
+  {
+    "start": 10.0,
+    "end": 13.0,
+    "text": " describe what Spark MLlib is,"
+  },
+  {
+    "start": 13.0,
+    "end": 17.0,
+    "text": " and contrast KNIME and MLlib as machine learning tools."
+  },
+  {
+    "start": 18.0,
+    "end": 23.0,
+    "text": " The machine learning tools that we will be using in this course are KNIME and Spark MLlib."
+  },
+  {
+    "start": 23.0,
+    "end": 25.0,
+    "text": " These are both open source tools."
+  },
+  {
+    "start": 25.0,
+    "end": 28.0,
+    "text": " This lecture will introduce these tools to you."
+  },
+  {
+    "start": 28.0,
+    "end": 33.76,
+    "text": " you. You will need to use them for the hands-on activities in this course."
+  },
+  {
+    "start": 33.76,
+    "end": 40.38,
+    "text": " KNIME Analytics is a platform for data analytics, reporting, and visualization. The KNIME platform"
+  },
+  {
+    "start": 40.38,
+    "end": 46.08,
+    "text": " uses a graphical user interface-based approach with drag-and-drop features to facilitate"
+  },
+  {
+    "start": 46.08,
+    "end": 52.56,
+    "text": " constructing an analytics solution. The basic components in KNIME are referred to as nodes."
+  },
+  {
+    "start": 52.56,
+    "end": 58.74,
+    "text": " Each node provides a specific functionality such as reading in a file, creating a specific"
+  },
+  {
+    "start": 58.74,
+    "end": 63.32,
+    "text": " type of machine learning model, and generating a plot."
+  },
+  {
+    "start": 63.32,
+    "end": 67.86,
+    "text": " Nodes can be connected to create machine learning workflows or pipelines."
+  },
+  {
+    "start": 67.86,
+    "end": 71.48,
+    "text": " KNIME stands for Constance Information Miner."
+  },
+  {
+    "start": 71.48,
+    "end": 75.62,
+    "text": " The Constance is for the University of Constance in Germany."
+  },
+  {
+    "start": 75.62,
+    "end": 81.44,
+    "text": " And note that the K in KNIME is silent in the pronunciation."
+  },
+  {
+    "start": 81.44,
+    "end": 85.67999999999999,
+    "text": " In KNIME, you assemble the steps that need to be performed in a machine learning process"
+  },
+  {
+    "start": 85.67999999999999,
+    "end": 89.2,
+    "text": " by connecting nodes to create a workflow."
+  },
+  {
+    "start": 89.2,
+    "end": 94.72,
+    "text": " To create a workflow, the user chooses the appropriate nodes from the node repository"
+  },
+  {
+    "start": 94.72,
+    "end": 97.74,
+    "text": " and assembles them into a workflow."
+  },
+  {
+    "start": 97.74,
+    "end": 103.08,
+    "text": " The workflow can then be executed in the KNIME workbench."
+  },
+  {
+    "start": 103.08,
+    "end": 107.32,
+    "text": " A node implements a specific operation in a workflow."
+  },
+  {
+    "start": 107.32,
+    "end": 109.88,
+    "text": " In this screenshot, we see two nodes."
+  },
+  {
+    "start": 109.88,
+    "end": 115.82,
+    "text": " The FileReader node is used to read data from a text file, or URL, or web address."
+  },
+  {
+    "start": 115.82,
+    "end": 120.5,
+    "text": " The DecisionTree Learner node builds a DecisionTree model."
+  },
+  {
+    "start": 120.5,
+    "end": 126.24,
+    "text": " Each node can have input and output ports, and can be connected to other nodes."
+  },
+  {
+    "start": 126.24,
+    "end": 131.68,
+    "text": " When a node is executed, it takes data from its input port, performs some operations on"
+  },
+  {
+    "start": 131.68,
+    "end": 135.82,
+    "text": " the data, and writes the results to the output port."
+  },
+  {
+    "start": 135.82,
+    "end": 138.82,
+    "text": " Data is transferred between nodes that are connected."
+  },
+  {
+    "start": 138.82,
+    "end": 143.16,
+    "text": " A node can be configured by opening up its configuration dialog."
+  },
+  {
+    "start": 143.16,
+    "end": 147.92,
+    "text": " This is where the parameters for the node can be set."
+  },
+  {
+    "start": 147.92,
+    "end": 153.72,
+    "text": " The node repository is where you will find all of the nodes available in your KNIME installation."
+  },
+  {
+    "start": 153.72,
+    "end": 156.94,
+    "text": " The nodes are organized by categories."
+  },
+  {
+    "start": 156.94,
+    "end": 162.78,
+    "text": " KNIME provides an array of nodes to perform operations for data access, data manipulation,"
+  },
+  {
+    "start": 162.78,
+    "end": 167.84,
+    "text": " analysis, visualization, and reporting."
+  },
+  {
+    "start": 167.84,
+    "end": 172.84,
+    "text": " As you can see, KNIME provides a visual approach to machine learning."
+  },
+  {
+    "start": 172.84,
+    "end": 178.26,
+    "text": " Its GUI-based, drag-and-drop approach provides an easy way to create and execute a machine"
+  },
+  {
+    "start": 178.26,
+    "end": 180.28,
+    "text": " learning workflow."
+  },
+  {
+    "start": 180.28,
+    "end": 184.96,
+    "text": " The open-source version of KNIME, however, is limited in how large of a dataset it can"
+  },
+  {
+    "start": 184.96,
+    "end": 186.3,
+    "text": " handle."
+  },
+  {
+    "start": 186.3,
+    "end": 191.12,
+    "text": " There are commercial extensions to KNIME to manage large datasets and offer other extra"
+  },
+  {
+    "start": 191.12,
+    "end": 196.08,
+    "text": " functionalities, but these extensions are not open-source."
+  },
+  {
+    "start": 196.08,
+    "end": 198.68,
+    "text": " Now let's talk about Spark MLlib."
+  },
+  {
+    "start": 198.68,
+    "end": 202.14000000000001,
+    "text": " You've worked with Spark before if you took the third course in this specialization on"
+  },
+  {
+    "start": 202.14000000000001,
+    "end": 204.20000000000002,
+    "text": " big data."
+  },
+  {
+    "start": 204.20000000000002,
+    "end": 207.14000000000001,
+    "text": " Spark is a distributed computing platform."
+  },
+  {
+    "start": 207.14000000000001,
+    "end": 212.04000000000002,
+    "text": " MLlib is a scalable machine learning library that runs on top of Spark."
+  },
+  {
+    "start": 212.04000000000002,
+    "end": 216.62,
+    "text": " It provides distributed implementations of commonly used machine learning algorithms"
+  },
+  {
+    "start": 216.62,
+    "end": 218.44,
+    "text": " and utilities."
+  },
+  {
+    "start": 218.44,
+    "end": 223.94,
+    "text": " The ML in MLlib, of course, stands for machine learning."
+  },
+  {
+    "start": 223.94,
+    "end": 229.16,
+    "text": " To implement machine learning operations in Spark MLlib, you need to write code."
+  },
+  {
+    "start": 229.16,
+    "end": 232.8,
+    "text": " So MLlib is not a GUI-based approach."
+  },
+  {
+    "start": 232.8,
+    "end": 238.3,
+    "text": " This segment of code reads and parses data from a file, then builds a decision tree classification"
+  },
+  {
+    "start": 238.3,
+    "end": 239.3,
+    "text": " model."
+  },
+  {
+    "start": 239.3,
+    "end": 247.3,
+    "text": " MLlib, as with the base Spark Core, provides an application programming interface or API"
+  },
+  {
+    "start": 247.3,
+    "end": 251.6,
+    "text": " for Java, Python, Scala, and R."
+  },
+  {
+    "start": 251.6,
+    "end": 255.2,
+    "text": " This means that you can write code in these programming languages to execute the base"
+  },
+  {
+    "start": 255.2,
+    "end": 259.36,
+    "text": " operations provided in Spark."
+  },
+  {
+    "start": 259.36,
+    "end": 262.6,
+    "text": " Spark MLlib runs on a distributed platform."
+  },
+  {
+    "start": 262.6,
+    "end": 266.84,
+    "text": " It provides machine learning algorithms and techniques that are implemented using distributed"
+  },
+  {
+    "start": 266.84,
+    "end": 268.56,
+    "text": " processing."
+  },
+  {
+    "start": 268.56,
+    "end": 273.46,
+    "text": " So MLlib is used for processing and analyzing large datasets."
+  },
+  {
+    "start": 273.46,
+    "end": 279.65999999999997,
+    "text": " And as we have discussed, writing code is required to implement operations in MLlib."
+  },
+  {
+    "start": 279.66,
+    "end": 284.72,
+    "text": " In summary, KNIME is a GUI-based machine learning tool, while Spark MLlib provides"
+  },
+  {
+    "start": 284.72,
+    "end": 290.02000000000004,
+    "text": " a programming-based, scalable platform for processing very large datasets."
+  },
+  {
+    "start": 290.02000000000004,
+    "end": 294.26000000000005,
+    "text": " You will be using both Spark MLlib and KNIME throughout this course."
+  },
+  {
+    "start": 294.26000000000005,
+    "end": 298.76000000000005,
+    "text": " We have readings and hands-on exercises to help you get familiar with these popular open-source"
+  },
+  {
+    "start": 298.76000000000005,
+    "end": 300.86,
+    "text": " tools for machine learning."
+  },
+  {
+    "start": 300.86,
+    "end": 304.46000000000004,
+    "text": " I think you will find it very informative and fun to work with these tools."
+  }
+]

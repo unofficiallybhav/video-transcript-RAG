@@ -1,0 +1,142 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.94,
+    "text": " So we saw that the Dijkstra algorithm has a very high worst-case complexity."
+  },
+  {
+    "start": 5.98,
+    "end": 8.2,
+    "text": " Despite the high complexity of the algorithm,"
+  },
+  {
+    "start": 8.92,
+    "end": 12.76,
+    "text": " there are several practical improvements that will enhance the performance of the method."
+  },
+  {
+    "start": 13.38,
+    "end": 16.62,
+    "text": " One of them is bidirectional Dijkstra algorithm."
+  },
+  {
+    "start": 17.080000000000002,
+    "end": 18.42,
+    "text": " The idea is very simple."
+  },
+  {
+    "start": 18.42,
+    "end": 22.62,
+    "text": " We will go forward from the source node and backward from the target node"
+  },
+  {
+    "start": 22.62,
+    "end": 26.1,
+    "text": " and stop when the two expanding frontiers meet."
+  },
+  {
+    "start": 26.62,
+    "end": 31.1,
+    "text": " We will briefly illustrate the process without going deep into the details of every step."
+  },
+  {
+    "start": 31.5,
+    "end": 34.120000000000005,
+    "text": " So the technique starts just like the regular method."
+  },
+  {
+    "start": 34.78,
+    "end": 38.08,
+    "text": " The control moves from I to F at a cost of 5,"
+  },
+  {
+    "start": 38.660000000000004,
+    "end": 44.38,
+    "text": " but then it switches and starts from the target and moves backward along the edges."
+  },
+  {
+    "start": 44.6,
+    "end": 47.980000000000004,
+    "text": " So from A, it comes to D or C."
+  },
+  {
+    "start": 48.8,
+    "end": 52.620000000000005,
+    "text": " We'll choose D because an AD is the least-weight path."
+  },
+  {
+    "start": 53.300000000000004,
+    "end": 58.96000000000001,
+    "text": " Now, the forward step is performed again, and we traverse from F to G."
+  },
+  {
+    "start": 59.42,
+    "end": 64.38000000000001,
+    "text": " We are skipping the expansion to J because, as we saw before, it does not contribute to the path."
+  },
+  {
+    "start": 64.38000000000001,
+    "end": 68.5,
+    "text": " So the total weight of the IFG path is 15."
+  },
+  {
+    "start": 69.34,
+    "end": 72.80000000000001,
+    "text": " The backward process then reaches G through D."
+  },
+  {
+    "start": 73.30000000000001,
+    "end": 78.52000000000001,
+    "text": " The cost of the IFG is 15, and the cost of ADG is also 15."
+  },
+  {
+    "start": 79.12,
+    "end": 82.06,
+    "text": " We stop because a common node is reached."
+  },
+  {
+    "start": 82.06,
+    "end": 86.44,
+    "text": " Next, we need to ensure that the weight of the forward path and that of the reverse path"
+  },
+  {
+    "start": 86.44,
+    "end": 90.82000000000001,
+    "text": " are added and the total combined weight is minimal."
+  },
+  {
+    "start": 90.82000000000001,
+    "end": 95.46000000000001,
+    "text": " At this point, we can concatenate the partial paths to construct the full shortest path"
+  },
+  {
+    "start": 95.46000000000001,
+    "end": 99.18,
+    "text": " which is I F G D A."
+  },
+  {
+    "start": 99.18,
+    "end": 104.6,
+    "text": " Now one point to remember is that the length of the smallest weight path can be longer"
+  },
+  {
+    "start": 104.6,
+    "end": 107.18,
+    "text": " than the shortest hop path."
+  },
+  {
+    "start": 107.18,
+    "end": 116.62,
+    "text": " Here the FCA path has 2 hops but a weight of 20, but the weight of the 3 hop path FGDA"
+  },
+  {
+    "start": 116.62,
+    "end": 117.62,
+    "text": " is 15."
+  },
+  {
+    "start": 117.62,
+    "end": 118.74000000000001,
+    "text": " So just remember that."
+  }
+]

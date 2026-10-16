@@ -1,0 +1,507 @@
+[
+  {
+    "start": 0.96,
+    "end": 5.72,
+    "text": " In 2010, Google published a paper outlining a system"
+  },
+  {
+    "start": 5.72,
+    "end": 9.08,
+    "text": " that they have been working on."
+  },
+  {
+    "start": 9.08,
+    "end": 12.200000000000001,
+    "text": " This publication about a system called Pregel"
+  },
+  {
+    "start": 12.200000000000001,
+    "end": 15.200000000000001,
+    "text": " has been one of the most influential publications"
+  },
+  {
+    "start": 15.200000000000001,
+    "end": 18.32,
+    "text": " on large-scale graph computing."
+  },
+  {
+    "start": 18.32,
+    "end": 21.400000000000002,
+    "text": " The Pregel system essentially implemented the BSP model"
+  },
+  {
+    "start": 21.400000000000002,
+    "end": 24.16,
+    "text": " that we covered in the last lecture."
+  },
+  {
+    "start": 24.16,
+    "end": 27.12,
+    "text": " To show how the Pregel system is programmed,"
+  },
+  {
+    "start": 27.12,
+    "end": 31.02,
+    "text": " we present the published code of Google's most famous"
+  },
+  {
+    "start": 31.02,
+    "end": 34.2,
+    "text": " algorithm, the PageRank."
+  },
+  {
+    "start": 34.2,
+    "end": 39.18,
+    "text": " Recall that PageRank's task is to compute node centrality."
+  },
+  {
+    "start": 39.18,
+    "end": 41.6,
+    "text": " The basic philosophy of PageRank is"
+  },
+  {
+    "start": 41.6,
+    "end": 44.16,
+    "text": " that a node that is connected to an important node"
+  },
+  {
+    "start": 44.16,
+    "end": 46.8,
+    "text": " gains more importance."
+  },
+  {
+    "start": 46.8,
+    "end": 49.78,
+    "text": " In the figure on the right, B is a very important node"
+  },
+  {
+    "start": 49.78,
+    "end": 53.24,
+    "text": " with a high PageRank because a lot of other nodes directly"
+  },
+  {
+    "start": 53.24,
+    "end": 55.400000000000006,
+    "text": " or indirectly point to it."
+  },
+  {
+    "start": 55.4,
+    "end": 58.06,
+    "text": " So C, being its direct neighbor that"
+  },
+  {
+    "start": 58.06,
+    "end": 61.94,
+    "text": " receives an edge from B, also has a high page rank,"
+  },
+  {
+    "start": 61.94,
+    "end": 66.72,
+    "text": " although C itself does not have too many incident edges."
+  },
+  {
+    "start": 66.72,
+    "end": 70.46,
+    "text": " On the left side, we have Google's published C++ code"
+  },
+  {
+    "start": 70.46,
+    "end": 74.34,
+    "text": " that implements page rank method on the Pregel infrastructure."
+  },
+  {
+    "start": 74.34,
+    "end": 76.46,
+    "text": " You don't have to know C++ to understand"
+  },
+  {
+    "start": 76.46,
+    "end": 78.75999999999999,
+    "text": " the basic essence of the code."
+  },
+  {
+    "start": 78.75999999999999,
+    "end": 81.88,
+    "text": " We will explain the basic elements of the vertex program"
+  },
+  {
+    "start": 81.88,
+    "end": 84.46000000000001,
+    "text": " in the next few slides."
+  },
+  {
+    "start": 84.46000000000001,
+    "end": 86.86000000000001,
+    "text": " Remember from the last lecture that the BSP technique"
+  },
+  {
+    "start": 86.86000000000001,
+    "end": 90.24000000000001,
+    "text": " considers a vertex to be a process."
+  },
+  {
+    "start": 90.24000000000001,
+    "end": 95.96000000000001,
+    "text": " Every vertex implements a method called compute."
+  },
+  {
+    "start": 95.96000000000001,
+    "end": 99.16000000000001,
+    "text": " This method implements the logic of what a vertex should"
+  },
+  {
+    "start": 99.16000000000001,
+    "end": 102.44000000000001,
+    "text": " do during the super steps."
+  },
+  {
+    "start": 102.44000000000001,
+    "end": 105.34,
+    "text": " The program starts by creating a special kind of vertex"
+  },
+  {
+    "start": 105.34,
+    "end": 109.18,
+    "text": " called the page rank vertex for which this compute method"
+  },
+  {
+    "start": 109.18,
+    "end": 111.02000000000001,
+    "text": " is specified."
+  },
+  {
+    "start": 111.02000000000001,
+    "end": 113.14000000000001,
+    "text": " You will notice that the compute method"
+  },
+  {
+    "start": 113.14,
+    "end": 120.0,
+    "text": " starts by saying what happens when the super step is 1 or more. But what happens in super"
+  },
+  {
+    "start": 120.0,
+    "end": 128.84,
+    "text": " step 0? Usually, super step 0 is used for initialization. Every vertex initializes its"
+  },
+  {
+    "start": 128.84,
+    "end": 134.04,
+    "text": " page rank value to the same number, which is 1, divided by the total number of vertices"
+  },
+  {
+    "start": 134.04,
+    "end": 140.98,
+    "text": " in the graph. Computationally, a page rank of a vertex is a number calculated by adding"
+  },
+  {
+    "start": 140.98,
+    "end": 148.14,
+    "text": " two terms. The first term depends on the total number of vertices in the graph and is therefore"
+  },
+  {
+    "start": 148.14,
+    "end": 155.12,
+    "text": " the same every time. And the second term depends on the page rank of the neighbors of the vertex."
+  },
+  {
+    "start": 155.92,
+    "end": 161.62,
+    "text": " How does the vertex compute the second term? It gets the page rank values of the neighbors in"
+  },
+  {
+    "start": 161.62,
+    "end": 169.48,
+    "text": " its messages and adds them up. As we saw for SSSP, after a vertex compute its value, it goes to the"
+  },
+  {
+    "start": 169.48,
+    "end": 176.56,
+    "text": " propagate step and sends a message to its outgoing edges. For PageRank, the message it sends out"
+  },
+  {
+    "start": 176.56,
+    "end": 184.33999999999997,
+    "text": " is just computed value divided by the number of outgoing edges. When this is done, the node halts"
+  },
+  {
+    "start": 184.33999999999997,
+    "end": 191.89999999999998,
+    "text": " for the next super step and waits for some other node to wake it up. At this point, we have seen"
+  },
+  {
+    "start": 191.89999999999998,
+    "end": 198.38,
+    "text": " two examples of graph analytic operations executed on the BSP programming model. Now,"
+  },
+  {
+    "start": 198.38,
+    "end": 203.88,
+    "text": " Now, we will look at the same problem from a slightly different viewpoint."
+  },
+  {
+    "start": 203.88,
+    "end": 208.98,
+    "text": " GraphLab, originally a project from Carnegie Mellon University, now turned into a company"
+  },
+  {
+    "start": 208.98,
+    "end": 213.94,
+    "text": " called Dato, took a similar yet different approach to the problem."
+  },
+  {
+    "start": 213.94,
+    "end": 218.8,
+    "text": " In GraphLab, any kind of data can be associated with a vertex or an edge."
+  },
+  {
+    "start": 218.8,
+    "end": 222.68,
+    "text": " This information is stored in what is called the data graph."
+  },
+  {
+    "start": 222.68,
+    "end": 225.01999999999998,
+    "text": " Let's look at the same PageRack algorithm."
+  },
+  {
+    "start": 225.02,
+    "end": 230.14000000000001,
+    "text": " The syntax is a bit different, but the logical blocks are identical."
+  },
+  {
+    "start": 230.14000000000001,
+    "end": 233.96,
+    "text": " These are the same blocks that we highlighted before."
+  },
+  {
+    "start": 233.96,
+    "end": 240.08,
+    "text": " GraphLab breaks up these blocks into three different user-specified functions, called"
+  },
+  {
+    "start": 240.08,
+    "end": 244.84,
+    "text": " gather, apply, scatter, or gas for short."
+  },
+  {
+    "start": 244.84,
+    "end": 248.18,
+    "text": " Okay, so what's different?"
+  },
+  {
+    "start": 248.18,
+    "end": 250.96,
+    "text": " Let's mention a few important differences."
+  },
+  {
+    "start": 250.96,
+    "end": 254.88,
+    "text": " First, let's consider gather."
+  },
+  {
+    "start": 254.88,
+    "end": 260.42,
+    "text": " Rather than adopting a message parsing or data flow model like Pregel, GraphLab allows"
+  },
+  {
+    "start": 260.42,
+    "end": 265.86,
+    "text": " the user-defined update function complete freedom to read and modify any of the data"
+  },
+  {
+    "start": 265.86,
+    "end": 269.8,
+    "text": " on adjacent vertices and edges."
+  },
+  {
+    "start": 269.8,
+    "end": 275.44,
+    "text": " In GraphLab, a receiving vertex has access to the data on the adjacent vertices even"
+  },
+  {
+    "start": 275.44,
+    "end": 281.46,
+    "text": " if the adjacent vertices did not schedule the current update."
+  },
+  {
+    "start": 281.46,
+    "end": 286.32,
+    "text": " In contrast, for Pregel, the control is with the sending nodes."
+  },
+  {
+    "start": 286.32,
+    "end": 290.52,
+    "text": " An update can happen only when a node sends out messages."
+  },
+  {
+    "start": 290.52,
+    "end": 295.21999999999997,
+    "text": " For some graph analytics operations, like a dynamic version of PageRank, this is very"
+  },
+  {
+    "start": 295.21999999999997,
+    "end": 296.21999999999997,
+    "text": " important."
+  },
+  {
+    "start": 296.21999999999997,
+    "end": 304.76,
+    "text": " Further, a vertex can update its value asynchronously, that is, as soon as it receives an update"
+  },
+  {
+    "start": 304.76,
+    "end": 309.67999999999995,
+    "text": " without having to wait for all nodes like we do in BSP."
+  },
+  {
+    "start": 309.68,
+    "end": 315.62,
+    "text": " This often helps some iterative algorithms like PageRank converge faster."
+  },
+  {
+    "start": 315.62,
+    "end": 322.42,
+    "text": " When the graph is large and must be split across machine, BSP cuts the graph along edges,"
+  },
+  {
+    "start": 322.42,
+    "end": 324.44,
+    "text": " as we see on this slide."
+  },
+  {
+    "start": 324.44,
+    "end": 329.84000000000003,
+    "text": " So every cut edge results in a machine-to-machine communication."
+  },
+  {
+    "start": 329.84000000000003,
+    "end": 335.32,
+    "text": " If we increase the number of across machine edges, we increase communication cost."
+  },
+  {
+    "start": 335.32,
+    "end": 339.14,
+    "text": " This has an interesting practical consequence."
+  },
+  {
+    "start": 339.14,
+    "end": 344.59999999999997,
+    "text": " As we have mentioned, many graph applications have communities and central nodes that have"
+  },
+  {
+    "start": 344.59999999999997,
+    "end": 346.36,
+    "text": " high degree."
+  },
+  {
+    "start": 346.36,
+    "end": 350.41999999999996,
+    "text": " Many young people today have over 500 Facebook friends."
+  },
+  {
+    "start": 350.41999999999996,
+    "end": 355.26,
+    "text": " So when an analytic operation like PageRank that goes through multiple iterations until"
+  },
+  {
+    "start": 355.26,
+    "end": 361.26,
+    "text": " convergence, for these graphs, the communication cost can become very high."
+  },
+  {
+    "start": 361.26,
+    "end": 366.86,
+    "text": " In the clustered graph shown here, every color represents a different machine."
+  },
+  {
+    "start": 366.86,
+    "end": 369.08,
+    "text": " Let's look at that red vertex."
+  },
+  {
+    "start": 369.08,
+    "end": 373.64,
+    "text": " What would happen if we split it like this instead?"
+  },
+  {
+    "start": 373.64,
+    "end": 379.7,
+    "text": " The red node gets split, and different vertices of different machines work with"
+  },
+  {
+    "start": 379.7,
+    "end": 383.38,
+    "text": " their own copy of the red vertex."
+  },
+  {
+    "start": 383.38,
+    "end": 387.41999999999996,
+    "text": " In the diagram, the primary red vertex is marked 0, and"
+  },
+  {
+    "start": 387.41999999999996,
+    "end": 390.88,
+    "text": " copies are marked 1 through 5."
+  },
+  {
+    "start": 390.88,
+    "end": 397.9,
+    "text": " Now the gather phase happens for each copy, followed by a second operation"
+  },
+  {
+    "start": 397.90000000000003,
+    "end": 401.02000000000004,
+    "text": " from the copies to the primary red vertex."
+  },
+  {
+    "start": 401.02000000000004,
+    "end": 403.66,
+    "text": " This is followed by a new user-defined operation"
+  },
+  {
+    "start": 403.66,
+    "end": 406.66,
+    "text": " called merge that combines the partial results"
+  },
+  {
+    "start": 406.66,
+    "end": 409.28000000000003,
+    "text": " from the copies to the primary vertex."
+  },
+  {
+    "start": 409.28000000000003,
+    "end": 411.56000000000006,
+    "text": " So for PageRank, the merge operation"
+  },
+  {
+    "start": 411.56000000000006,
+    "end": 413.74,
+    "text": " boils down to computing the total summation"
+  },
+  {
+    "start": 413.74,
+    "end": 417.68000000000006,
+    "text": " of the partial summation of the edges computed at the copies."
+  },
+  {
+    "start": 417.68000000000006,
+    "end": 420.74,
+    "text": " Thus, in this lesson, we have seen two"
+  },
+  {
+    "start": 420.74,
+    "end": 424.04,
+    "text": " of the most influential paradigms of large-scale graph"
+  },
+  {
+    "start": 424.04,
+    "end": 427.04,
+    "text": " computation when the number of nodes and edges"
+  },
+  {
+    "start": 427.04,
+    "end": 429.54,
+    "text": " run into tens of millions and more."
+  }
+]

@@ -1,0 +1,277 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.32,
+    "text": " We've looked at classification, regression, and cluster analysis. Let's now discuss association"
+  },
+  {
+    "start": 6.32,
+    "end": 12.52,
+    "text": " analysis as a machine learning task. After this video, you will be able to explain what"
+  },
+  {
+    "start": 12.52,
+    "end": 19.36,
+    "text": " association analysis entails, list some applications of association analysis, define what an item"
+  },
+  {
+    "start": 19.36,
+    "end": 25.48,
+    "text": " set is. In association analysis, the goal is to come up with a set of rules to capture"
+  },
+  {
+    "start": 25.48,
+    "end": 31.560000000000002,
+    "text": " associations between items or events. The rules are used to determine when items or"
+  },
+  {
+    "start": 31.560000000000002,
+    "end": 37.480000000000004,
+    "text": " events occur together. You may remember seeing these images earlier in the course where we"
+  },
+  {
+    "start": 37.480000000000004,
+    "end": 42.6,
+    "text": " introduced the different categories of machine learning tasks and techniques. But do you remember"
+  },
+  {
+    "start": 42.6,
+    "end": 47.88,
+    "text": " what the association is between these items? Well, let's recap that story in case you don't remember."
+  },
+  {
+    "start": 48.6,
+    "end": 54.68,
+    "text": " The story goes like this. A supermarket chain used association analysis to discover a connection"
+  },
+  {
+    "start": 54.68,
+    "end": 59.96,
+    "text": " between two seemingly unrelated products, they discovered that many customers who go"
+  },
+  {
+    "start": 59.96,
+    "end": 66.68,
+    "text": " to the store late on Sunday night to buy diapers also tend to buy beer. This information was"
+  },
+  {
+    "start": 66.68,
+    "end": 71.24,
+    "text": " then used to place beer and diapers close together, and they saw a jump in sales of"
+  },
+  {
+    "start": 71.24,
+    "end": 76.64,
+    "text": " both items. This illustrates that you can uncover unexpected and useful relationships"
+  },
+  {
+    "start": 76.64,
+    "end": 82.0,
+    "text": " with association analysis. This diaper and beer story has become part of the data mining"
+  },
+  {
+    "start": 82.0,
+    "end": 87.76,
+    "text": " folklore. It's unclear how much of it is true, but it has become the prime example of what you can"
+  },
+  {
+    "start": 87.76,
+    "end": 94.14,
+    "text": " discover with association analysis and machine learning in general. A common application of"
+  },
+  {
+    "start": 94.14,
+    "end": 100.84,
+    "text": " association analysis is referred to as market basket analysis. This is used to understand the"
+  },
+  {
+    "start": 100.84,
+    "end": 106.16,
+    "text": " purchasing behavior of customers. The idea is that you're looking into the shopping basket of"
+  },
+  {
+    "start": 106.16,
+    "end": 111.18,
+    "text": " customers when they are at the market and analyzing that data to understand what items"
+  },
+  {
+    "start": 111.18,
+    "end": 116.98,
+    "text": " are purchased together. This information can be used to place related items together or"
+  },
+  {
+    "start": 116.98,
+    "end": 122.9,
+    "text": " to have sales and items that are often purchased together. Another application of association"
+  },
+  {
+    "start": 122.9,
+    "end": 128.24,
+    "text": " analysis is to recommend items that a customer may be interested in based on their purchasing"
+  },
+  {
+    "start": 128.24,
+    "end": 134.32,
+    "text": " or browsing history. This is very commonly used on companies' websites to get customers"
+  },
+  {
+    "start": 134.32,
+    "end": 140.3,
+    "text": " to buy more items. There are medical applications as well. Analysis of patients and treatments"
+  },
+  {
+    "start": 140.3,
+    "end": 145.56,
+    "text": " may reveal associations to identify effective treatments for patients with certain medical"
+  },
+  {
+    "start": 145.56,
+    "end": 152.02,
+    "text": " histories. This diagram illustrates how association analysis works. The data set is a collection"
+  },
+  {
+    "start": 152.02,
+    "end": 158.66000000000003,
+    "text": " of transactions. Each transaction contains one or more items. This is referred to as"
+  },
+  {
+    "start": 158.66000000000003,
+    "end": 164.68,
+    "text": " the item set. From the given item sets, generate association rules that capture which items"
+  },
+  {
+    "start": 164.68,
+    "end": 171.5,
+    "text": " tend to occur together. In our example, the dataset consists of five transactions. In"
+  },
+  {
+    "start": 171.5,
+    "end": 177.68,
+    "text": " the first transaction, the items are diaper, bread, and milk. The second transaction has"
+  },
+  {
+    "start": 177.68,
+    "end": 184.74,
+    "text": " items bread, diaper, beer, and eggs, and so on. Rules that could be generated from this"
+  },
+  {
+    "start": 184.74,
+    "end": 190.24,
+    "text": " dataset are shown at the bottom. For example, the first rule states that if bread and milk"
+  },
+  {
+    "start": 190.24,
+    "end": 195.16,
+    "text": " or bought together, then diaper is also bought. The second rule states that if"
+  },
+  {
+    "start": 195.16,
+    "end": 201.10000000000002,
+    "text": " milk is bought, then bread is also bought. The association analysis process"
+  },
+  {
+    "start": 201.10000000000002,
+    "end": 207.22,
+    "text": " consists of the following steps. The first step is to create item sets. Item"
+  },
+  {
+    "start": 207.22,
+    "end": 212.20000000000002,
+    "text": " sets are generated for sets with one item, two items, three items, and so on."
+  },
+  {
+    "start": 212.20000000000002,
+    "end": 218.08,
+    "text": " Then, frequent item sets are identified. Frequent item sets are those that occur"
+  },
+  {
+    "start": 218.08,
+    "end": 224.26000000000002,
+    "text": " at least a minimum number of times. From the frequent item sets, association rules are"
+  },
+  {
+    "start": 224.26000000000002,
+    "end": 229.72000000000003,
+    "text": " generated. We will take a more detailed look at these steps in the next lecture."
+  },
+  {
+    "start": 229.72000000000003,
+    "end": 235.10000000000002,
+    "text": " Some things to note about association analysis. Like cluster analysis, each transaction does"
+  },
+  {
+    "start": 235.10000000000002,
+    "end": 241.4,
+    "text": " not have a label to specify which item set or rule it belongs to, so association analysis"
+  },
+  {
+    "start": 241.4,
+    "end": 247.52,
+    "text": " is an unsupervised task. You may end up with many rules at the end of the analysis, but"
+  },
+  {
+    "start": 247.52,
+    "end": 253.48000000000002,
+    "text": " But whether those rules are interesting, useful, or applicable requires interpretation using"
+  },
+  {
+    "start": 253.48000000000002,
+    "end": 256.5,
+    "text": " domain knowledge of the application."
+  },
+  {
+    "start": 256.5,
+    "end": 262.24,
+    "text": " In addition, the association analysis process will not tell you how to apply the rules."
+  },
+  {
+    "start": 262.24,
+    "end": 265.94,
+    "text": " This also requires knowledge of the application."
+  },
+  {
+    "start": 265.94,
+    "end": 271.56,
+    "text": " So as with cluster analysis, interpretation and analysis are required to make sense of"
+  },
+  {
+    "start": 271.56,
+    "end": 275.94,
+    "text": " the resulting rules that you get from association analysis."
+  },
+  {
+    "start": 275.94,
+    "end": 282.21999999999997,
+    "text": " In summary, association analysis finds rules to capture associations between items."
+  },
+  {
+    "start": 282.21999999999997,
+    "end": 287.7,
+    "text": " The association rules have intuitive appeal because they are in the form of if this, then"
+  },
+  {
+    "start": 287.7,
+    "end": 290.38,
+    "text": " that, which is easy to understand."
+  },
+  {
+    "start": 290.38,
+    "end": 296.64,
+    "text": " The results of association analysis require analysis and interpretation using domain knowledge"
+  },
+  {
+    "start": 296.64,
+    "end": 300.74,
+    "text": " to determine the usefulness and applicability of the resulting rules."
+  },
+  {
+    "start": 300.74,
+    "end": 305.72,
+    "text": " Next, we will cover the steps in the association analysis process in more detail."
+  },
+  {
+    "start": 305.94,
+    "end": 307.94,
+    "text": " You"
+  }
+]

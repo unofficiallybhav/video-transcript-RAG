@@ -1,0 +1,202 @@
+[
+  {
+    "start": 0.72,
+    "end": 5.5200000000000005,
+    "text": " In this lecture, we will discuss how overfitting occurs with decision trees and how it can"
+  },
+  {
+    "start": 5.5200000000000005,
+    "end": 11.92,
+    "text": " be avoided. After this video, you will be able to discuss overfitting in the context"
+  },
+  {
+    "start": 11.92,
+    "end": 18.96,
+    "text": " of decision tree models, explain how overfitting is addressed in decision tree induction, define"
+  },
+  {
+    "start": 18.96,
+    "end": 24.16,
+    "text": " pre-pruning and post-pruning. In our lecture on decision trees, we discussed that during"
+  },
+  {
+    "start": 24.16,
+    "end": 30.86,
+    "text": " the construction of a decision tree, also referred to as tree induction, the tree repeatedly"
+  },
+  {
+    "start": 30.86,
+    "end": 36.66,
+    "text": " splits the data in a node in order to get successively pure subsets of data. Note that"
+  },
+  {
+    "start": 36.66,
+    "end": 41.86,
+    "text": " a decision tree classifier can potentially expand its nodes until it can perfectly classify"
+  },
+  {
+    "start": 41.86,
+    "end": 47.34,
+    "text": " samples in the training data. But if the tree grows nodes to fit the noise in the training"
+  },
+  {
+    "start": 47.34,
+    "end": 53.18,
+    "text": " data, then it will not classify a new sample well. This is because the tree has partitioned"
+  },
+  {
+    "start": 53.18,
+    "end": 58.0,
+    "text": " the input space according to the noise in the data instead of to the true structure"
+  },
+  {
+    "start": 58.0,
+    "end": 62.68,
+    "text": " of the data. In other words, it has overfit."
+  },
+  {
+    "start": 62.68,
+    "end": 68.0,
+    "text": " How can overfitting be avoided in decision trees? There are two ways. One is to stop"
+  },
+  {
+    "start": 68.0,
+    "end": 72.64,
+    "text": " growing the tree before the tree is fully grown to perfectly fit the training data."
+  },
+  {
+    "start": 72.64,
+    "end": 78.3,
+    "text": " This is referred to as pre-pruning. The other way to avoid overfitting in decision trees"
+  },
+  {
+    "start": 78.3,
+    "end": 83.64,
+    "text": " is to grow the tree to its maximum size and then prune the tree back by removing parts"
+  },
+  {
+    "start": 83.64,
+    "end": 90.17999999999999,
+    "text": " of the tree. This is referred to as post-pruning. In general, overfitting occurs because the"
+  },
+  {
+    "start": 90.17999999999999,
+    "end": 95.74,
+    "text": " model is too complex. For a decision tree model, model complexity is determined by the"
+  },
+  {
+    "start": 95.74,
+    "end": 101.46,
+    "text": " number of nodes in the tree. So addressing overfitting in decision trees means controlling"
+  },
+  {
+    "start": 101.46,
+    "end": 106.78,
+    "text": " the number of nodes. Both methods of pruning control the growth of the tree and consequently"
+  },
+  {
+    "start": 106.78,
+    "end": 110.42,
+    "text": " the complexity of the resulting model."
+  },
+  {
+    "start": 110.42,
+    "end": 115.82000000000001,
+    "text": " With pre-pruning, the idea is to stop tree induction before a fully grown tree is built"
+  },
+  {
+    "start": 115.82000000000001,
+    "end": 118.52,
+    "text": " that perfectly fits the training data."
+  },
+  {
+    "start": 118.52,
+    "end": 123.3,
+    "text": " To do this, restrictive stopping conditions for growing nodes must be used."
+  },
+  {
+    "start": 123.3,
+    "end": 128.7,
+    "text": " For example, a node stops expanding if the number of samples in the node is less than"
+  },
+  {
+    "start": 128.7,
+    "end": 131.1,
+    "text": " some minimum threshold."
+  },
+  {
+    "start": 131.1,
+    "end": 135.22,
+    "text": " Another example is to stop expanding a node if the improvement in the impurity measure"
+  },
+  {
+    "start": 135.22,
+    "end": 142.46,
+    "text": " falls below a certain threshold. In post-pruning, the tree is grown to its maximum size. Then"
+  },
+  {
+    "start": 142.46,
+    "end": 148.28,
+    "text": " the tree is pruned by removing nodes using a bottom-up approach. That is, the tree is"
+  },
+  {
+    "start": 148.28,
+    "end": 153.52,
+    "text": " trimmed starting with the leaf nodes. The pruning is done by replacing a subtree with"
+  },
+  {
+    "start": 153.52,
+    "end": 159.46,
+    "text": " the leaf node if this improves the generalization error, or if there is no change to the generalization"
+  },
+  {
+    "start": 159.46,
+    "end": 164.66,
+    "text": " error with this replacement. In other words, if removing a subtree does not have a negative"
+  },
+  {
+    "start": 164.66,
+    "end": 169.96,
+    "text": " effect on the generalization error, then the nodes in that subtree only add to the complexity"
+  },
+  {
+    "start": 169.96,
+    "end": 175.78,
+    "text": " of the tree and not to its overall performance, and so those nodes should be removed."
+  },
+  {
+    "start": 175.78,
+    "end": 180.78,
+    "text": " In practice, post-pruning tends to give better results. This is because pruning decisions"
+  },
+  {
+    "start": 180.78,
+    "end": 185.7,
+    "text": " are based on information from the full tree. Pre-pruning, on the other hand, may stop the"
+  },
+  {
+    "start": 185.7,
+    "end": 192.16,
+    "text": " tree growing process prematurely. However, post-pruning is more computationally expensive"
+  },
+  {
+    "start": 192.16,
+    "end": 196.46,
+    "text": " since the tree has to be expanded to its full size."
+  },
+  {
+    "start": 196.46,
+    "end": 201.72,
+    "text": " In summary, to address overfitting in decision trees, tree pruning is used."
+  },
+  {
+    "start": 201.72,
+    "end": 206.12,
+    "text": " There are two pruning methods, pre-pruning and post-pruning."
+  },
+  {
+    "start": 206.12,
+    "end": 208.92,
+    "text": " Both methods control the complexity of the tree model."
+  }
+]

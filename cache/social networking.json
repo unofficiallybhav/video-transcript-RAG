@@ -1,0 +1,352 @@
+[
+  {
+    "start": 0.76,
+    "end": 5.76,
+    "text": " In the first example of graph analytics for with data, we will consider the social media"
+  },
+  {
+    "start": 5.76,
+    "end": 11.26,
+    "text": " called Twitter and graphs representing tweets."
+  },
+  {
+    "start": 11.26,
+    "end": 14.620000000000001,
+    "text": " What types of objects and relationships does a tweet have?"
+  },
+  {
+    "start": 14.620000000000001,
+    "end": 20.56,
+    "text": " Well, in fact, tweets consist of many of the same elements and relationships as the Facebook"
+  },
+  {
+    "start": 20.56,
+    "end": 23.12,
+    "text": " posts."
+  },
+  {
+    "start": 23.12,
+    "end": 29.98,
+    "text": " Tweets have users, they contain text, tweets can point to one another or to URLs."
+  },
+  {
+    "start": 29.98,
+    "end": 31.42,
+    "text": " They have hashtags."
+  },
+  {
+    "start": 31.42,
+    "end": 35.58,
+    "text": " They can include reference to various other types of media."
+  },
+  {
+    "start": 35.58,
+    "end": 38.06,
+    "text": " But what about relationships?"
+  },
+  {
+    "start": 38.06,
+    "end": 42.34,
+    "text": " Well, much like Facebook, relationships and tweets"
+  },
+  {
+    "start": 42.34,
+    "end": 46.6,
+    "text": " are more reflective of what the user do with tweets."
+  },
+  {
+    "start": 46.6,
+    "end": 48.900000000000006,
+    "text": " For example, people create tweets."
+  },
+  {
+    "start": 48.900000000000006,
+    "end": 50.3,
+    "text": " They respond to tweets."
+  },
+  {
+    "start": 50.3,
+    "end": 53.22,
+    "text": " They mention other users, and so forth."
+  },
+  {
+    "start": 53.22,
+    "end": 57.2,
+    "text": " Let's look at these relationships in detail."
+  },
+  {
+    "start": 57.2,
+    "end": 62.38,
+    "text": " In this graph, all of the light blue notes are tweets,"
+  },
+  {
+    "start": 62.38,
+    "end": 65.02000000000001,
+    "text": " and all of the purple notes are users."
+  },
+  {
+    "start": 65.02000000000001,
+    "end": 67.84,
+    "text": " When a specific user creates a specific tweet,"
+  },
+  {
+    "start": 67.84,
+    "end": 71.22,
+    "text": " an edge is created in the graph as a result."
+  },
+  {
+    "start": 71.22,
+    "end": 74.46000000000001,
+    "text": " We'll come back to this graph in the next few slides."
+  },
+  {
+    "start": 74.46000000000001,
+    "end": 77.92,
+    "text": " So what do we want to do with it?"
+  },
+  {
+    "start": 77.92,
+    "end": 80.36,
+    "text": " Well, to be very specific, this graph"
+  },
+  {
+    "start": 80.36,
+    "end": 84.60000000000001,
+    "text": " was created from tweets of a bunch of online gamers."
+  },
+  {
+    "start": 84.60000000000001,
+    "end": 87.00000000000001,
+    "text": " In this case, we were monitoring the tweets"
+  },
+  {
+    "start": 87.00000000000001,
+    "end": 91.16000000000001,
+    "text": " of all people who play a particular online video game."
+  },
+  {
+    "start": 91.16000000000001,
+    "end": 94.36000000000001,
+    "text": " Typically, gamers are very excited about their video games."
+  },
+  {
+    "start": 94.36000000000001,
+    "end": 96.60000000000001,
+    "text": " They're excited about the characters of the video games,"
+  },
+  {
+    "start": 96.60000000000001,
+    "end": 99.72000000000001,
+    "text": " and they want to discuss the video games they are excited"
+  },
+  {
+    "start": 99.72000000000001,
+    "end": 103.22000000000001,
+    "text": " about when new versions are released."
+  },
+  {
+    "start": 103.22000000000001,
+    "end": 105.96000000000001,
+    "text": " So what are the data science questions here?"
+  },
+  {
+    "start": 105.96000000000001,
+    "end": 109.18,
+    "text": " People who look at these things, such as behavioral psychologists,"
+  },
+  {
+    "start": 109.18,
+    "end": 113.14000000000001,
+    "text": " want to know if you are a war game user,"
+  },
+  {
+    "start": 113.14,
+    "end": 116.12,
+    "text": " or if you play any other violent game,"
+  },
+  {
+    "start": 116.12,
+    "end": 118.26,
+    "text": " where there is a lot of fighting online,"
+  },
+  {
+    "start": 118.26,
+    "end": 121.76,
+    "text": " do these people also show violent behavior?"
+  },
+  {
+    "start": 121.76,
+    "end": 124.24,
+    "text": " Maybe they do, maybe they don't."
+  },
+  {
+    "start": 124.24,
+    "end": 127.26,
+    "text": " They also want to know whether, as a result of looking"
+  },
+  {
+    "start": 127.26,
+    "end": 129.54,
+    "text": " at somebody's tweets and following them over time,"
+  },
+  {
+    "start": 129.54,
+    "end": 133.52,
+    "text": " they can tell if the person is addicted to the game or not."
+  },
+  {
+    "start": 133.52,
+    "end": 136.9,
+    "text": " So why you use graphs for that?"
+  },
+  {
+    "start": 136.9,
+    "end": 140.8,
+    "text": " One of the things you could do is what we show here."
+  },
+  {
+    "start": 140.8,
+    "end": 143.92000000000002,
+    "text": " From the graphs, you can extract certain elements,"
+  },
+  {
+    "start": 143.92000000000002,
+    "end": 147.44,
+    "text": " like conversations."
+  },
+  {
+    "start": 147.44,
+    "end": 149.96,
+    "text": " If you look at it, you will see all of them"
+  },
+  {
+    "start": 149.96,
+    "end": 153.18,
+    "text": " have somebody posting something, somebody responding"
+  },
+  {
+    "start": 153.18,
+    "end": 157.02,
+    "text": " to the post, and the first person responding to the response."
+  },
+  {
+    "start": 157.02,
+    "end": 160.32000000000002,
+    "text": " They are retweeting, and they are responding, and so forth."
+  },
+  {
+    "start": 160.32000000000002,
+    "end": 163.04000000000002,
+    "text": " You would see a conversation chain going on, which"
+  },
+  {
+    "start": 163.04000000000002,
+    "end": 165.70000000000002,
+    "text": " could be short or long, like you see."
+  },
+  {
+    "start": 165.70000000000002,
+    "end": 167.92000000000002,
+    "text": " And other people would join in."
+  },
+  {
+    "start": 167.92000000000002,
+    "end": 169.94,
+    "text": " We don't know if it's violent or not,"
+  },
+  {
+    "start": 169.94,
+    "end": 171.74,
+    "text": " But at least there is a lively conversation"
+  },
+  {
+    "start": 171.74,
+    "end": 174.62,
+    "text": " going on about something."
+  },
+  {
+    "start": 174.62,
+    "end": 178.68,
+    "text": " Using graphs, we could find some meaningful parts"
+  },
+  {
+    "start": 178.68,
+    "end": 182.35999999999999,
+    "text": " of the graph that we can further analyze using techniques"
+  },
+  {
+    "start": 182.35999999999999,
+    "end": 185.04,
+    "text": " like text analytics."
+  },
+  {
+    "start": 185.04,
+    "end": 187.78,
+    "text": " Another kind of thing people would like to identify"
+  },
+  {
+    "start": 187.78,
+    "end": 191.06,
+    "text": " is which players are interacting with which other players."
+  },
+  {
+    "start": 191.06,
+    "end": 192.5,
+    "text": " Who are these people?"
+  },
+  {
+    "start": 192.5,
+    "end": 194.48,
+    "text": " Do they form a close community?"
+  },
+  {
+    "start": 194.48,
+    "end": 196.34,
+    "text": " Can anybody join in?"
+  },
+  {
+    "start": 196.34,
+    "end": 197.56,
+    "text": " Are there groups?"
+  },
+  {
+    "start": 197.56,
+    "end": 198.96,
+    "text": " What are the groups?"
+  },
+  {
+    "start": 198.96,
+    "end": 203.58,
+    "text": " If you find a group, who are the most influential users?"
+  },
+  {
+    "start": 203.58,
+    "end": 205.08,
+    "text": " Who are the people that everybody"
+  },
+  {
+    "start": 205.08,
+    "end": 207.56,
+    "text": " refers to, listen to, and so on?"
+  },
+  {
+    "start": 207.56,
+    "end": 210.46,
+    "text": " Now, graph analytics is used to answer all these questions"
+  },
+  {
+    "start": 210.46,
+    "end": 213.92000000000002,
+    "text": " about a conversation that's going on live in social media"
+  },
+  {
+    "start": 213.92000000000002,
+    "end": 215.96,
+    "text": " stream."
+  },
+  {
+    "start": 215.96,
+    "end": 218.52,
+    "text": " Let's look at our next example."
+  }
+]

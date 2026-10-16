@@ -1,0 +1,112 @@
+[
+  {
+    "start": 0.0,
+    "end": 7.88,
+    "text": " So, there are two ways to break a graph. Identifying the smallest node set which, if removed, will"
+  },
+  {
+    "start": 7.88,
+    "end": 20.76,
+    "text": " disconnect the graph. Here, if we remove f, d, and h, or h, f, g, we have disconnected"
+  },
+  {
+    "start": 20.76,
+    "end": 29.84,
+    "text": " the graph. So, the separating set is either h, f, and g, or h, f, and d. So, the connectivity"
+  },
+  {
+    "start": 29.84,
+    "end": 31.34,
+    "text": " is 3."
+  },
+  {
+    "start": 31.34,
+    "end": 41.519999999999996,
+    "text": " Similarly, removing Cf, Dg, Df, and He edges"
+  },
+  {
+    "start": 41.519999999999996,
+    "end": 43.480000000000004,
+    "text": " will also disconnect the graph."
+  },
+  {
+    "start": 43.480000000000004,
+    "end": 46.66,
+    "text": " Therefore, the edge connectivity is 4."
+  },
+  {
+    "start": 46.66,
+    "end": 50.78,
+    "text": " So this is how network robustness is defined."
+  },
+  {
+    "start": 50.78,
+    "end": 54.620000000000005,
+    "text": " Now let's ask, is this network robust?"
+  },
+  {
+    "start": 54.620000000000005,
+    "end": 58.42,
+    "text": " Suppose the attacker removes the node f."
+  },
+  {
+    "start": 58.42,
+    "end": 60.28,
+    "text": " Why remove F?"
+  },
+  {
+    "start": 60.28,
+    "end": 64.32000000000001,
+    "text": " Because F is the most connected node."
+  },
+  {
+    "start": 64.32000000000001,
+    "end": 67.64,
+    "text": " That is, F has the highest degree."
+  },
+  {
+    "start": 67.64,
+    "end": 71.12,
+    "text": " If we remove F, five paths are disrupted."
+  },
+  {
+    "start": 71.12,
+    "end": 76.3,
+    "text": " For example, there is no way to go from C to G, or from I"
+  },
+  {
+    "start": 76.3,
+    "end": 80.2,
+    "text": " to E, because these paths went through F."
+  },
+  {
+    "start": 80.2,
+    "end": 82.18,
+    "text": " Let's try this exercise."
+  },
+  {
+    "start": 82.18,
+    "end": 85.66,
+    "text": " Suppose the attacker has already removed F,"
+  },
+  {
+    "start": 85.66,
+    "end": 89.5,
+    "text": " and would like to cause more damage to the rest of the network."
+  },
+  {
+    "start": 89.5,
+    "end": 92.38,
+    "text": " Which node should be targeted next?"
+  },
+  {
+    "start": 92.38,
+    "end": 98.32,
+    "text": " The answer is C, because C is the next most connected node."
+  },
+  {
+    "start": 98.32,
+    "end": 103.47999999999999,
+    "text": " Higher degree nodes make the network more vulnerable."
+  }
+]

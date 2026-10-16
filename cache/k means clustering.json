@@ -1,0 +1,512 @@
+[
+  {
+    "start": 0.84,
+    "end": 5.76,
+    "text": " K-means clustering is a simple yet effective algorithm for cluster analysis that is commonly"
+  },
+  {
+    "start": 5.76,
+    "end": 7.76,
+    "text": " used in practice."
+  },
+  {
+    "start": 7.76,
+    "end": 13.72,
+    "text": " After this video, you will be able to describe the steps in the K-means algorithm, explain"
+  },
+  {
+    "start": 13.72,
+    "end": 19.240000000000002,
+    "text": " what the K stands for in K-means, and define what a cluster centroid is."
+  },
+  {
+    "start": 19.240000000000002,
+    "end": 24.62,
+    "text": " Recall that cluster analysis divides samples in a dataset into groups or clusters."
+  },
+  {
+    "start": 24.62,
+    "end": 29.52,
+    "text": " The idea is to group similar items in the same cluster, where similar is defined by"
+  },
+  {
+    "start": 29.52,
+    "end": 34.86,
+    "text": " some metric that measures similarity between data samples, so the goal of cluster analysis"
+  },
+  {
+    "start": 34.86,
+    "end": 40.14,
+    "text": " is to divide data samples such that samples within a cluster are as close together as"
+  },
+  {
+    "start": 40.14,
+    "end": 46.519999999999996,
+    "text": " possible and samples from different clusters are as far apart as possible."
+  },
+  {
+    "start": 46.519999999999996,
+    "end": 50.42,
+    "text": " K-means is a classic algorithm used for cluster analysis."
+  },
+  {
+    "start": 50.42,
+    "end": 53.019999999999996,
+    "text": " The algorithm is very simple."
+  },
+  {
+    "start": 53.019999999999996,
+    "end": 57.14,
+    "text": " The first step is to select K-initial centroids."
+  },
+  {
+    "start": 57.14,
+    "end": 62.52,
+    "text": " The centroid is simply the center of a cluster, as you see in the diagram here."
+  },
+  {
+    "start": 62.52,
+    "end": 68.02,
+    "text": " Next, assign each sample in the dataset to the closest centroid."
+  },
+  {
+    "start": 68.02,
+    "end": 73.02,
+    "text": " This means you calculate the distance between the sample and each cluster center, and assign"
+  },
+  {
+    "start": 73.02,
+    "end": 76.88,
+    "text": " the sample to the cluster with the closest centroid."
+  },
+  {
+    "start": 76.88,
+    "end": 83.22,
+    "text": " Then you calculate the mean or average of each cluster to determine a new centroid."
+  },
+  {
+    "start": 83.22,
+    "end": 88.46,
+    "text": " These two steps are then repeated until some stopping criterion is reached."
+  },
+  {
+    "start": 88.46,
+    "end": 91.84,
+    "text": " Here's an illustration of how k-means works."
+  },
+  {
+    "start": 91.84,
+    "end": 96.06,
+    "text": " A shows the original dataset with some samples."
+  },
+  {
+    "start": 96.06,
+    "end": 100.32,
+    "text": " In B, initial centroids are randomly selected."
+  },
+  {
+    "start": 100.32,
+    "end": 102.86,
+    "text": " C shows the first iteration."
+  },
+  {
+    "start": 102.86,
+    "end": 106.46000000000001,
+    "text": " Here samples are assigned to the closest centroid."
+  },
+  {
+    "start": 106.46000000000001,
+    "end": 110.24,
+    "text": " In D, the centroids are recalculated."
+  },
+  {
+    "start": 110.24,
+    "end": 112.82,
+    "text": " E shows the second iteration."
+  },
+  {
+    "start": 112.82000000000001,
+    "end": 119.02000000000001,
+    "text": " are assigned to the closest centroid. Note that some samples change their cluster assignments."
+  },
+  {
+    "start": 119.02000000000001,
+    "end": 125.02000000000001,
+    "text": " And in F, the centroids are recalculated again. Cluster assignments and centroid recalculation"
+  },
+  {
+    "start": 125.02000000000001,
+    "end": 130.3,
+    "text": " are repeated until some stopping criterion is reached, and you get your final clusters,"
+  },
+  {
+    "start": 130.3,
+    "end": 132.72,
+    "text": " as shown in F."
+  },
+  {
+    "start": 132.72,
+    "end": 136.86,
+    "text": " How are the initial centroids selected? The issue is that the final cluster results are"
+  },
+  {
+    "start": 136.86,
+    "end": 141.96,
+    "text": " sensitive to initial centroids. This means that cluster results with one set of initial"
+  },
+  {
+    "start": 141.96,
+    "end": 147.28,
+    "text": " centroids can be very different from results with another set of initial centroids. There"
+  },
+  {
+    "start": 147.28,
+    "end": 151.82,
+    "text": " are many approaches to selecting the initial centroids for k-means, varying in levels of"
+  },
+  {
+    "start": 151.82,
+    "end": 157.64000000000001,
+    "text": " sophistication. The easiest and most widely used approach is to apply k-means several"
+  },
+  {
+    "start": 157.64000000000001,
+    "end": 164.22,
+    "text": " times with different initial centroids randomly chosen to cluster your dataset, and then select"
+  },
+  {
+    "start": 164.22,
+    "end": 168.12,
+    "text": " the centroids that give the best clustering results."
+  },
+  {
+    "start": 168.12,
+    "end": 173.0,
+    "text": " To evaluate the cluster results, an error measure known as the Within Cluster Sum of"
+  },
+  {
+    "start": 173.0,
+    "end": 175.86,
+    "text": " Squared Error can be used."
+  },
+  {
+    "start": 175.86,
+    "end": 181.42000000000002,
+    "text": " The error associated with a sample within a cluster is the distance between the sample"
+  },
+  {
+    "start": 181.42000000000002,
+    "end": 183.68,
+    "text": " and the cluster centroid."
+  },
+  {
+    "start": 183.68,
+    "end": 189.0,
+    "text": " The squared error of this sample, then, is the squared of that distance."
+  },
+  {
+    "start": 189.0,
+    "end": 194.62,
+    "text": " We sum up all the squared errors for all samples for a cluster to get the squared error for"
+  },
+  {
+    "start": 194.62,
+    "end": 196.56,
+    "text": " that cluster."
+  },
+  {
+    "start": 196.56,
+    "end": 201.62,
+    "text": " We then do the same thing for all clusters to get the final calculation for the within"
+  },
+  {
+    "start": 201.62,
+    "end": 208.96,
+    "text": " cluster sum of squared error for all clusters in the results of a cluster analysis run."
+  },
+  {
+    "start": 208.96,
+    "end": 213.24,
+    "text": " Given two clustering results, the one with the smaller within cluster sum of squared"
+  },
+  {
+    "start": 213.24,
+    "end": 218.74,
+    "text": " error, or WSSE for short, provides the better solution numerically."
+  },
+  {
+    "start": 218.74,
+    "end": 224.04,
+    "text": " However, as we've discussed before, there is no ground truth to mathematically determine"
+  },
+  {
+    "start": 224.04,
+    "end": 230.04,
+    "text": " which set of clusters is more correct than the other. In addition, note that increasing"
+  },
+  {
+    "start": 230.04,
+    "end": 237.28,
+    "text": " the number of clusters, that is, increasing the value for k, always reduces WSSE."
+  },
+  {
+    "start": 237.28,
+    "end": 243.51999999999998,
+    "text": " So WSSE should be used with caution. It only makes sense to use WSSE to compare two sets"
+  },
+  {
+    "start": 243.51999999999998,
+    "end": 250.34,
+    "text": " of clusters with the same value for k and generate it from the same dataset. Also, the"
+  },
+  {
+    "start": 250.34,
+    "end": 255.38,
+    "text": " set of clusters with the smallest WSSE may not always be the best solution for the application"
+  },
+  {
+    "start": 255.38,
+    "end": 260.8,
+    "text": " at hand. Again, interpretation and domain knowledge about what the clusters should represent"
+  },
+  {
+    "start": 260.8,
+    "end": 266.96,
+    "text": " and how they will be used are crucial in determining which clustering results are best. Note that"
+  },
+  {
+    "start": 266.96,
+    "end": 272.26,
+    "text": " there are several other metrics that are used to evaluate cluster results as well."
+  },
+  {
+    "start": 272.26,
+    "end": 276.74,
+    "text": " Choosing the optimal value for k is always a big question in using k-means. There are"
+  },
+  {
+    "start": 276.74,
+    "end": 282.90000000000003,
+    "text": " are several methods to determine the value for K. We will discuss a few here."
+  },
+  {
+    "start": 282.90000000000003,
+    "end": 287.1,
+    "text": " Visualization techniques can be used to determine the dataset to see if there are natural groupings"
+  },
+  {
+    "start": 287.1,
+    "end": 292.26,
+    "text": " of the samples. Scatter plots and the use of dimensionality reduction are useful here"
+  },
+  {
+    "start": 292.26,
+    "end": 297.52,
+    "text": " to visualize the data. A good value for K is application-dependent,"
+  },
+  {
+    "start": 297.52,
+    "end": 302.26,
+    "text": " so domain knowledge of the application can drive the selection for the value of K. For"
+  },
+  {
+    "start": 302.26,
+    "end": 307.26,
+    "text": " For example, if you want to cluster the types of products customers are purchasing, a natural"
+  },
+  {
+    "start": 307.26,
+    "end": 311.86,
+    "text": " choice for K might be the number of product categories that you offer."
+  },
+  {
+    "start": 311.86,
+    "end": 317.86,
+    "text": " Or K might be selected to represent the geographical locations of respondents to a survey, in which"
+  },
+  {
+    "start": 317.86,
+    "end": 324.26,
+    "text": " case a good value for K would be the number of regions you're interested in analyzing."
+  },
+  {
+    "start": 324.26,
+    "end": 329.5,
+    "text": " There are also data-driven methods for determining the value of K. These methods calculate some"
+  },
+  {
+    "start": 329.5,
+    "end": 335.24,
+    "text": " metric for different values of k to determine the best selection for k. One such method"
+  },
+  {
+    "start": 335.24,
+    "end": 342.24,
+    "text": " is the ELBO method. The ELBO method for determining the value of k is shown on this plot. As we"
+  },
+  {
+    "start": 342.24,
+    "end": 348.34,
+    "text": " saw in the previous slides, WSSE, or Within Cluster Sum of Squared Error, measures how"
+  },
+  {
+    "start": 348.34,
+    "end": 353.72,
+    "text": " much data samples deviate from their respective centroids in a set of clustering results."
+  },
+  {
+    "start": 353.72,
+    "end": 360.12,
+    "text": " If we plot WSSE for different values for K, we can see how this error measure changes"
+  },
+  {
+    "start": 360.12,
+    "end": 364.14000000000004,
+    "text": " as the value of K changes, as seen in the plot."
+  },
+  {
+    "start": 364.14000000000004,
+    "end": 369.98,
+    "text": " The bend in this error curve indicates a drop in gain by adding more clusters."
+  },
+  {
+    "start": 369.98,
+    "end": 376.14000000000004,
+    "text": " So this elbow in the curve provides a suggestion for a good value of K. Note that the elbow"
+  },
+  {
+    "start": 376.14000000000004,
+    "end": 381.16,
+    "text": " cannot always be unambiguously determined, especially for complex data."
+  },
+  {
+    "start": 381.16,
+    "end": 385.26000000000005,
+    "text": " And in many cases, the error curve will not have a clear suggestion for one value, but"
+  },
+  {
+    "start": 385.26000000000005,
+    "end": 390.72,
+    "text": " for multiple values. This can be used as a guideline for the range of values to try for"
+  },
+  {
+    "start": 390.72,
+    "end": 391.72,
+    "text": " k."
+  },
+  {
+    "start": 391.72,
+    "end": 396.70000000000005,
+    "text": " We've discussed choosing the initial centroids and looked at ways to select a value for k,"
+  },
+  {
+    "start": 396.70000000000005,
+    "end": 401.34000000000003,
+    "text": " the number of clusters. Let's now look at when to stop. How do you know when to stop"
+  },
+  {
+    "start": 401.34000000000003,
+    "end": 404.5,
+    "text": " iterating when using k-means?"
+  },
+  {
+    "start": 404.5,
+    "end": 409.22,
+    "text": " One obvious stopping criterion is when there are no changes to the centroids. This means"
+  },
+  {
+    "start": 409.22,
+    "end": 414.52000000000004,
+    "text": " that no samples would change cluster assignments, and recalculating the centroids will not result"
+  },
+  {
+    "start": 414.52000000000004,
+    "end": 420.22,
+    "text": " in any changes. So additional iterations will not bring about any more changes to the cluster"
+  },
+  {
+    "start": 420.22,
+    "end": 421.48,
+    "text": " results."
+  },
+  {
+    "start": 421.48,
+    "end": 426.38000000000005,
+    "text": " The stopping criterion can be relaxed to the second stopping criterion listed here, which"
+  },
+  {
+    "start": 426.38000000000005,
+    "end": 433.18,
+    "text": " is when the number of samples changing clusters is below a certain threshold, say 1% for example."
+  },
+  {
+    "start": 433.18,
+    "end": 438.16,
+    "text": " At this point, the clusters are changing by only a few samples, resulting in only minimal"
+  },
+  {
+    "start": 438.16,
+    "end": 443.84000000000003,
+    "text": " changes to the final cluster and results, so the algorithm can be stopped here."
+  },
+  {
+    "start": 443.84000000000003,
+    "end": 449.32000000000005,
+    "text": " At the end of k-means, we have a set of clusters, each with a centroid. Each centroid is the"
+  },
+  {
+    "start": 449.32000000000005,
+    "end": 455.12,
+    "text": " mean of the samples assigned to that cluster. You can think of the centroid as a representative"
+  },
+  {
+    "start": 455.12,
+    "end": 460.52000000000004,
+    "text": " sample for that cluster. So, to interpret the cluster analysis results, we can examine"
+  },
+  {
+    "start": 460.52000000000004,
+    "end": 465.62,
+    "text": " the cluster's centroids. Comparing the values of the variables between the centroids will"
+  },
+  {
+    "start": 465.62,
+    "end": 471.26,
+    "text": " will reveal how different or alike clusters are, and provide insights into what each cluster"
+  },
+  {
+    "start": 471.26,
+    "end": 477.32,
+    "text": " represents. For example, if the value for age is different for different customer clusters,"
+  },
+  {
+    "start": 477.32,
+    "end": 481.52,
+    "text": " this indicates that the clusters are encoding different customer segments by age, among"
+  },
+  {
+    "start": 481.52,
+    "end": 483.42,
+    "text": " other variables."
+  },
+  {
+    "start": 483.42,
+    "end": 488.56,
+    "text": " In summary, k-means is a classic algorithm for performing cluster analysis. It is an"
+  },
+  {
+    "start": 488.56,
+    "end": 493.66,
+    "text": " algorithm that is simple to understand and implement, and is also efficient. The value"
+  },
+  {
+    "start": 493.66,
+    "end": 499.12,
+    "text": " value of k, the number of clusters, must be specified, and final clusters are sensitive"
+  },
+  {
+    "start": 499.12,
+    "end": 500.16,
+    "text": " to initial centroids."
+  }
+]

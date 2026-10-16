@@ -1,0 +1,592 @@
+[
+  {
+    "start": 0.8,
+    "end": 5.88,
+    "text": " Now that we have seen what association analysis is, let's go over the association analysis"
+  },
+  {
+    "start": 5.88,
+    "end": 9.040000000000001,
+    "text": " process in more detail."
+  },
+  {
+    "start": 9.040000000000001,
+    "end": 15.84,
+    "text": " After this video, you will be able to define the terms support and confidence, describe"
+  },
+  {
+    "start": 15.84,
+    "end": 22.0,
+    "text": " the steps in association analysis, and explain how association rules are formed from item"
+  },
+  {
+    "start": 22.0,
+    "end": 23.0,
+    "text": " sets."
+  },
+  {
+    "start": 23.0,
+    "end": 26.2,
+    "text": " Let's review the steps in association analysis."
+  },
+  {
+    "start": 26.2,
+    "end": 33.2,
+    "text": " They are create the item sets, then identify the frequent item sets, finally generate the"
+  },
+  {
+    "start": 33.2,
+    "end": 38.480000000000004,
+    "text": " rules. We will continue with this example data set. There are five transactions in the"
+  },
+  {
+    "start": 38.480000000000004,
+    "end": 44.239999999999995,
+    "text": " data set, each with a set of items purchased together. The goal is to come up with rules"
+  },
+  {
+    "start": 44.239999999999995,
+    "end": 51.879999999999995,
+    "text": " describing associations between items. The first step is to create item sets. Item sets"
+  },
+  {
+    "start": 51.88,
+    "end": 56.72,
+    "text": " of different sizes need to be created. We will color code the items so that each one"
+  },
+  {
+    "start": 56.72,
+    "end": 60.86,
+    "text": " is easier to pick out from the transactions table."
+  },
+  {
+    "start": 60.86,
+    "end": 67.14,
+    "text": " We start out with just one item sets, that is, sets with just one item. The left table"
+  },
+  {
+    "start": 67.14,
+    "end": 72.34,
+    "text": " is the data set of transactions. The right table contains the one item sets that can"
+  },
+  {
+    "start": 72.34,
+    "end": 78.30000000000001,
+    "text": " be created from this data set. As each item set is created, we also need to keep track"
+  },
+  {
+    "start": 78.3,
+    "end": 84.52,
+    "text": " of the frequency at which this item set occurs in the dataset. This is referred to as the"
+  },
+  {
+    "start": 84.52,
+    "end": 90.17999999999999,
+    "text": " support for the item set, and is calculated by dividing the number of times the item set"
+  },
+  {
+    "start": 90.17999999999999,
+    "end": 96.5,
+    "text": " occurs in the dataset by the total number of transactions. This is what is in the support"
+  },
+  {
+    "start": 96.5,
+    "end": 103.5,
+    "text": " column in the write table. For example, eggs, the last item in the write table, occurs just"
+  },
+  {
+    "start": 103.5,
+    "end": 111.66,
+    "text": " once in the dataset, in transaction 2, so its support is 1 over 5, or 1 fifth. The item"
+  },
+  {
+    "start": 111.66,
+    "end": 119.74000000000001,
+    "text": " set with diaper occurs in all transactions, so its support is 5 over 5, or 1. The support"
+  },
+  {
+    "start": 119.74000000000001,
+    "end": 125.68,
+    "text": " for each item set will be used to identify frequent item sets in the next step. Specifically,"
+  },
+  {
+    "start": 125.68,
+    "end": 132.6,
+    "text": " the support is used to prune or remove item sets that do not occur frequently."
+  },
+  {
+    "start": 132.6,
+    "end": 137.16,
+    "text": " The support of each item set will be used to identify frequent item sets in the next"
+  },
+  {
+    "start": 137.16,
+    "end": 138.16,
+    "text": " step."
+  },
+  {
+    "start": 138.16,
+    "end": 144.72,
+    "text": " Specifically, the support is used to prune or remove item sets that do not occur frequently."
+  },
+  {
+    "start": 144.72,
+    "end": 149.66,
+    "text": " For example, the minimum support threshold is set to 3 fifths, so looking at the One"
+  },
+  {
+    "start": 149.66,
+    "end": 155.9,
+    "text": " Item Sets table, we can remove any item set with a support of less than 3 fifths."
+  },
+  {
+    "start": 155.9,
+    "end": 158.42,
+    "text": " These item sets are highlighted in pink."
+  },
+  {
+    "start": 158.42,
+    "end": 162.34,
+    "text": " They will be removed before the sets with two items are created."
+  },
+  {
+    "start": 162.34,
+    "end": 169.74,
+    "text": " The final one item sets are then the item sets with bread, milk, beer, and diaper."
+  },
+  {
+    "start": 169.74,
+    "end": 174.72,
+    "text": " We only consider items that were in the one item sets that were not pruned."
+  },
+  {
+    "start": 174.72,
+    "end": 178.0,
+    "text": " The two item sets are shown in the right table."
+  },
+  {
+    "start": 178.0,
+    "end": 182.3,
+    "text": " We again need to keep track of the support for these item sets, just as we did with the"
+  },
+  {
+    "start": 182.3,
+    "end": 184.16,
+    "text": " one item sets."
+  },
+  {
+    "start": 184.16,
+    "end": 188.92000000000002,
+    "text": " For example, for the last item set with beer and diaper, we see by looking at the left"
+  },
+  {
+    "start": 188.92000000000002,
+    "end": 196.18,
+    "text": " table that beer and diaper occur together 3 times in transactions 2, 3 and 4, so its"
+  },
+  {
+    "start": 196.18,
+    "end": 202.60000000000002,
+    "text": " support is 3 fifths. Again, we need to prune item sets with low support, the ones highlighted"
+  },
+  {
+    "start": 202.60000000000002,
+    "end": 208.20000000000002,
+    "text": " in pink in the 2 item sets table. Those would be the item set with bread and beer and the"
+  },
+  {
+    "start": 208.20000000000002,
+    "end": 214.52,
+    "text": " item set with milk and beer. The remaining 2 item sets and 1 item sets are then used"
+  },
+  {
+    "start": 214.52,
+    "end": 216.42000000000002,
+    "text": " to create the three item sets."
+  },
+  {
+    "start": 217.42000000000002,
+    "end": 219.72,
+    "text": " Let's look now at creating three item sets."
+  },
+  {
+    "start": 220.66000000000003,
+    "end": 223.20000000000002,
+    "text": " The only three item set that has a support value"
+  },
+  {
+    "start": 223.20000000000002,
+    "end": 225.04000000000002,
+    "text": " greater than minimum support"
+  },
+  {
+    "start": 225.04000000000002,
+    "end": 227.16000000000003,
+    "text": " is the one shown in the right table,"
+  },
+  {
+    "start": 227.16000000000003,
+    "end": 230.44,
+    "text": " namely the item set with bread, milk, and diaper."
+  },
+  {
+    "start": 231.84,
+    "end": 234.04000000000002,
+    "text": " The second step in association analysis"
+  },
+  {
+    "start": 234.04000000000002,
+    "end": 236.98000000000002,
+    "text": " is to identify the frequent item sets."
+  },
+  {
+    "start": 236.98000000000002,
+    "end": 239.58,
+    "text": " But note that the process that we just described"
+  },
+  {
+    "start": 239.58,
+    "end": 244.38,
+    "text": " for creating item sets already identifies frequent item sets."
+  },
+  {
+    "start": 244.38,
+    "end": 250.56,
+    "text": " A frequent item set is one whose support is greater than or equal to the minimum support."
+  },
+  {
+    "start": 250.56,
+    "end": 255.96,
+    "text": " So by keeping track of the support of each item set as it is being created, and removing"
+  },
+  {
+    "start": 255.96,
+    "end": 261.68,
+    "text": " item sets with low support, we are already identifying frequent item sets."
+  },
+  {
+    "start": 261.68,
+    "end": 268.26,
+    "text": " For our example, the frequent 1, 2, and 3 item sets are shown here."
+  },
+  {
+    "start": 268.26,
+    "end": 272.98,
+    "text": " Now that we have identified the frequent item sets, the last step is to generate the rules"
+  },
+  {
+    "start": 272.98,
+    "end": 276.90000000000003,
+    "text": " to capture associations that we see in the data."
+  },
+  {
+    "start": 276.90000000000003,
+    "end": 279.26,
+    "text": " Let's first define some terms we'll need"
+  },
+  {
+    "start": 279.26,
+    "end": 281.74,
+    "text": " to discuss association rules."
+  },
+  {
+    "start": 281.74,
+    "end": 285.54,
+    "text": " The format of an association rule is shown at the top."
+  },
+  {
+    "start": 285.54,
+    "end": 290.54,
+    "text": " It's written as X arrow Y and is read as if X then Y."
+  },
+  {
+    "start": 291.66,
+    "end": 294.86,
+    "text": " The X part is called the antecedent"
+  },
+  {
+    "start": 294.86,
+    "end": 298.66,
+    "text": " and the Y part is called the consequent of the rule."
+  },
+  {
+    "start": 298.66,
+    "end": 301.42,
+    "text": " X and Y are item sets."
+  },
+  {
+    "start": 301.42,
+    "end": 306.02000000000004,
+    "text": " An important term in rule generation is the rule confidence."
+  },
+  {
+    "start": 306.02000000000004,
+    "end": 310.12,
+    "text": " This is defined as the support for x and y together"
+  },
+  {
+    "start": 310.12,
+    "end": 313.86,
+    "text": " divided by the support for x only."
+  },
+  {
+    "start": 313.86,
+    "end": 317.20000000000005,
+    "text": " So rule confidence calculates the frequency of instances"
+  },
+  {
+    "start": 317.20000000000005,
+    "end": 318.84000000000003,
+    "text": " to which the rule applies."
+  },
+  {
+    "start": 320.08000000000004,
+    "end": 324.58000000000004,
+    "text": " Recall that the support for x is the frequency of item set x"
+  },
+  {
+    "start": 324.58000000000004,
+    "end": 327.62,
+    "text": " and is defined as the number of transactions containing items"
+  },
+  {
+    "start": 327.62,
+    "end": 331.38,
+    "text": " in x divided by the total number of transactions."
+  },
+  {
+    "start": 331.38,
+    "end": 336.5,
+    "text": " The rule confidence measures how frequently items in Y appear in the transactions that"
+  },
+  {
+    "start": 336.5,
+    "end": 343.15999999999997,
+    "text": " contain X. In other words, the confidence measures the reliability of the rule by determining"
+  },
+  {
+    "start": 343.15999999999997,
+    "end": 348.62,
+    "text": " how often, if X then Y, is found to be true in the data."
+  },
+  {
+    "start": 348.62,
+    "end": 354.5,
+    "text": " How is rule confidence used in rule generation? Association rules are generated from the frequent"
+  },
+  {
+    "start": 354.5,
+    "end": 359.88,
+    "text": " item sets created from the data. Each item in an item set can be used as part of the"
+  },
+  {
+    "start": 359.88,
+    "end": 365.36,
+    "text": " the antecedent or consequent of the rule. And you can have many ways to combine items"
+  },
+  {
+    "start": 365.36,
+    "end": 370.92,
+    "text": " to form the antecedent and consequent. So, if we just simply generate rules from each"
+  },
+  {
+    "start": 370.92,
+    "end": 376.98,
+    "text": " frequent item set, we would end up with lots and lots of rules. Each item set with k items"
+  },
+  {
+    "start": 376.98,
+    "end": 383.18,
+    "text": " can generate 2 to the k minus 2 rules. That's a lot of rules. And the majority of those"
+  },
+  {
+    "start": 383.18,
+    "end": 389.38,
+    "text": " rules would not be found in the data. This is where rule confidence comes in."
+  },
+  {
+    "start": 389.38,
+    "end": 395.56,
+    "text": " we can use rule confidence to constrain the number of rules to keep. Specifically, a minimum"
+  },
+  {
+    "start": 395.56,
+    "end": 401.56,
+    "text": " confidence threshold is set, and only rules with confidence greater than or equal to the"
+  },
+  {
+    "start": 401.56,
+    "end": 406.94,
+    "text": " minimum confidence are significant and only those will be kept."
+  },
+  {
+    "start": 406.94,
+    "end": 412.62,
+    "text": " Let's look at how this works with our example dataset. Recall that only one three-item set"
+  },
+  {
+    "start": 412.62,
+    "end": 418.82,
+    "text": " was created from the transactions. That three-item set contains items bread, milk, and diaper,"
+  },
+  {
+    "start": 418.82,
+    "end": 420.8,
+    "text": " shown at the top."
+  },
+  {
+    "start": 420.8,
+    "end": 425.38,
+    "text": " With this three-item set, let's see how we can generate rules from it, and determine"
+  },
+  {
+    "start": 425.38,
+    "end": 428.38,
+    "text": " which rules to keep and which ones to prune."
+  },
+  {
+    "start": 428.38,
+    "end": 433.4,
+    "text": " Let's set the minimum confidence to 0.95."
+  },
+  {
+    "start": 433.4,
+    "end": 436.88,
+    "text": " And here again is the definition for confidence."
+  },
+  {
+    "start": 436.88,
+    "end": 442.84,
+    "text": " For candidate rule, if bread and milk, then diaper, we can calculate its confidence as"
+  },
+  {
+    "start": 442.84,
+    "end": 444.15999999999997,
+    "text": " follows."
+  },
+  {
+    "start": 444.16,
+    "end": 449.64000000000004,
+    "text": " The support for both antecedent and consequent is the number of times we see bread, milk,"
+  },
+  {
+    "start": 449.64000000000004,
+    "end": 455.70000000000005,
+    "text": " and diaper together in the data, divided by the total number of transactions."
+  },
+  {
+    "start": 455.70000000000005,
+    "end": 461.74,
+    "text": " Items bread, milk, and diaper appear together in transactions 1, 4, and 5, so the support"
+  },
+  {
+    "start": 461.74,
+    "end": 463.70000000000005,
+    "text": " is 3 fifths."
+  },
+  {
+    "start": 463.70000000000005,
+    "end": 468.32000000000005,
+    "text": " The support for just the antecedent is the number of times we see bread and milk together"
+  },
+  {
+    "start": 468.32000000000005,
+    "end": 471.92,
+    "text": " divided by the total number of transactions."
+  },
+  {
+    "start": 471.92,
+    "end": 477.92,
+    "text": " Sometimes bread and milk appear together also in transactions 1, 4, and 5, so the support"
+  },
+  {
+    "start": 477.92,
+    "end": 479.86,
+    "text": " is 3 fifths."
+  },
+  {
+    "start": 479.86,
+    "end": 484.36,
+    "text": " The confidence of this rule is then 1, or 100%."
+  },
+  {
+    "start": 484.36,
+    "end": 488.12,
+    "text": " This means that the rule is correct 100%."
+  },
+  {
+    "start": 488.12,
+    "end": 492.76,
+    "text": " Every time bread and milk are bought together, diaper is bought as well."
+  },
+  {
+    "start": 492.76,
+    "end": 498.28000000000003,
+    "text": " For candidate rule, if bread and diaper, then milk, we calculate its confidence the same"
+  },
+  {
+    "start": 498.28000000000003,
+    "end": 499.28000000000003,
+    "text": " way."
+  },
+  {
+    "start": 499.28000000000003,
+    "end": 505.24,
+    "text": " support for bread, diaper, and milk is 3 fifths as before. Items bread and diaper appear"
+  },
+  {
+    "start": 505.24,
+    "end": 511.84000000000003,
+    "text": " together in transactions 1, 2, 4, and 5. So the support for the item set with bread and"
+  },
+  {
+    "start": 511.84000000000003,
+    "end": 519.72,
+    "text": " milk is 4 fifths. Then the confidence for this rule is 0.75 or 75 percent. Since the"
+  },
+  {
+    "start": 519.72,
+    "end": 525.94,
+    "text": " minimum confidence is 0.95 or 95 percent, the first rule is kept and the second rule"
+  },
+  {
+    "start": 525.94,
+    "end": 529.46,
+    "text": " is removed from consideration."
+  },
+  {
+    "start": 529.46,
+    "end": 532.6800000000001,
+    "text": " There are several algorithms for association analysis."
+  },
+  {
+    "start": 532.6800000000001,
+    "end": 537.7,
+    "text": " Each uses a different set of methods to make frequent item set creation and rule generation"
+  },
+  {
+    "start": 537.7,
+    "end": 538.94,
+    "text": " efficient."
+  },
+  {
+    "start": 538.94,
+    "end": 544.5600000000001,
+    "text": " The more popular algorithms are Apriori, FP Growth, and Eclat."
+  },
+  {
+    "start": 544.5600000000001,
+    "end": 549.36,
+    "text": " As a summary, we just looked at the steps in association analysis in more detail."
+  },
+  {
+    "start": 549.36,
+    "end": 555.34,
+    "text": " We saw how item sets can be created from a dataset, how frequent item sets can be identified,"
+  },
+  {
+    "start": 555.34,
+    "end": 560.62,
+    "text": " and how association rules can be created from frequent item sets and pruned using rule confidence."
+  }
+]
