@@ -16,7 +16,9 @@ llm='openai/gpt-oss-120b'
 embeddings_model='all-MiniLM-L6-v2'
 whisper='large-v3-turbo'  # faster-whisper resolves this to mobiuslabsgmbh/faster-whisper-large-v3-turbo
 
-groq_api_key=os.getenv("GROQ_API_KEY")
+# each groq key carries its own daily token budget, and one eval pass costs most of
+# one: GROQ_KEY picks which of the keys in .env to spend
+groq_api_key=os.getenv("GROQ_API_KEY_"+os.getenv("GROQ_KEY","2")) or os.getenv("GROQ_API_KEY")
 qdrant_api_key=os.getenv("QDRANT_API_KEY")
 qdrant_url=os.getenv("QDRANT_URL")
 
