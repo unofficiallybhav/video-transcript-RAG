@@ -1,6 +1,6 @@
 # Offline evaluation report
 
-Generated 2026-10-19T11:05:30 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
+Generated 2026-10-19T11:17:33 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
 
 Faithfulness, relevancy and correctness are judge scores on a continuous 0.00-1.00 scale; each question's per-score reasoning is kept in the `note` field of `report.json`.
 
@@ -22,15 +22,15 @@ Correctness is anchored to the course authors' own answer key. No chunk labels, 
 | relevancy | 0.792 | 83 |
 | correctness | 0.761 | 83 |
 | citation_present | 0.831 | 83 |
-| citation_video_valid | 0.988 | 69 |
-| citation_time_valid | 0.938 | 70 |
+| citation_video_valid | 0.981 | 69 |
+| citation_time_valid | 0.936 | 70 |
 
 ### By course
 
 | course | questions | correctness | faithfulness | citation_time_valid | cited a time |
 | --- | --- | --- | --- | --- | --- |
 | graph analytics | 31 | 0.81 | 0.789 | 0.963 | 27 |
-| machine learning | 52 | 0.733 | 0.795 | 0.922 | 43 |
+| machine learning | 52 | 0.733 | 0.795 | 0.919 | 43 |
 
 Hands-on questions (10 of tier A) ask about clicking through KNIME or Spark rather than lecture content: correctness 0.4.
 
