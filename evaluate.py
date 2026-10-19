@@ -22,6 +22,9 @@ labels, and averaging would hide both facts.
                                  new answers, judge scores passed through untouched
   uv run evaluate.py spotcheck   emit generated tier B questions for human review
   uv run evaluate.py review      summarise the spot-check verdicts
+  uv run evaluate.py calibrate   re-judge a seeded sample twice to put error bars on
+                                 the judge's scores, write golden/judge_calibration.json
+                                 resumable: rerun it after a daily limit to continue
 """
 import json
 import random
@@ -48,6 +51,39 @@ GENERATION_K = 5
 JUDGE_MODEL = "openai/gpt-oss-20b"
 SPOTCHECK_SIZE = 15
 SPOTCHECK_SEED = 7
+
+# --- judge calibration (issue #8) -------------------------------------------------
+# A stratified sample of the already-scored questions, re-judged to put error bars on
+# the judge-derived scores. Seed and sizes are constants so the sample is reproducible.
+CALIBRATION_SEED = 11
+CALIBRATION_STRATA = (("A", 20), ("B", 10))
+CALIBRATION_PATH = GOLDEN_DIR / "judge_calibration.json"
+# one line per (question, pass) as it finishes, so a daily limit costs no re-judging
+CALIBRATION_RAW_PATH = GOLDEN_DIR / "judge_calibration.jsonl"
+# Both thresholds were fixed in issue #1 and #8 before any of this was run. They are
+# written into the artifact with the outcome each one triggers, so a result that lands
+# the wrong way cannot afterwards be re-read as small-sample noise.
+CALIBRATION_THRESHOLD = 0.10
+CALIBRATION_RULES = (
+    {
+        "name": "between-run spread",
+        "measure": "mean absolute between-run difference, worst metric",
+        "threshold": CALIBRATION_THRESHOLD,
+        "comparison": "greater than",
+        "if_exceeded": "two-decimal continuous scoring is retired in favour of one "
+                       "decimal",
+        "if_not_exceeded": "two-decimal continuous scoring is kept",
+    },
+    {
+        "name": "faithfulness dependence on the reference answer",
+        "measure": "mean absolute faithfulness difference with the reference withheld",
+        "threshold": CALIBRATION_THRESHOLD,
+        "comparison": "greater than",
+        "if_exceeded": "faithfulness is split into its own judge call, permanently",
+        "if_not_exceeded": "faithfulness stays in the combined judge call",
+    },
+)
+JUDGE_METRICS = ("faithfulness", "relevancy", "correctness")
 
 # the system prompt tells the model to cite the video and timestamp, so citations are
 # parsed out of the answer and checked against what was actually retrieved.
@@ -207,9 +243,14 @@ def score(value):
     return round(min(1.0, max(0.0, number)), 2)
 
 
-def judge(question, answer, context):
-    """Scores one answer with the judge model, which is not the generator."""
-    payload = extract_json(complete(JUDGE_MODEL, JUDGE_PROMPT.format(
+def judge(question, answer, context, prompt=JUDGE_PROMPT, complete_fn=complete):
+    """Scores one answer with the judge model, which is not the generator.
+
+    The prompt and the client are arguments so that the calibration stage can re-judge
+    with the reference answer withheld, and so that both can be exercised against a stub
+    judge without a provider call. The defaults are the scoring path `run` uses.
+    """
+    payload = extract_json(complete_fn(JUDGE_MODEL, prompt.format(
         question=question["question"],
         reference=question["answer"],
         context=context,
@@ -570,6 +611,233 @@ def review():
               f"rate; regenerate those items or tighten MAX_JACCARD if it is high.")
 
 
+# ------------------------------------------------- judge calibration (issue #8)
+
+def no_reference_prompt():
+    """JUDGE_PROMPT with the reference answer, and the metric that needs it, removed.
+
+    Derived from the real judge prompt rather than copied, so the two calibration passes
+    cannot drift apart: an edit to JUDGE_PROMPT lands in both, and the only difference
+    between the passes stays the reference answer. Each edit is guarded, so a reworded
+    prompt fails here instead of quietly sending the reference through anyway.
+    """
+    prompt = JUDGE_PROMPT
+    for old, new in (("REFERENCE ANSWER (ground truth): {reference}\n\n", ""),
+                     ("Score these three, strictly:", "Score these two, strictly:"),
+                     ('"correctness": 0.00, ', "")):
+        if old not in prompt:
+            raise RuntimeError(
+                f"JUDGE_PROMPT no longer contains {old!r}; the reference-withheld "
+                "variant used by `calibrate` has to be rederived")
+        prompt = prompt.replace(old, new)
+    prompt, removed = re.subn(r"\n- correctness:.*?(?=\n\n)", "", prompt, flags=re.S)
+    if removed != 1:
+        raise RuntimeError("could not remove the correctness criterion from JUDGE_PROMPT")
+    return prompt
+
+
+def calibration_sample(rows):
+    """The seeded, stratified sample of already-scored questions, reproducibly.
+
+    Candidates are sorted by id first, so the sample depends on the seed and the set of
+    scored questions and not on the order the checkpoint happens to be in. A row with no
+    judge score is not a candidate: there is no first run to compare a re-run against.
+    """
+    sample = []
+    for tier, size in CALIBRATION_STRATA:
+        candidates = sorted(
+            (r for r in rows
+             if r.get("tier") == tier
+             and any(isinstance(r.get(m), (int, float)) for m in JUDGE_METRICS)),
+            key=lambda r: r["id"],
+        )
+        sample.extend(random.Random(CALIBRATION_SEED).sample(
+            candidates, min(size, len(candidates))))
+    return sample
+
+
+def _gap(left, right, metric):
+    """Signed differences on one metric, over the ids both sides scored numerically."""
+    gaps = {}
+    for qid, scores in left.items():
+        theirs, ours = right.get(qid, {}).get(metric), scores.get(metric)
+        if isinstance(theirs, (int, float)) and isinstance(ours, (int, float)):
+            gaps[qid] = ours - theirs
+    return gaps
+
+
+def _spread(gaps):
+    values = list(gaps.values())
+    return {
+        "n": len(values),
+        "mean_absolute_difference": mean([abs(v) for v in values]),
+        "mean_signed_shift": mean(values),
+        "max_absolute_difference": (round(max(abs(v) for v in values), 3)
+                                     if values else None),
+    }
+
+
+def calibration_summary(baseline_rows, results):
+    """Turns the two judged passes into the numbers and the pre-committed outcomes.
+
+    `baseline_rows` are the checkpoint rows carrying the original run's judge scores;
+    `results` are the rows this stage judged, each tagged with its pass. The thresholds
+    come from CALIBRATION_RULES, which were fixed before any of this was run, and are
+    written out alongside the verdict so the outcome cannot later be renegotiated.
+    """
+    baseline = {r["id"]: r for r in baseline_rows}
+    rerun = {r["id"]: r for r in results if r.get("pass") == "rerun"}
+    no_reference = {r["id"]: r for r in results if r.get("pass") == "no_reference"}
+
+    between_run = {m: _spread(_gap(rerun, baseline, m)) for m in JUDGE_METRICS}
+    # the reference-withheld pass is compared against the fresh unchanged-prompt pass,
+    # so the only thing that differs between the two is the reference answer
+    withheld = {m: _spread(_gap(no_reference, rerun, m))
+                for m in ("faithfulness", "relevancy")}
+
+    measured = [(m, between_run[m]["mean_absolute_difference"]) for m in JUDGE_METRICS
+                if between_run[m]["mean_absolute_difference"] is not None]
+    worst_metric, worst = max(measured, key=lambda pair: pair[1], default=(None, None))
+    faith_shift = withheld["faithfulness"]["mean_absolute_difference"]
+
+    outcomes = []
+    for rule, value in zip(CALIBRATION_RULES, (worst, faith_shift)):
+        triggered = value is not None and value > rule["threshold"]
+        outcomes.append({
+            **rule,
+            "value": value,
+            "triggered": triggered,
+            "outcome": rule["if_exceeded"] if triggered else rule["if_not_exceeded"],
+        })
+    outcomes[0]["worst_metric"] = worst_metric
+
+    return {
+        "stage": "calibrate",
+        "generated": datetime.now().strftime("%Y-%m-%d %H:%M"),
+        "judge_model": JUDGE_MODEL,
+        "seed": CALIBRATION_SEED,
+        "strata": {tier: size for tier, size in CALIBRATION_STRATA},
+        "sample": sorted(rerun),
+        "passes": {
+            "rerun": "the judge prompt unchanged, to measure between-run spread "
+                     "against the score already in golden/results.jsonl",
+            "no_reference": "the same prompt with the reference answer withheld, to "
+                            "measure how far faithfulness depends on seeing it",
+        },
+        "pre_committed": True,
+        "pre_committed_note": "Both thresholds and the outcome each one triggers were "
+                              "fixed in issues #1 and #8 before this stage was ever "
+                              "run, so a result cannot be re-read as small-sample "
+                              "noise after the fact.",
+        "between_run": between_run,
+        "no_reference": withheld,
+        "outcomes": outcomes,
+    }
+
+
+def calibration_progress():
+    """Judged passes from earlier attempts, keyed by (question id, pass)."""
+    if not CALIBRATION_RAW_PATH.exists():
+        return {}
+    done = {}
+    for line in CALIBRATION_RAW_PATH.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            row = json.loads(line)
+            done[(row["id"], row["pass"])] = row
+    return done
+
+
+def calibrate(complete_fn=complete):
+    """Re-judges a seeded sample twice, to put error bars on the judge-derived scores.
+
+    Pass one repeats the judge prompt unchanged, so the gap against the score already in
+    the checkpoint is between-run spread on an unchanged input. Pass two withholds the
+    reference answer, so the gap against pass one is how far faithfulness leans on
+    seeing it. Nothing is generated and no existing score is overwritten: the stage
+    reuses the stored answers and writes only its own artifact.
+
+    `complete_fn` is the provider call, so the whole stage is exercisable against a stub
+    judge. The default is the shared paced client, and the real run needs no change here.
+    Each judged pass is appended as it finishes, so a daily limit resumes for free.
+    """
+    checkpoint = list(load_checkpoint().values())
+    if not checkpoint:
+        sys.exit(f"{RESULTS_PATH} is empty; run `run` first")
+    sample = calibration_sample(checkpoint)
+    print(f"calibrating on {len(sample)} questions "
+          f"(seed {CALIBRATION_SEED}, {dict(CALIBRATION_STRATA)})")
+
+    golden = {q["id"]: q for q in load_golden()}
+    missing = [r["id"] for r in sample if r["id"] not in golden]
+    if missing:
+        sys.exit(f"{len(missing)} sampled questions are not in {GOLDEN_PATH}, so their "
+                 f"reference answer is unavailable: {missing[0]}")
+    chunks = {c["chunk_id"]: c for c in load_chunks()}
+
+    done = calibration_progress()
+    passes = (("rerun", JUDGE_PROMPT), ("no_reference", no_reference_prompt()))
+    GOLDEN_DIR.mkdir(exist_ok=True)
+
+    for i, row in enumerate(sample, 1):
+        # the context the judge saw originally, rebuilt from the checkpoint's ordered
+        # chunk ids and the local cache, so neither retrieval nor generation runs again
+        hits = [(cid, chunks[cid]) for cid in row["retrieved"][:GENERATION_K]
+                if cid in chunks]
+        context = format_context(hits)
+        for which, prompt in passes:
+            if (row["id"], which) in done:
+                continue
+            try:
+                scores = judge(golden[row["id"]], row["answer"], context,
+                               prompt=prompt, complete_fn=complete_fn)
+            except DailyLimitReached as e:
+                print(f"\nJudge hit its daily token limit after {len(done)} of "
+                      f"{len(sample) * len(passes)} passes. Progress is saved in "
+                      f"{CALIBRATION_RAW_PATH}; rerun `uv run evaluate.py calibrate` "
+                      f"once the limit resets to continue.\n  {e}")
+                return
+            judged = {"id": row["id"], "tier": row["tier"], "pass": which, **scores}
+            done[(row["id"], which)] = judged
+            with CALIBRATION_RAW_PATH.open("a", encoding="utf-8") as f:
+                f.write(json.dumps(judged, ensure_ascii=False) + "\n")
+            print(f"[{i}/{len(sample)}] {row['id'][:40]} {which}: "
+                  f"faith={judged.get('faithfulness')}")
+
+    summary = calibration_summary(checkpoint, list(done.values()))
+    CALIBRATION_PATH.write_text(
+        json.dumps({"summary": summary, "judged": list(done.values())},
+                   indent=2, ensure_ascii=False),
+        encoding="utf-8")
+    print(f"\nWrote {CALIBRATION_PATH}")
+    print(report_calibration(summary))
+
+
+def report_calibration(summary):
+    """The outcome in plain words, stated against the thresholds whichever way it fell."""
+    lines = ["Between-run difference, judge prompt unchanged:"]
+    for metric in JUDGE_METRICS:
+        spread = summary["between_run"][metric]
+        lines.append(f"  {metric:<13} mean abs diff {spread['mean_absolute_difference']} "
+                     f"(max {spread['max_absolute_difference']}, n={spread['n']})")
+    withheld = summary["no_reference"]["faithfulness"]
+    lines += [
+        "",
+        f"Faithfulness with the reference answer withheld: mean abs diff "
+        f"{withheld['mean_absolute_difference']}, mean shift "
+        f"{withheld['mean_signed_shift']} (n={withheld['n']})",
+        "",
+        "Pre-committed decision rules (fixed in #1/#8 before this was run):",
+    ]
+    for rule in summary["outcomes"]:
+        verdict = "EXCEEDED" if rule["triggered"] else "not exceeded"
+        lines += [
+            f"  {rule['name']}: {rule['measure']} = {rule['value']}, threshold "
+            f"{rule['threshold']} -> {verdict}",
+            f"    outcome: {rule['outcome']}",
+        ]
+    return "\n".join(lines)
+
+
 if __name__ == "__main__":
     stage = sys.argv[1] if len(sys.argv) > 1 else "run"
     if stage == "run":
@@ -578,6 +846,8 @@ if __name__ == "__main__":
         spotcheck()
     elif stage == "review":
         review()
+    elif stage == "calibrate":
+        calibrate()
     elif stage == "report":
         rows = list(load_checkpoint().values())
         if not rows:
@@ -587,4 +857,4 @@ if __name__ == "__main__":
     elif stage == "rescore":
         rescore()
     else:
-        sys.exit("usage: evaluate.py [run|report|rescore|spotcheck|review]")
+        sys.exit("usage: evaluate.py [run|report|rescore|spotcheck|review|calibrate]")
