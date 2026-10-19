@@ -138,6 +138,9 @@ def test_between_run_difference_is_the_mean_absolute_gap_per_metric():
     # |1.00-0.80| and |0.80-0.80| -> mean 0.10
     assert summary["between_run"]["faithfulness"]["mean_absolute_difference"] == 0.1
     assert summary["between_run"]["faithfulness"]["n"] == 2
+    # 1.00-0.80 in binary floating point is 0.19999999999999996; a reader of the
+    # artifact should not have to see that
+    assert summary["between_run"]["faithfulness"]["max_absolute_difference"] == 0.2
 
 
 def test_a_mean_difference_exactly_at_the_threshold_does_not_retire_two_decimals():

@@ -669,7 +669,8 @@ def _spread(gaps):
         "n": len(values),
         "mean_absolute_difference": mean([abs(v) for v in values]),
         "mean_signed_shift": mean(values),
-        "max_absolute_difference": max((abs(v) for v in values), default=None),
+        "max_absolute_difference": (round(max(abs(v) for v in values), 3)
+                                     if values else None),
     }
 
 
