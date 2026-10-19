@@ -1,6 +1,6 @@
 # Offline evaluation report
 
-Generated 2026-10-19T11:02:08 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
+Generated 2026-10-19T11:05:30 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
 
 Faithfulness, relevancy and correctness are judge scores on a continuous 0.00-1.00 scale; each question's per-score reasoning is kept in the `note` field of `report.json`.
 
@@ -14,22 +14,23 @@ Provenance: the citation check was invalid in the run this report supersedes. It
 
 Correctness is anchored to the course authors' own answer key. No chunk labels, so no retrieval metrics.
 
+83 questions in the tier; each value below covers the ones in its own `questions` column.
+
 | metric | value | questions |
 | --- | --- | --- |
-| questions | 83 |  |
 | faithfulness | 0.793 | 83 |
 | relevancy | 0.792 | 83 |
 | correctness | 0.761 | 83 |
 | citation_present | 0.831 | 83 |
 | citation_video_valid | 0.988 | 69 |
-| citation_time_valid | 0.488 | 70 |
+| citation_time_valid | 0.938 | 70 |
 
 ### By course
 
 | course | questions | correctness | faithfulness | citation_time_valid | cited a time |
 | --- | --- | --- | --- | --- | --- |
-| graph analytics | 31 | 0.81 | 0.789 | 0.469 | 27 |
-| machine learning | 52 | 0.733 | 0.795 | 0.5 | 43 |
+| graph analytics | 31 | 0.81 | 0.789 | 0.963 | 27 |
+| machine learning | 52 | 0.733 | 0.795 | 0.922 | 43 |
 
 Hands-on questions (10 of tier A) ask about clicking through KNIME or Spark rather than lecture content: correctness 0.4.
 
@@ -37,11 +38,12 @@ Hands-on questions (10 of tier A) ask about clicking through KNIME or Spark rath
 
 Retrieval metrics are exact here. The questions are synthetic, so read them as a retrieval measurement, not as user behaviour.
 
+40 questions in the tier; each value below covers the ones in its own `questions` column.
+
 `precision@k_max` is the ceiling that k and the number of gold chunks allow: a question with one gold chunk can score at most 1/k, so compare each precision against its own maximum, not against 1.0.
 
 | metric | value | questions |
 | --- | --- | --- |
-| questions | 40 |  |
 | precision@1 | 0.625 | 40 |
 | precision@1_max | 1.0 | 40 |
 | recall@1 | 0.588 | 40 |
@@ -64,7 +66,7 @@ Generation metrics on the same questions:
 | correctness | 0.889 | 40 |
 | citation_present | 0.975 | 40 |
 | citation_video_valid | 0.987 | 39 |
-| citation_time_valid | 0.62 | 39 |
+| citation_time_valid | 0.974 | 39 |
 
 ## Refusal — all three tiers together
 
