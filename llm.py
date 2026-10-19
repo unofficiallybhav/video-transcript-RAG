@@ -56,7 +56,7 @@ def complete(model, prompt=None, messages=None, retries=8):
             _remaining["tokens"] = TOKEN_BUDGET
 
         try:
-            raw = rag.groq_client.chat.completions.with_raw_response.create(
+            raw = rag.get_groq().chat.completions.with_raw_response.create(
                 model=model,
                 messages=messages,
                 temperature=0.0,
