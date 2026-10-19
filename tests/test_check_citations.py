@@ -53,6 +53,19 @@ class Case:
 
 CASES = [
     Case(
+        behaviour="a timestamp echoing a chunk's floored start is credited, because the "
+                  "floored start is the only time the context ever displayed",
+        answer="Precision and recall are defined in classification.mp4 at 03:02.",
+        hits=[chunk("classification.mp4", 182.4, 214.9, 3)],
+        expects={"citation_time_valid": 1.0},
+    ),
+    Case(
+        behaviour="a timestamp inside a span but not at its start is credited",
+        answer="classification.mp4 covers the confusion matrix at 03:20.",
+        hits=[chunk("classification.mp4", 182.4, 214.9, 3)],
+        expects={"citation_time_valid": 1.0},
+    ),
+    Case(
         behaviour="an invented timestamp outside every retrieved span is not credited",
         answer="The decision boundary is covered in classification.mp4 at 12:00.",
         hits=[chunk("classification.mp4", 182.4, 214.9, 3)],
