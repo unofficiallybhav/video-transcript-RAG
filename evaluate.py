@@ -334,6 +334,21 @@ def mean(values):
     return round(sum(values) / len(values), 3) if values else None
 
 
+def put(block, key, values):
+    """Records a metric's value under `key` and the questions it covers under `key_n`.
+
+    A question that carries no value for a metric is absent from that metric, not a zero
+    in it. `check_citations` returns None for citation validity when the answer cited
+    nothing, and averaging that None as 0.0 would collapse "did not cite" into "cited
+    wrongly" — two different failures with two different remedies. So the mean drops
+    those questions, and the count travels beside the value to say how many were left,
+    because a mean whose denominator is invisible cannot be read honestly.
+    """
+    present = [v for v in values if isinstance(v, (int, float))]
+    block[key] = mean(present)
+    block[f"{key}_n"] = len(present)
+
+
 def load_checkpoint():
     """Rows scored by earlier runs, keyed by question id."""
     if not RESULTS_PATH.exists():
@@ -484,6 +499,19 @@ def write_report(results):
     print(render_markdown(report))
 
 
+def tier_c_block(rows):
+    """Tier C's refusal rate, which is the one tier where declining is correct.
+
+    It is deliberately not called an answerable refusal rate: tier C's ground truth is
+    that no correct answer exists, so a refusal there is the pipeline working. The two
+    are rendered side by side so that neither can be read as success on its own.
+    """
+    out = {"questions": len(rows)}
+    put(out, "refusal_rate",
+        [1.0 if r.get("refused") else 0.0 for r in rows if r.get("refused") is not None])
+    return out
+
+
 def summarise(results):
     def block(rows, retrieval=False):
         if not rows:
@@ -491,17 +519,22 @@ def summarise(results):
         out = {"questions": len(rows)}
         if retrieval:
             for k in K_VALUES:
-                out[f"precision@{k}"] = mean([r.get(f"precision@{k}") for r in rows])
+                put(out, f"precision@{k}", [r.get(f"precision@{k}") for r in rows])
                 # precision@k cannot exceed len(gold)/k, and most tier B questions have a
                 # single gold chunk, so the raw number is meaningless without its ceiling
-                out[f"precision@{k}_max"] = mean(
-                    [min(1.0, len(r.get("gold_chunks", [])) / k) for r in rows]
-                )
-                out[f"recall@{k}"] = mean([r.get(f"recall@{k}") for r in rows])
-        for metric in ("faithfulness", "relevancy", "correctness"):
-            out[metric] = mean([r.get(metric) for r in rows])
-        for metric in ("citation_present", "citation_video_valid", "citation_time_valid"):
-            out[metric] = mean([r.get(metric) for r in rows])
+                put(out, f"precision@{k}_max",
+                    [min(1.0, len(r.get("gold_chunks", [])) / k) for r in rows])
+                put(out, f"recall@{k}", [r.get(f"recall@{k}") for r in rows])
+        for metric in ("faithfulness", "relevancy", "correctness",
+                       "citation_present", "citation_video_valid", "citation_time_valid"):
+            put(out, metric, [r.get(metric) for r in rows])
+        # An answerable refusal is a declined answer to a question whose tier's ground
+        # truth says the corpus can answer it, so it is only defined on tiers A and B —
+        # the tiers this block serves. It reuses the refusal verdict the judge already
+        # recorded; no question is judged again to obtain it. A row the judge left no
+        # verdict on is excluded rather than read as "did not refuse".
+        put(out, "answerable_refusal_rate",
+            [1.0 if r.get("refused") else 0.0 for r in rows if r.get("refused") is not None])
         return out
 
     tier_a = [r for r in results if r["tier"] == "A"]
@@ -519,25 +552,28 @@ def summarise(results):
         },
         "tier_a_hands_on": block([r for r in tier_a if r["hands_on"]]),
         "tier_b": block(tier_b, retrieval=True),
-        "tier_c": {
-            "questions": len(tier_c),
-            # the only correct behaviour here is to decline
-            "refusal_rate": mean([1.0 if r.get("refused") else 0.0 for r in tier_c]),
-        },
+        "tier_c": tier_c_block(tier_c),
         "unscored": sum(1 for r in results
                         if r["tier"] != "C" and r.get("correctness") is None),
     }
 
 
 def table(block, keys):
-    lines = ["| metric | value |", "| --- | --- |"]
+    """Each metric as a row of value and the questions that value was taken over.
+
+    The count column is what stops a mean being read as covering the whole tier: a
+    citation validity value drawn from 70 of 83 questions is a different claim from the
+    same number drawn from all 83, and the difference is only visible if the denominator
+    is printed beside the value.
+    """
+    lines = ["| metric | value | questions |", "| --- | --- | --- |"]
     for key in keys:
         if key in block:
-            lines.append(f"| {key} | {block[key]} |")
+            lines.append(f"| {key} | {block[key]} | {block.get(f'{key}_n', '')} |")
     return lines
 
 
-GENERATION_METRICS = ("questions", "faithfulness", "relevancy", "correctness",
+GENERATION_METRICS = ("faithfulness", "relevancy", "correctness",
                       "citation_present", "citation_video_valid", "citation_time_valid")
 RETRIEVAL_METRICS = tuple(
     name for k in K_VALUES
@@ -559,20 +595,41 @@ def render_markdown(summary):
         "Tiers are scored on what their ground truth supports and are never averaged "
         "together.",
         "",
+        "Every value carries the number of questions it was taken over. A question that "
+        "carries no value for a metric is left out of that metric rather than counted as "
+        "a zero, so a citation validity value covers only the answers that cited "
+        "something: \"did not cite\" and \"cited wrongly\" stay distinguishable, and the "
+        "count column is how a reader tells which is which.",
+        "",
+        "Provenance: the citation check was invalid in the run this report supersedes. "
+        "It compared a cited timestamp, which the generator only ever saw floored to a "
+        "whole second, against unfloored chunk spans, and it charged a timestamp against "
+        "the nearest video name appearing before it even when the answer never cited "
+        "that video. That citation defect was corrected 2026-10-19. Citation values here "
+        "therefore measure a repaired ruler, not a changed pipeline, and are not "
+        "comparable with any earlier copy of this report; the superseded values are "
+        "discarded rather than kept beside them, so that a corrected measurement is "
+        "never plotted as a trend.",
+        "",
         "## Tier A — quiz questions with human answer keys",
         "",
         "Correctness is anchored to the course authors' own answer key. No chunk labels, "
         "so no retrieval metrics.",
         "",
+        f"{summary['tier_a'].get('questions', 0)} questions in the tier; each value below "
+        f"covers the ones in its own `questions` column.",
+        "",
     ]
     lines += table(summary["tier_a"], GENERATION_METRICS)
 
     lines += ["", "### By course", "",
-              "| course | questions | correctness | faithfulness | citation_time_valid |",
-              "| --- | --- | --- | --- | --- |"]
+              "| course | questions | correctness | faithfulness | citation_time_valid "
+              "| cited a time |",
+              "| --- | --- | --- | --- | --- | --- |"]
     for course, block in summary["tier_a_by_course"].items():
         lines.append(f"| {course} | {block.get('questions')} | {block.get('correctness')} "
-                     f"| {block.get('faithfulness')} | {block.get('citation_time_valid')} |")
+                     f"| {block.get('faithfulness')} | {block.get('citation_time_valid')} "
+                     f"| {block.get('citation_time_valid_n')} |")
 
     hands_on = summary["tier_a_hands_on"]
     if hands_on:
@@ -583,18 +640,45 @@ def render_markdown(summary):
     lines += ["", "## Tier B — generated from single chunks, exact gold labels", "",
               "Retrieval metrics are exact here. The questions are synthetic, so read "
               "them as a retrieval measurement, not as user behaviour.", "",
+              f"{summary['tier_b'].get('questions', 0)} questions in the tier; each value "
+              f"below covers the ones in its own `questions` column.", "",
               "`precision@k_max` is the ceiling that k and the number of gold chunks "
               "allow: a question with one gold chunk can score at most 1/k, so compare "
               "each precision against its own maximum, not against 1.0.", ""]
-    lines += table(summary["tier_b"], ("questions",) + RETRIEVAL_METRICS)
+    lines += table(summary["tier_b"], RETRIEVAL_METRICS)
     lines += ["", "Generation metrics on the same questions:", ""]
-    lines += table(summary["tier_b"], GENERATION_METRICS[1:])
+    lines += table(summary["tier_b"], GENERATION_METRICS)
 
-    tier_c = summary["tier_c"]
-    lines += ["", "## Tier C — refusal test", "",
-              f"{tier_c['questions']} questions on topics verified absent from the corpus. "
-              f"The pipeline should decline all of them.", "",
-              f"- refusal rate: **{tier_c['refusal_rate']}**"]
+    tier_a, tier_b, tier_c = (summary["tier_a"], summary["tier_b"], summary["tier_c"])
+    lines += [
+        "", "## Refusal — all three tiers together", "",
+        "An answerable refusal is a declined answer to a question whose tier's ground "
+        "truth says the corpus can answer it, so it is a failure of the same pipeline "
+        "whose refusals on tier C are a success. Both rates are derived from the "
+        "refusal verdict the judge already recorded for each answer; nothing was judged "
+        "again to obtain them.",
+        "",
+        "Read the three rows as one measurement. A pipeline that declined every "
+        "question would score 1.0 on tier C and look perfect there, so tier C's "
+        "refusal rate is not a success on its own; nor is a low answerable refusal rate "
+        "on a pipeline that never declines anything.",
+        "",
+        "| tier | ground truth | metric | value | questions |",
+        "| --- | --- | --- | --- | --- |",
+        f"| tier A | the corpus can answer | answerable refusal rate "
+        f"| {tier_a.get('answerable_refusal_rate')} "
+        f"| {tier_a.get('answerable_refusal_rate_n')} |",
+        f"| tier B | the corpus can answer | answerable refusal rate "
+        f"| {tier_b.get('answerable_refusal_rate')} "
+        f"| {tier_b.get('answerable_refusal_rate_n')} |",
+        f"| tier C | no correct answer exists | refusal rate "
+        f"| {tier_c.get('refusal_rate')} | {tier_c.get('refusal_rate_n')} |",
+        "",
+        f"Tier C's {tier_c['questions']} questions are on topics verified absent from "
+        f"the corpus; the pipeline should decline all of them. Every answerable refusal "
+        f"counted above scored correctness 0.0, so without this rate the failure is "
+        f"hidden inside a low correctness value instead of named.",
+    ]
 
     if summary["unscored"]:
         lines += ["", f"{summary['unscored']} answers could not be scored by the judge."]
