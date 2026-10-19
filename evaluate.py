@@ -17,6 +17,9 @@ labels, and averaging would hide both facts.
   uv run evaluate.py run         score the pipeline, write golden/report.{json,md}
                                  resumable: rerun it after a daily limit to continue
   uv run evaluate.py report      rebuild the report from whatever is checkpointed
+  uv run evaluate.py rescore     re-derive the judge-free metrics from the checkpoint
+                                 offline and rewrite the report: no provider calls, no
+                                 new answers, judge scores passed through untouched
   uv run evaluate.py spotcheck   emit generated tier B questions for human review
   uv run evaluate.py review      summarise the spot-check verdicts
 """
@@ -338,6 +341,42 @@ def run():
     write_report(results)
 
 
+def rescore_rows(rows, chunks):
+    """The judge-free metrics of a stored run, re-derived; judge fields passed through.
+
+    Each checkpoint row carries the answer that was generated and the ordered ids it
+    retrieved, and the chunk corpus supplies those ids' spans, so the citation check is
+    handed exactly the input the original run handed it: the first GENERATION_K retrieved
+    chunks, in retrieval order. Nothing is generated and nothing is judged again, so the
+    rewritten report describes the same system behaviour that was first measured.
+    """
+    by_id = {chunk["chunk_id"]: chunk for chunk in chunks}
+    rescored = []
+    for row in rows:
+        hits = [(cid, by_id[cid]) for cid in row["retrieved"][:GENERATION_K]]
+        fresh = check_citations(row["answer"], hits)
+        gold = row.get("gold_chunks")
+        for k in K_VALUES if gold else ():
+            precision, recall = precision_recall(row["retrieved"], gold, k)
+            fresh[f"precision@{k}"] = precision
+            fresh[f"recall@{k}"] = recall
+        rescored.append({**row, **fresh})
+    return rescored
+
+
+def rescore():
+    """Rewrites both report artifacts from the checkpoint, without calling a provider."""
+    rows = list(load_checkpoint().values())
+    if not rows:
+        sys.exit(f"{RESULTS_PATH} is empty; run `run` first")
+    chunks = load_chunks()
+    if not chunks:
+        sys.exit("no chunks were rebuilt; data/ and cache/ must both be present")
+    print(f"re-deriving judge-free metrics for {len(rows)} checkpointed questions "
+          f"from {len(chunks)} chunks")
+    write_report(rescore_rows(rows, chunks))
+
+
 def write_report(results):
     report = summarise(results)
     GOLDEN_DIR.mkdir(exist_ok=True)
@@ -542,5 +581,7 @@ if __name__ == "__main__":
             sys.exit(f"{RESULTS_PATH} is empty; run `run` first")
         print(f"scoring {len(rows)} checkpointed questions")
         write_report(rows)
+    elif stage == "rescore":
+        rescore()
     else:
-        sys.exit("usage: evaluate.py [run|report|spotcheck|review]")
+        sys.exit("usage: evaluate.py [run|report|rescore|spotcheck|review]")
