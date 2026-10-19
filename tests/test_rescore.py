@@ -2,11 +2,15 @@
 
 The expected figures below are copied in as literals rather than read back from
 `golden/report.json`, which the stage rewrites. They started as the figures published on
-2026-10-17; the `citation_time_valid` values were superseded on 2026-10-19, when the
-citation check began accepting the floored start time that `format_context` actually
-displays. The superseded values are not kept beside the new ones, because a corrected
-measurement is not a trend. Everything else still reproduces the published run, which is
-what proves the re-derivation path faithful.
+2026-10-17. The citation figures were superseded on 2026-10-19, in two steps: the check
+began accepting the floored start time that `format_context` actually displays, and then
+it began recognising a video named without its file extension and attributing a timestamp
+to the name it was written next to in either direction. Tier A's video and time figures
+fell slightly at that second step, because a bare name the answer really did cite is now
+charged against the video it names rather than against an earlier one that happened to
+carry the extension. The superseded values are not kept beside the new ones, because a
+corrected measurement is not a trend. Everything else still reproduces the published run,
+which is what proves the re-derivation path faithful.
 """
 import pytest
 
@@ -15,7 +19,7 @@ from build_golden import load_chunks
 
 PUBLISHED_CITATIONS = {
     "tier_a": {"questions": 83, "citation_present": 0.831,
-               "citation_video_valid": 0.988, "citation_time_valid": 0.938},
+               "citation_video_valid": 0.981, "citation_time_valid": 0.936},
     "tier_b": {"questions": 40, "citation_present": 0.975,
                "citation_video_valid": 0.987, "citation_time_valid": 0.974,
                "precision@1": 0.625, "recall@1": 0.588,

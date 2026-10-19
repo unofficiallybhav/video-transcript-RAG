@@ -79,6 +79,51 @@ CASES = [
         expects={"citation_video_valid": 1.0, "citation_time_valid": 0.0},
     ),
     Case(
+        behaviour="a bare video name sitting next to a timestamp is a citation, so the "
+                  "metric does not depend on the model writing the file extension",
+        answer="Precision and recall are defined in classification at 03:02.",
+        hits=[chunk("classification.mp4", 182.4, 214.9, 3)],
+        expects={
+            "citation_present": 1.0,
+            "citation_video_valid": 1.0,
+            "citation_time_valid": 1.0,
+            "cited_videos": ["classification.mp4"],
+        },
+    ),
+    Case(
+        behaviour="an answer mixing an extension-bearing and a bare name attributes "
+                  "each timestamp to the video it was written next to",
+        answer="classification.mp4 defines recall at 03:02, "
+               "and cluster analysis at 05:10 covers k-means.",
+        hits=[
+            chunk("classification.mp4", 182.4, 214.9, 3),
+            chunk("cluster analysis.mp4", 309.6, 341.2, 5),
+        ],
+        expects={
+            "citation_time_valid": 1.0,
+            "cited_videos": ["classification.mp4", "cluster analysis.mp4"],
+        },
+    ),
+    Case(
+        behaviour="a timestamp written before its video name is attributed to that "
+                  "name when it falls in the same clause",
+        answer="At 03:02, classification.mp4 defines recall.",
+        hits=[chunk("classification.mp4", 182.4, 214.9, 3)],
+        expects={"citation_time_valid": 1.0},
+    ),
+    Case(
+        behaviour="a timestamp with no video named either side of it is uncheckable, "
+                  "and counts invalid rather than valid",
+        answer="The confusion matrix is covered at 03:02.",
+        hits=[chunk("classification.mp4", 182.4, 214.9, 3)],
+        expects={
+            "citation_present": 0.0,
+            "citation_video_valid": None,
+            "citation_time_valid": 0.0,
+            "cited_videos": [],
+        },
+    ),
+    Case(
         behaviour="an answer that cites nothing reports no citation, and leaves both "
                   "validity metrics absent rather than zero",
         answer="Clustering groups unlabelled records by similarity, "

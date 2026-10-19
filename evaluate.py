@@ -90,6 +90,16 @@ JUDGE_METRICS = ("faithfulness", "relevancy", "correctness")
 # video names are matched literally against the real filenames: a generic regex swallowed
 # the words in front of the name ("In modulariy.mp4") and failed every lookup
 TIMESTAMP_RE = re.compile(r"(\d{1,2}):(\d{2})")
+# A bare name — the filename without its extension — is only a citation when a timestamp
+# sits beside it, inside this many characters and without a clause boundary in between.
+# The corpus forces the restriction: `classification.mp4` and `cluster analysis.mp4` are
+# real videos, and across the scored answers bare mentions split 14 in citation position
+# against 35 in ordinary prose, so unrestricted stem matching would manufacture more
+# false citations than the defect it repairs.
+# ponytail: a character window and one boundary class is the whole rule. If answers ever
+# cite in a form this misses, widen the window before reaching for a sentence splitter.
+CITATION_WINDOW = 20
+CLAUSE_BOUNDARY_RE = re.compile(r"[.;\n]")
 _video_names = []
 
 
@@ -180,29 +190,66 @@ def format_context(hits):
     return "\n".join(lines)
 
 
+def _same_clause(answer, start, end):
+    """Whether two positions in the answer sit in the same clause."""
+    return CLAUSE_BOUNDARY_RE.search(answer, start, end) is None
+
+
+def cited_mentions(answer, names, stamp_positions):
+    """Every video the answer cites, as (position, filename), in order of appearance.
+
+    This is the one definition of a citation that all three citation metrics read, so
+    that they can be compared side by side. A name carrying its file extension is a
+    citation wherever it appears. A bare name is a citation only when a timestamp follows
+    it inside `CITATION_WINDOW` characters and in the same clause, which is what keeps
+    `cluster analysis.mp4` cited at a time apart from prose about cluster analysis.
+    """
+    lowered = answer.lower()
+    spelled, bare = [], []
+    for name in names:
+        at = lowered.find(name.lower())
+        while at != -1:
+            spelled.append((at, name, at + len(name)))
+            at = lowered.find(name.lower(), at + 1)
+    for name in names:
+        stem = name.rsplit(".", 1)[0].lower()
+        at = lowered.find(stem)
+        while at != -1:
+            end = at + len(stem)
+            inside_spelled = any(s <= at < e for s, _name, e in spelled)
+            if not inside_spelled and any(
+                end <= pos < end + CITATION_WINDOW and _same_clause(answer, end, pos)
+                for pos in stamp_positions
+            ):
+                bare.append((at, name))
+            at = lowered.find(stem, at + 1)
+    return sorted([(at, name) for at, name, _end in spelled] + bare)
+
+
 def check_citations(answer, hits, known_videos=None):
     """Exact, judge-free check of the video and timestamp the answer cites.
 
-    Each timestamp is attributed to the nearest video name mentioned before it, which is
-    how both the context format and the model's own prose order them. An answer that
-    cites a video without the .mp4 extension counts as not citing, which is strict but
-    never credits a citation that cannot be checked.
+    What counts as a citation is decided once, by `cited_mentions`, and the
+    citation-present, video-valid and time-valid metrics all read that one answer.
+
+    A timestamp is attributed to the nearest cited video before it; failing that, to the
+    nearest cited video after it in the same clause, so a model that names its source
+    after the time is not penalised for word order. A timestamp with no cited video
+    either side of it is uncheckable and counts invalid: the metric never credits a
+    citation it cannot verify, and never charges one against a video the answer did not
+    name.
     """
     retrieved = {}
     for _cid, payload in hits:
         retrieved.setdefault(payload["source"], []).append((payload["start"], payload["end"]))
 
-    lowered = answer.lower()
-    mentions = []
-    for name in (known_videos if known_videos is not None else video_names()):
-        start = lowered.find(name.lower())
-        while start != -1:
-            mentions.append((start, name))
-            start = lowered.find(name.lower(), start + 1)
-    mentions.sort()
-
     stamps = [(m.start(), int(m.group(1)) * 60 + int(m.group(2)))
               for m in TIMESTAMP_RE.finditer(answer)]
+    mentions = cited_mentions(
+        answer,
+        known_videos if known_videos is not None else video_names(),
+        [pos for pos, _seconds in stamps],
+    )
 
     cited_videos = [name for _pos, name in mentions]
     videos_valid = [name in retrieved for name in cited_videos]
@@ -210,10 +257,14 @@ def check_citations(answer, hits, known_videos=None):
     times_valid = []
     for pos, seconds in stamps:
         earlier = [name for at, name in mentions if at < pos]
-        if not earlier:
+        later = [name for at, name in mentions if at > pos and _same_clause(answer, pos, at)]
+        if earlier:
+            spans = retrieved.get(earlier[-1], [])
+        elif later:
+            spans = retrieved.get(later[0], [])
+        else:
             times_valid.append(False)
             continue
-        spans = retrieved.get(earlier[-1], [])
         # The cited time should fall inside a chunk that was actually retrieved. The
         # lower bound is floored to whole seconds because that is the only start time
         # `format_context` ever shows the generator; the upper bound is unchanged, so
