@@ -1,11 +1,11 @@
-"""The offline re-derivation must hold the judge-free figures over the real 135 rows.
+"""The offline re-derivation must hold the judge-free values over the real 135 rows.
 
-The expected figures below are copied in as literals rather than read back from
-`golden/report.json`, which the stage rewrites. They started as the figures published on
-2026-10-17. The citation figures were superseded on 2026-10-19, in two steps: the check
+The expected values below are copied in as literals rather than read back from
+`golden/report.json`, which the stage rewrites. They started as the values published on
+2026-10-17. The citation values were superseded on 2026-10-19, in two steps: the check
 began accepting the floored start time that `format_context` actually displays, and then
 it began recognising a video named without its file extension and attributing a timestamp
-to the name it was written next to in either direction. Tier A's video and time figures
+to the name it was written next to in either direction. Tier A's video and time values
 fell slightly at that second step, because a bare name the answer really did cite is now
 charged against the video it names rather than against an earlier one that happened to
 carry the extension. The superseded values are not kept beside the new ones, because a
@@ -51,7 +51,7 @@ def rescored(checkpoint, chunks):
 
 
 @pytest.mark.parametrize("tier", sorted(PUBLISHED_CITATIONS))
-def test_reproduces_published_citation_figures(rescored, tier):
+def test_reproduces_published_citation_values(rescored, tier):
     block = evaluate.summarise(rescored)[tier]
     expected = PUBLISHED_CITATIONS[tier]
     assert {k: block[k] for k in expected} == expected

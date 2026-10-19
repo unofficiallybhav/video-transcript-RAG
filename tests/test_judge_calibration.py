@@ -6,6 +6,8 @@ a stub passed in at the call site, which is the same seam the real run uses.
 import json
 import random
 
+import pytest
+
 import evaluate
 
 
@@ -97,7 +99,7 @@ def stub_judge(scores):
 
     def complete_fn(model, prompt=None, messages=None):
         sent.append({"model": model, "prompt": prompt})
-        return "here are the scores: " + __import__("json").dumps(scores)
+        return "here are the scores: " + json.dumps(scores)
 
     complete_fn.sent = sent
     return complete_fn
@@ -273,9 +275,17 @@ def test_calibrate_resumes_after_the_daily_limit_without_rejudging(monkeypatch, 
     assert (golden_dir / "judge_calibration.json").exists()
 
 
-def test_sample_is_reproducible_from_the_real_checkpoint():
-    """The 30 questions the real run will judge, derived without any provider call."""
+@pytest.fixture(scope="module")
+def checkpoint():
     rows = list(evaluate.load_checkpoint().values())
+    if not rows:
+        pytest.skip("golden/results.jsonl is empty")
+    return rows
+
+
+def test_sample_is_reproducible_from_the_real_checkpoint(checkpoint):
+    """The 30 questions the real run will judge, derived without any provider call."""
+    rows = checkpoint
     sample = evaluate.calibration_sample(rows)
     assert sum(1 for r in sample if r["tier"] == "A") == 20
     assert sum(1 for r in sample if r["tier"] == "B") == 10
