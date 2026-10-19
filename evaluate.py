@@ -202,7 +202,10 @@ def cited_mentions(answer, names, stamp_positions):
     that they can be compared side by side. A name carrying its file extension is a
     citation wherever it appears. A bare name is a citation only when a timestamp follows
     it inside `CITATION_WINDOW` characters and in the same clause, which is what keeps
-    `cluster analysis.mp4` cited at a time apart from prose about cluster analysis.
+    `cluster analysis.mp4` cited at a time apart from prose about cluster analysis. A
+    bare name lying inside a longer mention already accepted is not a second citation:
+    naming `building and applying a classification model` does not also cite
+    `classification.mp4`.
     """
     lowered = answer.lower()
     spelled, bare = [], []
@@ -211,17 +214,21 @@ def cited_mentions(answer, names, stamp_positions):
         while at != -1:
             spelled.append((at, name, at + len(name)))
             at = lowered.find(name.lower(), at + 1)
+    # names arrive longest first, so a longer mention is already accepted by the time a
+    # name nested inside it is tried, and `accepted` suppresses the nested one
+    accepted = [(s, e) for s, _name, e in spelled]
     for name in names:
         stem = name.rsplit(".", 1)[0].lower()
         at = lowered.find(stem)
         while at != -1:
             end = at + len(stem)
-            inside_spelled = any(s <= at < e for s, _name, e in spelled)
-            if not inside_spelled and any(
+            inside_accepted = any(s <= at < e for s, e in accepted)
+            if not inside_accepted and any(
                 end <= pos < end + CITATION_WINDOW and _same_clause(answer, end, pos)
                 for pos in stamp_positions
             ):
                 bare.append((at, name))
+                accepted.append((at, end))
             at = lowered.find(stem, at + 1)
     return sorted([(at, name) for at, name, _end in spelled] + bare)
 

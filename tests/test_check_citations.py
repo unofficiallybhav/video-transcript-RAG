@@ -24,6 +24,12 @@ CORPUS = (
     "cluster analysis.mp4",
     "classification.mp4",
 )
+# Also real: one filename contains another, so a bare match on the inner name sits inside
+# a mention of the outer one.
+NESTED_CORPUS = (
+    "building and applying a classification model.mp4",
+    "classification.mp4",
+)
 
 
 def chunk(source, start, end, index):
@@ -148,6 +154,19 @@ CASES = [
             "citation_time_valid": None,
             "cited_videos": [],
         },
+    ),
+    Case(
+        behaviour="one video name that happens to contain another is cited once, as the "
+                  "video the answer actually named",
+        answer="This is covered in building and applying a classification model "
+               "at 03:02.",
+        hits=[chunk("building and applying a classification model.mp4", 182.4, 214.9, 3)],
+        expects={
+            "citation_video_valid": 1.0,
+            "citation_time_valid": 1.0,
+            "cited_videos": ["building and applying a classification model.mp4"],
+        },
+        corpus=NESTED_CORPUS,
     ),
 ]
 
