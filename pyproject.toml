@@ -14,3 +14,13 @@ dependencies = [
     "rank-bm25>=0.2.2",
     "sentence-transformers>=6.0.0",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+# the modules under test sit at the repo root, not in a package
+pythonpath = ["."]
+testpaths = ["tests"]

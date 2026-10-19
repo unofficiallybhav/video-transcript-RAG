@@ -22,7 +22,17 @@ groq_api_key=os.getenv("GROQ_API_KEY_"+os.getenv("GROQ_KEY","2")) or os.getenv("
 qdrant_api_key=os.getenv("QDRANT_API_KEY")
 qdrant_url=os.getenv("QDRANT_URL")
 
-groq_client=Groq(api_key=groq_api_key)
+_groq_client=None
+
+# built on first use rather than at import, because Groq() raises when no key is set and
+# the offline stages (`evaluate.py rescore`, the tests) import this module only for
+# chunking and the video filenames, and must run with no credentials present
+def get_groq():
+    global _groq_client
+    if _groq_client is None:
+        _groq_client=Groq(api_key=groq_api_key)
+    return _groq_client
+
 qdrant_client=QdrantClient(api_key=qdrant_api_key,url=qdrant_url)
 embeddings_client=SentenceTransformer(embeddings_model)
 
@@ -237,7 +247,7 @@ def answer_messages(query,context):
 
 # passes context to LLM and asks the query
 def ask_llm(query,context):
-    response=groq_client.chat.completions.create(
+    response=get_groq().chat.completions.create(
         model=llm,messages=answer_messages(query,context),temperature=0.0
     )
     return response.choices[0].message.content
