@@ -1,9 +1,12 @@
-"""The offline re-derivation must reproduce the run that was already published.
+"""The offline re-derivation must hold the judge-free figures over the real 135 rows.
 
-The expected figures below are the ones in the report published on 2026-10-17, copied
-in as literals rather than read back from `golden/report.json`, which the stage rewrites.
-`citation_time_valid` of 0.488 is a known defect in `check_citations` and is corrected by
-later tickets; reproducing it here is what proves the re-derivation path faithful.
+The expected figures below are copied in as literals rather than read back from
+`golden/report.json`, which the stage rewrites. They started as the figures published on
+2026-10-17; the `citation_time_valid` values were superseded on 2026-10-19, when the
+citation check began accepting the floored start time that `format_context` actually
+displays. The superseded values are not kept beside the new ones, because a corrected
+measurement is not a trend. Everything else still reproduces the published run, which is
+what proves the re-derivation path faithful.
 """
 import pytest
 
@@ -12,9 +15,9 @@ from build_golden import load_chunks
 
 PUBLISHED_CITATIONS = {
     "tier_a": {"questions": 83, "citation_present": 0.831,
-               "citation_video_valid": 0.988, "citation_time_valid": 0.488},
+               "citation_video_valid": 0.988, "citation_time_valid": 0.938},
     "tier_b": {"questions": 40, "citation_present": 0.975,
-               "citation_video_valid": 0.987, "citation_time_valid": 0.62,
+               "citation_video_valid": 0.987, "citation_time_valid": 0.974,
                "precision@1": 0.625, "recall@1": 0.588,
                "precision@5": 0.2, "recall@5": 0.912,
                "precision@10": 0.103, "recall@10": 0.925},
