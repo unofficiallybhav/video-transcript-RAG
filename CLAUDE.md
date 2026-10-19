@@ -1,5 +1,11 @@
 # video-transcript-rag
 
+## Tests
+
+`uv run pytest` runs the whole suite, from `tests/`. It needs no network access and no
+API credentials, so it still runs once the daily token budget is gone. pytest is a dev
+dependency; add dependencies with `uv add`, never `pip`.
+
 ## Agent skills
 
 ### Issue tracker
