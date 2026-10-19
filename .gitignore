@@ -14,7 +14,6 @@ wheels/
 .env
 
 # Data and Logs
-data/
 ingest.log
 eval.log
 evals/

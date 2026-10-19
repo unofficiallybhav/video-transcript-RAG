@@ -44,6 +44,29 @@ CHUNK_OVERLAP=2
 CACHE_DIR=Path("cache")
 DATA_DIR=Path("data")
 VIDEO_SUFFIXES={".mp4",".mkv",".webm",".m4a",".mp3",".wav",".flac"}
+# the corpus the stored evaluation run was measured against: one entry per transcript in
+# CACHE_DIR, giving the video's filename and course. It exists because the media files
+# themselves are large, not worth versioning, and were lost once; everything downstream
+# of transcription (chunk ids, citation checks, the golden set) needs only these two
+# fields, so recording them makes the offline stages independent of DATA_DIR.
+CORPUS_PATH=Path("corpus.json")
+_corpus=None
+
+
+def load_corpus():
+    """Every ingested video as {stem: {"source": filename, "course": course}}.
+
+    Ordered by course then filename, which is the order a walk of DATA_DIR produced, so
+    chunk ids and chunk order match what is already in qdrant and in the golden set.
+    """
+    global _corpus
+    if _corpus is None:
+        entries=json.loads(CORPUS_PATH.read_text(encoding="utf-8"))
+        _corpus={
+            stem:entries[stem]
+            for stem in sorted(entries,key=lambda s:(entries[s]["course"],entries[s]["source"]))
+        }
+    return _corpus
 
 # whisper runs locally, so it is loaded once on first use instead of at import
 _whisper_model=None

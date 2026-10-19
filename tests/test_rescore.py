@@ -41,7 +41,7 @@ def checkpoint():
 def chunks():
     corpus = load_chunks()
     if not corpus:
-        pytest.skip("data/ is absent, so the chunk corpus cannot be rebuilt")
+        pytest.skip("corpus.json or cache/ is absent, so the chunk corpus cannot be rebuilt")
     return corpus
 
 

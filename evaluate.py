@@ -111,7 +111,7 @@ def video_names():
         import video_transcript_rag as rag
 
         _video_names.extend(sorted(
-            (p.name for p in Path("data").rglob("*") if p.suffix.lower() in rag.VIDEO_SUFFIXES),
+            (entry["source"] for entry in rag.load_corpus().values()),
             key=len,
             reverse=True,
         ))
@@ -511,7 +511,7 @@ def rescore():
         sys.exit(f"{RESULTS_PATH} is empty; run `run` first")
     chunks = load_chunks()
     if not chunks:
-        sys.exit("no chunks were rebuilt; data/ and cache/ must both be present")
+        sys.exit("no chunks were rebuilt; corpus.json and cache/ must both be present")
     print(f"re-deriving judge-free metrics for {len(rows)} checkpointed questions "
           f"from {len(chunks)} chunks")
     write_report(rescore_rows(rows, chunks))

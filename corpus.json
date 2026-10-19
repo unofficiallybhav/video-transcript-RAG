@@ -1,0 +1,334 @@
+{
+  "addressing data quality": {
+    "source": "addressing data quality.mp4",
+    "course": "machine learning"
+  },
+  "association analysis in detail": {
+    "source": "association analysis in detail.mp4",
+    "course": "machine learning"
+  },
+  "basic queries in neo4j": {
+    "source": "basic queries in neo4j.mp4",
+    "course": "graph analytics"
+  },
+  "besth path": {
+    "source": "besth path.mp4",
+    "course": "graph analytics"
+  },
+  "beyond single vertex computation": {
+    "source": "beyond single vertex computation.mp4",
+    "course": "graph analytics"
+  },
+  "bidirectional djikstra": {
+    "source": "bidirectional djikstra.mp4",
+    "course": "graph analytics"
+  },
+  "biological networks": {
+    "source": "biological networks.mp4",
+    "course": "graph analytics"
+  },
+  "building a degree histogram": {
+    "source": "building a degree histogram.mp4",
+    "course": "graph analytics"
+  },
+  "building a graph": {
+    "source": "building a graph.mp4",
+    "course": "graph analytics"
+  },
+  "building and applying a classification model": {
+    "source": "building and applying a classification model.mp4",
+    "course": "machine learning"
+  },
+  "categories of machine learning": {
+    "source": "categories of machine learning.mp4",
+    "course": "machine learning"
+  },
+  "centrality analysis": {
+    "source": "centrality analysis.mp4",
+    "course": "graph analytics"
+  },
+  "classification": {
+    "source": "classification.mp4",
+    "course": "machine learning"
+  },
+  "classification algorithms": {
+    "source": "classification algorithms.mp4",
+    "course": "machine learning"
+  },
+  "classification in spark": {
+    "source": "classification in spark.mp4",
+    "course": "machine learning"
+  },
+  "classification using decision tree in knime": {
+    "source": "classification using decision tree in knime.mp4",
+    "course": "machine learning"
+  },
+  "cluster analysis": {
+    "source": "cluster analysis.mp4",
+    "course": "machine learning"
+  },
+  "cluster analysis in spark": {
+    "source": "cluster analysis in spark.mp4",
+    "course": "machine learning"
+  },
+  "community analysis": {
+    "source": "community analysis.mp4",
+    "course": "graph analytics"
+  },
+  "confusion matrix": {
+    "source": "confusion matrix.mp4",
+    "course": "machine learning"
+  },
+  "connectivity analysis": {
+    "source": "connectivity analysis.mp4",
+    "course": "graph analytics"
+  },
+  "connectivity analysis with neo4j": {
+    "source": "connectivity analysis with neo4j.mp4",
+    "course": "graph analytics"
+  },
+  "crisp-dm": {
+    "source": "crisp-dm.mp4",
+    "course": "machine learning"
+  },
+  "data exploration": {
+    "source": "data exploration.mp4",
+    "course": "machine learning"
+  },
+  "data exploration using spark": {
+    "source": "data exploration using spark.mp4",
+    "course": "machine learning"
+  },
+  "data exploration using summary statistics": {
+    "source": "data exploration using summary statistics.mp4",
+    "course": "machine learning"
+  },
+  "data preparation": {
+    "source": "data preparation.mp4",
+    "course": "machine learning"
+  },
+  "data quality": {
+    "source": "data quality.mp4",
+    "course": "machine learning"
+  },
+  "data terminology": {
+    "source": "data terminology.mp4",
+    "course": "machine learning"
+  },
+  "decision tree": {
+    "source": "decision tree.mp4",
+    "course": "machine learning"
+  },
+  "dimensionality reduction": {
+    "source": "dimensionality reduction.mp4",
+    "course": "machine learning"
+  },
+  "disconnecting a graph": {
+    "source": "disconnecting a graph.mp4",
+    "course": "graph analytics"
+  },
+  "djikstra algotrithm": {
+    "source": "djikstra algotrithm.mp4",
+    "course": "graph analytics"
+  },
+  "eigenvector centrality": {
+    "source": "eigenvector centrality.mp4",
+    "course": "graph analytics"
+  },
+  "evaluation of a decision tree in knime": {
+    "source": "evaluation of a decision tree in knime.mp4",
+    "course": "machine learning"
+  },
+  "evaluation of a decision tree in spark": {
+    "source": "evaluation of a decision tree in spark.mp4",
+    "course": "machine learning"
+  },
+  "exploring data using plots": {
+    "source": "exploring data using plots.mp4",
+    "course": "machine learning"
+  },
+  "exploring data with knime": {
+    "source": "exploring data with knime.mp4",
+    "course": "machine learning"
+  },
+  "feature selection": {
+    "source": "feature selection.mp4",
+    "course": "machine learning"
+  },
+  "feature transformation": {
+    "source": "feature transformation.mp4",
+    "course": "machine learning"
+  },
+  "focus on graph analytics": {
+    "source": "focus on graph analytics.mp4",
+    "course": "graph analytics"
+  },
+  "generalization and overfitting": {
+    "source": "generalization and overfitting.mp4",
+    "course": "machine learning"
+  },
+  "giraph and graphx": {
+    "source": "giraph and graphx.mp4",
+    "course": "graph analytics"
+  },
+  "goal and activities in machine learning process": {
+    "source": "goal and activities in machine learning process.mp4",
+    "course": "machine learning"
+  },
+  "goal directed djikstra": {
+    "source": "goal directed djikstra.mp4",
+    "course": "graph analytics"
+  },
+  "graphs and big data 4 v's": {
+    "source": "graphs and big data 4 v's.mp4",
+    "course": "graph analytics"
+  },
+  "handling missing values in knime": {
+    "source": "handling missing values in knime.mp4",
+    "course": "machine learning"
+  },
+  "handling missing values in spark": {
+    "source": "handling missing values in spark.mp4",
+    "course": "machine learning"
+  },
+  "human information network analytics": {
+    "source": "human information network analytics.mp4",
+    "course": "graph analytics"
+  },
+  "importing data into neo4j": {
+    "source": "importing data into neo4j.mp4",
+    "course": "graph analytics"
+  },
+  "indegree and outdegree": {
+    "source": "indegree and outdegree.mp4",
+    "course": "graph analytics"
+  },
+  "intro to association analysis": {
+    "source": "intro to association analysis.mp4",
+    "course": "machine learning"
+  },
+  "intro to graph": {
+    "source": "intro to graph.mp4",
+    "course": "graph analytics"
+  },
+  "intro to neo4j": {
+    "source": "intro to neo4j.mp4",
+    "course": "graph analytics"
+  },
+  "joining graph datasets": {
+    "source": "joining graph datasets.mp4",
+    "course": "graph analytics"
+  },
+  "k means clustering": {
+    "source": "k means clustering.mp4",
+    "course": "machine learning"
+  },
+  "k nearest neighbors": {
+    "source": "k nearest neighbors.mp4",
+    "course": "machine learning"
+  },
+  "key player problems": {
+    "source": "key player problems.mp4",
+    "course": "graph analytics"
+  },
+  "knime and spark ml": {
+    "source": "knime and spark ml.mp4",
+    "course": "machine learning"
+  },
+  "large scale graph processing": {
+    "source": "large scale graph processing.mp4",
+    "course": "graph analytics"
+  },
+  "linear regression": {
+    "source": "linear regression.mp4",
+    "course": "machine learning"
+  },
+  "machine learning overview": {
+    "source": "machine learning overview.mp4",
+    "course": "machine learning"
+  },
+  "machine learning process": {
+    "source": "machine learning process.mp4",
+    "course": "machine learning"
+  },
+  "measuring graph evolution": {
+    "source": "measuring graph evolution.mp4",
+    "course": "graph analytics"
+  },
+  "metrics to evaluate model": {
+    "source": "metrics to evaluate model.mp4",
+    "course": "machine learning"
+  },
+  "modifying a graph with neo4j": {
+    "source": "modifying a graph with neo4j.mp4",
+    "course": "graph analytics"
+  },
+  "modulariy": {
+    "source": "modulariy.mp4",
+    "course": "graph analytics"
+  },
+  "naive bayes": {
+    "source": "naive bayes.mp4",
+    "course": "machine learning"
+  },
+  "network connectedness and clustering components": {
+    "source": "network connectedness and clustering components.mp4",
+    "course": "graph analytics"
+  },
+  "overfitting in a decision tree": {
+    "source": "overfitting in a decision tree.mp4",
+    "course": "machine learning"
+  },
+  "parallel programming": {
+    "source": "parallel programming.mp4",
+    "course": "graph analytics"
+  },
+  "path analytics": {
+    "source": "path analytics.mp4",
+    "course": "graph analytics"
+  },
+  "path analytics with neo4j": {
+    "source": "path analytics with neo4j.mp4",
+    "course": "graph analytics"
+  },
+  "plot degree histogram": {
+    "source": "plot degree histogram.mp4",
+    "course": "graph analytics"
+  },
+  "power law graphs": {
+    "source": "power law graphs.mp4",
+    "course": "graph analytics"
+  },
+  "pregel": {
+    "source": "pregel.mp4",
+    "course": "graph analytics"
+  },
+  "regression overview": {
+    "source": "regression overview.mp4",
+    "course": "machine learning"
+  },
+  "scaling up machine learning algorithms": {
+    "source": "scaling up machine learning algorithms.mp4",
+    "course": "machine learning"
+  },
+  "smart cities": {
+    "source": "smart cities.mp4",
+    "course": "graph analytics"
+  },
+  "social networking": {
+    "source": "social networking.mp4",
+    "course": "graph analytics"
+  },
+  "using a validation set": {
+    "source": "using a validation set.mp4",
+    "course": "machine learning"
+  },
+  "what is graph": {
+    "source": "what is graph.mp4",
+    "course": "graph analytics"
+  },
+  "why graphs": {
+    "source": "why graphs.mp4",
+    "course": "graph analytics"
+  }
+}

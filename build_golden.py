@@ -32,7 +32,6 @@ from pathlib import Path
 from llm import complete, extract_json
 
 EVALS_DIR = Path("evals")
-DATA_DIR = Path("data")
 GOLDEN_DIR = Path("golden")
 TIER_A_PATH = GOLDEN_DIR / "tier_a.json"
 TIER_B_PATH = GOLDEN_DIR / "tier_b.json"
@@ -207,14 +206,12 @@ def load_chunks():
     import video_transcript_rag as rag
 
     chunks = []
-    for path in sorted(DATA_DIR.rglob("*")):
-        if path.suffix.lower() not in rag.VIDEO_SUFFIXES:
-            continue
-        transcript_path = rag.CACHE_DIR / f"{path.stem}.json"
+    for stem, entry in rag.load_corpus().items():
+        transcript_path = rag.CACHE_DIR / f"{stem}.json"
         if not transcript_path.exists():
             continue
         segments = json.loads(transcript_path.read_text(encoding="utf-8"))
-        chunks.extend(rag.chunking(segments, path.name, path.parent.name))
+        chunks.extend(rag.chunking(segments, entry["source"], entry["course"]))
 
     for chunk in chunks:
         chunk["chunk_id"] = f"{chunk['source']}:{chunk['chunk_index']}"

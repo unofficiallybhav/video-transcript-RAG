@@ -1,5 +1,18 @@
 # video-transcript-rag
 
+## The corpus
+
+`corpus.json` lists the 83 ingested videos as `{stem: {source, course}}`, and `cache/`
+holds one Whisper transcript per stem. Together they are the corpus: `load_corpus()`,
+`load_chunks()` and `video_names()` read them, so every offline stage works without the
+media files. The videos themselves are gone and are not required.
+
+Rebuilding the chunks from `cache/` reproduces the 406 chunks and the chunk ids already
+in qdrant, because `corpus.json` is ordered by course then filename — the order the
+original walk of the media directory produced. Keep that ordering if you edit it.
+
+To ingest new media, put it somewhere and pass that path: `ingest_all(root)`.
+
 ## Tests
 
 `uv run pytest` runs the whole suite, from `tests/`. It needs no network access and no
