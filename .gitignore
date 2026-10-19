@@ -16,4 +16,5 @@ wheels/
 # Data and Logs
 ingest.log
 eval.log
+calibrate.log
 evals/

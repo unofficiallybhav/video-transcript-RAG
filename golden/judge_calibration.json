@@ -1,0 +1,1034 @@
+{
+  "summary": {
+    "stage": "calibrate",
+    "generated": "2026-10-19 12:31",
+    "judge_model": "openai/gpt-oss-20b",
+    "seed": 11,
+    "strata": {
+      "A": 20,
+      "B": 10
+    },
+    "sample": [
+      "A-Quiz 1 - Introduction to Graphs-7",
+      "A-Quiz 1 - Machine Learning Overview-6",
+      "A-Quiz 1 - Machine Learning Overview-8",
+      "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-5",
+      "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-7",
+      "A-Quiz 11 - Cluster Analysis in Spark-1",
+      "A-Quiz 11 - Cluster Analysis in Spark-2",
+      "A-Quiz 2 - Graph Analytics Applications-16",
+      "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-19",
+      "A-Quiz 4 - Graph Analytics with Neo4j-5",
+      "A-Quiz 4 - Graph Analytics with Neo4j-7",
+      "A-Quiz 5 - Handling Missing Values in KNIME and Spark-4",
+      "A-Quiz 6 - Classification-6",
+      "A-Quiz 7 - Classification in KNIME and Spark-5",
+      "A-Quiz 7 - Classification in KNIME and Spark-6",
+      "A-Quiz 8 - Model Evaluation-6",
+      "A-Quiz 8 - Model Evaluation-8",
+      "A-Quiz 9 - Model Evaluation in KNIME and Spark-1",
+      "A-Quiz 9 - Model Evaluation in KNIME and Spark-2",
+      "A-Quiz 9 - Model Evaluation in KNIME and Spark-5",
+      "B-data preparation.mp4:2",
+      "B-dimensionality reduction.mp4:1",
+      "B-goal directed djikstra.mp4:0",
+      "B-machine learning overview.mp4:1",
+      "B-measuring graph evolution.mp4:0",
+      "B-measuring graph evolution.mp4:2",
+      "B-network connectedness and clustering components.mp4:4",
+      "B-parallel programming.mp4:7",
+      "B-using a validation set.mp4:2",
+      "B-why graphs.mp4:0"
+    ],
+    "passes": {
+      "rerun": "the judge prompt unchanged",
+      "rerun_2": "the judge prompt unchanged again, judged in this same run, so between-run spread is measured between two fresh passes rather than against a score stored on an earlier day",
+      "no_reference": "the same prompt with the reference answer withheld, to measure how far faithfulness depends on seeing it"
+    },
+    "pre_committed": true,
+    "pre_committed_note": "Both thresholds and the outcome each one triggers were fixed in issues #1 and #8 before this stage was ever run, so a result cannot be re-read as small-sample noise after the fact.",
+    "between_run": {
+      "faithfulness": {
+        "n": 30,
+        "mean_absolute_difference": 0.008,
+        "mean_signed_shift": 0.005,
+        "max_absolute_difference": 0.1
+      },
+      "relevancy": {
+        "n": 30,
+        "mean_absolute_difference": 0.005,
+        "mean_signed_shift": 0.002,
+        "max_absolute_difference": 0.1
+      },
+      "correctness": {
+        "n": 30,
+        "mean_absolute_difference": 0.018,
+        "mean_signed_shift": 0.018,
+        "max_absolute_difference": 0.5
+      }
+    },
+    "no_reference": {
+      "faithfulness": {
+        "n": 30,
+        "mean_absolute_difference": 0.164,
+        "mean_signed_shift": 0.109,
+        "max_absolute_difference": 1.0
+      },
+      "relevancy": {
+        "n": 30,
+        "mean_absolute_difference": 0.025,
+        "mean_signed_shift": 0.022,
+        "max_absolute_difference": 0.5
+      }
+    },
+    "versus_stored_run": {
+      "faithfulness": {
+        "n": 30,
+        "mean_absolute_difference": 0.008,
+        "mean_signed_shift": -0.006,
+        "max_absolute_difference": 0.1
+      },
+      "relevancy": {
+        "n": 30,
+        "mean_absolute_difference": 0.004,
+        "mean_signed_shift": -0.002,
+        "max_absolute_difference": 0.1
+      },
+      "correctness": {
+        "n": 30,
+        "mean_absolute_difference": 0.003,
+        "mean_signed_shift": 0.003,
+        "max_absolute_difference": 0.05
+      }
+    },
+    "outcomes": [
+      {
+        "key": "between_run_spread",
+        "name": "between-run spread",
+        "measure": "mean absolute between-run difference, worst metric",
+        "threshold": 0.1,
+        "comparison": "greater than",
+        "if_exceeded": "two-decimal continuous scoring is retired in favour of one decimal",
+        "if_not_exceeded": "two-decimal continuous scoring is kept",
+        "value": 0.018,
+        "triggered": false,
+        "outcome": "two-decimal continuous scoring is kept",
+        "worst_metric": "correctness"
+      },
+      {
+        "key": "faithfulness_without_reference",
+        "name": "faithfulness dependence on the reference answer",
+        "measure": "mean absolute faithfulness difference with the reference withheld",
+        "threshold": 0.1,
+        "comparison": "greater than",
+        "if_exceeded": "faithfulness is split into its own judge call, permanently",
+        "if_not_exceeded": "faithfulness stays in the combined judge call",
+        "value": 0.164,
+        "triggered": true,
+        "outcome": "faithfulness is split into its own judge call, permanently"
+      }
+    ]
+  },
+  "judged": [
+    {
+      "id": "A-Quiz 4 - Graph Analytics with Neo4j-5",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 0.0,
+      "relevancy": 0.0,
+      "correctness": 0.0,
+      "refused": true,
+      "note": "The answer does not provide any factual claim, so it is unsupported, irrelevant, and incorrect."
+    },
+    {
+      "id": "A-Quiz 4 - Graph Analytics with Neo4j-5",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 0.0,
+      "relevancy": 0.0,
+      "correctness": 0.0,
+      "refused": true,
+      "note": "The answer gives no factual claim, is irrelevant, and does not match the reference; it effectively refuses to answer."
+    },
+    {
+      "id": "A-Quiz 4 - Graph Analytics with Neo4j-5",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 0.0,
+      "relevancy": 0.0,
+      "correctness": null,
+      "refused": true,
+      "note": "The answer gives no information, so it is neither faithful nor relevant to the question."
+    },
+    {
+      "id": "A-Quiz 7 - Classification in KNIME and Spark-6",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 0.0,
+      "relevancy": 0.0,
+      "correctness": 0.0,
+      "refused": true,
+      "note": "The answer neither cites any retrieved facts nor addresses the question, so all scores are zero."
+    },
+    {
+      "id": "A-Quiz 7 - Classification in KNIME and Spark-6",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 0.0,
+      "relevancy": 0.0,
+      "correctness": 0.0,
+      "refused": true,
+      "note": "Answer gives no information, is irrelevant and incorrect."
+    },
+    {
+      "id": "A-Quiz 7 - Classification in KNIME and Spark-6",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 0.0,
+      "relevancy": 0.0,
+      "correctness": null,
+      "refused": true,
+      "note": "The answer claims no information, which is unsupported by the context and does not address the question."
+    },
+    {
+      "id": "A-Quiz 4 - Graph Analytics with Neo4j-7",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer correctly identifies MATCH, fully supported by the context, and directly addresses the question."
+    },
+    {
+      "id": "A-Quiz 4 - Graph Analytics with Neo4j-7",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer correctly identifies MATCH, fully supported by the context, and directly addresses the question."
+    },
+    {
+      "id": "A-Quiz 4 - Graph Analytics with Neo4j-7",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "Answer correctly identifies MATCH as the command that initiates a search, supported by the context."
+    },
+    {
+      "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-5",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 0.0,
+      "relevancy": 0.0,
+      "correctness": 0.0,
+      "refused": true,
+      "note": "The answer contains no factual claims, does not address the question, and does not match the reference, so all scores are zero."
+    },
+    {
+      "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-5",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 0.0,
+      "relevancy": 0.0,
+      "correctness": 0.0,
+      "refused": true,
+      "note": "The answer gives no factual claim, is irrelevant, and does not match the reference, so all scores are zero."
+    },
+    {
+      "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-5",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 0.0,
+      "correctness": null,
+      "refused": true,
+      "note": "The answer states it has no information, which is consistent with the retrieved context, but it does not address the question."
+    },
+    {
+      "id": "A-Quiz 6 - Classification-6",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 0.5,
+      "correctness": 0.0,
+      "refused": false,
+      "note": "The claim about greedy splitting is supported by the context, but the answer is incomplete and does not match the reference that all statements are true."
+    },
+    {
+      "id": "A-Quiz 6 - Classification-6",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 0.5,
+      "correctness": 0.5,
+      "refused": false,
+      "note": "The single claim is fully supported by the context, but the answer is incomplete and only partially aligns with the reference that all statements are true."
+    },
+    {
+      "id": "A-Quiz 6 - Classification-6",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "Both the claim and the answer are fully supported by the retrieved context and directly answer the question."
+    },
+    {
+      "id": "A-Quiz 8 - Model Evaluation-6",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer directly states the correct formula, is fully supported by the context, and matches the reference answer."
+    },
+    {
+      "id": "A-Quiz 8 - Model Evaluation-6",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "Answer fully supports the reference and directly addresses the question."
+    },
+    {
+      "id": "A-Quiz 8 - Model Evaluation-6",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "The answer accurately states the formula and example, fully supported by the context and directly addresses the question."
+    },
+    {
+      "id": "A-Quiz 11 - Cluster Analysis in Spark-2",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully aligns with the reference and is fully supported by the retrieved context."
+    },
+    {
+      "id": "A-Quiz 11 - Cluster Analysis in Spark-2",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully aligns with the reference and is well supported by the retrieved context."
+    },
+    {
+      "id": "A-Quiz 11 - Cluster Analysis in Spark-2",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 0.98,
+      "relevancy": 0.95,
+      "correctness": null,
+      "refused": false,
+      "note": "Answer accurately reflects the context and directly addresses the question."
+    },
+    {
+      "id": "A-Quiz 11 - Cluster Analysis in Spark-1",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 0.8,
+      "relevancy": 0.8,
+      "correctness": 0.5,
+      "refused": false,
+      "note": "The answer cites the transcript’s claim that almost all samples have zero rain, which is supported, but it gives an approximate 100% instead of the precise 99.4% from the reference."
+    },
+    {
+      "id": "A-Quiz 11 - Cluster Analysis in Spark-1",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 0.9,
+      "relevancy": 0.9,
+      "correctness": 0.5,
+      "refused": false,
+      "note": "The answer is supported by the context and addresses the question, but it gives an approximate 100% instead of the precise 99.4% required by the reference."
+    },
+    {
+      "id": "A-Quiz 11 - Cluster Analysis in Spark-1",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 0.0,
+      "relevancy": 0.95,
+      "correctness": null,
+      "refused": false,
+      "note": "The answer claims 100% but the source only says 'almost all', so the factual claim is unsupported; however it directly addresses the question."
+    },
+    {
+      "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-1",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 0.9,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer correctly identifies low_humidity_day as the target class label, is fully relevant, and is largely supported by the provided context."
+    },
+    {
+      "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-1",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "Answer fully matches the reference and is supported by the retrieved context."
+    },
+    {
+      "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-1",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "The answer accurately states that low_humidity_day is the true class column used as ground truth in the confusion matrix, which is fully supported by the context and directly addresses the question."
+    },
+    {
+      "id": "A-Quiz 5 - Handling Missing Values in KNIME and Spark-4",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 0.0,
+      "relevancy": 0.0,
+      "correctness": 0.0,
+      "refused": true,
+      "note": "The answer gives no information, so it is not supported, not relevant, and incorrect."
+    },
+    {
+      "id": "A-Quiz 5 - Handling Missing Values in KNIME and Spark-4",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 0.0,
+      "relevancy": 0.0,
+      "correctness": 0.0,
+      "refused": true,
+      "note": "The answer neither cites any retrieved facts nor addresses the question, so all scores are zero."
+    },
+    {
+      "id": "A-Quiz 5 - Handling Missing Values in KNIME and Spark-4",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 0.0,
+      "correctness": null,
+      "refused": true,
+      "note": "The answer correctly states it has no information, which is consistent with the context, but it does not answer the question."
+    },
+    {
+      "id": "A-Quiz 8 - Model Evaluation-8",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully matches the reference and is supported by the context."
+    },
+    {
+      "id": "A-Quiz 8 - Model Evaluation-8",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully matches the reference and is supported by the context."
+    },
+    {
+      "id": "A-Quiz 8 - Model Evaluation-8",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "The answer correctly states the formula for accuracy from the confusion matrix, fully supported by the transcript, and directly addresses the question."
+    },
+    {
+      "id": "A-Quiz 1 - Machine Learning Overview-8",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "All claims are supported by the context, directly answer the question, and match the reference answer."
+    },
+    {
+      "id": "A-Quiz 1 - Machine Learning Overview-8",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 0.95,
+      "relevancy": 0.95,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer accurately reflects the retrieved context, directly addresses the question, and matches the reference answer."
+    },
+    {
+      "id": "A-Quiz 1 - Machine Learning Overview-8",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "All factual claims are supported by the context and the answer directly addresses the question."
+    },
+    {
+      "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-2",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer accurately states that low_humidity_day is the true label and Prediction(low_humidity_day) is the predicted label, fully supported by the context and matching the reference."
+    },
+    {
+      "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-2",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer accurately states that low_humidity_day is the true label and Prediction(low_humidity_day) is the model’s predicted label, fully supported by the context and matching the reference."
+    },
+    {
+      "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-2",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "The answer correctly identifies low_humidity_day as the true label and Prediction(low_humidity_day) as the model’s predicted label, matching the context and directly answering the question."
+    },
+    {
+      "id": "A-Quiz 2 - Graph Analytics Applications-16",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 0.0,
+      "relevancy": 0.0,
+      "correctness": 0.0,
+      "refused": true,
+      "note": "Answer gives no claim, so all scores are zero."
+    },
+    {
+      "id": "A-Quiz 2 - Graph Analytics Applications-16",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 0.0,
+      "relevancy": 0.0,
+      "correctness": 0.0,
+      "refused": true,
+      "note": "Answer gives no claim, so all scores are zero."
+    },
+    {
+      "id": "A-Quiz 2 - Graph Analytics Applications-16",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 0.0,
+      "correctness": null,
+      "refused": true,
+      "note": "No factual claims were made, so faithfulness is 1.00; the answer does not address the question, so relevancy is 0.00; the system refused to answer."
+    },
+    {
+      "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-5",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully matches the reference and is supported by the context."
+    },
+    {
+      "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-5",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully matches the reference and is supported by the context."
+    },
+    {
+      "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-5",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "Answer directly states the goal of cluster analysis and is fully supported by the retrieved context."
+    },
+    {
+      "id": "A-Quiz 1 - Machine Learning Overview-6",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully supports the claim with cited sources, directly addresses the question, and matches the reference answer."
+    },
+    {
+      "id": "A-Quiz 1 - Machine Learning Overview-6",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer directly states the process is iterative, fully supported by the context, and matches the reference."
+    },
+    {
+      "id": "A-Quiz 1 - Machine Learning Overview-6",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "Answer directly addresses the question and all claims are supported by the retrieved context."
+    },
+    {
+      "id": "A-Quiz 1 - Introduction to Graphs-7",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer correctly identifies Volume, fully supported by the context, directly addresses the question, and matches the reference."
+    },
+    {
+      "id": "A-Quiz 1 - Introduction to Graphs-7",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer correctly identifies Volume, fully supported by the context, directly addresses the question, and matches the reference."
+    },
+    {
+      "id": "A-Quiz 1 - Introduction to Graphs-7",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "The answer correctly identifies Volume as the V that increases algorithmic complexity, and this claim is directly supported by the transcript excerpts provided."
+    },
+    {
+      "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-19",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer correctly identifies degree centrality as the hub‑ness measure, fully supported by the context and matching the reference."
+    },
+    {
+      "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-19",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer correctly identifies degree centrality as the hub‑ness measure, fully supported by the context and matching the reference."
+    },
+    {
+      "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-19",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "The answer correctly identifies degree centrality as the hubness measure and is fully supported by the transcript."
+    },
+    {
+      "id": "A-Quiz 7 - Classification in KNIME and Spark-5",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 0.0,
+      "relevancy": 0.0,
+      "correctness": 0.0,
+      "refused": true,
+      "note": "The answer gives no factual claim, is irrelevant to the question, and does not match the reference; it effectively refuses to answer."
+    },
+    {
+      "id": "A-Quiz 7 - Classification in KNIME and Spark-5",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 0.0,
+      "relevancy": 0.0,
+      "correctness": 0.0,
+      "refused": true,
+      "note": "The answer gives no factual claim, is irrelevant to the question, and does not match the reference; it effectively refuses to answer."
+    },
+    {
+      "id": "A-Quiz 7 - Classification in KNIME and Spark-5",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 0.0,
+      "correctness": null,
+      "refused": true,
+      "note": "The answer correctly states it has no information, but it does not address the question."
+    },
+    {
+      "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-7",
+      "tier": "A",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer directly states the centroid is the mean of the samples in the cluster, fully supported by the context and matching the reference."
+    },
+    {
+      "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-7",
+      "tier": "A",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer directly states the centroid is the mean of the samples in the cluster, fully supported by the context and matching the reference."
+    },
+    {
+      "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-7",
+      "tier": "A",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "Answer directly defines a cluster centroid and all claims are supported by the retrieved context."
+    },
+    {
+      "id": "B-machine learning overview.mp4:1",
+      "tier": "B",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 0.8,
+      "refused": false,
+      "note": "Answer fully supported by context and directly addresses the question, but omits the data‑quality detail from the reference."
+    },
+    {
+      "id": "B-machine learning overview.mp4:1",
+      "tier": "B",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 0.85,
+      "refused": false,
+      "note": "Faithful and directly relevant; slightly incomplete relative to the reference."
+    },
+    {
+      "id": "B-machine learning overview.mp4:1",
+      "tier": "B",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "Both claims are fully supported by the context and directly answer the question."
+    },
+    {
+      "id": "B-parallel programming.mp4:7",
+      "tier": "B",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully matches the reference, is directly relevant, and all claims are supported by the retrieved context."
+    },
+    {
+      "id": "B-parallel programming.mp4:7",
+      "tier": "B",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully matches the reference, is directly relevant, and all claims are supported by the retrieved context."
+    },
+    {
+      "id": "B-parallel programming.mp4:7",
+      "tier": "B",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "The answer accurately reflects the context and directly addresses the question."
+    },
+    {
+      "id": "B-measuring graph evolution.mp4:0",
+      "tier": "B",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully matches the reference and is fully supported by the context."
+    },
+    {
+      "id": "B-measuring graph evolution.mp4:0",
+      "tier": "B",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully matches the retrieved context, directly addresses the question, and aligns with the reference answer."
+    },
+    {
+      "id": "B-measuring graph evolution.mp4:0",
+      "tier": "B",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "Both claims are directly supported by the transcript and precisely answer the question."
+    },
+    {
+      "id": "B-why graphs.mp4:0",
+      "tier": "B",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully matches the reference and is supported by the transcript."
+    },
+    {
+      "id": "B-why graphs.mp4:0",
+      "tier": "B",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully matches the reference and is supported by the transcript."
+    },
+    {
+      "id": "B-why graphs.mp4:0",
+      "tier": "B",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "The answer is fully supported by the transcript and directly addresses the question."
+    },
+    {
+      "id": "B-network connectedness and clustering components.mp4:4",
+      "tier": "B",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "All claims are supported by the context, directly answer the question, and match the reference answer."
+    },
+    {
+      "id": "B-network connectedness and clustering components.mp4:4",
+      "tier": "B",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully matches the retrieved context, directly addresses the question, and aligns with the reference answer."
+    },
+    {
+      "id": "B-network connectedness and clustering components.mp4:4",
+      "tier": "B",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "All factual claims are supported by the transcript and the answer directly addresses the export and copy steps requested."
+    },
+    {
+      "id": "B-dimensionality reduction.mp4:1",
+      "tier": "B",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully matches the reference, is directly relevant, and all claims are supported by the retrieved context."
+    },
+    {
+      "id": "B-dimensionality reduction.mp4:1",
+      "tier": "B",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer fully matches the reference, is directly relevant, and all claims are supported by the retrieved context."
+    },
+    {
+      "id": "B-dimensionality reduction.mp4:1",
+      "tier": "B",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "The answer accurately reflects the context and directly addresses the question."
+    },
+    {
+      "id": "B-data preparation.mp4:2",
+      "tier": "B",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer correctly states scaling and dimensionality reduction, fully supported by the retrieved context and matching the reference answer."
+    },
+    {
+      "id": "B-data preparation.mp4:2",
+      "tier": "B",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer correctly states scaling and dimensionality reduction, fully supported by the retrieved context and matching the reference answer."
+    },
+    {
+      "id": "B-data preparation.mp4:2",
+      "tier": "B",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "Both claims are directly supported by the context and the answer directly addresses the question."
+    },
+    {
+      "id": "B-using a validation set.mp4:2",
+      "tier": "B",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "All scores are 1.00 because the answer is fully supported by the context, directly addresses the question, and matches the reference answer."
+    },
+    {
+      "id": "B-using a validation set.mp4:2",
+      "tier": "B",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "All scores are 1.00 because the answer is fully supported by the context, directly addresses the question, and matches the reference answer."
+    },
+    {
+      "id": "B-using a validation set.mp4:2",
+      "tier": "B",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "The answer directly reflects the transcript and precisely answers the question."
+    },
+    {
+      "id": "B-measuring graph evolution.mp4:2",
+      "tier": "B",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 0.95,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer correctly states the term 'burst', fully supported by the context, directly addresses the question, and matches the reference answer."
+    },
+    {
+      "id": "B-measuring graph evolution.mp4:2",
+      "tier": "B",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 0.95,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "Faithful and correct; a small extra video reference slightly lowers relevancy."
+    },
+    {
+      "id": "B-measuring graph evolution.mp4:2",
+      "tier": "B",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "Answer correctly identifies the term 'burst' as supported by context and directly addresses the question."
+    },
+    {
+      "id": "B-goal directed djikstra.mp4:0",
+      "tier": "B",
+      "pass": "rerun",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer correctly names the variant, cites the target‑node guidance, and matches the reference, fully supported by the retrieved context."
+    },
+    {
+      "id": "B-goal directed djikstra.mp4:0",
+      "tier": "B",
+      "pass": "rerun_2",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": 1.0,
+      "refused": false,
+      "note": "The answer is fully faithful, relevant, and correct."
+    },
+    {
+      "id": "B-goal directed djikstra.mp4:0",
+      "tier": "B",
+      "pass": "no_reference",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "correctness": null,
+      "refused": false,
+      "note": "Answer directly matches the transcript and fully addresses the question."
+    }
+  ]
+}
