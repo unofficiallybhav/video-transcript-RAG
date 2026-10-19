@@ -180,9 +180,11 @@ CASES = [
     # clause, and the case above does that for `classification.mp4`. But the
     # Implementation Decision says a bare name counts "only when a timestamp follows
     # it", so a bare name after its timestamp is never recognised at all, and the
-    # forward attribution has nothing to reach. The Implementation Decision governs and
-    # the behaviour is left as it is; this case exists so the asymmetry is on record
-    # rather than discovered again as a defect. It awaits the user's ruling.
+    # forward attribution has nothing to reach. Ruled on 2026-10-19: the Implementation
+    # Decision governs and story 3 is read as covering extension-bearing names only.
+    # Making the bare-name window symmetric would let a bare name be recognised with no
+    # bounded window on either side, which reopens the false-citation tradeoff the
+    # 14-against-35 split exists to avoid. This case is the record of that decision.
     Case(
         behaviour="a bare video name written after its timestamp is not recognised, so "
                   "the timestamp stays uncheckable and counts invalid",

@@ -135,7 +135,8 @@ def judged(qid, which, faith, relevancy=0.9, correctness=0.7):
 
 def test_between_run_difference_is_the_mean_absolute_gap_per_metric():
     baseline = [dict(r, faithfulness=0.80) for r in checkpoint_rows(a=2, b=0)]
-    results = [judged("tierA-q000", "rerun", 1.00), judged("tierA-q001", "rerun", 0.80)]
+    results = [judged("tierA-q000", "rerun", 0.80), judged("tierA-q001", "rerun", 0.80),
+               judged("tierA-q000", "rerun_2", 1.00), judged("tierA-q001", "rerun_2", 0.80)]
     summary = evaluate.calibration_summary(baseline, results)
     # |1.00-0.80| and |0.80-0.80| -> mean 0.10
     assert summary["between_run"]["faithfulness"]["mean_absolute_difference"] == 0.1
@@ -145,9 +146,28 @@ def test_between_run_difference_is_the_mean_absolute_gap_per_metric():
     assert summary["between_run"]["faithfulness"]["max_absolute_difference"] == 0.2
 
 
+def test_between_run_spread_ignores_the_stored_score_and_reports_its_drift_apart():
+    """Two identical fresh passes agree, however far the stored run has drifted.
+
+    The threshold must read judge nondeterminism only. A score stored on an earlier day
+    carries provider-side model drift as well, so it is reported separately and is not
+    allowed to move the verdict.
+    """
+    baseline = [dict(r, faithfulness=0.20) for r in checkpoint_rows(a=2, b=0)]
+    results = [judged("tierA-q000", "rerun", 0.80), judged("tierA-q001", "rerun", 0.80),
+               judged("tierA-q000", "rerun_2", 0.80), judged("tierA-q001", "rerun_2", 0.80)]
+    summary = evaluate.calibration_summary(baseline, results)
+
+    assert summary["between_run"]["faithfulness"]["mean_absolute_difference"] == 0.0
+    assert summary["outcomes"][0]["triggered"] is False
+    # the drift against the stored run is still visible, just not on the threshold
+    assert summary["versus_stored_run"]["faithfulness"]["mean_absolute_difference"] == 0.6
+
+
 def test_a_mean_difference_exactly_at_the_threshold_does_not_retire_two_decimals():
     baseline = [dict(r, faithfulness=0.80) for r in checkpoint_rows(a=2, b=0)]
-    results = [judged("tierA-q000", "rerun", 1.00), judged("tierA-q001", "rerun", 0.80)]
+    results = [judged("tierA-q000", "rerun", 0.80), judged("tierA-q001", "rerun", 0.80),
+               judged("tierA-q000", "rerun_2", 1.00), judged("tierA-q001", "rerun_2", 0.80)]
     outcome = evaluate.calibration_summary(baseline, results)["outcomes"][0]
     assert outcome["triggered"] is False
     assert outcome["outcome"] == "two-decimal continuous scoring is kept"
@@ -155,7 +175,8 @@ def test_a_mean_difference_exactly_at_the_threshold_does_not_retire_two_decimals
 
 def test_a_mean_difference_above_the_threshold_retires_two_decimals():
     baseline = [dict(r, faithfulness=0.80) for r in checkpoint_rows(a=2, b=0)]
-    results = [judged("tierA-q000", "rerun", 0.50), judged("tierA-q001", "rerun", 0.80)]
+    results = [judged("tierA-q000", "rerun", 0.80), judged("tierA-q001", "rerun", 0.80),
+               judged("tierA-q000", "rerun_2", 0.50), judged("tierA-q001", "rerun_2", 0.80)]
     outcome = evaluate.calibration_summary(baseline, results)["outcomes"][0]
     assert outcome["triggered"] is True
     assert outcome["outcome"] == ("two-decimal continuous scoring is retired in favour "
@@ -223,7 +244,7 @@ def calibration_workspace(monkeypatch, tmp_path, rows):
     return golden_dir
 
 
-def test_calibrate_judges_the_sample_twice_and_writes_its_own_artifact(
+def test_calibrate_judges_the_sample_three_times_and_writes_its_own_artifact(
         monkeypatch, tmp_path):
     rows = checkpoint_rows(a=25, b=15)
     golden_dir = calibration_workspace(monkeypatch, tmp_path, rows)
@@ -232,7 +253,7 @@ def test_calibrate_judges_the_sample_twice_and_writes_its_own_artifact(
 
     evaluate.calibrate(complete_fn=fake)
 
-    assert len(fake.sent) == 60
+    assert len(fake.sent) == 90
     artifact = json.loads(
         (golden_dir / "judge_calibration.json").read_text("utf-8"))["summary"]
     assert len(artifact["sample"]) == 30
@@ -271,7 +292,7 @@ def test_calibrate_resumes_after_the_daily_limit_without_rejudging(monkeypatch, 
     rest = stub_judge({"faithfulness": 0.8, "relevancy": 0.9, "correctness": 0.7,
                        "refused": False})
     evaluate.calibrate(complete_fn=rest)
-    assert len(rest.sent) == 54
+    assert len(rest.sent) == 84
     assert (golden_dir / "judge_calibration.json").exists()
 
 

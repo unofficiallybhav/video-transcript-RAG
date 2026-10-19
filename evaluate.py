@@ -866,13 +866,23 @@ def calibration_summary(baseline_rows, results):
     """
     baseline = {r["id"]: r for r in baseline_rows}
     rerun = {r["id"]: r for r in results if r.get("pass") == "rerun"}
+    rerun_2 = {r["id"]: r for r in results if r.get("pass") == "rerun_2"}
     no_reference = {r["id"]: r for r in results if r.get("pass") == "no_reference"}
 
-    between_run = {m: _spread(_gap(rerun, baseline, m)) for m in JUDGE_METRICS}
-    # the reference-withheld pass is compared against the fresh unchanged-prompt pass,
-    # so the only thing that differs between the two is the reference answer
+    # between-run spread is measured between TWO FRESH passes judged in the same run,
+    # not against the score stored in the checkpoint. The stored score was produced on
+    # another day, so comparing against it folds provider-side model drift into a number
+    # that would be read as judge nondeterminism — a confound this experiment exists to
+    # avoid importing.
+    between_run = {m: _spread(_gap(rerun_2, rerun, m)) for m in JUDGE_METRICS}
+    # the reference-withheld pass is compared against the first fresh unchanged-prompt
+    # pass, so the only thing that differs between the two is the reference answer
     withheld = {m: _spread(_gap(no_reference, rerun, m))
                 for m in ("faithfulness", "relevancy")}
+    # informational only, deliberately not attached to a threshold: how far the fresh
+    # pass sits from the score stored on 2026-10-17. Reported because it is the drift
+    # that disqualified the stored score as a second run, and it costs nothing to show.
+    versus_stored_run = {m: _spread(_gap(rerun, baseline, m)) for m in JUDGE_METRICS}
 
     measured = [(m, between_run[m]["mean_absolute_difference"]) for m in JUDGE_METRICS
                 if between_run[m]["mean_absolute_difference"] is not None]
@@ -909,8 +919,10 @@ def calibration_summary(baseline_rows, results):
         "strata": {tier: size for tier, size in CALIBRATION_STRATA},
         "sample": sorted(rerun),
         "passes": {
-            "rerun": "the judge prompt unchanged, to measure between-run spread "
-                     "against the score already in golden/results.jsonl",
+            "rerun": "the judge prompt unchanged",
+            "rerun_2": "the judge prompt unchanged again, judged in this same run, so "
+                       "between-run spread is measured between two fresh passes rather "
+                       "than against a score stored on an earlier day",
             "no_reference": "the same prompt with the reference answer withheld, to "
                             "measure how far faithfulness depends on seeing it",
         },
@@ -921,6 +933,7 @@ def calibration_summary(baseline_rows, results):
                               "noise after the fact.",
         "between_run": between_run,
         "no_reference": withheld,
+        "versus_stored_run": versus_stored_run,
         "outcomes": outcomes,
     }
 
@@ -938,13 +951,13 @@ def calibration_progress():
 
 
 def calibrate(complete_fn=complete):
-    """Re-judges a seeded sample twice, to put error bars on the judge-derived scores.
+    """Re-judges a seeded sample three times, to put error bars on the judge scores.
 
-    Pass one repeats the judge prompt unchanged, so the gap against the score already in
-    the checkpoint is between-run spread on an unchanged input. Pass two withholds the
-    reference answer, so the gap against pass one is how far faithfulness leans on
-    seeing it. Nothing is generated and no existing score is overwritten: the stage
-    reuses the stored answers and writes only its own artifact.
+    Passes one and two repeat the judge prompt unchanged, so the gap between them is
+    between-run spread measured on identical input within a single run. Pass three
+    withholds the reference answer, so its gap against pass one is how far faithfulness
+    leans on seeing it. Nothing is generated and no existing score is overwritten: the
+    stage reuses the stored answers and writes only its own artifact.
 
     `complete_fn` is the provider call, so the whole stage is exercisable against a stub
     judge. The default is the shared paced client, and the real run needs no change here.
@@ -965,7 +978,8 @@ def calibrate(complete_fn=complete):
     chunks = {c["chunk_id"]: c for c in load_chunks()}
 
     done = calibration_progress()
-    passes = (("rerun", JUDGE_PROMPT), ("no_reference", no_reference_prompt()))
+    passes = (("rerun", JUDGE_PROMPT), ("rerun_2", JUDGE_PROMPT),
+              ("no_reference", no_reference_prompt()))
     GOLDEN_DIR.mkdir(exist_ok=True)
 
     for i, row in enumerate(sample, 1):
