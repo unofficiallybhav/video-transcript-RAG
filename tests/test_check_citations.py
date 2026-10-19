@@ -24,6 +24,12 @@ CORPUS = (
     "cluster analysis.mp4",
     "classification.mp4",
 )
+# Also real: one filename contains another, so a bare match on the inner name sits inside
+# a mention of the outer one.
+NESTED_CORPUS = (
+    "building and applying a classification model.mp4",
+    "classification.mp4",
+)
 
 
 def chunk(source, start, end, index):
@@ -126,8 +132,7 @@ CASES = [
     Case(
         behaviour="an answer that cites nothing reports no citation, and leaves both "
                   "validity metrics absent rather than zero",
-        answer="Clustering groups unlabelled records by similarity, "
-               "while classification assigns a known label.",
+        answer="Clustering groups unlabelled records by similarity.",
         hits=[chunk("classification.mp4", 182.4, 214.9, 3)],
         expects={
             "citation_present": 0.0,
@@ -135,6 +140,14 @@ CASES = [
             "citation_time_valid": None,
             "cited_videos": [],
         },
+    ),
+    Case(
+        behaviour="a bare video name in ordinary prose, with no timestamp beside it, is "
+                  "not a citation of the video that shares its name",
+        answer="Clustering groups unlabelled records by similarity, "
+               "while classification assigns a known label.",
+        hits=[chunk("classification.mp4", 182.4, 214.9, 3)],
+        expects={"citation_present": 0.0, "cited_videos": []},
     ),
     Case(
         behaviour="a refusal reports no citation, and leaves both validity metrics "
@@ -146,6 +159,39 @@ CASES = [
             "citation_present": 0.0,
             "citation_video_valid": None,
             "citation_time_valid": None,
+            "cited_videos": [],
+        },
+    ),
+    Case(
+        behaviour="one video name that happens to contain another is cited once, as the "
+                  "video the answer actually named",
+        answer="This is covered in building and applying a classification model "
+               "at 03:02.",
+        hits=[chunk("building and applying a classification model.mp4", 182.4, 214.9, 3)],
+        expects={
+            "citation_video_valid": 1.0,
+            "citation_time_valid": 1.0,
+            "cited_videos": ["building and applying a classification model.mp4"],
+        },
+        corpus=NESTED_CORPUS,
+    ),
+    # Deliberate, and the one place the spec argues with itself. Story 3 asks for a
+    # timestamp written before its video name to be attributed to that name in the same
+    # clause, and the case above does that for `classification.mp4`. But the
+    # Implementation Decision says a bare name counts "only when a timestamp follows
+    # it", so a bare name after its timestamp is never recognised at all, and the
+    # forward attribution has nothing to reach. The Implementation Decision governs and
+    # the behaviour is left as it is; this case exists so the asymmetry is on record
+    # rather than discovered again as a defect. It awaits the user's ruling.
+    Case(
+        behaviour="a bare video name written after its timestamp is not recognised, so "
+                  "the timestamp stays uncheckable and counts invalid",
+        answer="At 03:02, classification defines recall.",
+        hits=[chunk("classification.mp4", 182.4, 214.9, 3)],
+        expects={
+            "citation_present": 0.0,
+            "citation_video_valid": None,
+            "citation_time_valid": 0.0,
             "cited_videos": [],
         },
     ),

@@ -26,7 +26,8 @@ _groq_client=None
 
 # built on first use rather than at import, because Groq() raises when no key is set and
 # the offline stages (`evaluate.py rescore`, the tests) import this module only for
-# chunking and the video filenames, and must run with no credentials present
+# chunking and the video filenames. The Groq key was the one that blocked them; the
+# clients built below do not raise without their credentials, and are left at import.
 def get_groq():
     global _groq_client
     if _groq_client is None:

@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated": "2026-10-19T11:17:33",
+    "generated": "2026-10-19T11:38:43",
     "generation_k": 5,
     "judge_model": "openai/gpt-oss-20b",
     "tier_a": {
@@ -34,9 +34,7 @@
         "citation_video_valid": 1.0,
         "citation_video_valid_n": 26,
         "citation_time_valid": 0.963,
-        "citation_time_valid_n": 27,
-        "answerable_refusal_rate": 0.129,
-        "answerable_refusal_rate_n": 31
+        "citation_time_valid_n": 27
       },
       "machine learning": {
         "questions": 52,
@@ -51,9 +49,7 @@
         "citation_video_valid": 0.969,
         "citation_video_valid_n": 43,
         "citation_time_valid": 0.919,
-        "citation_time_valid_n": 43,
-        "answerable_refusal_rate": 0.173,
-        "answerable_refusal_rate_n": 52
+        "citation_time_valid_n": 43
       }
     },
     "tier_a_hands_on": {
@@ -69,9 +65,7 @@
       "citation_video_valid": 0.875,
       "citation_video_valid_n": 4,
       "citation_time_valid": 0.875,
-      "citation_time_valid_n": 4,
-      "answerable_refusal_rate": 0.6,
-      "answerable_refusal_rate_n": 10
+      "citation_time_valid_n": 4
     },
     "tier_b": {
       "questions": 40,

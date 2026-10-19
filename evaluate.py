@@ -66,6 +66,7 @@ CALIBRATION_RAW_PATH = GOLDEN_DIR / "judge_calibration.jsonl"
 CALIBRATION_THRESHOLD = 0.10
 CALIBRATION_RULES = (
     {
+        "key": "between_run_spread",
         "name": "between-run spread",
         "measure": "mean absolute between-run difference, worst metric",
         "threshold": CALIBRATION_THRESHOLD,
@@ -75,6 +76,7 @@ CALIBRATION_RULES = (
         "if_not_exceeded": "two-decimal continuous scoring is kept",
     },
     {
+        "key": "faithfulness_without_reference",
         "name": "faithfulness dependence on the reference answer",
         "measure": "mean absolute faithfulness difference with the reference withheld",
         "threshold": CALIBRATION_THRESHOLD,
@@ -202,7 +204,10 @@ def cited_mentions(answer, names, stamp_positions):
     that they can be compared side by side. A name carrying its file extension is a
     citation wherever it appears. A bare name is a citation only when a timestamp follows
     it inside `CITATION_WINDOW` characters and in the same clause, which is what keeps
-    `cluster analysis.mp4` cited at a time apart from prose about cluster analysis.
+    `cluster analysis.mp4` cited at a time apart from prose about cluster analysis. A
+    bare name lying inside a longer mention already accepted is not a second citation:
+    naming `building and applying a classification model` does not also cite
+    `classification.mp4`.
     """
     lowered = answer.lower()
     spelled, bare = [], []
@@ -211,17 +216,21 @@ def cited_mentions(answer, names, stamp_positions):
         while at != -1:
             spelled.append((at, name, at + len(name)))
             at = lowered.find(name.lower(), at + 1)
+    # names arrive longest first, so a longer mention is already accepted by the time a
+    # name nested inside it is tried, and `accepted` suppresses the nested one
+    accepted = [(s, e) for s, _name, e in spelled]
     for name in names:
         stem = name.rsplit(".", 1)[0].lower()
         at = lowered.find(stem)
         while at != -1:
             end = at + len(stem)
-            inside_spelled = any(s <= at < e for s, _name, e in spelled)
-            if not inside_spelled and any(
+            inside_accepted = any(s <= at < e for s, e in accepted)
+            if not inside_accepted and any(
                 end <= pos < end + CITATION_WINDOW and _same_clause(answer, end, pos)
                 for pos in stamp_positions
             ):
                 bare.append((at, name))
+                accepted.append((at, end))
             at = lowered.find(stem, at + 1)
     return sorted([(at, name) for at, name, _end in spelled] + bare)
 
@@ -329,12 +338,33 @@ def judge_refusal(question, answer):
     return payload
 
 
+def numeric(value):
+    """Whether a value counts towards a metric: a real number, not an absent None.
+
+    Absence is spelled None throughout — an unscored judge field, a citation validity
+    metric on an answer that cited nothing — and every mean, count and difference in
+    this module has to tell absence from zero, so the test is written down once.
+    """
+    return isinstance(value, (int, float))
+
+
 def mean(values):
-    values = [v for v in values if isinstance(v, (int, float))]
+    values = [v for v in values if numeric(v)]
     return round(sum(values) / len(values), 3) if values else None
 
 
-def put(block, key, values):
+def refusal_verdicts(rows):
+    """Each row's refusal verdict as 1.0 or 0.0, over the rows the judge left one on.
+
+    A row with no verdict is excluded rather than read as "did not refuse". The two
+    metrics built from this — tier C's refusal rate and tiers A and B's answerable
+    refusal rate — are different claims about the same verdict, and each names itself
+    where it is recorded.
+    """
+    return [1.0 if r.get("refused") else 0.0 for r in rows if r.get("refused") is not None]
+
+
+def record_with_denominator(block, key, values):
     """Records a metric's value under `key` and the questions it covers under `key_n`.
 
     A question that carries no value for a metric is absent from that metric, not a zero
@@ -344,7 +374,7 @@ def put(block, key, values):
     those questions, and the count travels beside the value to say how many were left,
     because a mean whose denominator is invisible cannot be read honestly.
     """
-    present = [v for v in values if isinstance(v, (int, float))]
+    present = [v for v in values if numeric(v)]
     block[key] = mean(present)
     block[f"{key}_n"] = len(present)
 
@@ -507,34 +537,39 @@ def tier_c_block(rows):
     are rendered side by side so that neither can be read as success on its own.
     """
     out = {"questions": len(rows)}
-    put(out, "refusal_rate",
-        [1.0 if r.get("refused") else 0.0 for r in rows if r.get("refused") is not None])
+    record_with_denominator(out, "refusal_rate", refusal_verdicts(rows))
     return out
 
 
 def summarise(results):
-    def block(rows, retrieval=False):
+    def block(rows, retrieval=False, answerable_refusal=False):
+        # An empty tier reports the one thing that is true of it — that it holds no
+        # questions — rather than nothing at all, so every block in this summary has the
+        # same shape and the renderer never has to guess whether `questions` is there.
         if not rows:
-            return {}
+            return {"questions": 0}
         out = {"questions": len(rows)}
         if retrieval:
             for k in K_VALUES:
-                put(out, f"precision@{k}", [r.get(f"precision@{k}") for r in rows])
+                record_with_denominator(out, f"precision@{k}",
+                    [r.get(f"precision@{k}") for r in rows])
                 # precision@k cannot exceed len(gold)/k, and most tier B questions have a
                 # single gold chunk, so the raw number is meaningless without its ceiling
-                put(out, f"precision@{k}_max",
+                record_with_denominator(out, f"precision@{k}_max",
                     [min(1.0, len(r.get("gold_chunks", [])) / k) for r in rows])
-                put(out, f"recall@{k}", [r.get(f"recall@{k}") for r in rows])
+                record_with_denominator(out, f"recall@{k}",
+                    [r.get(f"recall@{k}") for r in rows])
         for metric in ("faithfulness", "relevancy", "correctness",
                        "citation_present", "citation_video_valid", "citation_time_valid"):
-            put(out, metric, [r.get(metric) for r in rows])
+            record_with_denominator(out, metric, [r.get(metric) for r in rows])
         # An answerable refusal is a declined answer to a question whose tier's ground
-        # truth says the corpus can answer it, so it is only defined on tiers A and B —
-        # the tiers this block serves. It reuses the refusal verdict the judge already
-        # recorded; no question is judged again to obtain it. A row the judge left no
-        # verdict on is excluded rather than read as "did not refuse".
-        put(out, "answerable_refusal_rate",
-            [1.0 if r.get("refused") else 0.0 for r in rows if r.get("refused") is not None])
+        # truth says the corpus can answer it, so it is a claim about a tier and is
+        # derived only for the tier-level calls. A per-course or hands-on slice of it
+        # would be a different and much smaller claim that nothing reports. It reuses
+        # the refusal verdict the judge already recorded; no question is judged again to
+        # obtain it.
+        if answerable_refusal:
+            record_with_denominator(out, "answerable_refusal_rate", refusal_verdicts(rows))
         return out
 
     tier_a = [r for r in results if r["tier"] == "A"]
@@ -545,13 +580,13 @@ def summarise(results):
         "generated": datetime.now().isoformat(timespec="seconds"),
         "generation_k": GENERATION_K,
         "judge_model": JUDGE_MODEL,
-        "tier_a": block(tier_a),
+        "tier_a": block(tier_a, answerable_refusal=True),
         "tier_a_by_course": {
             course: block([r for r in tier_a if r["course"] == course])
             for course in sorted({r["course"] for r in tier_a})
         },
         "tier_a_hands_on": block([r for r in tier_a if r["hands_on"]]),
-        "tier_b": block(tier_b, retrieval=True),
+        "tier_b": block(tier_b, retrieval=True, answerable_refusal=True),
         "tier_c": tier_c_block(tier_c),
         "unscored": sum(1 for r in results
                         if r["tier"] != "C" and r.get("correctness") is None),
@@ -616,7 +651,7 @@ def render_markdown(summary):
         "Correctness is anchored to the course authors' own answer key. No chunk labels, "
         "so no retrieval metrics.",
         "",
-        f"{summary['tier_a'].get('questions', 0)} questions in the tier; each value below "
+        f"{summary['tier_a']['questions']} questions in the tier; each value below "
         f"covers the ones in its own `questions` column.",
         "",
     ]
@@ -632,15 +667,16 @@ def render_markdown(summary):
                      f"| {block.get('citation_time_valid_n')} |")
 
     hands_on = summary["tier_a_hands_on"]
-    if hands_on:
+    if hands_on["questions"]:
         lines += ["", f"Hands-on questions ({hands_on['questions']} of tier A) ask about "
                       f"clicking through KNIME or Spark rather than lecture content: "
-                      f"correctness {hands_on.get('correctness')}."]
+                      f"correctness {hands_on.get('correctness')} over "
+                      f"{hands_on.get('correctness_n')} of them."]
 
     lines += ["", "## Tier B — generated from single chunks, exact gold labels", "",
               "Retrieval metrics are exact here. The questions are synthetic, so read "
               "them as a retrieval measurement, not as user behaviour.", "",
-              f"{summary['tier_b'].get('questions', 0)} questions in the tier; each value "
+              f"{summary['tier_b']['questions']} questions in the tier; each value "
               f"below covers the ones in its own `questions` column.", "",
               "`precision@k_max` is the ceiling that k and the number of gold chunks "
               "allow: a question with one gold chunk can score at most 1/k, so compare "
@@ -783,7 +819,7 @@ def calibration_sample(rows):
         candidates = sorted(
             (r for r in rows
              if r.get("tier") == tier
-             and any(isinstance(r.get(m), (int, float)) for m in JUDGE_METRICS)),
+             and any(numeric(r.get(m)) for m in JUDGE_METRICS)),
             key=lambda r: r["id"],
         )
         sample.extend(random.Random(CALIBRATION_SEED).sample(
@@ -796,12 +832,20 @@ def _gap(left, right, metric):
     gaps = {}
     for qid, scores in left.items():
         theirs, ours = right.get(qid, {}).get(metric), scores.get(metric)
-        if isinstance(theirs, (int, float)) and isinstance(ours, (int, float)):
+        if numeric(theirs) and numeric(ours):
             gaps[qid] = ours - theirs
     return gaps
 
 
 def _spread(gaps):
+    """How far apart two judged passes landed on one metric, and in which direction.
+
+    The mean absolute difference is the number the pre-committed thresholds are read
+    against. The signed shift says whether the second pass scored systematically higher
+    or lower rather than merely differently, and the maximum says whether the mean is
+    hiding one large disagreement. `n` travels with them because a spread over 2 ids and
+    a spread over 20 are different claims.
+    """
     values = list(gaps.values())
     return {
         "n": len(values),
@@ -835,16 +879,27 @@ def calibration_summary(baseline_rows, results):
     worst_metric, worst = max(measured, key=lambda pair: pair[1], default=(None, None))
     faith_shift = withheld["faithfulness"]["mean_absolute_difference"]
 
+    # Each rule is matched to its measurement by key, never by position. A third rule
+    # added to CALIBRATION_RULES must not be able to inherit another's number silently:
+    # the whole credibility of this stage rests on these thresholds being the ones that
+    # were pre-committed, and on each verdict being read against its own measurement.
+    measurements = {
+        "between_run_spread": worst,
+        "faithfulness_without_reference": faith_shift,
+    }
     outcomes = []
-    for rule, value in zip(CALIBRATION_RULES, (worst, faith_shift)):
+    for rule in CALIBRATION_RULES:
+        value = measurements[rule["key"]]
         triggered = value is not None and value > rule["threshold"]
-        outcomes.append({
+        outcome = {
             **rule,
             "value": value,
             "triggered": triggered,
             "outcome": rule["if_exceeded"] if triggered else rule["if_not_exceeded"],
-        })
-    outcomes[0]["worst_metric"] = worst_metric
+        }
+        if rule["key"] == "between_run_spread":
+            outcome["worst_metric"] = worst_metric
+        outcomes.append(outcome)
 
     return {
         "stage": "calibrate",
