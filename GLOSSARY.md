@@ -51,6 +51,11 @@ question. It is a property of the reference, not of the claim: an answer can be 
 and cite invalidly, or cite validly and be wrong.
 _Avoid_: citation accuracy, grounding, attribution, citation correctness
 
+The avoid-line is about the name of the metric: it is citation validity, never
+"attribution". The verb stays available for the internal mechanic — a timestamp is
+attributed to the video name it sits beside — which is a step in deriving the metric,
+not another name for it.
+
 **Answerable refusal**:
 A declined answer to a question whose tier's ground truth says the corpus can answer it.
 It is a failure of the same pipeline whose refusals on Tier C are a success, which is
