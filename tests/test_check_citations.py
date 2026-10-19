@@ -7,7 +7,9 @@ the provider or the filesystem: the corpus is injected through `known_videos`, w
 what that argument is for.
 
 To add a behaviour, append a `Case` to `CASES`. Keep `expects` to the metrics the
-behaviour statement actually names, so a red case names exactly one reason.
+behaviour statement actually names, so a red case names exactly one reason, and state
+the behaviour in the vocabulary of `GLOSSARY.md` — a citation is a named video together
+with a timestamp, and citation validity is a property of that reference alone.
 
   uv run pytest
 """
