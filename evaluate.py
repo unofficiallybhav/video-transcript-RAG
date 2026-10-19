@@ -178,8 +178,11 @@ def check_citations(answer, hits, known_videos=None):
             times_valid.append(False)
             continue
         spans = retrieved.get(earlier[-1], [])
-        # the cited time should fall inside a chunk that was actually retrieved
-        times_valid.append(any(start <= seconds <= end for start, end in spans))
+        # The cited time should fall inside a chunk that was actually retrieved. The
+        # lower bound is floored to whole seconds because that is the only start time
+        # `format_context` ever shows the generator; the upper bound is unchanged, so
+        # this adds no tolerance beyond the display rounding.
+        times_valid.append(any(int(start) <= seconds <= end for start, end in spans))
 
     return {
         "citation_present": 1.0 if cited_videos and stamps else 0.0,
