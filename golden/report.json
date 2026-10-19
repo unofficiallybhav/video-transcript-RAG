@@ -1,70 +1,123 @@
 {
   "summary": {
-    "generated": "2026-10-19T10:46:00",
+    "generated": "2026-10-19T11:05:30",
     "generation_k": 5,
     "judge_model": "openai/gpt-oss-20b",
     "tier_a": {
       "questions": 83,
       "faithfulness": 0.793,
+      "faithfulness_n": 83,
       "relevancy": 0.792,
+      "relevancy_n": 83,
       "correctness": 0.761,
+      "correctness_n": 83,
       "citation_present": 0.831,
+      "citation_present_n": 83,
       "citation_video_valid": 0.988,
-      "citation_time_valid": 0.488
+      "citation_video_valid_n": 69,
+      "citation_time_valid": 0.938,
+      "citation_time_valid_n": 70,
+      "answerable_refusal_rate": 0.157,
+      "answerable_refusal_rate_n": 83
     },
     "tier_a_by_course": {
       "graph analytics": {
         "questions": 31,
         "faithfulness": 0.789,
+        "faithfulness_n": 31,
         "relevancy": 0.832,
+        "relevancy_n": 31,
         "correctness": 0.81,
+        "correctness_n": 31,
         "citation_present": 0.839,
+        "citation_present_n": 31,
         "citation_video_valid": 1.0,
-        "citation_time_valid": 0.469
+        "citation_video_valid_n": 26,
+        "citation_time_valid": 0.963,
+        "citation_time_valid_n": 27,
+        "answerable_refusal_rate": 0.129,
+        "answerable_refusal_rate_n": 31
       },
       "machine learning": {
         "questions": 52,
         "faithfulness": 0.795,
+        "faithfulness_n": 52,
         "relevancy": 0.769,
+        "relevancy_n": 52,
         "correctness": 0.733,
+        "correctness_n": 52,
         "citation_present": 0.827,
+        "citation_present_n": 52,
         "citation_video_valid": 0.981,
-        "citation_time_valid": 0.5
+        "citation_video_valid_n": 43,
+        "citation_time_valid": 0.922,
+        "citation_time_valid_n": 43,
+        "answerable_refusal_rate": 0.173,
+        "answerable_refusal_rate_n": 52
       }
     },
     "tier_a_hands_on": {
       "questions": 10,
       "faithfulness": 0.4,
+      "faithfulness_n": 10,
       "relevancy": 0.4,
+      "relevancy_n": 10,
       "correctness": 0.4,
+      "correctness_n": 10,
       "citation_present": 0.4,
+      "citation_present_n": 10,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.75
+      "citation_video_valid_n": 4,
+      "citation_time_valid": 1.0,
+      "citation_time_valid_n": 4,
+      "answerable_refusal_rate": 0.6,
+      "answerable_refusal_rate_n": 10
     },
     "tier_b": {
       "questions": 40,
       "precision@1": 0.625,
+      "precision@1_n": 40,
       "precision@1_max": 1.0,
+      "precision@1_max_n": 40,
       "recall@1": 0.588,
+      "recall@1_n": 40,
       "precision@3": 0.3,
+      "precision@3_n": 40,
       "precision@3_max": 0.375,
+      "precision@3_max_n": 40,
       "recall@3": 0.838,
+      "recall@3_n": 40,
       "precision@5": 0.2,
+      "precision@5_n": 40,
       "precision@5_max": 0.225,
+      "precision@5_max_n": 40,
       "recall@5": 0.912,
+      "recall@5_n": 40,
       "precision@10": 0.103,
+      "precision@10_n": 40,
       "precision@10_max": 0.113,
+      "precision@10_max_n": 40,
       "recall@10": 0.925,
+      "recall@10_n": 40,
       "faithfulness": 0.963,
+      "faithfulness_n": 40,
       "relevancy": 0.939,
+      "relevancy_n": 40,
       "correctness": 0.889,
+      "correctness_n": 40,
       "citation_present": 0.975,
+      "citation_present_n": 40,
       "citation_video_valid": 0.987,
-      "citation_time_valid": 0.62
+      "citation_video_valid_n": 39,
+      "citation_time_valid": 0.974,
+      "citation_time_valid_n": 39,
+      "answerable_refusal_rate": 0.025,
+      "answerable_refusal_rate_n": 40
     },
     "tier_c": {
       "questions": 12,
-      "refusal_rate": 1.0
+      "refusal_rate": 1.0,
+      "refusal_rate_n": 12
     },
     "unscored": 0
   },
@@ -122,7 +175,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "categories of machine learning.mp4"
       ],
@@ -153,7 +206,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "machine learning process.mp4"
       ],
@@ -247,7 +300,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "categories of machine learning.mp4",
         "regression overview.mp4"
@@ -372,7 +425,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.6666666666666666,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "cluster analysis.mp4"
       ],
@@ -403,7 +456,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "k means clustering.mp4"
       ],
@@ -434,7 +487,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "k means clustering.mp4"
       ],
@@ -465,7 +518,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "categories of machine learning.mp4",
         "intro to association analysis.mp4"
@@ -497,7 +550,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "association analysis in detail.mp4"
       ],
@@ -559,7 +612,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "cluster analysis in spark.mp4"
       ],
@@ -621,7 +674,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "cluster analysis in spark.mp4"
       ],
@@ -652,7 +705,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.3333333333333333,
+      "citation_time_valid": 0.6666666666666666,
       "cited_videos": [
         "cluster analysis in spark.mp4"
       ],
@@ -741,7 +794,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "data terminology.mp4"
       ],
@@ -803,7 +856,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "data exploration.mp4"
       ],
@@ -834,7 +887,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "data exploration.mp4"
       ],
@@ -865,7 +918,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "data exploration using summary statistics.mp4"
       ],
@@ -1019,7 +1072,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 0.6666666666666666,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 0.5,
       "cited_videos": [
         "addressing data quality.mp4",
         "data quality.mp4",
@@ -1052,7 +1105,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "crisp-dm.mp4"
       ],
@@ -1083,7 +1136,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "classification algorithms.mp4",
         "naive bayes.mp4"
@@ -1115,7 +1168,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "k nearest neighbors.mp4"
       ],
@@ -1146,7 +1199,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "decision tree.mp4"
       ],
@@ -1177,7 +1230,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "naive bayes.mp4"
       ],
@@ -1208,7 +1261,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "naive bayes.mp4"
       ],
@@ -1268,7 +1321,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "exploring data with knime.mp4"
       ],
@@ -1388,7 +1441,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "generalization and overfitting.mp4"
       ],
@@ -1482,7 +1535,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "metrics to evaluate model.mp4"
       ],
@@ -1693,7 +1746,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.6666666666666666,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "focus on graph analytics.mp4",
         "social networking.mp4"
@@ -1725,7 +1778,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "biological networks.mp4"
       ],
@@ -1756,7 +1809,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "graphs and big data 4 v's.mp4"
       ],
@@ -1787,7 +1840,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "graphs and big data 4 v's.mp4"
       ],
@@ -1818,7 +1871,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "biological networks.mp4"
       ],
@@ -1880,7 +1933,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "graphs and big data 4 v's.mp4"
       ],
@@ -1911,7 +1964,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "graphs and big data 4 v's.mp4"
       ],
@@ -2033,7 +2086,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "basic queries in neo4j.mp4"
       ],
@@ -2064,7 +2117,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "basic queries in neo4j.mp4"
       ],
@@ -2095,7 +2148,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "parallel programming.mp4"
       ],
@@ -2126,7 +2179,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "besth path.mp4"
       ],
@@ -2157,7 +2210,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "besth path.mp4"
       ],
@@ -2339,7 +2392,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "community analysis.mp4"
       ],
@@ -2370,7 +2423,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "community analysis.mp4"
       ],
@@ -2615,7 +2668,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "basic queries in neo4j.mp4",
         "path analytics with neo4j.mp4"
@@ -2647,7 +2700,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.6666666666666666,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "biological networks.mp4",
         "graphs and big data 4 v's.mp4"
@@ -2732,7 +2785,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "building a graph.mp4"
       ],
@@ -2774,7 +2827,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "classification in spark.mp4"
       ],
@@ -2903,7 +2956,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "djikstra algotrithm.mp4"
       ],
@@ -2945,7 +2998,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "evaluation of a decision tree in spark.mp4"
       ],
@@ -2987,7 +3040,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "exploring data using plots.mp4"
       ],
@@ -3029,7 +3082,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.3333333333333333,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "feature selection.mp4",
         "machine learning overview.mp4"
@@ -3156,7 +3209,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "intro to graph.mp4"
       ],
@@ -3240,7 +3293,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "large scale graph processing.mp4"
       ],
@@ -3536,7 +3589,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "pregel.mp4"
       ],
@@ -3663,7 +3716,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "exploring data using plots.mp4"
       ],
@@ -3705,7 +3758,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "community analysis.mp4"
       ],
@@ -3747,7 +3800,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "centrality analysis.mp4"
       ],
@@ -3913,7 +3966,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "handling missing values in knime.mp4"
       ],
@@ -3997,7 +4050,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "data preparation.mp4"
       ],
@@ -4039,7 +4092,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.6666666666666666,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "association analysis in detail.mp4"
       ],
@@ -4081,7 +4134,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "data exploration using spark.mp4"
       ],
@@ -4250,7 +4303,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "parallel programming.mp4"
       ],
