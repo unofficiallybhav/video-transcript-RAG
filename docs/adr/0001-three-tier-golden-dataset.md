@@ -75,6 +75,26 @@ comparable number is constant, and it is exactly the pressure the split exists t
 - Tier B's retrieval figures remain contingent on a human spot-check of its generated
   questions until that review is run. The tier boundary is what keeps that caveat
   attached to the retrieval numbers and off the Tier A numbers.
+
+  **Run on 2026-10-20.** A human reviewed 15 of the 40 generated questions against the
+  passage each was built from and rejected 2 as not answerable from it, so **13% of the
+  reviewed sample did not hold up** and Tier B's figures are read as carrying that error
+  rate. The verdicts are in `golden/spotcheck.md`, and the report reads its rejection
+  rate out of that sheet rather than restating it, so the two cannot drift apart. The
+  caveat above is therefore discharged, and replaced by a number.
+
+  Two things the review surfaced. The rejected `B-building a degree histogram.mp4:3` had
+  the highest jaccard overlap in the sample at 0.286, under a `MAX_JACCARD` filter set at
+  0.35 — so the filter is too loose, and tightening it is worth its own ticket, since it
+  would regenerate the tier and invalidate both the stored run and these verdicts. The
+  other rejection sat at 0.101 with bm25 rank 1, where no mechanical signal flagged it at
+  all, which is the argument for the human step rather than a stricter threshold.
+
+  The reviewer also marked 4 of the 15 as sound but asking about a hands-on exercise
+  rather than lecture content. That is not a rejection and is counted apart, but it bears
+  on reading Tier B's stronger generation figures, because hands-on questions are the
+  pipeline's weakest area on Tier A (0.40 correctness, 6 of 10 refused). Tier B rows carry
+  no `hands_on` field, so nothing currently measures that.
 - Reopening any part of this decision means re-reading this record first: the reasoning
   is not reconstructable from the metrics or from the module docstrings, which state the
   design without stating what it is defending.

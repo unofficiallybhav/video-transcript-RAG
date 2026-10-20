@@ -648,9 +648,27 @@ def drop_superseded_faithfulness(rows):
     return [{**r, "faithfulness": None} if r["id"] in stale else r for r in rows], len(stale)
 
 
+def reviewed_tier_b():
+    """The human verdicts on tier B's generated questions, if the sheet has been filled in.
+
+    Read rather than restated, so the rejection rate the report carries is the one in
+    `golden/spotcheck.md` and cannot drift from it. A sheet that cannot be parsed is
+    reported as no review at all: `review` is the stage whose job is to be strict about
+    the marks, and the report should not refuse to build over a stray character.
+    """
+    if not SPOTCHECK_MD.exists():
+        return None
+    try:
+        verdicts = spotcheck_verdicts(SPOTCHECK_MD.read_text(encoding="utf-8"))
+    except ValueError:
+        return None
+    return review_counts(verdicts) if verdicts else None
+
+
 def write_report(results):
     results, superseded = drop_superseded_faithfulness(results)
-    report = summarise(results, superseded_faithfulness=superseded)
+    report = summarise(results, superseded_faithfulness=superseded,
+                       tier_b_review=reviewed_tier_b())
     GOLDEN_DIR.mkdir(exist_ok=True)
     REPORT_JSON.write_text(
         json.dumps({"summary": report, "results": results}, indent=2, ensure_ascii=False),
@@ -673,7 +691,7 @@ def tier_c_block(rows):
     return out
 
 
-def summarise(results, superseded_faithfulness=0):
+def summarise(results, superseded_faithfulness=0, tier_b_review=None):
     def block(rows, retrieval=False, answerable_refusal=False):
         # An empty tier reports the one thing that is true of it — that it holds no
         # questions — rather than nothing at all, so every block in this summary has the
@@ -719,6 +737,7 @@ def summarise(results, superseded_faithfulness=0):
         },
         "tier_a_hands_on": block([r for r in tier_a if r["hands_on"]]),
         "tier_b": block(tier_b, retrieval=True, answerable_refusal=True),
+        "tier_b_review": tier_b_review,
         "tier_c": tier_c_block(tier_c),
         "superseded_faithfulness": superseded_faithfulness,
         "unscored": sum(1 for r in results
@@ -861,9 +880,29 @@ def render_markdown(summary):
                       f"correctness {hands_on.get('correctness')} over "
                       f"{hands_on.get('correctness_n')} of them."]
 
+    review = summary.get("tier_b_review")
     lines += ["", "## Tier B — generated from single chunks, exact gold labels", "",
               "Retrieval metrics are exact here. The questions are synthetic, so read "
-              "them as a retrieval measurement, not as user behaviour.", "",
+              "them as a retrieval measurement, not as user behaviour.", ""]
+    if review:
+        lines += [
+            f"Credibility: a human reviewed {review['reviewed']} of these questions "
+            f"against the passage each was generated from and rejected "
+            f"{review['rejected']} as not answerable from it, so "
+            f"{review['rejected_share']:.0%} of a reviewed sample did not hold up. Read "
+            f"every figure in this tier as carrying that error rate. The verdicts are in "
+            f"`golden/spotcheck.md`; no model took part in them, per "
+            f"`docs/adr/0001-three-tier-golden-dataset.md`."
+            + (f" A further {review['hands_on']} are sound but ask about a hands-on "
+               f"exercise rather than lecture content, which is the pipeline's weakest "
+               f"area on tier A." if review["hands_on"] else ""),
+            "",
+        ]
+    else:
+        lines += ["Credibility: the human review of these generated questions has not "
+                  "been run, so every figure in this tier assumes all of them are sound. "
+                  "Run `uv run evaluate.py spotcheck`, mark the sheet, then `review`.", ""]
+    lines += [
               f"{summary['tier_b']['questions']} questions in the tier; each value "
               f"below covers the ones in its own `questions` column.", "",
               "`precision@k_max` is the ceiling that k and the number of gold chunks "
@@ -929,8 +968,17 @@ def spotcheck():
         "# Tier B question review",
         "",
         "These questions were generated from the passage shown beneath each one.",
-        "Untick a question that is NOT answerable from its passage, or that merely",
-        "copies the passage's wording, then run `uv run evaluate.py review`.",
+        "Mark each one, then run `uv run evaluate.py review`:",
+        "",
+        "  - [x]  answerable from its passage",
+        "  - [ ]  NOT answerable from its passage, or merely copies its wording",
+        "  - [?]  answerable, but asks about a hands-on exercise or a worked example",
+        "         rather than lecture content",
+        "",
+        "A `?` is sound and does not count against tier B's credibility. It is counted",
+        "separately because a hands-on question measures something the course teaches by",
+        "demonstration, and hands-on performance is already known to be the pipeline's",
+        "weakest area.",
         "",
     ]
     for q in sample:
@@ -949,7 +997,60 @@ def spotcheck():
     print(f"Wrote {SPOTCHECK_MD}: {len(sample)} generated questions to review")
 
 
-CHECKBOX_RE = re.compile(r"^- \[([ xX])\] `([^`]+)`")
+# The mark is read, never written: ADR 0001 keeps a model out of every labelling
+# decision, and whether a generated question is sound is one. `?` says what a question is
+# about rather than whether it holds up, so it is sound and is counted apart.
+# An empty `[]` is the same untick as `[ ]`: editors strip the space out, and reading it
+# as an unknown mark would stop the stage over whitespace.
+CHECKBOX_RE = re.compile(r"^- \[(.?)\] `([^`]+)`")
+SPOTCHECK_MARKS = {"x": "accepted", " ": "rejected", "": "rejected", "?": "hands_on"}
+
+
+def spotcheck_verdicts(sheet):
+    """The reviewer's mark per question id, read back from the sheet.
+
+    An unrecognised mark raises rather than being skipped. The sheet is the only copy of
+    a human's verdicts, and a mark this function does not know would otherwise drop out
+    of the denominator with nothing said about it.
+    """
+    verdicts = {}
+    unknown = []
+    for line in sheet.splitlines():
+        found = CHECKBOX_RE.match(line)
+        if not found:
+            continue
+        mark, qid = found.group(1).lower(), found.group(2)
+        if mark not in SPOTCHECK_MARKS:
+            unknown.append(f"{qid} marked [{found.group(1)}]")
+            continue
+        verdicts[qid] = SPOTCHECK_MARKS[mark]
+    if unknown:
+        raise ValueError(
+            "the spot-check sheet carries marks this stage does not recognise, so the "
+            "review would be taken over fewer questions than were reviewed: "
+            + "; ".join(unknown)
+            + f". Use one of {sorted(SPOTCHECK_MARKS)}.")
+    return verdicts
+
+
+def review_counts(verdicts):
+    """The review as counts: how many held up, how many did not, how many are hands-on.
+
+    `hands_on` is a subset of `accepted`, not a third outcome beside it, so the rejected
+    share is the error rate tier B's figures carry and the hands-on count is a fact about
+    what the sample is made of.
+    """
+    rejected = [qid for qid, mark in verdicts.items() if mark == "rejected"]
+    hands_on = [qid for qid, mark in verdicts.items() if mark == "hands_on"]
+    return {
+        "reviewed": len(verdicts),
+        "accepted": len(verdicts) - len(rejected),
+        "rejected": len(rejected),
+        "hands_on": len(hands_on),
+        "rejected_share": len(rejected) / len(verdicts) if verdicts else None,
+        "rejected_ids": sorted(rejected),
+        "hands_on_ids": sorted(hands_on),
+    }
 
 
 def review():
@@ -957,23 +1058,31 @@ def review():
     if not SPOTCHECK_MD.exists():
         sys.exit(f"{SPOTCHECK_MD} not found; run spotcheck first")
 
-    verdicts = {m.group(2): m.group(1).lower() == "x"
-                for m in (CHECKBOX_RE.match(line)
-                          for line in SPOTCHECK_MD.read_text(encoding="utf-8").splitlines())
-                if m}
+    try:
+        verdicts = spotcheck_verdicts(SPOTCHECK_MD.read_text(encoding="utf-8"))
+    except ValueError as e:
+        sys.exit(str(e))
     if not verdicts:
         sys.exit("no checkboxes found in the spot-check sheet")
 
-    rejected = [qid for qid, kept in verdicts.items() if not kept]
-    print(f"reviewed: {len(verdicts)}")
-    print(f"accepted: {len(verdicts)-len(rejected)}")
-    print(f"rejected: {len(rejected)}")
-    for qid in rejected:
+    counts = review_counts(verdicts)
+    print(f"reviewed: {counts['reviewed']}")
+    print(f"accepted: {counts['accepted']}")
+    print(f"rejected: {counts['rejected']}")
+    for qid in counts["rejected_ids"]:
         print(f"  {qid}")
-    if rejected:
-        share = len(rejected) / len(verdicts)
-        print(f"\n{share:.0%} of the sample was rejected. Tier B metrics carry that error "
-              f"rate; regenerate those items or tighten MAX_JACCARD if it is high.")
+    if counts["hands_on"]:
+        print(f"\nof the accepted, {counts['hands_on']} ask about a hands-on exercise or "
+              f"a worked example rather than lecture content:")
+        for qid in counts["hands_on_ids"]:
+            print(f"  {qid}")
+        print("These are sound questions and are not counted as rejections. They do bear "
+              "on how tier B's figures read, because hands-on questions are the "
+              "pipeline's weakest area on tier A.")
+    if counts["rejected"]:
+        print(f"\n{counts['rejected_share']:.0%} of the sample was rejected. Tier B "
+              f"metrics carry that error rate; regenerate those items or tighten "
+              f"MAX_JACCARD if it is high.")
 
 
 # ------------------------------------------------- judge calibration (issue #8)

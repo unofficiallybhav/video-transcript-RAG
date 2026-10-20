@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated": "2026-10-20T12:48:53",
+    "generated": "2026-10-20T14:34:13",
     "generation_k": 5,
     "judge_model": "openai/gpt-oss-20b",
     "tier_a": {
@@ -107,6 +107,23 @@
       "citation_time_valid_n": 39,
       "answerable_refusal_rate": 0.025,
       "answerable_refusal_rate_n": 40
+    },
+    "tier_b_review": {
+      "reviewed": 15,
+      "accepted": 13,
+      "rejected": 2,
+      "hands_on": 4,
+      "rejected_share": 0.13333333333333333,
+      "rejected_ids": [
+        "B-building a degree histogram.mp4:3",
+        "B-measuring graph evolution.mp4:0"
+      ],
+      "hands_on_ids": [
+        "B-classification in spark.mp4:4",
+        "B-data exploration using spark.mp4:3",
+        "B-djikstra algotrithm.mp4:1",
+        "B-plot degree histogram.mp4:1"
+      ]
     },
     "tier_c": {
       "questions": 12,

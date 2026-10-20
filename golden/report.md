@@ -1,6 +1,6 @@
 # Offline evaluation report
 
-Generated 2026-10-20T12:48:53 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
+Generated 2026-10-20T14:34:13 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
 
 Faithfulness, relevancy and correctness are judge scores on a continuous 0.00-1.00 scale; each question's per-score reasoning is kept in the `note` field of `report.json`.
 
@@ -47,6 +47,8 @@ Hands-on questions (10 of tier A) ask about clicking through KNIME or Spark rath
 ## Tier B — generated from single chunks, exact gold labels
 
 Retrieval metrics are exact here. The questions are synthetic, so read them as a retrieval measurement, not as user behaviour.
+
+Credibility: a human reviewed 15 of these questions against the passage each was generated from and rejected 2 as not answerable from it, so 13% of a reviewed sample did not hold up. Read every figure in this tier as carrying that error rate. The verdicts are in `golden/spotcheck.md`; no model took part in them, per `docs/adr/0001-three-tier-golden-dataset.md`. A further 4 are sound but ask about a hands-on exercise rather than lecture content, which is the pipeline's weakest area on tier A.
 
 40 questions in the tier; each value below covers the ones in its own `questions` column.
 
