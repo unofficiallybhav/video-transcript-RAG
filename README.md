@@ -235,7 +235,7 @@ Stages that cost provider tokens, and are not needed to read the results:
 ```sh
 uv run evaluate.py run         # score the pipeline end to end, resumable
 uv run evaluate.py rejudge     # re-measure faithfulness with the reference withheld
-uv run evaluate.py calibrate   # the judge calibration experiment (~110k tokens)
+uv run evaluate.py calibrate   # the judge calibration experiment (~73k tokens)
 ```
 
 Set `PYTHONIOENCODING=utf-8` whenever an answer or report is printed: stored answers
