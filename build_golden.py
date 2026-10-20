@@ -3,8 +3,8 @@
 Each tier exists because a different kind of ground truth is trustworthy for a different
 metric, and mixing them would mean every number carried the weakest tier's caveat.
 
-  Tier A  85 course quiz questions, with answer keys written by the course authors.
-          Scores correctness, faithfulness, relevancy and citation accuracy. It has no
+  Tier A  83 course quiz questions, with answer keys written by the course authors.
+          Scores correctness, faithfulness, relevancy and citation validity. It has no
           chunk-level labels yet, so nothing here scores retrieval.
 
   Tier C  ~12 hand-written questions about topics the corpus does not contain, verified

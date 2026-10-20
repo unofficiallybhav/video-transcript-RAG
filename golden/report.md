@@ -1,6 +1,6 @@
 # Offline evaluation report
 
-Generated 2026-10-20T15:27:54 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
+Generated 2026-10-20T15:44:15 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
 
 Faithfulness, relevancy and correctness are judge scores on a continuous 0.00-1.00 scale; each question's per-score reasoning is kept in the `note` field of `report.json`.
 
@@ -13,6 +13,8 @@ Every value carries the number of questions it was taken over. A question that c
 Provenance: the citation check was invalid in the run this report supersedes. It compared a cited timestamp, which the generator only ever saw floored to a whole second, against unfloored chunk spans, and it charged a timestamp against the nearest video name appearing before it even when the answer never cited that video. That citation defect was corrected 2026-10-19. Citation values here therefore measure a repaired ruler, not a changed pipeline, and are not comparable with any earlier copy of this report; the superseded values are discarded rather than kept beside them, so that a corrected measurement is never plotted as a trend.
 
 Provenance: faithfulness values produced before 2026-10-20 came from a single judge call that also scored correctness, and are not comparable with the ones here. The calibration experiment recorded in `golden/judge_calibration.json` re-judged 30 questions with the reference answer withheld and measured a mean absolute faithfulness difference of 0.164 against a threshold of 0.10 fixed before the experiment was run, shifted +0.109: withholding the reference answer raises faithfulness, because with it visible the judge penalised answers that diverge from it, so faithfulness was partly grading correctness instead of support by the retrieved context. The pre-committed consequence was to split faithfulness into its own call permanently. `docs/adr/0002-faithfulness-judged-without-the-reference-answer.md` records the decision in full.
+
+Provenance: that calibration was measured on 2026-10-20 over a stratified sample of 20 tier A and 10 tier B questions. Tier B has since been retired, so the sample is not reproducible and the artifact is read as of that date rather than as a figure the current code would produce. It is kept unchanged because it is the record of the experiment the faithfulness split acted on; re-running calibration under the present strata would be a different measurement, not a refresh of this one.
 
 The choice of what to do with the superseded values was between re-judging the golden set and discarding the combined call's figures as not comparable. They are being re-judged, not discarded: faithfulness is re-measured over the stored answers by `uv run evaluate.py rejudge`, which retrieves and generates nothing, so the fresh score describes the same pipeline behaviour that was first measured. Only faithfulness is re-judged. Correctness and relevancy keep the values the combined call gave them and are unaffected by the split: their call is the same prompt it has always been, and re-judging them would move them for no reason this report could name. Until a row has been re-judged its old faithfulness value is left out of every figure here rather than averaged in beside a new one.
 
@@ -49,7 +51,6 @@ Hands-on questions (10 of tier A) ask about clicking through KNIME or Spark rath
 There are no retrieval figures in this report. `precision@k` and `recall@k` need chunk-level labels, and the only tier that carried them was tier B, whose questions were generated from the chunk that then served as their own gold label. A human review of 15 of those 40 questions rejected 2 as not answerable from the passage they were built from, and the tier was retired rather than regenerated: no threshold on lexical overlap separated the rejected questions from the sound ones. `docs/adr/0003-retiring-the-generated-retrieval-tier.md` records that decision and `golden/spotcheck.md` keeps the verdicts it rested on.
 
 This is a gap, not a result. Retrieval runs on every question in this report — each answer below was generated from the top 5 chunks — and nothing here checks whether those were the right chunks. Until gold chunks are labelled by hand onto tier A's quiz questions, no claim about retrieval quality is supported either way.
-
 
 ## Refusal — both tiers together
 

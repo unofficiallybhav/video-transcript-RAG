@@ -4,7 +4,7 @@ Run before deploying a change: it replays the golden dataset through the real re
 and generation path and scores each tier on what that tier's ground truth can support.
 
   Tier A (quiz questions, human answer keys)
-      correctness, faithfulness, relevancy, citation accuracy
+      correctness, faithfulness, relevancy, citation validity
       (faithfulness is judged by its own call, which is never shown the answer key)
   Tier C (questions the corpus cannot answer, verified absent)
       refusal rate
@@ -58,11 +58,15 @@ JUDGE_MODEL = "openai/gpt-oss-20b"
 # A stratified sample of the already-scored questions, re-judged to put error bars on
 # the judge-derived scores. Seed and sizes are constants so the sample is reproducible.
 CALIBRATION_SEED = 11
-# Tier A only since tier B was retired. `golden/judge_calibration.json` was measured
-# when the strata were (("A", 20), ("B", 10)) and is NOT regenerated: it is the record
-# of the experiment #9 acted on, cited by name in ADR 0002, the report's provenance note
+# Tier A only since tier B was retired; tier A's own draw is left at the 20 it always
+# was. Raising it to 30 to keep the old total of 30 was tempting and is not done: it
+# would change how many tier A questions the figure rests on without changing anything
+# about the judge, which is the kind of silent redefinition this layer exists to avoid.
+# `golden/judge_calibration.json` was measured when the strata were
+# (("A", 20), ("B", 10)) and is NOT regenerated: it is the record of the experiment the
+# faithfulness split acted on, cited by name in ADR 0002, the report's provenance note
 # and the glossary. A fresh run under these strata would be a different measurement.
-CALIBRATION_STRATA = (("A", 30),)
+CALIBRATION_STRATA = (("A", 20),)
 CALIBRATION_PATH = GOLDEN_DIR / "judge_calibration.json"
 # one line per (question, pass) as it finishes, so a daily limit costs no re-judging
 CALIBRATION_RAW_PATH = GOLDEN_DIR / "judge_calibration.jsonl"
@@ -240,7 +244,7 @@ def faithfulness_prompt():
 
 def load_golden():
     if not GOLDEN_PATH.exists():
-        sys.exit(f"{GOLDEN_PATH} not found; run build_golden.py parse, tierb, build first")
+        sys.exit(f"{GOLDEN_PATH} not found; run build_golden.py parse, tierc, build first")
     return json.loads(GOLDEN_PATH.read_text(encoding="utf-8"))
 
 
@@ -258,9 +262,17 @@ def retrieve(query, limit=RETRIEVE_K):
 
 
 def precision_recall(retrieved_ids, gold_ids, k):
+    """Precision and recall at k, counting each gold chunk at most once.
+
+    The deduplication is not reachable through qdrant, which returns distinct points,
+    but counting raw occurrences would let a repeated id report recall above 1.0 — a
+    value that is not wrong about retrieval so much as meaningless, and that no reader
+    could interpret. Counting distinct gold chunks keeps both values inside [0, 1]
+    whatever the caller passes.
+    """
     gold = set(gold_ids)
-    hits = sum(1 for cid in retrieved_ids[:k] if cid in gold)
-    return hits / k, (hits / len(gold) if gold else 0.0)
+    found = {cid for cid in retrieved_ids[:k] if cid in gold}
+    return len(found) / k, (len(found) / len(gold) if gold else 0.0)
 
 
 def format_context(hits):
@@ -555,7 +567,8 @@ def run():
             **check_citations(answer, hits[:GENERATION_K]),
         }
 
-        # retrieval metrics only where gold chunks exist, which is tier B by construction
+        # retrieval metrics only where gold chunks exist. No tier carries them at
+        # present; hand-labelling them onto tier A is what makes this branch live again.
         gold = q.get("gold_chunks")
         if gold:
             row["gold_chunks"] = gold
@@ -792,6 +805,14 @@ def render_markdown(summary):
         "`docs/adr/0002-faithfulness-judged-without-the-reference-answer.md` records the "
         "decision in full.",
         "",
+        "Provenance: that calibration was measured on 2026-10-20 over a stratified "
+        "sample of 20 tier A and 10 tier B questions. Tier B has since been retired, so "
+        "the sample is not reproducible and the artifact is read as of that date rather "
+        "than as a figure the current code would produce. It is kept unchanged because "
+        "it is the record of the experiment the faithfulness split acted on; re-running "
+        "calibration under the present strata would be a different measurement, not a "
+        "refresh of this one.",
+        "",
         "The choice of what to do with the superseded values was between re-judging the "
         "golden set and discarding the combined call's figures as not comparable. They "
         "are being re-judged, not discarded: faithfulness is re-measured over the stored "
@@ -871,7 +892,6 @@ def render_markdown(summary):
         f"{summary['generation_k']} chunks — and nothing here checks whether those were "
         "the right chunks. Until gold chunks are labelled by hand onto tier A's quiz "
         "questions, no claim about retrieval quality is supported either way.",
-        "",
     ]
 
     tier_a, tier_c = (summary["tier_a"], summary["tier_c"])

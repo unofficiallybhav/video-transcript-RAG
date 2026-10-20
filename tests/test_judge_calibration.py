@@ -12,32 +12,40 @@ import evaluate
 
 
 def checkpoint_rows(a=50, c=12):
-    """Checkpoint-shaped rows: scored questions, as results.jsonl has them."""
+    """Checkpoint-shaped rows, as results.jsonl holds them.
+
+    Tier A rows carry the judge's continuous scores; tier C rows carry only a refusal
+    verdict, because tier C's ground truth is that no correct answer exists and there is
+    nothing for the judge to score an answer against. The distinction matters here: it
+    is why calibration draws its sample from tier A, and a fixture that gave tier C
+    scores it never has would make the sampling look like a free choice.
+    """
     rows = []
     for tier, count in (("A", a), ("C", c)):
         for i in range(count):
-            rows.append({
+            row = {
                 "id": f"tier{tier}-q{i:03d}",
                 "tier": tier,
                 "question": f"question {tier}{i}",
                 "answer": f"system answer {tier}{i}",
                 "retrieved": [f"video {i}.mp4:{j}" for j in range(5)],
-                "faithfulness": 0.80,
-                "relevancy": 0.90,
-                "correctness": 0.70,
-                "refused": False,
-            })
+                "refused": tier == "C",
+            }
+            if tier == "A":
+                row |= {"faithfulness": 0.80, "relevancy": 0.90, "correctness": 0.70}
+            rows.append(row)
     return rows
 
 
 # ----------------------------------------------------------------- the seeded sample
 
-def test_sample_is_thirty_tier_a_questions():
+def test_sample_is_twenty_tier_a_questions():
     """The strata follow the surviving tiers: tier C's ground truth carries no score
-    for the judge to disagree with itself about, so calibration draws from tier A."""
+    for the judge to disagree with itself about, so calibration draws from tier A, and
+    draws the same 20 of them it always did."""
     sample = evaluate.calibration_sample(checkpoint_rows())
-    assert len(sample) == 30
-    assert sum(1 for r in sample if r["tier"] == "A") == 30
+    assert len(sample) == 20
+    assert sum(1 for r in sample if r["tier"] == "A") == 20
 
 
 def test_sample_is_reproducible_from_the_seed():
@@ -254,10 +262,11 @@ def test_calibrate_judges_the_sample_three_times_and_writes_its_own_artifact(
 
     evaluate.calibrate(complete_fn=fake)
 
-    assert len(fake.sent) == 90
+    # 20 sampled questions, each judged three times: baseline rerun, no-reference pass
+    assert len(fake.sent) == 60
     artifact = json.loads(
         (golden_dir / "judge_calibration.json").read_text("utf-8"))["summary"]
-    assert len(artifact["sample"]) == 30
+    assert len(artifact["sample"]) == 20
     assert artifact["seed"] == evaluate.CALIBRATION_SEED
     assert artifact["judge_model"] == evaluate.JUDGE_MODEL
     assert [o["threshold"] for o in artifact["outcomes"]] == [0.10, 0.10]
@@ -293,7 +302,8 @@ def test_calibrate_resumes_after_the_daily_limit_without_rejudging(monkeypatch, 
     rest = stub_judge({"faithfulness": 0.8, "relevancy": 0.9, "correctness": 0.7,
                        "refused": False})
     evaluate.calibrate(complete_fn=rest)
-    assert len(rest.sent) == 84
+    # the 6 already written are not re-judged, so 60 - 6 calls remain
+    assert len(rest.sent) == 54
     assert (golden_dir / "judge_calibration.json").exists()
 
 
@@ -306,9 +316,9 @@ def checkpoint():
 
 
 def test_sample_is_reproducible_from_the_real_checkpoint(checkpoint):
-    """The 30 questions the real run will judge, derived without any provider call."""
+    """The 20 questions the real run will judge, derived without any provider call."""
     rows = checkpoint
     sample = evaluate.calibration_sample(rows)
-    assert sum(1 for r in sample if r["tier"] == "A") == 30
+    assert sum(1 for r in sample if r["tier"] == "A") == 20
     assert [r["id"] for r in sample] == [
         r["id"] for r in evaluate.calibration_sample(list(reversed(rows)))]

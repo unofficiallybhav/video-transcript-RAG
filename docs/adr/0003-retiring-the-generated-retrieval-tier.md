@@ -100,10 +100,34 @@ measured over one question set with one `hands_on` field, and that becomes testa
 
 - **No retrieval metric is reported until Tier A is labelled.** `precision@k` and
   `recall@k` are not estimated, approximated or carried forward from the retired tier.
-- **The retrieval helpers stay.** `precision_recall`, `K_VALUES` and `RETRIEVAL_METRICS`
-  in `evaluate.py`, and the overlap and tokenising helpers in `build_golden.py`, are
-  tier-agnostic and are what hand labelling will use. They are unreferenced in the
-  meantime, which is deliberate and is recorded at each of them.
+- **The retrieval helpers stay**, and they divide into two kinds.
+
+  `precision_recall` and `K_VALUES` in `evaluate.py` are still *called*, by `run()` and
+  `rescore_rows()`, inside a branch guarded on a row carrying `gold_chunks`. No row
+  carries them, so the branch does not execute — the code is live and the data is
+  absent. Scoring a labelled row is therefore a question of supplying labels, not of
+  restoring code.
+
+  `RETRIEVAL_METRICS` in `evaluate.py`, and `content_words`, `jaccard` and `tokenise` in
+  `build_golden.py`, are genuinely unreferenced. They are kept because hand labelling
+  needs exactly them — a table of retrieval columns to render, and mechanical signals to
+  rank and annotate candidate chunks — and because a model may not be asked to rank the
+  candidates instead. This is recorded at each of them.
+
+- **The bm25 index construction went, against the ticket's own instruction to keep it.**
+  The ticket said the bm25 machinery should stay because hand labelling would reuse it.
+  On reading the code that turned out to describe something that did not exist: bm25
+  appeared only inside `sample_chunks`, which built an index over every chunk, scored the
+  tier A questions against it, and then drew a seeded random sample of chunks to generate
+  questions *from*. That is tier B's sampling procedure, parameterised by `TIER_B_SIZE`
+  and `TIER_B_SEED`, not a reusable way to rank candidates for a question. Keeping it
+  would have meant keeping the retired tier's sampling logic to preserve the two lines
+  that build the index.
+
+  What hand labelling needs is the opposite direction — given one question, rank the
+  chunks — so it is a new function either way. `tokenise` is kept because it is the part
+  that genuinely carries over, and `rank-bm25` stays in `pyproject.toml` so that
+  labelling does not open with a dependency change.
 - **`golden/judge_calibration.json` is not regenerated.** It was measured under strata of
   20 Tier A and 10 Tier B questions. It is the record of the experiment #9 acted on and
   is cited by name in ADR 0002, the report's provenance note and the glossary.
