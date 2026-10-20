@@ -1,14 +1,20 @@
 # Offline evaluation report
 
-Generated 2026-10-19T11:52:03 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
+Generated 2026-10-20T12:00:16 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
 
 Faithfulness, relevancy and correctness are judge scores on a continuous 0.00-1.00 scale; each question's per-score reasoning is kept in the `note` field of `report.json`.
+
+Faithfulness is scored by a second judge call that is shown the question, the retrieved context and the answer, and never the reference answer, so that it can only be a claim about whether the context supports the answer. Relevancy and correctness come from the call that does see the reference answer, with both criteria worded exactly as before. The faithfulness call's own reasoning is kept separately, in `faithfulness_note`.
 
 Tiers are scored on what their ground truth supports and are never averaged together.
 
 Every value carries the number of questions it was taken over. A question that carries no value for a metric is left out of that metric rather than counted as a zero, so a citation validity value covers only the answers that cited something: "did not cite" and "cited wrongly" stay distinguishable, and the count column is how a reader tells which is which.
 
 Provenance: the citation check was invalid in the run this report supersedes. It compared a cited timestamp, which the generator only ever saw floored to a whole second, against unfloored chunk spans, and it charged a timestamp against the nearest video name appearing before it even when the answer never cited that video. That citation defect was corrected 2026-10-19. Citation values here therefore measure a repaired ruler, not a changed pipeline, and are not comparable with any earlier copy of this report; the superseded values are discarded rather than kept beside them, so that a corrected measurement is never plotted as a trend.
+
+Provenance: faithfulness values produced before 2026-10-20 came from a single judge call that also scored correctness, and are not comparable with the ones here. The calibration experiment recorded in `golden/judge_calibration.json` re-judged 30 questions with the reference answer withheld and measured a mean absolute faithfulness difference of 0.164 against a threshold of 0.10 fixed before the experiment was run, shifted +0.109: withholding the reference answer raises faithfulness, because with it visible the judge penalised answers that diverge from it, so faithfulness was partly grading correctness instead of support by the retrieved context. The pre-committed consequence was to split faithfulness into its own call permanently. The combined call's faithfulness values are superseded, and are replaced here rather than kept beside the split call's. Correctness and relevancy are unaffected: the experiment's other threshold, between-run spread across two fresh passes, came in at 0.018 on its worst metric and was not exceeded, so two-decimal continuous scoring is kept.
+
+Cost: the faithfulness call adds about 1,700 tokens per question on top of the 1,970 the combined call used, measured over the 123 scored tier A and B questions at the four-characters-per-token estimate the rate limiter paces on. Judging one question now costs about 3,700 tokens rather than 1,970, so a full re-judge of all 123 is about 468,000 tokens — more than one API key's 200,000 per day allows, which is why `rejudge` resumes.
 
 ## Tier A — quiz questions with human answer keys
 
@@ -18,19 +24,19 @@ Correctness is anchored to the course authors' own answer key. No chunk labels, 
 
 | metric | value | questions |
 | --- | --- | --- |
-| faithfulness | 0.793 | 83 |
+| faithfulness | None | 0 |
 | relevancy | 0.792 | 83 |
 | correctness | 0.761 | 83 |
 | citation_present | 0.831 | 83 |
-| citation_video_valid | 0.981 | 69 |
-| citation_time_valid | 0.936 | 70 |
+| citation_video_valid | 0.988 | 69 |
+| citation_time_valid | 0.488 | 70 |
 
 ### By course
 
 | course | questions | correctness | faithfulness | citation_time_valid | cited a time |
 | --- | --- | --- | --- | --- | --- |
-| graph analytics | 31 | 0.81 | 0.789 | 0.963 | 27 |
-| machine learning | 52 | 0.733 | 0.795 | 0.919 | 43 |
+| graph analytics | 31 | 0.81 | None | 0.469 | 27 |
+| machine learning | 52 | 0.733 | None | 0.5 | 43 |
 
 Hands-on questions (10 of tier A) ask about clicking through KNIME or Spark rather than lecture content: correctness 0.4 over 10 of them.
 
@@ -61,12 +67,12 @@ Generation metrics on the same questions:
 
 | metric | value | questions |
 | --- | --- | --- |
-| faithfulness | 0.963 | 40 |
+| faithfulness | None | 0 |
 | relevancy | 0.939 | 40 |
 | correctness | 0.889 | 40 |
 | citation_present | 0.975 | 40 |
 | citation_video_valid | 0.987 | 39 |
-| citation_time_valid | 0.974 | 39 |
+| citation_time_valid | 0.62 | 39 |
 
 ## Refusal — all three tiers together
 
@@ -81,3 +87,5 @@ Read the three rows as one measurement. A pipeline that declined every question 
 | tier C | no correct answer exists | refusal rate | 1.0 | 12 |
 
 Tier C's 12 questions are on topics verified absent from the corpus; the pipeline should decline all of them. Every answerable refusal counted above scored correctness 0.0, so without this rate the failure is hidden inside a low correctness value instead of named.
+
+123 answers still carry faithfulness from the combined judge call and are left out of every faithfulness value above, rather than averaged in beside the split call's. Run `uv run evaluate.py rejudge` to re-judge them.

@@ -5,6 +5,7 @@ and generation path and scores each tier on what that tier's ground truth can su
 
   Tier A (quiz questions, human answer keys)
       correctness, faithfulness, relevancy, citation accuracy
+      (faithfulness is judged by its own call, which is never shown the answer key)
   Tier B (questions generated from one chunk each, so gold labels are exact)
       precision@k, recall@k, plus the generation metrics as secondary
   Tier C (questions the corpus cannot answer, verified absent)
@@ -20,6 +21,9 @@ labels, and averaging would hide both facts.
   uv run evaluate.py rescore     re-derive the judge-free metrics from the checkpoint
                                  offline and rewrite the report: no provider calls, no
                                  new answers, judge scores passed through untouched
+  uv run evaluate.py rejudge     re-score the checkpointed answers with the split
+                                 judge call, faithfulness judged without the reference
+                                 answer: no new answers, resumable after a daily limit
   uv run evaluate.py spotcheck   emit generated tier B questions for human review
   uv run evaluate.py review      summarise the spot-check verdicts
   uv run evaluate.py calibrate   re-judge a seeded sample twice to put error bars on
@@ -157,6 +161,91 @@ THE SYSTEM'S ANSWER: {answer}
 Did the system decline to answer, rather than making up an answer from unrelated material?
 
 Reply with only JSON: {{"refused": true|false, "note": "one short sentence"}}"""
+
+
+# --- the split judge call (issue #9) ----------------------------------------------
+# Faithfulness is judged on its own, by a call that never receives the reference answer.
+# The calibration experiment in #8 measured faithfulness with the reference withheld at
+# 0.164 mean absolute difference against a pre-committed threshold of 0.10, shifted
+# +0.109: with the reference visible the judge penalised answers that diverge from it,
+# so faithfulness was partly grading correctness rather than support by the retrieved
+# context. Both prompts are derived from JUDGE_PROMPT rather than written out again, so
+# each criterion ships in the wording it was calibrated in and a reworded JUDGE_PROMPT
+# fails loudly here instead of quietly sending the reference answer to the faithfulness
+# judge. JUDGE_PROMPT itself is no longer sent by the scoring path: it is the one source
+# of that wording, and the prompt `calibrate` recorded its result against.
+#
+# SPLIT_JUDGE records which call a row's faithfulness came from. A row without it is
+# from the combined call, whose faithfulness is not comparable with these, so the report
+# drops it rather than averaging the two together part-way through a re-judge.
+SPLIT_JUDGE = "split"
+JUDGE_JSON_LINE = (
+    """{{"faithfulness": 0.00, "relevancy": 0.00, "correctness": 0.00, """
+    """"refused": true|false, "note": "one short sentence explaining the scores"}}""")
+REFERENCE_LINE = "REFERENCE ANSWER (ground truth): {reference}\n\n"
+REFUSAL_LINE = ("Also report whether the system refused to answer "
+                "(said it has no information).\n\n")
+
+
+def _edited(prompt, *edits, why):
+    """JUDGE_PROMPT with guarded replacements applied, or a loud failure.
+
+    An unguarded replace on a prompt that has since been reworded is how a variant
+    silently stops differing in the way it claims to, so every edit has to find its
+    target.
+    """
+    for old, new in edits:
+        if old not in prompt:
+            raise RuntimeError(f"JUDGE_PROMPT no longer contains {old!r}; {why}")
+        prompt = prompt.replace(old, new)
+    return prompt
+
+
+def _without_criterion(prompt, metric, why):
+    """The same prompt with one metric's criterion paragraph removed."""
+    prompt, removed = re.subn(rf"\n- {metric}:.*?(?=\n- |\n\n)", "", prompt,
+                              flags=re.S)
+    if removed != 1:
+        raise RuntimeError(
+            f"could not remove the {metric} criterion from JUDGE_PROMPT; {why}")
+    return prompt
+
+
+def faithfulness_prompt():
+    """The faithfulness call: one metric, and no reference answer anywhere in it."""
+    why = "the reference-free faithfulness prompt has to be rederived"
+    prompt = _edited(
+        JUDGE_PROMPT,
+        (REFERENCE_LINE, ""),
+        (REFUSAL_LINE, ""),
+        ("Score these three, strictly:", "Score this one, strictly:"),
+        ("Reply with only JSON, with scores as decimals between 0.00 and 1.00:",
+         "Reply with only JSON, with the score as a decimal between 0.00 and 1.00:"),
+        (JUDGE_JSON_LINE,
+         """{{"faithfulness": 0.00, "note": "one short sentence explaining the score"}}"""),
+        why=why,
+    )
+    for metric in ("relevancy", "correctness"):
+        prompt = _without_criterion(prompt, metric, why)
+    return prompt
+
+
+def correctness_prompt():
+    """The call that keeps the reference answer: correctness and relevancy, as before.
+
+    Both criteria, the reference answer and the refusal verdict are word for word what
+    the combined call carried. Only faithfulness is gone from it.
+    """
+    why = "the faithfulness-free judge prompt has to be rederived"
+    prompt = _edited(
+        JUDGE_PROMPT,
+        ("Score these three, strictly:", "Score these two, strictly:"),
+        (JUDGE_JSON_LINE,
+         """{{"relevancy": 0.00, "correctness": 0.00, "refused": true|false, """
+         """"note": "one short sentence explaining the scores"}}"""),
+        why=why,
+    )
+    return _without_criterion(prompt, "faithfulness", why)
 
 
 def load_golden():
@@ -328,6 +417,28 @@ def judge(question, answer, context, prompt=JUDGE_PROMPT, complete_fn=complete):
     }
 
 
+def judge_split(question, answer, context, complete_fn=complete):
+    """Two judge calls per answer: the split that #9 made permanent.
+
+    The first keeps the reference answer and scores correctness and relevancy exactly as
+    the combined call did. The second is shown the question, the retrieved context and
+    the answer alone, and scores faithfulness, so the number can only be about whether
+    the context supports the answer. Returned as one row's worth of scores, because
+    which call produced which metric is an implementation detail of the judging, not of
+    the report.
+    """
+    scores = judge(question, answer, context, prompt=correctness_prompt(),
+                   complete_fn=complete_fn)
+    faithfulness = judge(question, answer, context, prompt=faithfulness_prompt(),
+                         complete_fn=complete_fn)
+    return {
+        **scores,
+        "faithfulness": faithfulness["faithfulness"],
+        "faithfulness_note": faithfulness["note"],
+        "faithfulness_judge": SPLIT_JUDGE,
+    }
+
+
 def judge_refusal(question, answer):
     """Tier C only: did the pipeline decline, as it should have."""
     payload = extract_json(complete(JUDGE_MODEL, REFUSAL_PROMPT.format(
@@ -455,13 +566,15 @@ def run():
                 row["refused"] = verdict.get("refused")
                 row["note"] = verdict.get("note")
             else:
-                scores = judge(q, answer, context)
+                scores = judge_split(q, answer, context)
                 row.update({
                     "faithfulness": scores.get("faithfulness"),
                     "relevancy": scores.get("relevancy"),
                     "correctness": scores.get("correctness"),
                     "refused": scores.get("refused"),
                     "note": scores.get("note"),
+                    "faithfulness_note": scores.get("faithfulness_note"),
+                    "faithfulness_judge": scores.get("faithfulness_judge"),
                 })
         except DailyLimitReached as e:
             print(f"\nJudge hit its daily token limit after {len(results)} of "
@@ -517,8 +630,25 @@ def rescore():
     write_report(rescore_rows(rows, chunks))
 
 
+def drop_superseded_faithfulness(rows):
+    """The rows with any combined-call faithfulness removed, and how many lost a value.
+
+    A re-judge that stopped at the daily token limit leaves both kinds of value in the
+    checkpoint, and averaging them would report a number that is partly the old metric.
+    So a faithfulness value is reported only when its row says which call produced it,
+    and the count of the ones dropped is reported beside the metric rather than left for
+    a reader to notice in the denominator.
+    """
+    stale = {r["id"] for r in rows if numeric(r.get("faithfulness"))
+             and r.get("faithfulness_judge") != SPLIT_JUDGE}
+    if not stale:
+        return rows, 0
+    return [{**r, "faithfulness": None} if r["id"] in stale else r for r in rows], len(stale)
+
+
 def write_report(results):
-    report = summarise(results)
+    results, superseded = drop_superseded_faithfulness(results)
+    report = summarise(results, superseded_faithfulness=superseded)
     GOLDEN_DIR.mkdir(exist_ok=True)
     REPORT_JSON.write_text(
         json.dumps({"summary": report, "results": results}, indent=2, ensure_ascii=False),
@@ -541,7 +671,7 @@ def tier_c_block(rows):
     return out
 
 
-def summarise(results):
+def summarise(results, superseded_faithfulness=0):
     def block(rows, retrieval=False, answerable_refusal=False):
         # An empty tier reports the one thing that is true of it — that it holds no
         # questions — rather than nothing at all, so every block in this summary has the
@@ -588,6 +718,7 @@ def summarise(results):
         "tier_a_hands_on": block([r for r in tier_a if r["hands_on"]]),
         "tier_b": block(tier_b, retrieval=True, answerable_refusal=True),
         "tier_c": tier_c_block(tier_c),
+        "superseded_faithfulness": superseded_faithfulness,
         "unscored": sum(1 for r in results
                         if r["tier"] != "C" and r.get("correctness") is None),
     }
@@ -627,6 +758,13 @@ def render_markdown(summary):
         "0.00-1.00 scale; each question's per-score reasoning is kept in the `note` "
         "field of `report.json`.",
         "",
+        "Faithfulness is scored by a second judge call that is shown the question, the "
+        "retrieved context and the answer, and never the reference answer, so that it "
+        "can only be a claim about whether the context supports the answer. Relevancy "
+        "and correctness come from the call that does see the reference answer, with "
+        "both criteria worded exactly as before. The faithfulness call's own reasoning "
+        "is kept separately, in `faithfulness_note`.",
+        "",
         "Tiers are scored on what their ground truth supports and are never averaged "
         "together.",
         "",
@@ -645,6 +783,29 @@ def render_markdown(summary):
         "comparable with any earlier copy of this report; the superseded values are "
         "discarded rather than kept beside them, so that a corrected measurement is "
         "never plotted as a trend.",
+        "",
+        "Provenance: faithfulness values produced before 2026-10-20 came from a single "
+        "judge call that also scored correctness, and are not comparable with the ones "
+        "here. The calibration experiment recorded in `golden/judge_calibration.json` "
+        "re-judged 30 questions with the reference answer withheld and measured a mean "
+        "absolute faithfulness difference of 0.164 against a threshold of 0.10 fixed "
+        "before the experiment was run, shifted +0.109: withholding the reference "
+        "answer raises faithfulness, because with it visible the judge penalised "
+        "answers that diverge from it, so faithfulness was partly grading correctness "
+        "instead of support by the retrieved context. The pre-committed consequence was "
+        "to split faithfulness into its own call permanently. The combined call's "
+        "faithfulness values are superseded, and are replaced here rather than kept "
+        "beside the split call's. Correctness and relevancy are unaffected: the "
+        "experiment's other threshold, between-run spread across two fresh passes, came "
+        "in at 0.018 on its worst metric and was not exceeded, so two-decimal "
+        "continuous scoring is kept.",
+        "",
+        "Cost: the faithfulness call adds about 1,700 tokens per question on top of the "
+        "1,970 the combined call used, measured over the 123 scored tier A and B "
+        "questions at the four-characters-per-token estimate the rate limiter paces on. "
+        "Judging one question now costs about 3,700 tokens rather than 1,970, so a full "
+        "re-judge of all 123 is about 468,000 tokens — more than one API key's 200,000 "
+        "per day allows, which is why `rejudge` resumes.",
         "",
         "## Tier A — quiz questions with human answer keys",
         "",
@@ -716,6 +877,12 @@ def render_markdown(summary):
         f"hidden inside a low correctness value instead of named.",
     ]
 
+    if summary.get("superseded_faithfulness"):
+        lines += ["", f"{summary['superseded_faithfulness']} answers still carry "
+                      f"faithfulness from the combined judge call and are left out of "
+                      f"every faithfulness value above, rather than averaged in beside "
+                      f"the split call's. Run `uv run evaluate.py rejudge` to re-judge "
+                      f"them."]
     if summary["unscored"]:
         lines += ["", f"{summary['unscored']} answers could not be scored by the judge."]
     return "\n".join(lines) + "\n"
@@ -792,19 +959,15 @@ def no_reference_prompt():
     between the passes stays the reference answer. Each edit is guarded, so a reworded
     prompt fails here instead of quietly sending the reference through anyway.
     """
-    prompt = JUDGE_PROMPT
-    for old, new in (("REFERENCE ANSWER (ground truth): {reference}\n\n", ""),
-                     ("Score these three, strictly:", "Score these two, strictly:"),
-                     ('"correctness": 0.00, ', "")):
-        if old not in prompt:
-            raise RuntimeError(
-                f"JUDGE_PROMPT no longer contains {old!r}; the reference-withheld "
-                "variant used by `calibrate` has to be rederived")
-        prompt = prompt.replace(old, new)
-    prompt, removed = re.subn(r"\n- correctness:.*?(?=\n\n)", "", prompt, flags=re.S)
-    if removed != 1:
-        raise RuntimeError("could not remove the correctness criterion from JUDGE_PROMPT")
-    return prompt
+    why = "the reference-withheld variant used by `calibrate` has to be rederived"
+    prompt = _edited(
+        JUDGE_PROMPT,
+        (REFERENCE_LINE, ""),
+        ("Score these three, strictly:", "Score these two, strictly:"),
+        ('"correctness": 0.00, ', ""),
+        why=why,
+    )
+    return _without_criterion(prompt, "correctness", why)
 
 
 def calibration_sample(rows):
@@ -1016,6 +1179,62 @@ def calibrate(complete_fn=complete):
     print(report_calibration(summary))
 
 
+def rejudge(complete_fn=complete):
+    """Re-scores every checkpointed answer with the split judge call.
+
+    The combined call's faithfulness is not comparable with the split call's, so the
+    golden set is re-judged rather than left with two kinds of value in one report. The
+    stage is a re-judge and not a re-run: each row's stored answer and its stored chunk
+    ids are reused, so the fresh scores describe the same pipeline behaviour that was
+    first measured, and no question is retrieved or answered again. Tier C is untouched,
+    because its refusal verdict never came from the combined call. Each row is appended
+    as it is judged, so a daily limit resumes for free.
+    """
+    checkpoint = load_checkpoint()
+    if not checkpoint:
+        sys.exit(f"{RESULTS_PATH} is empty; run `run` first")
+    # the re-judged rows are appended, and the checkpoint is the only copy of a run that
+    # cost a day of GPU transcription and two days of tokens
+    if not RESULTS_PATH.read_bytes().endswith(b"\n"):
+        sys.exit(f"{RESULTS_PATH} does not end with a newline, so appending to it would "
+                 f"corrupt its last row; add one and rerun")
+    todo = [r for r in checkpoint.values()
+            if r["tier"] != "C" and r.get("faithfulness_judge") != SPLIT_JUDGE]
+    already = sum(1 for r in checkpoint.values()
+                  if r.get("faithfulness_judge") == SPLIT_JUDGE)
+    print(f"re-judging {len(todo)} of {len(checkpoint)} checkpointed answers "
+          f"({already} already carry split faithfulness)")
+
+    golden = {q["id"]: q for q in load_golden()}
+    missing = [r["id"] for r in todo if r["id"] not in golden]
+    if missing:
+        sys.exit(f"{len(missing)} checkpointed questions are not in {GOLDEN_PATH}, so "
+                 f"their reference answer is unavailable: {missing[0]}")
+    chunks = {c["chunk_id"]: c for c in load_chunks()}
+
+    for i, row in enumerate(todo, 1):
+        # the context the judge saw originally, rebuilt from the checkpoint's ordered
+        # chunk ids and the local cache, exactly as `calibrate` rebuilds it
+        hits = [(cid, chunks[cid]) for cid in row["retrieved"][:GENERATION_K]
+                if cid in chunks]
+        try:
+            scores = judge_split(golden[row["id"]], row["answer"], format_context(hits),
+                                 complete_fn=complete_fn)
+        except DailyLimitReached as e:
+            print(f"\nJudge hit its daily token limit after {i - 1} of {len(todo)} "
+                  f"answers. Progress is saved in {RESULTS_PATH}; rerun "
+                  f"`uv run evaluate.py rejudge` once the limit resets to continue.\n"
+                  f"  {e}")
+            break
+        checkpoint[row["id"]] = {**row, **scores}
+        with RESULTS_PATH.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(checkpoint[row["id"]], ensure_ascii=False) + "\n")
+        print(f"[{i}/{len(todo)}] {row['id'][:45]} faith={scores.get('faithfulness')} "
+              f"corr={scores.get('correctness')}")
+
+    write_report(list(checkpoint.values()))
+
+
 def report_calibration(summary):
     """The outcome in plain words, stated against the thresholds whichever way it fell."""
     lines = ["Between-run difference, judge prompt unchanged:"]
@@ -1060,5 +1279,8 @@ if __name__ == "__main__":
         write_report(rows)
     elif stage == "rescore":
         rescore()
+    elif stage == "rejudge":
+        rejudge()
     else:
-        sys.exit("usage: evaluate.py [run|report|rescore|spotcheck|review|calibrate]")
+        sys.exit("usage: evaluate.py "
+                 "[run|report|rescore|rejudge|spotcheck|review|calibrate]")

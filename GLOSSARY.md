@@ -44,6 +44,22 @@ asked for an opinion at any point in deriving it. Such a metric can be recompute
 stored artifacts, and recomputing it yields the same number every time.
 _Avoid_: objective metric, deterministic metric, automatic metric, hard metric
 
+**Faithfulness**:
+What proportion of the factual claims an answer makes is supported by the context that
+was retrieved for it. A claim about support, not about truth: an answer can be faithful
+to a passage that is itself wrong, and an answer that is right about the world but
+absent from the context is unfaithful.
+_Avoid_: groundedness, hallucination rate, factuality, answer support
+
+That the judge scoring it is never shown the reference answer belongs to the definition
+and is not an implementation detail. While faithfulness was scored in the same call as
+correctness, the judge could see the answer key and penalised answers that diverged from
+it, so the metric was partly measuring correctness — the thing it names itself as not
+measuring. The calibration experiment put that at 0.164 of movement against a
+pre-committed threshold of 0.10, and `golden/judge_calibration.json` is the record. A
+faithfulness value obtained with the reference answer visible is therefore a different
+metric, and is not comparable with one obtained without it.
+
 **Citation validity**:
 Whether a citation an answer makes — a named video together with a timestamp, offered as
 the source of a claim — points at material that was actually retrieved for that
