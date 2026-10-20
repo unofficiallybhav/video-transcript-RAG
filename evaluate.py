@@ -165,15 +165,21 @@ Reply with only JSON: {{"refused": true|false, "note": "one short sentence"}}"""
 
 # --- the split judge call (issue #9) ----------------------------------------------
 # Faithfulness is judged on its own, by a call that never receives the reference answer.
-# The calibration experiment in #8 measured faithfulness with the reference withheld at
-# 0.164 mean absolute difference against a pre-committed threshold of 0.10, shifted
-# +0.109: with the reference visible the judge penalised answers that diverge from it,
-# so faithfulness was partly grading correctness rather than support by the retrieved
-# context. Both prompts are derived from JUDGE_PROMPT rather than written out again, so
-# each criterion ships in the wording it was calibrated in and a reworded JUDGE_PROMPT
+# docs/adr/0002 records the experiment that forced the split and what it measured.
+#
+# JUDGE_PROMPT is left exactly as it was and is still the call that scores correctness
+# and relevancy. Removing its faithfulness criterion would have been tidier, but #9
+# requires correctness and relevancy to be unaffected in how they are judged, and a
+# prompt that no longer mentions faithfulness is a different call: its scores would move
+# for a reason nothing in the report could name, and the values already measured for 135
+# questions would stop being comparable. So that call keeps asking for faithfulness and
+# `judge_split` discards the answer, which costs about 70 tokens a question and keeps two
+# metrics still.
+#
+# The faithfulness prompt is derived from JUDGE_PROMPT rather than written out again, so
+# the criterion ships in the wording it was calibrated in and a reworded JUDGE_PROMPT
 # fails loudly here instead of quietly sending the reference answer to the faithfulness
-# judge. JUDGE_PROMPT itself is no longer sent by the scoring path: it is the one source
-# of that wording, and the prompt `calibrate` recorded its result against.
+# judge.
 #
 # SPLIT_JUDGE records which call a row's faithfulness came from. A row without it is
 # from the combined call, whose faithfulness is not comparable with these, so the report
@@ -187,7 +193,7 @@ REFUSAL_LINE = ("Also report whether the system refused to answer "
                 "(said it has no information).\n\n")
 
 
-def _edited(prompt, *edits, why):
+def _guarded_replace(prompt, *edits, why):
     """JUDGE_PROMPT with guarded replacements applied, or a loud failure.
 
     An unguarded replace on a prompt that has since been reworded is how a variant
@@ -214,7 +220,7 @@ def _without_criterion(prompt, metric, why):
 def faithfulness_prompt():
     """The faithfulness call: one metric, and no reference answer anywhere in it."""
     why = "the reference-free faithfulness prompt has to be rederived"
-    prompt = _edited(
+    prompt = _guarded_replace(
         JUDGE_PROMPT,
         (REFERENCE_LINE, ""),
         (REFUSAL_LINE, ""),
@@ -228,24 +234,6 @@ def faithfulness_prompt():
     for metric in ("relevancy", "correctness"):
         prompt = _without_criterion(prompt, metric, why)
     return prompt
-
-
-def correctness_prompt():
-    """The call that keeps the reference answer: correctness and relevancy, as before.
-
-    Both criteria, the reference answer and the refusal verdict are word for word what
-    the combined call carried. Only faithfulness is gone from it.
-    """
-    why = "the faithfulness-free judge prompt has to be rederived"
-    prompt = _edited(
-        JUDGE_PROMPT,
-        ("Score these three, strictly:", "Score these two, strictly:"),
-        (JUDGE_JSON_LINE,
-         """{{"relevancy": 0.00, "correctness": 0.00, "refused": true|false, """
-         """"note": "one short sentence explaining the scores"}}"""),
-        why=why,
-    )
-    return _without_criterion(prompt, "faithfulness", why)
 
 
 def load_golden():
@@ -417,26 +405,40 @@ def judge(question, answer, context, prompt=JUDGE_PROMPT, complete_fn=complete):
     }
 
 
+def judge_faithfulness(question, answer, context, complete_fn=complete):
+    """The reference-free faithfulness call, on its own; see docs/adr/0002.
+
+    The judge is shown the question, the retrieved context and the answer, and nothing
+    else, so the score it returns can only be a claim about whether that context
+    supports that answer.
+
+    SPLIT_JUDGE is stamped only on a score that parsed. A row left unscored keeps no
+    mark, so `rejudge` picks it up again rather than recording an absent value as
+    measured.
+    """
+    scores = judge(question, answer, context, prompt=faithfulness_prompt(),
+                   complete_fn=complete_fn)
+    judged = {"faithfulness": scores["faithfulness"],
+              "faithfulness_note": scores["note"]}
+    if numeric(scores["faithfulness"]):
+        judged["faithfulness_judge"] = SPLIT_JUDGE
+    return judged
+
+
 def judge_split(question, answer, context, complete_fn=complete):
     """Two judge calls per answer: the split that #9 made permanent.
 
-    The first keeps the reference answer and scores correctness and relevancy exactly as
-    the combined call did. The second is shown the question, the retrieved context and
-    the answer alone, and scores faithfulness, so the number can only be about whether
-    the context supports the answer. Returned as one row's worth of scores, because
-    which call produced which metric is an implementation detail of the judging, not of
-    the report.
+    The first is JUDGE_PROMPT unchanged, so correctness and relevancy are judged exactly
+    as they have been all along; its faithfulness score is the one the calibration
+    experiment found to be partly grading correctness, and it is discarded here rather
+    than removed from the prompt, because removing it would change how the other two are
+    judged. The second call is the faithfulness measurement. Returned as one row's worth
+    of scores: which call produced which metric belongs to the judging, not to the
+    report.
     """
-    scores = judge(question, answer, context, prompt=correctness_prompt(),
-                   complete_fn=complete_fn)
-    faithfulness = judge(question, answer, context, prompt=faithfulness_prompt(),
-                         complete_fn=complete_fn)
-    return {
-        **scores,
-        "faithfulness": faithfulness["faithfulness"],
-        "faithfulness_note": faithfulness["note"],
-        "faithfulness_judge": SPLIT_JUDGE,
-    }
+    scores = judge(question, answer, context, complete_fn=complete_fn)
+    return {**scores,
+            **judge_faithfulness(question, answer, context, complete_fn=complete_fn)}
 
 
 def judge_refusal(question, answer):
@@ -793,19 +795,44 @@ def render_markdown(summary):
         "answer raises faithfulness, because with it visible the judge penalised "
         "answers that diverge from it, so faithfulness was partly grading correctness "
         "instead of support by the retrieved context. The pre-committed consequence was "
-        "to split faithfulness into its own call permanently. The combined call's "
-        "faithfulness values are superseded, and are replaced here rather than kept "
-        "beside the split call's. Correctness and relevancy are unaffected: the "
-        "experiment's other threshold, between-run spread across two fresh passes, came "
-        "in at 0.018 on its worst metric and was not exceeded, so two-decimal "
-        "continuous scoring is kept.",
+        "to split faithfulness into its own call permanently. "
+        "`docs/adr/0002-faithfulness-judged-without-the-reference-answer.md` records the "
+        "decision in full.",
         "",
-        "Cost: the faithfulness call adds about 1,700 tokens per question on top of the "
-        "1,970 the combined call used, measured over the 123 scored tier A and B "
-        "questions at the four-characters-per-token estimate the rate limiter paces on. "
-        "Judging one question now costs about 3,700 tokens rather than 1,970, so a full "
-        "re-judge of all 123 is about 468,000 tokens — more than one API key's 200,000 "
-        "per day allows, which is why `rejudge` resumes.",
+        "The choice of what to do with the superseded values was between re-judging the "
+        "golden set and discarding the combined call's figures as not comparable. They "
+        "are being re-judged, not discarded: faithfulness is re-measured over the stored "
+        "answers by `uv run evaluate.py rejudge`, which retrieves and generates nothing, "
+        "so the fresh score describes the same pipeline behaviour that was first "
+        "measured. Only faithfulness is re-judged. Correctness and relevancy keep the "
+        "values the combined call gave them and are unaffected by the split: their call "
+        "is the same prompt it has always been, and re-judging them would move them for "
+        "no reason this report could name. Until a row has been re-judged its old "
+        "faithfulness value is left out of every figure here rather than averaged in "
+        "beside a new one.",
+        "",
+        "What the split did to the numbers, measured over the 123 re-judged answers: "
+        "the tier means barely moved. Tier A's combined-call faithfulness mean was 0.793 "
+        "and tier B's was 0.963, over the same answers the tables above now score with "
+        "the split call. Individual answers moved much more than the means did — 0.093 "
+        "mean absolute movement on tier A, 0.013 on tier B — so the split changed which "
+        "answers score what, while leaving the tier aggregate close to where it was. "
+        "That is not a reason to doubt the split. Faithfulness scored with the answer "
+        "key in view was not a claim about support by the retrieved context whatever "
+        "number it landed on, so this is a repair to the metric's validity and not a "
+        "correction to its value, in the sense those two words carry in `GLOSSARY.md`. "
+        "Nor is the +0.109 signed shift the calibration experiment measured this "
+        "measurement: that experiment withheld the reference answer but still asked the "
+        "judge for relevancy in the same call, over a 30-question sample, so its figure "
+        "and this one are not the same quantity. The superseded values are discarded "
+        "rather than kept beside these.",
+        "",
+        "Cost: the faithfulness call is about 1,783 tokens per question, measured over "
+        "the 123 scored tier A and B questions at the four-characters-per-token estimate "
+        "the rate limiter paces on. It brings the cost of scoring one answer from about "
+        "1,970 tokens to about 3,753. Re-judging faithfulness alone over all 123 is "
+        "about 227,000 tokens, which exceeds the 200,000 per day one API key allows — "
+        "hence two keys, and hence `rejudge` resuming where it stopped.",
         "",
         "## Tier A — quiz questions with human answer keys",
         "",
@@ -960,7 +987,7 @@ def no_reference_prompt():
     prompt fails here instead of quietly sending the reference through anyway.
     """
     why = "the reference-withheld variant used by `calibrate` has to be rederived"
-    prompt = _edited(
+    prompt = _guarded_replace(
         JUDGE_PROMPT,
         (REFERENCE_LINE, ""),
         ("Score these three, strictly:", "Score these two, strictly:"),
@@ -1180,15 +1207,21 @@ def calibrate(complete_fn=complete):
 
 
 def rejudge(complete_fn=complete):
-    """Re-scores every checkpointed answer with the split judge call.
+    """Re-measures faithfulness over the whole checkpoint, with the reference withheld.
 
     The combined call's faithfulness is not comparable with the split call's, so the
-    golden set is re-judged rather than left with two kinds of value in one report. The
-    stage is a re-judge and not a re-run: each row's stored answer and its stored chunk
-    ids are reused, so the fresh scores describe the same pipeline behaviour that was
-    first measured, and no question is retrieved or answered again. Tier C is untouched,
-    because its refusal verdict never came from the combined call. Each row is appended
-    as it is judged, so a daily limit resumes for free.
+    golden set is re-judged rather than left with two kinds of value in one report.
+
+    Only faithfulness is re-judged. Correctness and relevancy keep the values the
+    combined call gave them, because #9 requires them to be unaffected and re-judging
+    them would move them for no reason the report could name. So this stage makes one
+    call per answer, not two.
+
+    It is a re-judge and not a re-run: each row's stored answer and its stored chunk ids
+    are reused, so the fresh score describes the same pipeline behaviour that was first
+    measured, and no question is retrieved or answered again. Tier C is untouched,
+    because it carries no faithfulness. Each row is appended as it is judged, so a daily
+    limit resumes for free.
     """
     checkpoint = load_checkpoint()
     if not checkpoint:
@@ -1202,8 +1235,8 @@ def rejudge(complete_fn=complete):
             if r["tier"] != "C" and r.get("faithfulness_judge") != SPLIT_JUDGE]
     already = sum(1 for r in checkpoint.values()
                   if r.get("faithfulness_judge") == SPLIT_JUDGE)
-    print(f"re-judging {len(todo)} of {len(checkpoint)} checkpointed answers "
-          f"({already} already carry split faithfulness)")
+    print(f"re-judging faithfulness for {len(todo)} of {len(checkpoint)} checkpointed "
+          f"answers ({already} already carry split faithfulness)")
 
     golden = {q["id"]: q for q in load_golden()}
     missing = [r["id"] for r in todo if r["id"] not in golden]
@@ -1218,8 +1251,8 @@ def rejudge(complete_fn=complete):
         hits = [(cid, chunks[cid]) for cid in row["retrieved"][:GENERATION_K]
                 if cid in chunks]
         try:
-            scores = judge_split(golden[row["id"]], row["answer"], format_context(hits),
-                                 complete_fn=complete_fn)
+            scores = judge_faithfulness(golden[row["id"]], row["answer"],
+                                        format_context(hits), complete_fn=complete_fn)
         except DailyLimitReached as e:
             print(f"\nJudge hit its daily token limit after {i - 1} of {len(todo)} "
                   f"answers. Progress is saved in {RESULTS_PATH}; rerun "
@@ -1229,8 +1262,8 @@ def rejudge(complete_fn=complete):
         checkpoint[row["id"]] = {**row, **scores}
         with RESULTS_PATH.open("a", encoding="utf-8") as f:
             f.write(json.dumps(checkpoint[row["id"]], ensure_ascii=False) + "\n")
-        print(f"[{i}/{len(todo)}] {row['id'][:45]} faith={scores.get('faithfulness')} "
-              f"corr={scores.get('correctness')}")
+        print(f"[{i}/{len(todo)}] {row['id'][:45]} "
+              f"faith={row.get('faithfulness')} -> {scores.get('faithfulness')}")
 
     write_report(list(checkpoint.values()))
 

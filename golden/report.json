@@ -1,21 +1,21 @@
 {
   "summary": {
-    "generated": "2026-10-20T12:00:16",
+    "generated": "2026-10-20T12:48:53",
     "generation_k": 5,
     "judge_model": "openai/gpt-oss-20b",
     "tier_a": {
       "questions": 83,
-      "faithfulness": null,
-      "faithfulness_n": 0,
+      "faithfulness": 0.787,
+      "faithfulness_n": 83,
       "relevancy": 0.792,
       "relevancy_n": 83,
       "correctness": 0.761,
       "correctness_n": 83,
       "citation_present": 0.831,
       "citation_present_n": 83,
-      "citation_video_valid": 0.988,
+      "citation_video_valid": 0.981,
       "citation_video_valid_n": 69,
-      "citation_time_valid": 0.488,
+      "citation_time_valid": 0.936,
       "citation_time_valid_n": 70,
       "answerable_refusal_rate": 0.157,
       "answerable_refusal_rate_n": 83
@@ -23,8 +23,8 @@
     "tier_a_by_course": {
       "graph analytics": {
         "questions": 31,
-        "faithfulness": null,
-        "faithfulness_n": 0,
+        "faithfulness": 0.781,
+        "faithfulness_n": 31,
         "relevancy": 0.832,
         "relevancy_n": 31,
         "correctness": 0.81,
@@ -33,38 +33,38 @@
         "citation_present_n": 31,
         "citation_video_valid": 1.0,
         "citation_video_valid_n": 26,
-        "citation_time_valid": 0.469,
+        "citation_time_valid": 0.963,
         "citation_time_valid_n": 27
       },
       "machine learning": {
         "questions": 52,
-        "faithfulness": null,
-        "faithfulness_n": 0,
+        "faithfulness": 0.79,
+        "faithfulness_n": 52,
         "relevancy": 0.769,
         "relevancy_n": 52,
         "correctness": 0.733,
         "correctness_n": 52,
         "citation_present": 0.827,
         "citation_present_n": 52,
-        "citation_video_valid": 0.981,
+        "citation_video_valid": 0.969,
         "citation_video_valid_n": 43,
-        "citation_time_valid": 0.5,
+        "citation_time_valid": 0.919,
         "citation_time_valid_n": 43
       }
     },
     "tier_a_hands_on": {
       "questions": 10,
-      "faithfulness": null,
-      "faithfulness_n": 0,
+      "faithfulness": 0.4,
+      "faithfulness_n": 10,
       "relevancy": 0.4,
       "relevancy_n": 10,
       "correctness": 0.4,
       "correctness_n": 10,
       "citation_present": 0.4,
       "citation_present_n": 10,
-      "citation_video_valid": 1.0,
+      "citation_video_valid": 0.875,
       "citation_video_valid_n": 4,
-      "citation_time_valid": 0.75,
+      "citation_time_valid": 0.875,
       "citation_time_valid_n": 4
     },
     "tier_b": {
@@ -93,8 +93,8 @@
       "precision@10_max_n": 40,
       "recall@10": 0.925,
       "recall@10_n": 40,
-      "faithfulness": null,
-      "faithfulness_n": 0,
+      "faithfulness": 0.962,
+      "faithfulness_n": 40,
       "relevancy": 0.939,
       "relevancy_n": 40,
       "correctness": 0.889,
@@ -103,7 +103,7 @@
       "citation_present_n": 40,
       "citation_video_valid": 0.987,
       "citation_video_valid_n": 39,
-      "citation_time_valid": 0.62,
+      "citation_time_valid": 0.974,
       "citation_time_valid_n": 39,
       "answerable_refusal_rate": 0.025,
       "answerable_refusal_rate_n": 40
@@ -113,7 +113,7 @@
       "refusal_rate": 1.0,
       "refusal_rate_n": 12
     },
-    "superseded_faithfulness": 123,
+    "superseded_faithfulness": 0,
     "unscored": 0
   },
   "results": [
@@ -143,11 +143,13 @@
         "categories of machine learning.mp4",
         "regression overview.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 0.75,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer fully matches the reference, directly supported by the retrieved context, and addresses the question without any padding."
+      "note": "Answer fully matches the reference, directly supported by the retrieved context, and addresses the question without any padding.",
+      "faithfulness_note": "The answer correctly identifies classification and regression as supervised categories, which is implied by the context listing them as main categories, but the retrieved excerpts do not explicitly state that these two are supervised, so the claim is only partially supported.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 1 - Machine Learning Overview-4",
@@ -170,15 +172,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "categories of machine learning.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully supports the claim with retrieved context, directly addresses the question, and matches the reference answer."
+      "note": "The answer fully supports the claim with retrieved context, directly addresses the question, and matches the reference answer.",
+      "faithfulness_note": "All factual statements in the answer are directly supported by the retrieved context: the definition of unsupervised approaches as using unlabeled data, the unknown target, and the mention of cluster analysis and association analysis as unsupervised methods.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 1 - Machine Learning Overview-5",
@@ -201,15 +205,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "machine learning process.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer accurately lists the five steps, matches the reference, and is fully supported by the retrieved context."
+      "note": "The answer accurately lists the five steps, matches the reference, and is fully supported by the retrieved context.",
+      "faithfulness_note": "All steps are directly supported by the context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 1 - Machine Learning Overview-6",
@@ -237,11 +243,13 @@
         "goal and activities in machine learning process.mp4",
         "machine learning process.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully supports the claim with cited sources, directly addresses the question, and matches the reference answer."
+      "note": "The answer fully supports the claim with cited sources, directly addresses the question, and matches the reference answer.",
+      "faithfulness_note": "All claims are directly supported by the transcript excerpts.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 1 - Machine Learning Overview-8",
@@ -268,11 +276,13 @@
       "cited_videos": [
         "knime and spark ml.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "All claims are supported by the context, directly answer the question, and match the reference answer."
+      "note": "All claims are supported by the context, directly answer the question, and match the reference answer.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context: KNIME’s GUI‑based drag‑and‑drop workflow, Spark MLlib’s code‑centric, scalable library running on Spark’s distributed engine, and its use for large‑dataset processing are all mentioned in the transcript.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-1",
@@ -295,16 +305,18 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "categories of machine learning.mp4",
         "regression overview.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference and is fully supported by the context."
+      "note": "The answer fully matches the reference and is fully supported by the context.",
+      "faithfulness_note": "All claims are directly supported by the context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-3",
@@ -331,11 +343,13 @@
       "cited_videos": [
         "linear regression.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer directly matches the reference and is fully supported by the retrieved context."
+      "note": "Answer directly matches the reference and is fully supported by the retrieved context.",
+      "faithfulness_note": "The answer accurately reflects the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-4",
@@ -362,11 +376,13 @@
       "cited_videos": [
         "linear regression.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 0.5,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Faithfulness is lower because the hyperplane claim is not supported by the retrieved context, but relevancy and correctness are full."
+      "note": "Faithfulness is lower because the hyperplane claim is not supported by the retrieved context, but relevancy and correctness are full.",
+      "faithfulness_note": "The first claim (simple linear regression uses one input variable and a straight‑line fit) is fully supported by the context. The second claim (multiple linear regression extends to two or more inputs and fits a hyperplane) is only partially supported—the extension to multiple inputs is mentioned, but the hyperplane detail is not present in the retrieved material.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-5",
@@ -393,11 +409,13 @@
       "cited_videos": [
         "cluster analysis.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference and is supported by the context."
+      "note": "The answer fully matches the reference and is supported by the context.",
+      "faithfulness_note": "The answer accurately reflects statements in the retrieved context about clustering goals.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-6",
@@ -420,15 +438,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.6666666666666666,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "cluster analysis.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "All claims are supported by the context, directly answer the question, and fully agree with the reference."
+      "note": "All claims are supported by the context, directly answer the question, and fully agree with the reference.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context, covering segmentation, classification of new samples, generating labeled data, anomaly detection, and domain-specific uses.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-7",
@@ -451,15 +471,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "k means clustering.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer directly matches the reference and is fully supported by the retrieved context."
+      "note": "Answer directly matches the reference and is fully supported by the retrieved context.",
+      "faithfulness_note": "The answer accurately reflects the definition of a cluster centroid as the mean of the samples assigned to that cluster, which is directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-8",
@@ -482,15 +504,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "k means clustering.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.95,
       "correctness": 0.9,
       "refused": false,
-      "note": "All factual claims are supported by the context; the answer directly addresses the question but adds extra detail beyond the minimal reference, so correctness is slightly lower."
+      "note": "All factual claims are supported by the context; the answer directly addresses the question but adds extra detail beyond the minimal reference, so correctness is slightly lower.",
+      "faithfulness_note": "All claims are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-9",
@@ -513,16 +537,18 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "categories of machine learning.mp4",
         "intro to association analysis.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "All scores are 1.00 because the answer is fully supported by the context, directly addresses the question, and matches the reference answer."
+      "note": "All scores are 1.00 because the answer is fully supported by the context, directly addresses the question, and matches the reference answer.",
+      "faithfulness_note": "The answer accurately reflects the retrieved context, which explicitly states that the goal of association analysis is to generate rules capturing associations between items or events.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-11",
@@ -545,15 +571,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "association analysis in detail.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer directly matches the reference, is fully supported by the retrieved context, and addresses the question precisely."
+      "note": "Answer directly matches the reference, is fully supported by the retrieved context, and addresses the question precisely.",
+      "faithfulness_note": "The answer accurately reflects the definition of support as described in the context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-12",
@@ -580,11 +608,13 @@
       "cited_videos": [
         "association analysis in detail.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer accurately states that rule confidence is used to prune low‑confidence rules, fully supported by the retrieved context and matching the reference answer."
+      "note": "The answer accurately states that rule confidence is used to prune low‑confidence rules, fully supported by the retrieved context and matching the reference answer.",
+      "faithfulness_note": "The answer accurately reflects the context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 11 - Cluster Analysis in Spark-1",
@@ -607,15 +637,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "cluster analysis in spark.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 0.5,
       "relevancy": 0.9,
       "correctness": 0.5,
       "refused": false,
-      "note": "The answer is supported by the context and addresses the question, but it gives an approximate 100% instead of the precise 99.4%, so correctness is only partial."
+      "note": "The answer is supported by the context and addresses the question, but it gives an approximate 100% instead of the precise 99.4%, so correctness is only partial.",
+      "faithfulness_note": "The answer correctly notes that almost all samples have 0 for rain_accumulation, but incorrectly claims 100% which is not supported by the context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 11 - Cluster Analysis in Spark-2",
@@ -642,11 +674,13 @@
       "cited_videos": [
         "feature transformation.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.97,
       "correctness": 0.97,
       "refused": false,
-      "note": "The answer is fully supported by the context, directly addresses the question, and aligns with the reference answer."
+      "note": "The answer is fully supported by the context, directly addresses the question, and aligns with the reference answer.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 11 - Cluster Analysis in Spark-4",
@@ -669,15 +703,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "cluster analysis in spark.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Faithfulness low because the retrieved context does not support the claim about seed reproducibility; relevancy and correctness are high."
+      "note": "Faithfulness low because the retrieved context does not support the claim about seed reproducibility; relevancy and correctness are high.",
+      "faithfulness_note": "The answer claims that seed=1 sets the random seed for initial centroids and ensures reproducibility, but the retrieved context does not provide any evidence or explanation of this effect.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 11 - Cluster Analysis in Spark-5",
@@ -700,15 +736,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.3333333333333333,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "cluster analysis in spark.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": false,
-      "note": "Faithful to the transcript but does not answer the question, so relevancy and correctness are zero."
+      "note": "Faithful to the transcript but does not answer the question, so relevancy and correctness are zero.",
+      "faithfulness_note": "All factual claims in the answer are supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 11 - Cluster Analysis in Spark-6",
@@ -733,11 +771,13 @@
       "citation_video_valid": null,
       "citation_time_valid": null,
       "cited_videos": [],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": true,
-      "note": "No factual claims were made, so faithfulness is 1.00, but the answer does not address the question or match the reference, yielding 0.00 for relevancy and correctness."
+      "note": "No factual claims were made, so faithfulness is 1.00, but the answer does not address the question or match the reference, yielding 0.00 for relevancy and correctness.",
+      "faithfulness_note": "The answer simply states that no information is available, which is consistent with the retrieved context that contains no details about clusters 7, 8, and 11.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 11 - Cluster Analysis in Spark-7",
@@ -762,11 +802,13 @@
       "citation_video_valid": null,
       "citation_time_valid": null,
       "cited_videos": [],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": true,
-      "note": "The answer contains no factual claims, does not address the question, and does not match the reference answer."
+      "note": "The answer contains no factual claims, does not address the question, and does not match the reference answer.",
+      "faithfulness_note": "The answer claims no information is available, which contradicts the retrieved context that identifies cluster 5 as Santa Ana conditions; thus no factual claim is supported.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Data Exploration-1",
@@ -789,15 +831,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "data terminology.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.2,
       "correctness": 0.0,
       "refused": false,
-      "note": "The answer accurately reflects the retrieved context but does not address the question or match the reference answer."
+      "note": "The answer accurately reflects the retrieved context but does not address the question or match the reference answer.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Data Exploration-2",
@@ -824,11 +868,13 @@
       "cited_videos": [
         "data terminology.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 0.75,
       "refused": false,
-      "note": "The answer is fully supported by the context and directly addresses the question, but it adds extra terms beyond the reference list, so it receives partial credit for correctness."
+      "note": "The answer is fully supported by the context and directly addresses the question, but it adds extra terms beyond the reference list, so it receives partial credit for correctness.",
+      "faithfulness_note": "All claims are supported by the context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Data Exploration-3",
@@ -851,15 +897,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "data exploration.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.95,
       "correctness": 0.98,
       "refused": false,
-      "note": "Answer is largely faithful, relevant, and correct, matching the reference."
+      "note": "Answer is largely faithful, relevant, and correct, matching the reference.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Data Exploration-4",
@@ -882,15 +930,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "data exploration.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer directly matches the reference and is fully supported by the retrieved context."
+      "note": "Answer directly matches the reference and is fully supported by the retrieved context.",
+      "faithfulness_note": "The answer accurately reflects the two categories mentioned in the context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Data Exploration-6",
@@ -913,15 +963,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "data exploration using summary statistics.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer fully matches the reference and is supported by the retrieved context."
+      "note": "Answer fully matches the reference and is supported by the retrieved context.",
+      "faithfulness_note": "The answer correctly cites skewness and kurtosis as measures of shape, directly supported by the context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 4 - Data Preparation-2",
@@ -949,11 +1001,13 @@
         "addressing data quality.mp4",
         "data quality.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "All scores are 1.00 because the answer correctly and fully matches the reference and is supported by the context."
+      "note": "All scores are 1.00 because the answer correctly and fully matches the reference and is supported by the context.",
+      "faithfulness_note": "The statement is directly supported by the transcript.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 4 - Data Preparation-3",
@@ -980,11 +1034,13 @@
       "cited_videos": [
         "data quality.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer directly matches the reference, is fully supported by the context, and precisely addresses the question."
+      "note": "The answer directly matches the reference, is fully supported by the context, and precisely addresses the question.",
+      "faithfulness_note": "The answer directly quotes the definition of an outlier from the context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 4 - Data Preparation-7",
@@ -1011,11 +1067,13 @@
       "cited_videos": [
         "feature transformation.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer fully matches the reference and is supported by the retrieved context."
+      "note": "Answer fully matches the reference and is supported by the retrieved context.",
+      "faithfulness_note": "The answer correctly states the mean and standard deviation as 0 and 1, which is directly supported by the context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 5 - Handling Missing Values in KNIME and Spark-4",
@@ -1040,11 +1098,13 @@
       "citation_video_valid": null,
       "citation_time_valid": null,
       "cited_videos": [],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": true,
-      "note": "The answer gives no information, so it is unsupported, irrelevant, and incorrect."
+      "note": "The answer gives no information, so it is unsupported, irrelevant, and incorrect.",
+      "faithfulness_note": "The answer claims no information is available, which is not supported by the context that discusses missing values per column.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 5 - Handling Missing Values in KNIME and Spark-5",
@@ -1067,17 +1127,19 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 0.6666666666666666,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 0.5,
       "cited_videos": [
         "addressing data quality.mp4",
         "data quality.mp4",
         "handling missing values in spark.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 0.33,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer is fully supported by the context, directly addresses the question, and matches the reference answer."
+      "note": "The answer is fully supported by the context, directly addresses the question, and matches the reference answer.",
+      "faithfulness_note": "Only the statement that dropping any row with a missing value removes all such rows is supported by the context; the specific numeric details (1089, 1095, 1064) are not present in the retrieved material.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 6 - Classification-2",
@@ -1100,15 +1162,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "crisp-dm.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.5,
       "correctness": 0.0,
       "refused": false,
-      "note": "The answer incorrectly states Phase 4 instead of the training phase, so it is not faithful or correct, though it does address the question."
+      "note": "The answer incorrectly states Phase 4 instead of the training phase, so it is not faithful or correct, though it does address the question.",
+      "faithfulness_note": "The answer correctly states that model parameters are adjusted during the modeling (Phase 4) stage, which is supported by the context that describes building a model in Phase 4 and adjusting parameters during training.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 6 - Classification-3",
@@ -1131,16 +1195,18 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "classification algorithms.mp4",
         "naive bayes.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer directly states Naive Bayes, cites supporting context, and matches the reference answer exactly."
+      "note": "The answer directly states Naive Bayes, cites supporting context, and matches the reference answer exactly.",
+      "faithfulness_note": "The claim that Naive Bayes uses a probabilistic approach is directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 6 - Classification-4",
@@ -1163,15 +1229,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "k nearest neighbors.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer directly states that k represents the number of nearest neighbors, fully supported by the context and matching the reference."
+      "note": "The answer directly states that k represents the number of nearest neighbors, fully supported by the context and matching the reference.",
+      "faithfulness_note": "The answer accurately reflects the retrieved context, which states that k represents the number of nearest neighbors considered.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 6 - Classification-6",
@@ -1194,15 +1262,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "decision tree.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.5,
       "correctness": 0.0,
       "refused": false,
-      "note": "The claim is supported by the context, but the answer only gives one statement instead of all, so it partially addresses the question but does not match the reference."
+      "note": "The claim is supported by the context, but the answer only gives one statement instead of all, so it partially addresses the question but does not match the reference.",
+      "faithfulness_note": "The claim that tree induction uses a greedy approach and does not guarantee a globally optimal tree is directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 6 - Classification-7",
@@ -1225,15 +1295,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "naive bayes.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "All scores are 1.00 because the answer is fully supported by the context, directly addresses the question, and matches the reference answer."
+      "note": "All scores are 1.00 because the answer is fully supported by the context, directly addresses the question, and matches the reference answer.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 6 - Classification-8",
@@ -1256,15 +1328,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "naive bayes.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer accurately reflects the independence assumption, is fully supported by the context, and directly answers the question."
+      "note": "The answer accurately reflects the independence assumption, is fully supported by the context, and directly answers the question.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 7 - Classification in KNIME and Spark-1",
@@ -1289,11 +1363,13 @@
       "citation_video_valid": null,
       "citation_time_valid": null,
       "cited_videos": [],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": true,
-      "note": "The answer does not provide any factual claim, so it is not faithful, irrelevant, or correct, and it explicitly refuses to answer."
+      "note": "The answer does not provide any factual claim, so it is not faithful, irrelevant, or correct, and it explicitly refuses to answer.",
+      "faithfulness_note": "The answer claims no information is available, but the retrieved context does contain relevant details, so the claim is unsupported.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 7 - Classification in KNIME and Spark-2",
@@ -1316,15 +1392,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "exploring data with knime.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer directly matches the reference and is fully supported by the transcript."
+      "note": "Answer directly matches the reference and is fully supported by the transcript.",
+      "faithfulness_note": "The answer asserts that unchecked 'Append new column' causes the original numeric column to be overwritten, but the provided transcript only shows the user checking the option and does not describe the behavior when it is unchecked. Thus the claim is unsupported by the context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 7 - Classification in KNIME and Spark-5",
@@ -1349,11 +1427,13 @@
       "citation_video_valid": null,
       "citation_time_valid": null,
       "cited_videos": [],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": true,
-      "note": "The answer gives no factual claim, is irrelevant to the question, and does not match the reference; it effectively refuses to answer."
+      "note": "The answer gives no factual claim, is irrelevant to the question, and does not match the reference; it effectively refuses to answer.",
+      "faithfulness_note": "The answer states the system lacks information, but the retrieved context does not support this claim; it neither confirms nor denies the lack of data, so the claim is unsupported.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 7 - Classification in KNIME and Spark-6",
@@ -1378,11 +1458,13 @@
       "citation_video_valid": null,
       "citation_time_valid": null,
       "cited_videos": [],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": true,
-      "note": "The answer gives no factual claim, fails to address the question, and does not match the reference answer."
+      "note": "The answer gives no factual claim, fails to address the question, and does not match the reference answer.",
+      "faithfulness_note": "The answer makes no factual claim about the number column, so it is fully consistent with the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 8 - Model Evaluation-1",
@@ -1409,11 +1491,13 @@
       "cited_videos": [
         "generalization and overfitting.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference, is directly supported by the retrieved context, and directly addresses the question."
+      "note": "The answer fully matches the reference, is directly supported by the retrieved context, and directly addresses the question.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 8 - Model Evaluation-2",
@@ -1436,15 +1520,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "generalization and overfitting.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer directly matches the reference and is fully supported by the retrieved context."
+      "note": "Answer directly matches the reference and is fully supported by the retrieved context.",
+      "faithfulness_note": "The answer is fully supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 8 - Model Evaluation-3",
@@ -1472,11 +1558,13 @@
         "decision tree.mp4",
         "overfitting in a decision tree.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly states pre‑pruning and post‑pruning, fully supported by the context and directly answers the question."
+      "note": "The answer correctly states pre‑pruning and post‑pruning, fully supported by the context and directly answers the question.",
+      "faithfulness_note": "All factual claims about pre‑pruning and post‑pruning as methods to avoid overfitting are directly supported by the retrieved lecture transcript.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 8 - Model Evaluation-6",
@@ -1503,11 +1591,13 @@
       "cited_videos": [
         "metrics to evaluate model.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer fully supports the reference and directly addresses the question."
+      "note": "Answer fully supports the reference and directly addresses the question.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 8 - Model Evaluation-7",
@@ -1530,15 +1620,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "metrics to evaluate model.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "All scores are 1.00 because the answer correctly and fully matches the reference and is supported by the context."
+      "note": "All scores are 1.00 because the answer correctly and fully matches the reference and is supported by the context.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 8 - Model Evaluation-8",
@@ -1565,11 +1657,13 @@
       "cited_videos": [
         "confusion matrix.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference and is supported by the context."
+      "note": "The answer fully matches the reference and is supported by the context.",
+      "faithfulness_note": "The answer accurately reflects the definition of accuracy from the confusion matrix as stated in the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-1",
@@ -1591,16 +1685,19 @@
         "classification using decision tree in knime.mp4:2"
       ],
       "citation_present": 1.0,
-      "citation_video_valid": 1.0,
-      "citation_time_valid": 1.0,
+      "citation_video_valid": 0.5,
+      "citation_time_valid": 0.5,
       "cited_videos": [
+        "confusion matrix.mp4",
         "evaluation of a decision tree in knime.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly identifies low_humidity_day as the target class label, directly addresses the question, and is fully supported by the provided context."
+      "note": "The answer correctly identifies low_humidity_day as the target class label, directly addresses the question, and is fully supported by the provided context.",
+      "faithfulness_note": "The answer correctly states that low_humidity_day is the true class column used in the Scorer node, which is supported by the context describing its creation and use in the confusion matrix.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-2",
@@ -1627,11 +1724,13 @@
       "cited_videos": [
         "evaluation of a decision tree in knime.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer accurately states that low_humidity_day is the true label and Prediction(low_humidity_day) is the model’s predicted label, fully supported by the context and matching the reference."
+      "note": "The answer accurately states that low_humidity_day is the true label and Prediction(low_humidity_day) is the model’s predicted label, fully supported by the context and matching the reference.",
+      "faithfulness_note": "All factual claims are supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-3",
@@ -1656,11 +1755,13 @@
       "citation_video_valid": null,
       "citation_time_valid": null,
       "cited_videos": [],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": true,
-      "note": "The answer neither cites any retrieved evidence nor addresses the question, so all scores are zero and it is a refusal."
+      "note": "The answer neither cites any retrieved evidence nor addresses the question, so all scores are zero and it is a refusal.",
+      "faithfulness_note": "The answer states a lack of information, which is not supported by any factual claim in the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-4",
@@ -1685,11 +1786,13 @@
       "citation_video_valid": null,
       "citation_time_valid": null,
       "cited_videos": [],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": true,
-      "note": "Answer gives no information, so all scores are zero."
+      "note": "Answer gives no information, so all scores are zero.",
+      "faithfulness_note": "The answer states the system lacks information, but the retrieved context does not support this claim; it actually contains relevant details about color settings.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-5",
@@ -1714,11 +1817,13 @@
       "citation_video_valid": null,
       "citation_time_valid": null,
       "cited_videos": [],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": true,
-      "note": "The answer gives no factual claim, is irrelevant, and does not match the reference, so all scores are zero."
+      "note": "The answer gives no factual claim, is irrelevant, and does not match the reference, so all scores are zero.",
+      "faithfulness_note": "The answer provides no factual claim and does not reference any information from the retrieved context, so it is entirely unsupported.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 1 - Introduction to Graphs-4",
@@ -1741,16 +1846,18 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.6666666666666666,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "focus on graph analytics.mp4",
         "social networking.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.95,
       "correctness": 0.95,
       "refused": false,
-      "note": "Answer aligns with reference, is supported by the context, and directly addresses the question."
+      "note": "Answer aligns with reference, is supported by the context, and directly addresses the question.",
+      "faithfulness_note": "All claims are directly supported by the provided video excerpts.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 1 - Introduction to Graphs-5",
@@ -1773,15 +1880,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "biological networks.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.95,
       "correctness": 0.95,
       "refused": false,
-      "note": "Answer correctly states the integration of multiple data sources as the key reason, fully supported by the context and directly addresses the question."
+      "note": "Answer correctly states the integration of multiple data sources as the key reason, fully supported by the context and directly addresses the question.",
+      "faithfulness_note": "The answer accurately summarizes the key point from the transcript that integrated biological networks grow in size, creating big‑data challenges that require big‑data analytics.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 1 - Introduction to Graphs-6",
@@ -1804,15 +1913,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "graphs and big data 4 v's.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 0.75,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer correctly identifies Velocity, is fully supported by the context, and directly addresses the question."
+      "note": "Answer correctly identifies Velocity, is fully supported by the context, and directly addresses the question.",
+      "faithfulness_note": "The claim that edges are added to the graph is supported by the context, but the assertion that this makes it hard to know when a final answer has been reached is not explicitly stated in the retrieved material.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 1 - Introduction to Graphs-7",
@@ -1835,15 +1946,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "graphs and big data 4 v's.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly identifies Volume and is fully supported by the context."
+      "note": "The answer correctly identifies Volume and is fully supported by the context.",
+      "faithfulness_note": "The answer correctly states that graph size (Volume V) increases algorithmic complexity, as supported by the transcript excerpts.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 1 - Introduction to Graphs-8",
@@ -1866,15 +1979,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "biological networks.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer directly states Variety, matches reference, and is supported by the context."
+      "note": "Answer directly states Variety, matches reference, and is supported by the context.",
+      "faithfulness_note": "The answer correctly identifies Variety as the V that causes challenges, and the claim is directly supported by the transcript excerpt about graphs being assembled from many independent data sources with differing formats and semantics.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 1 - Introduction to Graphs-9",
@@ -1901,11 +2016,13 @@
       "cited_videos": [
         "graphs and big data 4 v's.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer directly matches reference and is supported by context."
+      "note": "Answer directly matches reference and is supported by context.",
+      "faithfulness_note": "The answer correctly states that increasing valence increases inter‑connectivity and density, which is directly supported by the transcript excerpts.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 1 - Introduction to Graphs-10",
@@ -1928,15 +2045,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "graphs and big data 4 v's.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly identifies Velocity, fully supported by the context and directly addresses the question."
+      "note": "The answer correctly identifies Velocity, fully supported by the context and directly addresses the question.",
+      "faithfulness_note": "The answer accurately reflects the transcript’s description of high‑speed, continuous edge updates (velocity) in Facebook graphs.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 1 - Introduction to Graphs-11",
@@ -1959,15 +2078,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "graphs and big data 4 v's.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "All scores are 1.00 because the answer correctly and fully matches the reference and is supported by the context."
+      "note": "All scores are 1.00 because the answer correctly and fully matches the reference and is supported by the context.",
+      "faithfulness_note": "The answer accurately reflects the retrieved context, correctly identifying valence as the key concept related to increasing density in Amarnath’s Gmail interactions.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Graph Analytics Applications-2",
@@ -1992,11 +2113,13 @@
       "citation_video_valid": null,
       "citation_time_valid": null,
       "cited_videos": [],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": true,
-      "note": "The answer gives no information, so it fails all metrics."
+      "note": "The answer gives no information, so it fails all metrics.",
+      "faithfulness_note": "The answer claims no information is available, which is unsupported by the retrieved context that contains details about node types in web graphs.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Graph Analytics Applications-3",
@@ -2023,11 +2146,13 @@
       "cited_videos": [
         "focus on graph analytics.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 0.95,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer is correct and directly relevant, but the retrieved context only weakly supports the claim that edges represent hyperlinks."
+      "note": "Answer is correct and directly relevant, but the retrieved context only weakly supports the claim that edges represent hyperlinks.",
+      "faithfulness_note": "The answer correctly states that edges in a web‑graph represent hyperlinks between web pages, which is supported by the retrieved context mentioning web entities connected through links.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Graph Analytics Applications-4",
@@ -2054,11 +2179,13 @@
       "cited_videos": [
         "focus on graph analytics.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer matches the reference exactly, is fully supported by the retrieved context, and directly addresses the question."
+      "note": "Answer matches the reference exactly, is fully supported by the retrieved context, and directly addresses the question.",
+      "faithfulness_note": "The answer accurately reflects the context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Graph Analytics Applications-5",
@@ -2081,15 +2208,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "basic queries in neo4j.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer directly matches the reference answer and is fully supported by the retrieved context, addressing the question precisely."
+      "note": "The answer directly matches the reference answer and is fully supported by the retrieved context, addressing the question precisely.",
+      "faithfulness_note": "The answer correctly states that a loop is an edge connecting a node to itself, which is directly supported by the retrieved context that mentions matching nodes connected to themselves.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Graph Analytics Applications-6",
@@ -2112,15 +2241,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "basic queries in neo4j.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": false,
-      "note": "The answer’s claim is supported by the context, but it fails to give the requested example and does not match the reference answer."
+      "note": "The answer’s claim is supported by the context, but it fails to give the requested example and does not match the reference answer.",
+      "faithfulness_note": "The answer accurately reflects the definition of a loop as an edge from a node to itself, which is directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Graph Analytics Applications-10",
@@ -2143,15 +2274,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "parallel programming.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 0.9,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly matches the reference but the cited context does not directly support the claim about Maria and Julio, so faithfulness is low; relevancy and correctness are high."
+      "note": "The answer correctly matches the reference but the cited context does not directly support the claim about Maria and Julio, so faithfulness is low; relevancy and correctness are high.",
+      "faithfulness_note": "The answer correctly captures the concept of reachability and cites the relevant part of the transcript, though it does not mention Maria or Julio explicitly in the source.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Graph Analytics Applications-13",
@@ -2174,15 +2307,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "besth path.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 0.95,
       "correctness": 1.0,
       "refused": false,
-      "note": "Faithfulness is low because the claim about maximizing email discussion is not supported by the provided context; relevancy is high as the answer directly addresses the question; correctness is full as it matches the reference answer."
+      "note": "Faithfulness is low because the claim about maximizing email discussion is not supported by the provided context; relevancy is high as the answer directly addresses the question; correctness is full as it matches the reference answer.",
+      "faithfulness_note": "The answer claims a maximization objective for the most‑discussed email, but the retrieved context only states that optimization can be either minimize or maximize in general, without specifying this particular case.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Graph Analytics Applications-14",
@@ -2205,15 +2340,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "besth path.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly lists inclusion and exclusion constraints, fully supported by the context and matching the reference."
+      "note": "The answer correctly lists inclusion and exclusion constraints, fully supported by the context and matching the reference.",
+      "faithfulness_note": "The answer accurately reflects the two constraints—Inclusion and Exclusion—explicitly stated in the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Graph Analytics Applications-15",
@@ -2240,11 +2377,13 @@
       "cited_videos": [
         "besth path.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 0.5,
       "refused": false,
-      "note": "The answer is fully supported by the context and directly addresses the question, but it only lists one of the two examples given in the reference answer."
+      "note": "The answer is fully supported by the context and directly addresses the question, but it only lists one of the two examples given in the reference answer.",
+      "faithfulness_note": "All factual claims are directly supported by the transcript excerpts.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 2 - Graph Analytics Applications-16",
@@ -2269,11 +2408,13 @@
       "citation_video_valid": null,
       "citation_time_valid": null,
       "cited_videos": [],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": true,
-      "note": "The answer neither cites the context nor addresses the question, so all scores are zero and it is a refusal."
+      "note": "The answer neither cites the context nor addresses the question, so all scores are zero and it is a refusal.",
+      "faithfulness_note": "The answer claims no information is available, which contradicts the retrieved context that contains relevant details; thus the claim is unsupported.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-1",
@@ -2298,11 +2439,13 @@
       "citation_video_valid": null,
       "citation_time_valid": 0.0,
       "cited_videos": [],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 0.75,
       "refused": false,
-      "note": "The answer is fully supported by the context and directly addresses the question, but it phrases the concept as \"network robustness\" rather than the exact wording \"an attack which causes disconnection of the graph,\" so it receives partial credit for correctness."
+      "note": "The answer is fully supported by the context and directly addresses the question, but it phrases the concept as \"network robustness\" rather than the exact wording \"an attack which causes disconnection of the graph,\" so it receives partial credit for correctness.",
+      "faithfulness_note": "The answer accurately reflects the example of a power network losing power due to targeted attacks, as described in the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-4",
@@ -2329,11 +2472,13 @@
       "cited_videos": [
         "disconnecting a graph.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer fully matches reference and is supported by context."
+      "note": "Answer fully matches reference and is supported by context.",
+      "faithfulness_note": "The answer accurately reflects the context that high‑degree nodes are most vulnerable and likely targets.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-8",
@@ -2360,11 +2505,13 @@
       "cited_videos": [
         "indegree and outdegree.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference answer, is directly relevant to the question, and all claims are supported by the retrieved context."
+      "note": "The answer fully matches the reference answer, is directly relevant to the question, and all claims are supported by the retrieved context.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context, including the construction of degree tables, creation of histograms, and use of Euclidean distance to compare them.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-10",
@@ -2387,15 +2534,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "community analysis.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly identifies the question type as evolution, fully supported by the context and directly addresses the question."
+      "note": "The answer correctly identifies the question type as evolution, fully supported by the context and directly addresses the question.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-11",
@@ -2418,15 +2567,17 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "community analysis.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly identifies the question type as static, fully supported by the context and directly addresses the question."
+      "note": "The answer correctly identifies the question type as static, fully supported by the context and directly addresses the question.",
+      "faithfulness_note": "The answer correctly identifies the question as static, supported by the transcript.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-15",
@@ -2453,11 +2604,13 @@
       "cited_videos": [
         "centrality analysis.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 0.95,
       "relevancy": 0.95,
       "correctness": 0.95,
       "refused": false,
-      "note": "The answer accurately reflects the definition, is fully supported by the context, and directly addresses the question."
+      "note": "The answer accurately reflects the definition, is fully supported by the context, and directly addresses the question.",
+      "faithfulness_note": "The answer accurately reflects the definition of an influencer as a well‑connected node that can reach many others quickly, as described in the centrality analysis transcript. No unsupported claims are present.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-17",
@@ -2484,11 +2637,13 @@
       "cited_videos": [
         "centrality analysis.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly identifies closeness centrality, fully supported by context, directly addresses the question, and matches the reference answer."
+      "note": "The answer correctly identifies closeness centrality, fully supported by context, directly addresses the question, and matches the reference answer.",
+      "faithfulness_note": "The answer claims closeness centrality is the appropriate measure for rapid spread via shortest paths, but the context explicitly states that closeness centrality does not work well for such information flows, contradicting the claim.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-18",
@@ -2515,11 +2670,13 @@
       "cited_videos": [
         "centrality analysis.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer matches the reference and is supported by the context, with no irrelevant content."
+      "note": "Answer matches the reference and is supported by the context, with no irrelevant content.",
+      "faithfulness_note": "All factual claims in the answer are supported by the retrieved transcript, which defines betweenness centrality as measuring the fraction of shortest paths flowing through a node, implying its relevance for commodity flow.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 3 - Connectivity, Community, and Centrality Analytics-19",
@@ -2546,11 +2703,13 @@
       "cited_videos": [
         "centrality analysis.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly identifies degree centrality as hubness, fully supported by context and matches the reference."
+      "note": "The answer correctly identifies degree centrality as hubness, fully supported by context and matches the reference.",
+      "faithfulness_note": "The answer correctly states that degree centrality captures hub‑ness, which is directly supported by the transcript at 04:13.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 4 - Graph Analytics with Neo4j-2",
@@ -2578,11 +2737,13 @@
         "basic queries in neo4j.mp4",
         "connectivity analysis with neo4j.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 0.67,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly states that the query returns all non‑root MyNode nodes (i.e., those with at least one incoming relationship), which matches the reference answer and is supported by the context."
+      "note": "The answer correctly states that the query returns all non‑root MyNode nodes (i.e., those with at least one incoming relationship), which matches the reference answer and is supported by the context.",
+      "faithfulness_note": "Two of the three factual claims (indegree > 0 and inclusion of leaf nodes) are supported by the context; the claim about excluding root nodes is not directly supported.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 4 - Graph Analytics with Neo4j-5",
@@ -2607,11 +2768,13 @@
       "citation_video_valid": null,
       "citation_time_valid": null,
       "cited_videos": [],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": true,
-      "note": "The answer gives no factual claim, is irrelevant, and does not match the reference answer."
+      "note": "The answer gives no factual claim, is irrelevant, and does not match the reference answer.",
+      "faithfulness_note": "The answer claims no information is available, which is unsupported by the retrieved context that contains relevant Cypher patterns.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 4 - Graph Analytics with Neo4j-6",
@@ -2636,11 +2799,13 @@
       "citation_video_valid": null,
       "citation_time_valid": null,
       "cited_videos": [],
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": true,
-      "note": "The answer does not provide any factual claim, is irrelevant to the question, and is incorrect; it also explicitly refuses to answer."
+      "note": "The answer does not provide any factual claim, is irrelevant to the question, and is incorrect; it also explicitly refuses to answer.",
+      "faithfulness_note": "The answer states it has no information, which contradicts the retrieved context that contains details about Neo4j, so the claim is unsupported.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "A-Quiz 4 - Graph Analytics with Neo4j-7",
@@ -2663,16 +2828,18 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "basic queries in neo4j.mp4",
         "path analytics with neo4j.mp4"
       ],
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly identifies MATCH as the Cypher command that launches a Neo4j database search, fully supported by the context and matching the reference answer."
+      "note": "The answer correctly identifies MATCH as the Cypher command that launches a Neo4j database search, fully supported by the context and matching the reference answer.",
+      "faithfulness_note": "The answer correctly identifies MATCH as the Cypher command used to perform searches, and the retrieved context contains multiple instances where MATCH is used to query the database, fully supporting the claim.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-biological networks.mp4:1",
@@ -2695,7 +2862,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.6666666666666666,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "biological networks.mp4",
         "graphs and big data 4 v's.mp4"
@@ -2711,11 +2878,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.95,
       "correctness": 0.95,
       "refused": false,
-      "note": "Answer aligns well with reference and context, covering both why graphs are used and the scalability issue."
+      "note": "Answer aligns well with reference and context, covering both why graphs are used and the scalability issue.",
+      "faithfulness_note": "All factual claims in the answer are supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-building a degree histogram.mp4:3",
@@ -2753,11 +2922,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer matches the reference and is fully supported by the retrieved context."
+      "note": "The answer matches the reference and is fully supported by the retrieved context.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved transcript.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-building a graph.mp4:3",
@@ -2780,7 +2951,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "building a graph.mp4"
       ],
@@ -2795,11 +2966,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference and is supported by the context."
+      "note": "The answer fully matches the reference and is supported by the context.",
+      "faithfulness_note": "All factual claims are directly supported by the context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-classification in spark.mp4:4",
@@ -2822,7 +2995,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "classification in spark.mp4"
       ],
@@ -2838,11 +3011,13 @@
       "recall@5": 0.5,
       "precision@10": 0.2,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference, is directly relevant, and all claims are supported by the context."
+      "note": "The answer fully matches the reference, is directly relevant, and all claims are supported by the context.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved transcript excerpts.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-data preparation.mp4:2",
@@ -2882,11 +3057,13 @@
       "recall@5": 1.0,
       "precision@10": 0.2,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly states scaling and dimensionality reduction, fully supported by the retrieved context and matching the reference answer."
+      "note": "The answer correctly states scaling and dimensionality reduction, fully supported by the retrieved context and matching the reference answer.",
+      "faithfulness_note": "Both claims—scaling and dimensionality reduction—are explicitly mentioned in the retrieved context, so the answer is fully supported.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-dimensionality reduction.mp4:1",
@@ -2924,11 +3101,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference, is directly relevant, and all claims are supported by the retrieved context."
+      "note": "The answer fully matches the reference, is directly relevant, and all claims are supported by the retrieved context.",
+      "faithfulness_note": "All factual claims are supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-djikstra algotrithm.mp4:1",
@@ -2951,7 +3130,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "djikstra algotrithm.mp4"
       ],
@@ -2966,11 +3145,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer exactly matches the reference and is fully supported by the retrieved context."
+      "note": "The answer exactly matches the reference and is fully supported by the retrieved context.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-evaluation of a decision tree in spark.mp4:2",
@@ -2993,7 +3174,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "evaluation of a decision tree in spark.mp4"
       ],
@@ -3008,11 +3189,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "All claims are fully supported, directly answer the question, and match the reference."
+      "note": "All claims are fully supported, directly answer the question, and match the reference.",
+      "faithfulness_note": "All numerical claims are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-exploring data using plots.mp4:3",
@@ -3035,7 +3218,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "exploring data using plots.mp4"
       ],
@@ -3050,11 +3233,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference, directly addresses the question, and is supported by the retrieved context."
+      "note": "The answer fully matches the reference, directly addresses the question, and is supported by the retrieved context.",
+      "faithfulness_note": "All factual claims about bar charts for categorical data and histograms for numeric data are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-feature selection.mp4:4",
@@ -3077,7 +3262,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.3333333333333333,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "feature selection.mp4",
         "machine learning overview.mp4"
@@ -3093,11 +3278,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference and is fully supported by the retrieved context."
+      "note": "The answer fully matches the reference and is fully supported by the retrieved context.",
+      "faithfulness_note": "All factual claims about feature selection’s goal and the importance of domain knowledge are directly supported by the retrieved transcripts.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-goal directed djikstra.mp4:0",
@@ -3135,11 +3322,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly names the variant and is fully supported by the context."
+      "note": "The answer correctly names the variant and is fully supported by the context.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved transcript.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-importing data into neo4j.mp4:0",
@@ -3177,11 +3366,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.9,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference and is supported by the transcript, with only minor extra detail about edges."
+      "note": "The answer fully matches the reference and is supported by the transcript, with only minor extra detail about edges.",
+      "faithfulness_note": "All factual claims are directly supported by the transcript.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-intro to graph.mp4:1",
@@ -3204,7 +3395,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "intro to graph.mp4"
       ],
@@ -3219,11 +3410,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer accurately lists Pregel and the user‑specified functions, fully supported by the context, and directly answers the question."
+      "note": "The answer accurately lists Pregel and the user‑specified functions, fully supported by the context, and directly answers the question.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context: Pregel is identified as GraphX’s BSP implementation, and the user-specified functions vprog, sendMessageF, combineF, and the optional iteration count are all described in the context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-joining graph datasets.mp4:2",
@@ -3261,11 +3454,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 0.8,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference and is supported by the retrieved context."
+      "note": "The answer fully matches the reference and is supported by the retrieved context.",
+      "faithfulness_note": "Most factual claims are supported by the transcript, but the statement that the airport name is used as the vertex ID is not explicitly confirmed in the context, lowering the score slightly.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-large scale graph processing.mp4:0",
@@ -3288,7 +3483,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "large scale graph processing.mp4"
       ],
@@ -3303,11 +3498,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer fully matches reference and is supported by context."
+      "note": "Answer fully matches reference and is supported by context.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-machine learning overview.mp4:1",
@@ -3345,11 +3542,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 0.75,
       "refused": false,
-      "note": "The answer is fully supported by the context and directly addresses the question, but it omits the reference’s mention of data quantity/quality, so it receives partial credit."
+      "note": "The answer is fully supported by the context and directly addresses the question, but it omits the reference’s mention of data quantity/quality, so it receives partial credit.",
+      "faithfulness_note": "Both claims—learning from many cat images and discovering important visual features without explicit rules—are directly supported by the transcript excerpts at 00:00 and 01:04.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-measuring graph evolution.mp4:2",
@@ -3387,11 +3586,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.95,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer correctly identifies the term 'burst', cites the supporting context, and directly answers the question."
+      "note": "The answer correctly identifies the term 'burst', cites the supporting context, and directly answers the question.",
+      "faithfulness_note": "All claims are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-modifying a graph with neo4j.mp4:0",
@@ -3429,11 +3630,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 0.67,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer is fully relevant and correct, but the claim about the relationship type FIANCÉ is not directly supported by the context, so faithfulness is slightly lower."
+      "note": "Answer is fully relevant and correct, but the claim about the relationship type FIANCÉ is not directly supported by the context, so faithfulness is slightly lower.",
+      "faithfulness_note": "Two of the three main claims are supported by the context; the claim that the relationship type is FIANCÉ is not directly supported, so the score is below 1.00.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-network connectedness and clustering components.mp4:4",
@@ -3471,11 +3674,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the retrieved context, directly addresses the question, and aligns with the reference answer."
+      "note": "The answer fully matches the retrieved context, directly addresses the question, and aligns with the reference answer.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved transcript excerpts.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-parallel programming.mp4:6",
@@ -3514,11 +3719,13 @@
       "recall@5": 1.0,
       "precision@10": 0.2,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference and is supported by the retrieved context."
+      "note": "The answer fully matches the reference and is supported by the retrieved context.",
+      "faithfulness_note": "All factual claims are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-plot degree histogram.mp4:1",
@@ -3557,11 +3764,13 @@
       "recall@5": 0.0,
       "precision@10": 0.0,
       "recall@10": 0.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 0.0,
       "refused": false,
-      "note": "The answer is fully supported by the context and directly addresses the question, but it contradicts the reference answer."
+      "note": "The answer is fully supported by the context and directly addresses the question, but it contradicts the reference answer.",
+      "faithfulness_note": "The answer correctly states 11 nodes, which is directly supported by the retrieved context from basic queries in neo4j.mp4.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-pregel.mp4:5",
@@ -3584,7 +3793,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "pregel.mp4"
       ],
@@ -3600,11 +3809,13 @@
       "recall@5": 1.0,
       "precision@10": 0.2,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer directly matches the reference and is fully supported by the retrieved context."
+      "note": "The answer directly matches the reference and is fully supported by the retrieved context.",
+      "faithfulness_note": "The answer accurately reflects the statement in the retrieved context that the merge operation boils down to computing the total summation of the partial edge‑summations from the vertex copies.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-using a validation set.mp4:2",
@@ -3642,11 +3853,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer fully matches the reference and is supported by the retrieved context."
+      "note": "Answer fully matches the reference and is supported by the retrieved context.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-why graphs.mp4:0",
@@ -3684,11 +3897,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference and is supported by the transcript."
+      "note": "The answer fully matches the reference and is supported by the transcript.",
+      "faithfulness_note": "The answer accurately reflects the transcript’s statement that only Facebook users can comment on a post.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-exploring data using plots.mp4:1",
@@ -3711,7 +3926,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "exploring data using plots.mp4"
       ],
@@ -3726,11 +3941,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "All claims are supported by the context, directly answer the question, and match the reference answer."
+      "note": "All claims are supported by the context, directly answer the question, and match the reference answer.",
+      "faithfulness_note": "All factual claims in the answer are supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-community analysis.mp4:0",
@@ -3753,7 +3970,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "community analysis.mp4"
       ],
@@ -3768,11 +3985,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer is fully faithful, relevant, and correct."
+      "note": "The answer is fully faithful, relevant, and correct.",
+      "faithfulness_note": "The answer accurately reflects the lecture's definition of a community.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-centrality analysis.mp4:4",
@@ -3795,7 +4014,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "centrality analysis.mp4"
       ],
@@ -3810,11 +4029,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer directly states node f, which is fully supported by the retrieved context, directly addresses the question, and matches the reference answer."
+      "note": "The answer directly states node f, which is fully supported by the retrieved context, directly addresses the question, and matches the reference answer.",
+      "faithfulness_note": "The answer correctly cites the retrieved context that recommends starting at node f for fastest reach, and the claim about its closeness centrality is supported by the same source.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-building a degree histogram.mp4:0",
@@ -3850,11 +4071,13 @@
       "recall@5": 0.0,
       "precision@10": 0.0,
       "recall@10": 0.0,
-      "faithfulness": null,
+      "faithfulness": 0.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": true,
-      "note": "The answer claims no information, which is unsupported, irrelevant, and incorrect."
+      "note": "The answer claims no information, which is unsupported, irrelevant, and incorrect.",
+      "faithfulness_note": "The answer claims no information is available, which is unsupported by the retrieved context that contains detailed graph statistics.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-joining graph datasets.mp4:5",
@@ -3892,11 +4115,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 0.95,
       "refused": false,
-      "note": "Answer is largely supported and directly addresses the question, but the mention of NA is not in the context, slightly reducing faithfulness."
+      "note": "Answer is largely supported and directly addresses the question, but the mention of NA is not in the context, slightly reducing faithfulness.",
+      "faithfulness_note": "The answer correctly states that airports without matching data (e.g., LA) show only the name and empty/NA fields for city and code, which is directly supported by the transcript excerpts at 05:41 and 07:05.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-parallel programming.mp4:7",
@@ -3934,11 +4159,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference, is directly relevant, and all claims are supported by the retrieved context."
+      "note": "The answer fully matches the reference, is directly relevant, and all claims are supported by the retrieved context.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context, including the stopping condition, voting to halt, and final readout of vertex IDs and values.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-handling missing values in knime.mp4:3",
@@ -3961,7 +4188,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "handling missing values in knime.mp4"
       ],
@@ -3976,11 +4203,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.9,
       "correctness": 0.0,
       "refused": false,
-      "note": "The answer’s claims are supported by the retrieved context, it directly addresses the question, but it gives the wrong number of observations compared to the reference answer."
+      "note": "The answer’s claims are supported by the retrieved context, it directly addresses the question, but it gives the wrong number of observations compared to the reference answer.",
+      "faithfulness_note": "All factual claims in the answer are supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-bidirectional djikstra.mp4:1",
@@ -4018,11 +4247,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "All claims are supported by the context, directly answer the question, and match the reference answer."
+      "note": "All claims are supported by the context, directly answer the question, and match the reference answer.",
+      "faithfulness_note": "Both factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-data preparation.mp4:0",
@@ -4045,7 +4276,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "data preparation.mp4"
       ],
@@ -4060,11 +4291,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer lists all and only the data quality issues from the reference and context, fully matching the question."
+      "note": "The answer lists all and only the data quality issues from the reference and context, fully matching the question.",
+      "faithfulness_note": "All listed data quality issues are explicitly mentioned in the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-association analysis in detail.mp4:3",
@@ -4087,7 +4320,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.6666666666666666,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "association analysis in detail.mp4"
       ],
@@ -4102,11 +4335,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer matches the reference and is fully supported by the context."
+      "note": "The answer matches the reference and is fully supported by the context.",
+      "faithfulness_note": "All factual claims are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-data exploration using spark.mp4:3",
@@ -4129,7 +4364,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.5,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "data exploration using spark.mp4"
       ],
@@ -4144,11 +4379,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer fully matches reference and is supported by context."
+      "note": "Answer fully matches reference and is supported by context.",
+      "faithfulness_note": "Both factual claims are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-goal and activities in machine learning process.mp4:7",
@@ -4187,11 +4424,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.85,
       "correctness": 0.9,
       "refused": false,
-      "note": "The answer is largely supported by the context and covers the key factors, but adds extra points not asked, slightly lowering relevancy and correctness."
+      "note": "The answer is largely supported by the context and covers the key factors, but adds extra points not asked, slightly lowering relevancy and correctness.",
+      "faithfulness_note": "All five factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-measuring graph evolution.mp4:0",
@@ -4229,11 +4468,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer accurately reflects the retrieved context and matches the reference answer."
+      "note": "The answer accurately reflects the retrieved context and matches the reference answer.",
+      "faithfulness_note": "Both factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-evaluation of a decision tree in knime.mp4:2",
@@ -4271,11 +4512,13 @@
       "recall@5": 0.0,
       "precision@10": 0.0,
       "recall@10": 0.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 0.0,
       "correctness": 0.0,
       "refused": false,
-      "note": "The answer’s claims about false negatives and positives are supported by the context, but it fails to address the question about specific case numbers."
+      "note": "The answer’s claims about false negatives and positives are supported by the context, but it fails to address the question about specific case numbers.",
+      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-parallel programming.mp4:2",
@@ -4298,7 +4541,7 @@
       ],
       "citation_present": 1.0,
       "citation_video_valid": 1.0,
-      "citation_time_valid": 0.0,
+      "citation_time_valid": 1.0,
       "cited_videos": [
         "parallel programming.mp4"
       ],
@@ -4313,11 +4556,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "Answer fully matches reference and is supported by context."
+      "note": "Answer fully matches reference and is supported by context.",
+      "faithfulness_note": "All claims are directly supported by the transcript.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "B-knime and spark ml.mp4:0",
@@ -4355,11 +4600,13 @@
       "recall@5": 1.0,
       "precision@10": 0.1,
       "recall@10": 1.0,
-      "faithfulness": null,
+      "faithfulness": 1.0,
       "relevancy": 1.0,
       "correctness": 1.0,
       "refused": false,
-      "note": "The answer fully matches the reference, is directly relevant, and all claims are supported by the context."
+      "note": "The answer fully matches the reference, is directly relevant, and all claims are supported by the context.",
+      "faithfulness_note": "Both claims—KNIME stands for Constance Information Miner and the K is silent—are directly supported by the transcript excerpts.",
+      "faithfulness_judge": "split"
     },
     {
       "id": "C-transformer",

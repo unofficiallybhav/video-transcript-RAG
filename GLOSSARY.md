@@ -51,14 +51,10 @@ to a passage that is itself wrong, and an answer that is right about the world b
 absent from the context is unfaithful.
 _Avoid_: groundedness, hallucination rate, factuality, answer support
 
-That the judge scoring it is never shown the reference answer belongs to the definition
-and is not an implementation detail. While faithfulness was scored in the same call as
-correctness, the judge could see the answer key and penalised answers that diverged from
-it, so the metric was partly measuring correctness — the thing it names itself as not
-measuring. The calibration experiment put that at 0.164 of movement against a
-pre-committed threshold of 0.10, and `golden/judge_calibration.json` is the record. A
-faithfulness value obtained with the reference answer visible is therefore a different
-metric, and is not comparable with one obtained without it.
+Reported for Tier A and Tier B. That the judge scoring it is never shown the reference
+answer belongs to the definition and is not an implementation detail: a value obtained
+with the reference answer visible is a different metric and is not comparable with one
+obtained without it. See `docs/adr/0002-faithfulness-judged-without-the-reference-answer.md`.
 
 **Citation validity**:
 Whether a citation an answer makes — a named video together with a timestamp, offered as

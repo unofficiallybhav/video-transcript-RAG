@@ -18,3 +18,4 @@ ingest.log
 eval.log
 calibrate.log
 evals/
+rejudge.log
