@@ -11,10 +11,10 @@ import pytest
 import evaluate
 
 
-def checkpoint_rows(a=30, b=20):
-    """Checkpoint-shaped rows: scored tier A and tier B questions, as results.jsonl has."""
+def checkpoint_rows(a=50, c=12):
+    """Checkpoint-shaped rows: scored questions, as results.jsonl has them."""
     rows = []
-    for tier, count in (("A", a), ("B", b)):
+    for tier, count in (("A", a), ("C", c)):
         for i in range(count):
             rows.append({
                 "id": f"tier{tier}-q{i:03d}",
@@ -32,11 +32,12 @@ def checkpoint_rows(a=30, b=20):
 
 # ----------------------------------------------------------------- the seeded sample
 
-def test_sample_is_twenty_tier_a_and_ten_tier_b():
+def test_sample_is_thirty_tier_a_questions():
+    """The strata follow the surviving tiers: tier C's ground truth carries no score
+    for the judge to disagree with itself about, so calibration draws from tier A."""
     sample = evaluate.calibration_sample(checkpoint_rows())
     assert len(sample) == 30
-    assert sum(1 for r in sample if r["tier"] == "A") == 20
-    assert sum(1 for r in sample if r["tier"] == "B") == 10
+    assert sum(1 for r in sample if r["tier"] == "A") == 30
 
 
 def test_sample_is_reproducible_from_the_seed():
@@ -134,7 +135,7 @@ def judged(qid, which, faith, relevancy=0.9, correctness=0.7):
 
 
 def test_between_run_difference_is_the_mean_absolute_gap_per_metric():
-    baseline = [dict(r, faithfulness=0.80) for r in checkpoint_rows(a=2, b=0)]
+    baseline = [dict(r, faithfulness=0.80) for r in checkpoint_rows(a=2, c=0)]
     results = [judged("tierA-q000", "rerun", 0.80), judged("tierA-q001", "rerun", 0.80),
                judged("tierA-q000", "rerun_2", 1.00), judged("tierA-q001", "rerun_2", 0.80)]
     summary = evaluate.calibration_summary(baseline, results)
@@ -153,7 +154,7 @@ def test_between_run_spread_ignores_the_stored_score_and_reports_its_drift_apart
     carries provider-side model drift as well, so it is reported separately and is not
     allowed to move the verdict.
     """
-    baseline = [dict(r, faithfulness=0.20) for r in checkpoint_rows(a=2, b=0)]
+    baseline = [dict(r, faithfulness=0.20) for r in checkpoint_rows(a=2, c=0)]
     results = [judged("tierA-q000", "rerun", 0.80), judged("tierA-q001", "rerun", 0.80),
                judged("tierA-q000", "rerun_2", 0.80), judged("tierA-q001", "rerun_2", 0.80)]
     summary = evaluate.calibration_summary(baseline, results)
@@ -165,7 +166,7 @@ def test_between_run_spread_ignores_the_stored_score_and_reports_its_drift_apart
 
 
 def test_a_mean_difference_exactly_at_the_threshold_does_not_retire_two_decimals():
-    baseline = [dict(r, faithfulness=0.80) for r in checkpoint_rows(a=2, b=0)]
+    baseline = [dict(r, faithfulness=0.80) for r in checkpoint_rows(a=2, c=0)]
     results = [judged("tierA-q000", "rerun", 0.80), judged("tierA-q001", "rerun", 0.80),
                judged("tierA-q000", "rerun_2", 1.00), judged("tierA-q001", "rerun_2", 0.80)]
     outcome = evaluate.calibration_summary(baseline, results)["outcomes"][0]
@@ -174,7 +175,7 @@ def test_a_mean_difference_exactly_at_the_threshold_does_not_retire_two_decimals
 
 
 def test_a_mean_difference_above_the_threshold_retires_two_decimals():
-    baseline = [dict(r, faithfulness=0.80) for r in checkpoint_rows(a=2, b=0)]
+    baseline = [dict(r, faithfulness=0.80) for r in checkpoint_rows(a=2, c=0)]
     results = [judged("tierA-q000", "rerun", 0.80), judged("tierA-q001", "rerun", 0.80),
                judged("tierA-q000", "rerun_2", 0.50), judged("tierA-q001", "rerun_2", 0.80)]
     outcome = evaluate.calibration_summary(baseline, results)["outcomes"][0]
@@ -185,7 +186,7 @@ def test_a_mean_difference_above_the_threshold_retires_two_decimals():
 
 
 def test_faithfulness_shift_without_the_reference_is_measured_against_the_rerun():
-    baseline = [dict(r, faithfulness=0.80) for r in checkpoint_rows(a=2, b=0)]
+    baseline = [dict(r, faithfulness=0.80) for r in checkpoint_rows(a=2, c=0)]
     results = [judged("tierA-q000", "rerun", 0.80), judged("tierA-q001", "rerun", 0.80),
                judged("tierA-q000", "no_reference", 0.50),
                judged("tierA-q001", "no_reference", 0.80)]
@@ -199,7 +200,7 @@ def test_faithfulness_shift_without_the_reference_is_measured_against_the_rerun(
 
 
 def test_the_thresholds_are_recorded_as_pre_committed_either_way():
-    baseline = [dict(r, faithfulness=0.80) for r in checkpoint_rows(a=2, b=0)]
+    baseline = [dict(r, faithfulness=0.80) for r in checkpoint_rows(a=2, c=0)]
     results = [judged("tierA-q000", "rerun", 0.80), judged("tierA-q001", "rerun", 0.80),
                judged("tierA-q000", "no_reference", 0.80),
                judged("tierA-q001", "no_reference", 0.80)]
@@ -246,7 +247,7 @@ def calibration_workspace(monkeypatch, tmp_path, rows):
 
 def test_calibrate_judges_the_sample_three_times_and_writes_its_own_artifact(
         monkeypatch, tmp_path):
-    rows = checkpoint_rows(a=25, b=15)
+    rows = checkpoint_rows(a=40, c=15)
     golden_dir = calibration_workspace(monkeypatch, tmp_path, rows)
     fake = stub_judge({"faithfulness": 0.8, "relevancy": 0.9, "correctness": 0.7,
                        "refused": False, "note": "stub"})
@@ -264,7 +265,7 @@ def test_calibrate_judges_the_sample_three_times_and_writes_its_own_artifact(
 
 
 def test_calibrate_leaves_the_main_report_untouched(monkeypatch, tmp_path):
-    rows = checkpoint_rows(a=25, b=15)
+    rows = checkpoint_rows(a=40, c=15)
     golden_dir = calibration_workspace(monkeypatch, tmp_path, rows)
     evaluate.calibrate(complete_fn=stub_judge({"faithfulness": 0.8, "relevancy": 0.9,
                                                "correctness": 0.7, "refused": False}))
@@ -273,7 +274,7 @@ def test_calibrate_leaves_the_main_report_untouched(monkeypatch, tmp_path):
 
 
 def test_calibrate_resumes_after_the_daily_limit_without_rejudging(monkeypatch, tmp_path):
-    rows = checkpoint_rows(a=25, b=15)
+    rows = checkpoint_rows(a=40, c=15)
     golden_dir = calibration_workspace(monkeypatch, tmp_path, rows)
 
     good = stub_judge({"faithfulness": 0.8, "relevancy": 0.9, "correctness": 0.7,
@@ -308,7 +309,6 @@ def test_sample_is_reproducible_from_the_real_checkpoint(checkpoint):
     """The 30 questions the real run will judge, derived without any provider call."""
     rows = checkpoint
     sample = evaluate.calibration_sample(rows)
-    assert sum(1 for r in sample if r["tier"] == "A") == 20
-    assert sum(1 for r in sample if r["tier"] == "B") == 10
+    assert sum(1 for r in sample if r["tier"] == "A") == 30
     assert [r["id"] for r in sample] == [
         r["id"] for r in evaluate.calibration_sample(list(reversed(rows)))]

@@ -6,14 +6,17 @@ and generation path and scores each tier on what that tier's ground truth can su
   Tier A (quiz questions, human answer keys)
       correctness, faithfulness, relevancy, citation accuracy
       (faithfulness is judged by its own call, which is never shown the answer key)
-  Tier B (questions generated from one chunk each, so gold labels are exact)
-      precision@k, recall@k, plus the generation metrics as secondary
   Tier C (questions the corpus cannot answer, verified absent)
       refusal rate
 
-Tier metrics are reported separately and never averaged: tier B's retrieval numbers are
-exact but its questions are synthetic, tier A's questions are real but have no chunk
-labels, and averaging would hide both facts.
+Tier metrics are reported separately and never averaged: refusing is correct on tier C
+and a defect on tier A, so a blended number would cancel the two against each other.
+
+There are no retrieval metrics. The tier that carried them generated its own questions
+from the chunk that then served as their gold label, and a human review retired it; see
+`docs/adr/0003-retiring-the-generated-retrieval-tier.md`. The precision and recall
+helpers below are kept and are tier-agnostic: they score any row that carries
+`gold_chunks`, and hand-labelling those onto tier A is the work that restores them.
 
   uv run evaluate.py run         score the pipeline, write golden/report.{json,md}
                                  resumable: rerun it after a daily limit to continue
@@ -24,8 +27,6 @@ labels, and averaging would hide both facts.
   uv run evaluate.py rejudge     re-score the checkpointed answers with the split
                                  judge call, faithfulness judged without the reference
                                  answer: no new answers, resumable after a daily limit
-  uv run evaluate.py spotcheck   emit generated tier B questions for human review
-  uv run evaluate.py review      summarise the spot-check verdicts
   uv run evaluate.py calibrate   re-judge a seeded sample twice to put error bars on
                                  the judge's scores, write golden/judge_calibration.json
                                  resumable: rerun it after a daily limit to continue
@@ -43,7 +44,6 @@ from llm import DailyLimitReached, complete, extract_json
 GOLDEN_DIR = Path("golden")
 REPORT_JSON = GOLDEN_DIR / "report.json"
 REPORT_MD = GOLDEN_DIR / "report.md"
-SPOTCHECK_MD = GOLDEN_DIR / "spotcheck.md"
 # each scored question is appended here as it finishes, so hitting the daily token limit
 # costs nothing: the next run skips what is already done
 RESULTS_PATH = GOLDEN_DIR / "results.jsonl"
@@ -53,14 +53,16 @@ RETRIEVE_K = max(K_VALUES)
 # the deployed chat path asks for 5 chunks, so generation is scored on 5
 GENERATION_K = 5
 JUDGE_MODEL = "openai/gpt-oss-20b"
-SPOTCHECK_SIZE = 15
-SPOTCHECK_SEED = 7
 
 # --- judge calibration (issue #8) -------------------------------------------------
 # A stratified sample of the already-scored questions, re-judged to put error bars on
 # the judge-derived scores. Seed and sizes are constants so the sample is reproducible.
 CALIBRATION_SEED = 11
-CALIBRATION_STRATA = (("A", 20), ("B", 10))
+# Tier A only since tier B was retired. `golden/judge_calibration.json` was measured
+# when the strata were (("A", 20), ("B", 10)) and is NOT regenerated: it is the record
+# of the experiment #9 acted on, cited by name in ADR 0002, the report's provenance note
+# and the glossary. A fresh run under these strata would be a different measurement.
+CALIBRATION_STRATA = (("A", 30),)
 CALIBRATION_PATH = GOLDEN_DIR / "judge_calibration.json"
 # one line per (question, pass) as it finishes, so a daily limit costs no re-judging
 CALIBRATION_RAW_PATH = GOLDEN_DIR / "judge_calibration.jsonl"
@@ -648,27 +650,9 @@ def drop_superseded_faithfulness(rows):
     return [{**r, "faithfulness": None} if r["id"] in stale else r for r in rows], len(stale)
 
 
-def reviewed_tier_b():
-    """The human verdicts on tier B's generated questions, if the sheet has been filled in.
-
-    Read rather than restated, so the rejection rate the report carries is the one in
-    `golden/spotcheck.md` and cannot drift from it. A sheet that cannot be parsed is
-    reported as no review at all: `review` is the stage whose job is to be strict about
-    the marks, and the report should not refuse to build over a stray character.
-    """
-    if not SPOTCHECK_MD.exists():
-        return None
-    try:
-        verdicts = spotcheck_verdicts(SPOTCHECK_MD.read_text(encoding="utf-8"))
-    except ValueError:
-        return None
-    return review_counts(verdicts) if verdicts else None
-
-
 def write_report(results):
     results, superseded = drop_superseded_faithfulness(results)
-    report = summarise(results, superseded_faithfulness=superseded,
-                       tier_b_review=reviewed_tier_b())
+    report = summarise(results, superseded_faithfulness=superseded)
     GOLDEN_DIR.mkdir(exist_ok=True)
     REPORT_JSON.write_text(
         json.dumps({"summary": report, "results": results}, indent=2, ensure_ascii=False),
@@ -691,24 +675,14 @@ def tier_c_block(rows):
     return out
 
 
-def summarise(results, superseded_faithfulness=0, tier_b_review=None):
-    def block(rows, retrieval=False, answerable_refusal=False):
+def summarise(results, superseded_faithfulness=0):
+    def block(rows, answerable_refusal=False):
         # An empty tier reports the one thing that is true of it — that it holds no
         # questions — rather than nothing at all, so every block in this summary has the
         # same shape and the renderer never has to guess whether `questions` is there.
         if not rows:
             return {"questions": 0}
         out = {"questions": len(rows)}
-        if retrieval:
-            for k in K_VALUES:
-                record_with_denominator(out, f"precision@{k}",
-                    [r.get(f"precision@{k}") for r in rows])
-                # precision@k cannot exceed len(gold)/k, and most tier B questions have a
-                # single gold chunk, so the raw number is meaningless without its ceiling
-                record_with_denominator(out, f"precision@{k}_max",
-                    [min(1.0, len(r.get("gold_chunks", [])) / k) for r in rows])
-                record_with_denominator(out, f"recall@{k}",
-                    [r.get(f"recall@{k}") for r in rows])
         for metric in ("faithfulness", "relevancy", "correctness",
                        "citation_present", "citation_video_valid", "citation_time_valid"):
             record_with_denominator(out, metric, [r.get(metric) for r in rows])
@@ -723,7 +697,6 @@ def summarise(results, superseded_faithfulness=0, tier_b_review=None):
         return out
 
     tier_a = [r for r in results if r["tier"] == "A"]
-    tier_b = [r for r in results if r["tier"] == "B"]
     tier_c = [r for r in results if r["tier"] == "C"]
 
     return {
@@ -736,8 +709,6 @@ def summarise(results, superseded_faithfulness=0, tier_b_review=None):
             for course in sorted({r["course"] for r in tier_a})
         },
         "tier_a_hands_on": block([r for r in tier_a if r["hands_on"]]),
-        "tier_b": block(tier_b, retrieval=True, answerable_refusal=True),
-        "tier_b_review": tier_b_review,
         "tier_c": tier_c_block(tier_c),
         "superseded_faithfulness": superseded_faithfulness,
         "unscored": sum(1 for r in results
@@ -762,6 +733,9 @@ def table(block, keys):
 
 GENERATION_METRICS = ("faithfulness", "relevancy", "correctness",
                       "citation_present", "citation_video_valid", "citation_time_valid")
+# Nothing renders these while no tier carries gold chunks. Kept rather than deleted and
+# restored: they describe the shape of a retrieval table, which hand-labelling tier A
+# does not change.
 RETRIEVAL_METRICS = tuple(
     name for k in K_VALUES
     for name in (f"precision@{k}", f"precision@{k}_max", f"recall@{k}")
@@ -880,48 +854,36 @@ def render_markdown(summary):
                       f"correctness {hands_on.get('correctness')} over "
                       f"{hands_on.get('correctness_n')} of them."]
 
-    review = summary.get("tier_b_review")
-    lines += ["", "## Tier B — generated from single chunks, exact gold labels", "",
-              "Retrieval metrics are exact here. The questions are synthetic, so read "
-              "them as a retrieval measurement, not as user behaviour.", ""]
-    if review:
-        lines += [
-            f"Credibility: a human reviewed {review['reviewed']} of these questions "
-            f"against the passage each was generated from and rejected "
-            f"{review['rejected']} as not answerable from it, so "
-            f"{review['rejected_share']:.0%} of a reviewed sample did not hold up. Read "
-            f"every figure in this tier as carrying that error rate. The verdicts are in "
-            f"`golden/spotcheck.md`; no model took part in them, per "
-            f"`docs/adr/0001-three-tier-golden-dataset.md`."
-            + (f" A further {review['hands_on']} are sound but ask about a hands-on "
-               f"exercise rather than lecture content, which is the pipeline's weakest "
-               f"area on tier A." if review["hands_on"] else ""),
-            "",
-        ]
-    else:
-        lines += ["Credibility: the human review of these generated questions has not "
-                  "been run, so every figure in this tier assumes all of them are sound. "
-                  "Run `uv run evaluate.py spotcheck`, mark the sheet, then `review`.", ""]
     lines += [
-              f"{summary['tier_b']['questions']} questions in the tier; each value "
-              f"below covers the ones in its own `questions` column.", "",
-              "`precision@k_max` is the ceiling that k and the number of gold chunks "
-              "allow: a question with one gold chunk can score at most 1/k, so compare "
-              "each precision against its own maximum, not against 1.0.", ""]
-    lines += table(summary["tier_b"], RETRIEVAL_METRICS)
-    lines += ["", "Generation metrics on the same questions:", ""]
-    lines += table(summary["tier_b"], GENERATION_METRICS)
+        "", "## Retrieval — unmeasured", "",
+        "There are no retrieval figures in this report. `precision@k` and `recall@k` "
+        "need chunk-level labels, and the only tier that carried them was tier B, whose "
+        "questions were generated from the chunk that then served as their own gold "
+        "label. A human review of 15 of those 40 questions rejected 2 as not answerable "
+        "from the passage they were built from, and the tier was retired rather than "
+        "regenerated: no threshold on lexical overlap separated the rejected questions "
+        "from the sound ones. "
+        "`docs/adr/0003-retiring-the-generated-retrieval-tier.md` records that decision "
+        "and `golden/spotcheck.md` keeps the verdicts it rested on.",
+        "",
+        "This is a gap, not a result. Retrieval runs on every question in this report — "
+        "each answer below was generated from the top "
+        f"{summary['generation_k']} chunks — and nothing here checks whether those were "
+        "the right chunks. Until gold chunks are labelled by hand onto tier A's quiz "
+        "questions, no claim about retrieval quality is supported either way.",
+        "",
+    ]
 
-    tier_a, tier_b, tier_c = (summary["tier_a"], summary["tier_b"], summary["tier_c"])
+    tier_a, tier_c = (summary["tier_a"], summary["tier_c"])
     lines += [
-        "", "## Refusal — all three tiers together", "",
+        "", "## Refusal — both tiers together", "",
         "An answerable refusal is a declined answer to a question whose tier's ground "
         "truth says the corpus can answer it, so it is a failure of the same pipeline "
         "whose refusals on tier C are a success. Both rates are derived from the "
         "refusal verdict the judge already recorded for each answer; nothing was judged "
         "again to obtain them.",
         "",
-        "Read the three rows as one measurement. A pipeline that declined every "
+        "Read the two rows as one measurement. A pipeline that declined every "
         "question would score 1.0 on tier C and look perfect there, so tier C's "
         "refusal rate is not a success on its own; nor is a low answerable refusal rate "
         "on a pipeline that never declines anything.",
@@ -931,9 +893,6 @@ def render_markdown(summary):
         f"| tier A | the corpus can answer | answerable refusal rate "
         f"| {tier_a.get('answerable_refusal_rate')} "
         f"| {tier_a.get('answerable_refusal_rate_n')} |",
-        f"| tier B | the corpus can answer | answerable refusal rate "
-        f"| {tier_b.get('answerable_refusal_rate')} "
-        f"| {tier_b.get('answerable_refusal_rate_n')} |",
         f"| tier C | no correct answer exists | refusal rate "
         f"| {tier_c.get('refusal_rate')} | {tier_c.get('refusal_rate_n')} |",
         "",
@@ -952,137 +911,6 @@ def render_markdown(summary):
     if summary["unscored"]:
         lines += ["", f"{summary['unscored']} answers could not be scored by the judge."]
     return "\n".join(lines) + "\n"
-
-
-def spotcheck():
-    """Writes the generated tier B questions out for a human to confirm or reject."""
-    golden = [q for q in load_golden() if q["tier"] == "B"]
-    if not golden:
-        sys.exit("no tier B questions found; run build_golden.py tierb then build")
-
-    by_id = {c["chunk_id"]: c for c in load_chunks()}
-    random.seed(SPOTCHECK_SEED)
-    sample = random.sample(golden, min(SPOTCHECK_SIZE, len(golden)))
-
-    lines = [
-        "# Tier B question review",
-        "",
-        "These questions were generated from the passage shown beneath each one.",
-        "Mark each one, then run `uv run evaluate.py review`:",
-        "",
-        "  - [x]  answerable from its passage",
-        "  - [ ]  NOT answerable from its passage, or merely copies its wording",
-        "  - [?]  answerable, but asks about a hands-on exercise or a worked example",
-        "         rather than lecture content",
-        "",
-        "A `?` is sound and does not count against tier B's credibility. It is counted",
-        "separately because a hands-on question measures something the course teaches by",
-        "demonstration, and hands-on performance is already known to be the pipeline's",
-        "weakest area.",
-        "",
-    ]
-    for q in sample:
-        chunk = by_id.get(q["source_chunk"])
-        lines += [
-            f"- [x] `{q['id']}` (jaccard {q['jaccard']}, bm25 rank {q['bm25_rank']})",
-            f"    - **Q:** {q['question']}",
-            f"    - **A:** {q['answer']}",
-            f"    - **Source passage ({q['source_chunk']}):** "
-            f"{chunk['text'] if chunk else '(chunk missing)'}",
-            "",
-        ]
-
-    GOLDEN_DIR.mkdir(exist_ok=True)
-    SPOTCHECK_MD.write_text("\n".join(lines), encoding="utf-8")
-    print(f"Wrote {SPOTCHECK_MD}: {len(sample)} generated questions to review")
-
-
-# The mark is read, never written: ADR 0001 keeps a model out of every labelling
-# decision, and whether a generated question is sound is one. `?` says what a question is
-# about rather than whether it holds up, so it is sound and is counted apart.
-# An empty `[]` is the same untick as `[ ]`: editors strip the space out, and reading it
-# as an unknown mark would stop the stage over whitespace.
-CHECKBOX_RE = re.compile(r"^- \[(.?)\] `([^`]+)`")
-SPOTCHECK_MARKS = {"x": "accepted", " ": "rejected", "": "rejected", "?": "hands_on"}
-
-
-def spotcheck_verdicts(sheet):
-    """The reviewer's mark per question id, read back from the sheet.
-
-    An unrecognised mark raises rather than being skipped. The sheet is the only copy of
-    a human's verdicts, and a mark this function does not know would otherwise drop out
-    of the denominator with nothing said about it.
-    """
-    verdicts = {}
-    unknown = []
-    for line in sheet.splitlines():
-        found = CHECKBOX_RE.match(line)
-        if not found:
-            continue
-        mark, qid = found.group(1).lower(), found.group(2)
-        if mark not in SPOTCHECK_MARKS:
-            unknown.append(f"{qid} marked [{found.group(1)}]")
-            continue
-        verdicts[qid] = SPOTCHECK_MARKS[mark]
-    if unknown:
-        raise ValueError(
-            "the spot-check sheet carries marks this stage does not recognise, so the "
-            "review would be taken over fewer questions than were reviewed: "
-            + "; ".join(unknown)
-            + f". Use one of {sorted(SPOTCHECK_MARKS)}.")
-    return verdicts
-
-
-def review_counts(verdicts):
-    """The review as counts: how many held up, how many did not, how many are hands-on.
-
-    `hands_on` is a subset of `accepted`, not a third outcome beside it, so the rejected
-    share is the error rate tier B's figures carry and the hands-on count is a fact about
-    what the sample is made of.
-    """
-    rejected = [qid for qid, mark in verdicts.items() if mark == "rejected"]
-    hands_on = [qid for qid, mark in verdicts.items() if mark == "hands_on"]
-    return {
-        "reviewed": len(verdicts),
-        "accepted": len(verdicts) - len(rejected),
-        "rejected": len(rejected),
-        "hands_on": len(hands_on),
-        "rejected_share": len(rejected) / len(verdicts) if verdicts else None,
-        "rejected_ids": sorted(rejected),
-        "hands_on_ids": sorted(hands_on),
-    }
-
-
-def review():
-    """Reports how many reviewed tier B questions a human rejected."""
-    if not SPOTCHECK_MD.exists():
-        sys.exit(f"{SPOTCHECK_MD} not found; run spotcheck first")
-
-    try:
-        verdicts = spotcheck_verdicts(SPOTCHECK_MD.read_text(encoding="utf-8"))
-    except ValueError as e:
-        sys.exit(str(e))
-    if not verdicts:
-        sys.exit("no checkboxes found in the spot-check sheet")
-
-    counts = review_counts(verdicts)
-    print(f"reviewed: {counts['reviewed']}")
-    print(f"accepted: {counts['accepted']}")
-    print(f"rejected: {counts['rejected']}")
-    for qid in counts["rejected_ids"]:
-        print(f"  {qid}")
-    if counts["hands_on"]:
-        print(f"\nof the accepted, {counts['hands_on']} ask about a hands-on exercise or "
-              f"a worked example rather than lecture content:")
-        for qid in counts["hands_on_ids"]:
-            print(f"  {qid}")
-        print("These are sound questions and are not counted as rejections. They do bear "
-              "on how tier B's figures read, because hands-on questions are the "
-              "pipeline's weakest area on tier A.")
-    if counts["rejected"]:
-        print(f"\n{counts['rejected_share']:.0%} of the sample was rejected. Tier B "
-              f"metrics carry that error rate; regenerate those items or tighten "
-              f"MAX_JACCARD if it is high.")
 
 
 # ------------------------------------------------- judge calibration (issue #8)
@@ -1407,10 +1235,6 @@ if __name__ == "__main__":
     stage = sys.argv[1] if len(sys.argv) > 1 else "run"
     if stage == "run":
         run()
-    elif stage == "spotcheck":
-        spotcheck()
-    elif stage == "review":
-        review()
     elif stage == "calibrate":
         calibrate()
     elif stage == "report":
@@ -1425,4 +1249,4 @@ if __name__ == "__main__":
         rejudge()
     else:
         sys.exit("usage: evaluate.py "
-                 "[run|report|rescore|rejudge|spotcheck|review|calibrate]")
+                 "[run|report|rescore|rejudge|calibrate]")

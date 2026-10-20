@@ -1,6 +1,18 @@
 # Three tiers of ground truth, reported separately, with no model in a labelling decision
 
-Status: accepted
+Status: accepted, amended by
+[0003](0003-retiring-the-generated-retrieval-tier.md)
+
+> **Amendment, 2026-10-20.** Tier B was retired. The review this record required (see
+> Consequences) found that generating a question from a chunk guarantees a correct label
+> while guaranteeing nothing about whether the question is answerable, so *construction*
+> is no longer an admissible label source here. Two tiers remain, A and C, and retrieval
+> is unmeasured until gold chunks are hand-labelled onto Tier A.
+>
+> Everything else below stands, and the rule in the next paragraph is what forced the
+> retirement rather than being weakened by it. The text is left as it was written: it
+> records what was decided at the time, and "Why three tiers rather than one dataset"
+> remains the reasoning that any future tier has to answer to.
 
 ## Decision
 

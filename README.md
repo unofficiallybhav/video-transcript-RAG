@@ -130,18 +130,21 @@ layer that cannot tell a repaired ruler from a changed pipeline will report nois
 progress. Three ideas follow, and they are most of the design.
 
 **Ground truth is partitioned by what kind of ground truth it is.** Tier A is 83 course
-quiz questions with answer keys the course authors wrote. Tier B is 40 questions each
-generated from one known chunk, so retrieval has an exact target. Tier C is 12 questions
-on topics verified absent from the corpus, where declining to answer is the only correct
+quiz questions with answer keys the course authors wrote. Tier C is 12 questions on
+topics verified absent from the corpus, where declining to answer is the only correct
 behaviour. Each tier is scored only on what its own ground truth supports, and the tiers
 are never averaged — a blended number would cancel opposing failures, since refusing is
-correct on Tier C and a defect on the other two.
+correct on Tier C and a defect on Tier A.
 
 **No model participates in a labelling decision.** Not in deciding a question's gold
-chunk, not in deciding whether a question is answerable. Where a label needs a judgement,
-a human makes it: `golden/spotcheck.md` holds a human's verdicts on a sample of the
-generated Tier B questions, and 13% of that sample was rejected, so Tier B's retrieval
-figures are read as carrying that error rate.
+chunk, not in deciding whether a question is answerable. A third tier used to generate
+its own questions from the chunk that then served as their gold label, which made the
+label exact and the question unverified. A human reviewed 15 of its 40 questions and
+rejected 2, and the tier was retired rather than tightened — no threshold on lexical
+overlap separated the rejected questions from the sound ones. Its verdicts survive in
+`golden/spotcheck.md`, and
+[`docs/adr/0003-retiring-the-generated-retrieval-tier.md`](docs/adr/0003-retiring-the-generated-retrieval-tier.md)
+records the decision.
 
 **A measurement change is never plotted as a trend.** Twice now a metric has been found
 invalid and repaired — the citation check, then faithfulness. Both times the superseded
@@ -175,7 +178,8 @@ was to the metric's validity, not its value.
 | | |
 |---|---|
 | [`golden/report.md`](golden/report.md) | the current measurement, every value carrying the number of questions it was taken over |
-| [`docs/adr/0001-three-tier-golden-dataset.md`](docs/adr/0001-three-tier-golden-dataset.md) | why there are three tiers, why their metrics are never averaged, and why no model takes part in a labelling decision |
+| [`docs/adr/0001-three-tier-golden-dataset.md`](docs/adr/0001-three-tier-golden-dataset.md) | why ground truth is partitioned at all, why tier metrics are never averaged, and why no model takes part in a labelling decision |
+| [`docs/adr/0003-retiring-the-generated-retrieval-tier.md`](docs/adr/0003-retiring-the-generated-retrieval-tier.md) | why the tier that measured retrieval was retired, and why no threshold would have saved it |
 | [`docs/adr/0002-faithfulness-judged-without-the-reference-answer.md`](docs/adr/0002-faithfulness-judged-without-the-reference-answer.md) | the pre-registered experiment above |
 | [`golden/judge_calibration.json`](golden/judge_calibration.json) | that experiment's raw result, thresholds and all |
 | [`GLOSSARY.md`](GLOSSARY.md) | the project's own vocabulary, including which words it refuses to use for which metric |
@@ -191,29 +195,24 @@ top 5 chunks.
 |---|---|---|---|---|---|
 | 0.761 | 0.787 | 0.792 | 0.831 | 0.936 (of 70) | **0.157** |
 
-**Tier B** — 40 questions, exact chunk labels
-
-| recall@1 | recall@5 | recall@10 | precision@5 (max 0.225) | correctness | faithfulness |
-|---|---|---|---|---|---|
-| 0.588 | 0.912 | 0.925 | 0.200 | 0.889 | 0.962 |
-
 **Tier C** — 12 unanswerable questions: refusal rate **1.0**. Read beside Tier A's
 answerable refusal rate, never on its own — a pipeline that declined everything would
 score 1.0 here and look perfect.
+
+**Retrieval — unmeasured.** The tier that carried `recall@k` and `precision@k` was
+retired, so nothing currently checks whether the top 5 chunks were the right ones. This
+is a gap, not a result: until gold chunks are hand-labelled onto Tier A's quiz questions,
+no claim about retrieval quality is supported in either direction.
 
 ## What is weak, stated plainly
 
 - **15.7% of answerable Tier A questions were refused.** Every one scored correctness 0.0,
   so without naming this rate the failure hides inside a low correctness score.
 - **Hands-on questions are the worst area**: the 10 Tier A questions about clicking through
-  KNIME or Spark score 0.40 correctness, and 6 of 10 were refused. 4 of the 15 reviewed
-  Tier B questions are hands-on too, which bears on how Tier B's stronger figures read.
+  KNIME or Spark score 0.40 correctness, and 6 of 10 were refused.
 - **Machine learning trails graph analytics** on correctness, 0.733 against 0.81.
-- **3 Tier B gold chunks are never retrieved at any k**, so recall@10 of 0.925 has a
-  ceiling below 1.0 that is a property of the index, not of k.
-- **Tier B's questions are synthetic.** Its retrieval numbers are exact and its questions
-  are not user behaviour. 13% of a reviewed sample was rejected outright, which is why the
-  tier is being retired in favour of hand-labelled gold chunks on Tier A.
+- **Retrieval is unmeasured**, and it is the half of a RAG pipeline this report says
+  nothing about. Restoring it is the next piece of work.
 - **Retrieval is dense-only.** There is no hybrid or lexical fallback and no reranking.
 
 ## Running the evaluation
@@ -222,7 +221,7 @@ The offline stages need no network, no API credentials and no GPU. A clone can r
 the whole report from the stored run:
 
 ```sh
-uv run pytest                  # 75 tests, no network, no credentials
+uv run pytest                  # 64 tests, no network, no credentials
 uv run evaluate.py rescore     # re-derive the judge-free metrics and rewrite the report
 ```
 
@@ -253,10 +252,10 @@ video_transcript_rag.py     the pipeline: ingestion, transcription, chunking,
                             embedding, indexing, retrieval, generation, chat
 llm.py                      one rate-limit-paced provider call, shared by both layers
 evaluate.py                 the evaluation layer: scoring, judging, reporting, calibration
-build_golden.py             builds the three tiers of the golden dataset
+build_golden.py             builds the tiers of the golden dataset
 corpus.json                 the 83 ingested videos, ordered as they were first walked
 cache/                      83 Whisper transcripts, one per video
 golden/                     the dataset, the stored run, the reports, the calibration record
 docs/adr/                   decisions whose reasoning is not recoverable from the code
-tests/                      75 offline tests
+tests/                      64 offline tests
 ```

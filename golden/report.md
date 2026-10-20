@@ -1,6 +1,6 @@
 # Offline evaluation report
 
-Generated 2026-10-20T14:34:13 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
+Generated 2026-10-20T15:27:54 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
 
 Faithfulness, relevancy and correctness are judge scores on a continuous 0.00-1.00 scale; each question's per-score reasoning is kept in the `note` field of `report.json`.
 
@@ -44,52 +44,22 @@ Correctness is anchored to the course authors' own answer key. No chunk labels, 
 
 Hands-on questions (10 of tier A) ask about clicking through KNIME or Spark rather than lecture content: correctness 0.4 over 10 of them.
 
-## Tier B — generated from single chunks, exact gold labels
+## Retrieval — unmeasured
 
-Retrieval metrics are exact here. The questions are synthetic, so read them as a retrieval measurement, not as user behaviour.
+There are no retrieval figures in this report. `precision@k` and `recall@k` need chunk-level labels, and the only tier that carried them was tier B, whose questions were generated from the chunk that then served as their own gold label. A human review of 15 of those 40 questions rejected 2 as not answerable from the passage they were built from, and the tier was retired rather than regenerated: no threshold on lexical overlap separated the rejected questions from the sound ones. `docs/adr/0003-retiring-the-generated-retrieval-tier.md` records that decision and `golden/spotcheck.md` keeps the verdicts it rested on.
 
-Credibility: a human reviewed 15 of these questions against the passage each was generated from and rejected 2 as not answerable from it, so 13% of a reviewed sample did not hold up. Read every figure in this tier as carrying that error rate. The verdicts are in `golden/spotcheck.md`; no model took part in them, per `docs/adr/0001-three-tier-golden-dataset.md`. A further 4 are sound but ask about a hands-on exercise rather than lecture content, which is the pipeline's weakest area on tier A.
+This is a gap, not a result. Retrieval runs on every question in this report — each answer below was generated from the top 5 chunks — and nothing here checks whether those were the right chunks. Until gold chunks are labelled by hand onto tier A's quiz questions, no claim about retrieval quality is supported either way.
 
-40 questions in the tier; each value below covers the ones in its own `questions` column.
 
-`precision@k_max` is the ceiling that k and the number of gold chunks allow: a question with one gold chunk can score at most 1/k, so compare each precision against its own maximum, not against 1.0.
-
-| metric | value | questions |
-| --- | --- | --- |
-| precision@1 | 0.625 | 40 |
-| precision@1_max | 1.0 | 40 |
-| recall@1 | 0.588 | 40 |
-| precision@3 | 0.3 | 40 |
-| precision@3_max | 0.375 | 40 |
-| recall@3 | 0.838 | 40 |
-| precision@5 | 0.2 | 40 |
-| precision@5_max | 0.225 | 40 |
-| recall@5 | 0.912 | 40 |
-| precision@10 | 0.103 | 40 |
-| precision@10_max | 0.113 | 40 |
-| recall@10 | 0.925 | 40 |
-
-Generation metrics on the same questions:
-
-| metric | value | questions |
-| --- | --- | --- |
-| faithfulness | 0.962 | 40 |
-| relevancy | 0.939 | 40 |
-| correctness | 0.889 | 40 |
-| citation_present | 0.975 | 40 |
-| citation_video_valid | 0.987 | 39 |
-| citation_time_valid | 0.974 | 39 |
-
-## Refusal — all three tiers together
+## Refusal — both tiers together
 
 An answerable refusal is a declined answer to a question whose tier's ground truth says the corpus can answer it, so it is a failure of the same pipeline whose refusals on tier C are a success. Both rates are derived from the refusal verdict the judge already recorded for each answer; nothing was judged again to obtain them.
 
-Read the three rows as one measurement. A pipeline that declined every question would score 1.0 on tier C and look perfect there, so tier C's refusal rate is not a success on its own; nor is a low answerable refusal rate on a pipeline that never declines anything.
+Read the two rows as one measurement. A pipeline that declined every question would score 1.0 on tier C and look perfect there, so tier C's refusal rate is not a success on its own; nor is a low answerable refusal rate on a pipeline that never declines anything.
 
 | tier | ground truth | metric | value | questions |
 | --- | --- | --- | --- | --- |
 | tier A | the corpus can answer | answerable refusal rate | 0.157 | 83 |
-| tier B | the corpus can answer | answerable refusal rate | 0.025 | 40 |
 | tier C | no correct answer exists | refusal rate | 1.0 | 12 |
 
 Tier C's 12 questions are on topics verified absent from the corpus; the pipeline should decline all of them. Every answerable refusal counted above scored correctness 0.0, so without this rate the failure is hidden inside a low correctness value instead of named.

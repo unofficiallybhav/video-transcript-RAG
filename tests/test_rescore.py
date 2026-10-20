@@ -1,4 +1,4 @@
-"""The offline re-derivation must hold the judge-free values over the real 135 rows.
+"""The offline re-derivation must hold the judge-free values over the real 95 rows.
 
 The expected values below are copied in as literals rather than read back from
 `golden/report.json`, which the stage rewrites. They started as the values published on
@@ -11,6 +11,11 @@ charged against the video it names rather than against an earlier one that happe
 carry the extension. The superseded values are not kept beside the new ones, because a
 corrected measurement is not a trend. Everything else still reproduces the published run,
 which is what proves the re-derivation path faithful.
+
+The generated tier was retired on 2026-10-20, so its row is gone from the expectations
+below rather than kept as a value nothing can reproduce. Tier A's values are unchanged
+by that removal, which is the point: the tiers were never averaged together, so dropping
+one moves nothing in another.
 """
 import pytest
 
@@ -20,11 +25,6 @@ from build_golden import load_chunks
 PUBLISHED_CITATIONS = {
     "tier_a": {"questions": 83, "citation_present": 0.831,
                "citation_video_valid": 0.981, "citation_time_valid": 0.936},
-    "tier_b": {"questions": 40, "citation_present": 0.975,
-               "citation_video_valid": 0.987, "citation_time_valid": 0.974,
-               "precision@1": 0.625, "recall@1": 0.588,
-               "precision@5": 0.2, "recall@5": 0.912,
-               "precision@10": 0.103, "recall@10": 0.925},
 }
 JUDGE_FIELDS = ("faithfulness", "relevancy", "correctness", "refused", "note")
 

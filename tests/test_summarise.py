@@ -82,17 +82,6 @@ CASES = [
         expects={"answerable_refusal_rate": 0.25, "answerable_refusal_rate_n": 4},
     ),
     Case(
-        behaviour="tier B reports its own answerable refusal rate, counting only "
-                  "tier B rows",
-        rows=[
-            row("B", "b1", refused=True),
-            row("B", "b2", refused=False),
-            row("A", "a1", refused=True),
-        ],
-        tier_key="tier_b",
-        expects={"answerable_refusal_rate": 0.5, "answerable_refusal_rate_n": 2},
-    ),
-    Case(
         behaviour="a row the judge left no refusal verdict on is excluded from the "
                   "answerable refusal rate",
         rows=[
@@ -133,12 +122,26 @@ def test_rendered_report_shows_each_metric_count():
 
 def test_rendered_report_presents_both_refusal_rates_together():
     """Neither refusal rate may be read as success on its own."""
-    rows = [row("A", "a1", refused=True), row("B", "b1", refused=False),
-            row("C", "c1", refused=True)]
+    rows = [row("A", "a1", refused=True), row("C", "c1", refused=True)]
     rendered = render_markdown(summarise(rows))
     section = rendered.split("## Refusal")[1]
     assert "answerable refusal rate" in section
-    assert "tier A" in section and "tier B" in section and "tier C" in section
+    assert "tier A" in section and "tier C" in section
+
+
+def test_rendered_report_states_that_retrieval_is_unmeasured():
+    """The retired tier leaves a gap, and a gap has to be said rather than shown.
+
+    Tier B carried every retrieval metric, so retiring it removes them all. An absent
+    table reads as an oversight or as nothing to report; a named section saying
+    retrieval is unmeasured, and why, is the only form of this that a reader cannot
+    mistake for a passing grade.
+    """
+    rendered = render_markdown(summarise([row("A", "a1", correctness=1.0)]))
+    assert "## Retrieval — unmeasured" in rendered
+    section = rendered.split("## Retrieval — unmeasured")[1]
+    assert "recall" in section.lower()
+    assert "0003" in section, "the section does not point at the ADR that retired it"
 
 
 def test_rendered_report_carries_the_citation_provenance_note():

@@ -20,10 +20,11 @@ authors. Its ground truth is a reference answer, not a chunk label.
 _Avoid_: the quiz tier, the human tier
 
 **Tier B**:
-The tier whose questions were each generated from a single chunk, so that chunk is the
-retrieval target by construction. Its ground truth is a chunk label, not a reference
-answer a human stands behind.
-_Avoid_: the synthetic tier, the generated tier
+Retired on 2026-10-20. The tier whose questions were each generated from a single chunk,
+so that chunk was the retrieval target by construction. The term is kept here because
+older reports, commits and the calibration record still use it; it names nothing in the
+current dataset. See `docs/adr/0003-retiring-the-generated-retrieval-tier.md`.
+_Avoid_: using it for any current tier; writing as though three tiers exist
 
 **Tier C**:
 The tier whose questions are about topics verified absent from the corpus. Its ground
@@ -31,9 +32,12 @@ truth is that no correct answer exists.
 _Avoid_: the negative tier, the adversarial tier, the unanswerable tier
 
 **Gold chunk**:
-The chunk a question is scored as having needed: the one it was constructed from, plus
-any chunk that duplicates the material that makes it answerable. A question has gold
-chunks only when they were established without a model's opinion.
+The chunk a question is scored as having needed, plus any chunk that duplicates the
+material that makes it answerable. A question has gold chunks only when they were
+established without a model's opinion. The construction route that once supplied them —
+generating the question from the chunk — is retired, so the only remaining route is a
+human choosing from a mechanically ranked shortlist. No question currently carries gold
+chunks.
 _Avoid_: relevant chunk, correct chunk, ground-truth chunk, target chunk, expected chunk
 
 ### Measurement
@@ -51,7 +55,7 @@ to a passage that is itself wrong, and an answer that is right about the world b
 absent from the context is unfaithful.
 _Avoid_: groundedness, hallucination rate, factuality, answer support
 
-Reported for Tier A and Tier B. That the judge scoring it is never shown the reference
+Reported for Tier A. That the judge scoring it is never shown the reference
 answer belongs to the definition and is not an implementation detail: a value obtained
 with the reference answer visible is a different metric and is not comparable with one
 obtained without it. See `docs/adr/0002-faithfulness-judged-without-the-reference-answer.md`.
