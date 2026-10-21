@@ -233,18 +233,22 @@ def load_chunks():
 
 # The two marked lines, each naming its own id so that no verdict depends on the line's
 # position in the file or on how an editor reflowed the indentation around it. The word
-# `question` or `chunk` is what tells the two apart; `[]` is the same untick as `[ ]`,
-# because editors strip the space out and reading that as an unknown mark would stop the
-# stage over whitespace.
-QUESTION_MARK_RE = re.compile(r"^- \[(.?)\] question `([^`]+)`")
-CANDIDATE_MARK_RE = re.compile(r"^\s*- \[(.?)\] chunk `([^`]+)`")
+# `question` or `chunk` is what tells the two apart.
+#
+# Whatever sits between the brackets is captured, however long, and is then stripped and
+# looked up. Matching only a single character was worse than strict: `[x ]`, which is
+# what several editors leave behind, matched neither pattern, so the line was read by
+# nobody and a tick on it disappeared without a word — the exact failure the vocabulary
+# is total to prevent. Surrounding whitespace is therefore insignificant (`[]`, `[ ]` and
+# `[ x ]` all mean what they look like) and anything else raises.
+QUESTION_MARK_RE = re.compile(r"^- \[([^\]]*)\] question `([^`]+)`")
+CANDIDATE_MARK_RE = re.compile(r"^\s*- \[([^\]]*)\] chunk `([^`]+)`")
 
 # Read, never written: ADR 0001 keeps a model out of every labelling decision, and which
 # chunk a question needed is one. The vocabulary is total — an unlisted mark raises — so
 # the question marked with it stays in view instead of joining the unlabelled count.
-QUESTION_MARKS = {"": "unlabelled", " ": "unlabelled", "x": "labelled",
-                  "-": "no_gold_in_corpus"}
-CANDIDATE_MARKS = {"": False, " ": False, "x": True}
+QUESTION_MARKS = {"": "unlabelled", "x": "labelled", "-": "no_gold_in_corpus"}
+CANDIDATE_MARKS = {"": False, "x": True}
 
 
 def labelsheet_marks(sheet):
@@ -270,7 +274,7 @@ def labelsheet_marks(sheet):
     for line in sheet.splitlines():
         found = QUESTION_MARK_RE.match(line)
         if found:
-            mark, qid = found.group(1).lower(), found.group(2)
+            mark, qid = found.group(1).strip().lower(), found.group(2)
             if mark not in QUESTION_MARKS:
                 unknown.append(f"question {qid} marked [{found.group(1)}]")
                 current = None
@@ -282,7 +286,7 @@ def labelsheet_marks(sheet):
         found = CANDIDATE_MARK_RE.match(line)
         if not found or current is None:
             continue
-        mark, cid = found.group(1).lower(), found.group(2)
+        mark, cid = found.group(1).strip().lower(), found.group(2)
         if mark not in CANDIDATE_MARKS:
             unknown.append(f"chunk {cid} marked [{found.group(1)}]")
             continue
@@ -385,7 +389,7 @@ def render_labelsheet(entries, marks):
                            f"({candidate['bm25_score']:.2f})")
             if candidate["dense_rank"] is not None:
                 signals += f" · dense #{candidate['dense_rank']}"
-            if candidate.get("jaccard") is not None:
+            if candidate["jaccard"] is not None:
                 signals += f" · jaccard {candidate['jaccard']}"
             lines += [
                 f"  - [{'x' if cid in gold else ' '}] chunk `{cid}` · {signals}",
@@ -415,8 +419,8 @@ def label_rows(rows, marks, known_chunks=None):
     that is not in the corpus when the corpus is passed. Both are judgements that would
     otherwise be stored where nothing can read them.
     """
-    by_id = {row["id"] for row in rows}
-    orphans = sorted(set(marks) - by_id)
+    tier_ids = {row["id"] for row in rows}
+    orphans = sorted(set(marks) - tier_ids)
     if orphans:
         raise ValueError(
             "the label sheet marks questions tier A no longer holds, so those labels "
@@ -468,7 +472,7 @@ def bm25_ranker(chunks):
     return top
 
 
-def shortlist(bm25_hits, dense_ids, by_id, query_words=frozenset()):
+def shortlist(bm25_hits, dense_ids, by_id, query_words):
     """The candidates for one question: the two signals' top-N, merged and annotated.
 
     Ordered by bm25 rank, with the chunks only the dense half found appended. Both ranks
@@ -542,7 +546,7 @@ def label():
     print(f"\nWrote {LABELSHEET_PATH}: {len(entries)} questions, "
           f"{sum(sizes)} candidate chunks "
           f"({min(sizes)}-{max(sizes)} per question)")
-    print(f"  mark it, then run `uv run build_golden.py gold`")
+    print("  mark it, then run `uv run build_golden.py gold`")
 
 
 def write_gold():
@@ -561,15 +565,19 @@ def write_gold():
     TIER_A_PATH.write_text(json.dumps(rows, indent=2, ensure_ascii=False),
                            encoding="utf-8")
 
+    # the report's own count, so that what this stage prints and what the report prints
+    # cannot drift apart on which rows are labelled
+    from evaluate import label_counts
+
+    counts = label_counts(rows)
     labelled = [r for r in rows if r.get("gold_chunks")]
-    no_gold = [r for r in rows if r.get("no_gold_in_corpus")]
     print(f"Tier A labels -> {TIER_A_PATH}")
-    print(f"  labelled with gold chunks: {len(labelled)} of {len(rows)}")
+    print(f"  labelled with gold chunks:   {counts['labelled']} of {counts['questions']}")
     print(f"  gold chunks per labelled question: "
           f"{sum(len(r['gold_chunks']) for r in labelled) / len(labelled):.2f}"
           if labelled else "  gold chunks per labelled question: n/a")
-    print(f"  no gold chunk in the corpus:  {len(no_gold)}")
-    print(f"  not yet labelled:             {len(rows) - len(labelled) - len(no_gold)}")
+    print(f"  no gold chunk in the corpus: {counts['no_gold_in_corpus']}")
+    print(f"  not yet labelled:            {counts['unlabelled']}")
 
     # the golden set is what `evaluate.py` reads, so it is refreshed here rather than
     # left for a separate `build` the labels would otherwise be invisible without

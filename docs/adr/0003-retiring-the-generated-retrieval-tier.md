@@ -112,7 +112,7 @@ rests on this paragraph.
   by construction and whose questions were a model's.
 - **Two mark states are not labels and are reported apart.** A question nobody has
   reached yet is unlabelled and leaves every retrieval metric. A question a human looked
-  at and judged unanswerable from this corpus is marked `[-]`, counted as
+  at and judged to have no chunk in the corpus that answers it is marked `[-]`, counted as
   `no_gold_in_corpus`, and also leaves recall — it is a finding about the index, not a
   retrieval miss, and the report prints its count separately.
 - **The labelling is incremental and the report is correct part-way.** 83 questions is
@@ -163,8 +163,9 @@ measured over one question set with one `hands_on` field, and that becomes testa
 - **The 3 Tier B gold chunks never retrieved at any k** were the only evidence of an
   index-imposed ceiling on recall. That finding goes with the tier and is not carried
   forward as a claim; whether such a ceiling exists is open again. The `[-]` verdict on
-  the label sheet is how it becomes answerable: a question a human judges unanswerable
-  from this corpus is a ceiling imposed by the index, recorded as such and apart from
-  recall.
+  the label sheet is how it becomes answerable: a question a human judges to have no gold
+  chunk in the corpus is a ceiling imposed by the index, recorded as such and apart from
+  recall. ("Unanswerable" is reserved for Tier C, where it is established before the
+  question is written; `GLOSSARY.md` keeps the two apart deliberately.)
 - **Reopening this means re-reading ADR 0001 first.** The no-model-in-labelling rule is
   unchanged and is what motivates the replacement, not an obstacle to it.

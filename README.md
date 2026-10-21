@@ -234,7 +234,7 @@ The offline stages need no network, no API credentials and no GPU. A clone can r
 the whole report from the stored run:
 
 ```sh
-uv run pytest                  # 106 tests, no network, no credentials
+uv run pytest                  # 112 tests, no network, no credentials
 uv run evaluate.py rescore     # re-derive the judge-free metrics and rewrite the report
 ```
 
@@ -281,5 +281,5 @@ cache/                      83 Whisper transcripts, one per video
 golden/                     the dataset, the stored run, the reports, the calibration record
 golden/labelsheet.md        the gold chunk labels, marked by hand; the only copy of them
 docs/adr/                   decisions whose reasoning is not recoverable from the code
-tests/                      106 offline tests
+tests/                      112 offline tests
 ```

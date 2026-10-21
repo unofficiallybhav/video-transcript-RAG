@@ -188,6 +188,36 @@ def test_an_unlabelled_question_is_left_exactly_as_the_run_recorded_it():
     assert apply_labels([row], {})[0] == row
 
 
+def test_a_label_withdrawn_since_the_run_is_cleared_rather_than_passed_through():
+    """A stored row carries the labels it was scored with, and they can go stale.
+
+    `run()` writes `gold_chunks` and the retrieval metrics into the checkpoint. A
+    question relabelled afterwards — a tick removed, or the verdict changed to no gold
+    chunk in the corpus — would otherwise keep scoring recall against chunks it no longer
+    claims, and would keep being counted among the labelled. `label_rows` clears both
+    fields for this reason; the join has to do the same on the rows it reads.
+    """
+    stale = {**stored_row("a1", ["a.mp4:0"]), "gold_chunks": ["a.mp4:0"],
+             "recall@5": 1.0, "precision@5": 0.2, "precision@5_max": 0.2}
+
+    withdrawn = apply_labels([stale], {})[0]
+    assert "gold_chunks" not in withdrawn
+    assert "recall@5" not in withdrawn
+
+    no_gold = apply_labels([stale], {"a1": {"no_gold_in_corpus": True}})[0]
+    assert no_gold["no_gold_in_corpus"] is True
+    assert "gold_chunks" not in no_gold
+    assert "recall@5" not in no_gold
+
+
+def test_a_relabelled_question_scores_against_its_new_gold_chunks_only():
+    stale = {**stored_row("a1", ["a.mp4:0", "b.mp4:1"]), "gold_chunks": ["a.mp4:0"],
+             "recall@1": 1.0}
+    relabelled = apply_labels([stale], {"a1": {"gold_chunks": ["b.mp4:1"]}})[0]
+    assert relabelled["gold_chunks"] == ["b.mp4:1"]
+    assert relabelled["recall@1"] == 0.0
+
+
 def test_joining_labels_twice_changes_nothing_further():
     labels = {"a1": {"gold_chunks": ["a.mp4:0"]}}
     once = apply_labels([stored_row("a1", ["a.mp4:0"])], labels)

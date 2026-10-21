@@ -1,6 +1,6 @@
 # Offline evaluation report
 
-Generated 2026-10-21T09:23:22 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
+Generated 2026-10-21T09:32:04 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
 
 Faithfulness, relevancy and correctness are judge scores on a continuous 0.00-1.00 scale; each question's per-score reasoning is kept in the `note` field of `report.json`.
 

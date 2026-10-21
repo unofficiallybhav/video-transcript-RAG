@@ -86,6 +86,19 @@ CASES = [
                     CANDIDATE.format(mark="X", cid="a.mp4:0")),
         expects={"status": "labelled", "gold": ["a.mp4:0"]},
     ),
+    Case(
+        behaviour="a tick padded with whitespace is a tick, because `[x ]` is what an "
+                  "editor leaves behind and losing that tick would be silent",
+        sheet=sheet(QUESTION.format(mark=" "),
+                    CANDIDATE.format(mark="x ", cid="a.mp4:0")),
+        expects={"status": "labelled", "gold": ["a.mp4:0"]},
+    ),
+    Case(
+        behaviour="a question verdict padded with whitespace is read the same way",
+        sheet=sheet(QUESTION.format(mark=" - "),
+                    CANDIDATE.format(mark=" ", cid="a.mp4:0")),
+        expects={"status": "no_gold_in_corpus", "gold": []},
+    ),
 ]
 
 
@@ -130,6 +143,20 @@ RAISE_CASES = [
         behaviour="[x] with nothing ticked is a contradiction and raises, because a "
                   "question labelled as having gold chunks has to name them",
         sheet=sheet(QUESTION.format(mark="x"),
+                    CANDIDATE.format(mark=" ", cid="a.mp4:0")),
+        names="A-q1",
+    ),
+    RaiseCase(
+        behaviour="a mark of more than one character raises rather than matching "
+                  "nothing, since a line that matches neither pattern is a mark read "
+                  "by no one",
+        sheet=sheet(QUESTION.format(mark=" "),
+                    CANDIDATE.format(mark="xy", cid="a.mp4:0")),
+        names="a.mp4:0",
+    ),
+    RaiseCase(
+        behaviour="a multi-character question mark raises for the same reason",
+        sheet=sheet(QUESTION.format(mark="??"),
                     CANDIDATE.format(mark=" ", cid="a.mp4:0")),
         names="A-q1",
     ),
@@ -212,7 +239,8 @@ def test_a_gold_chunk_id_absent_from_the_corpus_raises():
 def candidate(cid, bm25_rank=1, dense_rank=None):
     """One shortlisted chunk, shaped the way the shortlist builder yields them."""
     return {"chunk_id": cid, "text": f"transcript text of {cid}",
-            "bm25_rank": bm25_rank, "bm25_score": 12.4, "dense_rank": dense_rank}
+            "bm25_rank": bm25_rank, "bm25_score": 12.4, "dense_rank": dense_rank,
+            "jaccard": 0.21}
 
 
 def entry(qid="A-q1", candidates=None):

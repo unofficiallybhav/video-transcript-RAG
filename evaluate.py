@@ -42,7 +42,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from build_golden import GOLDEN_PATH, load_chunks
+from build_golden import GOLDEN_PATH, LABEL_FIELDS, load_chunks
 from llm import DailyLimitReached, complete, extract_json
 
 GOLDEN_DIR = Path("golden")
@@ -316,21 +316,30 @@ def apply_labels(rows, labels):
     beside. Every path that writes a report goes through this, so `report` and `rescore`
     cannot disagree about which questions are labelled.
 
-    A row whose question carries no label is returned unchanged, not stamped with an
-    empty one: not yet labelled has to stay distinguishable from labelled as having no
-    gold chunk in the corpus, and only the second is a finding.
+    A row whose question carries no label gets neither field, rather than an empty one:
+    not yet labelled has to stay distinguishable from labelled as having no gold chunk in
+    the corpus, and only the second is a finding.
+
+    Every label a row already carried is cleared before the current one is written, which
+    is what makes the golden set the single authority on who is labelled. A row scored by
+    `run()` after its question was labelled stores `gold_chunks` and the metrics derived
+    from them; withdrawing that tick or changing it to `[-]` afterwards would otherwise
+    leave the row scoring recall against chunks it no longer claims, and counted among the
+    labelled on the strength of a label that no longer exists. `label_rows` clears the
+    same two fields on the tier for the same reason.
     """
     joined = []
     for row in rows:
         label = labels.get(row["id"], {})
         gold = label.get("gold_chunks")
+        fresh = {key: value for key, value in row.items()
+                 if key not in LABEL_FIELDS and key not in RETRIEVAL_METRICS}
         if gold:
-            joined.append({**row, "gold_chunks": gold,
-                           **retrieval_metrics(row["retrieved"], gold)})
+            fresh.update({"gold_chunks": gold,
+                          **retrieval_metrics(row["retrieved"], gold)})
         elif label.get("no_gold_in_corpus"):
-            joined.append({**row, "no_gold_in_corpus": True})
-        else:
-            joined.append(row)
+            fresh["no_gold_in_corpus"] = True
+        joined.append(fresh)
     return joined
 
 
@@ -717,8 +726,8 @@ def drop_superseded_faithfulness(rows):
     return [{**r, "faithfulness": None} if r["id"] in stale else r for r in rows], len(stale)
 
 
-def gold_labels():
-    """The hand-written retrieval labels from the golden set, keyed by question id.
+def golden_by_id():
+    """The golden set keyed by question id, which is where the retrieval labels live.
 
     Read from the golden set rather than from the checkpoint, because the labels are made
     long after the run: the rows in `golden/results.jsonl` were written before any
@@ -732,7 +741,7 @@ def gold_labels():
 
 
 def write_report(results):
-    results = apply_labels(results, gold_labels())
+    results = apply_labels(results, golden_by_id())
     results, superseded = drop_superseded_faithfulness(results)
     report = summarise(results, superseded_faithfulness=superseded)
     GOLDEN_DIR.mkdir(exist_ok=True)
