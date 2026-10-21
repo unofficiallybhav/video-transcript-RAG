@@ -6,17 +6,21 @@ and generation path and scores each tier on what that tier's ground truth can su
   Tier A (quiz questions, human answer keys)
       correctness, faithfulness, relevancy, citation validity
       (faithfulness is judged by its own call, which is never shown the answer key)
+      precision@k and recall@k, over the questions whose gold chunks are labelled
   Tier C (questions the corpus cannot answer, verified absent)
       refusal rate
 
 Tier metrics are reported separately and never averaged: refusing is correct on tier C
 and a defect on tier A, so a blended number would cancel the two against each other.
 
-There are no retrieval metrics. The tier that carried them generated its own questions
-from the chunk that then served as their gold label, and a human review retired it; see
-`docs/adr/0003-retiring-the-generated-retrieval-tier.md`. The precision and recall
-helpers below are kept and are tier-agnostic: they score any row that carries
-`gold_chunks`, and hand-labelling those onto tier A is the work that restores them.
+Retrieval is measured over the tier A questions a human has labelled gold chunks on, with
+`uv run build_golden.py label` and `gold`. The labels are joined onto the stored run by
+`apply_labels`, so the figures come from the run already paid for and cost nothing to
+restore. Questions not yet labelled, and questions a human judged to have no gold chunk
+in the corpus, are both absent from those metrics rather than zero in them, and all three
+counts are printed. The tier that once carried retrieval generated its questions from the
+chunk that then served as their gold label, and a human review retired it; see
+`docs/adr/0003-retiring-the-generated-retrieval-tier.md`.
 
   uv run evaluate.py run         score the pipeline, write golden/report.{json,md}
                                  resumable: rerun it after a daily limit to continue
@@ -273,6 +277,61 @@ def precision_recall(retrieved_ids, gold_ids, k):
     gold = set(gold_ids)
     found = {cid for cid in retrieved_ids[:k] if cid in gold}
     return len(found) / k, (len(found) / len(gold) if gold else 0.0)
+
+
+def retrieval_metrics(retrieved_ids, gold_ids):
+    """Every retrieval metric one row contributes, or nothing when it has no labels.
+
+    `precision@k_max` is the highest precision@k this question could reach: a question
+    with one gold chunk cannot score above 1/k however well retrieval works, so the raw
+    precision is unreadable without the ceiling printed beside it. Both are kept rather
+    than normalising one by the other, because a normalised precision is a third quantity
+    that neither the retired tier's figures nor any outside benchmark would be comparable
+    with.
+
+    A question carrying no gold chunks returns no entries at all. That is how an
+    unlabelled question, and one labelled as having no gold chunk in the corpus, leave
+    the retrieval denominators instead of entering them as zeros: `summarise` records a
+    metric only over the rows that carry a value for it.
+    """
+    if not gold_ids:
+        return {}
+
+    metrics = {}
+    for k in K_VALUES:
+        precision, recall = precision_recall(retrieved_ids, gold_ids, k)
+        metrics[f"precision@{k}"] = precision
+        metrics[f"precision@{k}_max"] = min(len(set(gold_ids)), k) / k
+        metrics[f"recall@{k}"] = recall
+    return metrics
+
+
+def apply_labels(rows, labels):
+    """Stored rows with the hand-written retrieval labels joined on by question id.
+
+    The labels live in the golden set and are written there by hand, long after the run
+    that produced these rows; the rows carry the ordered ids that run retrieved. Joining
+    the two here is what lets retrieval be measured over a run already paid for, so
+    restoring the metric costs no tokens and does not replace the answers it is read
+    beside. Every path that writes a report goes through this, so `report` and `rescore`
+    cannot disagree about which questions are labelled.
+
+    A row whose question carries no label is returned unchanged, not stamped with an
+    empty one: not yet labelled has to stay distinguishable from labelled as having no
+    gold chunk in the corpus, and only the second is a finding.
+    """
+    joined = []
+    for row in rows:
+        label = labels.get(row["id"], {})
+        gold = label.get("gold_chunks")
+        if gold:
+            joined.append({**row, "gold_chunks": gold,
+                           **retrieval_metrics(row["retrieved"], gold)})
+        elif label.get("no_gold_in_corpus"):
+            joined.append({**row, "no_gold_in_corpus": True})
+        else:
+            joined.append(row)
+    return joined
 
 
 def format_context(hits):
@@ -567,15 +626,14 @@ def run():
             **check_citations(answer, hits[:GENERATION_K]),
         }
 
-        # retrieval metrics only where gold chunks exist. No tier carries them at
-        # present; hand-labelling them onto tier A is what makes this branch live again.
+        # retrieval metrics only where the question carries hand-written gold chunks;
+        # the ones that do not are absent from those metrics rather than zero in them
         gold = q.get("gold_chunks")
         if gold:
             row["gold_chunks"] = gold
-            for k in K_VALUES:
-                precision, recall = precision_recall(retrieved_ids, gold, k)
-                row[f"precision@{k}"] = precision
-                row[f"recall@{k}"] = recall
+            row.update(retrieval_metrics(retrieved_ids, gold))
+        if q.get("no_gold_in_corpus"):
+            row["no_gold_in_corpus"] = True
 
         try:
             if q["tier"] == "C":
@@ -625,11 +683,7 @@ def rescore_rows(rows, chunks):
     for row in rows:
         hits = [(cid, by_id[cid]) for cid in row["retrieved"][:GENERATION_K]]
         fresh = check_citations(row["answer"], hits)
-        gold = row.get("gold_chunks")
-        for k in K_VALUES if gold else ():
-            precision, recall = precision_recall(row["retrieved"], gold, k)
-            fresh[f"precision@{k}"] = precision
-            fresh[f"recall@{k}"] = recall
+        fresh.update(retrieval_metrics(row["retrieved"], row.get("gold_chunks") or []))
         rescored.append({**row, **fresh})
     return rescored
 
@@ -663,7 +717,22 @@ def drop_superseded_faithfulness(rows):
     return [{**r, "faithfulness": None} if r["id"] in stale else r for r in rows], len(stale)
 
 
+def gold_labels():
+    """The hand-written retrieval labels from the golden set, keyed by question id.
+
+    Read from the golden set rather than from the checkpoint, because the labels are made
+    long after the run: the rows in `golden/results.jsonl` were written before any
+    question carried a label and are never rewritten to add one. An absent golden set
+    yields no labels rather than stopping the report, which is what keeps a checkout with
+    only a checkpoint able to render one.
+    """
+    if not GOLDEN_PATH.exists():
+        return {}
+    return {q["id"]: q for q in json.loads(GOLDEN_PATH.read_text(encoding="utf-8"))}
+
+
 def write_report(results):
+    results = apply_labels(results, gold_labels())
     results, superseded = drop_superseded_faithfulness(results)
     report = summarise(results, superseded_faithfulness=superseded)
     GOLDEN_DIR.mkdir(exist_ok=True)
@@ -688,8 +757,26 @@ def tier_c_block(rows):
     return out
 
 
+def label_counts(rows):
+    """How many of a tier's questions are labelled, have no gold chunk, or are neither.
+
+    All three are printed. A retrieval figure over 12 of 83 questions and the same figure
+    over all 83 are different claims, and the only thing that distinguishes them is this
+    count; `no_gold_in_corpus` is reported apart from both because it is a finding about
+    the index rather than unfinished work.
+    """
+    labelled = [r for r in rows if r.get("gold_chunks")]
+    no_gold = [r for r in rows if not r.get("gold_chunks") and r.get("no_gold_in_corpus")]
+    return {
+        "questions": len(rows),
+        "labelled": len(labelled),
+        "no_gold_in_corpus": len(no_gold),
+        "unlabelled": len(rows) - len(labelled) - len(no_gold),
+    }
+
+
 def summarise(results, superseded_faithfulness=0):
-    def block(rows, answerable_refusal=False):
+    def block(rows, answerable_refusal=False, retrieval=False):
         # An empty tier reports the one thing that is true of it — that it holds no
         # questions — rather than nothing at all, so every block in this summary has the
         # same shape and the renderer never has to guess whether `questions` is there.
@@ -707,10 +794,16 @@ def summarise(results, superseded_faithfulness=0):
         # obtain it.
         if answerable_refusal:
             record_with_denominator(out, "answerable_refusal_rate", refusal_verdicts(rows))
+        # Retrieval is recorded on a block of labelled questions only, and the same
+        # block carries the generation metrics above, so the two are read over one
+        # question set rather than over two sets of different sizes.
+        for metric in RETRIEVAL_METRICS if retrieval else ():
+            record_with_denominator(out, metric, [r.get(metric) for r in rows])
         return out
 
     tier_a = [r for r in results if r["tier"] == "A"]
     tier_c = [r for r in results if r["tier"] == "C"]
+    labelled = [r for r in tier_a if r.get("gold_chunks")]
 
     return {
         "generated": datetime.now().isoformat(timespec="seconds"),
@@ -722,6 +815,10 @@ def summarise(results, superseded_faithfulness=0):
             for course in sorted({r["course"] for r in tier_a})
         },
         "tier_a_hands_on": block([r for r in tier_a if r["hands_on"]]),
+        "tier_a_labels": label_counts(tier_a),
+        "tier_a_retrieval": block(labelled, retrieval=True),
+        "tier_a_retrieval_hands_on": block([r for r in labelled if r["hands_on"]],
+                                           retrieval=True),
         "tier_c": tier_c_block(tier_c),
         "superseded_faithfulness": superseded_faithfulness,
         "unscored": sum(1 for r in results
@@ -746,9 +843,8 @@ def table(block, keys):
 
 GENERATION_METRICS = ("faithfulness", "relevancy", "correctness",
                       "citation_present", "citation_video_valid", "citation_time_valid")
-# Nothing renders these while no tier carries gold chunks. Kept rather than deleted and
-# restored: they describe the shape of a retrieval table, which hand-labelling tier A
-# does not change.
+# The retrieval table's columns, rendered over tier A's labelled questions. Each
+# precision sits beside the ceiling k left it, because the two are only readable together.
 RETRIEVAL_METRICS = tuple(
     name for k in K_VALUES
     for name in (f"precision@{k}", f"precision@{k}_max", f"recall@{k}")
@@ -850,8 +946,9 @@ def render_markdown(summary):
         "",
         "## Tier A — quiz questions with human answer keys",
         "",
-        "Correctness is anchored to the course authors' own answer key. No chunk labels, "
-        "so no retrieval metrics.",
+        "Correctness is anchored to the course authors' own answer key. The chunk labels "
+        "that carry retrieval are hand-written onto this tier and reported in their own "
+        "section below, over the questions that have them.",
         "",
         f"{summary['tier_a']['questions']} questions in the tier; each value below "
         f"covers the ones in its own `questions` column.",
@@ -875,24 +972,7 @@ def render_markdown(summary):
                       f"correctness {hands_on.get('correctness')} over "
                       f"{hands_on.get('correctness_n')} of them."]
 
-    lines += [
-        "", "## Retrieval — unmeasured", "",
-        "There are no retrieval figures in this report. `precision@k` and `recall@k` "
-        "need chunk-level labels, and the only tier that carried them was tier B, whose "
-        "questions were generated from the chunk that then served as their own gold "
-        "label. A human review of 15 of those 40 questions rejected 2 as not answerable "
-        "from the passage they were built from, and the tier was retired rather than "
-        "regenerated: no threshold on lexical overlap separated the rejected questions "
-        "from the sound ones. "
-        "`docs/adr/0003-retiring-the-generated-retrieval-tier.md` records that decision "
-        "and `golden/spotcheck.md` keeps the verdicts it rested on.",
-        "",
-        "This is a gap, not a result. Retrieval runs on every question in this report — "
-        "each answer below was generated from the top "
-        f"{summary['generation_k']} chunks — and nothing here checks whether those were "
-        "the right chunks. Until gold chunks are labelled by hand onto tier A's quiz "
-        "questions, no claim about retrieval quality is supported either way.",
-    ]
+    lines += retrieval_section(summary)
 
     tier_a, tier_c = (summary["tier_a"], summary["tier_c"])
     lines += [
@@ -931,6 +1011,97 @@ def render_markdown(summary):
     if summary["unscored"]:
         lines += ["", f"{summary['unscored']} answers could not be scored by the judge."]
     return "\n".join(lines) + "\n"
+
+
+def retrieval_section(summary):
+    """The retrieval section: a table once anything is labelled, a named gap until then.
+
+    Labelling tier A by hand is done over several sittings, so both states are normal and
+    the section says which one the reader is in. The gap is written out rather than left
+    as an absent table, because an absent table reads as nothing to report.
+    """
+    labels = summary.get("tier_a_labels", {"labelled": 0, "questions": 0,
+                                           "no_gold_in_corpus": 0, "unlabelled": 0})
+    if not labels["labelled"]:
+        return unmeasured_retrieval_section(summary, labels)
+
+    block = summary["tier_a_retrieval"]
+    lines = [
+        "", "## Retrieval — tier A, hand-labelled", "",
+        f"**{labels['labelled']} of {labels['questions']}** tier A questions carry "
+        f"hand-labelled gold chunks. Every figure below is taken over those alone; the "
+        f"remaining {labels['unlabelled']} are not yet labelled and are absent from the "
+        f"metric rather than scored zero in it.",
+        "",
+        "These labels were made by a human choosing from a shortlist that bm25 and "
+        "embedding similarity ranked and annotated. No model took part in the decision, "
+        "which is what separates them from the retired generated tier's labels: those "
+        "were correct by construction and said nothing about whether the question was "
+        "worth asking. See `docs/adr/0001-three-tier-golden-dataset.md` for the "
+        "admissible label sources and "
+        "`docs/adr/0003-retiring-the-generated-retrieval-tier.md` for why this is the "
+        "only one left.",
+        "",
+        "`precision@k_max` is the highest `precision@k` these questions could reach: a "
+        "question with one gold chunk cannot score above 1/k however well retrieval "
+        "works. Read each precision against the ceiling beside it, not against 1.0.",
+        "",
+    ]
+    lines += table(block, RETRIEVAL_METRICS)
+    lines += [
+        "",
+        f"Generation over the same {block['questions']} questions, so the two can be "
+        f"read against each other rather than over two differently sized sets:",
+        "",
+    ]
+    lines += table(block, GENERATION_METRICS)
+
+    if labels["no_gold_in_corpus"]:
+        lines += ["", f"{labels['no_gold_in_corpus']} question(s) are labelled as having "
+                      f"no gold chunk in the corpus: a human looked and the material "
+                      f"that would answer them is not in these transcripts. They are "
+                      f"excluded from recall rather than scored zero in it, because an "
+                      f"index gap and a retrieval miss are different findings with "
+                      f"different remedies."]
+
+    hands_on = summary["tier_a_retrieval_hands_on"]
+    if hands_on["questions"]:
+        lines += [
+            "", "### Hands-on", "",
+            f"Hands-on questions are the pipeline's weakest area on generation, and "
+            f"whether that is a retrieval failure or a generation failure is what this "
+            f"breakout answers. {hands_on['questions']} of the labelled questions are "
+            f"hands-on: recall@{GENERATION_K} {hands_on.get(f'recall@{GENERATION_K}')} "
+            f"against correctness {hands_on.get('correctness')}.",
+            "",
+        ]
+        lines += table(hands_on, RETRIEVAL_METRICS)
+
+    return lines
+
+
+def unmeasured_retrieval_section(summary, labels):
+    pending = (f" `golden/labelsheet.md` holds the sheet; "
+               f"{labels['questions']} tier A questions are waiting on it."
+               if labels["questions"] else "")
+    return [
+        "", "## Retrieval — unmeasured", "",
+        "There are no retrieval figures in this report. `precision@k` and `recall@k` "
+        "need chunk-level labels, and the only tier that carried them was tier B, whose "
+        "questions were generated from the chunk that then served as their own gold "
+        "label. A human review of 15 of those 40 questions rejected 2 as not answerable "
+        "from the passage they were built from, and the tier was retired rather than "
+        "regenerated: no threshold on lexical overlap separated the rejected questions "
+        "from the sound ones. "
+        "`docs/adr/0003-retiring-the-generated-retrieval-tier.md` records that decision "
+        "and `golden/spotcheck.md` keeps the verdicts it rested on.",
+        "",
+        "This is a gap, not a result. Retrieval runs on every question in this report — "
+        "each answer below was generated from the top "
+        f"{summary['generation_k']} chunks — and nothing here checks whether those were "
+        "the right chunks. Until gold chunks are labelled by hand onto tier A's quiz "
+        f"questions, no claim about retrieval quality is supported either way.{pending}",
+    ]
 
 
 # ------------------------------------------------- judge calibration (issue #8)

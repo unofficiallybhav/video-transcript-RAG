@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated": "2026-10-20T15:44:15",
+    "generated": "2026-10-21T09:23:22",
     "generation_k": 5,
     "judge_model": "openai/gpt-oss-20b",
     "tier_a": {
@@ -66,6 +66,18 @@
       "citation_video_valid_n": 4,
       "citation_time_valid": 0.875,
       "citation_time_valid_n": 4
+    },
+    "tier_a_labels": {
+      "questions": 83,
+      "labelled": 0,
+      "no_gold_in_corpus": 0,
+      "unlabelled": 83
+    },
+    "tier_a_retrieval": {
+      "questions": 0
+    },
+    "tier_a_retrieval_hands_on": {
+      "questions": 0
     },
     "tier_c": {
       "questions": 12,

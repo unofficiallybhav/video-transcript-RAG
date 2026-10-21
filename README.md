@@ -146,6 +146,14 @@ overlap separated the rejected questions from the sound ones. Its verdicts survi
 [`docs/adr/0003-retiring-the-generated-retrieval-tier.md`](docs/adr/0003-retiring-the-generated-retrieval-tier.md)
 records the decision.
 
+Gold chunks are therefore labelled by hand. `uv run build_golden.py label` writes
+`golden/labelsheet.md`: every Tier A question beside a shortlist of candidate chunks, each
+shown with its transcript text, its bm25 and embedding ranks, and its lexical overlap with
+the answer key. Those signals choose what a human reads; they never decide what is gold.
+Marking is incremental and the report is correct part-way through — an unmarked question
+is counted as unlabelled and left out of every retrieval figure rather than scored zero in
+one.
+
 **A measurement change is never plotted as a trend.** Twice now a metric has been found
 invalid and repaired — the citation check, then faithfulness. Both times the superseded
 values were discarded rather than kept beside the new ones, and the report says which
@@ -199,10 +207,13 @@ top 5 chunks.
 answerable refusal rate, never on its own — a pipeline that declined everything would
 score 1.0 here and look perfect.
 
-**Retrieval — unmeasured.** The tier that carried `recall@k` and `precision@k` was
-retired, so nothing currently checks whether the top 5 chunks were the right ones. This
-is a gap, not a result: until gold chunks are hand-labelled onto Tier A's quiz questions,
-no claim about retrieval quality is supported in either direction.
+**Retrieval — awaiting labels.** The tier that carried `recall@k` and `precision@k` was
+retired, and the machinery that replaces it is in place: `golden/labelsheet.md` holds all
+83 Tier A questions with their candidate shortlists, and `precision@k`, `precision@k_max`
+and `recall@k` are re-derived offline from the stored run as the sheet is marked. No
+question is labelled yet, so the report still states retrieval as unmeasured. This is a
+gap, not a result — until a question carries gold chunks, no claim about retrieval quality
+over it is supported in either direction.
 
 ## What is weak, stated plainly
 
@@ -212,7 +223,9 @@ no claim about retrieval quality is supported in either direction.
   KNIME or Spark score 0.40 correctness, and 6 of 10 were refused.
 - **Machine learning trails graph analytics** on correctness, 0.733 against 0.81.
 - **Retrieval is unmeasured**, and it is the half of a RAG pipeline this report says
-  nothing about. Restoring it is the next piece of work.
+  nothing about. What restores it is labelling time, not code: the sheet is built and the
+  metrics re-derive from the run already stored, so the figures appear as questions are
+  marked.
 - **Retrieval is dense-only.** There is no hybrid or lexical fallback and no reranking.
 
 ## Running the evaluation
@@ -221,7 +234,7 @@ The offline stages need no network, no API credentials and no GPU. A clone can r
 the whole report from the stored run:
 
 ```sh
-uv run pytest                  # 64 tests, no network, no credentials
+uv run pytest                  # 106 tests, no network, no credentials
 uv run evaluate.py rescore     # re-derive the judge-free metrics and rewrite the report
 ```
 
@@ -229,6 +242,16 @@ uv run evaluate.py rescore     # re-derive the judge-free metrics and rewrite th
 > values stored in the checkpoint rather than re-deriving them, which silently reverts
 > Tier A `citation_time_valid` from 0.936 to the superseded 0.488. After any change that
 > regenerates the report, run `rescore`.
+
+Labelling gold chunks, which also needs no provider tokens — `label` needs the qdrant
+index for the shortlist's dense half, `gold` and `rescore` need nothing but the repo:
+
+```sh
+uv run build_golden.py label   # write golden/labelsheet.md, keeping any marks on it
+                               # ... then tick the gold chunks in that file by hand
+uv run build_golden.py gold    # read the marks back into the golden set
+uv run evaluate.py rescore     # report retrieval over the questions labelled so far
+```
 
 Stages that cost provider tokens, and are not needed to read the results:
 
@@ -256,6 +279,7 @@ build_golden.py             builds the tiers of the golden dataset
 corpus.json                 the 83 ingested videos, ordered as they were first walked
 cache/                      83 Whisper transcripts, one per video
 golden/                     the dataset, the stored run, the reports, the calibration record
+golden/labelsheet.md        the gold chunk labels, marked by hand; the only copy of them
 docs/adr/                   decisions whose reasoning is not recoverable from the code
-tests/                      64 offline tests
+tests/                      106 offline tests
 ```

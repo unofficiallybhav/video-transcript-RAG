@@ -100,6 +100,53 @@ CASES = [
         expects={"questions": 2, "refusal_rate": 0.5,
                  "answerable_refusal_rate": None},
     ),
+    Case(
+        behaviour="retrieval is reported over the labelled questions only, with its "
+                  "own denominator, so partial labelling is visible rather than "
+                  "inflating or deflating the figure",
+        rows=[
+            row("A", "a1", gold_chunks=["a.mp4:0"], **{"recall@5": 1.0}),
+            row("A", "a2"),
+            row("A", "a3", no_gold_in_corpus=True),
+        ],
+        tier_key="tier_a_retrieval",
+        expects={"questions": 1, "recall@5": 1.0, "recall@5_n": 1},
+    ),
+    Case(
+        behaviour="a question labelled as having no gold chunk leaves recall rather "
+                  "than scoring zero in it, so an index gap and a retrieval miss stay "
+                  "distinguishable",
+        rows=[
+            row("A", "a1", gold_chunks=["a.mp4:0"], **{"recall@5": 1.0}),
+            row("A", "a2", no_gold_in_corpus=True),
+        ],
+        tier_key="tier_a_retrieval",
+        expects={"recall@5": 1.0, "recall@5_n": 1},
+    ),
+    Case(
+        behaviour="generation is reported beside retrieval over that same labelled "
+                  "set, so the two can be read against each other",
+        rows=[
+            row("A", "a1", correctness=1.0, gold_chunks=["a.mp4:0"], **{"recall@5": 0.0}),
+            row("A", "a2", correctness=0.0),
+        ],
+        tier_key="tier_a_retrieval",
+        expects={"questions": 1, "correctness": 1.0, "correctness_n": 1,
+                 "recall@5": 0.0},
+    ),
+    Case(
+        behaviour="the three label states are counted separately, so unfinished work "
+                  "is never read as an absent answer",
+        rows=[
+            row("A", "a1", gold_chunks=["a.mp4:0"]),
+            row("A", "a2"),
+            row("A", "a3", no_gold_in_corpus=True),
+            row("A", "a4"),
+        ],
+        tier_key="tier_a_labels",
+        expects={"questions": 4, "labelled": 1, "no_gold_in_corpus": 1,
+                 "unlabelled": 2},
+    ),
 ]
 
 
@@ -142,6 +189,37 @@ def test_rendered_report_states_that_retrieval_is_unmeasured():
     section = rendered.split("## Retrieval — unmeasured")[1]
     assert "recall" in section.lower()
     assert "0003" in section, "the section does not point at the ADR that retired it"
+
+
+def test_rendered_report_measures_retrieval_once_a_question_is_labelled():
+    """One hand-labelled question replaces the gap with a figure and its denominator.
+
+    The section has to say how much of the tier is labelled, because 1 of 83 and 83 of
+    83 are the same table with very different weight, and the difference is only in the
+    count.
+    """
+    rows = [
+        row("A", "a1", gold_chunks=["a.mp4:0"], **{"recall@5": 1.0, "precision@5": 0.2}),
+        row("A", "a2"),
+        row("A", "a3", no_gold_in_corpus=True),
+    ]
+    rendered = render_markdown(summarise(rows))
+    assert "## Retrieval — unmeasured" not in rendered
+    section = rendered.split("## Retrieval")[1]
+    assert "| recall@5 | 1.0 | 1 |" in section
+    assert "1 of 3" in section, "the section does not say how much of the tier is labelled"
+    assert "no gold chunk" in section.lower()
+
+
+def test_rendered_report_breaks_retrieval_out_by_hands_on():
+    """Whether hands-on weakness is a retrieval failure has to be answerable here."""
+    rows = [
+        dict(row("A", "a1", gold_chunks=["a.mp4:0"], **{"recall@5": 0.0}), hands_on=True),
+        row("A", "a2", gold_chunks=["b.mp4:1"], **{"recall@5": 1.0}),
+    ]
+    section = render_markdown(summarise(rows)).split("## Retrieval")[1]
+    assert "hands-on" in section.lower()
+    assert "0.0" in section
 
 
 def test_rendered_report_carries_the_citation_provenance_note():

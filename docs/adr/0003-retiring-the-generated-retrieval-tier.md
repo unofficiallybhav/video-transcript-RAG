@@ -91,6 +91,34 @@ Two alternatives were considered and rejected:
   embedding similarity is not a labelling decision and is allowed; choosing from it is,
   and stays with a human.
 
+## The provenance of Tier A's gold chunks
+
+Recorded here so that nobody later assumes these labels came from construction, as Tier
+B's did. Anyone reading a retrieval figure in `golden/report.md` is reading a figure that
+rests on this paragraph.
+
+- **The verdict is a human's.** Every gold chunk in `golden/tier_a.json` was ticked by
+  hand on `golden/labelsheet.md` by a person reading the candidate's transcript text
+  beside the question and the course authors' answer key. This is ADR 0001's third
+  admissible source, hand verification.
+- **The shortlist is mechanical, and it is not a label.** `build_golden.py label` builds
+  each question's candidates as the union of bm25's top 5 over the question *and its
+  answer key* and the deployed embedding retrieval's top 5 over the question alone,
+  deduplicated and ordered by bm25 rank. Each candidate is annotated with both ranks and
+  with its jaccard overlap against the question and key. These signals choose what the
+  human reads, never what the answer is.
+- **No model participates at any point.** Nothing is generated, prompted or judged in
+  producing these labels. That is the difference from Tier B, whose labels were correct
+  by construction and whose questions were a model's.
+- **Two mark states are not labels and are reported apart.** A question nobody has
+  reached yet is unlabelled and leaves every retrieval metric. A question a human looked
+  at and judged unanswerable from this corpus is marked `[-]`, counted as
+  `no_gold_in_corpus`, and also leaves recall — it is a finding about the index, not a
+  retrieval miss, and the report prints its count separately.
+- **The labelling is incremental and the report is correct part-way.** 83 questions is
+  more than one sitting. Every figure carries the count it was taken over, and the
+  retrieval section states how many of the 83 are labelled.
+
 Hand labelling also closes a gap ADR 0001 recorded and could not act on: Tier B rows
 carry no `hands_on` field, so nothing measured whether its stronger generation figures
 came from its question construction. Labelled onto Tier A, retrieval and generation are
@@ -98,21 +126,16 @@ measured over one question set with one `hands_on` field, and that becomes testa
 
 ## Consequences
 
-- **No retrieval metric is reported until Tier A is labelled.** `precision@k` and
+- **No retrieval metric is reported over an unlabelled question.** `precision@k` and
   `recall@k` are not estimated, approximated or carried forward from the retired tier.
-- **The retrieval helpers stay**, and they divide into two kinds.
-
-  `precision_recall` and `K_VALUES` in `evaluate.py` are still *called*, by `run()` and
-  `rescore_rows()`, inside a branch guarded on a row carrying `gold_chunks`. No row
-  carries them, so the branch does not execute — the code is live and the data is
-  absent. Scoring a labelled row is therefore a question of supplying labels, not of
-  restoring code.
-
-  `RETRIEVAL_METRICS` in `evaluate.py`, and `content_words`, `jaccard` and `tokenise` in
-  `build_golden.py`, are genuinely unreferenced. They are kept because hand labelling
-  needs exactly them — a table of retrieval columns to render, and mechanical signals to
-  rank and annotate candidate chunks — and because a model may not be asked to rank the
-  candidates instead. This is recorded at each of them.
+  They are reported over the labelled subset of Tier A with its own denominator, and the
+  labelled, no-gold and unlabelled counts are printed beside them.
+- **The retrieval helpers that were kept are all in use.** `precision_recall` and
+  `K_VALUES` were always called; `retrieval_metrics` now wraps them and adds
+  `precision@k_max`. `RETRIEVAL_METRICS` renders the table it was kept to describe, and
+  `tokenise`, `content_words` and `jaccard` are the labelling path's mechanical signals —
+  the bm25 index and the per-candidate overlap annotation respectively. Keeping them was
+  the right call for the reason given: the shortlist had to be mechanical.
 
 - **The bm25 index construction went, against the ticket's own instruction to keep it.**
   The ticket said the bm25 machinery should stay because hand labelling would reuse it.
@@ -131,13 +154,17 @@ measured over one question set with one `hands_on` field, and that becomes testa
 - **`golden/judge_calibration.json` is not regenerated.** It was measured under strata of
   20 Tier A and 10 Tier B questions. It is the record of the experiment #9 acted on and
   is cited by name in ADR 0002, the report's provenance note and the glossary.
-  `CALIBRATION_STRATA` now reads 30 Tier A for any future run; the stored artifact
+  `CALIBRATION_STRATA` now reads 20 Tier A, the draw it always had, so a future run makes
+  60 calls rather than the 90 the retired tier's extra stratum cost; the stored artifact
   describes the run that happened, not the one the constant would now produce.
 - **`golden/spotcheck.md` stays tracked** although the stage that wrote it is gone. It is
   the only record of the 15 human verdicts this decision rests on, and deleting the
   evidence along with the thing it condemned would leave this ADR unfalsifiable.
 - **The 3 Tier B gold chunks never retrieved at any k** were the only evidence of an
   index-imposed ceiling on recall. That finding goes with the tier and is not carried
-  forward as a claim; whether such a ceiling exists is open again.
+  forward as a claim; whether such a ceiling exists is open again. The `[-]` verdict on
+  the label sheet is how it becomes answerable: a question a human judges unanswerable
+  from this corpus is a ceiling imposed by the index, recorded as such and apart from
+  recall.
 - **Reopening this means re-reading ADR 0001 first.** The no-model-in-labelling rule is
   unchanged and is what motivates the replacement, not an obstacle to it.

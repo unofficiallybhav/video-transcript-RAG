@@ -1,6 +1,6 @@
 # Offline evaluation report
 
-Generated 2026-10-20T15:44:15 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
+Generated 2026-10-21T09:23:22 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
 
 Faithfulness, relevancy and correctness are judge scores on a continuous 0.00-1.00 scale; each question's per-score reasoning is kept in the `note` field of `report.json`.
 
@@ -24,7 +24,7 @@ Cost: the faithfulness call is about 1,783 tokens per question, measured over th
 
 ## Tier A — quiz questions with human answer keys
 
-Correctness is anchored to the course authors' own answer key. No chunk labels, so no retrieval metrics.
+Correctness is anchored to the course authors' own answer key. The chunk labels that carry retrieval are hand-written onto this tier and reported in their own section below, over the questions that have them.
 
 83 questions in the tier; each value below covers the ones in its own `questions` column.
 
@@ -50,7 +50,7 @@ Hands-on questions (10 of tier A) ask about clicking through KNIME or Spark rath
 
 There are no retrieval figures in this report. `precision@k` and `recall@k` need chunk-level labels, and the only tier that carried them was tier B, whose questions were generated from the chunk that then served as their own gold label. A human review of 15 of those 40 questions rejected 2 as not answerable from the passage they were built from, and the tier was retired rather than regenerated: no threshold on lexical overlap separated the rejected questions from the sound ones. `docs/adr/0003-retiring-the-generated-retrieval-tier.md` records that decision and `golden/spotcheck.md` keeps the verdicts it rested on.
 
-This is a gap, not a result. Retrieval runs on every question in this report — each answer below was generated from the top 5 chunks — and nothing here checks whether those were the right chunks. Until gold chunks are labelled by hand onto tier A's quiz questions, no claim about retrieval quality is supported either way.
+This is a gap, not a result. Retrieval runs on every question in this report — each answer below was generated from the top 5 chunks — and nothing here checks whether those were the right chunks. Until gold chunks are labelled by hand onto tier A's quiz questions, no claim about retrieval quality is supported either way. `golden/labelsheet.md` holds the sheet; 83 tier A questions are waiting on it.
 
 ## Refusal — both tiers together
 

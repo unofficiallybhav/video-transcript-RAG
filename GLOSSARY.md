@@ -35,10 +35,27 @@ _Avoid_: the negative tier, the adversarial tier, the unanswerable tier
 The chunk a question is scored as having needed, plus any chunk that duplicates the
 material that makes it answerable. A question has gold chunks only when they were
 established without a model's opinion. The construction route that once supplied them —
-generating the question from the chunk — is retired, so the only remaining route is a
-human choosing from a mechanically ranked shortlist. No question currently carries gold
-chunks.
+generating the question from the chunk — is retired, so the one remaining route is a
+human ticking them on `golden/labelsheet.md`, choosing from a shortlist that bm25 and
+embedding similarity rank and annotate but do not decide. A question carries gold chunks
+only once that tick is made: see _unlabelled_ and _no gold chunk in corpus_ for the two
+states that are not labels.
 _Avoid_: relevant chunk, correct chunk, ground-truth chunk, target chunk, expected chunk
+
+**Unlabelled**:
+A question nobody has yet judged the gold chunks of. It is absent from every retrieval
+metric rather than scored zero in one, and the count of unlabelled questions is printed
+beside each figure, because labelling tier A is done over several sittings and a
+denominator that moves has to be visible.
+_Avoid_: unknown, missing label, untagged, pending
+
+**No gold chunk in corpus**:
+A verdict, not an absent label: a human read the question and judged that the material
+answering it is not in these transcripts. Marked `[-]` on the label sheet, stored as
+`no_gold_in_corpus`, counted on its own and excluded from recall — an index gap and a
+retrieval miss are different findings with different remedies.
+_Avoid_: unanswerable (that is tier C's property, established before the question was
+written), no match, zero recall
 
 ### Measurement
 
