@@ -54,6 +54,12 @@ A verdict, not an absent label: a human read the question and judged that the ma
 answering it is not in these transcripts. Marked `[-]` on the label sheet, stored as
 `no_gold_in_corpus`, counted on its own and excluded from recall — an index gap and a
 retrieval miss are different findings with different remedies.
+What follows from the verdict is a separate judgement. Where the question was never
+answerable from this corpus at all — it asks for a figure produced by running an exercise —
+the question leaves tier A, because tier A's ground truth is that the corpus can answer it
+(`docs/adr/0004-questions-the-corpus-cannot-answer-leave-tier-a.md`). Where the material
+is lecture content that simply was not transcribed, the question stays and the verdict is
+reported as an index gap.
 _Avoid_: unanswerable (that is tier C's property, established before the question was
 written), no match, zero recall
 

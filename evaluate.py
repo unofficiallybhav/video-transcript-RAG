@@ -710,6 +710,25 @@ def rescore():
     write_report(rescore_rows(rows, chunks))
 
 
+def drop_questions_not_in_golden(rows, golden):
+    """The rows whose question is still in the golden set, and how many were dropped.
+
+    `golden/results.jsonl` accumulates every question ever scored and is never rewritten,
+    so a question removed from the golden set keeps its stored row indefinitely. Reporting
+    that row would describe a dataset that no longer exists. It also matters which way the
+    figures move: the questions removed from tier A were removed because the corpus cannot
+    answer them, and every one of them scored correctness 0.0, so leaving them in holds
+    every tier A mean down on the strength of questions the tier no longer contains.
+
+    An empty golden set drops nothing. A checkout that has only a checkpoint can still
+    render a report, which is what `golden_by_id` returning `{}` is for.
+    """
+    if not golden:
+        return rows, []
+    kept = [row for row in rows if row["id"] in golden]
+    return kept, [row for row in rows if row["id"] not in golden]
+
+
 def drop_superseded_faithfulness(rows):
     """The rows with any combined-call faithfulness removed, and how many lost a value.
 
@@ -741,9 +760,12 @@ def golden_by_id():
 
 
 def write_report(results):
-    results = apply_labels(results, golden_by_id())
+    golden = golden_by_id()
+    results, removed = drop_questions_not_in_golden(results, golden)
+    results = apply_labels(results, golden)
     results, superseded = drop_superseded_faithfulness(results)
-    report = summarise(results, superseded_faithfulness=superseded)
+    report = summarise(results, superseded_faithfulness=superseded,
+                       removed_from_golden=removed)
     GOLDEN_DIR.mkdir(exist_ok=True)
     REPORT_JSON.write_text(
         json.dumps({"summary": report, "results": results}, indent=2, ensure_ascii=False),
@@ -784,7 +806,22 @@ def label_counts(rows):
     }
 
 
-def summarise(results, superseded_faithfulness=0):
+def removed_block(rows):
+    """What the questions since removed from the golden set had scored while in it.
+
+    Derived, not asserted. The first version of the provenance line below claimed every
+    removed question had scored correctness 0.0; four of the seventeen had scored 1.0.
+    The reason the tier means moved is a fact about these rows, so it is computed from
+    them and carries its own denominator like every other figure in this report.
+    """
+    out = {"questions": len(rows)}
+    record_with_denominator(out, "correctness", [r.get("correctness") for r in rows])
+    out["zero_correctness"] = sum(1 for r in rows if r.get("correctness") == 0.0)
+    out["refused"] = sum(1 for r in rows if r.get("refused"))
+    return out
+
+
+def summarise(results, superseded_faithfulness=0, removed_from_golden=()):
     def block(rows, answerable_refusal=False, retrieval=False):
         # An empty tier reports the one thing that is true of it — that it holds no
         # questions — rather than nothing at all, so every block in this summary has the
@@ -830,6 +867,7 @@ def summarise(results, superseded_faithfulness=0):
                                            retrieval=True),
         "tier_c": tier_c_block(tier_c),
         "superseded_faithfulness": superseded_faithfulness,
+        "removed_from_golden": removed_block(removed_from_golden),
         "unscored": sum(1 for r in results
                         if r["tier"] != "C" and r.get("correctness") is None),
     }
@@ -849,6 +887,12 @@ def table(block, keys):
             lines.append(f"| {key} | {block[key]} | {block.get(f'{key}_n', '')} |")
     return lines
 
+
+# Below this many questions a slice is named and counted but not tabled. A table of
+# twelve metrics over one question reads as a measurement, and the hands-on slice fell to
+# a single question when the KNIME and Spark exercise quizzes left tier A — so this is
+# reached by real data, not a hypothetical.
+MIN_BREAKOUT = 5
 
 GENERATION_METRICS = ("faithfulness", "relevancy", "correctness",
                       "citation_present", "citation_video_valid", "citation_time_valid")
@@ -975,11 +1019,18 @@ def render_markdown(summary):
                      f"| {block.get('citation_time_valid_n')} |")
 
     hands_on = summary["tier_a_hands_on"]
-    if hands_on["questions"]:
+    if hands_on["questions"] >= MIN_BREAKOUT:
         lines += ["", f"Hands-on questions ({hands_on['questions']} of tier A) ask about "
                       f"clicking through KNIME or Spark rather than lecture content: "
                       f"correctness {hands_on.get('correctness')} over "
                       f"{hands_on.get('correctness_n')} of them."]
+    elif hands_on["questions"]:
+        lines += ["", f"Hands-on questions are no longer a reportable slice of this "
+                      f"tier: {hands_on['questions']} remain, against the 10 the earlier "
+                      f"0.40 correctness figure was taken over. The exercise quizzes "
+                      f"those came from were removed because their answers are figures "
+                      f"from an exercise's dataset rather than anything the lectures "
+                      f"state — see the provenance note at the end."]
 
     lines += retrieval_section(summary)
 
@@ -1011,6 +1062,25 @@ def render_markdown(summary):
         f"hidden inside a low correctness value instead of named.",
     ]
 
+    removed = summary.get("removed_from_golden") or {}
+    if removed.get("questions"):
+        lines += ["", f"Provenance: {removed['questions']} questions that this run scored "
+                      f"have since been removed from the golden set, and are left out of "
+                      f"every figure above. They asked for figures produced by running a "
+                      f"KNIME or Spark exercise — a percentage of a dataset, a cluster "
+                      f"number, the name of a column — which no lecture transcript "
+                      f"states, so tier A's ground truth that the corpus can answer the "
+                      f"question did not hold for them. While they were in the tier they "
+                      f"scored correctness {removed.get('correctness')} over "
+                      f"{removed.get('correctness_n')} of them, "
+                      f"{removed['zero_correctness']} of them scoring 0.0 and "
+                      f"{removed['refused']} refused, so every tier A mean above is "
+                      f"higher than in any earlier copy of this report partly for that "
+                      f"reason. That is a change in which questions are measured, not a "
+                      f"change in the pipeline, so the superseded figures are discarded "
+                      f"rather than kept beside these. `build_golden.py`'s "
+                      f"`EXCLUDED_QUIZZES` and `EXCLUDED_QUESTIONS` name each removed "
+                      f"question with its reason."]
     if summary.get("superseded_faithfulness"):
         lines += ["", f"{summary['superseded_faithfulness']} answers still carry "
                       f"faithfulness from the combined judge call and are left out of "
@@ -1073,20 +1143,48 @@ def retrieval_section(summary):
                       f"index gap and a retrieval miss are different findings with "
                       f"different remedies."]
 
-    hands_on = summary["tier_a_retrieval_hands_on"]
-    if hands_on["questions"]:
-        lines += [
-            "", "### Hands-on", "",
-            f"Hands-on questions are the pipeline's weakest area on generation, and "
-            f"whether that is a retrieval failure or a generation failure is what this "
-            f"breakout answers. {hands_on['questions']} of the labelled questions are "
-            f"hands-on: recall@{GENERATION_K} {hands_on.get(f'recall@{GENERATION_K}')} "
-            f"against correctness {hands_on.get('correctness')}.",
-            "",
-        ]
-        lines += table(hands_on, RETRIEVAL_METRICS)
-
+    lines += hands_on_breakout(summary["tier_a_retrieval_hands_on"], block["questions"])
     return lines
+
+
+def hands_on_breakout(hands_on, labelled):
+    """The hands-on retrieval slice, tabled only when enough questions carry it.
+
+    This breakout existed to settle whether hands-on weakness was a retrieval failure or
+    a generation failure. That question has been dissolved rather than answered: most
+    hands-on questions asked for a figure produced by running a KNIME or Spark exercise,
+    tier A's ground truth did not hold for them, and they were removed. So the slice
+    states its own size and, below `MIN_BREAKOUT`, says plainly that it settles nothing —
+    an absent table would read as nothing to report, and a table over one question would
+    read as a result.
+    """
+    if not hands_on["questions"]:
+        return []
+
+    if hands_on["questions"] < MIN_BREAKOUT:
+        return [
+            "", "### Hands-on — not reportable", "",
+            f"{hands_on['questions']} of the {labelled} labelled questions carry the "
+            f"hands-on flag, which supports no claim and is not tabled. The breakout "
+            f"was added to test "
+            f"whether the pipeline's weakness on hands-on questions was a retrieval "
+            f"failure or a generation failure. That weakness was measured over 10 "
+            f"questions, and the exercise quizzes those came from have since left tier A "
+            f"because the corpus cannot answer them — so the hypothesis is no longer "
+            f"answerable from this tier, and was dissolved rather than settled. Any "
+            f"future test of it needs hands-on questions whose answers the lectures "
+            f"actually state.",
+        ]
+
+    return [
+        "", "### Hands-on", "",
+        f"Whether the pipeline's weakness on hands-on questions is a retrieval failure "
+        f"or a generation failure is what this breakout tests. "
+        f"{hands_on['questions']} of the {labelled} labelled questions are hands-on: "
+        f"recall@{GENERATION_K} {hands_on.get(f'recall@{GENERATION_K}')} against "
+        f"correctness {hands_on.get('correctness')}.",
+        "",
+    ] + table(hands_on, RETRIEVAL_METRICS)
 
 
 def unmeasured_retrieval_section(summary, labels):

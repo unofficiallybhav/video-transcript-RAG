@@ -22,7 +22,8 @@ from dataclasses import dataclass, field
 
 import pytest
 
-from evaluate import render_markdown, summarise
+from evaluate import (MIN_BREAKOUT, drop_questions_not_in_golden, render_markdown,
+                      summarise)
 
 
 def row(tier, qid="q", **metrics):
@@ -191,6 +192,44 @@ def test_rendered_report_states_that_retrieval_is_unmeasured():
     assert "0003" in section, "the section does not point at the ADR that retired it"
 
 
+def test_a_question_removed_from_the_golden_set_leaves_the_report():
+    """Removing a question from the dataset has to remove it from the figures too.
+
+    `golden/results.jsonl` keeps every question ever scored and is never rewritten, so a
+    question dropped from the golden set still has a stored row. Reporting it would
+    describe a dataset that no longer exists — and since the questions removed here were
+    removed for scoring 0.0 on a corpus that cannot answer them, leaving them in would
+    hold every tier A mean down on their account.
+    """
+    rows = [row("A", "a1", correctness=1.0), row("A", "gone", correctness=0.0)]
+    kept, removed = drop_questions_not_in_golden(rows, {"a1": {"id": "a1"}})
+    assert [r["id"] for r in kept] == ["a1"]
+    assert [r["id"] for r in removed] == ["gone"]
+
+
+def test_an_absent_golden_set_removes_nothing():
+    """A checkout with no golden set still renders a report, rather than an empty one."""
+    rows = [row("A", "a1", correctness=1.0)]
+    assert drop_questions_not_in_golden(rows, {}) == (rows, [])
+
+
+def test_the_report_states_what_the_removed_questions_had_scored():
+    """The provenance line reports the removed set's own figures, it does not assert them.
+
+    Saying "every one scored 0.0" was wrong the first time it was written: 5 of 17 had
+    scored above zero. A sentence that states what moved the means has to be derived from
+    the rows it describes, or it is one more number nobody can check.
+    """
+    removed = [row("A", "g1", correctness=0.0), row("A", "g2", correctness=1.0),
+               row("A", "g3", correctness=0.0, refused=True)]
+    rendered = render_markdown(summarise([row("A", "a1", correctness=1.0)],
+                                         removed_from_golden=removed))
+    line = next(l for l in rendered.splitlines() if "removed from the golden set" in l)
+    assert "3 questions" in line
+    assert "0.333" in line, "the removed set's own correctness mean is not stated"
+    assert "2 of them scoring 0.0" in line
+
+
 def test_rendered_report_measures_retrieval_once_a_question_is_labelled():
     """One hand-labelled question replaces the gap with a figure and its denominator.
 
@@ -211,15 +250,37 @@ def test_rendered_report_measures_retrieval_once_a_question_is_labelled():
     assert "no gold chunk" in section.lower()
 
 
-def test_rendered_report_breaks_retrieval_out_by_hands_on():
-    """Whether hands-on weakness is a retrieval failure has to be answerable here."""
+def test_a_hands_on_breakout_too_small_to_support_a_claim_is_not_tabled():
+    """One question cannot answer a hypothesis, and a table invites reading it as if it can.
+
+    The hands-on category was all but emptied when the KNIME and Spark exercise quizzes
+    left tier A, because their answers were figures from an exercise's dataset rather
+    than anything the lectures state. What remains is too small to break out, and saying
+    so is the only honest form of it: a 12-row table over a single question reads as a
+    measurement.
+    """
     rows = [
-        dict(row("A", "a1", gold_chunks=["a.mp4:0"], **{"recall@5": 0.0}), hands_on=True),
-        row("A", "a2", gold_chunks=["b.mp4:1"], **{"recall@5": 1.0}),
+        dict(row("A", "a1", gold_chunks=["a.mp4:0"], **{"recall@5": 1.0}), hands_on=True),
+        row("A", "a2", gold_chunks=["b.mp4:1"], **{"recall@5": 0.5}),
     ]
     section = render_markdown(summarise(rows)).split("## Retrieval")[1]
+    assert "| recall@5 | 1.0 | 1 |" not in section, "a one-question table was rendered"
+    assert "1 of the 2" in section
+    assert "supports no claim" in section
+
+
+def test_rendered_report_breaks_retrieval_out_by_hands_on():
+    """Whether hands-on weakness is a retrieval failure has to be answerable here.
+
+    Enough hands-on questions to clear the breakout threshold, so this exercises the
+    table rather than the too-small-to-report path beside it.
+    """
+    rows = [dict(row("A", f"h{i}", gold_chunks=["a.mp4:0"], **{"recall@5": 0.0}),
+                 hands_on=True) for i in range(MIN_BREAKOUT)]
+    rows.append(row("A", "a1", gold_chunks=["b.mp4:1"], **{"recall@5": 1.0}))
+    section = render_markdown(summarise(rows)).split("## Retrieval")[1]
     assert "hands-on" in section.lower()
-    assert "0.0" in section
+    assert f"| recall@5 | 0.0 | {MIN_BREAKOUT} |" in section
 
 
 def test_rendered_report_carries_the_citation_provenance_note():

@@ -1,6 +1,6 @@
 # Offline evaluation report
 
-Generated 2026-10-21T09:32:04 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
+Generated 2026-10-23T16:14:38 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
 
 Faithfulness, relevancy and correctness are judge scores on a continuous 0.00-1.00 scale; each question's per-score reasoning is kept in the `note` field of `report.json`.
 
@@ -26,31 +26,63 @@ Cost: the faithfulness call is about 1,783 tokens per question, measured over th
 
 Correctness is anchored to the course authors' own answer key. The chunk labels that carry retrieval are hand-written onto this tier and reported in their own section below, over the questions that have them.
 
-83 questions in the tier; each value below covers the ones in its own `questions` column.
+66 questions in the tier; each value below covers the ones in its own `questions` column.
 
 | metric | value | questions |
 | --- | --- | --- |
-| faithfulness | 0.787 | 83 |
-| relevancy | 0.792 | 83 |
-| correctness | 0.761 | 83 |
-| citation_present | 0.831 | 83 |
-| citation_video_valid | 0.981 | 69 |
-| citation_time_valid | 0.936 | 70 |
+| faithfulness | 0.861 | 66 |
+| relevancy | 0.912 | 66 |
+| correctness | 0.889 | 66 |
+| citation_present | 0.924 | 66 |
+| citation_video_valid | 0.986 | 61 |
+| citation_time_valid | 0.935 | 62 |
 
 ### By course
 
 | course | questions | correctness | faithfulness | citation_time_valid | cited a time |
 | --- | --- | --- | --- | --- | --- |
 | graph analytics | 31 | 0.81 | 0.781 | 0.963 | 27 |
-| machine learning | 52 | 0.733 | 0.79 | 0.919 | 43 |
+| machine learning | 35 | 0.96 | 0.931 | 0.914 | 35 |
 
-Hands-on questions (10 of tier A) ask about clicking through KNIME or Spark rather than lecture content: correctness 0.4 over 10 of them.
+Hands-on questions are no longer a reportable slice of this tier: 1 remain, against the 10 the earlier 0.40 correctness figure was taken over. The exercise quizzes those came from were removed because their answers are figures from an exercise's dataset rather than anything the lectures state — see the provenance note at the end.
 
-## Retrieval — unmeasured
+## Retrieval — tier A, hand-labelled
 
-There are no retrieval figures in this report. `precision@k` and `recall@k` need chunk-level labels, and the only tier that carried them was tier B, whose questions were generated from the chunk that then served as their own gold label. A human review of 15 of those 40 questions rejected 2 as not answerable from the passage they were built from, and the tier was retired rather than regenerated: no threshold on lexical overlap separated the rejected questions from the sound ones. `docs/adr/0003-retiring-the-generated-retrieval-tier.md` records that decision and `golden/spotcheck.md` keeps the verdicts it rested on.
+**33 of 66** tier A questions carry hand-labelled gold chunks. Every figure below is taken over those alone; the remaining 33 are not yet labelled and are absent from the metric rather than scored zero in it.
 
-This is a gap, not a result. Retrieval runs on every question in this report — each answer below was generated from the top 5 chunks — and nothing here checks whether those were the right chunks. Until gold chunks are labelled by hand onto tier A's quiz questions, no claim about retrieval quality is supported either way. `golden/labelsheet.md` holds the sheet; 83 tier A questions are waiting on it.
+These labels were made by a human choosing from a shortlist that bm25 and embedding similarity ranked and annotated. No model took part in the decision, which is what separates them from the retired generated tier's labels: those were correct by construction and said nothing about whether the question was worth asking. See `docs/adr/0001-three-tier-golden-dataset.md` for the admissible label sources and `docs/adr/0003-retiring-the-generated-retrieval-tier.md` for why this is the only one left.
+
+`precision@k_max` is the highest `precision@k` these questions could reach: a question with one gold chunk cannot score above 1/k however well retrieval works. Read each precision against the ceiling beside it, not against 1.0.
+
+| metric | value | questions |
+| --- | --- | --- |
+| precision@1 | 0.545 | 33 |
+| precision@1_max | 1.0 | 33 |
+| recall@1 | 0.265 | 33 |
+| precision@3 | 0.465 | 33 |
+| precision@3_max | 0.727 | 33 |
+| recall@3 | 0.629 | 33 |
+| precision@5 | 0.345 | 33 |
+| precision@5_max | 0.461 | 33 |
+| recall@5 | 0.778 | 33 |
+| precision@10 | 0.206 | 33 |
+| precision@10_max | 0.23 | 33 |
+| recall@10 | 0.917 | 33 |
+
+Generation over the same 33 questions, so the two can be read against each other rather than over two differently sized sets:
+
+| metric | value | questions |
+| --- | --- | --- |
+| faithfulness | 0.977 | 33 |
+| relevancy | 0.981 | 33 |
+| correctness | 0.958 | 33 |
+| citation_present | 1.0 | 33 |
+| citation_video_valid | 0.985 | 33 |
+| citation_time_valid | 0.924 | 33 |
+
+### Hands-on — not reportable
+
+1 of the 33 labelled questions carry the hands-on flag, which supports no claim and is not tabled. The breakout was added to test whether the pipeline's weakness on hands-on questions was a retrieval failure or a generation failure. That weakness was measured over 10 questions, and the exercise quizzes those came from have since left tier A because the corpus cannot answer them — so the hypothesis is no longer answerable from this tier, and was dissolved rather than settled. Any future test of it needs hands-on questions whose answers the lectures actually state.
 
 ## Refusal — both tiers together
 
@@ -60,7 +92,9 @@ Read the two rows as one measurement. A pipeline that declined every question wo
 
 | tier | ground truth | metric | value | questions |
 | --- | --- | --- | --- | --- |
-| tier A | the corpus can answer | answerable refusal rate | 0.157 | 83 |
+| tier A | the corpus can answer | answerable refusal rate | 0.061 | 66 |
 | tier C | no correct answer exists | refusal rate | 1.0 | 12 |
 
 Tier C's 12 questions are on topics verified absent from the corpus; the pipeline should decline all of them. Every answerable refusal counted above scored correctness 0.0, so without this rate the failure is hidden inside a low correctness value instead of named.
+
+Provenance: 17 questions that this run scored have since been removed from the golden set, and are left out of every figure above. They asked for figures produced by running a KNIME or Spark exercise — a percentage of a dataset, a cluster number, the name of a column — which no lecture transcript states, so tier A's ground truth that the corpus can answer the question did not hold for them. While they were in the tier they scored correctness 0.265 over 17 of them, 12 of them scoring 0.0 and 9 refused, so every tier A mean above is higher than in any earlier copy of this report partly for that reason. That is a change in which questions are measured, not a change in the pipeline, so the superseded figures are discarded rather than kept beside these. `build_golden.py`'s `EXCLUDED_QUIZZES` and `EXCLUDED_QUESTIONS` name each removed question with its reason.

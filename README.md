@@ -129,7 +129,7 @@ A judge model scoring its own pipeline's answers will flatter them, and an evalu
 layer that cannot tell a repaired ruler from a changed pipeline will report noise as
 progress. Three ideas follow, and they are most of the design.
 
-**Ground truth is partitioned by what kind of ground truth it is.** Tier A is 83 course
+**Ground truth is partitioned by what kind of ground truth it is.** Tier A is 66 course
 quiz questions with answer keys the course authors wrote. Tier C is 12 questions on
 topics verified absent from the corpus, where declining to answer is the only correct
 behaviour. Each tier is scored only on what its own ground truth supports, and the tiers
@@ -188,6 +188,7 @@ was to the metric's validity, not its value.
 | [`golden/report.md`](golden/report.md) | the current measurement, every value carrying the number of questions it was taken over |
 | [`docs/adr/0001-three-tier-golden-dataset.md`](docs/adr/0001-three-tier-golden-dataset.md) | why ground truth is partitioned at all, why tier metrics are never averaged, and why no model takes part in a labelling decision |
 | [`docs/adr/0003-retiring-the-generated-retrieval-tier.md`](docs/adr/0003-retiring-the-generated-retrieval-tier.md) | why the tier that measured retrieval was retired, and why no threshold would have saved it |
+| [`docs/adr/0004-questions-the-corpus-cannot-answer-leave-tier-a.md`](docs/adr/0004-questions-the-corpus-cannot-answer-leave-tier-a.md) | why 17 questions left Tier A, what every figure it moved, and why the hands-on finding was dissolved rather than answered |
 | [`docs/adr/0002-faithfulness-judged-without-the-reference-answer.md`](docs/adr/0002-faithfulness-judged-without-the-reference-answer.md) | the pre-registered experiment above |
 | [`golden/judge_calibration.json`](golden/judge_calibration.json) | that experiment's raw result, thresholds and all |
 | [`GLOSSARY.md`](GLOSSARY.md) | the project's own vocabulary, including which words it refuses to use for which metric |
@@ -197,35 +198,67 @@ was to the metric's validity, not its value.
 Judge is `openai/gpt-oss-20b`, which is deliberately not the generator. Generation sees the
 top 5 chunks.
 
-**Tier A** — 83 quiz questions, human answer keys
+**Tier A** — 66 quiz questions, human answer keys
 
 | correctness | faithfulness | relevancy | cited a video+time | timestamp valid | answerable refusal |
 |---|---|---|---|---|---|
-| 0.761 | 0.787 | 0.792 | 0.831 | 0.936 (of 70) | **0.157** |
+| 0.889 | 0.861 | 0.912 | 0.924 | 0.935 (of 62) | **0.061** |
+
+> These are not comparable with any earlier copy of this table. The tier held 83
+> questions until 17 were removed on 2026-10-23, because their answers were figures
+> produced by running a KNIME or Spark exercise — a percentage of a dataset, a cluster
+> number, a column name — which no lecture transcript states, so Tier A's ground truth
+> that the corpus can answer the question never held for them. Those 17 had scored
+> correctness 0.265, so every figure above rises partly for that reason. What changed is
+> which questions are measured, not the pipeline. See
+> [`docs/adr/0004-questions-the-corpus-cannot-answer-leave-tier-a.md`](docs/adr/0004-questions-the-corpus-cannot-answer-leave-tier-a.md).
 
 **Tier C** — 12 unanswerable questions: refusal rate **1.0**. Read beside Tier A's
 answerable refusal rate, never on its own — a pipeline that declined everything would
 score 1.0 here and look perfect.
 
-**Retrieval — awaiting labels.** The tier that carried `recall@k` and `precision@k` was
-retired, and the machinery that replaces it is in place: `golden/labelsheet.md` holds all
-83 Tier A questions with their candidate shortlists, and `precision@k`, `precision@k_max`
-and `recall@k` are re-derived offline from the stored run as the sheet is marked. No
-question is labelled yet, so the report still states retrieval as unmeasured. This is a
-gap, not a result — until a question carries gold chunks, no claim about retrieval quality
-over it is supported in either direction.
+**Retrieval** — measured for the first time, over the **33 of 66** Tier A questions whose
+gold chunks are labelled by hand so far.
+
+| k | recall@k | precision@k | ceiling (`precision@k_max`) |
+|---|---|---|---|
+| 1 | 0.265 | 0.545 | 1.0 |
+| 3 | 0.629 | 0.465 | 0.727 |
+| 5 | **0.778** | 0.345 | 0.461 |
+| 10 | 0.917 | 0.206 | 0.230 |
+
+Generation is scored on the top 5, so `recall@5` 0.778 is the figure that bears on the
+answers: about a fifth of the material the labeller judged necessary never reaches the
+generator. Read each precision against the ceiling beside it, not against 1.0 — the
+labelled questions average 2.3 gold chunks, so `precision@5` cannot exceed 0.461. At that
+reading retrieval is using 75% of the precision available to it at k=5, and ranks a gold
+chunk first 54% of the time.
+
+The remaining 33 questions are unlabelled and absent from every figure above rather than
+scored zero in it; the report prints the count beside each one.
 
 ## What is weak, stated plainly
 
-- **15.7% of answerable Tier A questions were refused.** Every one scored correctness 0.0,
-  so without naming this rate the failure hides inside a low correctness score.
-- **Hands-on questions are the worst area**: the 10 Tier A questions about clicking through
-  KNIME or Spark score 0.40 correctness, and 6 of 10 were refused.
-- **Machine learning trails graph analytics** on correctness, 0.733 against 0.81.
-- **Retrieval is unmeasured**, and it is the half of a RAG pipeline this report says
-  nothing about. What restores it is labelling time, not code: the sheet is built and the
-  metrics re-derive from the run already stored, so the figures appear as questions are
-  marked.
+- **A fifth of the material an answer needed never reaches the generator.** `recall@5` is
+  0.778 over the 33 labelled questions, and generation runs on the top 5. This is the
+  first measured retrieval figure this project has had, and it is the clearest target
+  left: `recall@10` is 0.917, so most of the missing material is ranked 6th to 10th
+  rather than absent from the index.
+- **The top-ranked chunk is a gold chunk 54% of the time** (`precision@1` 0.545 against a
+  ceiling of 1.0), which is the figure a reranker would move.
+- **6.1% of answerable Tier A questions are still refused** — 4 of 66. Every one scored
+  correctness 0.0, so without naming this rate the failure hides inside a low correctness
+  score. It was 15.7% of 83 before the 17 removals, and 9 of those 17 were refusals the
+  pipeline was arguably right to make.
+- **Graph analytics now trails machine learning** on correctness, 0.81 against 0.96. The
+  direction has reversed: machine learning was the weaker course at 0.733, and its weak
+  questions were disproportionately the exercise questions now removed. Graph analytics is
+  also the half that is **entirely unlabelled**, so none of its retrieval is measured.
+- **The hands-on finding was dissolved, not answered.** The earlier 0.40 correctness over
+  10 hands-on questions is gone: 9 of those 10 were asking for exercise output the corpus
+  does not contain. One hands-on question remains, which supports no claim. Whether the
+  pipeline is genuinely weak at hands-on material is now untested, and testing it needs
+  hands-on questions whose answers the lectures actually state.
 - **Retrieval is dense-only.** There is no hybrid or lexical fallback and no reranking.
 
 ## Running the evaluation

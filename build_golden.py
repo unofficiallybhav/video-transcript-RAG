@@ -73,6 +73,56 @@ OPTION_DEPENDENT_RE = re.compile(
 )
 NUMERIC_ANSWER_RE = re.compile(r"[\d.,%\s]+")
 
+# An answer key that is itself an "all of the above" option. `OPTION_DEPENDENT_RE` above
+# catches these when the giveaway is in the question, but on three quiz questions it sat
+# only in the key — "All of these statements are true." — so the question survived parsing
+# as a bare stem with an answer naming options that are no longer there. Anchored at the
+# start, so an answer that merely mentions all of several things is untouched.
+ANSWER_IS_ALL_OPTIONS_RE = re.compile(r"^all of (these|the above|them)\b", re.I)
+
+# Quizzes that walk through a KNIME or Spark exercise rather than lecture content. Every
+# answer in them is a figure from the exercise's own dataset — a percentage, a cluster
+# number, a column name — so no transcript chunk can answer them and no retrieval metric
+# over them would mean anything. They are dropped at parse rather than labelled: tier A's
+# ground truth is that the corpus can answer the question, per ADR 0001, and these do not
+# meet it. Removed on the labeller's instruction, 2026-10-23.
+EXCLUDED_QUIZZES = {
+    "Quiz 7 - Classification in KNIME and Spark":
+        "every question asks for a figure produced by running the KNIME or Spark "
+        "exercise, not for anything the lectures state",
+    "Quiz 9 - Model Evaluation in KNIME and Spark":
+        "as Quiz 7: the answers are accuracy figures and confusion matrix cells from "
+        "the exercise's own run",
+}
+
+# The same kind of question, inside quizzes that are otherwise lecture-based. Each was
+# marked `[-]` on the label sheet by a human who looked through its candidate chunks for
+# a gold chunk and found the corpus holds none; `golden/labelsheet.md` is that evidence.
+# Listed by id with its reason rather than caught by a rule, because "the answer is a
+# figure from the exercise dataset" has no reliable spelling.
+EXCLUDED_QUESTIONS = {
+    "A-Quiz 11 - Cluster Analysis in Spark-1":
+        "answer is a proportion computed from the weather dataset (99.4%)",
+    "A-Quiz 11 - Cluster Analysis in Spark-5":
+        "answer is a cluster number from the labeller's own k-means run",
+    "A-Quiz 11 - Cluster Analysis in Spark-6":
+        "answer describes the contents of specific clusters from that run",
+    "A-Quiz 11 - Cluster Analysis in Spark-7":
+        "answer is a cluster number from a 20-cluster run with a given seed",
+    "A-Quiz 5 - Handling Missing Values in KNIME and Spark-4":
+        "answer is the name of a column in the exercise's dataset",
+}
+
+
+def is_excluded(qid):
+    """Whether a question id was deliberately dropped from tier A, and not merely absent.
+
+    A question removed on purpose is not a lost label, so reading a mark for one is not
+    an error — which is the difference `label_rows`' orphan check needs to be told about.
+    """
+    return (qid in EXCLUDED_QUESTIONS
+            or any(qid.startswith(f"A-{quiz}-") for quiz in EXCLUDED_QUIZZES))
+
 STOPWORDS = {
     "a", "an", "the", "is", "are", "was", "were", "be", "been", "of", "in", "on", "to",
     "for", "with", "and", "or", "but", "if", "then", "that", "this", "these", "those",
@@ -179,6 +229,8 @@ def keep_question(question, answer):
     """Drops questions that cannot stand on their own once the options are gone."""
     if OPTION_DEPENDENT_RE.search(question):
         return False
+    if ANSWER_IS_ALL_OPTIONS_RE.match(answer.strip()):
+        return False
     if answer.strip().lower() in ("true", "false"):
         return False
     # bare numbers are answers to knime click-through exercises, not lecture content
@@ -190,12 +242,20 @@ def keep_question(question, answer):
 def parse_all():
     rows = []
     skipped = []
+    excluded = []
     for folder, course in COURSES.items():
         for path in sorted((EVALS_DIR / folder).glob("Quiz*.md")):
+            if path.stem in EXCLUDED_QUIZZES:
+                excluded.append(f"{path.stem} (whole quiz): {EXCLUDED_QUIZZES[path.stem]}")
+                continue
             found = parse_quiz(path, course)
             if not found:
                 skipped.append(path.name)
-            rows.extend(found)
+            for row in found:
+                if row["id"] in EXCLUDED_QUESTIONS:
+                    excluded.append(f"{row['id']}: {EXCLUDED_QUESTIONS[row['id']]}")
+                else:
+                    rows.append(row)
 
     GOLDEN_DIR.mkdir(exist_ok=True)
     TIER_A_PATH.write_text(json.dumps(rows, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -207,6 +267,8 @@ def parse_all():
     print(f"  multi-answer:     {sum(1 for r in rows if r['multi_answer'])}")
     for name in skipped:
         print(f"  skipped (no usable questions): {name}")
+    for line in excluded:
+        print(f"  excluded: {line}")
     return rows
 
 
@@ -242,6 +304,13 @@ def load_chunks():
 # is total to prevent. Surrounding whitespace is therefore insignificant (`[]`, `[ ]` and
 # `[ x ]` all mean what they look like) and anything else raises.
 QUESTION_MARK_RE = re.compile(r"^- \[([^\]]*)\] question `([^`]+)`")
+# A line the human wrote themselves: why several chunks are ticked, why one that looks
+# right was rejected, why a question should go. It is reasoning no signal on the sheet
+# carries, so it is read back, written back on regeneration, and stored on the row.
+NOTE_RE = re.compile(r"^\*\*Note:\*\*\s*(.+)$")
+# `## `the question id`` opens a question's section. It is what tells a note written
+# above a question line from one written below the previous question's candidates.
+SECTION_RE = re.compile(r"^## `([^`]+)`")
 CANDIDATE_MARK_RE = re.compile(r"^\s*- \[([^\]]*)\] chunk `([^`]+)`")
 
 # Read, never written: ADR 0001 keeps a model out of every labelling decision, and which
@@ -270,16 +339,33 @@ def labelsheet_marks(sheet):
     verdicts = {}
     unknown = []
     current = None
+    pending_notes = []
 
     for line in sheet.splitlines():
+        if SECTION_RE.match(line):
+            # a new section closes the previous question, so a note below this line
+            # belongs to the question this section is about and not to the last one
+            current, pending_notes = None, []
+            continue
+
+        found = NOTE_RE.match(line)
+        if found:
+            # notes are written above the question line in a generated sheet and below
+            # it by hand just as readily; both are kept, in the order they were written
+            note = found.group(1).strip()
+            (current["notes"] if current else pending_notes).append(note)
+            continue
+
         found = QUESTION_MARK_RE.match(line)
         if found:
             mark, qid = found.group(1).strip().lower(), found.group(2)
             if mark not in QUESTION_MARKS:
                 unknown.append(f"question {qid} marked [{found.group(1)}]")
-                current = None
+                current, pending_notes = None, []
                 continue
-            current = {"status": QUESTION_MARKS[mark], "gold": []}
+            current = {"status": QUESTION_MARKS[mark], "gold": [],
+                       "notes": pending_notes}
+            pending_notes = []
             verdicts[qid] = current
             continue
 
@@ -349,7 +435,7 @@ An unrecognised mark stops the stage rather than being skipped, naming the id, b
 this file is the only copy of these labels.
 """
 
-LABEL_FIELDS = ("gold_chunks", "no_gold_in_corpus")
+LABEL_FIELDS = ("gold_chunks", "no_gold_in_corpus", "label_note")
 
 
 def render_labelsheet(entries, marks):
@@ -363,7 +449,8 @@ def render_labelsheet(entries, marks):
     """
     lines = [SHEET_HEADER]
     for entry in entries:
-        verdict = marks.get(entry["id"], {"status": "unlabelled", "gold": []})
+        verdict = marks.get(entry["id"], {"status": "unlabelled", "gold": [],
+                                          "notes": []})
         gold = set(verdict["gold"])
         question_mark = "-" if verdict["status"] == "no_gold_in_corpus" else " "
 
@@ -374,6 +461,12 @@ def render_labelsheet(entries, marks):
             "",
             f"**Answer key:** {entry['answer']}",
             "",
+        ]
+        # the human's own lines, written back above the marks exactly where they put
+        # them: a note is work the sheet holds the only copy of, like a tick
+        for note in verdict.get("notes", ()):
+            lines += [f"**Note:** {note}", ""]
+        lines += [
             f"- [{question_mark}] question `{entry['id']}` — "
             f"{entry['quiz']}{', hands-on' if entry['hands_on'] else ''}",
         ]
@@ -444,6 +537,9 @@ def label_rows(rows, marks, known_chunks=None):
             row["gold_chunks"] = list(verdict["gold"])
         elif verdict and verdict["status"] == "no_gold_in_corpus":
             row["no_gold_in_corpus"] = True
+        # the reasoning behind a label, stored beside it so it outlives the sheet
+        if verdict and verdict.get("notes"):
+            row["label_note"] = " ".join(verdict["notes"])
         labelled.append(row)
     return labelled
 
@@ -557,6 +653,16 @@ def write_gold():
         sys.exit(f"{TIER_A_PATH} not found; run `parse` first")
 
     marks = labelsheet_marks(LABELSHEET_PATH.read_text(encoding="utf-8"))
+
+    # a mark on a question that was deliberately excluded is an honoured judgement, not
+    # a lost one, so it is dropped quietly here rather than raising the orphan check
+    dropped = sorted(qid for qid in marks if is_excluded(qid))
+    marks = {qid: verdict for qid, verdict in marks.items() if qid not in dropped}
+    if dropped:
+        print(f"ignoring marks on {len(dropped)} question(s) excluded from tier A:")
+        for qid in dropped:
+            print(f"  {qid}")
+
     rows = json.loads(TIER_A_PATH.read_text(encoding="utf-8"))
     chunks = load_chunks()
     rows = label_rows(rows, marks,

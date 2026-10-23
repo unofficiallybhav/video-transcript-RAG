@@ -287,6 +287,47 @@ def test_a_ticked_chunk_dropped_from_the_shortlist_is_kept_as_a_candidate():
     assert labelsheet_marks(rendered)["A-q1"]["gold"] == ["dropped.mp4:3"]
 
 
+def test_a_note_is_read_back_against_its_question():
+    """A note is the human's reasoning, and the sheet is the only place it exists.
+
+    Notes record why several chunks are ticked, or why a chunk that looks right was
+    rejected — judgements no signal on the sheet carries and nothing else records.
+    """
+    marked = sheet(QUESTION.format(mark=" "),
+                   "**Note:** the answer straddles the chunk boundary",
+                   CANDIDATE.format(mark="x", cid="a.mp4:0"))
+    assert labelsheet_marks(marked)["A-q1"]["notes"] == [
+        "the answer straddles the chunk boundary"]
+
+
+def test_a_note_survives_regeneration_like_a_mark():
+    marks = {"A-q1": {"status": "labelled", "gold": ["a.mp4:0"],
+                      "notes": ["both chunks are needed"]}}
+    rendered = render_labelsheet([entry()], marks)
+    verdict = labelsheet_marks(rendered)["A-q1"]
+    assert verdict["notes"] == ["both chunks are needed"]
+    assert verdict["gold"] == ["a.mp4:0"]
+
+
+def test_several_notes_on_one_question_all_survive():
+    marks = {"A-q1": {"status": "labelled", "gold": ["a.mp4:0"],
+                      "notes": ["first thought", "second thought"]}}
+    rendered = render_labelsheet([entry()], marks)
+    assert labelsheet_marks(rendered)["A-q1"]["notes"] == ["first thought",
+                                                           "second thought"]
+
+
+def test_a_question_with_no_note_reads_back_with_none():
+    assert labelsheet_marks(render_labelsheet([entry()], {}))["A-q1"]["notes"] == []
+
+
+def test_a_note_is_stored_on_the_labelled_row():
+    """The reasoning travels into the tier, so it outlives the sheet it was written on."""
+    rows = label_rows([question()], {"A-q1": {"status": "labelled", "gold": ["a.mp4:0"],
+                                              "notes": ["the answer spans two chunks"]}})
+    assert rows[0]["label_note"] == "the answer spans two chunks"
+
+
 def test_an_unmarked_sheet_reads_back_as_wholly_unlabelled():
     """The first sheet asserts nothing, so the report's denominator starts at zero."""
     verdicts = labelsheet_marks(render_labelsheet([entry("A-q1"), entry("A-q2")], {}))

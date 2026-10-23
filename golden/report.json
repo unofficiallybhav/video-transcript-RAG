@@ -1,24 +1,24 @@
 {
   "summary": {
-    "generated": "2026-10-21T09:32:04",
+    "generated": "2026-10-23T16:14:38",
     "generation_k": 5,
     "judge_model": "openai/gpt-oss-20b",
     "tier_a": {
-      "questions": 83,
-      "faithfulness": 0.787,
-      "faithfulness_n": 83,
-      "relevancy": 0.792,
-      "relevancy_n": 83,
-      "correctness": 0.761,
-      "correctness_n": 83,
-      "citation_present": 0.831,
-      "citation_present_n": 83,
-      "citation_video_valid": 0.981,
-      "citation_video_valid_n": 69,
-      "citation_time_valid": 0.936,
-      "citation_time_valid_n": 70,
-      "answerable_refusal_rate": 0.157,
-      "answerable_refusal_rate_n": 83
+      "questions": 66,
+      "faithfulness": 0.861,
+      "faithfulness_n": 66,
+      "relevancy": 0.912,
+      "relevancy_n": 66,
+      "correctness": 0.889,
+      "correctness_n": 66,
+      "citation_present": 0.924,
+      "citation_present_n": 66,
+      "citation_video_valid": 0.986,
+      "citation_video_valid_n": 61,
+      "citation_time_valid": 0.935,
+      "citation_time_valid_n": 62,
+      "answerable_refusal_rate": 0.061,
+      "answerable_refusal_rate_n": 66
     },
     "tier_a_by_course": {
       "graph analytics": {
@@ -37,47 +37,119 @@
         "citation_time_valid_n": 27
       },
       "machine learning": {
-        "questions": 52,
-        "faithfulness": 0.79,
-        "faithfulness_n": 52,
-        "relevancy": 0.769,
-        "relevancy_n": 52,
-        "correctness": 0.733,
-        "correctness_n": 52,
-        "citation_present": 0.827,
-        "citation_present_n": 52,
-        "citation_video_valid": 0.969,
-        "citation_video_valid_n": 43,
-        "citation_time_valid": 0.919,
-        "citation_time_valid_n": 43
+        "questions": 35,
+        "faithfulness": 0.931,
+        "faithfulness_n": 35,
+        "relevancy": 0.982,
+        "relevancy_n": 35,
+        "correctness": 0.96,
+        "correctness_n": 35,
+        "citation_present": 1.0,
+        "citation_present_n": 35,
+        "citation_video_valid": 0.976,
+        "citation_video_valid_n": 35,
+        "citation_time_valid": 0.914,
+        "citation_time_valid_n": 35
       }
     },
     "tier_a_hands_on": {
-      "questions": 10,
-      "faithfulness": 0.4,
-      "faithfulness_n": 10,
-      "relevancy": 0.4,
-      "relevancy_n": 10,
-      "correctness": 0.4,
-      "correctness_n": 10,
-      "citation_present": 0.4,
-      "citation_present_n": 10,
-      "citation_video_valid": 0.875,
-      "citation_video_valid_n": 4,
-      "citation_time_valid": 0.875,
-      "citation_time_valid_n": 4
+      "questions": 1,
+      "faithfulness": 1.0,
+      "faithfulness_n": 1,
+      "relevancy": 1.0,
+      "relevancy_n": 1,
+      "correctness": 1.0,
+      "correctness_n": 1,
+      "citation_present": 1.0,
+      "citation_present_n": 1,
+      "citation_video_valid": 1.0,
+      "citation_video_valid_n": 1,
+      "citation_time_valid": 1.0,
+      "citation_time_valid_n": 1
     },
     "tier_a_labels": {
-      "questions": 83,
-      "labelled": 0,
+      "questions": 66,
+      "labelled": 33,
       "no_gold_in_corpus": 0,
-      "unlabelled": 83
+      "unlabelled": 33
     },
     "tier_a_retrieval": {
-      "questions": 0
+      "questions": 33,
+      "faithfulness": 0.977,
+      "faithfulness_n": 33,
+      "relevancy": 0.981,
+      "relevancy_n": 33,
+      "correctness": 0.958,
+      "correctness_n": 33,
+      "citation_present": 1.0,
+      "citation_present_n": 33,
+      "citation_video_valid": 0.985,
+      "citation_video_valid_n": 33,
+      "citation_time_valid": 0.924,
+      "citation_time_valid_n": 33,
+      "precision@1": 0.545,
+      "precision@1_n": 33,
+      "precision@1_max": 1.0,
+      "precision@1_max_n": 33,
+      "recall@1": 0.265,
+      "recall@1_n": 33,
+      "precision@3": 0.465,
+      "precision@3_n": 33,
+      "precision@3_max": 0.727,
+      "precision@3_max_n": 33,
+      "recall@3": 0.629,
+      "recall@3_n": 33,
+      "precision@5": 0.345,
+      "precision@5_n": 33,
+      "precision@5_max": 0.461,
+      "precision@5_max_n": 33,
+      "recall@5": 0.778,
+      "recall@5_n": 33,
+      "precision@10": 0.206,
+      "precision@10_n": 33,
+      "precision@10_max": 0.23,
+      "precision@10_max_n": 33,
+      "recall@10": 0.917,
+      "recall@10_n": 33
     },
     "tier_a_retrieval_hands_on": {
-      "questions": 0
+      "questions": 1,
+      "faithfulness": 1.0,
+      "faithfulness_n": 1,
+      "relevancy": 1.0,
+      "relevancy_n": 1,
+      "correctness": 1.0,
+      "correctness_n": 1,
+      "citation_present": 1.0,
+      "citation_present_n": 1,
+      "citation_video_valid": 1.0,
+      "citation_video_valid_n": 1,
+      "citation_time_valid": 1.0,
+      "citation_time_valid_n": 1,
+      "precision@1": 1.0,
+      "precision@1_n": 1,
+      "precision@1_max": 1.0,
+      "precision@1_max_n": 1,
+      "recall@1": 0.25,
+      "recall@1_n": 1,
+      "precision@3": 1.0,
+      "precision@3_n": 1,
+      "precision@3_max": 1.0,
+      "precision@3_max_n": 1,
+      "recall@3": 0.75,
+      "recall@3_n": 1,
+      "precision@5": 0.8,
+      "precision@5_n": 1,
+      "precision@5_max": 0.8,
+      "precision@5_max_n": 1,
+      "recall@5": 1.0,
+      "recall@5_n": 1,
+      "precision@10": 0.4,
+      "precision@10_n": 1,
+      "precision@10_max": 0.4,
+      "precision@10_max_n": 1,
+      "recall@10": 1.0,
+      "recall@10_n": 1
     },
     "tier_c": {
       "questions": 12,
@@ -85,6 +157,13 @@
       "refusal_rate_n": 12
     },
     "superseded_faithfulness": 0,
+    "removed_from_golden": {
+      "questions": 17,
+      "correctness": 0.265,
+      "correctness_n": 17,
+      "zero_correctness": 12,
+      "refused": 9
+    },
     "unscored": 0
   },
   "results": [
@@ -120,7 +199,25 @@
       "refused": false,
       "note": "Answer fully matches the reference, directly supported by the retrieved context, and addresses the question without any padding.",
       "faithfulness_note": "The answer correctly identifies classification and regression as supervised categories, which is implied by the context listing them as main categories, but the retrieved excerpts do not explicitly state that these two are supervised, so the claim is only partially supported.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "categories of machine learning.mp4:0",
+        "categories of machine learning.mp4:6",
+        "categories of machine learning.mp4:4",
+        "regression overview.mp4:0"
+      ],
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 1.0,
+      "recall@3": 0.25,
+      "precision@5": 0.4,
+      "precision@5_max": 0.8,
+      "recall@5": 0.5,
+      "precision@10": 0.2,
+      "precision@10_max": 0.4,
+      "recall@10": 0.5
     },
     {
       "id": "A-Quiz 1 - Machine Learning Overview-4",
@@ -153,7 +250,23 @@
       "refused": false,
       "note": "The answer fully supports the claim with retrieved context, directly addresses the question, and matches the reference answer.",
       "faithfulness_note": "All factual statements in the answer are directly supported by the retrieved context: the definition of unsupervised approaches as using unlabeled data, the unknown target, and the mention of cluster analysis and association analysis as unsupervised methods.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "categories of machine learning.mp4:5",
+        "categories of machine learning.mp4:6"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.5,
+      "precision@3": 0.6666666666666666,
+      "precision@3_max": 0.6666666666666666,
+      "recall@3": 1.0,
+      "precision@5": 0.4,
+      "precision@5_max": 0.4,
+      "recall@5": 1.0,
+      "precision@10": 0.2,
+      "precision@10_max": 0.2,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 1 - Machine Learning Overview-5",
@@ -186,7 +299,25 @@
       "refused": false,
       "note": "The answer accurately lists the five steps, matches the reference, and is fully supported by the retrieved context.",
       "faithfulness_note": "All steps are directly supported by the context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "machine learning process.mp4:0",
+        "goal and activities in machine learning process.mp4:0",
+        "goal and activities in machine learning process.mp4:6",
+        "machine learning process.mp4:1"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.25,
+      "precision@3": 0.6666666666666666,
+      "precision@3_max": 1.0,
+      "recall@3": 0.5,
+      "precision@5": 0.6,
+      "precision@5_max": 0.8,
+      "recall@5": 0.75,
+      "precision@10": 0.4,
+      "precision@10_max": 0.4,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 1 - Machine Learning Overview-6",
@@ -220,7 +351,24 @@
       "refused": false,
       "note": "The answer fully supports the claim with cited sources, directly addresses the question, and matches the reference answer.",
       "faithfulness_note": "All claims are directly supported by the transcript excerpts.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "machine learning process.mp4:0",
+        "goal and activities in machine learning process.mp4:8",
+        "machine learning process.mp4:2"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.3333333333333333,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 1.0,
+      "recall@3": 0.3333333333333333,
+      "precision@5": 0.6,
+      "precision@5_max": 0.6,
+      "recall@5": 1.0,
+      "precision@10": 0.3,
+      "precision@10_max": 0.3,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 1 - Machine Learning Overview-8",
@@ -253,7 +401,25 @@
       "refused": false,
       "note": "All claims are supported by the context, directly answer the question, and match the reference answer.",
       "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context: KNIME’s GUI‑based drag‑and‑drop workflow, Spark MLlib’s code‑centric, scalable library running on Spark’s distributed engine, and its use for large‑dataset processing are all mentioned in the transcript.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "knime and spark ml.mp4:3",
+        "knime and spark ml.mp4:2",
+        "knime and spark ml.mp4:0",
+        "knime and spark ml.mp4:1"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.25,
+      "precision@3": 1.0,
+      "precision@3_max": 1.0,
+      "recall@3": 0.75,
+      "precision@5": 0.8,
+      "precision@5_max": 0.8,
+      "recall@5": 1.0,
+      "precision@10": 0.4,
+      "precision@10_max": 0.4,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-1",
@@ -287,7 +453,24 @@
       "refused": false,
       "note": "The answer fully matches the reference and is fully supported by the context.",
       "faithfulness_note": "All claims are directly supported by the context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "regression overview.mp4:1",
+        "categories of machine learning.mp4:2",
+        "categories of machine learning.mp4:1"
+      ],
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.6666666666666666,
+      "precision@3_max": 1.0,
+      "recall@3": 0.6666666666666666,
+      "precision@5": 0.4,
+      "precision@5_max": 0.6,
+      "recall@5": 0.6666666666666666,
+      "precision@10": 0.2,
+      "precision@10_max": 0.3,
+      "recall@10": 0.6666666666666666
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-3",
@@ -320,7 +503,24 @@
       "refused": false,
       "note": "Answer directly matches the reference and is fully supported by the retrieved context.",
       "faithfulness_note": "The answer accurately reflects the retrieved context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "linear regression.mp4:2",
+        "linear regression.mp4:1",
+        "linear regression.mp4:3"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.3333333333333333,
+      "precision@3": 0.6666666666666666,
+      "precision@3_max": 1.0,
+      "recall@3": 0.6666666666666666,
+      "precision@5": 0.6,
+      "precision@5_max": 0.6,
+      "recall@5": 1.0,
+      "precision@10": 0.3,
+      "precision@10_max": 0.3,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-4",
@@ -353,7 +553,22 @@
       "refused": false,
       "note": "Faithfulness is lower because the hyperplane claim is not supported by the retrieved context, but relevancy and correctness are full.",
       "faithfulness_note": "The first claim (simple linear regression uses one input variable and a straight‑line fit) is fully supported by the context. The second claim (multiple linear regression extends to two or more inputs and fits a hyperplane) is only partially supported—the extension to multiple inputs is mentioned, but the hyperplane detail is not present in the retrieved material.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "linear regression.mp4:2"
+      ],
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 0.3333333333333333,
+      "recall@3": 1.0,
+      "precision@5": 0.2,
+      "precision@5_max": 0.2,
+      "recall@5": 1.0,
+      "precision@10": 0.1,
+      "precision@10_max": 0.1,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-5",
@@ -386,40 +601,23 @@
       "refused": false,
       "note": "The answer fully matches the reference and is supported by the context.",
       "faithfulness_note": "The answer accurately reflects statements in the retrieved context about clustering goals.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-6",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": false,
-      "question": "Cluster results can be used to",
-      "answer": "**Short version:**  \nCluster results can be applied in several ways:  \n\n* **Data segmentation** – split customers (or any items) into groups to understand preferences and tailor marketing.  \n* **Classifying new samples** – compute similarity to cluster centers and assign the new item to the nearest cluster.  \n* **Generating labeled data** – use the manually‑determined cluster labels as targets for a supervised classification model.  \n* **Anomaly detection** – flag samples that are far from all cluster centers as outliers for further review.  \n* **Other domain uses** – segment weather patterns, group news articles by topic, or locate crime hotspots.\n\n**Sources:**  \n* *cluster analysis.mp4* – 04:40 (segmentation, marketing, classifying new samples)  \n* *cluster analysis.mp4* – 05:45 (using cluster labels for classification, anomaly detection)  \n* *cluster analysis.mp4* – 01:06 (examples like weather patterns, news topics, crime hotspots)",
-      "retrieved": [
-        "cluster analysis.mp4:4",
+      "faithfulness_judge": "split",
+      "gold_chunks": [
         "cluster analysis.mp4:1",
-        "cluster analysis.mp4:0",
-        "cluster analysis.mp4:5",
-        "categories of machine learning.mp4:2",
-        "k means clustering.mp4:3",
-        "cluster analysis.mp4:6",
-        "k means clustering.mp4:0",
-        "cluster analysis.mp4:3",
-        "cluster analysis in spark.mp4:4"
+        "k means clustering.mp4:0"
       ],
-      "citation_present": 1.0,
-      "citation_video_valid": 1.0,
-      "citation_time_valid": 1.0,
-      "cited_videos": [
-        "cluster analysis.mp4"
-      ],
-      "faithfulness": 1.0,
-      "relevancy": 1.0,
-      "correctness": 1.0,
-      "refused": false,
-      "note": "All claims are supported by the context, directly answer the question, and fully agree with the reference.",
-      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context, covering segmentation, classification of new samples, generating labeled data, anomaly detection, and domain-specific uses.",
-      "faithfulness_judge": "split"
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.5,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 0.6666666666666666,
+      "recall@3": 0.5,
+      "precision@5": 0.2,
+      "precision@5_max": 0.4,
+      "recall@5": 0.5,
+      "precision@10": 0.2,
+      "precision@10_max": 0.2,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-7",
@@ -452,7 +650,22 @@
       "refused": false,
       "note": "Answer directly matches the reference and is fully supported by the retrieved context.",
       "faithfulness_note": "The answer accurately reflects the definition of a cluster centroid as the mean of the samples assigned to that cluster, which is directly supported by the retrieved context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "k means clustering.mp4:6"
+      ],
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.0,
+      "precision@3_max": 0.3333333333333333,
+      "recall@3": 0.0,
+      "precision@5": 0.2,
+      "precision@5_max": 0.2,
+      "recall@5": 1.0,
+      "precision@10": 0.1,
+      "precision@10_max": 0.1,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-8",
@@ -485,7 +698,23 @@
       "refused": false,
       "note": "All factual claims are supported by the context; the answer directly addresses the question but adds extra detail beyond the minimal reference, so correctness is slightly lower.",
       "faithfulness_note": "All claims are directly supported by the retrieved context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "k means clustering.mp4:0",
+        "k means clustering.mp4:1"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.5,
+      "precision@3": 0.6666666666666666,
+      "precision@3_max": 0.6666666666666666,
+      "recall@3": 1.0,
+      "precision@5": 0.4,
+      "precision@5_max": 0.4,
+      "recall@5": 1.0,
+      "precision@10": 0.2,
+      "precision@10_max": 0.2,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-9",
@@ -519,7 +748,24 @@
       "refused": false,
       "note": "All scores are 1.00 because the answer is fully supported by the context, directly addresses the question, and matches the reference answer.",
       "faithfulness_note": "The answer accurately reflects the retrieved context, which explicitly states that the goal of association analysis is to generate rules capturing associations between items or events.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "intro to association analysis.mp4:0",
+        "categories of machine learning.mp4:3",
+        "intro to association analysis.mp4:3"
+      ],
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 1.0,
+      "recall@3": 0.3333333333333333,
+      "precision@5": 0.4,
+      "precision@5_max": 0.6,
+      "recall@5": 0.6666666666666666,
+      "precision@10": 0.3,
+      "precision@10_max": 0.3,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-11",
@@ -552,7 +798,22 @@
       "refused": false,
       "note": "Answer directly matches the reference, is fully supported by the retrieved context, and addresses the question precisely.",
       "faithfulness_note": "The answer accurately reflects the definition of support as described in the context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "association analysis in detail.mp4:4"
+      ],
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.0,
+      "precision@3_max": 0.3333333333333333,
+      "recall@3": 0.0,
+      "precision@5": 0.0,
+      "precision@5_max": 0.2,
+      "recall@5": 0.0,
+      "precision@10": 0.1,
+      "precision@10_max": 0.1,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 10 - Regression, Cluster Analysis and Association Analysis-12",
@@ -585,40 +846,23 @@
       "refused": false,
       "note": "The answer accurately states that rule confidence is used to prune low‑confidence rules, fully supported by the retrieved context and matching the reference answer.",
       "faithfulness_note": "The answer accurately reflects the context.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 11 - Cluster Analysis in Spark-1",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": false,
-      "question": "What percentage of samples have 0 for rain_accumulation?",
-      "answer": "**Answer:** The transcript notes that, after filtering the data to about 160 k rows, “almost all” of the observations have a value of 0 for rain accumulation (and rain duration). This implies that roughly 100 % of the samples in the filtered data frame have 0 rain accumulation.\n\n**Source:** *cluster analysis in spark.mp4* @ 01:21.",
-      "retrieved": [
-        "data exploration using spark.mp4:3",
-        "cluster analysis in spark.mp4:1",
-        "classification using decision tree in knime.mp4:1",
-        "classification using decision tree in knime.mp4:2",
-        "evaluation of a decision tree in knime.mp4:3",
-        "handling missing values in knime.mp4:3",
-        "metrics to evaluate model.mp4:3",
-        "classification using decision tree in knime.mp4:0",
-        "data exploration using summary statistics.mp4:5",
-        "exploring data with knime.mp4:1"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "association analysis in detail.mp4:4",
+        "association analysis in detail.mp4:5"
       ],
-      "citation_present": 1.0,
-      "citation_video_valid": 1.0,
-      "citation_time_valid": 1.0,
-      "cited_videos": [
-        "cluster analysis in spark.mp4"
-      ],
-      "faithfulness": 0.5,
-      "relevancy": 0.9,
-      "correctness": 0.5,
-      "refused": false,
-      "note": "The answer is supported by the context and addresses the question, but it gives an approximate 100% instead of the precise 99.4%, so correctness is only partial.",
-      "faithfulness_note": "The answer correctly notes that almost all samples have 0 for rain_accumulation, but incorrectly claims 100% which is not supported by the context.",
-      "faithfulness_judge": "split"
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.5,
+      "precision@3": 0.6666666666666666,
+      "precision@3_max": 0.6666666666666666,
+      "recall@3": 1.0,
+      "precision@5": 0.4,
+      "precision@5_max": 0.4,
+      "recall@5": 1.0,
+      "precision@10": 0.2,
+      "precision@10_max": 0.2,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 11 - Cluster Analysis in Spark-2",
@@ -651,7 +895,23 @@
       "refused": false,
       "note": "The answer is fully supported by the context, directly addresses the question, and aligns with the reference answer.",
       "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "cluster analysis.mp4:2",
+        "feature transformation.mp4:0"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.5,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 0.6666666666666666,
+      "recall@3": 0.5,
+      "precision@5": 0.2,
+      "precision@5_max": 0.4,
+      "recall@5": 0.5,
+      "precision@10": 0.1,
+      "precision@10_max": 0.2,
+      "recall@10": 0.5
     },
     {
       "id": "A-Quiz 11 - Cluster Analysis in Spark-4",
@@ -687,134 +947,6 @@
       "faithfulness_judge": "split"
     },
     {
-      "id": "A-Quiz 11 - Cluster Analysis in Spark-5",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": false,
-      "question": "Just by looking at the values for the cluster centers, which cluster contains samples with the lowest relative humidity?",
-      "answer": "**Short answer:**  \nThe transcript only tells us that *all* of the “dry‑day” clusters (those shown starting at 05:25 in **“cluster analysis in spark.mp4”**) have relative humidity below 0.5. It does not name a single cluster as having the absolute lowest humidity; the lowest‑humidity samples are simply among those dry‑day clusters.\n\n**Source:**  \n- **Video:** *cluster analysis in spark.mp4*  \n- **Timestamp:** 05:25 – 06:52 (discussion of dry‑day clusters and their relative‑humidity values)",
-      "retrieved": [
-        "evaluation of a decision tree in knime.mp4:3",
-        "cluster analysis in spark.mp4:4",
-        "cluster analysis in spark.mp4:5",
-        "classification using decision tree in knime.mp4:2",
-        "k means clustering.mp4:2",
-        "cluster analysis.mp4:1",
-        "k means clustering.mp4:1",
-        "k means clustering.mp4:3",
-        "exploring data with knime.mp4:5",
-        "cluster analysis in spark.mp4:0"
-      ],
-      "citation_present": 1.0,
-      "citation_video_valid": 1.0,
-      "citation_time_valid": 1.0,
-      "cited_videos": [
-        "cluster analysis in spark.mp4"
-      ],
-      "faithfulness": 1.0,
-      "relevancy": 0.0,
-      "correctness": 0.0,
-      "refused": false,
-      "note": "Faithful to the transcript but does not answer the question, so relevancy and correctness are zero.",
-      "faithfulness_note": "All factual claims in the answer are supported by the retrieved context.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 11 - Cluster Analysis in Spark-6",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": false,
-      "question": "What do clusters 7, 8, and 11 have in common?",
-      "answer": "I dont have information about that.",
-      "retrieved": [
-        "cluster analysis.mp4:1",
-        "k means clustering.mp4:6",
-        "k means clustering.mp4:0",
-        "cluster analysis.mp4:6",
-        "cluster analysis.mp4:4",
-        "cluster analysis in spark.mp4:5",
-        "cluster analysis in spark.mp4:4",
-        "k means clustering.mp4:1",
-        "cluster analysis.mp4:5",
-        "k means clustering.mp4:3"
-      ],
-      "citation_present": 0.0,
-      "citation_video_valid": null,
-      "citation_time_valid": null,
-      "cited_videos": [],
-      "faithfulness": 1.0,
-      "relevancy": 0.0,
-      "correctness": 0.0,
-      "refused": true,
-      "note": "No factual claims were made, so faithfulness is 1.00, but the answer does not address the question or match the reference, yielding 0.00 for relevancy and correctness.",
-      "faithfulness_note": "The answer simply states that no information is available, which is consistent with the retrieved context that contains no details about clusters 7, 8, and 11.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 11 - Cluster Analysis in Spark-7",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": false,
-      "question": "If we perform clustering with 20 clusters (and seed = 1), which cluster appears to identify Santa Ana conditions (lowest humidity and highest wind speeds)?",
-      "answer": "I dont have information about that.",
-      "retrieved": [
-        "cluster analysis in spark.mp4:5",
-        "cluster analysis in spark.mp4:4",
-        "cluster analysis.mp4:1",
-        "evaluation of a decision tree in knime.mp4:3",
-        "cluster analysis in spark.mp4:0",
-        "k means clustering.mp4:3",
-        "community analysis.mp4:2",
-        "k means clustering.mp4:2",
-        "cluster analysis.mp4:6",
-        "modulariy.mp4:3"
-      ],
-      "citation_present": 0.0,
-      "citation_video_valid": null,
-      "citation_time_valid": null,
-      "cited_videos": [],
-      "faithfulness": 0.0,
-      "relevancy": 0.0,
-      "correctness": 0.0,
-      "refused": true,
-      "note": "The answer contains no factual claims, does not address the question, and does not match the reference answer.",
-      "faithfulness_note": "The answer claims no information is available, which contradicts the retrieved context that identifies cluster 5 as Santa Ana conditions; thus no factual claim is supported.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 2 - Data Exploration-1",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": false,
-      "question": "Which of these statements is true about samples and variables?",
-      "answer": "**True statement:**  \nA *sample* (also called a record, example, row, instance, or observation) is a single instance or example of an entity in your dataset—typically represented as a row. A *variable* (also called a feature, column, dimension, attribute, or field) is a specific characteristic of each sample, holding a digital value with a data type (e.g., numeric or categorical).  \n\n**Source:** *data terminology.mp4* – 00:00 (introduction of sample and variable) and 01:18 (alternative terms).",
-      "retrieved": [
-        "data terminology.mp4:3",
-        "data terminology.mp4:1",
-        "data terminology.mp4:0",
-        "data quality.mp4:1",
-        "data quality.mp4:0",
-        "regression overview.mp4:3",
-        "data exploration.mp4:3",
-        "k nearest neighbors.mp4:1",
-        "addressing data quality.mp4:1",
-        "data exploration using summary statistics.mp4:6"
-      ],
-      "citation_present": 1.0,
-      "citation_video_valid": 1.0,
-      "citation_time_valid": 1.0,
-      "cited_videos": [
-        "data terminology.mp4"
-      ],
-      "faithfulness": 1.0,
-      "relevancy": 0.2,
-      "correctness": 0.0,
-      "refused": false,
-      "note": "The answer accurately reflects the retrieved context but does not address the question or match the reference answer.",
-      "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
-      "faithfulness_judge": "split"
-    },
-    {
       "id": "A-Quiz 2 - Data Exploration-2",
       "tier": "A",
       "course": "machine learning",
@@ -845,7 +977,22 @@
       "refused": false,
       "note": "The answer is fully supported by the context and directly addresses the question, but it adds extra terms beyond the reference list, so it receives partial credit for correctness.",
       "faithfulness_note": "All claims are supported by the context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "data terminology.mp4:1"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 1.0,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 0.3333333333333333,
+      "recall@3": 1.0,
+      "precision@5": 0.2,
+      "precision@5_max": 0.2,
+      "recall@5": 1.0,
+      "precision@10": 0.1,
+      "precision@10_max": 0.1,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 2 - Data Exploration-3",
@@ -878,7 +1025,25 @@
       "refused": false,
       "note": "Answer is largely faithful, relevant, and correct, matching the reference.",
       "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "data exploration.mp4:3",
+        "data exploration.mp4:0",
+        "goal and activities in machine learning process.mp4:1",
+        "data exploration using summary statistics.mp4:6"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.25,
+      "precision@3": 1.0,
+      "precision@3_max": 1.0,
+      "recall@3": 0.75,
+      "precision@5": 0.6,
+      "precision@5_max": 0.8,
+      "recall@5": 0.75,
+      "precision@10": 0.3,
+      "precision@10_max": 0.4,
+      "recall@10": 0.75
     },
     {
       "id": "A-Quiz 2 - Data Exploration-4",
@@ -911,7 +1076,23 @@
       "refused": false,
       "note": "Answer directly matches the reference and is fully supported by the retrieved context.",
       "faithfulness_note": "The answer accurately reflects the two categories mentioned in the context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "data exploration.mp4:0",
+        "data exploration.mp4:3"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.5,
+      "precision@3": 0.6666666666666666,
+      "precision@3_max": 0.6666666666666666,
+      "recall@3": 1.0,
+      "precision@5": 0.4,
+      "precision@5_max": 0.4,
+      "recall@5": 1.0,
+      "precision@10": 0.2,
+      "precision@10_max": 0.2,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 2 - Data Exploration-6",
@@ -944,7 +1125,22 @@
       "refused": false,
       "note": "Answer fully matches the reference and is supported by the retrieved context.",
       "faithfulness_note": "The answer correctly cites skewness and kurtosis as measures of shape, directly supported by the context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "data exploration using summary statistics.mp4:2"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 1.0,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 0.3333333333333333,
+      "recall@3": 1.0,
+      "precision@5": 0.2,
+      "precision@5_max": 0.2,
+      "recall@5": 1.0,
+      "precision@10": 0.1,
+      "precision@10_max": 0.1,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 4 - Data Preparation-2",
@@ -978,7 +1174,22 @@
       "refused": false,
       "note": "All scores are 1.00 because the answer correctly and fully matches the reference and is supported by the context.",
       "faithfulness_note": "The statement is directly supported by the transcript.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "addressing data quality.mp4:1"
+      ],
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 0.3333333333333333,
+      "recall@3": 1.0,
+      "precision@5": 0.2,
+      "precision@5_max": 0.2,
+      "recall@5": 1.0,
+      "precision@10": 0.1,
+      "precision@10_max": 0.1,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 4 - Data Preparation-3",
@@ -1011,7 +1222,23 @@
       "refused": false,
       "note": "The answer directly matches the reference, is fully supported by the context, and precisely addresses the question.",
       "faithfulness_note": "The answer directly quotes the definition of an outlier from the context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "data quality.mp4:3",
+        "data quality.mp4:2"
+      ],
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 0.6666666666666666,
+      "recall@3": 0.5,
+      "precision@5": 0.2,
+      "precision@5_max": 0.4,
+      "recall@5": 0.5,
+      "precision@10": 0.1,
+      "precision@10_max": 0.2,
+      "recall@10": 0.5
     },
     {
       "id": "A-Quiz 4 - Data Preparation-7",
@@ -1044,38 +1271,22 @@
       "refused": false,
       "note": "Answer fully matches the reference and is supported by the retrieved context.",
       "faithfulness_note": "The answer correctly states the mean and standard deviation as 0 and 1, which is directly supported by the context.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 5 - Handling Missing Values in KNIME and Spark-4",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": false,
-      "question": "Which column in the weather dataset has the most number of missing values?",
-      "answer": "I dont have information about that.",
-      "retrieved": [
-        "data exploration using spark.mp4:2",
-        "handling missing values in spark.mp4:1",
-        "handling missing values in knime.mp4:1",
-        "handling missing values in spark.mp4:2",
-        "handling missing values in knime.mp4:3",
-        "exploring data with knime.mp4:1",
-        "classification using decision tree in knime.mp4:0",
-        "classification using decision tree in knime.mp4:1",
-        "cluster analysis in spark.mp4:1",
-        "data exploration using summary statistics.mp4:5"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "feature transformation.mp4:1"
       ],
-      "citation_present": 0.0,
-      "citation_video_valid": null,
-      "citation_time_valid": null,
-      "cited_videos": [],
-      "faithfulness": 0.0,
-      "relevancy": 0.0,
-      "correctness": 0.0,
-      "refused": true,
-      "note": "The answer gives no information, so it is unsupported, irrelevant, and incorrect.",
-      "faithfulness_note": "The answer claims no information is available, which is not supported by the context that discusses missing values per column.",
-      "faithfulness_judge": "split"
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 0.3333333333333333,
+      "recall@3": 1.0,
+      "precision@5": 0.2,
+      "precision@5_max": 0.2,
+      "recall@5": 1.0,
+      "precision@10": 0.1,
+      "precision@10_max": 0.1,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 5 - Handling Missing Values in KNIME and Spark-5",
@@ -1143,7 +1354,24 @@
       "refused": false,
       "note": "The answer incorrectly states Phase 4 instead of the training phase, so it is not faithful or correct, though it does address the question.",
       "faithfulness_note": "The answer correctly states that model parameters are adjusted during the modeling (Phase 4) stage, which is supported by the context that describes building a model in Phase 4 and adjusting parameters during training.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "building and applying a classification model.mp4:3",
+        "k nearest neighbors.mp4:3",
+        "regression overview.mp4:2"
+      ],
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.0,
+      "precision@3_max": 1.0,
+      "recall@3": 0.0,
+      "precision@5": 0.0,
+      "precision@5_max": 0.6,
+      "recall@5": 0.0,
+      "precision@10": 0.2,
+      "precision@10_max": 0.3,
+      "recall@10": 0.6666666666666666
     },
     {
       "id": "A-Quiz 6 - Classification-3",
@@ -1177,7 +1405,24 @@
       "refused": false,
       "note": "The answer directly states Naive Bayes, cites supporting context, and matches the reference answer exactly.",
       "faithfulness_note": "The claim that Naive Bayes uses a probabilistic approach is directly supported by the retrieved context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "naive bayes.mp4:0",
+        "naive bayes.mp4:10",
+        "classification algorithms.mp4:1"
+      ],
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.6666666666666666,
+      "precision@3_max": 1.0,
+      "recall@3": 0.6666666666666666,
+      "precision@5": 0.6,
+      "precision@5_max": 0.6,
+      "recall@5": 1.0,
+      "precision@10": 0.3,
+      "precision@10_max": 0.3,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 6 - Classification-4",
@@ -1210,40 +1455,24 @@
       "refused": false,
       "note": "The answer directly states that k represents the number of nearest neighbors, fully supported by the context and matching the reference.",
       "faithfulness_note": "The answer accurately reflects the retrieved context, which states that k represents the number of nearest neighbors considered.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 6 - Classification-6",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": false,
-      "question": "Which statement is true of tree induction?",
-      "answer": "**True statement:**  \nThe tree‑induction algorithm uses a greedy approach that selects the best split for the data at each node, but this does **not** guarantee the globally optimal tree for the entire dataset.\n\n**Source:** *decision tree.mp4* – 11:12.",
-      "retrieved": [
-        "decision tree.mp4:5",
-        "decision tree.mp4:1",
-        "decision tree.mp4:6",
-        "decision tree.mp4:9",
-        "overfitting in a decision tree.mp4:0",
-        "overfitting in a decision tree.mp4:1",
-        "overfitting in a decision tree.mp4:2",
-        "decision tree.mp4:8",
-        "decision tree.mp4:4",
-        "decision tree.mp4:10"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "k nearest neighbors.mp4:1",
+        "k nearest neighbors.mp4:2",
+        "classification algorithms.mp4:0"
       ],
-      "citation_present": 1.0,
-      "citation_video_valid": 1.0,
-      "citation_time_valid": 1.0,
-      "cited_videos": [
-        "decision tree.mp4"
-      ],
-      "faithfulness": 1.0,
-      "relevancy": 0.5,
-      "correctness": 0.0,
-      "refused": false,
-      "note": "The claim is supported by the context, but the answer only gives one statement instead of all, so it partially addresses the question but does not match the reference.",
-      "faithfulness_note": "The claim that tree induction uses a greedy approach and does not guarantee a globally optimal tree is directly supported by the retrieved context.",
-      "faithfulness_judge": "split"
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.3333333333333333,
+      "precision@3": 0.6666666666666666,
+      "precision@3_max": 1.0,
+      "recall@3": 0.6666666666666666,
+      "precision@5": 0.4,
+      "precision@5_max": 0.6,
+      "recall@5": 0.6666666666666666,
+      "precision@10": 0.2,
+      "precision@10_max": 0.3,
+      "recall@10": 0.6666666666666666
     },
     {
       "id": "A-Quiz 6 - Classification-7",
@@ -1276,7 +1505,24 @@
       "refused": false,
       "note": "All scores are 1.00 because the answer is fully supported by the context, directly addresses the question, and matches the reference answer.",
       "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "naive bayes.mp4:0",
+        "naive bayes.mp4:7",
+        "naive bayes.mp4:1"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.3333333333333333,
+      "precision@3": 0.6666666666666666,
+      "precision@3_max": 1.0,
+      "recall@3": 0.6666666666666666,
+      "precision@5": 0.4,
+      "precision@5_max": 0.6,
+      "recall@5": 0.6666666666666666,
+      "precision@10": 0.3,
+      "precision@10_max": 0.3,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 6 - Classification-8",
@@ -1309,133 +1555,22 @@
       "refused": false,
       "note": "The answer accurately reflects the independence assumption, is fully supported by the context, and directly answers the question.",
       "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 7 - Classification in KNIME and Spark-1",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": true,
-      "question": "KNIME: In configuring the Numeric Binner node, what would happen if the definition for the humidity_low bin is changed from ``` ] -infinity ... 25.0 [ to ] -infinity ... 25.0 ] ``` (i.e., the last bracket is changed from [ to ] ?",
-      "answer": "I dont have information about that.",
-      "retrieved": [
-        "exploring data with knime.mp4:5",
-        "knime and spark ml.mp4:1",
-        "classification using decision tree in knime.mp4:0",
-        "handling missing values in knime.mp4:1",
-        "classification using decision tree in knime.mp4:1",
-        "evaluation of a decision tree in knime.mp4:0",
-        "exploring data with knime.mp4:3",
-        "exploring data with knime.mp4:4",
-        "evaluation of a decision tree in knime.mp4:1",
-        "handling missing values in knime.mp4:2"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "naive bayes.mp4:9"
       ],
-      "citation_present": 0.0,
-      "citation_video_valid": null,
-      "citation_time_valid": null,
-      "cited_videos": [],
-      "faithfulness": 0.0,
-      "relevancy": 0.0,
-      "correctness": 0.0,
-      "refused": true,
-      "note": "The answer does not provide any factual claim, so it is not faithful, irrelevant, or correct, and it explicitly refuses to answer.",
-      "faithfulness_note": "The answer claims no information is available, but the retrieved context does contain relevant details, so the claim is unsupported.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 7 - Classification in KNIME and Spark-2",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": true,
-      "question": "KNIME: Considering the Numeric Binner node again, what would happen if the “Append new column” box is not checked?",
-      "answer": "**Short answer:**  \nIf the “Append new column” box is not checked in the Numeric Binner node, the binned (categorical) values will replace the original numeric column instead of being added as a separate new column.\n\n**Source:**  \n*exploring data with knime.mp4 @ 07:25* – the transcript shows the user checking “Append this new column” to create a separate column called *low humidity day*. The implication is that without checking this option, the new column would not be created, so the original column would be overwritten.",
-      "retrieved": [
-        "handling missing values in knime.mp4:1",
-        "knime and spark ml.mp4:1",
-        "exploring data with knime.mp4:5",
-        "evaluation of a decision tree in knime.mp4:0",
-        "classification using decision tree in knime.mp4:4",
-        "handling missing values in knime.mp4:3",
-        "exploring data with knime.mp4:4",
-        "handling missing values in knime.mp4:2",
-        "classification using decision tree in knime.mp4:0",
-        "classification in spark.mp4:2"
-      ],
-      "citation_present": 1.0,
-      "citation_video_valid": 1.0,
-      "citation_time_valid": 1.0,
-      "cited_videos": [
-        "exploring data with knime.mp4"
-      ],
-      "faithfulness": 0.0,
-      "relevancy": 1.0,
-      "correctness": 1.0,
-      "refused": false,
-      "note": "Answer directly matches the reference and is fully supported by the transcript.",
-      "faithfulness_note": "The answer asserts that unchecked 'Append new column' causes the original numeric column to be overwritten, but the provided transcript only shows the user checking the option and does not describe the behavior when it is unchecked. Thus the claim is unsupported by the context.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 7 - Classification in KNIME and Spark-5",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": true,
-      "question": "KNIME: What are the target and predicted class labels for the first sample in the test set?",
-      "answer": "I dont have information about that.",
-      "retrieved": [
-        "k nearest neighbors.mp4:1",
-        "k nearest neighbors.mp4:0",
-        "k nearest neighbors.mp4:2",
-        "k nearest neighbors.mp4:3",
-        "knime and spark ml.mp4:1",
-        "using a validation set.mp4:7",
-        "classification.mp4:3",
-        "evaluation of a decision tree in knime.mp4:0",
-        "building and applying a classification model.mp4:4",
-        "classification.mp4:1"
-      ],
-      "citation_present": 0.0,
-      "citation_video_valid": null,
-      "citation_time_valid": null,
-      "cited_videos": [],
-      "faithfulness": 0.0,
-      "relevancy": 0.0,
-      "correctness": 0.0,
-      "refused": true,
-      "note": "The answer gives no factual claim, is irrelevant to the question, and does not match the reference; it effectively refuses to answer.",
-      "faithfulness_note": "The answer states the system lacks information, but the retrieved context does not support this claim; it neither confirms nor denies the lack of data, so the claim is unsupported.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 7 - Classification in KNIME and Spark-6",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": true,
-      "question": "Spark: What values are in the number column?",
-      "answer": "I dont have information about that.",
-      "retrieved": [
-        "handling missing values in spark.mp4:0",
-        "classification in spark.mp4:1",
-        "building a degree histogram.mp4:0",
-        "data exploration using spark.mp4:1",
-        "data exploration using spark.mp4:2",
-        "knime and spark ml.mp4:3",
-        "building a graph.mp4:1",
-        "classification in spark.mp4:0",
-        "intro to graph.mp4:0",
-        "association analysis in detail.mp4:1"
-      ],
-      "citation_present": 0.0,
-      "citation_video_valid": null,
-      "citation_time_valid": null,
-      "cited_videos": [],
-      "faithfulness": 1.0,
-      "relevancy": 0.0,
-      "correctness": 0.0,
-      "refused": true,
-      "note": "The answer gives no factual claim, fails to address the question, and does not match the reference answer.",
-      "faithfulness_note": "The answer makes no factual claim about the number column, so it is fully consistent with the retrieved context.",
-      "faithfulness_judge": "split"
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.0,
+      "precision@3_max": 0.3333333333333333,
+      "recall@3": 0.0,
+      "precision@5": 0.2,
+      "precision@5_max": 0.2,
+      "recall@5": 1.0,
+      "precision@10": 0.1,
+      "precision@10_max": 0.1,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 8 - Model Evaluation-1",
@@ -1468,7 +1603,24 @@
       "refused": false,
       "note": "The answer fully matches the reference, is directly supported by the retrieved context, and directly addresses the question.",
       "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "generalization and overfitting.mp4:1",
+        "generalization and overfitting.mp4:3",
+        "using a validation set.mp4:0"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.3333333333333333,
+      "precision@3": 0.6666666666666666,
+      "precision@3_max": 1.0,
+      "recall@3": 0.6666666666666666,
+      "precision@5": 0.4,
+      "precision@5_max": 0.6,
+      "recall@5": 0.6666666666666666,
+      "precision@10": 0.3,
+      "precision@10_max": 0.3,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 8 - Model Evaluation-2",
@@ -1501,7 +1653,24 @@
       "refused": false,
       "note": "Answer directly matches the reference and is fully supported by the retrieved context.",
       "faithfulness_note": "The answer is fully supported by the retrieved context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "generalization and overfitting.mp4:2",
+        "using a validation set.mp4:1",
+        "using a validation set.mp4:2"
+      ],
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 1.0,
+      "recall@3": 0.3333333333333333,
+      "precision@5": 0.2,
+      "precision@5_max": 0.6,
+      "recall@5": 0.3333333333333333,
+      "precision@10": 0.3,
+      "precision@10_max": 0.3,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 8 - Model Evaluation-3",
@@ -1535,7 +1704,24 @@
       "refused": false,
       "note": "The answer correctly states pre‑pruning and post‑pruning, fully supported by the context and directly answers the question.",
       "faithfulness_note": "All factual claims about pre‑pruning and post‑pruning as methods to avoid overfitting are directly supported by the retrieved lecture transcript.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "overfitting in a decision tree.mp4:1",
+        "overfitting in a decision tree.mp4:0",
+        "overfitting in a decision tree.mp4:2"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.3333333333333333,
+      "precision@3": 1.0,
+      "precision@3_max": 1.0,
+      "recall@3": 1.0,
+      "precision@5": 0.6,
+      "precision@5_max": 0.6,
+      "recall@5": 1.0,
+      "precision@10": 0.3,
+      "precision@10_max": 0.3,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 8 - Model Evaluation-6",
@@ -1568,7 +1754,23 @@
       "refused": false,
       "note": "Answer fully supports the reference and directly addresses the question.",
       "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "metrics to evaluate model.mp4:1",
+        "confusion matrix.mp4:4"
+      ],
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 0.6666666666666666,
+      "recall@3": 0.5,
+      "precision@5": 0.2,
+      "precision@5_max": 0.4,
+      "recall@5": 0.5,
+      "precision@10": 0.2,
+      "precision@10_max": 0.2,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 8 - Model Evaluation-7",
@@ -1601,7 +1803,22 @@
       "refused": false,
       "note": "All scores are 1.00 because the answer correctly and fully matches the reference and is supported by the context.",
       "faithfulness_note": "All factual claims in the answer are directly supported by the retrieved context.",
-      "faithfulness_judge": "split"
+      "faithfulness_judge": "split",
+      "gold_chunks": [
+        "metrics to evaluate model.mp4:4"
+      ],
+      "precision@1": 1.0,
+      "precision@1_max": 1.0,
+      "recall@1": 1.0,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 0.3333333333333333,
+      "recall@3": 1.0,
+      "precision@5": 0.2,
+      "precision@5_max": 0.2,
+      "recall@5": 1.0,
+      "precision@10": 0.1,
+      "precision@10_max": 0.1,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 8 - Model Evaluation-8",
@@ -1634,167 +1851,23 @@
       "refused": false,
       "note": "The answer fully matches the reference and is supported by the context.",
       "faithfulness_note": "The answer accurately reflects the definition of accuracy from the confusion matrix as stated in the retrieved context.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-1",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": true,
-      "question": "KNIME: In the confusion matrix as viewed in the Scorer node, low_humidity_day is:",
-      "answer": "**Short answer:**  \nIn the Scorer (confusion‑matrix) node, **`low_humidity_day`** is the **original/true class column** that indicates whether a day’s humidity is “low” or “not low”. It is used as the reference (ground‑truth) against which the decision‑tree predictions are compared.\n\n**Source:** *evaluation of a decision tree in knime.mp4* – discussed from the start of the video (00:00) and reiterated when the confusion matrix is described (01:13).",
-      "retrieved": [
-        "evaluation of a decision tree in knime.mp4:0",
-        "classification using decision tree in knime.mp4:0",
-        "evaluation of a decision tree in knime.mp4:3",
-        "evaluation of a decision tree in knime.mp4:1",
-        "exploring data with knime.mp4:5",
-        "knime and spark ml.mp4:1",
-        "handling missing values in knime.mp4:1",
-        "confusion matrix.mp4:5",
-        "evaluation of a decision tree in spark.mp4:2",
-        "classification using decision tree in knime.mp4:2"
-      ],
-      "citation_present": 1.0,
-      "citation_video_valid": 0.5,
-      "citation_time_valid": 0.5,
-      "cited_videos": [
-        "confusion matrix.mp4",
-        "evaluation of a decision tree in knime.mp4"
-      ],
-      "faithfulness": 1.0,
-      "relevancy": 1.0,
-      "correctness": 1.0,
-      "refused": false,
-      "note": "The answer correctly identifies low_humidity_day as the target class label, directly addresses the question, and is fully supported by the provided context.",
-      "faithfulness_note": "The answer correctly states that low_humidity_day is the true class column used in the Scorer node, which is supported by the context describing its creation and use in the confusion matrix.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-2",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": true,
-      "question": "KNIME: In the confusion matrix, what is the difference between low_humidity_day and Prediction(low_humidity_day)?",
-      "answer": "**Short answer:**  \n- **low_humidity_day** – the original (true) class label in the data that tells whether the humidity at 3 p.m. is “low” or “not low.”  \n- **Prediction(low_humidity_day)** – the class label that the decision‑tree model predicts for each observation.  \n\nThe confusion matrix compares these two columns: the rows (or columns, depending on the software) contain the true low_humidity_day values, while the other axis contains the model’s Prediction(low_humidity_day) values, allowing you to see how many cases were correctly or incorrectly classified.\n\n**Source:** *evaluation of a decision tree in knime.mp4* @ 00:00 (where the original column and the prediction column are set up).",
-      "retrieved": [
-        "evaluation of a decision tree in knime.mp4:0",
-        "classification using decision tree in knime.mp4:0",
-        "evaluation of a decision tree in knime.mp4:3",
-        "confusion matrix.mp4:5",
+      "faithfulness_judge": "split",
+      "gold_chunks": [
         "confusion matrix.mp4:4",
-        "knime and spark ml.mp4:1",
-        "exploring data with knime.mp4:5",
-        "confusion matrix.mp4:3",
-        "confusion matrix.mp4:2",
-        "evaluation of a decision tree in knime.mp4:1"
+        "confusion matrix.mp4:3"
       ],
-      "citation_present": 1.0,
-      "citation_video_valid": 1.0,
-      "citation_time_valid": 1.0,
-      "cited_videos": [
-        "evaluation of a decision tree in knime.mp4"
-      ],
-      "faithfulness": 1.0,
-      "relevancy": 1.0,
-      "correctness": 1.0,
-      "refused": false,
-      "note": "The answer accurately states that low_humidity_day is the true label and Prediction(low_humidity_day) is the model’s predicted label, fully supported by the context and matching the reference.",
-      "faithfulness_note": "All factual claims are supported by the retrieved context.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-3",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": true,
-      "question": "KNIME: In the Table View of the Interactive Table, each row is color-coded. Blue specifies:",
-      "answer": "I dont have information about that.",
-      "retrieved": [
-        "k nearest neighbors.mp4:1",
-        "knime and spark ml.mp4:1",
-        "evaluation of a decision tree in knime.mp4:2",
-        "handling missing values in knime.mp4:1",
-        "intro to neo4j.mp4:3",
-        "classification using decision tree in knime.mp4:4",
-        "evaluation of a decision tree in knime.mp4:0",
-        "knime and spark ml.mp4:0",
-        "exploring data using plots.mp4:6",
-        "indegree and outdegree.mp4:1"
-      ],
-      "citation_present": 0.0,
-      "citation_video_valid": null,
-      "citation_time_valid": null,
-      "cited_videos": [],
-      "faithfulness": 0.0,
-      "relevancy": 0.0,
-      "correctness": 0.0,
-      "refused": true,
-      "note": "The answer neither cites any retrieved evidence nor addresses the question, so all scores are zero and it is a refusal.",
-      "faithfulness_note": "The answer states a lack of information, which is not supported by any factual claim in the retrieved context.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-4",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": true,
-      "question": "KNIME: To change the colors used to color-code each sample in the Table View of the Interactive Table node:",
-      "answer": "I dont have information about that.",
-      "retrieved": [
-        "k nearest neighbors.mp4:1",
-        "knime and spark ml.mp4:1",
-        "classification using decision tree in knime.mp4:2",
-        "intro to neo4j.mp4:3",
-        "knime and spark ml.mp4:0",
-        "evaluation of a decision tree in knime.mp4:2",
-        "handling missing values in knime.mp4:1",
-        "giraph and graphx.mp4:4",
-        "classification using decision tree in knime.mp4:4",
-        "cluster analysis in spark.mp4:3"
-      ],
-      "citation_present": 0.0,
-      "citation_video_valid": null,
-      "citation_time_valid": null,
-      "cited_videos": [],
-      "faithfulness": 0.0,
-      "relevancy": 0.0,
-      "correctness": 0.0,
-      "refused": true,
-      "note": "Answer gives no information, so all scores are zero.",
-      "faithfulness_note": "The answer states the system lacks information, but the retrieved context does not support this claim; it actually contains relevant details about color settings.",
-      "faithfulness_judge": "split"
-    },
-    {
-      "id": "A-Quiz 9 - Model Evaluation in KNIME and Spark-5",
-      "tier": "A",
-      "course": "machine learning",
-      "hands_on": true,
-      "question": "KNIME: In the Table View of the Interactive Table, the values in RowID are not consecutive because:",
-      "answer": "I dont have information about that.",
-      "retrieved": [
-        "handling missing values in knime.mp4:1",
-        "classification using decision tree in knime.mp4:4",
-        "k nearest neighbors.mp4:1",
-        "evaluation of a decision tree in knime.mp4:0",
-        "evaluation of a decision tree in knime.mp4:2",
-        "handling missing values in spark.mp4:0",
-        "knime and spark ml.mp4:1",
-        "cluster analysis in spark.mp4:3",
-        "handling missing values in knime.mp4:3",
-        "connectivity analysis with neo4j.mp4:0"
-      ],
-      "citation_present": 0.0,
-      "citation_video_valid": null,
-      "citation_time_valid": null,
-      "cited_videos": [],
-      "faithfulness": 0.0,
-      "relevancy": 0.0,
-      "correctness": 0.0,
-      "refused": true,
-      "note": "The answer gives no factual claim, is irrelevant, and does not match the reference, so all scores are zero.",
-      "faithfulness_note": "The answer provides no factual claim and does not reference any information from the retrieved context, so it is entirely unsupported.",
-      "faithfulness_judge": "split"
+      "precision@1": 0.0,
+      "precision@1_max": 1.0,
+      "recall@1": 0.0,
+      "precision@3": 0.3333333333333333,
+      "precision@3_max": 0.6666666666666666,
+      "recall@3": 0.5,
+      "precision@5": 0.4,
+      "precision@5_max": 0.4,
+      "recall@5": 1.0,
+      "precision@10": 0.2,
+      "precision@10_max": 0.2,
+      "recall@10": 1.0
     },
     {
       "id": "A-Quiz 1 - Introduction to Graphs-4",
