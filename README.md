@@ -290,9 +290,14 @@ Stages that cost provider tokens, and are not needed to read the results:
 
 ```sh
 uv run evaluate.py run         # score the pipeline end to end, resumable
+uv run evaluate.py run "<id>"  # score one question again, when its wording or key changed
 uv run evaluate.py rejudge     # re-measure faithfulness with the reference withheld
 uv run evaluate.py calibrate   # the judge calibration experiment (~73k tokens)
 ```
+
+`run <id>` overrides the checkpoint for that one question and appends the fresh row, which
+supersedes the earlier one by id. It does not render the report — one row cannot state
+figures about the whole golden set — so follow it with `rescore`.
 
 Set `PYTHONIOENCODING=utf-8` whenever an answer or report is printed: stored answers
 contain characters cp1252 cannot encode.

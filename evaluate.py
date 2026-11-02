@@ -597,18 +597,58 @@ def generate(question, context):
     return complete(rag.llm, messages=rag.answer_messages(question, context))
 
 
-def run():
+def questions_to_score(golden, done, only=None):
+    """The questions a run will retrieve, answer and judge.
+
+    Without an id this is every question the checkpoint does not already hold, which is
+    what makes a run resumable. With one it is that question alone, checkpoint or not:
+    naming an id is an instruction to score it again because something about it changed —
+    its wording, or its answer key — and the stored row no longer describes it.
+
+    An id outside the golden set exits rather than selecting nothing, so a typo cannot
+    read as a run that had nothing to do.
+    """
+    if only is None:
+        return [q for q in golden if q["id"] not in done]
+
+    chosen = [q for q in golden if q["id"] == only]
+    if not chosen:
+        sys.exit(f"{only} is not in the golden set.\n"
+                 f"Run `uv run evaluate.py run` for the whole set, or name an id that "
+                 f"{GOLDEN_PATH} holds.")
+    return chosen
+
+
+def writes_report(only=None):
+    """Whether a run renders the report when it finishes.
+
+    A single-id run does not. `golden/report.md` is a document about the whole golden
+    set, and rendering it from one row would replace every figure in it with that row's
+    own. The fresh row lands in the append-only `golden/results.jsonl`, where it
+    supersedes the earlier row for its id, and reaches the report through `rescore`.
+    """
+    return only is None
+
+
+def run(only=None):
     golden = load_golden()
     done = load_checkpoint()
-    if done:
+    pending = questions_to_score(golden, done, only)
+    if only is not None:
+        print(f"scoring 1 question: {only}"
+              + (" (already in the checkpoint; the fresh row supersedes it)"
+                 if only in done else ""))
+    elif done:
         print(f"resuming: {len(done)} of {len(golden)} already scored")
 
     GOLDEN_DIR.mkdir(exist_ok=True)
     results = []
 
+    pending_ids = {q["id"] for q in pending}
     for i, q in enumerate(golden, 1):
-        if q["id"] in done:
-            results.append(done[q["id"]])
+        if q["id"] not in pending_ids:
+            if q["id"] in done:
+                results.append(done[q["id"]])
             continue
 
         hits = retrieve(q["question"])
@@ -675,7 +715,11 @@ def run():
             summary = f"r@5={row['recall@5']:.2f} " + summary
         print(f"[{i}/{len(golden)}] {q['id'][:45]} {summary}")
 
-    write_report(results)
+    if writes_report(only):
+        write_report(results)
+    else:
+        print(f"\nWrote the fresh row to {RESULTS_PATH}. The report is not rendered from "
+              f"one question:\n  run `uv run evaluate.py rescore` to fold it in.")
 
 
 def rescore_rows(rows, chunks):
@@ -1532,7 +1576,9 @@ def report_calibration(summary):
 if __name__ == "__main__":
     stage = sys.argv[1] if len(sys.argv) > 1 else "run"
     if stage == "run":
-        run()
+        # `run <id>` scores one question again, for when its wording or its answer key
+        # changed and the stored row describes the question it used to be
+        run(only=sys.argv[2] if len(sys.argv) > 2 else None)
     elif stage == "calibrate":
         calibrate()
     elif stage == "report":
@@ -1547,4 +1593,4 @@ if __name__ == "__main__":
         rejudge()
     else:
         sys.exit("usage: evaluate.py "
-                 "[run|report|rescore|rejudge|calibrate]")
+                 "[run [question id]|report|rescore|rejudge|calibrate]")

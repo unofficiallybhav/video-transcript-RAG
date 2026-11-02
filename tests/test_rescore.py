@@ -16,6 +16,17 @@ The generated tier was retired on 2026-10-20, so its row is gone from the expect
 below rather than kept as a value nothing can reproduce. Tier A's values are unchanged
 by that removal, which is the point: the tiers were never averaged together, so dropping
 one moves nothing in another.
+
+Tier A's citation values were superseded again on 2026-10-27, by one question rather than
+by any change to the check. `A-Quiz 2 - Graph Analytics Applications-16` was restated —
+its original stem named options that parsing had already dropped, so there was nothing to
+answer — and `evaluate.py run <id>` regenerated its answer against the new wording. A
+regenerated answer carries its own citations, so the aggregate over the 83 rows moved.
+`rejudge` had superseded rows here before without moving these values, because it
+re-judges faithfulness over a stored answer and never regenerates one; this is the first
+stage that does. The other 82 rows are untouched, which is still what proves the
+re-derivation path faithful. The superseded values are not kept beside the new ones, for
+the same reason as above.
 """
 import pytest
 
@@ -23,8 +34,8 @@ import evaluate
 from build_golden import load_chunks
 
 PUBLISHED_CITATIONS = {
-    "tier_a": {"questions": 83, "citation_present": 0.831,
-               "citation_video_valid": 0.981, "citation_time_valid": 0.936},
+    "tier_a": {"questions": 83, "citation_present": 0.843,
+               "citation_video_valid": 0.981, "citation_time_valid": 0.937},
 }
 JUDGE_FIELDS = ("faithfulness", "relevancy", "correctness", "refused", "note")
 
