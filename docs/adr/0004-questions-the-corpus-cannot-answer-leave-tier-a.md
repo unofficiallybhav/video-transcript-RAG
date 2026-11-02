@@ -10,6 +10,10 @@ It does not change what any tier means.
 
 Seventeen Tier A questions are removed from the golden dataset. Tier A holds 66 questions.
 
+> Amended by `0005-restating-a-question-and-rescoring-one-answer.md`, which removes an
+> eighteenth question and restates another: Tier A holds 65. The count above is this
+> record's own, as of its date, and is left as written.
+
 They fall into two kinds:
 
 - **Fourteen ask for a figure produced by running a KNIME or Spark exercise.** "What

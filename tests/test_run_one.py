@@ -9,7 +9,9 @@ Two promises are stated here. The first is the selection itself. The second is t
 `run <id>` never writes the report: `golden/report.md` is a document about the whole
 golden set, and rendering it from one row would replace every figure in it with that
 row's own. One question's fresh row belongs in `golden/results.jsonl`, which is
-append-only and keyed last-line-wins, and reaches the report through `rescore`.
+append-only and keyed last-line-wins, and reaches the report through `rescore`. That
+second promise is one condition inside `run`, so it is asserted over `run`'s source
+rather than by calling a function written to be called by nothing but this test.
 
   uv run pytest tests/test_run_one.py
 """
@@ -17,7 +19,10 @@ from dataclasses import dataclass
 
 import pytest
 
-from evaluate import questions_to_score, writes_report
+import inspect
+
+import evaluate
+from evaluate import questions_to_score
 
 
 def q(qid, tier="A"):
@@ -85,7 +90,17 @@ def test_an_id_outside_the_golden_set_stops_the_stage():
     assert "A-nope" in str(raised.value)
 
 
-def test_a_full_run_writes_the_report_and_a_single_id_run_does_not():
-    """One row cannot render a report about the whole golden set without replacing it."""
-    assert writes_report(None) is True
-    assert writes_report("A-2") is False
+def test_the_report_is_written_only_on_the_full_run_path():
+    """One row cannot render a report about the whole golden set without replacing it.
+
+    Asserted over `run`'s source because the decision is one condition inside it rather
+    than a function of its own, and because what matters is that the single-id path
+    cannot reach `write_report` at all. A reader tempted to lift the guard out of the
+    `if` will fail here.
+    """
+    source = inspect.getsource(evaluate.run)
+    calls = [line.strip() for line in source.splitlines() if "write_report(" in line]
+    assert calls == ["write_report(results)"], calls
+    before = source.split("write_report(results)")[0].splitlines()
+    guard = [line.strip() for line in before if line.strip()][-1]
+    assert guard == "if only is None:", guard

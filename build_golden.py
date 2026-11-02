@@ -97,10 +97,14 @@ EXCLUDED_QUIZZES = {
 
 # The same kind of question, inside quizzes that are otherwise lecture-based. Each was
 # marked `[-]` on the label sheet by a human who looked through its candidate chunks for
-# a gold chunk and found the corpus holds none, or carries a note there instructing its
-# removal; `golden/labelsheet.md` is that evidence either way. Listed by id with its
-# reason rather than caught by a rule, because "the answer is a figure from the exercise
-# dataset" has no reliable spelling.
+# a gold chunk and found the corpus holds none; `golden/labelsheet.md` is that evidence.
+# Listed by id with its reason rather than caught by a rule, because "the answer is a
+# figure from the exercise dataset" has no reliable spelling.
+#
+# One entry is evidenced differently and says so, because excluding a question deletes
+# its entry from the sheet on the next `label` run: the note instructing its removal goes
+# in the reason here, quoted, since the sheet it was written on no longer holds it. ADR
+# 0005 records why that is the only durable place for it.
 EXCLUDED_QUESTIONS = {
     "A-Quiz 11 - Cluster Analysis in Spark-1":
         "answer is a proportion computed from the weather dataset (99.4%)",
@@ -114,7 +118,9 @@ EXCLUDED_QUESTIONS = {
         "answer is the name of a column in the exercise's dataset",
     "A-Quiz 4 - Graph Analytics with Neo4j-2":
         "answer is what a Cypher query returns for the exercise's own graph, which no "
-        "lecture states; removed on the labeller's note, 2026-10-27",
+        "lecture states; removed 2026-10-27 on the labeller's note, which read "
+        "\"Remove this as its an hands on question\" and was written on the sheet entry "
+        "that this exclusion then deleted",
 }
 
 # Questions restated in the tier because the authors' wording cannot stand without the
@@ -142,8 +148,8 @@ REPHRASED_QUESTIONS = {
 def apply_rephrasings(rows, table=None):
     """Parsed rows with the declared rephrasings applied, originals kept beside them.
 
-    The original question and answer ride along under `rephrased` so that a row restated
-    here is distinguishable from one carrying the authors' own words, wherever the row is
+    The authors' own question and answer key ride along under `original` so that a row
+    restated here is distinguishable from one carrying their words, wherever the row is
     read. An id in the table that matches no row exits rather than returning quietly,
     because a rephrasing that stops applying leaves the label sheet and the tier stating
     two different questions, with nothing to show which was scored.
@@ -160,9 +166,9 @@ def apply_rephrasings(rows, table=None):
 
     for qid, restated in table.items():
         row = by_id[qid]
-        row["rephrased"] = {"question": row["question"],
-                            "answer": row["answer"],
-                            "reason": restated["reason"]}
+        row["original"] = {"question": row["question"],
+                           "answer": row["answer"],
+                           "reason": restated["reason"]}
         row["question"] = restated["question"]
         row["answer"] = restated["answer"]
 

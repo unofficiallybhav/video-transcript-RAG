@@ -619,17 +619,6 @@ def questions_to_score(golden, done, only=None):
     return chosen
 
 
-def writes_report(only=None):
-    """Whether a run renders the report when it finishes.
-
-    A single-id run does not. `golden/report.md` is a document about the whole golden
-    set, and rendering it from one row would replace every figure in it with that row's
-    own. The fresh row lands in the append-only `golden/results.jsonl`, where it
-    supersedes the earlier row for its id, and reaches the report through `rescore`.
-    """
-    return only is None
-
-
 def run(only=None):
     golden = load_golden()
     done = load_checkpoint()
@@ -645,7 +634,7 @@ def run(only=None):
     results = []
 
     pending_ids = {q["id"] for q in pending}
-    for i, q in enumerate(golden, 1):
+    for q in golden:
         if q["id"] not in pending_ids:
             if q["id"] in done:
                 results.append(done[q["id"]])
@@ -713,9 +702,16 @@ def run(only=None):
                    else f"corr={row.get('correctness')} faith={row.get('faithfulness')}")
         if gold:
             summary = f"r@5={row['recall@5']:.2f} " + summary
-        print(f"[{i}/{len(golden)}] {q['id'][:45]} {summary}")
+        # counted over what this run is scoring, not over the golden set: a single-id run
+        # reporting `[53/77]` would read as a run that had skipped 52 questions
+        scored = f"[{len(results)}/{len(pending_ids)}] " if only is None else ""
+        print(f"{scored}{q['id'][:45]} {summary}")
 
-    if writes_report(only):
+    # A single-id run does not render the report. `golden/report.md` is a document about
+    # the whole golden set, and rendering it from one row would replace every figure in it
+    # with that row's own. The fresh row lands in the append-only results file, where it
+    # supersedes the earlier row for its id, and reaches the report through `rescore`.
+    if only is None:
         write_report(results)
     else:
         print(f"\nWrote the fresh row to {RESULTS_PATH}. The report is not rendered from "
@@ -1152,9 +1148,12 @@ def retrieval_section(summary):
     lines = [
         "", "## Retrieval — tier A, hand-labelled", "",
         f"**{labels['labelled']} of {labels['questions']}** tier A questions carry "
-        f"hand-labelled gold chunks. Every figure below is taken over those alone; the "
-        f"remaining {labels['unlabelled']} are not yet labelled and are absent from the "
-        f"metric rather than scored zero in it.",
+        f"hand-labelled gold chunks. Every figure below is taken over those alone"
+        + (f"; the remaining {labels['unlabelled']} are not yet labelled and are absent "
+           f"from the metric rather than scored zero in it."
+           if labels["unlabelled"] else
+           ", and every question in the tier is now labelled: none is absent from the "
+           "metric for want of a label."),
         "",
         "These labels were made by a human choosing from a shortlist that bm25 and "
         "embedding similarity ranked and annotated. No model took part in the decision, "

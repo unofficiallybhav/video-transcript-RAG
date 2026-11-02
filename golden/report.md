@@ -1,6 +1,6 @@
 # Offline evaluation report
 
-Generated 2026-10-27T11:16:57 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
+Generated 2026-11-02T16:31:54 · judge `openai/gpt-oss-20b` · generation uses top 5 chunks
 
 Faithfulness, relevancy and correctness are judge scores on a continuous 0.00-1.00 scale; each question's per-score reasoning is kept in the `note` field of `report.json`.
 
@@ -48,7 +48,7 @@ Hands-on questions are no longer a reportable slice of this tier: 1 remain, agai
 
 ## Retrieval — tier A, hand-labelled
 
-**60 of 65** tier A questions carry hand-labelled gold chunks. Every figure below is taken over those alone; the remaining 0 are not yet labelled and are absent from the metric rather than scored zero in it.
+**60 of 65** tier A questions carry hand-labelled gold chunks. Every figure below is taken over those alone, and every question in the tier is now labelled: none is absent from the metric for want of a label.
 
 These labels were made by a human choosing from a shortlist that bm25 and embedding similarity ranked and annotated. No model took part in the decision, which is what separates them from the retired generated tier's labels: those were correct by construction and said nothing about whether the question was worth asking. See `docs/adr/0001-three-tier-golden-dataset.md` for the admissible label sources and `docs/adr/0003-retiring-the-generated-retrieval-tier.md` for why this is the only one left.
 

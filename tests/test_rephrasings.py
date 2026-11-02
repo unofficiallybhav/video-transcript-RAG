@@ -52,25 +52,25 @@ CASES = [
                  "answer": "Yes. Dijkstra's algorithm has high computational complexity."},
     ),
     Case(
-        behaviour="the original wording and the reason ride along on the row, so the "
-                  "deviation from the authors' key is readable wherever the row goes",
+        behaviour="the authors' wording and the reason ride along on the row, so the "
+                  "deviation from their key is readable wherever the row goes",
         rows=[row()],
         table={"A-q1": {"question": "Is Dijkstra's algorithm computationally inefficient?",
                         "answer": "Yes. Dijkstra's algorithm has high computational complexity.",
                         "reason": "the original named options that parsing had dropped"}},
-        expects={"rephrased": {
+        expects={"original": {
             "question": "Which of the statements below is true?",
             "answer": "Dijkstra's algorithm is computationally inefficient.",
             "reason": "the original named options that parsing had dropped"}},
     ),
     Case(
         behaviour="a question absent from the table is passed through untouched, and "
-                  "carries no rephrasing marker to be mistaken for one",
+                  "carries no restatement marker to be mistaken for one",
         rows=[row(qid="A-q2"), row(qid="A-q1")],
         table={"A-q1": {"question": "q", "answer": "a", "reason": "r"}},
         expects={"question": "Which of the statements below is true?",
                  "answer": "Dijkstra's algorithm is computationally inefficient.",
-                 "rephrased": None},
+                 "original": None},
     ),
 ]
 
@@ -98,7 +98,7 @@ def test_a_rephrasing_matching_no_question_stops_the_stage():
 def test_nothing_is_rephrased_when_the_table_is_empty():
     rows = apply_rephrasings([row(), row(qid="A-q2")], {})
     assert [r["question"] for r in rows] == ["Which of the statements below is true?"] * 2
-    assert not any("rephrased" in r for r in rows)
+    assert not any("original" in r for r in rows)
 
 
 def test_the_real_table_names_only_ids_the_real_parse_keeps():

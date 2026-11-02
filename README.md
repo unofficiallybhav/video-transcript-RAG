@@ -267,13 +267,13 @@ The offline stages need no network, no API credentials and no GPU. A clone can r
 the whole report from the stored run:
 
 ```sh
-uv run pytest                  # 112 tests, no network, no credentials
+uv run pytest                  # 134 tests, no network, no credentials
 uv run evaluate.py rescore     # re-derive the judge-free metrics and rewrite the report
 ```
 
 > **Use `rescore`, not `report`.** `uv run evaluate.py report` rebuilds the report from the
 > values stored in the checkpoint rather than re-deriving them, which silently reverts
-> Tier A `citation_time_valid` from 0.936 to the superseded 0.488. After any change that
+> Tier A `citation_time_valid` from 0.937 to the superseded 0.488. After any change that
 > regenerates the report, run `rescore`.
 
 Labelling gold chunks, which also needs no provider tokens — `label` needs the qdrant

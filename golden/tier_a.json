@@ -752,7 +752,7 @@
     "answer": "Yes. Dijsktra's algorithm has high computational complexity.",
     "multi_answer": false,
     "hands_on": false,
-    "rephrased": {
+    "original": {
       "question": "Which of the statements below is true?",
       "answer": "Dijsktra's algorithm is computationally inefficient (has high computational complexity).",
       "reason": "the original was a 'which of the statements below is true' stem whose options parsing had already dropped, leaving nothing to answer; restated by the labeller, 2026-10-27"

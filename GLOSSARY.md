@@ -63,6 +63,21 @@ reported as an index gap.
 _Avoid_: unanswerable (that is tier C's property, established before the question was
 written), no match, zero recall
 
+**Restated question**:
+A tier A question whose wording, and with it the answer key, was rewritten by the labeller
+because the authors' own stem could not be answered as written — typically a "which of the
+following" whose options parsing had already dropped. Declared by id in
+`REPHRASED_QUESTIONS`, applied by `apply_rephrasings`, and the exception rather than the
+practice: `keep_question` drops most such stems, and a hole in it is to be fixed before
+reaching for a restatement
+(`docs/adr/0005-restating-a-question-and-rescoring-one-answer.md`).
+It is named as its own thing because of what it costs. Tier A is admissible because its
+answer keys come from outside the system under test, and a restated question's key does
+not; the authors' question and key are kept on the row under `original` so that any figure
+can be checked against which questions are still theirs.
+_Avoid_: fixed, corrected, cleaned up, reworded (each implies the authors were wrong
+rather than that parsing lost something); rephrased as a noun for the stored original
+
 ### Measurement
 
 **Judge-free metric**:
