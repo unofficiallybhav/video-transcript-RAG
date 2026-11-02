@@ -97,9 +97,10 @@ EXCLUDED_QUIZZES = {
 
 # The same kind of question, inside quizzes that are otherwise lecture-based. Each was
 # marked `[-]` on the label sheet by a human who looked through its candidate chunks for
-# a gold chunk and found the corpus holds none; `golden/labelsheet.md` is that evidence.
-# Listed by id with its reason rather than caught by a rule, because "the answer is a
-# figure from the exercise dataset" has no reliable spelling.
+# a gold chunk and found the corpus holds none, or carries a note there instructing its
+# removal; `golden/labelsheet.md` is that evidence either way. Listed by id with its
+# reason rather than caught by a rule, because "the answer is a figure from the exercise
+# dataset" has no reliable spelling.
 EXCLUDED_QUESTIONS = {
     "A-Quiz 11 - Cluster Analysis in Spark-1":
         "answer is a proportion computed from the weather dataset (99.4%)",
@@ -111,7 +112,61 @@ EXCLUDED_QUESTIONS = {
         "answer is a cluster number from a 20-cluster run with a given seed",
     "A-Quiz 5 - Handling Missing Values in KNIME and Spark-4":
         "answer is the name of a column in the exercise's dataset",
+    "A-Quiz 4 - Graph Analytics with Neo4j-2":
+        "answer is what a Cypher query returns for the exercise's own graph, which no "
+        "lecture states; removed on the labeller's note, 2026-10-27",
 }
+
+# Questions restated in the tier because the authors' wording cannot stand without the
+# options that parsing drops — "which of the statements below is true" names a list that
+# is no longer there. `keep_question` catches most of these and drops them; one got past
+# it and the labeller chose to restate it rather than lose the question, so the deviation
+# is declared here instead of being edited into the quiz file under `evals/`.
+#
+# This moves correctness off the authors' own answer key for the question named, which is
+# the anchor the tier A figures rest on, so each entry carries its reason and the original
+# wording is kept on the row by `apply_rephrasings`. A rephrasing whose id no longer
+# parses stops the stage rather than silently lapsing: the sheet would go on showing the
+# restated question while the tier scored the original.
+REPHRASED_QUESTIONS = {
+    "A-Quiz 2 - Graph Analytics Applications-16": {
+        "question": "Is Dijsktra's algorithm computationally inefficient?",
+        "answer": "Yes. Dijsktra's algorithm has high computational complexity.",
+        "reason": "the original was a 'which of the statements below is true' stem whose "
+                  "options parsing had already dropped, leaving nothing to answer; "
+                  "restated by the labeller, 2026-10-27",
+    },
+}
+
+
+def apply_rephrasings(rows, table=None):
+    """Parsed rows with the declared rephrasings applied, originals kept beside them.
+
+    The original question and answer ride along under `rephrased` so that a row restated
+    here is distinguishable from one carrying the authors' own words, wherever the row is
+    read. An id in the table that matches no row exits rather than returning quietly,
+    because a rephrasing that stops applying leaves the label sheet and the tier stating
+    two different questions, with nothing to show which was scored.
+    """
+    table = REPHRASED_QUESTIONS if table is None else table
+    by_id = {row["id"]: row for row in rows}
+
+    missing = sorted(qid for qid in table if qid not in by_id)
+    if missing:
+        sys.exit("rephrased question id(s) match no parsed question: "
+                 + ", ".join(missing)
+                 + "\nA rephrasing is pinned to an id. Remove the entry from "
+                   "REPHRASED_QUESTIONS, or correct the id.")
+
+    for qid, restated in table.items():
+        row = by_id[qid]
+        row["rephrased"] = {"question": row["question"],
+                            "answer": row["answer"],
+                            "reason": restated["reason"]}
+        row["question"] = restated["question"]
+        row["answer"] = restated["answer"]
+
+    return rows
 
 
 def is_excluded(qid):
@@ -256,6 +311,8 @@ def parse_all():
                     excluded.append(f"{row['id']}: {EXCLUDED_QUESTIONS[row['id']]}")
                 else:
                     rows.append(row)
+
+    rows = apply_rephrasings(rows)
 
     GOLDEN_DIR.mkdir(exist_ok=True)
     TIER_A_PATH.write_text(json.dumps(rows, indent=2, ensure_ascii=False), encoding="utf-8")
