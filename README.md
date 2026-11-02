@@ -1,4 +1,4 @@
-# video-transcript-rag
+# VIDEO-TRANSCRIPT-RAG
 
 Ask questions about a library of course lecture videos and get an answer that cites the
 video and the timestamp it came from.
@@ -13,11 +13,11 @@ Alongside it sits an offline evaluation layer that decides whether a change to t
 pipeline is actually an improvement. Most of this repo's design effort went there, and
 it is the part worth reading.
 
-## The pipeline, end to end
+## THE PIPELINE, END TO END
 
 All of it lives in [`video_transcript_rag.py`](video_transcript_rag.py).
 
-### 1. Ingestion
+### 1. INGESTION
 
 `ingest_all(root)` walks a media directory and picks up anything with a recognised
 extension — `.mp4`, `.mkv`, `.webm`, `.m4a`, `.mp3`, `.wav`, `.flac`. The folder a video
@@ -25,7 +25,7 @@ sits in names its course, which becomes a payload field and later a retrieval fi
 Each file then runs the full transcript → chunks → vectors path, and a failure on one
 file is reported and skipped rather than killing the batch.
 
-### 2. Transcription
+### 2. TRANSCRIPTION
 
 Whisper runs **locally**, not through an API: `faster-whisper` with `large-v3-turbo`, on
 the GPU in `float16` where CUDA is available and falling back to CPU `int8` where it is
@@ -40,7 +40,7 @@ from steering everything after it.
 Every transcript is cached as JSON in `cache/`, one file per video, holding each segment's
 `start`, `end` and `text`. Re-ingesting a video reuses the cache instead of re-transcribing.
 
-### 3. Chunking
+### 3. CHUNKING
 
 Segments are accumulated until a chunk reaches **1200 characters**, then flushed, with the
 last **2 segments** carried into the next chunk as overlap. The tail is skipped when it
@@ -51,12 +51,12 @@ Chunks are split on segment boundaries rather than mid-sentence, and each one ke
 citation checkable, so chunking is not a purely lexical step here — it is what the
 accuracy of every later citation claim rests on.
 
-### 4. Embedding
+### 4. EMBEDDING
 
 `sentence-transformers` with `all-MiniLM-L6-v2`, 384 dimensions, encoded in a batch per
 video. Local, no API call.
 
-### 5. Indexing
+### 5. INDEXING
 
 One qdrant collection, `video transcript`, cosine distance, with keyword payload indexes
 on `source` and `course` so retrieval can be filtered to one video or one course.
@@ -67,7 +67,7 @@ makes re-ingesting a video idempotent, and it is why a chunk id like
 the stored evaluation run. Before upserting, every existing point for that `source` is
 deleted, so a re-ingest that produces fewer chunks does not leave stale ones behind.
 
-### 6. Retrieval
+### 6. RETRIEVAL
 
 Dense retrieval only. The query is encoded with the same embedding model and
 `query_points` returns the top 5 by cosine similarity, optionally filtered by `source` or
@@ -82,10 +82,9 @@ Each hit is rendered into the context as:
 The video name travels with the timestamp because a bare timestamp means nothing across a
 library this size. Note that `MM:SS` **floors the chunk's start to a whole second** — the
 model can only ever cite the rounded value it was shown, and a citation checker that
-compared against the unfloored start would mark correct behaviour as wrong. It did, for a
-while; see the evaluation section.
+compared against the unfloored start would mark correct behaviour as wrong.
 
-### 7. Generation
+### 7. GENERATION
 
 Groq, `openai/gpt-oss-120b`, `temperature=0.0`. The system prompt carries the retrieved
 context and asks for a short summary of what was discussed plus the video name and
@@ -95,14 +94,7 @@ timestamp, and instructs the model to decline rather than answer from outside th
 evaluator replays *that function*, so the measured prompt and the shipped prompt cannot
 drift apart.
 
-### Rate limiting
-
-Every hosted call goes through [`llm.py`](llm.py), which paces requests against the free
-tier's 8k tokens-per-minute budget using the response's rate-limit headers rather than
-retrying blindly after a failure. The per-day budget is not reported in headers at all, so
-a daily exhaustion raises `DailyLimitReached` instead of sleeping for hours.
-
-## Using it
+## USING IT
 
 ```sh
 uv run video_transcript_rag.py            # interactive chat
@@ -123,145 +115,99 @@ Credentials live in `.env`: `QDRANT_URL`, `QDRANT_API_KEY`, and numbered Groq ke
 defaults to `2`. Each key carries its own daily token budget and one full evaluation pass
 costs most of one, which is why they are numbered.
 
-## The evaluation layer
+## THE EVALUATION LAYER
 
-A judge model scoring its own pipeline's answers will flatter them, and an evaluation
-layer that cannot tell a repaired ruler from a changed pipeline will report noise as
-progress. Three ideas follow, and they are most of the design.
+### HOW IT WORKS
 
-**Ground truth is partitioned by what kind of ground truth it is.** Tier A is 66 course
-quiz questions with answer keys the course authors wrote. Tier C is 12 questions on
-topics verified absent from the corpus, where declining to answer is the only correct
-behaviour. Each tier is scored only on what its own ground truth supports, and the tiers
-are never averaged — a blended number would cancel opposing failures, since refusing is
-correct on Tier C and a defect on Tier A.
+**Ground truth is partitioned by what kind of ground truth it is.** Tier A is 65 course
+quiz questions with answer keys the course authors wrote. Tier C is 12 questions on topics
+verified absent from the corpus, where declining to answer is the only correct behaviour.
+Each tier is scored only on what its own ground truth supports, and the tiers are never
+averaged — a blended number would cancel opposing failures, since refusing is correct on
+Tier C and a defect on Tier A.
 
 **No model participates in a labelling decision.** Not in deciding a question's gold
-chunk, not in deciding whether a question is answerable. A third tier used to generate
-its own questions from the chunk that then served as their gold label, which made the
-label exact and the question unverified. A human reviewed 15 of its 40 questions and
-rejected 2, and the tier was retired rather than tightened — no threshold on lexical
-overlap separated the rejected questions from the sound ones. Its verdicts survive in
-`golden/spotcheck.md`, and
-[`docs/adr/0003-retiring-the-generated-retrieval-tier.md`](docs/adr/0003-retiring-the-generated-retrieval-tier.md)
-records the decision.
-
-Gold chunks are therefore labelled by hand. `uv run build_golden.py label` writes
-`golden/labelsheet.md`: every Tier A question beside a shortlist of candidate chunks, each
-shown with its transcript text, its bm25 and embedding ranks, and its lexical overlap with
-the answer key. Those signals choose what a human reads; they never decide what is gold.
+chunk, not in deciding whether a question is answerable. `uv run build_golden.py label`
+writes `golden/labelsheet.md`: every Tier A question beside a shortlist of candidate
+chunks, each shown with its transcript text, its bm25 and embedding ranks, and its lexical
+overlap with the answer key. Those signals choose what a human reads; they never decide
+what is gold. `uv run build_golden.py gold` reads the marks back into the golden set.
 Marking is incremental and the report is correct part-way through — an unmarked question
 is counted as unlabelled and left out of every retrieval figure rather than scored zero in
 one.
 
-**A measurement change is never plotted as a trend.** Twice now a metric has been found
-invalid and repaired — the citation check, then faithfulness. Both times the superseded
-values were discarded rather than kept beside the new ones, and the report says which
-metric was repaired, when, and why its old values are not comparable. `GLOSSARY.md`
-separates a metric's *validity* from its *value* precisely so those two can be discussed
-without being confused.
+**Generation is judged by a model that is not the generator**, `openai/gpt-oss-20b`.
+Faithfulness is scored in its own judge call that never sees the reference answer, so it
+can only be a claim about whether the retrieved context supports the answer; correctness
+and relevancy come from the call that does see the key.
 
-### The faithfulness experiment
+**Retrieval costs nothing to re-measure.** Every stored run keeps the 10 chunk ids it
+retrieved, so precision and recall at every k re-derive offline from a run already paid
+for. `uv run evaluate.py rescore` re-derives the judge-free metrics and rewrites
+`golden/report.md`.
 
-The clearest example, and the thing to read if you only read one. Faithfulness claims to
-measure how much of an answer the retrieved context supports. It was being scored in the
-same judge call as correctness, which meant the judge could see the answer key.
+**A measurement change is never plotted as a trend.** Where a metric has been found
+invalid and repaired, the superseded values are discarded rather than kept beside the new
+ones, and the report says which metric was repaired, when, and why its old values are not
+comparable. Figures are also always reported with the number of questions they were taken
+over, because the tier's size has changed across sessions.
 
-Two thresholds and the consequence each would trigger were fixed **before** the experiment
-ran, so the result could not afterwards be renegotiated as small-sample noise. Thirty
-questions were re-judged with the reference answer withheld. Faithfulness moved 0.164
-against a threshold of 0.10 — a signed shift of +0.109, meaning the judge had been
-*penalising* answers that diverged from the answer key, so faithfulness was partly grading
-correctness, the one thing it names itself as not measuring. The pre-committed consequence
-was a permanent split into two judge calls, and it was carried out.
+### RESULTS
 
-Re-judging all 123 scored answers then moved the tier means almost not at all (Tier A
-0.793 → 0.787) while moving individual answers by 0.093 on average. That is recorded as it
-happened, including why it does not weaken the decision: a score taken with the answer key
-in view was not a claim about contextual support whatever number it landed on. The repair
-was to the metric's validity, not its value.
+**Tier A** — 65 quiz questions, human answer keys. Each value covers the questions that
+carry it, which is why the counts differ: a citation validity figure covers only the
+answers that cited something.
 
-### Where to read further
-
-| | |
-|---|---|
-| [`golden/report.md`](golden/report.md) | the current measurement, every value carrying the number of questions it was taken over |
-| [`docs/adr/0001-three-tier-golden-dataset.md`](docs/adr/0001-three-tier-golden-dataset.md) | why ground truth is partitioned at all, why tier metrics are never averaged, and why no model takes part in a labelling decision |
-| [`docs/adr/0003-retiring-the-generated-retrieval-tier.md`](docs/adr/0003-retiring-the-generated-retrieval-tier.md) | why the tier that measured retrieval was retired, and why no threshold would have saved it |
-| [`docs/adr/0004-questions-the-corpus-cannot-answer-leave-tier-a.md`](docs/adr/0004-questions-the-corpus-cannot-answer-leave-tier-a.md) | why 17 questions left Tier A, what every figure it moved, and why the hands-on finding was dissolved rather than answered |
-| [`docs/adr/0002-faithfulness-judged-without-the-reference-answer.md`](docs/adr/0002-faithfulness-judged-without-the-reference-answer.md) | the pre-registered experiment above |
-| [`golden/judge_calibration.json`](golden/judge_calibration.json) | that experiment's raw result, thresholds and all |
-| [`GLOSSARY.md`](GLOSSARY.md) | the project's own vocabulary, including which words it refuses to use for which metric |
-
-## Current measurement
-
-Judge is `openai/gpt-oss-20b`, which is deliberately not the generator. Generation sees the
-top 5 chunks.
-
-**Tier A** — 66 quiz questions, human answer keys
-
-| correctness | faithfulness | relevancy | cited a video+time | timestamp valid | answerable refusal |
-|---|---|---|---|---|---|
-| 0.889 | 0.861 | 0.912 | 0.924 | 0.935 (of 62) | **0.061** |
-
-> These are not comparable with any earlier copy of this table. The tier held 83
-> questions until 17 were removed on 2026-10-23, because their answers were figures
-> produced by running a KNIME or Spark exercise — a percentage of a dataset, a cluster
-> number, a column name — which no lecture transcript states, so Tier A's ground truth
-> that the corpus can answer the question never held for them. Those 17 had scored
-> correctness 0.265, so every figure above rises partly for that reason. What changed is
-> which questions are measured, not the pipeline. See
-> [`docs/adr/0004-questions-the-corpus-cannot-answer-leave-tier-a.md`](docs/adr/0004-questions-the-corpus-cannot-answer-leave-tier-a.md).
+| metric | value | questions |
+|---|---|---|
+| correctness | 0.903 | 65 |
+| faithfulness | 0.879 | 65 |
+| relevancy | 0.926 | 65 |
+| citation_present | 0.938 | 65 |
+| citation_video_valid | 0.986 | 61 |
+| citation_time_valid | 0.935 | 62 |
+| answerable refusal rate | 0.046 | 65 |
 
 **Tier C** — 12 unanswerable questions: refusal rate **1.0**. Read beside Tier A's
 answerable refusal rate, never on its own — a pipeline that declined everything would
 score 1.0 here and look perfect.
 
-**Retrieval** — measured for the first time, over the **33 of 66** Tier A questions whose
-gold chunks are labelled by hand so far.
+**Retrieval** — over the **60 of 65** Tier A questions carrying hand-labelled gold chunks.
+The other 5 are labelled as having no gold chunk in the corpus and are excluded from recall
+rather than scored zero in it, because an index gap and a retrieval miss are different
+findings with different remedies. No question in the tier is unlabelled.
 
 | k | recall@k | precision@k | ceiling (`precision@k_max`) |
 |---|---|---|---|
-| 1 | 0.265 | 0.545 | 1.0 |
-| 3 | 0.629 | 0.465 | 0.727 |
-| 5 | **0.778** | 0.345 | 0.461 |
-| 10 | 0.917 | 0.206 | 0.230 |
+| 1 | 0.282 | 0.533 | 1.0 |
+| 3 | 0.585 | 0.389 | 0.661 |
+| 5 | **0.703** | 0.287 | 0.410 |
+| 10 | 0.810 | 0.168 | 0.205 |
 
-Generation is scored on the top 5, so `recall@5` 0.778 is the figure that bears on the
-answers: about a fifth of the material the labeller judged necessary never reaches the
+Generation is scored on the top 5, so `recall@5` 0.703 is the figure that bears on the
+answers: about a third of the material the labeller judged necessary never reaches the
 generator. Read each precision against the ceiling beside it, not against 1.0 — the
-labelled questions average 2.3 gold chunks, so `precision@5` cannot exceed 0.461. At that
-reading retrieval is using 75% of the precision available to it at k=5, and ranks a gold
-chunk first 54% of the time.
+labelled questions average 2.05 gold chunks, so `precision@5` cannot exceed 0.410.
 
-The remaining 33 questions are unlabelled and absent from every figure above rather than
-scored zero in it; the report prints the count beside each one.
+**The two courses fail differently**, which is the measurement's most useful result:
 
-## What is weak, stated plainly
+| course | n | recall@5 | recall@10 | gold entirely outside top 10 | gold chunks per question |
+|---|---|---|---|---|---|
+| machine learning | 35 | 0.762 | 0.902 | 0 of 35 | 2.40 |
+| graph analytics | 25 | 0.620 | 0.680 | 5 of 25 | 1.56 |
 
-- **A fifth of the material an answer needed never reaches the generator.** `recall@5` is
-  0.778 over the 33 labelled questions, and generation runs on the top 5. This is the
-  first measured retrieval figure this project has had, and it is the clearest target
-  left: `recall@10` is 0.917, so most of the missing material is ranked 6th to 10th
-  rather than absent from the index.
-- **The top-ranked chunk is a gold chunk 54% of the time** (`precision@1` 0.545 against a
-  ceiling of 1.0), which is the figure a reranker would move.
-- **6.1% of answerable Tier A questions are still refused** — 4 of 66. Every one scored
-  correctness 0.0, so without naming this rate the failure hides inside a low correctness
-  score. It was 15.7% of 83 before the 17 removals, and 9 of those 17 were refusals the
-  pipeline was arguably right to make.
-- **Graph analytics now trails machine learning** on correctness, 0.81 against 0.96. The
-  direction has reversed: machine learning was the weaker course at 0.733, and its weak
-  questions were disproportionately the exercise questions now removed. Graph analytics is
-  also the half that is **entirely unlabelled**, so none of its retrieval is measured.
-- **The hands-on finding was dissolved, not answered.** The earlier 0.40 correctness over
-  10 hands-on questions is gone: 9 of those 10 were asking for exercise output the corpus
-  does not contain. One hands-on question remains, which supports no claim. Whether the
-  pipeline is genuinely weak at hands-on material is now untested, and testing it needs
-  hands-on questions whose answers the lectures actually state.
-- **Retrieval is dense-only.** There is no hybrid or lexical fallback and no reranking.
+Machine learning's misses sit at ranks 6–10 — a ranking problem, reachable by re-ranking.
+Graph analytics gains only 6 points from k=5 to k=10, so re-ranking buys it almost nothing:
+its gold is absent from the top 10 altogether, which is a coverage problem. Whether that is
+chunking, embedding or a genuine index gap is unmeasured. Because the two courses differ in
+gold chunks per question their `precision@k_max` ceilings differ, so their precision columns
+are not directly comparable.
 
-## Running the evaluation
+Generation over the same 60 labelled questions, so retrieval and generation can be read
+against each other rather than over two differently sized sets: correctness 0.928,
+faithfulness 0.920, relevancy 0.954, citation_present 0.967.
+
+## RUNNING THE EVALUATION
 
 The offline stages need no network, no API credentials and no GPU. A clone can reproduce
 the whole report from the stored run:
@@ -273,8 +219,8 @@ uv run evaluate.py rescore     # re-derive the judge-free metrics and rewrite th
 
 > **Use `rescore`, not `report`.** `uv run evaluate.py report` rebuilds the report from the
 > values stored in the checkpoint rather than re-deriving them, which silently reverts
-> Tier A `citation_time_valid` from 0.937 to the superseded 0.488. After any change that
-> regenerates the report, run `rescore`.
+> Tier A `citation_time_valid` to the superseded 0.488. After any change that regenerates
+> the report, run `rescore`.
 
 Labelling gold chunks, which also needs no provider tokens — `label` needs the qdrant
 index for the shortlist's dense half, `gold` and `rescore` need nothing but the repo:
@@ -306,7 +252,7 @@ Dependencies are managed with `uv`, never pip. The video files themselves are go
 not required — `corpus.json` lists the 83 ingested videos and `cache/` holds one transcript
 each, which together reproduce the 406 chunks and the chunk ids already in qdrant.
 
-## Layout
+## LAYOUT
 
 ```
 video_transcript_rag.py     the pipeline: ingestion, transcription, chunking,
@@ -319,5 +265,5 @@ cache/                      83 Whisper transcripts, one per video
 golden/                     the dataset, the stored run, the reports, the calibration record
 golden/labelsheet.md        the gold chunk labels, marked by hand; the only copy of them
 docs/adr/                   decisions whose reasoning is not recoverable from the code
-tests/                      112 offline tests
+tests/                      134 offline tests
 ```
